@@ -185,6 +185,12 @@ identifiers in its manifest.
   same-model likelihood reference, and proposed/B3 equality is a correctness
   gate rather than a claimed advantage. A separate M7F role performs a no-fit
   four-cell preflight under a distinct seed and namespace.
+- M7F is complete. Its accepted four-cell run passed every acquisition,
+  native-trace, provenance, learner/evaluator-separation, and aggregate quality
+  gate without fitting or scoring a model. The first run was correctly rejected
+  because a parsed scope argument was not forwarded; it is retained and no row
+  from it is reused. All three M7 workflow jobs now have a 360-minute safety
+  timeout.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
@@ -222,7 +228,9 @@ outcomes are inspected. M7C and its transparent resource recovery are complete:
 `docs/milestones/M7C_STOCHASTIC_FREEZE_PILOT.md`. M7D is also complete: all 64
 pilot schemas passed the executable anti-leakage boundary documented in
 `docs/milestones/M7D_LEARNER_EVIDENCE_BOUNDARY.md`. No main-analysis fit was
-used for either decision.
+used for either decision. The separate M7F main-path preflight is documented in
+`docs/milestones/M7F_NO_FIT_PREFLIGHT.md`; its accepted run also performed no
+fit or score and remains excluded from M7 effectiveness evidence.
 
 ## Generated tables
 
