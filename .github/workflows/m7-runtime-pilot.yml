@@ -1,0 +1,165 @@
+name: M7P Runtime Feasibility Pilot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: m7-runtime-pilot-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    name: ${{ matrix.profile }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - profile: deathstarbench_social_network
+            repository: delimitrou/DeathStarBench
+            commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+            compose_file: socialNetwork/docker-compose.yml
+          - profile: opentelemetry_demo
+            repository: open-telemetry/opentelemetry-demo
+            commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+            compose_file: compose.yaml
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Check out exact benchmark revision
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.commit }}
+          path: upstream
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Record runner resources
+        run: |
+          mkdir -p "workflow-results/${{ matrix.profile }}"
+          uname -a > "workflow-results/${{ matrix.profile }}/runner.txt"
+          docker version >> "workflow-results/${{ matrix.profile }}/runner.txt"
+          docker compose version >> "workflow-results/${{ matrix.profile }}/runner.txt"
+          free -h >> "workflow-results/${{ matrix.profile }}/runner.txt"
+          df -h >> "workflow-results/${{ matrix.profile }}/runner.txt"
+
+      - name: Render and digest-lock Compose
+        env:
+          DEMO_VERSION: "3.0.0"
+          LOCUST_AUTOSTART: "false"
+          LOCUST_HEADLESS: "true"
+          LOCUST_BROWSER_TRAFFIC_ENABLED: "false"
+        run: |
+          if [[ "${{ matrix.profile }}" == "opentelemetry_demo" ]]; then
+            export OTEL_COLLECTOR_CONFIG_EXTRAS="$GITHUB_WORKSPACE/configs/live/otel-pilot-collector-extra.yml"
+            docker compose --env-file upstream/.env -f "upstream/${{ matrix.compose_file }}" config --format json > "workflow-results/${{ matrix.profile }}/rendered-compose.json"
+          else
+            docker compose -f "upstream/${{ matrix.compose_file }}" config --format json > "workflow-results/${{ matrix.profile }}/rendered-compose.json"
+          fi
+          python -m telemetry_availability pin-live-compose \
+            --config configs/m7_runtime_pilot.yaml \
+            --profile "${{ matrix.profile }}" \
+            --input "workflow-results/${{ matrix.profile }}/rendered-compose.json" \
+            --out "workflow-results/${{ matrix.profile }}/pinned-compose.json" \
+            --audit "workflow-results/${{ matrix.profile }}/image-lock-audit.json"
+
+      - name: Pull and start the frozen benchmark
+        run: |
+          docker compose -f "workflow-results/${{ matrix.profile }}/pinned-compose.json" pull
+          docker compose -f "workflow-results/${{ matrix.profile }}/pinned-compose.json" up -d --no-build --wait --wait-timeout 360
+
+      - name: Run predeclared external-client pilot
+        run: >-
+          python -m telemetry_availability run-runtime-pilot
+          --config configs/m7_runtime_pilot.yaml
+          --profile "${{ matrix.profile }}"
+          --checkout upstream
+          --compose "workflow-results/${{ matrix.profile }}/pinned-compose.json"
+          --image-audit "workflow-results/${{ matrix.profile }}/image-lock-audit.json"
+          --out "workflow-results/${{ matrix.profile }}"
+
+      - name: Capture service diagnostics
+        if: ${{ always() }}
+        run: |
+          docker compose -f "workflow-results/${{ matrix.profile }}/pinned-compose.json" ps --format json > "workflow-results/${{ matrix.profile }}/compose-ps.json" || true
+          docker compose -f "workflow-results/${{ matrix.profile }}/pinned-compose.json" logs --no-color > "workflow-results/${{ matrix.profile }}/compose.log" 2>&1 || true
+          docker stats --no-stream --format '{{json .}}' > "workflow-results/${{ matrix.profile }}/docker-stats.jsonl" || true
+
+      - name: Upload immutable pilot evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7p-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/${{ matrix.profile }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Tear down benchmark
+        if: ${{ always() }}
+        run: docker compose -f "workflow-results/${{ matrix.profile }}/pinned-compose.json" down --volumes --remove-orphans || true
+
+  aggregate:
+    name: Aggregate M7P evidence
+    if: ${{ always() }}
+    needs: pilot
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download all pilot diagnostics
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m7p-*-${{ github.run_id }}
+          path: workflow-shards
+
+      - name: Aggregate accepted pilot profiles
+        run: >-
+          python -m telemetry_availability aggregate-runtime-pilot
+          --config configs/m7_runtime_pilot.yaml
+          --input-root workflow-shards
+          --out workflow-results/aggregate
+
+      - name: Upload aggregate
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7p-aggregate-${{ github.run_id }}
+          path: workflow-results/aggregate
+          if-no-files-found: warn
+          retention-days: 30

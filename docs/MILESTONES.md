@@ -17,6 +17,7 @@ tests, configuration validation, and bounded smoke cases.
 | M4 | Simultaneous uncertainty sets and coverage | Complete | `milestones/M4_SIMULTANEOUS_UNCERTAINTY.md` |
 | M5 | Directed misspecification and telemetry-loss stress tests | In progress | `M5_STRESS_PROTOCOL.md`; report follows the GitHub run |
 | M6 | Versioned live-ingestion contract and benchmark harness | Complete | `milestones/M6_LIVE_INGESTION_HARNESS.md` |
+| M7P | Remote runtime and native-telemetry feasibility pilot | In progress | `M7_RUNTIME_PILOT_PROTOCOL.md`; never used as effectiveness evidence |
 | M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
 
 The order may expose a scientific stopping condition. In particular, failure to

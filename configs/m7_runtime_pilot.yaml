@@ -1,0 +1,59 @@
+schema_version: 1
+id: m7_runtime_feasibility_pilot
+pilot_only: true
+requests_per_operation_per_period: 20
+minimum_success_fraction: 0.95
+minimum_exported_traces: 6
+readiness_timeout_seconds: 360
+trace_flush_seconds: 15
+inter_period_gap_seconds: 2
+
+profiles:
+  - id: deathstarbench_social_network
+    repository: https://github.com/delimitrou/DeathStarBench.git
+    commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+    compose_file: socialNetwork/docker-compose.yml
+    base_url: http://127.0.0.1:8080
+    readiness_path: /
+    telemetry_kind: jaeger_api
+    telemetry_source: http://127.0.0.1:16686/api/traces?service=nginx-web-server&lookback=1h&limit=1000
+    operations: [compose_post, read_home_timeline, read_user_timeline]
+    images:
+      "deathstarbench/social-network-microservices:latest": sha256:a845266e98ce15d204ee7b98d41a2a95820af525013ce70f14104f5b9b5e92b6
+      "jaegertracing/all-in-one:latest": sha256:ab6f1a1f0fb49ea08bcd19f6b84f6081d0d44b364b6de148e1798eb5816bacac
+      "memcached:latest": sha256:75c93cc91e76853da7c029e74d6e8dbd44774dd3713c93be8cd1971ad26120a4
+      "mongo:4.4.6": sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b
+      "redis:latest": sha256:298e5b3bc566bade82f46ad5511777a4a07a294097ce16ada2f6a42be5239df5
+      "yg397/media-frontend:xenial": sha256:272049995f2929435b91da34f20fc16216a7f974d1b8f9afa0ccbb529f1a9840
+      "yg397/openresty-thrift:xenial": sha256:6c295fda3c2f6b941d85ebf16421bafac0dcf72450c96f53a2d031b29d8c81ef
+
+  - id: opentelemetry_demo
+    repository: https://github.com/open-telemetry/opentelemetry-demo.git
+    commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+    compose_file: compose.yaml
+    base_url: http://127.0.0.1:8080
+    readiness_path: /
+    telemetry_kind: docker_logs
+    telemetry_source: otel-collector
+    operations: [browse_product, add_to_cart, checkout]
+    images:
+      "ghcr.io/open-telemetry/demo:3.0.0-ad": sha256:e6c593fe75eb0309392951d35c7ac85fcd15c0b80430500921b7d2e9c332a6db
+      "ghcr.io/open-telemetry/demo:3.0.0-cart": sha256:3f89a444250a8a56050ba59756be3ca269af500bf44e33579e79ba9c74cab8c1
+      "ghcr.io/open-telemetry/demo:3.0.0-checkout": sha256:3d18cb304a6af6a512c5e488bb19ee42be7d71bdf75a9786aa7296b8fb0a5036
+      "ghcr.io/open-telemetry/demo:3.0.0-currency": sha256:f82a7805e7ba635b62c08f8fe67a5deccb06c91dc51cb56ae88767f582ad7f75
+      "ghcr.io/open-telemetry/demo:3.0.0-email": sha256:d674d4081ca4201cbec9994e753ddf8f6a6fea7d57451c54fc964de6ac51c76c
+      "ghcr.io/open-telemetry/demo:3.0.0-flagd-ui": sha256:92873a8e277d4db925f61b680708f4043e3aa08d8073c8e9000b83731f288bb7
+      "ghcr.io/open-telemetry/demo:3.0.0-frontend": sha256:9505e349e140ed5efde4b03b77cf500ef5d53c568ea83502c7e9c26494b964a3
+      "ghcr.io/open-telemetry/demo:3.0.0-frontend-proxy": sha256:1c53bfb596970a014682925f804c686762c0c593949ce58a90ac38563f317841
+      "ghcr.io/open-telemetry/demo:3.0.0-image-provider": sha256:93e1585e97ac3de0e2ace6929dc5e2a797e2c009fbb3eba668fa3990f4f271b5
+      "ghcr.io/open-telemetry/demo:3.0.0-load-generator": sha256:cd12cb42fb150fb2283fc05df5353fde88d5e35f3bf8189058756a6458eede87
+      "ghcr.io/open-telemetry/demo:3.0.0-payment": sha256:d498c7434d22ff7a82ec86843efd22c93c52cb8c6df4961a7110617b1e08c15f
+      "ghcr.io/open-telemetry/demo:3.0.0-product-catalog": sha256:278aff685646443b88cf1ab7d83812d82204fbb16ea279296161d05bf1329080
+      "ghcr.io/open-telemetry/demo:3.0.0-quote": sha256:6bc8f7f6809e1435241dc9ea404e602657d192cf237bcd175d7344cec9e0d615
+      "ghcr.io/open-telemetry/demo:3.0.0-recommendation": sha256:6510027907f925b1d76d0c645c9c757427c8735577ea9a422291c7b4b770bfd5
+      "ghcr.io/open-telemetry/demo:3.0.0-shipping": sha256:02602e60edbfa7e019b21fa98f95e3d44bc3181c9aafaf82a73b5169ae8f9031
+      "ghcr.io/open-telemetry/demo:3.0.0-telemetry-docs": sha256:3519858704e72fe6ef8ce8c41e70dbd41410e79bdc1eea9608658e9eade06d05
+      "ghcr.io/open-feature/flagd:v0.16.0": sha256:32234e63c1d0634883aabd31cbd46802934aaaef0153dfd653b5d1017940bb4e
+      "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.159.0": sha256:1f2c54a30e713fac6b3ae77a1ec84010c2007e29ced8ec666214fc2f6739c1cc
+      "ghcr.io/valkey-io/valkey:9.0.4-alpine3.23": sha256:107b203169a20ef7c87548c157f4e4a833dbbbd20fefd3a26740b7f98ac80216
+      "postgres:18.4": sha256:a02db8cac496f15b094798a38254f14d6e00741f709360e5e00bb6668ea31636

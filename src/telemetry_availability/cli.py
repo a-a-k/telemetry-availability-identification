@@ -18,6 +18,12 @@ from .live_harness import (
     verify_live_profile,
 )
 from .live_ingestion import ingest_live_bundle, write_ingested_bundle
+from .live_pilot import (
+    aggregate_runtime_pilots,
+    pin_compose_files,
+    run_runtime_pilot,
+)
+from .live_pilot_config import load_runtime_pilot_config
 from .moments import structural_moment_rows
 from .reduction_experiment import (
     aggregate_reduction_experiment,
@@ -218,6 +224,41 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate_live.add_argument("--config", required=True, type=Path)
     aggregate_live.add_argument("--input-root", required=True, type=Path)
     aggregate_live.add_argument("--out", required=True, type=Path)
+
+    validate_pilot = commands.add_parser(
+        "validate-runtime-pilot",
+        help="validate the remote-only live runtime pilot contract",
+    )
+    validate_pilot.add_argument("--config", required=True, type=Path)
+
+    pin_compose = commands.add_parser(
+        "pin-live-compose",
+        help="replace every rendered Compose image with its frozen digest",
+    )
+    pin_compose.add_argument("--config", required=True, type=Path)
+    pin_compose.add_argument("--profile", required=True)
+    pin_compose.add_argument("--input", required=True, type=Path)
+    pin_compose.add_argument("--out", required=True, type=Path)
+    pin_compose.add_argument("--audit", required=True, type=Path)
+
+    run_pilot = commands.add_parser(
+        "run-runtime-pilot",
+        help="run one remote-only benchmark feasibility pilot",
+    )
+    run_pilot.add_argument("--config", required=True, type=Path)
+    run_pilot.add_argument("--profile", required=True)
+    run_pilot.add_argument("--checkout", required=True, type=Path)
+    run_pilot.add_argument("--compose", required=True, type=Path)
+    run_pilot.add_argument("--image-audit", required=True, type=Path)
+    run_pilot.add_argument("--out", required=True, type=Path)
+
+    aggregate_pilot = commands.add_parser(
+        "aggregate-runtime-pilot",
+        help="combine remote benchmark feasibility pilot artifacts",
+    )
+    aggregate_pilot.add_argument("--config", required=True, type=Path)
+    aggregate_pilot.add_argument("--input-root", required=True, type=Path)
+    aggregate_pilot.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -487,6 +528,56 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "aggregate-live-harness":
         config = load_live_harness_config(args.config)
         manifest = aggregate_live_harness(config, args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-runtime-pilot":
+        config = load_runtime_pilot_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "pilot_only": config.pilot_only,
+                    "profiles": [profile.id for profile in config.profiles],
+                    "expected_requests_per_profile": 2
+                    * config.requests_per_operation_per_period
+                    * len(config.profiles[0].operations),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "pin-live-compose":
+        config = load_runtime_pilot_config(args.config)
+        audit = pin_compose_files(
+            config,
+            args.profile,
+            args.input,
+            args.out,
+            args.audit,
+        )
+        print(json.dumps(audit, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "run-runtime-pilot":
+        config = load_runtime_pilot_config(args.config)
+        manifest = run_runtime_pilot(
+            config,
+            args.profile,
+            args.checkout,
+            args.compose,
+            args.image_audit,
+            args.out,
+        )
+        print(json.dumps(manifest["counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-runtime-pilot":
+        config = load_runtime_pilot_config(args.config)
+        manifest = aggregate_runtime_pilots(config, args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

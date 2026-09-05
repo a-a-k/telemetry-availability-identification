@@ -143,9 +143,17 @@ identifiers in its manifest.
   operation-specific workload evidence, both trace adapters, deterministic
   normalization, and preservation of external failures without exported traces.
   It is an integration milestone, not a live-system experiment.
+- M7P Runtime Feasibility Pilot is a remote-only deployment and telemetry-path
+  check. All container images are digest-locked, and pilot outcomes may change
+  infrastructure implementation but cannot enter the main M7 analysis.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
+
+M7P starts the two actual applications, sends 120 predeclared external requests
+per application, and retains native raw telemetry plus failure diagnostics. Its
+traffic is explicitly excluded from effectiveness estimates; the subsequent M7
+design is frozen separately.
 
 ## Generated tables
 
