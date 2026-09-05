@@ -15,7 +15,7 @@ tests, configuration validation, and bounded smoke cases.
 | M2 | Identification-aware compiler and structure-preserving likelihood reduction | Complete | `milestones/M2_STRUCTURE_PRESERVING_REDUCTION.md` |
 | M3 | Non-direct Boolean targets and synthetic placement transfer with B0-B4 | Complete | `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` |
 | M4 | Simultaneous uncertainty sets and coverage | Complete | `milestones/M4_SIMULTANEOUS_UNCERTAINTY.md` |
-| M5 | Directed misspecification and telemetry-loss stress tests | In progress | `M5_STRESS_PROTOCOL.md`; report follows the GitHub run |
+| M5 | Directed misspecification and telemetry-loss stress tests | Complete | `milestones/M5_DIRECTED_STRESS_TESTS.md` |
 | M6 | Versioned live-ingestion contract and benchmark harness | Complete | `milestones/M6_LIVE_INGESTION_HARNESS.md` |
 | M7P | Remote runtime and native-telemetry feasibility pilot | Complete | `milestones/M7P_RUNTIME_FEASIBILITY_PILOT.md`; never used as effectiveness evidence |
 | M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |

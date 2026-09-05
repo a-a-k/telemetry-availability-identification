@@ -75,6 +75,18 @@ The unchanged M4 procedure and matched B3 are retained, diagnostics gate a
 separate guarded output, and mechanism-aware references are explicitly labelled
 as such.
 
+The completed M5 run found the intended non-universal boundary behavior.
+Informative exporter loss made the assumed B3 placement choice wrong in every
+n=2,000 campaign; a hidden merged domain made both raw proposed and B3 choices
+wrong in every campaign. The corresponding selection-aware and corrected-map
+references chose correctly, while the predeclared guards abstained after their
+diagnostics fired. Persistent episodes reduced raw split/choice interval coverage
+to 0.860/0.760; a fixed moving-block reference improved this to 0.945/0.900 but
+did not universally restore 95%. Rare/unseen branch and readiness results expose
+support and semantic incompatibility rather than filling missing evidence. Full
+results and limitations are recorded in
+`docs/milestones/M5_DIRECTED_STRESS_TESTS.md`.
+
 Completed milestone M6 adds the versioned `taid.live_bundle/v1` ingestion boundary. It
 normalizes Jaeger and OTLP JSON alongside an independent external-request census,
 deployment/domain metadata, distinct liveness/readiness records, mesh attempts,
