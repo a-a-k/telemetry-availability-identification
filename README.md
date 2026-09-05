@@ -150,10 +150,15 @@ identifiers in its manifest.
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
 
-M7P starts the two actual applications, sends 120 predeclared external requests
-per application, and retains native raw telemetry plus failure diagnostics. Its
-traffic is explicitly excluded from effectiveness estimates; the subsequent M7
-design is frozen separately.
+Completed M7P starts the two actual applications, sends 120 predeclared external
+requests per application, and retains native raw telemetry plus failure
+diagnostics. The accepted run retained 120/120 HTTP-successful attempts and 28
+native traces for DeathStarBench, and 120/120 attempts and 159 traces for OTel
+Demo, with every active container matching a digest lock. These are technical
+feasibility counts, not effectiveness estimates; details and the superseded
+diagnostic attempt are recorded in
+`docs/milestones/M7P_RUNTIME_FEASIBILITY_PILOT.md`. The subsequent M7 design is
+frozen separately.
 
 ## Generated tables
 
