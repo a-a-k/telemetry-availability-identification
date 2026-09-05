@@ -75,7 +75,7 @@ The unchanged M4 procedure and matched B3 are retained, diagnostics gate a
 separate guarded output, and mechanism-aware references are explicitly labelled
 as such.
 
-Milestone M6 adds the versioned `taid.live_bundle/v1` ingestion boundary. It
+Completed milestone M6 adds the versioned `taid.live_bundle/v1` ingestion boundary. It
 normalizes Jaeger and OTLP JSON alongside an independent external-request census,
 deployment/domain metadata, distinct liveness/readiness records, mesh attempts,
 verified injection intervals, and manual operation semantics. Its integration
@@ -143,6 +143,9 @@ identifiers in its manifest.
   operation-specific workload evidence, both trace adapters, deterministic
   normalization, and preservation of external failures without exported traces.
   It is an integration milestone, not a live-system experiment.
+
+The successful remote integration evidence and its limitations are recorded in
+`docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
 
 ## Generated tables
 
