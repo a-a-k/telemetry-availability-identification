@@ -67,6 +67,14 @@ size, and no incorrect identification-aware placement decision. Full results,
 including conservative width and node-budget limitations, are recorded in
 `docs/milestones/M4_SIMULTANEOUS_UNCERTAINTY.md`.
 
+Milestone M5 implements five separate assumption-boundary generators with
+paired neutral controls: domain-coupled exporter loss at fixed marginal
+retention, persistent Markov episodes at fixed stationary marginals, a hidden
+merged failure domain, rare/unseen conditional branches, and readiness delay.
+The unchanged M4 procedure and matched B3 are retained, diagnostics gate a
+separate guarded output, and mechanism-aware references are explicitly labelled
+as such.
+
 The configured RQ1 matrix has four small factor-graph families, three observation
 modes, three nested sample sizes, and 200 independently generated campaigns. It
 therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
@@ -143,6 +151,12 @@ The M3 workflow emits fits, parameters, predictions, placement changes,
 decisions, independent validation draws, structural classifications, ambiguity
 witnesses, paired campaign contrasts, and their summaries. Its completed result
 is recorded in docs/milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md.
+
+The M5 workflow emits per-campaign estimates, diagnostics, guarded and raw
+decisions, execution status, paired stress-minus-control effects, and aggregate
+coverage/width/diagnostic summaries. Its protocol deliberately permits the
+unchanged method to fail under violated assumptions; empirical performance is
+not a build gate.
 
 Generated results are intentionally ignored by Git. GitHub workflow artifacts are
 the source of experimental outputs until a reviewed result snapshot is explicitly

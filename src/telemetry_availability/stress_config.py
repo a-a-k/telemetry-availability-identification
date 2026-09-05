@@ -153,6 +153,14 @@ def load_stress_config(path: str | Path) -> StressExperimentConfig:
         raise ConfigError(f"unknown base stress scenario {result.base_scenario!r}")
 
     exporter = next(item for item in result.series if item.id == "exporter_loss")
+    policy_ids = {policy.id for policy in transfer.observation_modes}
+    for series in result.series:
+        if "observation_mode" in series.settings:
+            requested = str(series.settings["observation_mode"])
+            if requested not in policy_ids:
+                raise ConfigError(
+                    f"stress series {series.id!r} uses unknown observation mode {requested!r}"
+                )
     gamma = next(
         factor.probability
         for scenario in transfer.scenarios
@@ -171,4 +179,37 @@ def load_stress_config(path: str | Path) -> StressExperimentConfig:
             raise ConfigError(
                 f"exporter variant {variant.id!r} does not preserve retention: {marginal}"
             )
+    temporal = next(item for item in result.series if item.id == "temporal_bursts")
+    if any(
+        not 0.0 <= float(variant.parameters["lag1_autocorrelation"]) < 1.0
+        for variant in temporal.variants
+    ):
+        raise ConfigError("temporal autocorrelations must lie in [0, 1)")
+    wrong_domain = next(item for item in result.series if item.id == "wrong_domain_map")
+    shared_probability = float(wrong_domain.settings["shared_domain_probability"])
+    if not 0.0 < shared_probability < 1.0:
+        raise ConfigError("shared domain probability must lie in (0, 1)")
+    rare = next(item for item in result.series if item.id == "rare_branch")
+    branch_probabilities = (
+        float(rare.settings["branch_a_success"]),
+        float(rare.settings["branch_b_success"]),
+        float(rare.settings["target_branch_b_share"]),
+        *(
+            float(variant.parameters["calibration_branch_b_share"])
+            for variant in rare.variants
+        ),
+    )
+    if any(not 0.0 <= value <= 1.0 for value in branch_probabilities):
+        raise ConfigError("branch success probabilities and shares must lie in [0, 1]")
+    readiness = next(item for item in result.series if item.id == "readiness_lag")
+    stationary = float(readiness.settings["domain_stationary_probability"])
+    recovery = float(readiness.settings["recovery_probability"])
+    if abs(stationary - gamma) > 1e-12:
+        raise ConfigError("readiness stationary probability must match base domain A")
+    if not 0.0 < recovery <= 1.0:
+        raise ConfigError("readiness recovery probability must lie in (0, 1]")
+    if any(int(variant.parameters["lag_episodes"]) < 0 for variant in readiness.variants):
+        raise ConfigError("readiness lags must be nonnegative")
+    if result.block_length > min(result.sample_sizes):
+        raise ConfigError("block length must not exceed the smallest sample size")
     return result

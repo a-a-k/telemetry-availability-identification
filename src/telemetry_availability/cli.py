@@ -17,6 +17,8 @@ from .reduction_experiment import (
     run_reduction_experiment,
 )
 from .runner import aggregate_results, run_experiment
+from .stress_config import load_stress_config
+from .stress_experiment import aggregate_stress_experiment, run_stress_experiment
 from .transfer_config import load_transfer_config
 from .transfer_experiment import (
     aggregate_transfer_experiment,
@@ -149,6 +151,30 @@ def build_parser() -> argparse.ArgumentParser:
     )
     aggregate_uncertainty.add_argument("--input-root", required=True, type=Path)
     aggregate_uncertainty.add_argument("--out", required=True, type=Path)
+
+    validate_stress = commands.add_parser(
+        "validate-stress-config",
+        help="validate the directed misspecification experiment contract",
+    )
+    validate_stress.add_argument("--config", required=True, type=Path)
+
+    stress = commands.add_parser(
+        "run-stress-experiment",
+        help="run paired directed misspecification and telemetry-loss tests",
+    )
+    stress.add_argument("--config", required=True, type=Path)
+    stress.add_argument("--out", required=True, type=Path)
+    stress.add_argument("--series", action="append")
+    stress.add_argument("--repetitions", type=int)
+    stress.add_argument("--sample-sizes", type=_comma_separated_positive_integers)
+    stress.add_argument("--bootstrap-replicates", type=int)
+
+    aggregate_stress = commands.add_parser(
+        "aggregate-stress-experiment",
+        help="combine directed stress-test workflow shards",
+    )
+    aggregate_stress.add_argument("--input-root", required=True, type=Path)
+    aggregate_stress.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -337,6 +363,43 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "aggregate-uncertainty-experiment":
         manifest = aggregate_uncertainty_experiment(args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-stress-config":
+        config = load_stress_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "series": [item.id for item in config.series],
+                    "variants": {
+                        item.id: [variant.id for variant in item.variants]
+                        for item in config.series
+                    },
+                },
+                indent=2,
+            )
+        )
+        return 0
+
+    if args.command == "run-stress-experiment":
+        config = load_stress_config(args.config)
+        manifest = run_stress_experiment(
+            config=config,
+            config_path=args.config,
+            output_directory=args.out,
+            series_names=None if args.series is None else tuple(args.series),
+            repetitions=args.repetitions,
+            sample_sizes=args.sample_sizes,
+            bootstrap_replicates=args.bootstrap_replicates,
+        )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-stress-experiment":
+        manifest = aggregate_stress_experiment(args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

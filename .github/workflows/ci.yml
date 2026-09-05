@@ -47,6 +47,9 @@ jobs:
       - name: Validate uncertainty experiment contract
         run: python -m telemetry_availability validate-uncertainty-config --config configs/m4_uncertainty.yaml
 
+      - name: Validate stress experiment contract
+        run: python -m telemetry_availability validate-stress-config --config configs/m5_stress.yaml
+
       - name: Run bounded smoke experiment
         if: ${{ matrix.python-version == '3.13' }}
         run: >-
@@ -108,6 +111,21 @@ jobs:
           --repetitions 1
           --sample-sizes 100
 
+      - name: Run bounded stress smoke
+        if: ${{ matrix.python-version == '3.13' }}
+        run: >-
+          python -m telemetry_availability run-stress-experiment
+          --config configs/m5_stress.yaml
+          --out workflow-results/stress-smoke
+          --series exporter_loss
+          --series temporal_bursts
+          --series wrong_domain_map
+          --series rare_branch
+          --series readiness_lag
+          --repetitions 1
+          --sample-sizes 100
+          --bootstrap-replicates 9
+
       - name: Upload smoke evidence
         if: ${{ matrix.python-version == '3.13' }}
         uses: actions/upload-artifact@v7
@@ -150,5 +168,14 @@ jobs:
         with:
           name: uncertainty-smoke-${{ github.run_id }}
           path: workflow-results/uncertainty-smoke
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload stress smoke evidence
+        if: ${{ matrix.python-version == '3.13' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: stress-smoke-${{ github.run_id }}
+          path: workflow-results/stress-smoke
           if-no-files-found: error
           retention-days: 14
