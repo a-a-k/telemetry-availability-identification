@@ -215,6 +215,10 @@ class StochasticFreezePilotTests(unittest.TestCase):
         by_id = {row["event_id"]: row for row in rows}
         self.assertEqual(by_id["first"]["expected_affected_after_release"], service)
         self.assertEqual(by_id["second"]["expected_affected_after_release"], "")
+        self.assertTrue(by_id["first"]["observation_start_required"])
+        self.assertFalse(by_id["first"]["observation_release_required"])
+        self.assertFalse(by_id["second"]["observation_start_required"])
+        self.assertTrue(by_id["second"]["observation_release_required"])
         self.assertEqual(summary["active_pause_causes_at_end"], 0)
 
     def test_runtime_is_forbidden_locally(self) -> None:

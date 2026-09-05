@@ -111,6 +111,8 @@ EVENT_FIELDS = (
     "released_offset_seconds",
     "confirmed",
     "release_confirmed",
+    "observation_start_required",
+    "observation_release_required",
     "expected_affected_after_release",
     "observation_start_lag_seconds",
     "observation_release_lag_seconds",
@@ -780,6 +782,8 @@ def _stochastic_fault_controller(
             "released_offset_seconds": "",
             "confirmed": False,
             "release_confirmed": False,
+            "observation_start_required": False,
+            "observation_release_required": False,
             "expected_affected_after_release": "",
             "observation_start_lag_seconds": "",
             "observation_release_lag_seconds": "",
@@ -794,6 +798,9 @@ def _stochastic_fault_controller(
         errors: list[str] = []
         if transition_kind == 1:
             causes = pause_causes if event.effect == "pause" else network_causes
+            record["observation_start_required"] = any(
+                not causes[target] for target in event.targets
+            )
             for target in event.targets:
                 causes[target].add(event.event_id)
             if event.effect == "pause":
@@ -824,6 +831,9 @@ def _stochastic_fault_controller(
             record["verified_at"] = _format_time(_utc_now())
         else:
             causes = pause_causes if event.effect == "pause" else network_causes
+            record["observation_release_required"] = any(
+                causes[target] == {event.event_id} for target in event.targets
+            )
             for target in event.targets:
                 causes[target].discard(event.event_id)
             if event.effect == "pause":
@@ -903,6 +913,7 @@ def _health_sampler(
     replica_by_service = {service: key for key, service in replicas.items()}
     services = (*replicas.values(), profile.target_service)
     identifiers = [containers[service] for service in services]
+    tick = 0
     while not stop.is_set():
         observed = _utc_now()
         elapsed = time.monotonic() - started_monotonic
@@ -967,7 +978,10 @@ def _health_sampler(
                     "error": f"{type(error).__name__}: {error}",
                 }
             )
-        stop.wait(config.health_poll_seconds)
+        tick += 1
+        next_deadline = started_monotonic + tick * config.health_poll_seconds
+        if stop.wait(max(0.0, next_deadline - time.monotonic())):
+            return
 
 
 def _run_period(
@@ -1742,8 +1756,14 @@ def run_stochastic_freeze_pilot(
             for period in ("calibration", "test")
         ),
         "unobserved_event_transitions": sum(
-            row["observation_start_lag_seconds"] == ""
-            or row["observation_release_lag_seconds"] == ""
+            (
+                bool(row["observation_start_required"])
+                and row["observation_start_lag_seconds"] == ""
+            )
+            + (
+                bool(row["observation_release_required"])
+                and row["observation_release_lag_seconds"] == ""
+            )
             for row in all_events
         ),
         "health_service_periods_below_minimum": sum(
@@ -1791,12 +1811,14 @@ def run_stochastic_freeze_pilot(
             "start": [
                 float(row["observation_start_lag_seconds"])
                 for row in all_events
-                if row["observation_start_lag_seconds"] != ""
+                if row["observation_start_required"]
+                and row["observation_start_lag_seconds"] != ""
             ],
             "release": [
                 float(row["observation_release_lag_seconds"])
                 for row in all_events
-                if row["observation_release_lag_seconds"] != ""
+                if row["observation_release_required"]
+                and row["observation_release_lag_seconds"] != ""
             ],
         },
         "routing_audit": routing_audit,
@@ -1819,6 +1841,22 @@ def run_stochastic_freeze_pilot(
             "confirmed_events": sum(bool(row["confirmed"]) for row in all_events),
             "released_events": sum(
                 bool(row["release_confirmed"]) for row in all_events
+            ),
+            "observable_transitions_required": sum(
+                bool(row["observation_start_required"])
+                + bool(row["observation_release_required"])
+                for row in all_events
+            ),
+            "observable_transitions_observed": sum(
+                (
+                    bool(row["observation_start_required"])
+                    and row["observation_start_lag_seconds"] != ""
+                )
+                + (
+                    bool(row["observation_release_required"])
+                    and row["observation_release_lag_seconds"] != ""
+                )
+                for row in all_events
             ),
             "health_samples": len(all_health),
             "trace_rows": len(trace_join),
