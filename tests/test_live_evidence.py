@@ -226,6 +226,14 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
                         "error": "",
                     }
                 )
+            health_rows.extend(
+                {
+                    **row,
+                    "period": "test",
+                    "observed_at": "2026-01-01T00:01:00Z",
+                }
+                for row in tuple(health_rows)
+            )
             _write_csv(source / "health.csv", health_rows)
             traces = []
             for trace_id, replica in zip(calibration_ids, ("a", "b"), strict=True):
@@ -299,11 +307,13 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
             self.assertTrue(summary["usable"])
             self.assertEqual(summary["calibration_requests"], 2)
             self.assertEqual(summary["test_requests_sequestered"], 1)
+            self.assertEqual(summary["test_health_ticks_sequestered"], 1)
             learner_text = (output / "learner" / "requests.csv").read_text(
                 encoding="utf-8"
             )
             self.assertNotIn("test-0", learner_text)
             self.assertFalse((output / "learner" / "events.csv").exists())
+            self.assertTrue((output / "evaluator" / "test-health.csv").is_file())
             audit = json.loads(
                 (output / "audit" / "boundary.json").read_text(encoding="utf-8")
             )

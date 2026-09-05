@@ -108,6 +108,7 @@ CELL_SUMMARY_FIELDS = (
     "replica_a_trace_assignments",
     "replica_b_trace_assignments",
     "test_requests_sequestered",
+    "test_health_ticks_sequestered",
     "quality_failures",
     "usable",
 )
@@ -598,6 +599,7 @@ def qualify_evidence_cell(
     health_rows, malformed_health = _pivot_health(
         identity, health, config.learner_period
     )
+    test_health_rows, malformed_test_health = _pivot_health(identity, health, "test")
     topology_rows = _topology_rows(identity, parsed.spans_by_trace)
     evaluation_rows = [
         {
@@ -639,6 +641,11 @@ def qualify_evidence_cell(
         evaluator / "test-requests.csv",
         EVALUATOR_REQUEST_FIELDS,
         evaluation_rows,
+    )
+    _write_csv(
+        evaluator / "test-health.csv",
+        LEARNER_HEALTH_FIELDS,
+        test_health_rows,
     )
 
     learner_ids = {row["request_id"] for row in learner_rows}
@@ -727,6 +734,8 @@ def qualify_evidence_cell(
             for replica in ("a", "b")
         ),
         "malformed_health_rows_or_ticks": malformed_health,
+        "missing_test_health_ticks": int(not test_health_rows),
+        "malformed_test_health_rows_or_ticks": malformed_test_health,
         "denied_learner_fields": len(denied_fields),
         "privileged_files_copied_to_learner": sum(
             (learner / name).exists() for name in config.privileged_source_files
@@ -769,6 +778,7 @@ def qualify_evidence_cell(
         "replica_a_trace_assignments": replica_counts["a"],
         "replica_b_trace_assignments": replica_counts["b"],
         "test_requests_sequestered": len(evaluation_rows),
+        "test_health_ticks_sequestered": len(test_health_rows),
         "quality_failures": sum(quality.values()),
         "usable": not failures,
     }
@@ -871,6 +881,9 @@ def qualify_evidence_boundary(
             "topology_edges": sum(int(row["topology_edges"]) for row in summaries),
             "sequestered_test_requests": sum(
                 int(row["test_requests_sequestered"]) for row in summaries
+            ),
+            "sequestered_test_health_ticks": sum(
+                int(row["test_health_ticks_sequestered"]) for row in summaries
             ),
         },
         "files": {"cells_sha256": file_sha256(output / "cells.csv")},

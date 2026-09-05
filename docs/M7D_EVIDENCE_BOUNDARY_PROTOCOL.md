@@ -21,9 +21,12 @@ For each source cell the executable adapter writes three directories:
    trace-derived service graphs and replica assignments, one-second
    health/lifecycle/network observations, and declared deployment/routing
    metadata.
-2. `evaluator/` contains only held-out test-period external semantic outcomes.
-   It is not an input to topology discovery, fitting, model selection, or
-   numerical tuning.
+2. `evaluator/` contains held-out test-period external semantic outcomes and
+   the independently sampled test health series. It is not an input to topology
+   discovery, fitting, model selection, or numerical tuning. Test health may
+   locate transitions for the frozen stable-interval evaluation rule; those
+   transitions are detected from the ordinary series rather than controller
+   event times.
 3. `audit/` records boundary checks and hashes. The exact planned schedule,
    controller event identifiers and cause sets, intended/applied/verified
    transition times, cleanup records, and final controller state are privileged
@@ -80,8 +83,9 @@ from one commit. Every cell must satisfy all of the following:
   and at least 80% of semantic successes retain a native trace;
 - the calibration trace graph has at least one cross-service edge and both
   target replicas have positive trace assignment support;
-- every calibration health tick contains exactly the proxy and both replicas
-  with no sampler error;
+- every calibration and test health tick contains exactly the proxy and both
+  replicas with no sampler error; test health is written only below
+  `evaluator/`;
 - none of the denied controller/event field names occurs in the learner schema
   and no privileged source file is copied below `learner/`;
 - all source cells name one workflow run, one tested commit, the expected
