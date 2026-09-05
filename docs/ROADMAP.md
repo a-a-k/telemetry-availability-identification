@@ -26,7 +26,12 @@ Evidence: `milestones/M1_EXACT_LIKELIHOOD_REFERENCE.md`.
 
 ## Phase 3: proposed identification procedure
 
-Status: in progress as milestone M2.
+Status: partially implemented across milestones M1--M2. M2 supplies one proved
+signature-reduction rule, direct reduced-likelihood optimization, and three-way
+diagnostic output. General heterogeneous adapters, broader elimination rules,
+and B1 remain later work.
+
+Evidence: `milestones/M2_STRUCTURE_PRESERVING_REDUCTION.md`.
 
 - factor-graph compilation from heterogeneous records;
 - domain-local elimination rules with preservation tests;
