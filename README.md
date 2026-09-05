@@ -55,6 +55,12 @@ domain. It uses B0--B4, a strengthened analytic moment baseline, the matched B3
 likelihood, explicit ambiguity witnesses, change error, choice accuracy, regret,
 and identification-aware abstention.
 
+Milestone M4 constructs simultaneous exact-binomial constraints on the
+observable probabilities and propagates them through a conservative numerical
+outer enclosure of the two-domain parameter set. Coverage is reported together
+with width and decision abstention, against likelihood-Wald, direct endpoint,
+and fixed-input simulation-only alternatives.
+
 The configured RQ1 matrix has four small factor-graph families, three observation
 modes, three nested sample sizes, and 200 independently generated campaigns. It
 therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
@@ -104,6 +110,9 @@ identifiers in its manifest.
 - M3 Non-Direct Placement Transfer is started manually, shards by common-cause
   scenario, and requires matched B3 predictions, valid ambiguity witnesses, and
   zero unsupported proposed decisions before publishing its aggregate artifact.
+- M4 Simultaneous Uncertainty is started manually, shards by scenario, and
+  requires valid outer enclosures without treating random empirical coverage as
+  a CI build gate.
 
 ## Generated tables
 

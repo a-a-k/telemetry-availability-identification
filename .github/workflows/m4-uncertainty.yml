@@ -1,0 +1,130 @@
+name: M4 Simultaneous Uncertainty
+
+on:
+  workflow_dispatch:
+    inputs:
+      tier:
+        description: Diagnostic uses 10 campaigns; full uses the frozen 200 campaigns.
+        required: true
+        default: diagnostic
+        type: choice
+        options:
+          - diagnostic
+          - full
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m4-uncertainty-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    name: ${{ matrix.scenario }} (${{ inputs.tier }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario:
+          - weak_common_cause
+          - medium_common_cause
+          - strong_common_cause
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Run diagnostic uncertainty shard
+        if: ${{ inputs.tier == 'diagnostic' }}
+        run: >-
+          python -m telemetry_availability run-uncertainty-experiment
+          --config configs/m4_uncertainty.yaml
+          --out "workflow-results/${{ matrix.scenario }}"
+          --scenario "${{ matrix.scenario }}"
+          --repetitions 10
+          --sample-sizes 100,500
+
+      - name: Run full uncertainty shard
+        if: ${{ inputs.tier == 'full' }}
+        run: >-
+          python -m telemetry_availability run-uncertainty-experiment
+          --config configs/m4_uncertainty.yaml
+          --out "workflow-results/${{ matrix.scenario }}"
+          --scenario "${{ matrix.scenario }}"
+
+      - name: Upload immutable scenario shard
+        uses: actions/upload-artifact@v7
+        with:
+          name: m4-${{ matrix.scenario }}-${{ github.run_id }}
+          path: workflow-results/${{ matrix.scenario }}
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    name: Aggregate M4 tables
+    needs: experiment
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download scenario shards
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m4-*-${{ github.run_id }}
+          path: workflow-shards
+
+      - name: Aggregate uncertainty tables
+        run: >-
+          python -m telemetry_availability aggregate-uncertainty-experiment
+          --input-root workflow-shards
+          --out workflow-results/aggregate
+
+      - name: Require valid conservative enclosures
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("workflow-results/aggregate/manifest.json").read_text())
+          failures = {name: value for name, value in manifest["quality"].items() if value}
+          if failures:
+              raise SystemExit(f"M4 quality-gate failures: {failures}")
+          PY
+
+      - name: Upload aggregate
+        uses: actions/upload-artifact@v7
+        with:
+          name: m4-aggregate-${{ github.run_id }}
+          path: workflow-results/aggregate
+          if-no-files-found: error
+          retention-days: 30

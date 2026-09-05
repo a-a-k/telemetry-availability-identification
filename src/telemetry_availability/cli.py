@@ -22,6 +22,11 @@ from .transfer_experiment import (
     aggregate_transfer_experiment,
     run_transfer_experiment,
 )
+from .uncertainty_config import load_uncertainty_config
+from .uncertainty_experiment import (
+    aggregate_uncertainty_experiment,
+    run_uncertainty_experiment,
+)
 
 
 def _comma_separated_positive_integers(value: str) -> tuple[int, ...]:
@@ -120,6 +125,30 @@ def build_parser() -> argparse.ArgumentParser:
     )
     aggregate_transfer.add_argument("--input-root", required=True, type=Path)
     aggregate_transfer.add_argument("--out", required=True, type=Path)
+
+    validate_uncertainty = commands.add_parser(
+        "validate-uncertainty-config",
+        help="validate the simultaneous uncertainty experiment contract",
+    )
+    validate_uncertainty.add_argument("--config", required=True, type=Path)
+
+    uncertainty = commands.add_parser(
+        "run-uncertainty-experiment",
+        help="run simultaneous confidence-set coverage experiments",
+    )
+    uncertainty.add_argument("--config", required=True, type=Path)
+    uncertainty.add_argument("--out", required=True, type=Path)
+    uncertainty.add_argument("--scenario", action="append")
+    uncertainty.add_argument("--mode", action="append")
+    uncertainty.add_argument("--repetitions", type=int)
+    uncertainty.add_argument("--sample-sizes", type=_comma_separated_positive_integers)
+
+    aggregate_uncertainty = commands.add_parser(
+        "aggregate-uncertainty-experiment",
+        help="combine simultaneous uncertainty workflow shards",
+    )
+    aggregate_uncertainty.add_argument("--input-root", required=True, type=Path)
+    aggregate_uncertainty.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -269,6 +298,45 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "aggregate-transfer-experiment":
         manifest = aggregate_transfer_experiment(args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-uncertainty-config":
+        config = load_uncertainty_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "confidence_level": config.confidence_level,
+                    "scenarios": [item.id for item in config.transfer.scenarios],
+                    "observation_modes": [
+                        item.id for item in config.transfer.observation_modes
+                    ],
+                },
+                indent=2,
+            )
+        )
+        return 0
+
+    if args.command == "run-uncertainty-experiment":
+        config = load_uncertainty_config(args.config)
+        manifest = run_uncertainty_experiment(
+            config=config,
+            config_path=args.config,
+            output_directory=args.out,
+            scenario_names=(
+                None if args.scenario is None else tuple(args.scenario)
+            ),
+            mode_names=None if args.mode is None else tuple(args.mode),
+            repetitions=args.repetitions,
+            sample_sizes=args.sample_sizes,
+        )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-uncertainty-experiment":
+        manifest = aggregate_uncertainty_experiment(args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 
