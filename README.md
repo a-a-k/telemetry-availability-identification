@@ -75,6 +75,14 @@ The unchanged M4 procedure and matched B3 are retained, diagnostics gate a
 separate guarded output, and mechanism-aware references are explicitly labelled
 as such.
 
+Milestone M6 adds the versioned `taid.live_bundle/v1` ingestion boundary. It
+normalizes Jaeger and OTLP JSON alongside an independent external-request census,
+deployment/domain metadata, distinct liveness/readiness records, mesh attempts,
+verified injection intervals, and manual operation semantics. Its integration
+workflow checks exact upstream revisions of DeathStarBench and OpenTelemetry Demo
+and exercises deliberately tiny contract fixtures. These fixtures are not live
+measurements and provide no effectiveness result.
+
 The configured RQ1 matrix has four small factor-graph families, three observation
 modes, three nested sample sizes, and 200 independently generated campaigns. It
 therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
@@ -131,6 +139,10 @@ identifiers in its manifest.
   uses paired controls for five named assumption violations and treats
   diagnostics and guarded abstention separately from mechanism-aware oracle
   references.
+- M6 Live Ingestion Harness checks two exact public benchmark revisions,
+  operation-specific workload evidence, both trace adapters, deterministic
+  normalization, and preservation of external failures without exported traces.
+  It is an integration milestone, not a live-system experiment.
 
 ## Generated tables
 
@@ -164,10 +176,10 @@ frozen for the paper.
 
 ## Scope not yet implemented
 
-The current implementation does not claim support for general Boolean request
-predicates, state-dependent exporter loss, temporally dependent episodes,
-overlapping failure domains, general sparse elimination, EM, uncertainty sets,
-or live-system ingestion. M2 is one proved compiler rule, not a general
-factor-graph solver. M3 supports one explicit two-domain placement transfer and
-must not be generalized to arbitrary Boolean models or unknown transfer
-mechanisms.
+The current implementation does not claim support for arbitrary Boolean request
+predicates, overlapping failure domains, general sparse elimination, or EM. M2
+is one proved compiler rule, not a general factor-graph solver. M3 supports one
+explicit two-domain placement transfer. M5's state-dependent loss and temporal
+dependence are directed stress generators, not general estimators for those
+mechanisms. M6 provides ingestion and upstream-integration evidence only; live
+effectiveness and live placement transfer remain untested until M7.

@@ -1,0 +1,63 @@
+schema_version: 1
+
+contract:
+  id: taid.live_bundle
+  version: 1
+  require_file_digests: true
+  require_disjoint_periods: true
+  require_external_request_census: true
+  maximum_health_age_seconds: 30
+
+benchmarks:
+  - id: deathstarbench_social_network
+    repository: https://github.com/delimitrou/DeathStarBench.git
+    commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+    checkout_subtree: socialNetwork
+    required_paths:
+      - socialNetwork/docker-compose.yml
+      - socialNetwork/wrk2/scripts/social-network/compose-post.lua
+      - socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua
+      - socialNetwork/wrk2/scripts/social-network/read-user-timeline.lua
+    required_services:
+      - nginx-thrift
+      - compose-post-service
+      - home-timeline-service
+      - user-timeline-service
+    trace_format: jaeger_json_v1
+    fixture_bundle: tests/fixtures/live/deathstarbench
+    operations:
+      - id: compose_post
+        workload_path: socialNetwork/wrk2/scripts/social-network/compose-post.lua
+        markers: ["POST", "/wrk2-api/post/compose"]
+      - id: read_home_timeline
+        workload_path: socialNetwork/wrk2/scripts/social-network/read-home-timeline.lua
+        markers: ["GET", "/wrk2-api/home-timeline/read"]
+      - id: read_user_timeline
+        workload_path: socialNetwork/wrk2/scripts/social-network/read-user-timeline.lua
+        markers: ["GET", "/wrk2-api/user-timeline/read"]
+
+  - id: opentelemetry_demo
+    repository: https://github.com/open-telemetry/opentelemetry-demo.git
+    commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+    checkout_subtree: .
+    required_paths:
+      - compose.yaml
+      - src/load-generator/locustfile.py
+      - src/otel-collector/otelcol-config.yml
+    required_services:
+      - frontend
+      - product-catalog
+      - cart
+      - checkout
+    trace_format: otlp_json_v1
+    fixture_bundle: tests/fixtures/live/otel-demo
+    operations:
+      - id: browse_product
+        workload_path: src/load-generator/locustfile.py
+        markers: ["def browse_product", "/api/products/"]
+      - id: add_to_cart
+        workload_path: src/load-generator/locustfile.py
+        markers: ["def add_to_cart", "/api/cart"]
+      - id: checkout
+        workload_path: src/load-generator/locustfile.py
+        markers: ["def checkout", "/api/checkout"]

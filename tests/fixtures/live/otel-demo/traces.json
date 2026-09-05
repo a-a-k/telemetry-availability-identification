@@ -1,0 +1,48 @@
+{
+  "resourceSpans": [
+    {
+      "resource": {"attributes": [
+        {"key": "service.name", "value": {"stringValue": "frontend"}},
+        {"key": "service.instance.id", "value": {"stringValue": "otel-frontend-a"}}
+      ]},
+      "scopeSpans": [{"scope": {"name": "taid-fixture"}, "spans": [
+        {"traceId": "20000000000000000000000000000001", "spanId": "2000000000000001", "name": "GET /api/products/{id}", "kind": "SPAN_KIND_SERVER", "startTimeUnixNano": "1785542401000000000", "endTimeUnixNano": "1785542401200000000", "attributes": [{"key": "taid.operation_class", "value": {"stringValue": "browse_product"}}], "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000002", "spanId": "2000000000000003", "name": "POST /api/cart", "kind": "SPAN_KIND_SERVER", "startTimeUnixNano": "1785542402000000000", "endTimeUnixNano": "1785542402200000000", "attributes": [{"key": "taid.operation_class", "value": {"stringValue": "add_to_cart"}}], "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000003", "spanId": "2000000000000005", "name": "POST /api/checkout", "kind": "SPAN_KIND_SERVER", "startTimeUnixNano": "1785542403000000000", "endTimeUnixNano": "1785542403200000000", "attributes": [{"key": "taid.operation_class", "value": {"stringValue": "checkout"}}], "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000004", "spanId": "2000000000000007", "name": "GET /api/products/{id}", "kind": "SPAN_KIND_SERVER", "startTimeUnixNano": "1785546001000000000", "endTimeUnixNano": "1785546001200000000", "attributes": [{"key": "taid.operation_class", "value": {"stringValue": "browse_product"}}], "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000005", "spanId": "2000000000000009", "name": "POST /api/cart", "kind": "SPAN_KIND_SERVER", "startTimeUnixNano": "1785546002000000000", "endTimeUnixNano": "1785546002200000000", "attributes": [{"key": "taid.operation_class", "value": {"stringValue": "add_to_cart"}}], "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000006", "spanId": "200000000000000b", "name": "POST /api/checkout", "kind": "SPAN_KIND_SERVER", "startTimeUnixNano": "1785546003000000000", "endTimeUnixNano": "1785546003200000000", "attributes": [{"key": "taid.operation_class", "value": {"stringValue": "checkout"}}], "status": {"code": "STATUS_CODE_OK"}}
+      ]}]
+    },
+    {
+      "resource": {"attributes": [
+        {"key": "service.name", "value": {"stringValue": "product-catalog"}},
+        {"key": "service.instance.id", "value": {"stringValue": "otel-product-a"}}
+      ]},
+      "scopeSpans": [{"scope": {"name": "taid-fixture"}, "spans": [
+        {"traceId": "20000000000000000000000000000001", "spanId": "2000000000000002", "parentSpanId": "2000000000000001", "name": "GetProduct", "kind": "SPAN_KIND_CLIENT", "startTimeUnixNano": "1785542401050000000", "endTimeUnixNano": "1785542401150000000", "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000004", "spanId": "2000000000000008", "parentSpanId": "2000000000000007", "name": "GetProduct", "kind": "SPAN_KIND_CLIENT", "startTimeUnixNano": "1785546001050000000", "endTimeUnixNano": "1785546001150000000", "status": {"code": "STATUS_CODE_OK"}}
+      ]}]
+    },
+    {
+      "resource": {"attributes": [
+        {"key": "service.name", "value": {"stringValue": "cart"}},
+        {"key": "service.instance.id", "value": {"stringValue": "otel-cart-a"}}
+      ]},
+      "scopeSpans": [{"scope": {"name": "taid-fixture"}, "spans": [
+        {"traceId": "20000000000000000000000000000002", "spanId": "2000000000000004", "parentSpanId": "2000000000000003", "name": "AddItem", "kind": "SPAN_KIND_CLIENT", "startTimeUnixNano": "1785542402050000000", "endTimeUnixNano": "1785542402150000000", "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000005", "spanId": "200000000000000a", "parentSpanId": "2000000000000009", "name": "AddItem", "kind": "SPAN_KIND_CLIENT", "startTimeUnixNano": "1785546002050000000", "endTimeUnixNano": "1785546002150000000", "status": {"code": "STATUS_CODE_OK"}}
+      ]}]
+    },
+    {
+      "resource": {"attributes": [
+        {"key": "service.name", "value": {"stringValue": "checkout"}},
+        {"key": "service.instance.id", "value": {"stringValue": "otel-checkout-a"}}
+      ]},
+      "scopeSpans": [{"scope": {"name": "taid-fixture"}, "spans": [
+        {"traceId": "20000000000000000000000000000003", "spanId": "2000000000000006", "parentSpanId": "2000000000000005", "name": "PlaceOrder", "kind": "SPAN_KIND_CLIENT", "startTimeUnixNano": "1785542403050000000", "endTimeUnixNano": "1785542403150000000", "status": {"code": "STATUS_CODE_OK"}},
+        {"traceId": "20000000000000000000000000000006", "spanId": "200000000000000c", "parentSpanId": "200000000000000b", "name": "PlaceOrder", "kind": "SPAN_KIND_CLIENT", "startTimeUnixNano": "1785546003050000000", "endTimeUnixNano": "1785546003150000000", "status": {"code": "STATUS_CODE_OK"}}
+      ]}]
+    }
+  ]
+}

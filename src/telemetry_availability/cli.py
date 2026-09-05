@@ -11,6 +11,13 @@ from .likelihood_reference import (
     aggregate_likelihood_reference,
     run_likelihood_reference,
 )
+from .live_config import load_live_harness_config
+from .live_harness import (
+    aggregate_live_harness,
+    select_live_profile,
+    verify_live_profile,
+)
+from .live_ingestion import ingest_live_bundle, write_ingested_bundle
 from .moments import structural_moment_rows
 from .reduction_experiment import (
     aggregate_reduction_experiment,
@@ -175,6 +182,42 @@ def build_parser() -> argparse.ArgumentParser:
     )
     aggregate_stress.add_argument("--input-root", required=True, type=Path)
     aggregate_stress.add_argument("--out", required=True, type=Path)
+
+    validate_live = commands.add_parser(
+        "validate-live-harness",
+        help="validate the versioned live-ingestion and benchmark contract",
+    )
+    validate_live.add_argument("--config", required=True, type=Path)
+
+    ingest_live = commands.add_parser(
+        "ingest-live-bundle",
+        help="validate and normalize one external telemetry bundle",
+    )
+    ingest_live.add_argument("--config", required=True, type=Path)
+    ingest_live.add_argument("--benchmark", required=True)
+    ingest_live.add_argument(
+        "--bundle",
+        type=Path,
+        help="bundle directory; defaults to the profile's contract fixture",
+    )
+    ingest_live.add_argument("--out", required=True, type=Path)
+
+    verify_live = commands.add_parser(
+        "verify-live-profile",
+        help="verify a frozen upstream checkout and its ingestion adapter fixture",
+    )
+    verify_live.add_argument("--config", required=True, type=Path)
+    verify_live.add_argument("--benchmark", required=True)
+    verify_live.add_argument("--checkout", required=True, type=Path)
+    verify_live.add_argument("--out", required=True, type=Path)
+
+    aggregate_live = commands.add_parser(
+        "aggregate-live-harness",
+        help="combine frozen benchmark-profile verification artifacts",
+    )
+    aggregate_live.add_argument("--config", required=True, type=Path)
+    aggregate_live.add_argument("--input-root", required=True, type=Path)
+    aggregate_live.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -400,6 +443,50 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "aggregate-stress-experiment":
         manifest = aggregate_stress_experiment(args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-live-harness":
+        config = load_live_harness_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "contract": f"{config.contract.id}/v{config.contract.version}",
+                    "benchmarks": [item.id for item in config.benchmarks],
+                    "trace_adapters": sorted(
+                        {item.trace_format for item in config.benchmarks}
+                    ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "ingest-live-bundle":
+        config = load_live_harness_config(args.config)
+        profile = select_live_profile(config, args.benchmark)
+        bundle_directory = profile.fixture_bundle if args.bundle is None else args.bundle
+        bundle = ingest_live_bundle(bundle_directory, config.contract, profile)
+        manifest = write_ingested_bundle(bundle, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "verify-live-profile":
+        config = load_live_harness_config(args.config)
+        report = verify_live_profile(
+            config,
+            args.benchmark,
+            args.checkout,
+            args.out,
+        )
+        print(json.dumps(report["fixture_audit"]["counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-live-harness":
+        config = load_live_harness_config(args.config)
+        manifest = aggregate_live_harness(config, args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

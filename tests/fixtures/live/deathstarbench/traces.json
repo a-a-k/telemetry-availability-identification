@@ -1,0 +1,70 @@
+{
+  "data": [
+    {
+      "traceID": "10000000000000000000000000000001",
+      "processes": {
+        "p0": {"serviceName": "nginx-thrift", "tags": [{"key": "hostname", "type": "string", "value": "ds-nginx-a"}]},
+        "p1": {"serviceName": "compose-post-service", "tags": [{"key": "hostname", "type": "string", "value": "ds-compose-a"}]}
+      },
+      "spans": [
+        {"traceID": "10000000000000000000000000000001", "spanID": "1000000000000001", "operationName": "POST /wrk2-api/post/compose", "references": [], "startTime": 1785542401000000, "duration": 200000, "processID": "p0", "tags": [{"key": "taid.operation_class", "type": "string", "value": "compose_post"}]},
+        {"traceID": "10000000000000000000000000000001", "spanID": "1000000000000002", "operationName": "ComposePost", "references": [{"refType": "CHILD_OF", "traceID": "10000000000000000000000000000001", "spanID": "1000000000000001"}], "startTime": 1785542401050000, "duration": 100000, "processID": "p1", "tags": []}
+      ]
+    },
+    {
+      "traceID": "10000000000000000000000000000002",
+      "processes": {
+        "p0": {"serviceName": "nginx-thrift", "tags": [{"key": "hostname", "type": "string", "value": "ds-nginx-a"}]},
+        "p1": {"serviceName": "home-timeline-service", "tags": [{"key": "hostname", "type": "string", "value": "ds-home-a"}]}
+      },
+      "spans": [
+        {"traceID": "10000000000000000000000000000002", "spanID": "1000000000000003", "operationName": "GET /wrk2-api/home-timeline/read", "references": [], "startTime": 1785542402000000, "duration": 200000, "processID": "p0", "tags": [{"key": "taid.operation_class", "type": "string", "value": "read_home_timeline"}]},
+        {"traceID": "10000000000000000000000000000002", "spanID": "1000000000000004", "operationName": "ReadHomeTimeline", "references": [{"refType": "CHILD_OF", "traceID": "10000000000000000000000000000002", "spanID": "1000000000000003"}], "startTime": 1785542402050000, "duration": 100000, "processID": "p1", "tags": []}
+      ]
+    },
+    {
+      "traceID": "10000000000000000000000000000003",
+      "processes": {
+        "p0": {"serviceName": "nginx-thrift", "tags": [{"key": "hostname", "type": "string", "value": "ds-nginx-a"}]},
+        "p1": {"serviceName": "user-timeline-service", "tags": [{"key": "hostname", "type": "string", "value": "ds-user-a"}]}
+      },
+      "spans": [
+        {"traceID": "10000000000000000000000000000003", "spanID": "1000000000000005", "operationName": "GET /wrk2-api/user-timeline/read", "references": [], "startTime": 1785542403000000, "duration": 200000, "processID": "p0", "tags": [{"key": "taid.operation_class", "type": "string", "value": "read_user_timeline"}]},
+        {"traceID": "10000000000000000000000000000003", "spanID": "1000000000000006", "operationName": "ReadUserTimeline", "references": [{"refType": "CHILD_OF", "traceID": "10000000000000000000000000000003", "spanID": "1000000000000005"}], "startTime": 1785542403050000, "duration": 100000, "processID": "p1", "tags": []}
+      ]
+    },
+    {
+      "traceID": "10000000000000000000000000000004",
+      "processes": {
+        "p0": {"serviceName": "nginx-thrift", "tags": [{"key": "hostname", "type": "string", "value": "ds-nginx-a"}]},
+        "p1": {"serviceName": "compose-post-service", "tags": [{"key": "hostname", "type": "string", "value": "ds-compose-a"}]}
+      },
+      "spans": [
+        {"traceID": "10000000000000000000000000000004", "spanID": "1000000000000007", "operationName": "POST /wrk2-api/post/compose", "references": [], "startTime": 1785546001000000, "duration": 200000, "processID": "p0", "tags": [{"key": "taid.operation_class", "type": "string", "value": "compose_post"}]},
+        {"traceID": "10000000000000000000000000000004", "spanID": "1000000000000008", "operationName": "ComposePost", "references": [{"refType": "CHILD_OF", "traceID": "10000000000000000000000000000004", "spanID": "1000000000000007"}], "startTime": 1785546001050000, "duration": 100000, "processID": "p1", "tags": []}
+      ]
+    },
+    {
+      "traceID": "10000000000000000000000000000005",
+      "processes": {
+        "p0": {"serviceName": "nginx-thrift", "tags": [{"key": "hostname", "type": "string", "value": "ds-nginx-a"}]},
+        "p1": {"serviceName": "home-timeline-service", "tags": [{"key": "hostname", "type": "string", "value": "ds-home-a"}]}
+      },
+      "spans": [
+        {"traceID": "10000000000000000000000000000005", "spanID": "1000000000000009", "operationName": "GET /wrk2-api/home-timeline/read", "references": [], "startTime": 1785546002000000, "duration": 200000, "processID": "p0", "tags": [{"key": "taid.operation_class", "type": "string", "value": "read_home_timeline"}]},
+        {"traceID": "10000000000000000000000000000005", "spanID": "100000000000000a", "operationName": "ReadHomeTimeline", "references": [{"refType": "CHILD_OF", "traceID": "10000000000000000000000000000005", "spanID": "1000000000000009"}], "startTime": 1785546002050000, "duration": 100000, "processID": "p1", "tags": []}
+      ]
+    },
+    {
+      "traceID": "10000000000000000000000000000006",
+      "processes": {
+        "p0": {"serviceName": "nginx-thrift", "tags": [{"key": "hostname", "type": "string", "value": "ds-nginx-a"}]},
+        "p1": {"serviceName": "user-timeline-service", "tags": [{"key": "hostname", "type": "string", "value": "ds-user-a"}]}
+      },
+      "spans": [
+        {"traceID": "10000000000000000000000000000006", "spanID": "100000000000000b", "operationName": "GET /wrk2-api/user-timeline/read", "references": [], "startTime": 1785546003000000, "duration": 200000, "processID": "p0", "tags": [{"key": "taid.operation_class", "type": "string", "value": "read_user_timeline"}]},
+        {"traceID": "10000000000000000000000000000006", "spanID": "100000000000000c", "operationName": "ReadUserTimeline", "references": [{"refType": "CHILD_OF", "traceID": "10000000000000000000000000000006", "spanID": "100000000000000b"}], "startTime": 1785546003050000, "duration": 100000, "processID": "p1", "tags": []}
+      ]
+    }
+  ]
+}

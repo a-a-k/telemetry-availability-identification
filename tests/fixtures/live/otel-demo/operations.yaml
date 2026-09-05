@@ -1,0 +1,20 @@
+schema_version: taid.operations/v1
+operations:
+  - id: browse_product
+    entry_service: frontend
+    semantics: immediate
+    accepted_outcomes: [ok]
+    required_effects: [product_rendered]
+    branch_classes: [catalog_hit, catalog_miss]
+  - id: add_to_cart
+    entry_service: frontend
+    semantics: immediate
+    accepted_outcomes: [ok]
+    required_effects: [cart_updated]
+    branch_classes: [new_item, existing_item]
+  - id: checkout
+    entry_service: frontend
+    semantics: eventual
+    accepted_outcomes: [ok]
+    required_effects: [order_recorded, payment_accepted]
+    branch_classes: [single_item, multi_item]

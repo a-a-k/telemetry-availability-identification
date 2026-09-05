@@ -1,0 +1,20 @@
+schema_version: taid.operations/v1
+operations:
+  - id: compose_post
+    entry_service: nginx-thrift
+    semantics: eventual
+    accepted_outcomes: [ok]
+    required_effects: [post_persisted, home_timeline_fanout, user_timeline_fanout]
+    branch_classes: [with_media, text_only]
+  - id: read_home_timeline
+    entry_service: nginx-thrift
+    semantics: immediate
+    accepted_outcomes: [ok]
+    required_effects: [timeline_returned]
+    branch_classes: [cache_hit, cache_miss]
+  - id: read_user_timeline
+    entry_service: nginx-thrift
+    semantics: immediate
+    accepted_outcomes: [ok]
+    required_effects: [timeline_returned]
+    branch_classes: [cache_hit, cache_miss]

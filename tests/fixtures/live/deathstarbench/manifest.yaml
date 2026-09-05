@@ -1,0 +1,27 @@
+schema_version: taid.live_bundle/v1
+bundle_id: deathstarbench-contract-fixture-v1
+benchmark:
+  id: deathstarbench_social_network
+  commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+trace_format: jaeger_json_v1
+periods:
+  calibration:
+    start: 2026-08-01T00:00:00Z
+    end: 2026-08-01T00:10:00Z
+    workload_seed: 1101
+    failure_seed: 1102
+    sampling_seed: 1103
+  test:
+    start: 2026-08-01T01:00:00Z
+    end: 2026-08-01T01:10:00Z
+    workload_seed: 1201
+    failure_seed: 1202
+    sampling_seed: 1203
+files:
+  requests: {path: requests.csv, sha256: c8f92061ebfcbb2c9ed19e85bfe6cd967e72b91a11d7774d938d4a42ba94128d}
+  traces: {path: traces.json, sha256: 652eefd3e85328cb0e4727ecf1e03f8f6f964738d4b6a8f967886feb477934d0}
+  deployments: {path: deployments.csv, sha256: ec7cb8f1e35859da0005e65f84383e2bd480d66262da8d516d2ee609a24b39c6}
+  health: {path: health.csv, sha256: 2dd8804107376f4eb0ee564d79850a93bff98c0d09d7e08da3ed7c7af5ec0723}
+  mesh: {path: mesh.csv, sha256: 9b9ea4797d319a34e517e8a6941a5ba24e6b27e69ec0652bdf803e85fbea53b5}
+  injections: {path: injections.csv, sha256: 684b097cff38296c12305630404a6b0e437868bc76873ecc064dbee8d98cde2b}
+  operations: {path: operations.yaml, sha256: 321ebca4f54fd1cc6874d6eaeafdc72a0d598bfaccac54c7c0dc75280f6f9afe}

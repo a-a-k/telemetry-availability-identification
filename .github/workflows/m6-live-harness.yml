@@ -1,0 +1,134 @@
+name: M6 Live Ingestion Harness
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m6-live-harness-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  profile:
+    name: ${{ matrix.benchmark }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - benchmark: deathstarbench_social_network
+            repository: delimitrou/DeathStarBench
+            commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+            sparse: socialNetwork
+          - benchmark: opentelemetry_demo
+            repository: open-telemetry/opentelemetry-demo
+            commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+            sparse: |
+              compose.yaml
+              src/load-generator
+              src/otel-collector
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Check out exact benchmark revision
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.commit }}
+          path: upstream
+          sparse-checkout: ${{ matrix.sparse }}
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Validate harness contract
+        run: python -m telemetry_availability validate-live-harness --config configs/m6_live_harness.yaml
+
+      - name: Verify frozen upstream and adapter
+        run: >-
+          python -m telemetry_availability verify-live-profile
+          --config configs/m6_live_harness.yaml
+          --benchmark "${{ matrix.benchmark }}"
+          --checkout upstream
+          --out "workflow-results/${{ matrix.benchmark }}"
+
+      - name: Upload immutable profile evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: m6-${{ matrix.benchmark }}-${{ github.run_id }}
+          path: workflow-results/${{ matrix.benchmark }}
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    name: Aggregate M6 evidence
+    needs: profile
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download profile evidence
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m6-*-${{ github.run_id }}
+          path: workflow-shards
+
+      - name: Aggregate profile reports
+        run: >-
+          python -m telemetry_availability aggregate-live-harness
+          --config configs/m6_live_harness.yaml
+          --input-root workflow-shards
+          --out workflow-results/aggregate
+
+      - name: Require a valid fixture-only integration artifact
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest = json.loads(Path("workflow-results/aggregate/manifest.json").read_text())
+          failures = {name: value for name, value in manifest["quality"].items() if value}
+          if failures:
+              raise SystemExit(f"M6 quality-gate failures: {failures}")
+          if not manifest["fixture_only"] or manifest["source_profiles"] != 2:
+              raise SystemExit("M6 must contain exactly two fixture-only profile checks")
+          PY
+
+      - name: Upload aggregate
+        uses: actions/upload-artifact@v7
+        with:
+          name: m6-aggregate-${{ github.run_id }}
+          path: workflow-results/aggregate
+          if-no-files-found: error
+          retention-days: 30

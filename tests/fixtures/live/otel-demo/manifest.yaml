@@ -1,0 +1,27 @@
+schema_version: taid.live_bundle/v1
+bundle_id: opentelemetry-demo-contract-fixture-v1
+benchmark:
+  id: opentelemetry_demo
+  commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+trace_format: otlp_json_v1
+periods:
+  calibration:
+    start: 2026-08-01T00:00:00Z
+    end: 2026-08-01T00:10:00Z
+    workload_seed: 2101
+    failure_seed: 2102
+    sampling_seed: 2103
+  test:
+    start: 2026-08-01T01:00:00Z
+    end: 2026-08-01T01:10:00Z
+    workload_seed: 2201
+    failure_seed: 2202
+    sampling_seed: 2203
+files:
+  requests: {path: requests.csv, sha256: 7f80515462f9e9fddd61eeb56f964c8e78dd874316a8e466cf91d3e5aa7feee6}
+  traces: {path: traces.json, sha256: 41cc3e2e04a0edf7a43f7da1ade93d3478ba74a78987bbb1f1c24cfcc9b17186}
+  deployments: {path: deployments.csv, sha256: 449c889624a3462d3e0e7faeba95f6fcc3d3a7b301bba0a8f1050218c8fab2da}
+  health: {path: health.csv, sha256: 30996275920ab61487552ff2747ad46cda74830b5c7b9bff98d86c2600b59e29}
+  mesh: {path: mesh.csv, sha256: e47aee6707213de2943c2dcb8ba2f0d4b61da8465f1cfce111930547be366929}
+  injections: {path: injections.csv, sha256: 407aa04b781872760f1d7c11b02a0e75d24fa6e339bee2d6342ba50aed507113}
+  operations: {path: operations.yaml, sha256: 225f1eb24f4f592daed69f7c68d217ec77be4b8df8bc14b42c214236c7fbff18}

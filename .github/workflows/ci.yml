@@ -50,6 +50,15 @@ jobs:
       - name: Validate stress experiment contract
         run: python -m telemetry_availability validate-stress-config --config configs/m5_stress.yaml
 
+      - name: Validate live-ingestion harness contract
+        run: python -m telemetry_availability validate-live-harness --config configs/m6_live_harness.yaml
+
+      - name: Ingest both live-contract fixtures
+        if: ${{ matrix.python-version == '3.13' }}
+        run: |
+          python -m telemetry_availability ingest-live-bundle --config configs/m6_live_harness.yaml --benchmark deathstarbench_social_network --out workflow-results/live-smoke/deathstarbench
+          python -m telemetry_availability ingest-live-bundle --config configs/m6_live_harness.yaml --benchmark opentelemetry_demo --out workflow-results/live-smoke/otel-demo
+
       - name: Run bounded smoke experiment
         if: ${{ matrix.python-version == '3.13' }}
         run: >-
@@ -177,5 +186,14 @@ jobs:
         with:
           name: stress-smoke-${{ github.run_id }}
           path: workflow-results/stress-smoke
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload live-ingestion smoke evidence
+        if: ${{ matrix.python-version == '3.13' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: live-smoke-${{ github.run_id }}
+          path: workflow-results/live-smoke
           if-no-files-found: error
           retention-days: 14

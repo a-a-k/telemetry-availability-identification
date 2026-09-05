@@ -7,6 +7,15 @@ try {
     python -m unittest discover -s tests -v
     python -m telemetry_availability validate-config --config configs/rq1_synthetic.yaml
     python -m telemetry_availability validate-stress-config --config configs/m5_stress.yaml
+    python -m telemetry_availability validate-live-harness --config configs/m6_live_harness.yaml
+    python -m telemetry_availability ingest-live-bundle `
+        --config configs/m6_live_harness.yaml `
+        --benchmark deathstarbench_social_network `
+        --out .smoke/live/deathstarbench
+    python -m telemetry_availability ingest-live-bundle `
+        --config configs/m6_live_harness.yaml `
+        --benchmark opentelemetry_demo `
+        --out .smoke/live/otel-demo
     python -m telemetry_availability run `
         --config configs/rq1_synthetic.yaml `
         --out .smoke `
