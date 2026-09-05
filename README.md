@@ -168,6 +168,14 @@ identifiers in its manifest.
   both backends serve traffic, freezes content-aware success predicates, and
   exercises co-located versus split logical-domain targets without treating the
   pilot as effectiveness evidence.
+- M7C Stochastic Schedule and Budget Freeze Pilot runs independent alternating
+  renewal processes for individual, communication, and domain factors. Its
+  predeclared rule selects only the M7 duration, campaign-pair count, and
+  transition guard; no method outcome can affect that selection.
+- M7D Learner Evidence Boundary Qualification streams both native trace formats,
+  normalizes calibration-only trace graphs and health evidence, physically
+  sequesters test outcomes, and rejects controller/event fields in learner
+  schemas. It is a diagnostic adapter check, not an effectiveness experiment.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
@@ -199,7 +207,8 @@ linkage, and clean recovery; its first failed semantic-contract attempt is
 retained. Details are in
 `docs/milestones/M7B_REPLICATED_PLACEMENT_PILOT.md`. M7C next freezes the
 stochastic schedule and independent-repetition budget before M7 effectiveness
-outcomes are inspected.
+outcomes are inspected. M7D then qualifies the executable anti-leakage boundary
+in `docs/M7D_EVIDENCE_BOUNDARY_PROTOCOL.md` before any main-analysis fit.
 
 ## Generated tables
 

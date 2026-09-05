@@ -1,0 +1,52 @@
+schema_version: 1
+id: m7d_learner_evidence_boundary_qualification
+diagnostic_only: true
+source_experiment_id: m7c_stochastic_schedule_and_budget_freeze_pilot
+expected_source_cells: 64
+learner_period: calibration
+minimum_trace_link_fraction: 0.80
+minimum_replica_assignments_per_replica: 1
+
+profiles:
+  - id: deathstarbench_social_network
+    trace_format: jaeger_json_v1
+    raw_telemetry_file: raw-telemetry.json
+    target_service: user-timeline-service
+    replica_attribute: hostname
+    replica_values:
+      user-timeline-service-replica-a: a
+      user-timeline-service-replica-b: b
+  - id: opentelemetry_demo
+    trace_format: otlp_jsonl_v1
+    raw_telemetry_file: raw-telemetry.log
+    target_service: product-catalog
+    replica_attribute: study.replica
+    replica_values:
+      a: a
+      b: b
+
+allowed_source_files:
+  - requests.csv
+  - trace-join.csv
+  - health.csv
+  - raw-telemetry.json
+  - raw-telemetry.log
+  - image-lock-audit.json
+  - pilot-manifest.json
+
+privileged_source_files:
+  - planned-schedule.json
+  - events.csv
+  - period-cleanup.json
+  - final-state.json
+
+denied_learner_field_tokens:
+  - event_id
+  - incident_id
+  - cause
+  - intended_at
+  - applied_at
+  - verified_at
+  - release_at
+  - planned_schedule
+  - event_offset

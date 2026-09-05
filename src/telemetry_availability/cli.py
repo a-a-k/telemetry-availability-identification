@@ -12,6 +12,8 @@ from .likelihood_reference import (
     run_likelihood_reference,
 )
 from .live_config import load_live_harness_config
+from .live_evidence import qualify_evidence_boundary
+from .live_evidence_config import load_evidence_boundary_config
 from .live_fault_campaign import (
     aggregate_live_fault_diagnostics,
     run_live_fault_diagnostic,
@@ -383,6 +385,20 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate_stochastic.add_argument("--config", required=True, type=Path)
     aggregate_stochastic.add_argument("--input-root", required=True, type=Path)
     aggregate_stochastic.add_argument("--out", required=True, type=Path)
+
+    validate_evidence = commands.add_parser(
+        "validate-evidence-boundary",
+        help="validate the M7D learner/evaluator evidence-separation contract",
+    )
+    validate_evidence.add_argument("--config", required=True, type=Path)
+
+    qualify_evidence = commands.add_parser(
+        "qualify-evidence-boundary",
+        help="normalize M7C cells and audit the M7 learner/evaluator boundary",
+    )
+    qualify_evidence.add_argument("--config", required=True, type=Path)
+    qualify_evidence.add_argument("--input-root", required=True, type=Path)
+    qualify_evidence.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -856,6 +872,31 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.input_root,
             args.out,
         )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-evidence-boundary":
+        config = load_evidence_boundary_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "diagnostic_only": config.diagnostic_only,
+                    "source_experiment_id": config.source_experiment_id,
+                    "expected_source_cells": config.expected_source_cells,
+                    "learner_period": config.learner_period,
+                    "profiles": [profile.id for profile in config.profiles],
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "qualify-evidence-boundary":
+        config = load_evidence_boundary_config(args.config)
+        manifest = qualify_evidence_boundary(config, args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 
