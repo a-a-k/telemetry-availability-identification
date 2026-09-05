@@ -19,6 +19,7 @@ from telemetry_availability.live_stochastic_pilot import (
     StochasticPilotError,
     _stochastic_fault_controller,
     _trace_join_rows,
+    _transition_observation_plan,
     aggregate_stochastic_freeze_pilots,
     autocorrelation_block_length,
     factor_definitions,
@@ -41,6 +42,7 @@ class StochasticFreezePilotTests(unittest.TestCase):
         self.assertEqual(self.config.expected_cells, 64)
         self.assertEqual(self.config.baseline_requests, 240)
         self.assertEqual(self.config.requests_per_period, 1200)
+        self.assertEqual(self.config.transition_observation_minimum_ticks, 2)
         self.assertNotEqual(self.config.pilot_base_seed, self.config.main_base_seed)
 
     def test_factor_mapping_uses_real_replicas_and_placement_domains(self) -> None:
@@ -152,6 +154,33 @@ class StochasticFreezePilotTests(unittest.TestCase):
         self.assertEqual([row["raw_occurrences"] for row in rows], [2, 1])
         self.assertTrue(all(row["trace_present"] for row in rows))
 
+    def test_transition_plan_separates_physical_changes_from_poll_aliasing(
+        self,
+    ) -> None:
+        events = (
+            RenewalEvent(
+                "first", "individual:a", "individual", "pause", "", ("a",), 1, 0, 2
+            ),
+            RenewalEvent(
+                "second",
+                "common_domain:d",
+                "common_domain",
+                "pause",
+                "d",
+                ("a",),
+                2,
+                2.25,
+                2,
+            ),
+        )
+        plan = _transition_observation_plan(events, 6, 1, 2)
+        self.assertTrue(plan[("first", "start")]["eligible"])
+        self.assertTrue(plan[("first", "release")]["required"])
+        self.assertFalse(plan[("first", "release")]["eligible"])
+        self.assertTrue(plan[("second", "start")]["eligible"])
+        self.assertTrue(plan[("second", "release")]["required"])
+        self.assertFalse(plan[("second", "release")]["eligible"])
+
     def test_overlap_controller_does_not_release_an_active_cause(self) -> None:
         profile = select_placement_pilot_profile(
             self.config.placement, "deathstarbench_social_network"
@@ -207,6 +236,9 @@ class StochasticFreezePilotTests(unittest.TestCase):
                 datetime_for_test(),
                 0.0,
                 events,
+                5.0,
+                1.0,
+                2,
                 {service: "container-a"},
                 {service: ("network", (service,))},
                 rows,
@@ -219,6 +251,8 @@ class StochasticFreezePilotTests(unittest.TestCase):
         self.assertFalse(by_id["first"]["observation_release_required"])
         self.assertFalse(by_id["second"]["observation_start_required"])
         self.assertTrue(by_id["second"]["observation_release_required"])
+        self.assertTrue(by_id["first"]["observation_start_eligible"])
+        self.assertTrue(by_id["second"]["observation_release_eligible"])
         self.assertEqual(summary["active_pause_causes_at_end"], 0)
 
     def test_runtime_is_forbidden_locally(self) -> None:

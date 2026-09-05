@@ -55,6 +55,7 @@ class StochasticPilotConfig:
     request_workers: int
     inter_period_recovery_seconds: int
     health_poll_seconds: float
+    transition_observation_minimum_ticks: int
     trace_flush_seconds: int
     minimum_baseline_semantic_success_fraction: float
     minimum_linked_success_fraction: float
@@ -267,6 +268,10 @@ def load_stochastic_pilot_config(path: str | Path) -> StochasticPilotConfig:
         ),
         health_poll_seconds=_positive_float(
             root["health_poll_seconds"], "health_poll_seconds"
+        ),
+        transition_observation_minimum_ticks=_positive_int(
+            root["transition_observation_minimum_ticks"],
+            "transition_observation_minimum_ticks",
         ),
         trace_flush_seconds=_positive_int(
             root["trace_flush_seconds"], "trace_flush_seconds"

@@ -113,6 +113,10 @@ EVENT_FIELDS = (
     "release_confirmed",
     "observation_start_required",
     "observation_release_required",
+    "observation_start_eligible",
+    "observation_release_eligible",
+    "observation_start_stable_seconds",
+    "observation_release_stable_seconds",
     "expected_affected_after_release",
     "observation_start_lag_seconds",
     "observation_release_lag_seconds",
@@ -403,6 +407,60 @@ def plan_renewal_events(
             event_index += 1
     events.sort(key=lambda item: (item.offset_seconds, item.event_id))
     return tuple(events)
+
+
+def _transition_observation_plan(
+    events: tuple[RenewalEvent, ...],
+    period_seconds: float,
+    poll_seconds: float,
+    minimum_ticks: int,
+) -> dict[tuple[str, str], dict[str, Any]]:
+    transitions: list[tuple[float, int, RenewalEvent]] = []
+    for event in events:
+        transitions.append((event.offset_seconds, 1, event))
+        transitions.append((event.end_seconds, 0, event))
+    transitions.sort(key=lambda item: (item[0], item[1], item[2].event_id))
+
+    active: dict[tuple[str, str], set[str]] = {}
+    boundaries: list[dict[str, Any]] = []
+    for offset, transition_kind, event in transitions:
+        watched = {(event.effect, target) for target in event.targets}
+        for key in watched:
+            active.setdefault(key, set())
+        before = {key: bool(active[key]) for key in watched}
+        for key in watched:
+            if transition_kind == 1:
+                active[key].add(event.event_id)
+            else:
+                active[key].discard(event.event_id)
+        changed = {key for key in watched if before[key] != bool(active[key])}
+        boundaries.append(
+            {
+                "offset": offset,
+                "event_id": event.event_id,
+                "phase": "start" if transition_kind == 1 else "release",
+                "watched": watched,
+                "changed": changed,
+            }
+        )
+
+    minimum_residence = poll_seconds * minimum_ticks
+    result: dict[tuple[str, str], dict[str, Any]] = {}
+    for index, boundary in enumerate(boundaries):
+        stable_until = period_seconds
+        if boundary["changed"]:
+            for later in boundaries[index + 1 :]:
+                if later["changed"] & boundary["watched"]:
+                    stable_until = float(later["offset"])
+                    break
+        stable_seconds = max(0.0, stable_until - float(boundary["offset"]))
+        required = bool(boundary["changed"])
+        result[(str(boundary["event_id"]), str(boundary["phase"]))] = {
+            "required": required,
+            "eligible": required and stable_seconds >= minimum_residence,
+            "stable_seconds": stable_seconds,
+        }
+    return result
 
 
 def autocorrelation_block_length(
@@ -743,6 +801,9 @@ def _stochastic_fault_controller(
     period_started_at: datetime,
     period_started_monotonic: float,
     events: tuple[RenewalEvent, ...],
+    period_duration_seconds: float,
+    health_poll_seconds: float,
+    transition_observation_minimum_ticks: int,
     containers: dict[str, str],
     networks: dict[str, tuple[str, tuple[str, ...]]],
     output: list[dict[str, Any]],
@@ -751,9 +812,17 @@ def _stochastic_fault_controller(
     replica_services = tuple(profile.replica_services.values())
     pause_causes = {service: set() for service in replica_services}
     network_causes = {service: set() for service in replica_services}
+    observation_plan = _transition_observation_plan(
+        events,
+        period_duration_seconds,
+        health_poll_seconds,
+        transition_observation_minimum_ticks,
+    )
     records: dict[str, dict[str, Any]] = {}
     transitions: list[tuple[float, int, RenewalEvent]] = []
     for event in events:
+        start_observation = observation_plan[(event.event_id, "start")]
+        release_observation = observation_plan[(event.event_id, "release")]
         transitions.append((event.offset_seconds, 1, event))
         transitions.append((event.end_seconds, 0, event))
         records[event.event_id] = {
@@ -782,8 +851,12 @@ def _stochastic_fault_controller(
             "released_offset_seconds": "",
             "confirmed": False,
             "release_confirmed": False,
-            "observation_start_required": False,
-            "observation_release_required": False,
+            "observation_start_required": start_observation["required"],
+            "observation_release_required": release_observation["required"],
+            "observation_start_eligible": start_observation["eligible"],
+            "observation_release_eligible": release_observation["eligible"],
+            "observation_start_stable_seconds": start_observation["stable_seconds"],
+            "observation_release_stable_seconds": release_observation["stable_seconds"],
             "expected_affected_after_release": "",
             "observation_start_lag_seconds": "",
             "observation_release_lag_seconds": "",
@@ -798,9 +871,6 @@ def _stochastic_fault_controller(
         errors: list[str] = []
         if transition_kind == 1:
             causes = pause_causes if event.effect == "pause" else network_causes
-            record["observation_start_required"] = any(
-                not causes[target] for target in event.targets
-            )
             for target in event.targets:
                 causes[target].add(event.event_id)
             if event.effect == "pause":
@@ -831,9 +901,6 @@ def _stochastic_fault_controller(
             record["verified_at"] = _format_time(_utc_now())
         else:
             causes = pause_causes if event.effect == "pause" else network_causes
-            record["observation_release_required"] = any(
-                causes[target] == {event.event_id} for target in event.targets
-            )
             for target in event.targets:
                 causes[target].discard(event.event_id)
             if event.effect == "pause":
@@ -1071,6 +1138,9 @@ def _run_period(
                 started_at,
                 started_monotonic,
                 events,
+                duration_seconds,
+                config.health_poll_seconds,
+                config.transition_observation_minimum_ticks,
                 containers,
                 networks,
                 event_rows,
@@ -1755,13 +1825,13 @@ def run_stochastic_freeze_pilot(
             + periods[period]["controller"]["active_network_causes_at_end"]
             for period in ("calibration", "test")
         ),
-        "unobserved_event_transitions": sum(
+        "unobserved_eligible_event_transitions": sum(
             (
-                bool(row["observation_start_required"])
+                bool(row["observation_start_eligible"])
                 and row["observation_start_lag_seconds"] == ""
             )
             + (
-                bool(row["observation_release_required"])
+                bool(row["observation_release_eligible"])
                 and row["observation_release_lag_seconds"] == ""
             )
             for row in all_events
@@ -1811,13 +1881,13 @@ def run_stochastic_freeze_pilot(
             "start": [
                 float(row["observation_start_lag_seconds"])
                 for row in all_events
-                if row["observation_start_required"]
+                if row["observation_start_eligible"]
                 and row["observation_start_lag_seconds"] != ""
             ],
             "release": [
                 float(row["observation_release_lag_seconds"])
                 for row in all_events
-                if row["observation_release_required"]
+                if row["observation_release_eligible"]
                 and row["observation_release_lag_seconds"] != ""
             ],
         },
@@ -1847,13 +1917,29 @@ def run_stochastic_freeze_pilot(
                 + bool(row["observation_release_required"])
                 for row in all_events
             ),
-            "observable_transitions_observed": sum(
+            "observable_transitions_eligible": sum(
+                bool(row["observation_start_eligible"])
+                + bool(row["observation_release_eligible"])
+                for row in all_events
+            ),
+            "resolution_limited_transitions": sum(
                 (
                     bool(row["observation_start_required"])
-                    and row["observation_start_lag_seconds"] != ""
+                    and not bool(row["observation_start_eligible"])
                 )
                 + (
                     bool(row["observation_release_required"])
+                    and not bool(row["observation_release_eligible"])
+                )
+                for row in all_events
+            ),
+            "eligible_transitions_observed": sum(
+                (
+                    bool(row["observation_start_eligible"])
+                    and row["observation_start_lag_seconds"] != ""
+                )
+                + (
+                    bool(row["observation_release_eligible"])
                     and row["observation_release_lag_seconds"] != ""
                 )
                 for row in all_events

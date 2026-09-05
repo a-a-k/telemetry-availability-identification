@@ -94,15 +94,19 @@ both HAProxy backends `UP`.
 An independent one-second sampler records Docker running, paused, health, and
 network state for both replicas and the proxy. It also records HAProxy backend
 status, check state, and cumulative sessions. Its deadlines are anchored to the
-period clock, so inspection time does not accumulate as sampling drift. Every
-event boundary that changes physical state must be visible in this ordinary
-series and its observed lag is retained. A redundant same-effect cause starting
-or ending while another cause keeps every target in the same state is explicitly
-not called an observable transition; requiring a separate tick for that latent
-boundary would use controller knowledge as if it were sensor evidence. At least
-85% of nominal service observations must be present for every baseline or
-stochastic period. Controller intent and its privileged schedule are never
-substituted for the state audit.
+period clock, so inspection time does not accumulate as sampling drift. A
+physical transition is eligible for the completeness gate and transition-lag
+distribution only when its resulting state is scheduled to persist for at least
+two nominal audit ticks. Every eligible transition must be visible in the
+ordinary series and its observed lag is retained. Physical states shorter than
+that fixed resolution are counted as resolution-limited rather than silently
+converted into observations. A redundant same-effect cause starting or ending
+while another cause keeps every target in the same state is explicitly not
+called a physical transition; requiring a separate tick for that latent boundary
+would use controller knowledge as if it were sensor evidence. At least 85% of
+nominal service observations must be present for every baseline or stochastic
+period. Controller intent and its privileged schedule are never substituted for
+the state audit.
 
 ## Workload and semantics
 
