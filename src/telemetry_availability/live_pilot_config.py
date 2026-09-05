@@ -21,6 +21,7 @@ class RuntimePilotProfile:
     telemetry_kind: str
     telemetry_source: str
     operations: tuple[str, ...]
+    disabled_services: tuple[str, ...]
     images: dict[str, str]
 
 
@@ -32,6 +33,7 @@ class RuntimePilotConfig:
     minimum_success_fraction: float
     minimum_exported_traces: int
     readiness_timeout_seconds: int
+    post_start_stabilization_seconds: int
     trace_flush_seconds: int
     inter_period_gap_seconds: int
     profiles: tuple[RuntimePilotProfile, ...]
@@ -97,6 +99,13 @@ def load_runtime_pilot_config(path: str | Path) -> RuntimePilotConfig:
             str(value)
             for value in _sequence(data.get("operations"), "pilot operations")
         )
+        disabled_services = tuple(
+            str(value)
+            for value in _sequence(
+                data.get("disabled_services", []),
+                "disabled pilot services",
+            )
+        )
         profile = RuntimePilotProfile(
             id=str(data["id"]),
             repository=repository,
@@ -107,6 +116,7 @@ def load_runtime_pilot_config(path: str | Path) -> RuntimePilotConfig:
             telemetry_kind=str(data["telemetry_kind"]),
             telemetry_source=str(data["telemetry_source"]),
             operations=operations,
+            disabled_services=disabled_services,
             images=images,
         )
         if (
@@ -117,6 +127,8 @@ def load_runtime_pilot_config(path: str | Path) -> RuntimePilotConfig:
             or not profile.telemetry_source
             or not operations
             or len(set(operations)) != len(operations)
+            or any(not service for service in disabled_services)
+            or len(set(disabled_services)) != len(disabled_services)
         ):
             raise ConfigError("runtime pilot profile fields are invalid")
         profiles.append(profile)
@@ -137,6 +149,10 @@ def load_runtime_pilot_config(path: str | Path) -> RuntimePilotConfig:
         readiness_timeout_seconds=_positive_integer(
             root["readiness_timeout_seconds"],
             "readiness_timeout_seconds",
+        ),
+        post_start_stabilization_seconds=_positive_integer(
+            root["post_start_stabilization_seconds"],
+            "post_start_stabilization_seconds",
         ),
         trace_flush_seconds=_positive_integer(
             root["trace_flush_seconds"],

@@ -33,6 +33,15 @@ with `DEMO_VERSION=3.0.0`, then every application and dependency image is also
 replaced by its recorded digest. The workflow removes build directives and
 fails if any rendered service image lacks a lock.
 
+The DeathStarBench `jaegertracing/all-in-one:latest` reference is replaced by
+the recorded multi-platform manifest digest of Jaeger 1.57.0. This version is
+chosen for compatibility with the benchmark revision's legacy UDP agent sender;
+the tag is not resolved during a run. OTel Demo's built-in `load-generator` is
+removed from the rendered pilot Compose document, and references to it are
+removed from `depends_on`: the experiment uses one separately counted external
+client and must not admit background requests. The removal is recorded in the
+image-lock audit, and every service that remains is digest-locked.
+
 ## Workload and periods
 
 There is one pilot pair per application. Each half executes 20 sequential
@@ -42,10 +51,13 @@ by two seconds, with different deterministic workload seeds. They exercise the
 period machinery but are not statistical replicates.
 
 The client records every initiated request, HTTP/transport outcome, start/end
-time, operation, and period. A DeathStarBench user is registered before counted
-traffic. OTel checkout creates and fills a distinct cart before submitting the
-order. Success in this pilot means HTTP 2xx; eventual application effects are not
-audited and therefore no semantic availability conclusion is allowed.
+time, operation, and period. After frontend readiness there is a fixed 30-second
+stabilization interval. Two DeathStarBench users are then registered and linked
+in both directions, forming the smallest nonempty social graph required by the
+compose-post fan-out path. These setup requests are not counted. OTel checkout
+creates and fills a distinct cart before submitting the order. Success in this
+pilot means HTTP 2xx; eventual application effects are not audited and therefore
+no semantic availability conclusion is allowed.
 
 No fault is injected. This isolates deployment, operation, and trace-export
 failures before the fault controller is introduced. A no-fault pilot is not the

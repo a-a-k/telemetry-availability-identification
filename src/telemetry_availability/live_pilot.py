@@ -77,6 +77,28 @@ def pin_compose_document(
     services = document.get("services")
     if not isinstance(services, dict) or not services:
         raise RuntimePilotError("rendered Compose document has no services")
+    rendered_service_count = len(services)
+    disabled = set(profile.disabled_services)
+    missing_disabled = sorted(disabled - set(services))
+    if missing_disabled:
+        raise RuntimePilotError(
+            f"disabled services are absent from rendered Compose: {missing_disabled}"
+        )
+    for service_name in disabled:
+        services.pop(service_name)
+    for raw_service in services.values():
+        if not isinstance(raw_service, dict):
+            continue
+        dependencies = raw_service.get("depends_on")
+        if isinstance(dependencies, dict):
+            for service_name in disabled:
+                dependencies.pop(service_name, None)
+        elif isinstance(dependencies, list):
+            raw_service["depends_on"] = [
+                service_name
+                for service_name in dependencies
+                if service_name not in disabled
+            ]
     locks = {_image_key(image): (image, digest) for image, digest in profile.images.items()}
     if len(locks) != len(profile.images):
         raise RuntimePilotError("image lock aliases are ambiguous")
@@ -112,7 +134,9 @@ def pin_compose_document(
     return document, {
         "schema_version": 1,
         "profile": profile.id,
+        "rendered_service_count": rendered_service_count,
         "service_count": len(rows),
+        "disabled_services": sorted(disabled),
         "all_services_locked": True,
         "images": sorted(rows, key=lambda row: row["service"]),
     }
@@ -290,25 +314,48 @@ def _otel_request(
 def initialize_profile(profile: RuntimePilotProfile) -> None:
     if profile.id != "deathstarbench_social_network":
         return
-    payload = {
-        "first_name": "TAID",
-        "last_name": "Pilot",
-        "username": "username_0",
-        "password": "password_0",
-        "user_id": "0",
-    }
-    last = ""
-    for _ in range(30):
-        status, body, error = _http_request(
-            profile.base_url + "/wrk2-api/user/register",
-            data=_form(payload),
-            content_type="application/x-www-form-urlencoded",
+    actions: list[tuple[str, str, dict[str, str]]] = []
+    for user_id in ("0", "1"):
+        actions.append(
+            (
+                f"register user {user_id}",
+                "/wrk2-api/user/register",
+                {
+                    "first_name": f"first_name_{user_id}",
+                    "last_name": f"last_name_{user_id}",
+                    "username": f"username_{user_id}",
+                    "password": f"password_{user_id}",
+                    "user_id": user_id,
+                },
+            )
         )
-        last = error or body.decode("utf-8", errors="replace")[:200]
-        if status is not None and 200 <= status < 300:
-            return
-        time.sleep(2)
-    raise RuntimePilotError(f"DeathStarBench initialization failed: {last}")
+    for user_id, followee_id in (("0", "1"), ("1", "0")):
+        actions.append(
+            (
+                f"follow {user_id} -> {followee_id}",
+                "/wrk2-api/user/follow",
+                {
+                    "user_name": f"username_{user_id}",
+                    "followee_name": f"username_{followee_id}",
+                },
+            )
+        )
+    for label, path, payload in actions:
+        last = "not attempted"
+        for _ in range(30):
+            status, body, error = _http_request(
+                profile.base_url + path,
+                data=_form(payload),
+                content_type="application/x-www-form-urlencoded",
+            )
+            last = error or body.decode("utf-8", errors="replace")[:200]
+            if status is not None and 200 <= status < 300:
+                break
+            time.sleep(2)
+        else:
+            raise RuntimePilotError(
+                f"DeathStarBench initialization action {label!r} failed: {last}"
+            )
 
 
 def _run_period(
@@ -457,6 +504,7 @@ def run_runtime_pilot(
     pilot_started = datetime.now(timezone.utc)
     observed_commit = _git_head(checkout)
     wait_for_frontend(profile, config.readiness_timeout_seconds)
+    time.sleep(config.post_start_stabilization_seconds)
     initialize_profile(profile)
     calibration, calibration_start, calibration_end = _run_period(
         config,

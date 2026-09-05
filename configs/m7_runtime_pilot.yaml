@@ -5,6 +5,7 @@ requests_per_operation_per_period: 20
 minimum_success_fraction: 0.95
 minimum_exported_traces: 6
 readiness_timeout_seconds: 360
+post_start_stabilization_seconds: 30
 trace_flush_seconds: 15
 inter_period_gap_seconds: 2
 
@@ -20,7 +21,8 @@ profiles:
     operations: [compose_post, read_home_timeline, read_user_timeline]
     images:
       "deathstarbench/social-network-microservices:latest": sha256:a845266e98ce15d204ee7b98d41a2a95820af525013ce70f14104f5b9b5e92b6
-      "jaegertracing/all-in-one:latest": sha256:ab6f1a1f0fb49ea08bcd19f6b84f6081d0d44b364b6de148e1798eb5816bacac
+      # v1.57.0: retains the legacy UDP agent receiver used by this revision.
+      "jaegertracing/all-in-one:latest": sha256:8f165334f418ca53691ce358c19b4244226ed35c5d18408c5acf305af2065fb9
       "memcached:latest": sha256:75c93cc91e76853da7c029e74d6e8dbd44774dd3713c93be8cd1971ad26120a4
       "mongo:4.4.6": sha256:6efa052039903e731e4a5550c68a13c4869ddc93742c716332883fd9c77eb79b
       "redis:latest": sha256:298e5b3bc566bade82f46ad5511777a4a07a294097ce16ada2f6a42be5239df5
@@ -36,6 +38,9 @@ profiles:
     telemetry_kind: docker_logs
     telemetry_source: otel-collector
     operations: [browse_product, add_to_cart, checkout]
+    # The study supplies its own counted client; the upstream generator is neither
+    # an application dependency nor an admissible source of uncounted requests.
+    disabled_services: [load-generator]
     images:
       "ghcr.io/open-telemetry/demo:3.0.0-ad": sha256:e6c593fe75eb0309392951d35c7ac85fcd15c0b80430500921b7d2e9c332a6db
       "ghcr.io/open-telemetry/demo:3.0.0-cart": sha256:3f89a444250a8a56050ba59756be3ca269af500bf44e33579e79ba9c74cab8c1
@@ -46,7 +51,6 @@ profiles:
       "ghcr.io/open-telemetry/demo:3.0.0-frontend": sha256:9505e349e140ed5efde4b03b77cf500ef5d53c568ea83502c7e9c26494b964a3
       "ghcr.io/open-telemetry/demo:3.0.0-frontend-proxy": sha256:1c53bfb596970a014682925f804c686762c0c593949ce58a90ac38563f317841
       "ghcr.io/open-telemetry/demo:3.0.0-image-provider": sha256:93e1585e97ac3de0e2ace6929dc5e2a797e2c009fbb3eba668fa3990f4f271b5
-      "ghcr.io/open-telemetry/demo:3.0.0-load-generator": sha256:cd12cb42fb150fb2283fc05df5353fde88d5e35f3bf8189058756a6458eede87
       "ghcr.io/open-telemetry/demo:3.0.0-payment": sha256:d498c7434d22ff7a82ec86843efd22c93c52cb8c6df4961a7110617b1e08c15f
       "ghcr.io/open-telemetry/demo:3.0.0-product-catalog": sha256:278aff685646443b88cf1ab7d83812d82204fbb16ea279296161d05bf1329080
       "ghcr.io/open-telemetry/demo:3.0.0-quote": sha256:6bc8f7f6809e1435241dc9ea404e602657d192cf237bcd175d7344cec9e0d615

@@ -33,10 +33,13 @@ class RuntimePilotTests(unittest.TestCase):
         self.assertTrue(self.config.pilot_only)
         self.assertEqual(len(self.config.profiles), 2)
         self.assertEqual(self.config.requests_per_operation_per_period, 20)
+        self.assertEqual(self.config.post_start_stabilization_seconds, 30)
         self.assertEqual(
             {profile.id for profile in self.config.profiles},
             {"deathstarbench_social_network", "opentelemetry_demo"},
         )
+        otel = select_runtime_pilot_profile(self.config, "opentelemetry_demo")
+        self.assertEqual(otel.disabled_services, ("load-generator",))
 
     def test_pin_compose_replaces_tags_and_removes_build(self) -> None:
         original = select_runtime_pilot_profile(
@@ -72,6 +75,7 @@ class RuntimePilotTests(unittest.TestCase):
         )
         profile = replace(
             original,
+            disabled_services=(),
             images={"known:1": "sha256:" + "a" * 64},
         )
         with self.assertRaisesRegex(RuntimePilotError, "no digest lock"):
@@ -84,12 +88,36 @@ class RuntimePilotTests(unittest.TestCase):
                 {"services": {"known": {"image": "known:1"}, "other": {"image": "known:1"}}},
                 replace(
                     profile,
+                    disabled_services=(),
                     images={
                         "known:1": "sha256:" + "a" * 64,
                         "unused:1": "sha256:" + "b" * 64,
                     },
                 ),
             )
+
+    def test_pin_compose_removes_declared_external_generator_and_dependencies(self) -> None:
+        original = select_runtime_pilot_profile(self.config, "opentelemetry_demo")
+        profile = replace(
+            original,
+            disabled_services=("driver",),
+            images={"application:1": "sha256:" + "a" * 64},
+        )
+        document = {
+            "services": {
+                "application": {
+                    "image": "application:1",
+                    "depends_on": {"driver": {"condition": "service_started"}},
+                },
+                "driver": {"image": "unlocked-driver:1"},
+            }
+        }
+        pinned, audit = pin_compose_document(document, profile)
+        self.assertNotIn("driver", pinned["services"])
+        self.assertNotIn("driver", pinned["services"]["application"]["depends_on"])
+        self.assertEqual(audit["rendered_service_count"], 2)
+        self.assertEqual(audit["service_count"], 1)
+        self.assertEqual(audit["disabled_services"], ["driver"])
 
     def test_runtime_workload_is_forbidden_locally(self) -> None:
         with patch.dict(os.environ, {}, clear=True):
