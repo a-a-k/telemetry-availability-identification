@@ -162,6 +162,7 @@ identifiers in its manifest.
   and grouped logical-domain interventions across the four planned law labels.
   It tests deterministic external-census/native-trace linkage and period cleanup;
   its short, forced-sampling records are excluded from effectiveness analysis.
+  This milestone is complete.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
@@ -176,11 +177,17 @@ diagnostic attempt are recorded in
 `docs/milestones/M7P_RUNTIME_FEASIBILITY_PILOT.md`. The subsequent M7 design is
 frozen separately.
 
-M7A then exercises the acquisition path under N, NC, ND, and NCD interventions
-for both applications. It keeps controller intent, independent Docker-state
-verification, one-second health observations, external outcomes, and native
-trace presence separate. This remains a diagnostic namespace: only the later
-frozen M7 campaign can support a live prediction or transfer claim.
+Completed M7A exercised the acquisition path under N, NC, ND, and NCD
+interventions for both applications. Its accepted run retained all 1,920
+requests, linked every assigned trace id, verified and restored all 48
+interventions, and passed all aggregate quality gates. The first run exposed and
+retained an OTel Docker-log rotation failure; the accepted run used a lossless
+mounted native collector sink without changing the workload or threshold.
+Details are recorded in
+`docs/milestones/M7A_FAULT_ACQUISITION_DIAGNOSTIC.md`. This remains a diagnostic
+namespace: only the later frozen M7 campaign can support a live prediction or
+transfer claim. M7B next verifies actual replication, load balancing, placement
+semantics, and operation-effect checks before that freeze.
 
 ## Generated tables
 
