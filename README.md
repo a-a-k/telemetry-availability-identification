@@ -120,6 +120,11 @@ The M1 workflow additionally emits reference_fits.csv, reference_estimates.csv,
 patterns.csv, reference_summary.csv, and paired_summary.csv. Its protocol is
 frozen in docs/M1_LIKELIHOOD_PROTOCOL.md before the non-smoke run.
 
+The M3 workflow emits fits, parameters, predictions, placement changes,
+decisions, independent validation draws, structural classifications, ambiguity
+witnesses, paired campaign contrasts, and their summaries. Its completed result
+is recorded in docs/milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md.
+
 Generated results are intentionally ignored by Git. GitHub workflow artifacts are
 the source of experimental outputs until a reviewed result snapshot is explicitly
 frozen for the paper.
