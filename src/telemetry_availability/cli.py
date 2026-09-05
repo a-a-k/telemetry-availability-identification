@@ -1012,6 +1012,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.compose,
             args.image_audit,
             args.out,
+            args.execution_scope,
         )
         print(json.dumps(manifest["counts"], indent=2, sort_keys=True))
         return 0

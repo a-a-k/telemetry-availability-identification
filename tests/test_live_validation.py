@@ -3,10 +3,12 @@ from __future__ import annotations
 import shutil
 import tempfile
 import unittest
+from io import StringIO
 from os import environ
 from pathlib import Path
 from unittest.mock import patch
 
+from telemetry_availability.cli import main
 from telemetry_availability.live_stochastic_pilot import StochasticPilotError
 from telemetry_availability.live_validation import (
     frozen_live_matrix,
@@ -85,6 +87,58 @@ class FrozenLiveValidationTests(unittest.TestCase):
                         "missing-audit",
                         Path(temporary) / "output",
                     )
+
+    def test_cli_forwards_preflight_execution_scope(self) -> None:
+        with (
+            patch(
+                "telemetry_availability.cli.load_frozen_live_validation_config",
+                return_value="loaded-config",
+            ),
+            patch(
+                "telemetry_availability.cli.run_frozen_live_cell",
+                return_value={"counts": {}},
+            ) as run_cell,
+            patch("sys.stdout", new=StringIO()),
+        ):
+            status = main(
+                [
+                    "run-frozen-live-cell",
+                    "--config",
+                    "config.yaml",
+                    "--execution-scope",
+                    "preflight",
+                    "--profile",
+                    "profile",
+                    "--placement",
+                    "split",
+                    "--law",
+                    "NCD",
+                    "--repetition",
+                    "0",
+                    "--checkout",
+                    "checkout",
+                    "--compose",
+                    "compose.json",
+                    "--image-audit",
+                    "audit.json",
+                    "--out",
+                    "output",
+                ]
+            )
+
+        self.assertEqual(status, 0)
+        run_cell.assert_called_once_with(
+            "loaded-config",
+            "profile",
+            "split",
+            "NCD",
+            0,
+            Path("checkout"),
+            Path("compose.json"),
+            Path("audit.json"),
+            Path("output"),
+            "preflight",
+        )
 
 
 if __name__ == "__main__":
