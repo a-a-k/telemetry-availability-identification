@@ -1,0 +1,81 @@
+schema_version: 1
+
+experiment:
+  id: m5_directed_stress_tests
+  transfer_config: m3_transfer.yaml
+  base_scenario: medium_common_cause
+  seed: 260907
+  repetitions: 200
+  sample_sizes: [500, 2000]
+  confidence_level: 0.95
+  diagnostic_alpha: 0.01
+  local_smoke_max_dataset_fits: 20
+  branch_tolerance: 0.008
+  branch_tolerance_scale: 0.20
+  branch_minimum_tolerance: 0.004
+  branch_max_nodes_per_domain: 12000
+  block_bootstrap_replicates: 199
+  block_length: 50
+  minimum_branch_observations: 20
+
+series:
+  exporter_loss:
+    observation_mode: no_joint_health
+    target_trace_retention: 0.70
+    variants:
+      - id: independent_control
+        is_stress: false
+        retention_when_domain_up: 0.70
+        retention_when_domain_down: 0.70
+      - id: domain_coupled
+        is_stress: true
+        retention_when_domain_up: 0.7414893617021276
+        retention_when_domain_down: 0.05
+
+  temporal_bursts:
+    observation_mode: full
+    variants:
+      - id: iid_control
+        is_stress: false
+        lag1_autocorrelation: 0.0
+      - id: persistent_bursts
+        is_stress: true
+        lag1_autocorrelation: 0.90
+
+  wrong_domain_map:
+    observation_mode: full
+    shared_domain_probability: 0.94
+    variants:
+      - id: independent_domains_control
+        is_stress: false
+        merge_declared_domains: false
+      - id: hidden_merged_domain
+        is_stress: true
+        merge_declared_domains: true
+
+  rare_branch:
+    branch_a_success: 0.985
+    branch_b_success: 0.78
+    target_branch_b_share: 0.50
+    variants:
+      - id: supported_control
+        is_stress: false
+        calibration_branch_b_share: 0.50
+      - id: rare_branch
+        is_stress: true
+        calibration_branch_b_share: 0.01
+      - id: unseen_branch
+        is_stress: true
+        calibration_branch_b_share: 0.0
+
+  readiness_lag:
+    observation_mode: full
+    domain_stationary_probability: 0.94
+    recovery_probability: 0.25
+    variants:
+      - id: instantaneous_control
+        is_stress: false
+        lag_episodes: 0
+      - id: delayed_readiness
+        is_stress: true
+        lag_episodes: 3

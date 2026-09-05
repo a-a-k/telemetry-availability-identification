@@ -61,6 +61,12 @@ outer enclosure of the two-domain parameter set. Coverage is reported together
 with width and decision abstention, against likelihood-Wald, direct endpoint,
 and fixed-input simulation-only alternatives.
 
+The completed M4 experiment found 0.955--1.000 simultaneous target coverage
+across its 45 scenario/mode/size cells, monotone width contraction with sample
+size, and no incorrect identification-aware placement decision. Full results,
+including conservative width and node-budget limitations, are recorded in
+`docs/milestones/M4_SIMULTANEOUS_UNCERTAINTY.md`.
+
 The configured RQ1 matrix has four small factor-graph families, three observation
 modes, three nested sample sizes, and 200 independently generated campaigns. It
 therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
@@ -113,6 +119,10 @@ identifiers in its manifest.
 - M4 Simultaneous Uncertainty is started manually, shards by scenario, and
   requires valid outer enclosures without treating random empirical coverage as
   a CI build gate.
+- M5 Directed Stress Tests is predeclared in `docs/M5_STRESS_PROTOCOL.md`. It
+  uses paired controls for five named assumption violations and treats
+  diagnostics and guarded abstention separately from mechanism-aware oracle
+  references.
 
 ## Generated tables
 
