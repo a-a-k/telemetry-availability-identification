@@ -118,9 +118,9 @@ backends.
 Every request, including timeout, driver error, and malformed HTTP 2xx, is
 retained in an external census. All requests carry deterministic forced-sampled
 native trace contexts for this transport pilot. The Jaeger query bound is raised
-from 1,000 to 10,000 traces and its lookback from one to two hours to cover the
-declared pilot and candidate main cells; OTel continues to use its lossless
-mounted collector file. At least 80% of semantic successes must
+from 1,000 to 20,000 traces and its lookback from one to two hours to cover the
+declared pilot and even the longest candidate main cell; OTel continues to use
+its lossless mounted collector file. At least 80% of semantic successes must
 join to raw telemetry. This is not an estimate of natural production sampling.
 
 ## Frozen duration-selection rule
