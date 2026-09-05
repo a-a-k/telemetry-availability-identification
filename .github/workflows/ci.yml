@@ -68,6 +68,9 @@ jobs:
       - name: Validate learner/evaluator evidence-boundary contract
         run: python -m telemetry_availability validate-evidence-boundary --config configs/m7d_evidence_boundary.yaml
 
+      - name: Validate post-stopping macro-resource contract
+        run: python -m telemetry_availability validate-macro-live-budget --config configs/m7c_macro_precision_recovery.yaml
+
       - name: Ingest both live-contract fixtures
         if: ${{ matrix.python-version == '3.13' }}
         run: |

@@ -1,0 +1,17 @@
+schema_version: 1
+id: m7c_macro_precision_resource_recovery
+pilot_only: true
+stochastic_pilot_config: m7c_stochastic_freeze_pilot.yaml
+source_pilot_run_id: "33977809019"
+source_pilot_commit: 5ee628d448a63b313a6f950002ae50e105dc8270
+original_recommendation_sha256: 880a152c7aac6fc17f046ead4c6dec5f41e2093d5232ff8de728b3b58b0d2c25
+
+original_estimand: cell-specific calibration-to-test endpoint-rate difference
+revised_estimand: equally weighted macro-average over the 16 predeclared application-placement-law strata
+cell_specific_precision_claim: false
+expected_strata: 16
+expected_pilot_pairs_per_stratum: 4
+candidate_main_repetitions: [10, 15, 20, 30, 40]
+target_macro_half_width: 0.015
+paired_confidence_level: 0.95
+variance_upper_confidence_level: 0.90

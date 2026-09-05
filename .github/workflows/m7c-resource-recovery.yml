@@ -1,0 +1,61 @@
+name: M7C-R Macro Precision Resource Recovery
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Complete M7C run stopped only by repetition selection
+        required: true
+        default: "33977809019"
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  recover:
+    name: Re-evaluate the narrowed macro resource estimand
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download all immutable M7C cells
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m7c-cell-*-${{ inputs.source_run_id }}
+          path: workflow-results/m7c-recovery-input
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ inputs.source_run_id }}
+
+      - name: Re-run full pilot analysis under the narrowed macro estimand
+        run: >-
+          python -m telemetry_availability recover-macro-live-budget
+          --config configs/m7c_macro_precision_recovery.yaml
+          --input-root workflow-results/m7c-recovery-input
+          --out workflow-results/m7c-recovery
+
+      - name: Upload original replay and recovered recommendation
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7c-resource-recovery-${{ github.run_id }}
+          path: workflow-results/m7c-recovery
+          if-no-files-found: error
+          retention-days: 30

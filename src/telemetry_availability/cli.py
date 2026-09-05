@@ -11,6 +11,10 @@ from .likelihood_reference import (
     aggregate_likelihood_reference,
     run_likelihood_reference,
 )
+from .live_budget_recovery import (
+    load_macro_budget_recovery_config,
+    recover_macro_budget,
+)
 from .live_config import load_live_harness_config
 from .live_evidence import qualify_evidence_boundary
 from .live_evidence_config import load_evidence_boundary_config
@@ -399,6 +403,20 @@ def build_parser() -> argparse.ArgumentParser:
     qualify_evidence.add_argument("--config", required=True, type=Path)
     qualify_evidence.add_argument("--input-root", required=True, type=Path)
     qualify_evidence.add_argument("--out", required=True, type=Path)
+
+    validate_recovery = commands.add_parser(
+        "validate-macro-live-budget",
+        help="validate the post-stopping M7C macro-resource recovery contract",
+    )
+    validate_recovery.add_argument("--config", required=True, type=Path)
+
+    recover_budget = commands.add_parser(
+        "recover-macro-live-budget",
+        help="replay all M7C cells and select the narrowed macro repetition budget",
+    )
+    recover_budget.add_argument("--config", required=True, type=Path)
+    recover_budget.add_argument("--input-root", required=True, type=Path)
+    recover_budget.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -901,6 +919,40 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = load_evidence_boundary_config(args.config)
         manifest = qualify_evidence_boundary(config, args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-macro-live-budget":
+        config = load_macro_budget_recovery_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "pilot_only": config.pilot_only,
+                    "source_pilot_run_id": config.source_pilot_run_id,
+                    "expected_strata": config.expected_strata,
+                    "cell_specific_precision_claim": (
+                        config.cell_specific_precision_claim
+                    ),
+                    "candidate_main_repetitions": (config.candidate_main_repetitions),
+                    "target_macro_half_width": config.target_macro_half_width,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "recover-macro-live-budget":
+        config = load_macro_budget_recovery_config(args.config)
+        manifest = recover_macro_budget(config, args.input_root, args.out)
+        print(
+            json.dumps(
+                manifest["recommendation"]["repetitions"],
+                indent=2,
+                sort_keys=True,
+            )
+        )
         return 0
 
     raise AssertionError(f"unhandled command {args.command}")
