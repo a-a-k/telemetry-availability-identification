@@ -7,6 +7,7 @@ import numpy as np
 from scipy.optimize import OptimizeResult, minimize
 from scipy.special import expit, logit
 
+from .boolean_model import clauses_for
 from .model import ConjunctiveModel
 from .observation import EpisodeBatch
 
@@ -61,8 +62,11 @@ def observable_states(model: ConjunctiveModel, latent_states: np.ndarray) -> np.
     factor_index = {factor_id: index for index, factor_id in enumerate(model.factor_ids)}
     columns = []
     for observable in model.observables:
-        positions = [factor_index[factor_id] for factor_id in observable.factors]
-        columns.append(np.all(latent_states[:, positions], axis=1))
+        clause_values = []
+        for clause in clauses_for(observable):
+            positions = [factor_index[factor_id] for factor_id in clause]
+            clause_values.append(np.all(latent_states[:, positions], axis=1))
+        columns.append(np.any(np.column_stack(clause_values), axis=1))
     return np.column_stack(columns).astype(bool, copy=False)
 
 

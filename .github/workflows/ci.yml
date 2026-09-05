@@ -41,6 +41,9 @@ jobs:
       - name: Validate experiment contract
         run: python -m telemetry_availability validate-config --config configs/rq1_synthetic.yaml
 
+      - name: Validate transfer experiment contract
+        run: python -m telemetry_availability validate-transfer-config --config configs/m3_transfer.yaml
+
       - name: Run bounded smoke experiment
         if: ${{ matrix.python-version == '3.13' }}
         run: >-
@@ -77,6 +80,19 @@ jobs:
           --repetitions 1
           --sample-sizes 100
 
+      - name: Run bounded transfer smoke
+        if: ${{ matrix.python-version == '3.13' }}
+        run: >-
+          python -m telemetry_availability run-transfer-experiment
+          --config configs/m3_transfer.yaml
+          --out workflow-results/transfer-smoke
+          --scenario medium_common_cause
+          --mode full
+          --mode trace_only
+          --repetitions 1
+          --sample-sizes 100
+          --validation-episodes 100
+
       - name: Upload smoke evidence
         if: ${{ matrix.python-version == '3.13' }}
         uses: actions/upload-artifact@v7
@@ -101,5 +117,14 @@ jobs:
         with:
           name: reduction-smoke-${{ github.run_id }}
           path: workflow-results/reduction-smoke
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload transfer smoke evidence
+        if: ${{ matrix.python-version == '3.13' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: transfer-smoke-${{ github.run_id }}
+          path: workflow-results/transfer-smoke
           if-no-files-found: error
           retention-days: 14

@@ -1,0 +1,62 @@
+schema_version: 1
+
+experiment:
+  id: m3_non_direct_placement_transfer
+  seed: 260906
+  repetitions: 200
+  sample_sizes: [100, 500, 2000]
+  validation_episodes: 10000
+  min_observations: 20
+  local_smoke_max_dataset_fits: 50
+
+observation_modes:
+  - id: full
+    mode: full
+
+  - id: sampled_mixed
+    mode: full
+    sampling_by_kind:
+      health: 0.40
+      trace: 0.70
+
+  - id: joint_health_only
+    mode: drop_kinds
+    drop_kinds: [trace]
+
+  - id: no_joint_health
+    mode: staggered
+    staggered_kinds: [health]
+    sampling_by_kind:
+      health: 1.0
+      trace: 1.0
+
+  - id: trace_only
+    mode: only_kinds
+    include_kinds: [trace]
+    sampling_by_kind:
+      trace: 1.0
+
+scenarios:
+  - id: weak_common_cause
+    domain_a_probability: 0.99
+    domain_b_probability: 0.96
+    replica_a_marginal: 0.90
+    replica_b_marginal: 0.88
+    anchor_a_marginal: 0.91
+    anchor_b_marginal: 0.89
+
+  - id: medium_common_cause
+    domain_a_probability: 0.94
+    domain_b_probability: 0.96
+    replica_a_marginal: 0.90
+    replica_b_marginal: 0.88
+    anchor_a_marginal: 0.91
+    anchor_b_marginal: 0.89
+
+  - id: strong_common_cause
+    domain_a_probability: 0.91
+    domain_b_probability: 0.96
+    replica_a_marginal: 0.90
+    replica_b_marginal: 0.88
+    anchor_a_marginal: 0.91
+    anchor_b_marginal: 0.89

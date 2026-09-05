@@ -17,6 +17,11 @@ from .reduction_experiment import (
     run_reduction_experiment,
 )
 from .runner import aggregate_results, run_experiment
+from .transfer_config import load_transfer_config
+from .transfer_experiment import (
+    aggregate_transfer_experiment,
+    run_transfer_experiment,
+)
 
 
 def _comma_separated_positive_integers(value: str) -> tuple[int, ...]:
@@ -90,6 +95,31 @@ def build_parser() -> argparse.ArgumentParser:
     )
     aggregate_reduction.add_argument("--input-root", required=True, type=Path)
     aggregate_reduction.add_argument("--out", required=True, type=Path)
+
+    validate_transfer = commands.add_parser(
+        "validate-transfer-config",
+        help="validate the non-direct placement-transfer experiment contract",
+    )
+    validate_transfer.add_argument("--config", required=True, type=Path)
+
+    transfer = commands.add_parser(
+        "run-transfer-experiment",
+        help="run the matched B0-B4 non-direct placement-transfer experiment",
+    )
+    transfer.add_argument("--config", required=True, type=Path)
+    transfer.add_argument("--out", required=True, type=Path)
+    transfer.add_argument("--scenario", action="append")
+    transfer.add_argument("--mode", action="append")
+    transfer.add_argument("--repetitions", type=int)
+    transfer.add_argument("--sample-sizes", type=_comma_separated_positive_integers)
+    transfer.add_argument("--validation-episodes", type=int)
+
+    aggregate_transfer = commands.add_parser(
+        "aggregate-transfer-experiment",
+        help="combine non-direct placement-transfer workflow shards",
+    )
+    aggregate_transfer.add_argument("--input-root", required=True, type=Path)
+    aggregate_transfer.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -200,6 +230,45 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "aggregate-reduction-experiment":
         manifest = aggregate_reduction_experiment(args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-transfer-config":
+        config = load_transfer_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "scenarios": [item.id for item in config.scenarios],
+                    "observation_modes": [
+                        item.id for item in config.observation_modes
+                    ],
+                },
+                indent=2,
+            )
+        )
+        return 0
+
+    if args.command == "run-transfer-experiment":
+        config = load_transfer_config(args.config)
+        manifest = run_transfer_experiment(
+            config=config,
+            config_path=args.config,
+            output_directory=args.out,
+            scenario_names=(
+                None if args.scenario is None else tuple(args.scenario)
+            ),
+            mode_names=None if args.mode is None else tuple(args.mode),
+            repetitions=args.repetitions,
+            sample_sizes=args.sample_sizes,
+            validation_episodes=args.validation_episodes,
+        )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-transfer-experiment":
+        manifest = aggregate_transfer_experiment(args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

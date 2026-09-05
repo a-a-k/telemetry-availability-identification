@@ -48,6 +48,13 @@ factors are removed. The compiler attaches identifiability certificates or
 counterexample witnesses and tests the reduced likelihood against the unreduced
 B3 objective on every campaign.
 
+Milestone M3 extends the executable model to OR-of-conjunction Boolean
+observables and evaluates two outcomes that are absent from calibration: moving
+a replica across known domains and adding a same-type replica in its current
+domain. It uses B0--B4, a strengthened analytic moment baseline, the matched B3
+likelihood, explicit ambiguity witnesses, change error, choice accuracy, regret,
+and identification-aware abstention.
+
 The configured RQ1 matrix has four small factor-graph families, three observation
 modes, three nested sample sizes, and 200 independently generated campaigns. It
 therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
@@ -94,6 +101,9 @@ identifiers in its manifest.
 - M2 Structure-Preserving Reduction is started manually and requires objective
   equivalence between the original and reduced likelihood before publishing its
   aggregate artifact.
+- M3 Non-Direct Placement Transfer is started manually, shards by common-cause
+  scenario, and requires matched B3 predictions, valid ambiguity witnesses, and
+  zero unsupported proposed decisions before publishing its aggregate artifact.
 
 ## Generated tables
 
@@ -119,7 +129,7 @@ frozen for the paper.
 The current implementation does not claim support for general Boolean request
 predicates, state-dependent exporter loss, temporally dependent episodes,
 overlapping failure domains, general sparse elimination, EM, uncertainty sets,
-live-system ingestion, or placement transfer. M2 is one proved compiler rule,
-not a general factor-graph solver. B3 is implemented only as a small-model exact
-reference; the full B0-B4 comparison is still staged in the roadmap rather than
-simulated by placeholder numbers.
+or live-system ingestion. M2 is one proved compiler rule, not a general
+factor-graph solver. M3 supports one explicit two-domain placement transfer and
+must not be generalized to arbitrary Boolean models or unknown transfer
+mechanisms.

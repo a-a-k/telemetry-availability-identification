@@ -6,6 +6,7 @@ from typing import Iterable
 
 import numpy as np
 
+from .boolean_model import clauses_for
 from .model import ConjunctiveModel
 
 
@@ -81,8 +82,11 @@ def simulate_observable_values(
     index = {name: position for position, name in enumerate(model.factor_ids)}
     columns = []
     for observable in model.observables:
-        positions = [index[name] for name in observable.factors]
-        columns.append(np.all(primitive[:, positions], axis=1))
+        clause_values = []
+        for clause in clauses_for(observable):
+            positions = [index[name] for name in clause]
+            clause_values.append(np.all(primitive[:, positions], axis=1))
+        columns.append(np.any(np.column_stack(clause_values), axis=1))
     return np.column_stack(columns).astype(bool, copy=False)
 
 
