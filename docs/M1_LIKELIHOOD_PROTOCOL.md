@@ -29,7 +29,9 @@ The optimizer uses parameter bounds `[1e-6, 1 - 1e-6]`, analytic gradients in
 logit coordinates, three fixed starts (0.5, 0.8, and 0.95), and the preceding
 nested-prefix solution as an additional warm start where available. All start
 objectives, convergence, boundary contact, and near-optimal parameter spread are
-diagnostic outputs. Structurally unsupported individual estimates are withheld
+diagnostic outputs. The lowest-objective successful start is selected; an
+unsuccessful start cannot displace an equivalent converged solution by numerical
+noise. Structurally unsupported individual estimates are withheld
 even if a numerical optimizer selects one point on a likelihood ridge.
 
 Target truth is independently evaluated by summing enumerated primitive-state

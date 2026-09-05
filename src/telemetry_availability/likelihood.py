@@ -238,14 +238,15 @@ def fit_exact_observed_likelihood(
             message="all starts returned non-finite objectives",
         )
 
-    best = min(finite, key=lambda result: float(result.fun))
-    best_probabilities = expit(np.asarray(best.x, dtype=float))
     successful = [result for result in finite if bool(result.success)]
+    selection_pool = successful if successful else finite
+    best = min(selection_pool, key=lambda result: float(result.fun))
+    best_probabilities = expit(np.asarray(best.x, dtype=float))
     objective_values = np.asarray([float(result.fun) for result in finite])
     tolerance = 1e-7 * max(1.0, abs(float(best.fun)))
     near_optimal = [
         expit(np.asarray(result.x, dtype=float))
-        for result in finite
+        for result in selection_pool
         if float(result.fun) - float(best.fun) <= tolerance
     ]
     parameter_spread = 0.0

@@ -3,8 +3,10 @@ from __future__ import annotations
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
+from scipy.optimize import OptimizeResult
 from scipy.special import logit
 
 from telemetry_availability.config import load_config
@@ -65,6 +67,44 @@ class ExactLikelihoodTests(unittest.TestCase):
         self.assertTrue(fit.converged)
         self.assertIsNotNone(fit.probabilities)
         self.assertAlmostEqual(float(fit.probabilities[0]), 0.7, places=7)
+
+    def test_multistart_prefers_successful_solution_with_equivalent_objective(self) -> None:
+        model = ConjunctiveModel(
+            id="single",
+            factors=(Factor("instance", 0.7, "instance_residual"),),
+            observables=(Observable("health", ("instance",), "health"),),
+            targets=(Target("live", ("instance",)),),
+        )
+        batch = EpisodeBatch(
+            values=np.asarray([[True], [False]], dtype=bool),
+            observed=np.ones((2, 1), dtype=bool),
+        )
+        table = compress_observed_patterns(model, batch)
+        failed = OptimizeResult(
+            x=logit(np.asarray([0.7])),
+            fun=10.0,
+            jac=np.asarray([1e-6]),
+            nit=3,
+            success=False,
+            message="abnormal line search termination",
+        )
+        successful = OptimizeResult(
+            x=logit(np.asarray([0.7000001])),
+            fun=10.0 + 1e-10,
+            jac=np.asarray([1e-8]),
+            nit=4,
+            success=True,
+            message="converged",
+        )
+        with patch(
+            "telemetry_availability.likelihood.minimize",
+            side_effect=(failed, successful, successful),
+        ):
+            fit = fit_exact_observed_likelihood(model, table)
+        self.assertTrue(fit.converged)
+        self.assertEqual(fit.status, "converged")
+        self.assertAlmostEqual(float(fit.negative_log_likelihood), 10.0 + 1e-10)
+        self.assertEqual(fit.successful_starts, 2)
 
     def test_staggered_same_domain_has_equal_likelihood_on_parameter_ridge(self) -> None:
         config = load_config(CONFIG_PATH)
