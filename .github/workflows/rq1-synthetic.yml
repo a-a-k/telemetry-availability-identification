@@ -1,0 +1,120 @@
+name: RQ1 Synthetic Identification
+
+on:
+  workflow_dispatch:
+    inputs:
+      tier:
+        description: Diagnostic uses a smaller predeclared budget; full uses the frozen configuration.
+        required: true
+        default: diagnostic
+        type: choice
+        options:
+          - diagnostic
+          - full
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rq1-synthetic-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  experiment:
+    name: ${{ matrix.family }} (${{ inputs.tier }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        family:
+          - same_domain_replicas
+          - mandatory_fanout
+          - communication_bottleneck
+          - two_domain_path
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Run diagnostic family shard
+        if: ${{ inputs.tier == 'diagnostic' }}
+        run: >-
+          python -m telemetry_availability run
+          --config configs/rq1_synthetic.yaml
+          --out "workflow-results/${{ matrix.family }}"
+          --family "${{ matrix.family }}"
+          --repetitions 20
+          --sample-sizes 100,500
+
+      - name: Run full family shard
+        if: ${{ inputs.tier == 'full' }}
+        run: >-
+          python -m telemetry_availability run
+          --config configs/rq1_synthetic.yaml
+          --out "workflow-results/${{ matrix.family }}"
+          --family "${{ matrix.family }}"
+
+      - name: Upload immutable family shard
+        uses: actions/upload-artifact@v7
+        with:
+          name: rq1-${{ matrix.family }}-${{ github.run_id }}
+          path: workflow-results/${{ matrix.family }}
+          if-no-files-found: error
+          retention-days: 30
+
+  aggregate:
+    name: Aggregate RQ1 tables
+    needs: experiment
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download family shards
+        uses: actions/download-artifact@v8
+        with:
+          pattern: rq1-*-${{ github.run_id }}
+          path: workflow-shards
+
+      - name: Aggregate raw and summary tables
+        run: >-
+          python -m telemetry_availability aggregate
+          --input-root workflow-shards
+          --out workflow-results/aggregate
+
+      - name: Upload aggregate
+        uses: actions/upload-artifact@v7
+        with:
+          name: rq1-aggregate-${{ github.run_id }}
+          path: workflow-results/aggregate
+          if-no-files-found: error
+          retention-days: 30

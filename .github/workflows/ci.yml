@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned dependencies and package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate experiment contract
+        run: python -m telemetry_availability validate-config --config configs/rq1_synthetic.yaml
+
+      - name: Run bounded smoke experiment
+        if: ${{ matrix.python-version == '3.13' }}
+        run: >-
+          python -m telemetry_availability run
+          --config configs/rq1_synthetic.yaml
+          --out workflow-results/smoke
+          --family same_domain_replicas
+          --mode full
+          --mode no_joint_health
+          --repetitions 3
+          --sample-sizes 100
+
+      - name: Upload smoke evidence
+        if: ${{ matrix.python-version == '3.13' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: smoke-${{ github.run_id }}
+          path: workflow-results/smoke
+          if-no-files-found: error
+          retention-days: 14

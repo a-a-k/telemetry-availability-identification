@@ -1,0 +1,90 @@
+schema_version: 1
+
+experiment:
+  id: rq1_structural_and_practical_identifiability
+  seed: 260905
+  repetitions: 200
+  sample_sizes: [100, 500, 2000]
+  max_moment_order: 3
+  min_joint_observations: 20
+  local_smoke_max_dataset_fits: 50
+
+observation_modes:
+  - id: full
+    mode: full
+
+  - id: no_joint_health
+    mode: staggered
+    staggered_kinds: [health]
+    sampling_by_kind:
+      health: 1.0
+      trace: 1.0
+
+  - id: trace_only
+    mode: only_kinds
+    include_kinds: [trace]
+    sampling_by_kind:
+      trace: 1.0
+
+families:
+  - id: same_domain_replicas
+    factors:
+      - {id: domain, probability: 0.92, role: domain}
+      - {id: replica_a, probability: 0.97, role: instance_residual}
+      - {id: replica_b, probability: 0.94, role: instance_residual}
+    observables:
+      - {id: health_a, kind: health, factors: [domain, replica_a]}
+      - {id: health_b, kind: health, factors: [domain, replica_b]}
+    targets:
+      - {id: both_replicas_live, factors: [domain, replica_a, replica_b]}
+
+  - id: mandatory_fanout
+    factors:
+      - {id: entry, probability: 0.98, role: instance_residual}
+      - {id: backend_domain, probability: 0.93, role: domain}
+      - {id: backend_a, probability: 0.96, role: instance_residual}
+      - {id: backend_b, probability: 0.95, role: instance_residual}
+      - {id: channel_a, probability: 0.97, role: channel_residual}
+      - {id: channel_b, probability: 0.96, role: channel_residual}
+    observables:
+      - {id: entry_health, kind: health, factors: [entry]}
+      - {id: backend_a_health, kind: health, factors: [backend_domain, backend_a]}
+      - {id: backend_b_health, kind: health, factors: [backend_domain, backend_b]}
+      - {id: call_a, kind: trace, factors: [entry, backend_domain, backend_a, channel_a]}
+      - {id: call_b, kind: trace, factors: [entry, backend_domain, backend_b, channel_b]}
+      - {id: request_success, kind: trace, factors: [entry, backend_domain, backend_a, backend_b, channel_a, channel_b]}
+    targets:
+      - {id: fanout_success, factors: [entry, backend_domain, backend_a, backend_b, channel_a, channel_b]}
+
+  - id: communication_bottleneck
+    factors:
+      - {id: source, probability: 0.98, role: instance_residual}
+      - {id: target_domain, probability: 0.94, role: domain}
+      - {id: target_a, probability: 0.96, role: instance_residual}
+      - {id: target_b, probability: 0.95, role: instance_residual}
+      - {id: route, probability: 0.90, role: channel_residual}
+    observables:
+      - {id: source_health, kind: health, factors: [source]}
+      - {id: target_a_health, kind: health, factors: [target_domain, target_a]}
+      - {id: target_b_health, kind: health, factors: [target_domain, target_b]}
+      - {id: request_success, kind: trace, factors: [source, target_domain, target_a, route]}
+    targets:
+      - {id: routed_request_success, factors: [source, target_domain, target_a, route]}
+
+  - id: two_domain_path
+    factors:
+      - {id: source_domain, probability: 0.95, role: domain}
+      - {id: source_a, probability: 0.97, role: instance_residual}
+      - {id: source_b, probability: 0.96, role: instance_residual}
+      - {id: target_domain, probability: 0.93, role: domain}
+      - {id: target_a, probability: 0.96, role: instance_residual}
+      - {id: target_b, probability: 0.94, role: instance_residual}
+      - {id: route, probability: 0.91, role: channel_residual}
+    observables:
+      - {id: source_a_health, kind: health, factors: [source_domain, source_a]}
+      - {id: source_b_health, kind: health, factors: [source_domain, source_b]}
+      - {id: target_a_health, kind: health, factors: [target_domain, target_a]}
+      - {id: target_b_health, kind: health, factors: [target_domain, target_b]}
+      - {id: request_success, kind: trace, factors: [source_domain, source_a, target_domain, target_a, route]}
+    targets:
+      - {id: cross_domain_request_success, factors: [source_domain, source_a, target_domain, target_a, route]}

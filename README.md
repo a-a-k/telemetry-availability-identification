@@ -1,0 +1,99 @@
+# Telemetry-driven availability identification
+
+This repository is the experimental implementation for the planned SIMPAT study
+Telemetry-Driven Identification of Stochastic Availability Models for
+Microservice Systems.
+
+It is a new research line built on the earlier stochastic-connectivity model. It
+is not a one-to-one implementation of MODELS reviewer requests. The venue-level
+claim here is about constructing, identifying, validating, and using a simulation
+input model from heterogeneous telemetry.
+
+## Current vertical slice
+
+The first executable slice covers the conjunctive primitive-factor submodel used
+by the planned T1 identifiability result. Independent Bernoulli primitives denote
+known failure-domain state, residual instance health, and residual communication
+health. Each observable is a conjunction of primitives. For observable moments,
+the implementation builds
+
+~~~text
+log(m) = H log(p)
+~~~
+
+and reports:
+
+- structural and finite-sample rank;
+- individual parameter identifiability;
+- conjunctive target identifiability;
+- singular values and condition number;
+- estimates only for identified parameters or identified target functionals;
+- false-confident estimates as an explicit failure metric.
+
+The estimator in this slice is a weighted log-moment estimator. It is a
+transparent baseline and executable check of the rank argument, not yet the
+article's proposed observed-likelihood or EM implementation.
+
+The configured RQ1 matrix has four small factor-graph families, three observation
+modes, three nested sample sizes, and 200 independently generated campaigns. It
+therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
+2,000 within one campaign are nested and are not counted as independent
+replications.
+
+## Execution policy
+
+Full and diagnostic experiment matrices run only in GitHub Actions. The heavy
+workflow is manual and uploads immutable result artifacts. Local execution is
+limited in code to at most 50 dataset fits, enough for unit tests and a basic
+smoke run.
+
+Local smoke on Windows:
+
+~~~powershell
+./scripts/smoke.ps1
+~~~
+
+Equivalent commands without installing the package:
+
+~~~powershell
+$env:PYTHONPATH = "src"
+python -m unittest discover -s tests -v
+python -m telemetry_availability validate-config --config configs/rq1_synthetic.yaml
+python -m telemetry_availability run --config configs/rq1_synthetic.yaml --out .smoke --family same_domain_replicas --mode full --mode no_joint_health --repetitions 3 --sample-sizes 100
+~~~
+
+Do not use a smoke output as a paper result. The full workflow records the Git
+revision, configuration digest, dependency versions, seeds, and GitHub run
+identifiers in its manifest.
+
+## Workflows
+
+- CI runs unit tests, validates the experiment contract, and executes only the
+  bounded smoke case.
+- RQ1 Synthetic Identification is started manually. The diagnostic tier runs 20
+  campaigns at sizes 100 and 500; the full tier uses the frozen values from the
+  experiment configuration. Each family is an independent workflow shard, and a
+  final job aggregates the raw tables.
+
+## Generated tables
+
+- runs.csv contains rank, conditioning, moment counts, and fit status per dataset.
+- parameters.csv contains truth, identifiability, estimates, and errors per factor.
+- targets.csv contains the corresponding result for availability targets.
+- moments.csv preserves every empirical moment, its factor union, effective
+  observation count, and generator truth for audit and independent re-analysis.
+- summary.csv aggregates predeclared accuracy and failure metrics by family,
+  observation mode, and sample size.
+- manifest.json records provenance and row counts.
+
+Generated results are intentionally ignored by Git. GitHub workflow artifacts are
+the source of experimental outputs until a reviewed result snapshot is explicitly
+frozen for the paper.
+
+## Scope not yet implemented
+
+The current slice does not claim support for general Boolean request predicates,
+state-dependent exporter loss, temporally dependent episodes, overlapping failure
+domains, observed-data maximum likelihood, EM, uncertainty sets, live-system
+ingestion, placement transfer, or B0-B4 comparisons. These are staged in the
+roadmap rather than simulated by placeholder numbers.
