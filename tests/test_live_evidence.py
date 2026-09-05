@@ -97,6 +97,7 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
         self.assertEqual({row.target_replica for row in spans}, {"", "a"})
         self.assertEqual(parsed.invalid_records, 0)
         self.assertEqual(parsed.unknown_target_instances, 0)
+        self.assertEqual(parsed.truncated_tail_records, 0)
 
     def test_otlp_jsonl_parser_filters_to_expected_trace_and_replica(self) -> None:
         profile = self.config.profile("opentelemetry_demo")
@@ -142,6 +143,55 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
         self.assertEqual(set(parsed.spans_by_trace), {expected})
         self.assertEqual(parsed.spans_by_trace[expected][0].target_replica, "b")
         self.assertEqual(parsed.invalid_records, 0)
+        self.assertEqual(parsed.truncated_tail_records, 0)
+
+    def test_otlp_parser_tolerates_only_nonlearner_unterminated_tail(self) -> None:
+        profile = self.config.profile("opentelemetry_demo")
+        expected = "0123456789abcdef0123456789abcdef"
+        valid = {
+            "resourceSpans": [
+                {
+                    "resource": {
+                        "attributes": [
+                            {
+                                "key": "service.name",
+                                "value": {"stringValue": "product-catalog"},
+                            },
+                            {
+                                "key": "study.replica",
+                                "value": {"stringValue": "a"},
+                            },
+                        ]
+                    },
+                    "scopeSpans": [
+                        {
+                            "spans": [
+                                {
+                                    "traceId": expected,
+                                    "spanId": "0000000000000001",
+                                    "name": "get-product",
+                                }
+                            ]
+                        }
+                    ],
+                }
+            ]
+        }
+        cases = (
+            ('{"resourceSpans":[{"unrelated":', 0, 1),
+            ('{"traceId":"' + expected + '",', 1, 0),
+            ('{"resourceSpans":[}\n', 1, 0),
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "traces.log"
+            for tail, expected_invalid, expected_tolerated in cases:
+                path.write_text(json.dumps(valid) + "\n" + tail, encoding="utf-8")
+                parsed = parse_otlp_jsonl_trace_evidence(profile, path, [expected])
+                self.assertEqual(parsed.invalid_records, expected_invalid)
+                self.assertEqual(
+                    parsed.truncated_tail_records,
+                    expected_tolerated,
+                )
 
     def test_cell_qualification_physically_sequesters_test_and_events(self) -> None:
         profile = self.config.profile("deathstarbench_social_network")

@@ -109,6 +109,7 @@ CELL_SUMMARY_FIELDS = (
     "replica_b_trace_assignments",
     "test_requests_sequestered",
     "test_health_ticks_sequestered",
+    "tolerated_truncated_tail_trace_records",
     "quality_failures",
     "usable",
 )
@@ -130,6 +131,7 @@ class ParsedTraceEvidence:
     invalid_records: int
     duplicate_spans: int
     unknown_target_instances: int
+    truncated_tail_records: int
 
 
 def _csv_rows(path: Path) -> list[dict[str, str]]:
@@ -195,6 +197,7 @@ def _deduplicate_spans(
     records: Iterable[SpanRecord],
     invalid_records: int,
     unknown_target_instances: int,
+    truncated_tail_records: int = 0,
 ) -> ParsedTraceEvidence:
     unique: dict[tuple[str, str], SpanRecord] = {}
     duplicates = 0
@@ -215,6 +218,7 @@ def _deduplicate_spans(
         invalid_records=invalid_records,
         duplicate_spans=duplicates,
         unknown_target_instances=unknown_target_instances,
+        truncated_tail_records=truncated_tail_records,
     )
 
 
@@ -278,7 +282,9 @@ def parse_jaeger_trace_evidence(
     return _deduplicate_spans(records, invalid, unknown)
 
 
-def _iter_otlp_documents(path: Path) -> Iterator[tuple[dict[str, Any] | None, bool]]:
+def _iter_otlp_documents(
+    path: Path,
+) -> Iterator[tuple[dict[str, Any] | None, bool, bool, str]]:
     with path.open(encoding="utf-8", errors="replace") as source:
         for raw in source:
             line = raw.strip()
@@ -287,11 +293,13 @@ def _iter_otlp_documents(path: Path) -> Iterator[tuple[dict[str, Any] | None, bo
             try:
                 document = json.loads(line)
             except json.JSONDecodeError:
-                yield None, True
+                yield None, True, not raw.endswith(("\n", "\r")), line
                 continue
             yield (
                 (document if isinstance(document, dict) else None),
                 not isinstance(document, dict),
+                False,
+                line,
             )
 
 
@@ -304,8 +312,19 @@ def parse_otlp_jsonl_trace_evidence(
     records: list[SpanRecord] = []
     invalid = 0
     unknown = 0
-    for document, malformed in _iter_otlp_documents(Path(path)):
-        invalid += int(malformed)
+    truncated_tail = 0
+    for document, malformed, is_unterminated_tail, raw in _iter_otlp_documents(
+        Path(path)
+    ):
+        raw_lower = raw.lower() if malformed else ""
+        contains_expected_trace = malformed and any(
+            trace_id in raw_lower for trace_id in expected
+        )
+        tolerated_tail = (
+            malformed and is_unterminated_tail and not contains_expected_trace
+        )
+        truncated_tail += int(tolerated_tail)
+        invalid += int(malformed and not tolerated_tail)
         if document is None:
             continue
         resource_spans = document.get("resourceSpans", [])
@@ -355,7 +374,7 @@ def parse_otlp_jsonl_trace_evidence(
                             target_replica=replica,
                         )
                     )
-    return _deduplicate_spans(records, invalid, unknown)
+    return _deduplicate_spans(records, invalid, unknown, truncated_tail)
 
 
 def parse_trace_evidence(
@@ -694,6 +713,10 @@ def qualify_evidence_cell(
             "health_ticks": len(health_rows),
             "topology_edges": len(topology_rows),
         },
+        "source_trace_parsing": {
+            "invalid_records": parsed.invalid_records,
+            "tolerated_truncated_tail_records": parsed.truncated_tail_records,
+        },
         "files": {
             "requests_sha256": file_sha256(learner / "requests.csv"),
             "health_sha256": file_sha256(learner / "health.csv"),
@@ -764,6 +787,9 @@ def qualify_evidence_cell(
         "privileged_files_parsed_for_learner": [],
         "denied_learner_fields": denied_fields,
         "source_sha256": source_hashes,
+        "nonfatal_observations": {
+            "truncated_nonlearner_tail_trace_records": parsed.truncated_tail_records,
+        },
         "quality": quality,
         "usable": not failures,
     }
@@ -784,6 +810,7 @@ def qualify_evidence_cell(
         "replica_b_trace_assignments": replica_counts["b"],
         "test_requests_sequestered": len(evaluation_rows),
         "test_health_ticks_sequestered": len(test_health_rows),
+        "tolerated_truncated_tail_trace_records": parsed.truncated_tail_records,
         "quality_failures": sum(quality.values()),
         "usable": not failures,
     }
@@ -891,6 +918,11 @@ def qualify_evidence_boundary(
             "sequestered_test_health_ticks": sum(
                 int(row["test_health_ticks_sequestered"]) for row in summaries
             ),
+        },
+        "nonfatal_observations": {
+            "truncated_nonlearner_tail_trace_records": sum(
+                int(row["tolerated_truncated_tail_trace_records"]) for row in summaries
+            )
         },
         "files": {"cells_sha256": file_sha256(output / "cells.csv")},
         "environment": environment_manifest(),

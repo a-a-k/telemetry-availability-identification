@@ -49,6 +49,14 @@ and replica identity come from resource attributes and edges from span and
 parent-span identifiers. Only trace ids assigned to calibration requests are
 materialized; unrelated, baseline, sentinel, and test traces are ignored.
 
+The collector's append-only log can end in one unterminated JSON fragment when
+the container is stopped. Such a fragment is a nonfatal, counted observation
+only when it is the physical final line, lacks the normal line terminator, and
+contains no calibration trace id. A malformed interior or terminated record,
+or any malformed tail containing a calibration trace id, remains a hard
+failure. This exception cannot hide loss of learner evidence and is recorded in
+both the cell audit and aggregate manifest.
+
 The normalized request row retains semantic success, timeout, operation and
 branch class, trace presence, the observed service set, and the set of target
 replicas actually represented by spans. Multiple target replicas in one trace
@@ -79,8 +87,10 @@ from one commit. Every cell must satisfy all of the following:
 - calibration and sequestered test request counts match the signed source
   manifest, request ids are unique, and their intersection is empty;
 - every trace declared present by the transport census has at least one parsed
-  span, invalid/duplicate spans and unknown target-replica identities are zero,
-  and at least 80% of semantic successes retain a native trace;
+  span, invalid complete records, duplicate spans and unknown target-replica
+  identities are zero, and at least 80% of semantic successes retain a native
+  trace; the narrowly defined non-learner unterminated tail exception above is
+  counted separately;
 - the calibration trace graph has at least one cross-service edge and both
   target replicas have positive trace assignment support;
 - every calibration and test health tick contains exactly the proxy and both
