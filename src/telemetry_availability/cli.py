@@ -728,7 +728,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "status": "valid",
                     "experiment_id": config.id,
                     "diagnostic_only": config.diagnostic_only,
-                    "main_effectiveness": config.main_effectiveness,
                     "profiles": [profile.id for profile in config.profiles],
                     "failure_laws": config.laws,
                     "expected_cells": len(config.profiles)
@@ -884,6 +883,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "status": "valid",
                     "experiment_id": config.id,
                     "diagnostic_only": config.diagnostic_only,
+                    "main_effectiveness": config.main_effectiveness,
                     "source_experiment_id": config.source_experiment_id,
                     "source_manifest_file": config.source_manifest_file,
                     "source_usable_field": config.source_usable_field,
