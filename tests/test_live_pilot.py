@@ -12,6 +12,7 @@ from unittest.mock import patch
 from telemetry_availability.live_pilot import (
     RuntimePilotError,
     _collect_telemetry,
+    _deathstar_request,
     aggregate_runtime_pilots,
     pin_compose_document,
     run_runtime_pilot,
@@ -20,7 +21,6 @@ from telemetry_availability.live_pilot_config import (
     load_runtime_pilot_config,
     select_runtime_pilot_profile,
 )
-
 
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG_PATH = ROOT / "configs" / "m7_runtime_pilot.yaml"
@@ -87,7 +87,12 @@ class RuntimePilotTests(unittest.TestCase):
             )
         with self.assertRaisesRegex(RuntimePilotError, "unused"):
             pin_compose_document(
-                {"services": {"known": {"image": "known:1"}, "other": {"image": "known:1"}}},
+                {
+                    "services": {
+                        "known": {"image": "known:1"},
+                        "other": {"image": "known:1"},
+                    }
+                },
                 replace(
                     profile,
                     disabled_services=(),
@@ -98,7 +103,9 @@ class RuntimePilotTests(unittest.TestCase):
                 ),
             )
 
-    def test_pin_compose_removes_declared_external_generator_and_dependencies(self) -> None:
+    def test_pin_compose_removes_declared_external_generator_and_dependencies(
+        self,
+    ) -> None:
         original = select_runtime_pilot_profile(self.config, "opentelemetry_demo")
         profile = replace(
             original,
@@ -163,6 +170,17 @@ class RuntimePilotTests(unittest.TestCase):
             )
         self.assertEqual(count, 1)
         self.assertEqual(error, "")
+
+    def test_deathstar_home_read_targets_initialized_follower(self) -> None:
+        profile = select_runtime_pilot_profile(
+            self.config, "deathstarbench_social_network"
+        )
+        with patch(
+            "telemetry_availability.live_pilot._http_request",
+            return_value=(200, b"[]", ""),
+        ) as request:
+            _deathstar_request(profile, "read_home_timeline", 0)
+        self.assertIn("user_id=1", request.call_args.args[0])
 
     def test_runtime_workload_is_forbidden_locally(self) -> None:
         with patch.dict(os.environ, {}, clear=True):

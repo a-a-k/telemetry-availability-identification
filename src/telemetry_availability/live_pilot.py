@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import csv
 import json
 import os
 import random
@@ -128,7 +127,9 @@ def pin_compose_document(
             "container_directory": "/study-output",
             "file": "raw-telemetry.log",
         }
-    locks = {_image_key(image): (image, digest) for image, digest in profile.images.items()}
+    locks = {
+        _image_key(image): (image, digest) for image, digest in profile.images.items()
+    }
     if len(locks) != len(profile.images):
         raise RuntimePilotError("image lock aliases are ambiguous")
     rows: list[dict[str, str]] = []
@@ -191,7 +192,9 @@ def pin_compose_files(
     )
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(pinned, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    output.write_text(
+        json.dumps(pinned, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
     audit_output = Path(audit_path)
     audit_output.parent.mkdir(parents=True, exist_ok=True)
     audit_output.write_text(
@@ -278,7 +281,7 @@ def _deathstar_request(
         return status, body, error, branch
     if operation == "read_home_timeline":
         status, body, error = _http_request(
-            profile.base_url + "/wrk2-api/home-timeline/read?user_id=0&start=0&stop=10",
+            profile.base_url + "/wrk2-api/home-timeline/read?user_id=1&start=0&stop=10",
             timeout=timeout,
             extra_headers=extra_headers,
         )
@@ -526,7 +529,9 @@ def _collect_telemetry(
     return len(trace_ids), "" if completed.returncode == 0 else "docker logs failed"
 
 
-def _runtime_containers(compose_path: Path, output: Path) -> tuple[list[dict[str, Any]], int]:
+def _runtime_containers(
+    compose_path: Path, output: Path
+) -> tuple[list[dict[str, Any]], int]:
     listed = subprocess.run(
         ["docker", "compose", "-f", str(compose_path), "ps", "-q"],
         capture_output=True,

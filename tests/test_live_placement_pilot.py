@@ -147,7 +147,7 @@ class PlacementPilotTests(unittest.TestCase):
         )
         self.assertEqual(len(_event_targets(self.config, profile, "split", event)), 1)
 
-    def test_operation_semantics_reject_malformed_2xx(self) -> None:
+    def test_operation_semantics_match_deathstar_wire_format(self) -> None:
         valid, _, _ = validate_operation_response(
             "deathstarbench_social_network",
             "compose_post",
@@ -155,11 +155,25 @@ class PlacementPilotTests(unittest.TestCase):
             b"Successfully upload post\n",
         )
         self.assertTrue(valid)
-        valid, _, reason = validate_operation_response(
+        valid, _, _ = validate_operation_response(
             "deathstarbench_social_network", "read_user_timeline", 200, b"{}"
+        )
+        self.assertTrue(valid)
+        valid, _, reason = validate_operation_response(
+            "deathstarbench_social_network",
+            "read_user_timeline",
+            200,
+            b'{"unexpected":"object"}',
         )
         self.assertFalse(valid)
         self.assertEqual(reason, "invalid_timeline")
+        valid, _, _ = validate_operation_response(
+            "deathstarbench_social_network",
+            "read_home_timeline",
+            200,
+            b'[{"post_id":"1","text":"visible"}]',
+        )
+        self.assertTrue(valid)
         valid, _, _ = validate_operation_response(
             "opentelemetry_demo",
             "browse_product",

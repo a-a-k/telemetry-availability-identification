@@ -62,9 +62,13 @@ Its rows remain in the M7B namespace only.
 One sentinel of every selected operation must pass both HTTP and content rules
 before the fault period:
 
-- DeathStarBench compose-post requires the exact acknowledgement; both timeline
-  reads require a JSON array with the declared post fields. In addition, the
-  sentinel post must eventually appear in the owner's user timeline and the
+- DeathStarBench compose-post requires the exact acknowledgement. Nonempty
+  timeline reads require a JSON array with the declared post fields; the exact
+  empty object `{}` is also accepted because the pinned upstream Lua endpoint
+  serializes an empty Lua table in that form. Arbitrary JSON objects are still
+  rejected. The counted home-timeline read uses follower 1, who follows author
+  0, rather than reading the author's normally empty home timeline. In addition,
+  the sentinel post must eventually appear in the owner's user timeline and the
   follower's home timeline. This eventual fan-out audit is stored separately;
   later immediate availability must not silently claim eventual completion.
 - OTel product browse requires the selected product id; add-to-cart requires the

@@ -416,12 +416,18 @@ def validate_operation_response(
                 value = json.loads(body)
             except (json.JSONDecodeError, UnicodeDecodeError):
                 return False, "http_2xx_and_timeline_json", "invalid_json"
-            valid = isinstance(value, list) and all(
+            valid_posts = isinstance(value, list) and all(
                 isinstance(item, dict)
                 and isinstance(item.get("post_id"), str)
                 and isinstance(item.get("text"), str)
                 for item in value
             )
+            # The pinned DeathStarBench Lua endpoint builds timelines with an
+            # initially empty Lua table. lua-cjson serializes that ambiguous
+            # empty table as {}, while every non-empty timeline is an array.
+            # Accept only the exact empty object as the upstream empty value;
+            # arbitrary objects remain malformed responses.
+            valid = valid_posts or value == {}
             return (
                 valid,
                 "http_2xx_and_timeline_json",
