@@ -1171,12 +1171,13 @@ def _run_period(
                     offset,
                 )
             )
+        _sleep_until(started_monotonic + duration_seconds)
+        stop_health.set()
         pairs = [future.result() for future in futures]
     if fault_thread is not None:
         fault_thread.join(timeout=duration_seconds + 30)
         if fault_thread.is_alive():
             raise StochasticPilotError("stochastic fault controller did not terminate")
-    stop_health.set()
     health_thread.join(timeout=15)
     if health_thread.is_alive():
         raise StochasticPilotError("stochastic health sampler did not terminate")

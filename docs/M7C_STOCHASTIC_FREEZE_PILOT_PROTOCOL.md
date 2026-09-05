@@ -94,7 +94,8 @@ both HAProxy backends `UP`.
 An independent one-second sampler records Docker running, paused, health, and
 network state for both replicas and the proxy. It also records HAProxy backend
 status, check state, and cumulative sessions. Its deadlines are anchored to the
-period clock, so inspection time does not accumulate as sampling drift. A
+period clock, so inspection time does not accumulate as sampling drift, and it
+stops at the nominal period boundary rather than following late request futures. A
 physical transition is eligible for the completeness gate and transition-lag
 distribution only when its resulting state is scheduled to persist for at least
 two nominal audit ticks. Every eligible transition must be visible in the
