@@ -11,12 +11,13 @@ tests, configuration validation, and bounded smoke cases.
 | Milestone | Scope | Status | Evidence |
 |---|---|---|---|
 | M0 | Conjunctive rank and log-moment vertical slice | Complete | `milestones/M0_RANK_AND_MOMENTS.md` |
-| M1 | Exact observed-likelihood reference and matched B2/B3 comparison | In progress | report follows the GitHub run |
-| M2 | Non-direct targets and synthetic placement transfer with B0-B3 | Planned | report follows the GitHub run |
-| M3 | Simultaneous uncertainty sets and coverage | Planned | report follows the GitHub run |
-| M4 | Directed misspecification and telemetry-loss stress tests | Planned | report follows the GitHub run |
-| M5 | Versioned live-ingestion contract and benchmark harness | Planned | report follows integration evidence |
-| M6 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
+| M1 | Exact observed-likelihood reference and matched B2/B3 comparison | Complete | `milestones/M1_EXACT_LIKELIHOOD_REFERENCE.md` |
+| M2 | Identification-aware compiler, structured EM, and matched B1-B3 comparison | In progress | report follows the GitHub run |
+| M3 | Non-direct Boolean targets and synthetic placement transfer with B0-B4 | Planned | report follows the GitHub run |
+| M4 | Simultaneous uncertainty sets and coverage | Planned | report follows the GitHub run |
+| M5 | Directed misspecification and telemetry-loss stress tests | Planned | report follows the GitHub run |
+| M6 | Versioned live-ingestion contract and benchmark harness | Planned | report follows integration evidence |
+| M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
 
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference
