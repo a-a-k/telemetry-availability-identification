@@ -22,6 +22,8 @@ tests, configuration validation, and bounded smoke cases.
 | M7B | Replicated placement, load-balancing, and effect-semantics pilot | Complete | `milestones/M7B_REPLICATED_PLACEMENT_PILOT.md`; excluded from effectiveness evidence |
 | M7C | Stochastic schedule and repetition-budget freeze pilot | Complete | `milestones/M7C_STOCHASTIC_FREEZE_PILOT.md`; includes documented M7C-R claim narrowing and excludes all pilot data from effectiveness evidence |
 | M7D | Learner/evaluator boundary and native-trace normalization | Complete | `milestones/M7D_LEARNER_EVIDENCE_BOUNDARY.md`; diagnostic only and excluded from effectiveness evidence |
+| M7E | Frozen main acquisition, strong comparators, matched likelihood, and campaign inference | Complete | `milestones/M7E_ANALYSIS_FREEZE.md`; completed before any M7 remote request |
+| M7F | Separate no-fit four-cell main-path preflight | Planned | report follows the qualification run; excluded from effectiveness evidence |
 | M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
 
 The order may expose a scientific stopping condition. In particular, failure to

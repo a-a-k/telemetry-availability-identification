@@ -180,6 +180,11 @@ identifiers in its manifest.
   normalizes calibration-only trace graphs and health evidence, physically
   sequesters test outcomes, and rejects controller/event fields in learner
   schemas. It is a diagnostic adapter check, not an effectiveness experiment.
+- M7E freezes the complete main acquisition and analysis implementation before
+  any M7 request. The primary comparator is strengthened B2, B3 is the matched
+  same-model likelihood reference, and proposed/B3 equality is a correctness
+  gate rather than a claimed advantage. A separate M7F role performs a no-fit
+  four-cell preflight under a distinct seed and namespace.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
