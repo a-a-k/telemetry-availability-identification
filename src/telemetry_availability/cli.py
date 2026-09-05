@@ -12,6 +12,10 @@ from .likelihood_reference import (
     run_likelihood_reference,
 )
 from .moments import structural_moment_rows
+from .reduction_experiment import (
+    aggregate_reduction_experiment,
+    run_reduction_experiment,
+)
 from .runner import aggregate_results, run_experiment
 
 
@@ -68,6 +72,24 @@ def build_parser() -> argparse.ArgumentParser:
     )
     aggregate_reference.add_argument("--input-root", required=True, type=Path)
     aggregate_reference.add_argument("--out", required=True, type=Path)
+
+    reduction = commands.add_parser(
+        "run-reduction-experiment",
+        help="compare the structure-preserving reduction with the exact reference",
+    )
+    reduction.add_argument("--config", required=True, type=Path)
+    reduction.add_argument("--out", required=True, type=Path)
+    reduction.add_argument("--family", action="append")
+    reduction.add_argument("--mode", action="append")
+    reduction.add_argument("--repetitions", type=int)
+    reduction.add_argument("--sample-sizes", type=_comma_separated_positive_integers)
+
+    aggregate_reduction = commands.add_parser(
+        "aggregate-reduction-experiment",
+        help="combine structure-preserving reduction shards",
+    )
+    aggregate_reduction.add_argument("--input-root", required=True, type=Path)
+    aggregate_reduction.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -159,6 +181,25 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "aggregate-likelihood-reference":
         manifest = aggregate_likelihood_reference(args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "run-reduction-experiment":
+        config = load_config(args.config)
+        manifest = run_reduction_experiment(
+            config=config,
+            config_path=args.config,
+            output_directory=args.out,
+            family_names=None if args.family is None else tuple(args.family),
+            mode_names=None if args.mode is None else tuple(args.mode),
+            repetitions=args.repetitions,
+            sample_sizes=args.sample_sizes,
+        )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-reduction-experiment":
+        manifest = aggregate_reduction_experiment(args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

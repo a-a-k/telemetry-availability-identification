@@ -84,9 +84,6 @@ class ConjunctiveModel:
             raise ModelValidationError(f"model {self.id!r} has no factors")
         if not self.observables:
             raise ModelValidationError(f"model {self.id!r} has no observables")
-        if not self.targets:
-            raise ModelValidationError(f"model {self.id!r} has no targets")
-
         known = set(self.factor_ids)
         for item in (*self.observables, *self.targets):
             unknown = set(item.factors) - known

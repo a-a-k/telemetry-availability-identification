@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from itertools import product
-from math import log
 
 import numpy as np
 from scipy.optimize import OptimizeResult, minimize
@@ -185,6 +184,8 @@ def fit_exact_observed_likelihood(
     table: ObservedPatternTable,
     initial_probabilities: np.ndarray | None = None,
     epsilon: float = 1e-6,
+    lower_probabilities: np.ndarray | None = None,
+    upper_probabilities: np.ndarray | None = None,
 ) -> ExactLikelihoodFit:
     if not 0.0 < epsilon < 0.5:
         raise ValueError("epsilon must lie in (0, 0.5)")
@@ -204,19 +205,38 @@ def fit_exact_observed_likelihood(
             message="no observable values were retained",
         )
 
-    lower = log(epsilon / (1.0 - epsilon))
-    upper = -lower
+    parameter_count = len(model.factors)
+    lower_vector = (
+        np.full(parameter_count, epsilon, dtype=float)
+        if lower_probabilities is None
+        else np.asarray(lower_probabilities, dtype=float)
+    )
+    upper_vector = (
+        np.full(parameter_count, 1.0 - epsilon, dtype=float)
+        if upper_probabilities is None
+        else np.asarray(upper_probabilities, dtype=float)
+    )
+    if lower_vector.shape != (parameter_count,) or upper_vector.shape != (parameter_count,):
+        raise ValueError("probability bounds do not match the model")
+    if (
+        np.any(lower_vector <= 0.0)
+        or np.any(upper_vector >= 1.0)
+        or np.any(lower_vector >= upper_vector)
+    ):
+        raise ValueError("probability bounds must satisfy 0 < lower < upper < 1")
+    lower_logits = logit(lower_vector)
+    upper_logits = logit(upper_vector)
     starts = _candidate_starts(len(model.factors), initial_probabilities)
     results: list[OptimizeResult] = []
     for start in starts:
-        clipped = np.clip(start, epsilon, 1.0 - epsilon)
+        clipped = np.clip(start, lower_vector, upper_vector)
         result = minimize(
             negative_log_likelihood_and_gradient,
             logit(clipped),
             args=(table,),
             method="L-BFGS-B",
             jac=True,
-            bounds=[(lower, upper)] * len(model.factors),
+            bounds=list(zip(lower_logits, upper_logits, strict=True)),
             options={"maxiter": 1_000, "ftol": 1e-12, "gtol": 1e-8, "maxls": 50},
         )
         results.append(result)
@@ -258,8 +278,8 @@ def fit_exact_observed_likelihood(
     converged = bool(best.success) and np.all(np.isfinite(best_probabilities))
     boundary_count = int(
         np.count_nonzero(
-            (best_probabilities <= epsilon * 1.01)
-            | (best_probabilities >= 1.0 - epsilon * 1.01)
+            np.isclose(best_probabilities, lower_vector, rtol=1e-6, atol=1e-12)
+            | np.isclose(best_probabilities, upper_vector, rtol=1e-6, atol=1e-12)
         )
     )
     if not converged:

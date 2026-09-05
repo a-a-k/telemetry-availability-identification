@@ -65,6 +65,18 @@ jobs:
           --repetitions 1
           --sample-sizes 100
 
+      - name: Run bounded reduction smoke
+        if: ${{ matrix.python-version == '3.13' }}
+        run: >-
+          python -m telemetry_availability run-reduction-experiment
+          --config configs/rq1_synthetic.yaml
+          --out workflow-results/reduction-smoke
+          --family mandatory_fanout
+          --mode full
+          --mode trace_only
+          --repetitions 1
+          --sample-sizes 100
+
       - name: Upload smoke evidence
         if: ${{ matrix.python-version == '3.13' }}
         uses: actions/upload-artifact@v7
@@ -80,5 +92,14 @@ jobs:
         with:
           name: likelihood-smoke-${{ github.run_id }}
           path: workflow-results/likelihood-smoke
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload reduction smoke evidence
+        if: ${{ matrix.python-version == '3.13' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: reduction-smoke-${{ github.run_id }}
+          path: workflow-results/reduction-smoke
           if-no-files-found: error
           retention-days: 14

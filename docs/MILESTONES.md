@@ -12,7 +12,7 @@ tests, configuration validation, and bounded smoke cases.
 |---|---|---|---|
 | M0 | Conjunctive rank and log-moment vertical slice | Complete | `milestones/M0_RANK_AND_MOMENTS.md` |
 | M1 | Exact observed-likelihood reference and matched B2/B3 comparison | Complete | `milestones/M1_EXACT_LIKELIHOOD_REFERENCE.md` |
-| M2 | Identification-aware compiler, structured EM, and matched B1-B3 comparison | In progress | report follows the GitHub run |
+| M2 | Identification-aware compiler and structure-preserving likelihood reduction | In progress | report follows the GitHub run |
 | M3 | Non-direct Boolean targets and synthetic placement transfer with B0-B4 | Planned | report follows the GitHub run |
 | M4 | Simultaneous uncertainty sets and coverage | Planned | report follows the GitHub run |
 | M5 | Directed misspecification and telemetry-loss stress tests | Planned | report follows the GitHub run |

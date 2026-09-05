@@ -41,6 +41,13 @@ multistart optimizer. This is the article-design B3 correctness reference; the
 log-moment implementation is labeled B2 and is not presented as the proposed
 full method.
 
+Milestone M2 adds the first identification-aware compilation rule. Primitive
+factors that have identical nonzero signatures across every supported observable
+are replaced by one explicitly named product factor; structurally inactive
+factors are removed. The compiler attaches identifiability certificates or
+counterexample witnesses and tests the reduced likelihood against the unreduced
+B3 objective on every campaign.
+
 The configured RQ1 matrix has four small factor-graph families, three observation
 modes, three nested sample sizes, and 200 independently generated campaigns. It
 therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
@@ -84,6 +91,9 @@ identifiers in its manifest.
 - M1 Exact Likelihood Reference is started manually and compares B2 and B3 on
   paired campaign prefixes. Its aggregate includes the compressed observation
   patterns needed to reconstruct the exact conditional likelihood.
+- M2 Structure-Preserving Reduction is started manually and requires objective
+  equivalence between the original and reduced likelihood before publishing its
+  aggregate artifact.
 
 ## Generated tables
 
@@ -108,7 +118,8 @@ frozen for the paper.
 
 The current implementation does not claim support for general Boolean request
 predicates, state-dependent exporter loss, temporally dependent episodes,
-overlapping failure domains, the proposed sparse identification procedure, EM,
-uncertainty sets, live-system ingestion, or placement transfer. B3 is now
-implemented only as a small-model exact reference; the full B0-B4 comparison is
-still staged in the roadmap rather than simulated by placeholder numbers.
+overlapping failure domains, general sparse elimination, EM, uncertainty sets,
+live-system ingestion, or placement transfer. M2 is one proved compiler rule,
+not a general factor-graph solver. B3 is implemented only as a small-model exact
+reference; the full B0-B4 comparison is still staged in the roadmap rather than
+simulated by placeholder numbers.

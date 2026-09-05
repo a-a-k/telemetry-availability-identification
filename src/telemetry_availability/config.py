@@ -88,6 +88,8 @@ def load_config(path: str | Path) -> ExperimentConfig:
             )
             for item in (_mapping(value, "target") for value in _sequence(family.get("targets"), "targets"))
         )
+        if not targets:
+            raise ConfigError(f"family {family.get('id')!r} must define at least one target")
         families.append(
             ConjunctiveModel(
                 id=str(family["id"]),
