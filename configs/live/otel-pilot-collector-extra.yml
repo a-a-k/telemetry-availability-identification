@@ -1,3 +1,16 @@
 exporters:
   debug:
     verbosity: detailed
+  file/study:
+    # The debug exporter is useful for diagnostics but the upstream Compose
+    # rotates its Docker logs at 5 MiB.  A mounted OTLP/JSON-lines sink is the
+    # lossless request--trace linkage source for remote study runs.
+    path: /study-output/raw-telemetry.log
+    format: json
+    append: true
+    flush_interval: 1s
+
+service:
+  pipelines:
+    traces:
+      exporters: [debug, span_metrics, file/study]

@@ -5,11 +5,13 @@ import os
 import tempfile
 import unittest
 from dataclasses import replace
+from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import patch
 
 from telemetry_availability.live_pilot import (
     RuntimePilotError,
+    _collect_telemetry,
     aggregate_runtime_pilots,
     pin_compose_document,
     run_runtime_pilot,
@@ -118,6 +120,49 @@ class RuntimePilotTests(unittest.TestCase):
         self.assertEqual(audit["rendered_service_count"], 2)
         self.assertEqual(audit["service_count"], 1)
         self.assertEqual(audit["disabled_services"], ["driver"])
+
+    def test_pin_compose_mounts_lossless_otel_study_sink(self) -> None:
+        original = select_runtime_pilot_profile(self.config, "opentelemetry_demo")
+        profile = replace(
+            original,
+            disabled_services=(),
+            images={"collector:1": "sha256:" + "a" * 64},
+        )
+        document = {
+            "services": {
+                "otel-collector": {"image": "collector:1", "volumes": []},
+            }
+        }
+        with tempfile.TemporaryDirectory() as temporary:
+            pinned, audit = pin_compose_document(
+                document,
+                profile,
+                telemetry_output_directory=temporary,
+            )
+        mount = pinned["services"]["otel-collector"]["volumes"][-1]
+        self.assertEqual(mount["target"], "/study-output")
+        self.assertFalse(mount["read_only"])
+        self.assertEqual(
+            audit["study_telemetry_sink"]["kind"],
+            "mounted_otlp_json_lines",
+        )
+
+    def test_collect_telemetry_prefers_mounted_otel_json_lines(self) -> None:
+        profile = select_runtime_pilot_profile(self.config, "opentelemetry_demo")
+        trace_id = "0123456789abcdef0123456789abcdef"
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary)
+            (output / "raw-telemetry.log").write_text(
+                json.dumps({"resourceSpans": [{"traceId": trace_id}]}) + "\n",
+                encoding="utf-8",
+            )
+            count, error = _collect_telemetry(
+                profile,
+                datetime.now(timezone.utc),
+                output,
+            )
+        self.assertEqual(count, 1)
+        self.assertEqual(error, "")
 
     def test_runtime_workload_is_forbidden_locally(self) -> None:
         with patch.dict(os.environ, {}, clear=True):

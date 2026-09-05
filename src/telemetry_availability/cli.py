@@ -245,6 +245,11 @@ def build_parser() -> argparse.ArgumentParser:
     pin_compose.add_argument("--input", required=True, type=Path)
     pin_compose.add_argument("--out", required=True, type=Path)
     pin_compose.add_argument("--audit", required=True, type=Path)
+    pin_compose.add_argument(
+        "--telemetry-output-directory",
+        type=Path,
+        help="mount a lossless OTel file-exporter sink into the collector",
+    )
 
     run_pilot = commands.add_parser(
         "run-runtime-pilot",
@@ -590,6 +595,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.input,
             args.out,
             args.audit,
+            args.telemetry_output_directory,
         )
         print(json.dumps(audit, indent=2, sort_keys=True))
         return 0

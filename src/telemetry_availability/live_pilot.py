@@ -73,6 +73,7 @@ def _image_key(value: str) -> str:
 def pin_compose_document(
     document: dict[str, Any],
     profile: RuntimePilotProfile,
+    telemetry_output_directory: str | Path | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     services = document.get("services")
     if not isinstance(services, dict) or not services:
@@ -99,6 +100,34 @@ def pin_compose_document(
                 for service_name in dependencies
                 if service_name not in disabled
             ]
+    telemetry_sink: dict[str, Any] | None = None
+    if telemetry_output_directory is not None:
+        if profile.id != "opentelemetry_demo":
+            raise RuntimePilotError(
+                "the mounted study telemetry sink is defined only for opentelemetry_demo"
+            )
+        collector = services.get("otel-collector")
+        if not isinstance(collector, dict):
+            raise RuntimePilotError("rendered Compose has no otel-collector service")
+        volumes = collector.setdefault("volumes", [])
+        if not isinstance(volumes, list):
+            raise RuntimePilotError("otel-collector volumes must be a list")
+        host_directory = Path(telemetry_output_directory).resolve()
+        host_directory.mkdir(parents=True, exist_ok=True)
+        mount = {
+            "type": "bind",
+            "source": str(host_directory),
+            "target": "/study-output",
+            "read_only": False,
+            "bind": {"create_host_path": True},
+        }
+        volumes.append(mount)
+        telemetry_sink = {
+            "kind": "mounted_otlp_json_lines",
+            "host_directory": str(host_directory),
+            "container_directory": "/study-output",
+            "file": "raw-telemetry.log",
+        }
     locks = {_image_key(image): (image, digest) for image, digest in profile.images.items()}
     if len(locks) != len(profile.images):
         raise RuntimePilotError("image lock aliases are ambiguous")
@@ -131,7 +160,7 @@ def pin_compose_document(
     unused = sorted(set(locks) - used)
     if unused:
         raise RuntimePilotError(f"image locks are unused by rendered Compose: {unused}")
-    return document, {
+    audit = {
         "schema_version": 1,
         "profile": profile.id,
         "rendered_service_count": rendered_service_count,
@@ -140,6 +169,9 @@ def pin_compose_document(
         "all_services_locked": True,
         "images": sorted(rows, key=lambda row: row["service"]),
     }
+    if telemetry_sink is not None:
+        audit["study_telemetry_sink"] = telemetry_sink
+    return document, audit
 
 
 def pin_compose_files(
@@ -148,10 +180,15 @@ def pin_compose_files(
     input_path: str | Path,
     output_path: str | Path,
     audit_path: str | Path,
+    telemetry_output_directory: str | Path | None = None,
 ) -> dict[str, Any]:
     profile = select_runtime_pilot_profile(config, profile_id)
     document = json.loads(Path(input_path).read_text(encoding="utf-8"))
-    pinned, audit = pin_compose_document(document, profile)
+    pinned, audit = pin_compose_document(
+        document,
+        profile,
+        telemetry_output_directory=telemetry_output_directory,
+    )
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(pinned, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -456,6 +493,18 @@ def _collect_telemetry(
         except (json.JSONDecodeError, AttributeError) as parse_error:
             return 0, f"invalid Jaeger response: {parse_error}"
         return count, ""
+    mounted_path = output / "raw-telemetry.log"
+    if mounted_path.exists() and mounted_path.stat().st_size > 0:
+        raw = mounted_path.read_text(encoding="utf-8", errors="replace")
+        trace_ids = set(
+            re.findall(
+                r'(?:Trace ID\s*:\s*|["\']traceId["\']\s*:\s*["\'])'
+                r"([0-9a-f]{32})",
+                raw,
+                flags=re.IGNORECASE,
+            )
+        )
+        return len(trace_ids), ""
     completed = subprocess.run(
         [
             "docker",

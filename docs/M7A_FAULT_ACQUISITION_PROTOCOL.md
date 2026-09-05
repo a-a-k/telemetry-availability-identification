@@ -76,11 +76,22 @@ legacy Jaeger instrumentation. Multiple HTTP calls inside one OTel logical
 attempt share the same absent external parent and therefore one trace id.
 
 The independent request census is written before trace matching. After a
-15-second flush, raw Jaeger API JSON or detailed OTel Collector output is saved
-unaltered. A separate join table records whether each planned trace id appears.
+15-second flush, raw Jaeger API JSON or the OTel Collector's mounted OTLP/JSON
+lines file-exporter stream is saved unaltered. The OTel debug exporter remains
+available for service diagnostics, but its size-rotated Docker log is not the
+request--trace linkage source. A separate join table records whether each
+planned trace id appears.
 A failed or timed-out request is retained even when its id is absent. At least
 80% of HTTP-successful attempts must be linkable; this is a transport feasibility
 threshold, not a claim about natural trace coverage.
+
+The first eight-cell attempt disclosed that the upstream OTel Compose rotates
+the collector's debug log at 5 MiB. All four OTel cells consequently lost early
+records while all four DeathStarBench cells passed. Before the repeat, and
+without inspecting any estimator result (none exists in M7A), acquisition was
+repaired by adding the lossless mounted sink above. Workload, faults, seeds,
+matrix, and the 80% threshold remain unchanged; both attempts are retained in
+the milestone report.
 
 ## Independent health and intervention audit
 

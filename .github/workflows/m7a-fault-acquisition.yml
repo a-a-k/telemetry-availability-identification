@@ -107,15 +107,18 @@ jobs:
           if [[ "${{ matrix.profile }}" == "opentelemetry_demo" ]]; then
             export OTEL_COLLECTOR_CONFIG_EXTRAS="$GITHUB_WORKSPACE/configs/live/otel-pilot-collector-extra.yml"
             docker compose --env-file upstream/.env -f "upstream/${{ matrix.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=(--telemetry-output-directory "$GITHUB_WORKSPACE/$out")
           else
             docker compose -f "upstream/${{ matrix.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=()
           fi
           python -m telemetry_availability pin-live-compose \
             --config configs/m7_runtime_pilot.yaml \
             --profile "${{ matrix.profile }}" \
             --input "$out/rendered-compose.json" \
             --out "$out/pinned-compose.json" \
-            --audit "$out/image-lock-audit.json"
+            --audit "$out/image-lock-audit.json" \
+            "${telemetry_args[@]}"
 
       - name: Pull and start the frozen benchmark
         run: |
