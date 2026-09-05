@@ -3,7 +3,9 @@ from __future__ import annotations
 import shutil
 import tempfile
 import unittest
+from os import environ
 from pathlib import Path
+from unittest.mock import patch
 
 from telemetry_availability.live_stochastic_pilot import StochasticPilotError
 from telemetry_availability.live_validation import (
@@ -68,18 +70,21 @@ class FrozenLiveValidationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             path = self._write_config(Path(temporary))
             config = load_frozen_live_validation_config(path)
-            with self.assertRaises(StochasticPilotError):
-                run_frozen_live_cell(
-                    config,
-                    "deathstarbench_social_network",
-                    "colocated",
-                    "N",
-                    0,
-                    "missing-checkout",
-                    "missing-compose",
-                    "missing-audit",
-                    Path(temporary) / "output",
-                )
+            clean_environment = dict(environ)
+            clean_environment.pop("GITHUB_ACTIONS", None)
+            with patch.dict(environ, clean_environment, clear=True):
+                with self.assertRaises(StochasticPilotError):
+                    run_frozen_live_cell(
+                        config,
+                        "deathstarbench_social_network",
+                        "colocated",
+                        "N",
+                        0,
+                        "missing-checkout",
+                        "missing-compose",
+                        "missing-audit",
+                        Path(temporary) / "output",
+                    )
 
 
 if __name__ == "__main__":
