@@ -195,6 +195,20 @@ class StressRunnerTests(unittest.TestCase):
             ):
                 self.assertTrue((Path(directory) / name).is_file())
 
+    def test_delayed_readiness_never_emits_an_inverted_interval(self) -> None:
+        config = load_stress_config(CONFIG)
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = run_stress_experiment(
+                config,
+                CONFIG,
+                directory,
+                series_names=("readiness_lag",),
+                repetitions=1,
+                sample_sizes=(500,),
+                bootstrap_replicates=5,
+            )
+            self.assertEqual(manifest["quality"]["invalid_intervals"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

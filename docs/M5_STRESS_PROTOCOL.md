@@ -46,6 +46,13 @@ Four roles are distinguished:
 exists. A pointwise oracle truth is evaluator-only and never passed to the raw or
 guarded learner.
 
+If individually valid observable intervals have no jointly compatible parameter
+set, the procedure emits `incompatible_observation_constraints` and no target
+interval. It does not reorder an inverted numerical range or silently widen that
+model-rejection symptom into an ordinary confidence result. The same-model B3
+point, when it exists, is retained in its own row to measure misspecification
+bias.
+
 ## S1: exporter loss coupled to a domain failure
 
 Calibration uses staggered health observations plus two OR traces. Both trace

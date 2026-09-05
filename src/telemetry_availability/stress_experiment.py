@@ -465,8 +465,22 @@ def _assumed_transfer_methods(
             tolerance,
             config.branch_max_nodes_per_domain,
         )
-        raw = _with_points(proposed.intervals, points)
-        proposed_status = next(iter(proposed.intervals.values())).status
+        malformed = any(
+            estimate.lower is not None
+            and estimate.upper is not None
+            and estimate.lower > estimate.upper
+            for estimate in proposed.intervals.values()
+        )
+        if malformed:
+            raw = _point_only(
+                QUANTITIES,
+                points,
+                "incompatible_observation_constraints",
+            )
+            proposed_status = "incompatible_observation_constraints"
+        else:
+            raw = _with_points(proposed.intervals, points)
+            proposed_status = next(iter(proposed.intervals.values())).status
         truncated = proposed.domain_a.truncated or proposed.domain_b.truncated
     except (ValueError, ZeroDivisionError, FloatingPointError) as error:
         raw = _point_only(QUANTITIES, points, f"range_failed:{error}")
