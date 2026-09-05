@@ -158,6 +158,10 @@ identifiers in its manifest.
 - M7P Runtime Feasibility Pilot is a remote-only deployment and telemetry-path
   check. All container images are digest-locked, and pilot outcomes may change
   infrastructure implementation but cannot enter the main M7 analysis.
+- M7A Fault and Trace-Linkage Diagnostic applies verified container, network,
+  and grouped logical-domain interventions across the four planned law labels.
+  It tests deterministic external-census/native-trace linkage and period cleanup;
+  its short, forced-sampling records are excluded from effectiveness analysis.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
@@ -171,6 +175,12 @@ feasibility counts, not effectiveness estimates; details and the superseded
 diagnostic attempt are recorded in
 `docs/milestones/M7P_RUNTIME_FEASIBILITY_PILOT.md`. The subsequent M7 design is
 frozen separately.
+
+M7A then exercises the acquisition path under N, NC, ND, and NCD interventions
+for both applications. It keeps controller intent, independent Docker-state
+verification, one-second health observations, external outcomes, and native
+trace presence separate. This remains a diagnostic namespace: only the later
+frozen M7 campaign can support a live prediction or transfer claim.
 
 ## Generated tables
 

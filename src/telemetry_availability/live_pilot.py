@@ -170,10 +170,13 @@ def _http_request(
     data: bytes | None = None,
     content_type: str | None = None,
     timeout: float = 10.0,
+    extra_headers: dict[str, str] | None = None,
 ) -> tuple[int | None, bytes, str]:
     headers = {"User-Agent": "taid-runtime-pilot/1"}
     if content_type:
         headers["Content-Type"] = content_type
+    if extra_headers:
+        headers.update(extra_headers)
     request = urllib.request.Request(url, data=data, headers=headers)
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
@@ -211,6 +214,9 @@ def _deathstar_request(
     profile: RuntimePilotProfile,
     operation: str,
     index: int,
+    *,
+    extra_headers: dict[str, str] | None = None,
+    timeout: float = 10.0,
 ) -> tuple[int | None, bytes, str, str]:
     if operation == "compose_post":
         branch = "with_media" if index % 2 else "text_only"
@@ -229,16 +235,22 @@ def _deathstar_request(
                 }
             ),
             content_type="application/x-www-form-urlencoded",
+            timeout=timeout,
+            extra_headers=extra_headers,
         )
         return status, body, error, branch
     if operation == "read_home_timeline":
         status, body, error = _http_request(
-            profile.base_url + "/wrk2-api/home-timeline/read?user_id=0&start=0&stop=10"
+            profile.base_url + "/wrk2-api/home-timeline/read?user_id=0&start=0&stop=10",
+            timeout=timeout,
+            extra_headers=extra_headers,
         )
         return status, body, error, "observed_mix"
     if operation == "read_user_timeline":
         status, body, error = _http_request(
-            profile.base_url + "/wrk2-api/user-timeline/read?user_id=0&start=0&stop=10"
+            profile.base_url + "/wrk2-api/user-timeline/read?user_id=0&start=0&stop=10",
+            timeout=timeout,
+            extra_headers=extra_headers,
         )
         return status, body, error, "observed_mix"
     raise RuntimePilotError(f"unsupported DeathStarBench operation {operation!r}")
@@ -264,9 +276,17 @@ OTEL_PERSON = {
 }
 
 
-def _otel_add_cart(profile: RuntimePilotProfile, user_id: str) -> tuple[int | None, bytes, str]:
+def _otel_add_cart(
+    profile: RuntimePilotProfile,
+    user_id: str,
+    *,
+    extra_headers: dict[str, str] | None = None,
+    timeout: float = 10.0,
+) -> tuple[int | None, bytes, str]:
     product_status, _, product_error = _http_request(
-        profile.base_url + f"/api/products/{OTEL_PRODUCT}"
+        profile.base_url + f"/api/products/{OTEL_PRODUCT}",
+        timeout=timeout,
+        extra_headers=extra_headers,
     )
     if product_status is None or not 200 <= product_status < 300:
         return product_status, b"", product_error or "product prerequisite failed"
@@ -279,6 +299,8 @@ def _otel_add_cart(profile: RuntimePilotProfile, user_id: str) -> tuple[int | No
             }
         ),
         content_type="application/json",
+        timeout=timeout,
+        extra_headers=extra_headers,
     )
 
 
@@ -287,18 +309,33 @@ def _otel_request(
     operation: str,
     period: str,
     index: int,
+    *,
+    extra_headers: dict[str, str] | None = None,
+    timeout: float = 10.0,
 ) -> tuple[int | None, bytes, str, str]:
     if operation == "browse_product":
         status, body, error = _http_request(
-            profile.base_url + f"/api/products/{OTEL_PRODUCT}"
+            profile.base_url + f"/api/products/{OTEL_PRODUCT}",
+            timeout=timeout,
+            extra_headers=extra_headers,
         )
         return status, body, error, "catalog_request"
     user_id = f"taid-{period}-{index}"
     if operation == "add_to_cart":
-        status, body, error = _otel_add_cart(profile, user_id)
+        status, body, error = _otel_add_cart(
+            profile,
+            user_id,
+            timeout=timeout,
+            extra_headers=extra_headers,
+        )
         return status, body, error, "new_item"
     if operation == "checkout":
-        status, _, error = _otel_add_cart(profile, user_id)
+        status, _, error = _otel_add_cart(
+            profile,
+            user_id,
+            timeout=timeout,
+            extra_headers=extra_headers,
+        )
         if status is None or not 200 <= status < 300:
             return status, b"", error or "cart prerequisite failed", "single_item"
         payload = {**OTEL_PERSON, "userId": user_id}
@@ -306,6 +343,8 @@ def _otel_request(
             profile.base_url + "/api/checkout",
             data=_json(payload),
             content_type="application/json",
+            timeout=timeout,
+            extra_headers=extra_headers,
         )
         return status, body, error, "single_item"
     raise RuntimePilotError(f"unsupported OTel Demo operation {operation!r}")

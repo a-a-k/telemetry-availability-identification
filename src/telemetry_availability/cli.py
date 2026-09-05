@@ -12,6 +12,11 @@ from .likelihood_reference import (
     run_likelihood_reference,
 )
 from .live_config import load_live_harness_config
+from .live_fault_campaign import (
+    aggregate_live_fault_diagnostics,
+    run_live_fault_diagnostic,
+)
+from .live_fault_config import load_live_fault_config
 from .live_harness import (
     aggregate_live_harness,
     select_live_profile,
@@ -259,6 +264,33 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate_pilot.add_argument("--config", required=True, type=Path)
     aggregate_pilot.add_argument("--input-root", required=True, type=Path)
     aggregate_pilot.add_argument("--out", required=True, type=Path)
+
+    validate_fault = commands.add_parser(
+        "validate-live-fault-diagnostic",
+        help="validate the remote-only fault-control and trace-linkage contract",
+    )
+    validate_fault.add_argument("--config", required=True, type=Path)
+
+    run_fault = commands.add_parser(
+        "run-live-fault-diagnostic",
+        help="run one remote fault-control and trace-linkage diagnostic cell",
+    )
+    run_fault.add_argument("--config", required=True, type=Path)
+    run_fault.add_argument("--profile", required=True)
+    run_fault.add_argument("--law", required=True)
+    run_fault.add_argument("--repetition", required=True, type=int)
+    run_fault.add_argument("--checkout", required=True, type=Path)
+    run_fault.add_argument("--compose", required=True, type=Path)
+    run_fault.add_argument("--image-audit", required=True, type=Path)
+    run_fault.add_argument("--out", required=True, type=Path)
+
+    aggregate_fault = commands.add_parser(
+        "aggregate-live-fault-diagnostics",
+        help="combine remote fault-control and trace-linkage diagnostic cells",
+    )
+    aggregate_fault.add_argument("--config", required=True, type=Path)
+    aggregate_fault.add_argument("--input-root", required=True, type=Path)
+    aggregate_fault.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -578,6 +610,52 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "aggregate-runtime-pilot":
         config = load_runtime_pilot_config(args.config)
         manifest = aggregate_runtime_pilots(config, args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-live-fault-diagnostic":
+        config = load_live_fault_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "diagnostic_only": config.diagnostic_only,
+                    "profiles": [profile.id for profile in config.profiles],
+                    "failure_laws": config.laws,
+                    "expected_cells": len(config.profiles)
+                    * len(config.laws)
+                    * config.repetitions,
+                    "requests_per_cell": 2 * config.requests_per_period,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "run-live-fault-diagnostic":
+        config = load_live_fault_config(args.config)
+        manifest = run_live_fault_diagnostic(
+            config,
+            args.profile,
+            args.law,
+            args.repetition,
+            args.checkout,
+            args.compose,
+            args.image_audit,
+            args.out,
+        )
+        print(json.dumps(manifest["counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-live-fault-diagnostics":
+        config = load_live_fault_config(args.config)
+        manifest = aggregate_live_fault_diagnostics(
+            config,
+            args.input_root,
+            args.out,
+        )
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

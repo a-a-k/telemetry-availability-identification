@@ -56,6 +56,9 @@ jobs:
       - name: Validate remote runtime-pilot contract
         run: python -m telemetry_availability validate-runtime-pilot --config configs/m7_runtime_pilot.yaml
 
+      - name: Validate fault-control and trace-linkage diagnostic contract
+        run: python -m telemetry_availability validate-live-fault-diagnostic --config configs/m7a_fault_acquisition.yaml
+
       - name: Ingest both live-contract fixtures
         if: ${{ matrix.python-version == '3.13' }}
         run: |

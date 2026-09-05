@@ -1,0 +1,45 @@
+schema_version: 1
+id: m7a_fault_and_trace_linkage_diagnostic
+diagnostic_only: true
+runtime_config: m7_runtime_pilot.yaml
+
+period_seconds: 30
+request_rate_per_second: 4
+request_timeout_seconds: 2
+request_workers: 16
+inter_period_gap_seconds: 5
+
+fault_duration_seconds: 3
+first_fault_offset_seconds: 5
+fault_gap_seconds: 8
+fault_jitter_seconds: 0.5
+health_poll_seconds: 1
+trace_flush_seconds: 15
+
+minimum_linked_success_fraction: 0.80
+minimum_health_samples_per_service_period: 20
+base_seed: 770031
+repetitions: 1
+
+failure_laws:
+  N: [individual]
+  NC: [individual, communication]
+  ND: [individual, common_domain]
+  NCD: [individual, communication, common_domain]
+
+profiles:
+  - id: deathstarbench_social_network
+    individual_service: user-timeline-service
+    communication_service: user-timeline-service
+    common_domain_services: [user-timeline-service, home-timeline-service]
+    health_services:
+      - user-timeline-service
+      - home-timeline-service
+
+  - id: opentelemetry_demo
+    individual_service: product-catalog
+    communication_service: product-catalog
+    common_domain_services: [product-catalog, cart]
+    health_services:
+      - product-catalog
+      - cart

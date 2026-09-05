@@ -18,6 +18,7 @@ tests, configuration validation, and bounded smoke cases.
 | M5 | Directed misspecification and telemetry-loss stress tests | Complete | `milestones/M5_DIRECTED_STRESS_TESTS.md` |
 | M6 | Versioned live-ingestion contract and benchmark harness | Complete | `milestones/M6_LIVE_INGESTION_HARNESS.md` |
 | M7P | Remote runtime and native-telemetry feasibility pilot | Complete | `milestones/M7P_RUNTIME_FEASIBILITY_PILOT.md`; never used as effectiveness evidence |
+| M7A | Fault-control, health-audit, and request--trace linkage diagnostic | In progress | `M7A_FAULT_ACQUISITION_PROTOCOL.md`; excluded from effectiveness evidence |
 | M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
 
 The order may expose a scientific stopping condition. In particular, failure to
