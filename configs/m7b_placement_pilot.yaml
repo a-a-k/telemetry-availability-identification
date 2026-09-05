@@ -1,0 +1,48 @@
+schema_version: 1
+id: m7b_replicated_placement_and_semantics_pilot
+pilot_only: true
+runtime_config: m7_runtime_pilot.yaml
+
+proxy_image: haproxy:3.0-alpine
+proxy_manifest_digest: sha256:34cc7d1f6142464d7d2b73e2a1eef7392556dbf304160aef543e513cfd9e5162
+proxy_stats_port: 8404
+
+routing_probe_requests: 48
+routing_probe_workers: 16
+fault_period_seconds: 40
+request_rate_per_second: 4
+request_timeout_seconds: 2
+request_workers: 16
+fault_duration_seconds: 3
+health_poll_seconds: 1
+trace_flush_seconds: 15
+recovery_seconds: 5
+
+minimum_routing_semantic_success_fraction: 0.90
+minimum_linked_success_fraction: 0.80
+minimum_health_samples_per_service: 30
+minimum_backend_sessions_per_replica: 1
+base_seed: 770032
+
+events:
+  - {id: individual_a, mechanism: individual_a, offset_seconds: 4}
+  - {id: individual_b, mechanism: individual_b, offset_seconds: 12}
+  - {id: domain_a, mechanism: common_domain, offset_seconds: 20}
+  - {id: communication, mechanism: communication, offset_seconds: 28}
+
+placements:
+  colocated: {a: domain_a, b: domain_a}
+  split: {a: domain_a, b: domain_b}
+
+profiles:
+  - id: deathstarbench_social_network
+    target_service: user-timeline-service
+    target_port: 9090
+    proxy_mode: tcp
+    routing_probe_operation: read_user_timeline
+
+  - id: opentelemetry_demo
+    target_service: product-catalog
+    target_port: 3550
+    proxy_mode: grpc_h2
+    routing_probe_operation: browse_product

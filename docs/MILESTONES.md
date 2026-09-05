@@ -19,7 +19,7 @@ tests, configuration validation, and bounded smoke cases.
 | M6 | Versioned live-ingestion contract and benchmark harness | Complete | `milestones/M6_LIVE_INGESTION_HARNESS.md` |
 | M7P | Remote runtime and native-telemetry feasibility pilot | Complete | `milestones/M7P_RUNTIME_FEASIBILITY_PILOT.md`; never used as effectiveness evidence |
 | M7A | Fault-control, health-audit, and request--trace linkage diagnostic | Complete | `milestones/M7A_FAULT_ACQUISITION_DIAGNOSTIC.md`; excluded from effectiveness evidence |
-| M7B | Replicated placement, load-balancing, and effect-semantics pilot | Planned | disposable pilot report follows remote runs |
+| M7B | Replicated placement, load-balancing, and effect-semantics pilot | In progress | `M7B_PLACEMENT_PILOT_PROTOCOL.md`; excluded from effectiveness evidence |
 | M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
 
 The order may expose a scientific stopping condition. In particular, failure to

@@ -59,6 +59,9 @@ jobs:
       - name: Validate fault-control and trace-linkage diagnostic contract
         run: python -m telemetry_availability validate-live-fault-diagnostic --config configs/m7a_fault_acquisition.yaml
 
+      - name: Validate replicated-placement pilot contract
+        run: python -m telemetry_availability validate-placement-pilot --config configs/m7b_placement_pilot.yaml
+
       - name: Ingest both live-contract fixtures
         if: ${{ matrix.python-version == '3.13' }}
         run: |

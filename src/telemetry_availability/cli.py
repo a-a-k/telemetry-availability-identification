@@ -29,6 +29,12 @@ from .live_pilot import (
     run_runtime_pilot,
 )
 from .live_pilot_config import load_runtime_pilot_config
+from .live_placement_config import load_placement_pilot_config
+from .live_placement_pilot import (
+    aggregate_placement_pilots,
+    prepare_placement_compose,
+    run_placement_pilot,
+)
 from .moments import structural_moment_rows
 from .reduction_experiment import (
     aggregate_reduction_experiment,
@@ -296,6 +302,46 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate_fault.add_argument("--config", required=True, type=Path)
     aggregate_fault.add_argument("--input-root", required=True, type=Path)
     aggregate_fault.add_argument("--out", required=True, type=Path)
+
+    validate_placement = commands.add_parser(
+        "validate-placement-pilot",
+        help="validate the remote-only replicated-placement pilot contract",
+    )
+    validate_placement.add_argument("--config", required=True, type=Path)
+
+    prepare_placement = commands.add_parser(
+        "prepare-placement-compose",
+        help="replace one pinned service with two replicas and a pinned proxy",
+    )
+    prepare_placement.add_argument("--config", required=True, type=Path)
+    prepare_placement.add_argument("--profile", required=True)
+    prepare_placement.add_argument("--placement", required=True)
+    prepare_placement.add_argument("--input", required=True, type=Path)
+    prepare_placement.add_argument("--base-audit", required=True, type=Path)
+    prepare_placement.add_argument("--out", required=True, type=Path)
+    prepare_placement.add_argument("--audit", required=True, type=Path)
+    prepare_placement.add_argument("--haproxy", required=True, type=Path)
+
+    run_placement = commands.add_parser(
+        "run-placement-pilot",
+        help="run one remote replicated-placement and operation-semantics cell",
+    )
+    run_placement.add_argument("--config", required=True, type=Path)
+    run_placement.add_argument("--profile", required=True)
+    run_placement.add_argument("--placement", required=True)
+    run_placement.add_argument("--checkout", required=True, type=Path)
+    run_placement.add_argument("--compose", required=True, type=Path)
+    run_placement.add_argument("--image-audit", required=True, type=Path)
+    run_placement.add_argument("--haproxy", required=True, type=Path)
+    run_placement.add_argument("--out", required=True, type=Path)
+
+    aggregate_placement = commands.add_parser(
+        "aggregate-placement-pilots",
+        help="combine the four replicated-placement pilot cells",
+    )
+    aggregate_placement.add_argument("--config", required=True, type=Path)
+    aggregate_placement.add_argument("--input-root", required=True, type=Path)
+    aggregate_placement.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -662,6 +708,63 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.input_root,
             args.out,
         )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-placement-pilot":
+        config = load_placement_pilot_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "pilot_only": config.pilot_only,
+                    "profiles": [profile.id for profile in config.profiles],
+                    "placements": config.placements,
+                    "expected_cells": len(config.profiles) * len(config.placements),
+                    "requests_per_cell": len(config.runtime.profiles[0].operations)
+                    + config.routing_probe_requests
+                    + config.requests_per_fault_period,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "prepare-placement-compose":
+        config = load_placement_pilot_config(args.config)
+        audit = prepare_placement_compose(
+            config,
+            args.profile,
+            args.placement,
+            args.input,
+            args.base_audit,
+            args.out,
+            args.audit,
+            args.haproxy,
+        )
+        print(json.dumps(audit["placement_pilot"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "run-placement-pilot":
+        config = load_placement_pilot_config(args.config)
+        manifest = run_placement_pilot(
+            config,
+            args.profile,
+            args.placement,
+            args.checkout,
+            args.compose,
+            args.image_audit,
+            args.haproxy,
+            args.out,
+        )
+        print(json.dumps(manifest["counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-placement-pilots":
+        config = load_placement_pilot_config(args.config)
+        manifest = aggregate_placement_pilots(config, args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

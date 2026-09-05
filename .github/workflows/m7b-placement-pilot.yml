@@ -1,0 +1,199 @@
+name: M7B Replicated Placement and Semantics Pilot
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: read
+
+concurrency:
+  group: m7b-placement-pilot-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    name: ${{ matrix.profile }} / ${{ matrix.placement }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - profile: deathstarbench_social_network
+            placement: colocated
+            repository: delimitrou/DeathStarBench
+            commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+            compose_file: socialNetwork/docker-compose.yml
+          - profile: deathstarbench_social_network
+            placement: split
+            repository: delimitrou/DeathStarBench
+            commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+            compose_file: socialNetwork/docker-compose.yml
+          - profile: opentelemetry_demo
+            placement: colocated
+            repository: open-telemetry/opentelemetry-demo
+            commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+            compose_file: compose.yaml
+          - profile: opentelemetry_demo
+            placement: split
+            repository: open-telemetry/opentelemetry-demo
+            commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+            compose_file: compose.yaml
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Check out exact benchmark revision
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.repository }}
+          ref: ${{ matrix.commit }}
+          path: upstream
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Record runner resources
+        run: |
+          out="workflow-results/${{ matrix.profile }}/${{ matrix.placement }}"
+          mkdir -p "$out"
+          uname -a > "$out/runner.txt"
+          docker version >> "$out/runner.txt"
+          docker compose version >> "$out/runner.txt"
+          free -h >> "$out/runner.txt"
+          df -h >> "$out/runner.txt"
+
+      - name: Render, lock, and extend Compose
+        env:
+          DEMO_VERSION: "3.0.0"
+          LOCUST_AUTOSTART: "false"
+          LOCUST_HEADLESS: "true"
+          LOCUST_BROWSER_TRAFFIC_ENABLED: "false"
+        run: |
+          out="workflow-results/${{ matrix.profile }}/${{ matrix.placement }}"
+          if [[ "${{ matrix.profile }}" == "opentelemetry_demo" ]]; then
+            export OTEL_COLLECTOR_CONFIG_EXTRAS="$GITHUB_WORKSPACE/configs/live/otel-pilot-collector-extra.yml"
+            docker compose --env-file upstream/.env -f "upstream/${{ matrix.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=(--telemetry-output-directory "$GITHUB_WORKSPACE/$out")
+          else
+            docker compose -f "upstream/${{ matrix.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=()
+          fi
+          python -m telemetry_availability pin-live-compose \
+            --config configs/m7_runtime_pilot.yaml \
+            --profile "${{ matrix.profile }}" \
+            --input "$out/rendered-compose.json" \
+            --out "$out/base-pinned-compose.json" \
+            --audit "$out/base-image-lock-audit.json" \
+            "${telemetry_args[@]}"
+          python -m telemetry_availability prepare-placement-compose \
+            --config configs/m7b_placement_pilot.yaml \
+            --profile "${{ matrix.profile }}" \
+            --placement "${{ matrix.placement }}" \
+            --input "$out/base-pinned-compose.json" \
+            --base-audit "$out/base-image-lock-audit.json" \
+            --out "$out/pinned-compose.json" \
+            --audit "$out/image-lock-audit.json" \
+            --haproxy "$out/haproxy.cfg"
+
+      - name: Pull and start replicated benchmark
+        run: |
+          compose="workflow-results/${{ matrix.profile }}/${{ matrix.placement }}/pinned-compose.json"
+          docker compose -f "$compose" pull
+          docker compose -f "$compose" up -d --no-build --wait --wait-timeout 360
+
+      - name: Run predeclared placement and semantics pilot
+        run: >-
+          python -m telemetry_availability run-placement-pilot
+          --config configs/m7b_placement_pilot.yaml
+          --profile "${{ matrix.profile }}"
+          --placement "${{ matrix.placement }}"
+          --checkout upstream
+          --compose "workflow-results/${{ matrix.profile }}/${{ matrix.placement }}/pinned-compose.json"
+          --image-audit "workflow-results/${{ matrix.profile }}/${{ matrix.placement }}/image-lock-audit.json"
+          --haproxy "workflow-results/${{ matrix.profile }}/${{ matrix.placement }}/haproxy.cfg"
+          --out "workflow-results/${{ matrix.profile }}/${{ matrix.placement }}"
+
+      - name: Capture service diagnostics
+        if: ${{ always() }}
+        run: |
+          out="workflow-results/${{ matrix.profile }}/${{ matrix.placement }}"
+          docker compose -f "$out/pinned-compose.json" ps --format json > "$out/compose-ps.json" || true
+          docker compose -f "$out/pinned-compose.json" logs --no-color > "$out/compose.log" 2>&1 || true
+          docker stats --no-stream --format '{{json .}}' > "$out/docker-stats.jsonl" || true
+
+      - name: Upload immutable pilot evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7b-cell-${{ matrix.profile }}-${{ matrix.placement }}-${{ github.run_id }}
+          path: workflow-results/${{ matrix.profile }}/${{ matrix.placement }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Tear down benchmark
+        if: ${{ always() }}
+        run: >-
+          docker compose
+          -f "workflow-results/${{ matrix.profile }}/${{ matrix.placement }}/pinned-compose.json"
+          down --volumes --remove-orphans || true
+
+  aggregate:
+    name: Aggregate M7B pilot evidence
+    if: ${{ always() }}
+    needs: pilot
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download all placement cells
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m7b-cell-*-${{ github.run_id }}
+          path: workflow-shards
+
+      - name: Aggregate complete placement matrix
+        run: >-
+          python -m telemetry_availability aggregate-placement-pilots
+          --config configs/m7b_placement_pilot.yaml
+          --input-root workflow-shards
+          --out workflow-results/aggregate
+
+      - name: Upload aggregate
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7b-aggregate-${{ github.run_id }}
+          path: workflow-results/aggregate
+          if-no-files-found: warn
+          retention-days: 30

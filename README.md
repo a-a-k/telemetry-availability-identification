@@ -163,6 +163,11 @@ identifiers in its manifest.
   It tests deterministic external-census/native-trace linkage and period cleanup;
   its short, forced-sampling records are excluded from effectiveness analysis.
   This milestone is complete.
+- M7B Replicated Placement and Semantics Pilot replaces one pinned key service
+  with two real containers behind a pinned, auditable proxy. It verifies that
+  both backends serve traffic, freezes content-aware success predicates, and
+  exercises co-located versus split logical-domain targets without treating the
+  pilot as effectiveness evidence.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
