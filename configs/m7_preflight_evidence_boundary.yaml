@@ -1,0 +1,64 @@
+schema_version: 1
+id: m7_preflight_learner_evidence_boundary
+diagnostic_only: true
+main_effectiveness: false
+source_experiment_id: m7_frozen_live_validation
+source_manifest_file: campaign-manifest.json
+source_usable_field: usable_for_live_preflight
+required_source_labels:
+  pilot_only: true
+  main_effectiveness: false
+  analysis_frozen: true
+  preflight_only: true
+  campaign_scope: preflight
+  selected_design_sha256: b4a7f3c71d93c5f216e33f3f7e012703ee47916cc2e767e65120246019bf9b00
+  live_config_sha256: 42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a
+expected_source_cells: 4
+learner_period: calibration
+auxiliary_learner_periods: [baseline]
+minimum_trace_link_fraction: 0.80
+minimum_replica_assignments_per_replica: 1
+
+profiles:
+  - id: deathstarbench_social_network
+    trace_format: jaeger_json_v1
+    raw_telemetry_file: raw-telemetry.json
+    target_service: user-timeline-service
+    replica_attribute: hostname
+    replica_values:
+      user-timeline-service-replica-a: a
+      user-timeline-service-replica-b: b
+  - id: opentelemetry_demo
+    trace_format: otlp_jsonl_v1
+    raw_telemetry_file: raw-telemetry.log
+    target_service: product-catalog
+    replica_attribute: study.replica
+    replica_values:
+      a: a
+      b: b
+
+allowed_source_files:
+  - requests.csv
+  - trace-join.csv
+  - health.csv
+  - raw-telemetry.json
+  - raw-telemetry.log
+  - image-lock-audit.json
+  - campaign-manifest.json
+
+privileged_source_files:
+  - planned-schedule.json
+  - events.csv
+  - period-cleanup.json
+  - final-state.json
+
+denied_learner_field_tokens:
+  - event_id
+  - incident_id
+  - cause
+  - intended_at
+  - applied_at
+  - verified_at
+  - release_at
+  - planned_schedule
+  - event_offset

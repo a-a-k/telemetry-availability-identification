@@ -4,6 +4,7 @@ import csv
 import json
 import tempfile
 import unittest
+from dataclasses import replace
 from pathlib import Path
 
 from telemetry_availability.live_evidence import (
@@ -201,6 +202,7 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
             output = root / "output"
             source.mkdir()
             calibration_ids = ("0123456789abcdef", "fedcba9876543210")
+            baseline_id = "bbbbbbbbbbbbbbbb"
             manifest = {
                 "experiment_id": self.config.source_experiment_id,
                 "pilot_only": True,
@@ -210,6 +212,7 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
                 "failure_law": "NCD",
                 "repetition": 0,
                 "period_summaries": {
+                    "baseline": {"requests": 1},
                     "calibration": {"requests": 2},
                     "test": {"requests": 1},
                 },
@@ -233,6 +236,19 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
             ]
             request_rows.append(
                 {
+                    "period": "baseline",
+                    "request_id": "baseline-0",
+                    "trace_id": baseline_id,
+                    "operation": "read",
+                    "branch_class": "observed_mix",
+                    "started_at": "2026-01-01T00:00:30Z",
+                    "completed_at": "2026-01-01T00:00:30.1Z",
+                    "semantic_success": True,
+                    "timed_out": False,
+                }
+            )
+            request_rows.append(
+                {
                     "period": "test",
                     "request_id": "test-0",
                     "trace_id": "aaaaaaaaaaaaaaaa",
@@ -254,6 +270,13 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
                         "trace_present": True,
                     }
                     for index in range(2)
+                ]
+                + [
+                    {
+                        "period": "baseline",
+                        "request_id": "baseline-0",
+                        "trace_present": True,
+                    }
                 ],
             )
             health_rows = []
@@ -331,6 +354,45 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
                         ],
                     }
                 )
+            traces.append(
+                {
+                    "traceID": baseline_id,
+                    "processes": {
+                        "p1": {
+                            "serviceName": "frontend",
+                            "tags": [{"key": "hostname", "value": "front"}],
+                        },
+                        "p2": {
+                            "serviceName": "user-timeline-service",
+                            "tags": [
+                                {
+                                    "key": "hostname",
+                                    "value": "user-timeline-service-replica-a",
+                                }
+                            ],
+                        },
+                    },
+                    "spans": [
+                        {
+                            "spanID": "0000000000000101",
+                            "processID": "p1",
+                            "operationName": "request",
+                            "references": [],
+                        },
+                        {
+                            "spanID": "0000000000000102",
+                            "processID": "p2",
+                            "operationName": "read",
+                            "references": [
+                                {
+                                    "refType": "CHILD_OF",
+                                    "spanID": "0000000000000101",
+                                }
+                            ],
+                        },
+                    ],
+                }
+            )
             (source / profile.raw_telemetry_file).write_text(
                 json.dumps({"data": traces}), encoding="utf-8"
             )
@@ -372,6 +434,31 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
             )
             self.assertEqual(audit["quality"]["learner_test_request_overlap"], 0)
             self.assertEqual(audit["privileged_files_parsed_for_learner"], [])
+
+            main_config = replace(
+                self.config,
+                diagnostic_only=False,
+                main_effectiveness=True,
+                auxiliary_learner_periods=("baseline",),
+            )
+            main_output = root / "main-output"
+            main_summary = qualify_evidence_cell(main_config, source, main_output)
+            self.assertTrue(main_summary["usable"])
+            self.assertEqual(main_summary["calibration_requests"], 2)
+            self.assertEqual(main_summary["auxiliary_learner_requests"], 1)
+            with (main_output / "learner" / "requests.csv").open(
+                encoding="utf-8", newline=""
+            ) as source_file:
+                main_rows = list(csv.DictReader(source_file))
+            self.assertEqual(
+                {row["period"] for row in main_rows}, {"baseline", "calibration"}
+            )
+            self.assertNotIn(
+                "test-0",
+                (main_output / "learner" / "requests.csv").read_text(
+                    encoding="utf-8"
+                ),
+            )
 
 
 if __name__ == "__main__":

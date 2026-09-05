@@ -99,6 +99,7 @@ CELL_SUMMARY_FIELDS = (
     "failure_law",
     "repetition",
     "calibration_requests",
+    "auxiliary_learner_requests",
     "calibration_semantic_successes",
     "calibration_traces_present",
     "calibration_traces_parsed",
@@ -581,17 +582,24 @@ def qualify_evidence_cell(
     calibration = [
         row for row in requests if row.get("period") == config.learner_period
     ]
+    auxiliary = [
+        row
+        for row in requests
+        if row.get("period") in set(config.auxiliary_learner_periods)
+    ]
+    learner_source_rows = [*auxiliary, *calibration]
     evaluation = [row for row in requests if row.get("period") == "test"]
     joins = {
         row["request_id"]: row
         for row in trace_join
-        if row.get("period") == config.learner_period
+        if row.get("period")
+        in {config.learner_period, *config.auxiliary_learner_periods}
     }
-    expected_trace_ids = [row["trace_id"] for row in calibration]
+    expected_trace_ids = [row["trace_id"] for row in learner_source_rows]
     parsed = parse_trace_evidence(profile, raw_path, expected_trace_ids)
 
     learner_rows = []
-    for request in calibration:
+    for request in learner_source_rows:
         trace_id = str(request["trace_id"]).lower()
         spans = parsed.spans_by_trace.get(trace_id, ())
         span_count, services, replicas, replica_count = _trace_features(spans)
@@ -599,7 +607,7 @@ def qualify_evidence_cell(
         learner_rows.append(
             {
                 **identity,
-                "period": config.learner_period,
+                "period": request["period"],
                 "request_id": request["request_id"],
                 "trace_id": trace_id,
                 "operation": request["operation"],
@@ -667,22 +675,36 @@ def qualify_evidence_cell(
         test_health_rows,
     )
 
+    calibration_learner_rows = [
+        row for row in learner_rows if row["period"] == config.learner_period
+    ]
+    auxiliary_learner_rows = [
+        row for row in learner_rows if row["period"] in config.auxiliary_learner_periods
+    ]
     learner_ids = {row["request_id"] for row in learner_rows}
     evaluation_ids = {row["request_id"] for row in evaluation_rows}
-    semantic_successes = sum(row["semantic_success"] for row in learner_rows)
+    semantic_successes = sum(
+        row["semantic_success"] for row in calibration_learner_rows
+    )
     linked_successes = sum(
-        row["semantic_success"] and row["trace_present"] for row in learner_rows
+        row["semantic_success"] and row["trace_present"]
+        for row in calibration_learner_rows
     )
     linked_fraction = (
         linked_successes / semantic_successes if semantic_successes else 0.0
     )
     parsed_linked = sum(
+        row["trace_present"] and row["span_count"] > 0
+        for row in calibration_learner_rows
+    )
+    present = sum(row["trace_present"] for row in calibration_learner_rows)
+    all_parsed_linked = sum(
         row["trace_present"] and row["span_count"] > 0 for row in learner_rows
     )
-    present = sum(row["trace_present"] for row in learner_rows)
+    all_present = sum(row["trace_present"] for row in learner_rows)
     replica_counts = Counter(
         replica
-        for row in learner_rows
+        for row in calibration_learner_rows
         for replica in str(row["target_replicas"]).split(";")
         if replica
     )
@@ -693,6 +715,14 @@ def qualify_evidence_cell(
     )
     expected_test = int(
         manifest.get("period_summaries", {}).get("test", {}).get("requests", -1)
+    )
+    expected_auxiliary = sum(
+        int(
+            manifest.get("period_summaries", {})
+            .get(period, {})
+            .get("requests", -1)
+        )
+        for period in config.auxiliary_learner_periods
     )
 
     learner_manifest = {
@@ -710,6 +740,13 @@ def qualify_evidence_cell(
         ),
         "row_counts": {
             "requests": len(learner_rows),
+            "requests_by_period": {
+                period: sum(row["period"] == period for row in learner_rows)
+                for period in (
+                    *config.auxiliary_learner_periods,
+                    config.learner_period,
+                )
+            },
             "health_ticks": len(health_rows),
             "topology_edges": len(topology_rows),
         },
@@ -740,7 +777,10 @@ def qualify_evidence_cell(
         "source_unusable": int(manifest.get(config.source_usable_field) is not True),
         "missing_allowed_source_files": len(missing_allowed),
         "calibration_request_count_mismatches": int(
-            len(learner_rows) != expected_calibration
+            len(calibration_learner_rows) != expected_calibration
+        ),
+        "auxiliary_request_count_mismatches": int(
+            len(auxiliary_learner_rows) != expected_auxiliary
         ),
         "test_request_count_mismatches": int(len(evaluation_rows) != expected_test),
         "duplicate_calibration_request_ids": len(learner_rows) - len(learner_ids),
@@ -748,7 +788,7 @@ def qualify_evidence_cell(
         "trace_join_request_mismatches": len(
             learner_ids.symmetric_difference(set(joins))
         ),
-        "linked_traces_without_parsed_spans": present - parsed_linked,
+        "linked_traces_without_parsed_spans": all_present - all_parsed_linked,
         "invalid_trace_records": parsed.invalid_records,
         "duplicate_trace_spans": parsed.duplicate_spans,
         "unknown_target_trace_instances": parsed.unknown_target_instances,
@@ -781,12 +821,36 @@ def qualify_evidence_cell(
         "main_effectiveness": config.main_effectiveness,
         **identity,
         "learner_period": config.learner_period,
+        "auxiliary_learner_periods": list(config.auxiliary_learner_periods),
         "evaluation_period": "test",
         "allowed_source_files": list(config.allowed_source_files),
         "privileged_source_files": list(config.privileged_source_files),
         "privileged_files_parsed_for_learner": [],
         "denied_learner_fields": denied_fields,
         "source_sha256": source_hashes,
+        "source_provenance": {
+            "manifest_sha256": file_sha256(manifest_path),
+            "environment": manifest.get("environment", {}),
+            "role_labels": {
+                key: manifest.get(key)
+                for key in (
+                    "pilot_only",
+                    "main_effectiveness",
+                    "analysis_frozen",
+                    "preflight_only",
+                    "campaign_scope",
+                    "source_pilot_run_id",
+                    "source_pilot_commit",
+                    "source_pilot_recommendation_sha256",
+                    "resource_recovery_run_id",
+                    "resource_recovery_commit",
+                    "resource_recommendation_sha256",
+                    "selected_design_sha256",
+                    "live_config_sha256",
+                )
+                if key in manifest
+            },
+        },
         "nonfatal_observations": {
             "truncated_nonlearner_tail_trace_records": parsed.truncated_tail_records,
         },
@@ -799,7 +863,8 @@ def qualify_evidence_cell(
     )
     summary = {
         **identity,
-        "calibration_requests": len(learner_rows),
+        "calibration_requests": len(calibration_learner_rows),
+        "auxiliary_learner_requests": len(auxiliary_learner_rows),
         "calibration_semantic_successes": semantic_successes,
         "calibration_traces_present": present,
         "calibration_traces_parsed": parsed_linked,
@@ -870,7 +935,9 @@ def qualify_evidence_boundary(
     )
     _write_csv(output / "cells.csv", CELL_SUMMARY_FIELDS, summaries)
     identity_set = set(identities)
-    declared_source_run = os.environ.get("M7D_SOURCE_RUN_ID", "")
+    declared_source_run = os.environ.get(
+        "EVIDENCE_SOURCE_RUN_ID", os.environ.get("M7D_SOURCE_RUN_ID", "")
+    )
     quality = {
         "source_cell_count_mismatches": int(
             len(manifest_paths) != config.expected_source_cells

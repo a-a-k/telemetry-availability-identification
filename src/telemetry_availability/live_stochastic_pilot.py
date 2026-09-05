@@ -246,6 +246,18 @@ class RenewalEvent:
         return self.offset_seconds + self.duration_seconds
 
 
+@dataclass(frozen=True)
+class StochasticCellPurpose:
+    kind: str
+    manifest_filename: str
+    role_fields: dict[str, Any]
+    usability_field: str
+    repetition_count: int
+    base_seed: int
+    request_namespace: str
+    failure_label: str
+
+
 def _utc_now() -> datetime:
     return datetime.now(timezone.utc)
 
@@ -512,8 +524,10 @@ def _execute_request(
     driver_index: int,
     operation: str,
     offset_seconds: float,
+    request_namespace: str = "",
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    request_id = (
+    namespace = f"{request_namespace}-" if request_namespace else ""
+    request_id = namespace + (
         f"{profile.id}-{placement}-{law}-r{repetition}-{period}-{scheduled_index:06d}"
     )
     trace_id, trace_header, trace_value = make_trace_context(profile.id, request_id)
@@ -529,10 +543,13 @@ def _execute_request(
                 timeout=float(config.request_timeout_seconds),
             )
         elif profile.id == "opentelemetry_demo":
+            request_period = (
+                f"{request_namespace or 'm7c'}-{placement}-{law}-r{repetition}-{period}"
+            )
             status, body, error, branch = _otel_request(
                 runtime_profile,
                 operation,
-                f"m7c-{placement}-{law}-r{repetition}-{period}",
+                request_period,
                 driver_index,
                 extra_headers={trace_header: trace_value},
                 timeout=float(config.request_timeout_seconds),
@@ -593,6 +610,7 @@ def _semantic_sentinels(
     placement: str,
     law: str,
     repetition: int,
+    request_namespace: str = "",
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
     law_index = list(config.laws).index(law)
     driver_base = 9_000_000 + repetition * 100 + law_index * 10
@@ -611,6 +629,7 @@ def _semantic_sentinels(
             driver_base + offset,
             operation,
             0.0,
+            request_namespace,
         )
         requests.append(request)
         responses.append(response)
@@ -1062,6 +1081,9 @@ def _run_period(
     duration_seconds: int,
     compose_path: Path,
     events: tuple[RenewalEvent, ...],
+    *,
+    base_seed: int | None = None,
+    request_namespace: str = "",
 ) -> tuple[
     list[dict[str, Any]],
     list[dict[str, Any]],
@@ -1077,7 +1099,7 @@ def _run_period(
     }
     request_count = duration_seconds * config.request_rate_per_second
     workload_seed = _stable_seed(
-        config.pilot_base_seed,
+        config.pilot_base_seed if base_seed is None else base_seed,
         profile.id,
         placement,
         law,
@@ -1169,6 +1191,7 @@ def _run_period(
                     period_offset + index,
                     operation,
                     offset,
+                    request_namespace,
                 )
             )
         _sleep_until(started_monotonic + duration_seconds)
@@ -1448,7 +1471,7 @@ def _trace_join_rows(
     return rows
 
 
-def run_stochastic_freeze_pilot(
+def _run_stochastic_cell(
     config: StochasticPilotConfig,
     profile_id: str,
     placement: str,
@@ -1458,14 +1481,15 @@ def run_stochastic_freeze_pilot(
     compose_path: str | Path,
     image_audit_path: str | Path,
     output_directory: str | Path,
+    purpose: StochasticCellPurpose,
 ) -> dict[str, Any]:
     if os.environ.get("GITHUB_ACTIONS") != "true":
         raise StochasticPilotError(
-            "stochastic freeze pilot may run only in GitHub Actions"
+            "stochastic live cells may run only in GitHub Actions"
         )
-    if repetition < 0 or repetition >= config.pilot_repetitions:
+    if repetition < 0 or repetition >= purpose.repetition_count:
         raise StochasticPilotError(
-            f"repetition must lie in [0, {config.pilot_repetitions - 1}]"
+            f"repetition must lie in [0, {purpose.repetition_count - 1}]"
         )
     if law not in config.laws:
         raise StochasticPilotError(f"unknown failure law {law!r}")
@@ -1491,12 +1515,13 @@ def run_stochastic_freeze_pilot(
             law,
             repetition,
             period,
+            base_seed=purpose.base_seed,
         )
         for period in ("calibration", "test")
     }
     schedule_document = {
         "schema_version": 1,
-        "pilot_only": True,
+        **purpose.role_fields,
         "profile": profile.id,
         "placement": placement,
         "failure_law": law,
@@ -1513,6 +1538,7 @@ def run_stochastic_freeze_pilot(
                     repetition,
                     period,
                     factor.factor_id,
+                    base_seed=purpose.base_seed,
                 )
                 for factor in factors
             }
@@ -1541,6 +1567,7 @@ def run_stochastic_freeze_pilot(
         placement,
         law,
         repetition,
+        purpose.request_namespace,
     )
 
     period_requests: dict[str, list[dict[str, Any]]] = {}
@@ -1561,6 +1588,8 @@ def run_stochastic_freeze_pilot(
         config.baseline_seconds,
         compose,
         (),
+        base_seed=purpose.base_seed,
+        request_namespace=purpose.request_namespace,
     )
     (
         period_requests["baseline"],
@@ -1582,6 +1611,8 @@ def run_stochastic_freeze_pilot(
             config.period_seconds,
             compose,
             schedules[period],
+            base_seed=purpose.base_seed,
+            request_namespace=purpose.request_namespace,
         )
         (
             period_requests[period],
@@ -1776,6 +1807,7 @@ def run_stochastic_freeze_pilot(
                 repetition,
                 period,
                 factor.factor_id,
+                base_seed=purpose.base_seed,
             ),
         )
         for period in ("calibration", "test")
@@ -1865,10 +1897,10 @@ def run_stochastic_freeze_pilot(
     }
     manifest = {
         "schema_version": 1,
-        "kind": "stochastic_schedule_and_budget_freeze_pilot",
+        "kind": purpose.kind,
         "experiment_id": config.id,
-        "pilot_only": True,
-        "usable_for_m7_freeze": not any(quality.values()),
+        **purpose.role_fields,
+        purpose.usability_field: not any(quality.values()),
         "profile": profile.id,
         "placement": placement,
         "failure_law": law,
@@ -1977,14 +2009,50 @@ def run_stochastic_freeze_pilot(
         },
         "environment": environment_manifest(),
     }
-    (output / "pilot-manifest.json").write_text(
+    (output / purpose.manifest_filename).write_text(
         json.dumps(manifest, indent=2, sort_keys=True) + "\n",
         encoding="utf-8",
     )
     failures = {name: value for name, value in quality.items() if value}
     if failures:
-        raise StochasticPilotError(f"M7C cell acceptance failures: {failures}")
+        raise StochasticPilotError(
+            f"{purpose.failure_label} cell acceptance failures: {failures}"
+        )
     return manifest
+
+
+def run_stochastic_freeze_pilot(
+    config: StochasticPilotConfig,
+    profile_id: str,
+    placement: str,
+    law: str,
+    repetition: int,
+    checkout_directory: str | Path,
+    compose_path: str | Path,
+    image_audit_path: str | Path,
+    output_directory: str | Path,
+) -> dict[str, Any]:
+    return _run_stochastic_cell(
+        config,
+        profile_id,
+        placement,
+        law,
+        repetition,
+        checkout_directory,
+        compose_path,
+        image_audit_path,
+        output_directory,
+        StochasticCellPurpose(
+            kind="stochastic_schedule_and_budget_freeze_pilot",
+            manifest_filename="pilot-manifest.json",
+            role_fields={"pilot_only": True},
+            usability_field="usable_for_m7_freeze",
+            repetition_count=config.pilot_repetitions,
+            base_seed=config.pilot_base_seed,
+            request_namespace="",
+            failure_label="M7C",
+        ),
+    )
 
 
 def _quantile_higher(values: Iterable[float], probability: float) -> float:

@@ -16,7 +16,7 @@ from .live_budget_recovery import (
     recover_macro_budget,
 )
 from .live_config import load_live_harness_config
-from .live_evidence import qualify_evidence_boundary
+from .live_evidence import qualify_evidence_boundary, qualify_evidence_cell
 from .live_evidence_config import load_evidence_boundary_config
 from .live_fault_campaign import (
     aggregate_live_fault_diagnostics,
@@ -46,6 +46,9 @@ from .live_stochastic_pilot import (
     aggregate_stochastic_freeze_pilots,
     run_stochastic_freeze_pilot,
 )
+from .live_validation import run_frozen_live_cell
+from .live_validation_analysis import analyze_live_validation
+from .live_validation_config import load_frozen_live_validation_config
 from .moments import structural_moment_rows
 from .reduction_experiment import (
     aggregate_reduction_experiment,
@@ -404,6 +407,48 @@ def build_parser() -> argparse.ArgumentParser:
     qualify_evidence.add_argument("--input-root", required=True, type=Path)
     qualify_evidence.add_argument("--out", required=True, type=Path)
 
+    qualify_evidence_cell_parser = commands.add_parser(
+        "qualify-evidence-cell",
+        help="normalize one main M7 cell behind the frozen evidence boundary",
+    )
+    qualify_evidence_cell_parser.add_argument("--config", required=True, type=Path)
+    qualify_evidence_cell_parser.add_argument("--input", required=True, type=Path)
+    qualify_evidence_cell_parser.add_argument("--out", required=True, type=Path)
+
+    validate_frozen_live = commands.add_parser(
+        "validate-frozen-live-validation",
+        help="validate the fully frozen M7 acquisition and analysis contract",
+    )
+    validate_frozen_live.add_argument("--config", required=True, type=Path)
+
+    run_frozen_live = commands.add_parser(
+        "run-frozen-live-cell",
+        help="run one remote-only frozen M7 campaign cell",
+    )
+    run_frozen_live.add_argument("--config", required=True, type=Path)
+    run_frozen_live.add_argument("--profile", required=True)
+    run_frozen_live.add_argument("--placement", required=True)
+    run_frozen_live.add_argument("--law", required=True)
+    run_frozen_live.add_argument("--repetition", required=True, type=int)
+    run_frozen_live.add_argument("--checkout", required=True, type=Path)
+    run_frozen_live.add_argument("--compose", required=True, type=Path)
+    run_frozen_live.add_argument("--image-audit", required=True, type=Path)
+    run_frozen_live.add_argument("--out", required=True, type=Path)
+    run_frozen_live.add_argument(
+        "--execution-scope", required=True, choices=("preflight", "full")
+    )
+
+    analyze_frozen_live = commands.add_parser(
+        "analyze-frozen-live-validation",
+        help="fit and score the frozen M7 methods from qualified evidence",
+    )
+    analyze_frozen_live.add_argument("--config", required=True, type=Path)
+    analyze_frozen_live.add_argument("--input-root", required=True, type=Path)
+    analyze_frozen_live.add_argument("--out", required=True, type=Path)
+    analyze_frozen_live.add_argument(
+        "--scope", required=True, choices=("preflight", "full")
+    )
+
     validate_recovery = commands.add_parser(
         "validate-macro-live-budget",
         help="validate the post-stopping M7C macro-resource recovery contract",
@@ -728,6 +773,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.compose,
             args.image_audit,
             args.out,
+            args.execution_scope,
         )
         print(json.dumps(manifest["counts"], indent=2, sort_keys=True))
         return 0
@@ -907,6 +953,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "source_usable_field": config.source_usable_field,
                     "expected_source_cells": config.expected_source_cells,
                     "learner_period": config.learner_period,
+                    "auxiliary_learner_periods": config.auxiliary_learner_periods,
                     "profiles": [profile.id for profile in config.profiles],
                 },
                 indent=2,
@@ -918,6 +965,62 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "qualify-evidence-boundary":
         config = load_evidence_boundary_config(args.config)
         manifest = qualify_evidence_boundary(config, args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "qualify-evidence-cell":
+        config = load_evidence_boundary_config(args.config)
+        summary = qualify_evidence_cell(config, args.input, args.out)
+        print(json.dumps(summary, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-frozen-live-validation":
+        config = load_frozen_live_validation_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "main_effectiveness": config.main_effectiveness,
+                    "expected_cells": config.expected_cells,
+                    "requests_per_cell": (
+                        config.stochastic.baseline_requests
+                        + 2 * config.stochastic.requests_per_period
+                    ),
+                    "period_seconds": config.stochastic.period_seconds,
+                    "repetitions": config.repetitions,
+                    "selected_design_sha256": config.selected_design_sha256,
+                    "primary_contrast": config.analysis.primary_contrast,
+                    "primary_mode": config.analysis.primary_mode,
+                    "methods": config.analysis.methods,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "run-frozen-live-cell":
+        config = load_frozen_live_validation_config(args.config)
+        manifest = run_frozen_live_cell(
+            config,
+            args.profile,
+            args.placement,
+            args.law,
+            args.repetition,
+            args.checkout,
+            args.compose,
+            args.image_audit,
+            args.out,
+        )
+        print(json.dumps(manifest["counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "analyze-frozen-live-validation":
+        config = load_frozen_live_validation_config(args.config)
+        manifest = analyze_live_validation(
+            config, args.input_root, args.out, args.scope
+        )
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

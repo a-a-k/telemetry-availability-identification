@@ -1,0 +1,152 @@
+schema_version: 1
+id: m7_frozen_live_validation
+main_effectiveness: true
+stochastic_pilot_config: m7c_stochastic_freeze_pilot.yaml
+
+source_pilot_run_id: "33977809019"
+source_pilot_commit: 5ee628d448a63b313a6f950002ae50e105dc8270
+source_pilot_recommendation_sha256: 880a152c7aac6fc17f046ead4c6dec5f41e2093d5232ff8de728b3b58b0d2c25
+resource_recovery_run_id: "33982201605"
+resource_recovery_commit: 9693c7ad594596281f35022513baa9b8d4d4c94b
+resource_recommendation_sha256: 1405f431a278a40ff6325a1a6f49940f8e087419666a80ad05b3ebf82cd97cb1
+
+selected_design_sha256: b4a7f3c71d93c5f216e33f3f7e012703ee47916cc2e767e65120246019bf9b00
+selected_design:
+  period_seconds: 900
+  repetitions: 10
+  transition_guard_seconds_each_side: 1
+  request_rate_per_second: 4
+  main_base_seed: 770034
+  laws:
+    N: [individual]
+    NC: [individual, communication]
+    ND: [individual, common_domain]
+    NCD: [individual, communication, common_domain]
+  placements:
+    colocated:
+      a: domain_a
+      b: domain_a
+    split:
+      a: domain_a
+      b: domain_b
+  renewal_processes:
+    individual:
+      mechanism: individual
+      minimum_up_seconds: 12.0
+      mean_up_seconds: 35.0
+      minimum_down_seconds: 5.0
+      maximum_down_seconds: 9.0
+    communication:
+      mechanism: communication
+      minimum_up_seconds: 20.0
+      mean_up_seconds: 55.0
+      minimum_down_seconds: 4.0
+      maximum_down_seconds: 8.0
+    common_domain:
+      mechanism: common_domain
+      minimum_up_seconds: 30.0
+      mean_up_seconds: 75.0
+      minimum_down_seconds: 6.0
+      maximum_down_seconds: 10.0
+
+request_namespace: m7-main-v1
+preflight_base_seed: 770036
+preflight_request_namespace: m7-preflight-v1
+
+analysis:
+  seed: 770035
+  confidence_level: 0.95
+  secondary_multiplicity: holm
+  methods: [B0, B1, B2, B3, proposed, B4]
+
+  observation_modes:
+    - id: full
+      health_policy: joint
+      health_keep_probability: 1.0
+      trace_keep_probability: 1.0
+    - id: sampled_mixed
+      health_policy: joint
+      health_keep_probability: 0.4
+      trace_keep_probability: 0.7
+    - id: no_joint_health
+      health_policy: staggered
+      health_keep_probability: 1.0
+      trace_keep_probability: 0.7
+    - id: trace_only
+      health_policy: none
+      health_keep_probability: 1.0
+      trace_keep_probability: 0.7
+
+  primary:
+    mode: sampled_mixed
+    contrast: proposed_minus_B2
+    metric: brier_score
+    view: stable
+    aggregation_unit: campaign
+    stratum_weighting: equal
+    operation_weighting: equal
+
+  temporal:
+    time_bin_seconds: 1
+    health_alignment_tolerance_seconds: 1.25
+    transition_guard_seconds_each_side: 1
+    block_length_seconds: 23
+    sensitivity_block_length_seconds: 46
+
+  baseline:
+    estimator: beta_posterior_mean
+    beta_prior_alpha: 0.5
+    beta_prior_beta: 0.5
+    role: clean auxiliary learner period for operation-specific residual success
+
+  optimizer:
+    algorithm: bounded_multistart_lbfgsb
+    starts: 8
+    max_iterations: 1000
+    parameter_epsilon: 0.00001
+    numerical_probability_floor: 0.000000000001
+
+  identification:
+    rank_tolerance: 0.0000001
+    target_gradient_tolerance: 0.000001
+    multistart_prediction_tolerance: 0.0001
+    minimum_signal_observations: 20
+    minimum_pattern_observations: 10
+    minimum_operation_requests: 20
+
+  topology:
+    discovery_periods: [baseline, calibration]
+    minimum_operation_support: 20
+    required_target_fraction: 0.80
+    maximum_nontarget_fraction: 0.05
+    minimum_replica_assignments: 5
+    absent_spans_are_not_negative_states: true
+
+  transfer:
+    source_placement: colocated
+    target_placement: split
+    paired_by: [application, failure_law, repetition]
+    homogeneous_new_domain_assumption: true
+    target_calibration_is_forbidden: true
+
+  operations:
+    deathstarbench_social_network:
+      - id: compose_post
+        requires_target_group: true
+        specification_source: frozen M7B driver contract; checked against M7 learner traces
+      - id: read_home_timeline
+        requires_target_group: false
+        specification_source: frozen M7B driver contract; checked against M7 learner traces
+      - id: read_user_timeline
+        requires_target_group: true
+        specification_source: frozen M7B driver contract; checked against M7 learner traces
+    opentelemetry_demo:
+      - id: browse_product
+        requires_target_group: true
+        specification_source: frozen M7B driver contract; checked against M7 learner traces
+      - id: add_to_cart
+        requires_target_group: true
+        specification_source: frozen M7B driver contract; checked against M7 learner traces
+      - id: checkout
+        requires_target_group: true
+        specification_source: frozen M7B driver contract; checked against M7 learner traces

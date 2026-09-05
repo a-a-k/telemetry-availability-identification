@@ -68,6 +68,15 @@ jobs:
       - name: Validate learner/evaluator evidence-boundary contract
         run: python -m telemetry_availability validate-evidence-boundary --config configs/m7d_evidence_boundary.yaml
 
+      - name: Validate frozen main live-study contract
+        run: python -m telemetry_availability validate-frozen-live-validation --config configs/m7_frozen_live.yaml
+
+      - name: Validate main learner/evaluator boundary contract
+        run: python -m telemetry_availability validate-evidence-boundary --config configs/m7_evidence_boundary.yaml
+
+      - name: Validate no-fit M7 preflight evidence boundary
+        run: python -m telemetry_availability validate-evidence-boundary --config configs/m7_preflight_evidence_boundary.yaml
+
       - name: Validate post-stopping macro-resource contract
         run: python -m telemetry_availability validate-macro-live-budget --config configs/m7c_macro_precision_recovery.yaml
 

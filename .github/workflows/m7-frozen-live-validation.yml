@@ -1,0 +1,277 @@
+name: M7 Frozen Live Validation
+
+on:
+  workflow_dispatch:
+    inputs:
+      scope:
+        description: No-fit four-cell preflight or the frozen 160-cell main campaign
+        required: true
+        default: preflight
+        type: choice
+        options:
+          - preflight
+          - full
+
+permissions:
+  contents: read
+  packages: read
+  actions: read
+
+concurrency:
+  group: m7-frozen-live-validation-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  campaign:
+    name: ${{ matrix.application.profile }} / ${{ matrix.placement }} / ${{ matrix.law }} / r${{ matrix.repetition }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        application:
+          - profile: deathstarbench_social_network
+            repository: delimitrou/DeathStarBench
+            commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+            compose_file: socialNetwork/docker-compose.yml
+          - profile: opentelemetry_demo
+            repository: open-telemetry/opentelemetry-demo
+            commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+            compose_file: compose.yaml
+        placement: [colocated, split]
+        law: ${{ fromJSON(inputs.scope == 'preflight' && '["NCD"]' || '["N","NC","ND","NCD"]') }}
+        repetition: ${{ fromJSON(inputs.scope == 'preflight' && '[0]' || '[0,1,2,3,4,5,6,7,8,9]') }}
+
+    steps:
+      - name: Check out frozen experiment repository
+        uses: actions/checkout@v7
+
+      - name: Check out exact benchmark revision
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.application.repository }}
+          ref: ${{ matrix.application.commit }}
+          path: upstream
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Record runner resources
+        run: |
+          out="workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+          mkdir -p "$out"
+          uname -a > "$out/runner.txt"
+          docker version >> "$out/runner.txt"
+          docker compose version >> "$out/runner.txt"
+          free -h >> "$out/runner.txt"
+          df -h >> "$out/runner.txt"
+
+      - name: Render, digest-lock, and replicate benchmark
+        env:
+          DEMO_VERSION: "3.0.0"
+          LOCUST_AUTOSTART: "false"
+          LOCUST_HEADLESS: "true"
+          LOCUST_BROWSER_TRAFFIC_ENABLED: "false"
+        run: |
+          out="workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+          if [[ "${{ matrix.application.profile }}" == "opentelemetry_demo" ]]; then
+            export OTEL_COLLECTOR_CONFIG_EXTRAS="$GITHUB_WORKSPACE/configs/live/otel-pilot-collector-extra.yml"
+            docker compose --env-file upstream/.env -f "upstream/${{ matrix.application.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=(--telemetry-output-directory "$GITHUB_WORKSPACE/$out")
+          else
+            docker compose -f "upstream/${{ matrix.application.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=()
+          fi
+          python -m telemetry_availability pin-live-compose \
+            --config configs/m7_runtime_pilot.yaml \
+            --profile "${{ matrix.application.profile }}" \
+            --input "$out/rendered-compose.json" \
+            --out "$out/base-pinned-compose.json" \
+            --audit "$out/base-image-lock-audit.json" \
+            "${telemetry_args[@]}"
+          python -m telemetry_availability prepare-placement-compose \
+            --config configs/m7b_placement_pilot.yaml \
+            --profile "${{ matrix.application.profile }}" \
+            --placement "${{ matrix.placement }}" \
+            --input "$out/base-pinned-compose.json" \
+            --base-audit "$out/base-image-lock-audit.json" \
+            --out "$out/pinned-compose.json" \
+            --audit "$out/image-lock-audit.json" \
+            --haproxy "$out/haproxy.cfg"
+
+      - name: Pull and start replicated benchmark
+        run: |
+          compose="workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json"
+          docker compose -f "$compose" pull
+          docker compose -f "$compose" up -d --no-build --wait --wait-timeout 360
+
+      - name: Run frozen stochastic campaign cell
+        run: >-
+          python -m telemetry_availability run-frozen-live-cell
+          --config configs/m7_frozen_live.yaml
+          --execution-scope "${{ inputs.scope }}"
+          --profile "${{ matrix.application.profile }}"
+          --placement "${{ matrix.placement }}"
+          --law "${{ matrix.law }}"
+          --repetition "${{ matrix.repetition }}"
+          --checkout upstream
+          --compose "workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json"
+          --image-audit "workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/image-lock-audit.json"
+          --out "workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+
+      - name: Qualify and physically separate full-campaign evidence
+        if: ${{ success() && inputs.scope == 'full' }}
+        run: >-
+          python -m telemetry_availability qualify-evidence-cell
+          --config configs/m7_evidence_boundary.yaml
+          --input "workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+          --out "workflow-results/m7-qualified/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+
+      - name: Capture compact runtime diagnostics
+        if: ${{ always() }}
+        run: |
+          out="workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+          docker compose -f "$out/pinned-compose.json" ps --format json > "$out/compose-ps.json" || true
+          docker stats --no-stream --format '{{json .}}' > "$out/docker-stats.jsonl" || true
+
+      - name: Capture service logs after a failed cell
+        if: ${{ failure() }}
+        run: |
+          out="workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+          docker compose -f "$out/pinned-compose.json" logs --no-color > "$out/compose.log" 2>&1 || true
+
+      - name: Upload transient preflight source evidence
+        if: ${{ always() && inputs.scope == 'preflight' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7-raw-preflight-${{ matrix.application.profile }}-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}
+          path: workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}
+          if-no-files-found: error
+          retention-days: 1
+
+      - name: Upload full-run raw audit sample
+        if: ${{ success() && inputs.scope == 'full' && matrix.law == 'NCD' && matrix.repetition == 0 }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7-raw-audit-sample-${{ matrix.application.profile }}-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}
+          path: workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload failed full-run source evidence
+        if: ${{ failure() && inputs.scope == 'full' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7-raw-failure-${{ matrix.application.profile }}-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}
+          path: workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload qualified main evidence
+        if: ${{ success() && inputs.scope == 'full' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7-qualified-${{ matrix.application.profile }}-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}
+          path: workflow-results/m7-qualified/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Tear down benchmark
+        if: ${{ always() }}
+        run: >-
+          docker compose
+          -f "workflow-results/m7-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json"
+          down --volumes --remove-orphans || true
+
+  preflight_audit:
+    name: Audit no-fit preflight boundary
+    if: ${{ always() && inputs.scope == 'preflight' }}
+    needs: campaign
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Download all immutable preflight cells
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m7-raw-preflight-*-${{ github.run_id }}
+          path: workflow-results/m7-preflight-input
+      - name: Normalize and audit without fitting or scoring
+        env:
+          EVIDENCE_SOURCE_RUN_ID: ${{ github.run_id }}
+        run: >-
+          python -m telemetry_availability qualify-evidence-boundary
+          --config configs/m7_preflight_evidence_boundary.yaml
+          --input-root workflow-results/m7-preflight-input
+          --out workflow-results/m7-preflight-audit
+      - name: Upload preflight boundary audit
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7-preflight-boundary-${{ github.run_id }}
+          path: workflow-results/m7-preflight-audit
+          if-no-files-found: error
+          retention-days: 30
+
+  analyze:
+    name: Frozen full analysis
+    if: ${{ always() && inputs.scope == 'full' }}
+    needs: campaign
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Download physically separated evidence only
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m7-qualified-*-${{ github.run_id }}
+          path: workflow-results/m7-qualified-input
+      - name: Run the frozen likelihood, baselines, scoring, and campaign inference
+        env:
+          M7_SOURCE_RUN_ID: ${{ github.run_id }}
+        run: >-
+          python -m telemetry_availability analyze-frozen-live-validation
+          --config configs/m7_frozen_live.yaml
+          --scope full
+          --input-root workflow-results/m7-qualified-input
+          --out workflow-results/m7-analysis
+      - name: Upload frozen analysis
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m7-frozen-analysis-${{ github.run_id }}
+          path: workflow-results/m7-analysis
+          if-no-files-found: error
+          retention-days: 90

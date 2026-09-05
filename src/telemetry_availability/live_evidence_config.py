@@ -32,6 +32,7 @@ class EvidenceBoundaryConfig:
     required_source_labels: dict[str, Any]
     expected_source_cells: int
     learner_period: str
+    auxiliary_learner_periods: tuple[str, ...]
     minimum_trace_link_fraction: float
     minimum_replica_assignments_per_replica: int
     profiles: tuple[EvidenceProfile, ...]
@@ -155,6 +156,13 @@ def load_evidence_boundary_config(path: str | Path) -> EvidenceBoundaryConfig:
             root.get("expected_source_cells"), "expected_source_cells"
         ),
         learner_period=str(root.get("learner_period", "")),
+        auxiliary_learner_periods=tuple(
+            str(value)
+            for value in _sequence(
+                root.get("auxiliary_learner_periods", []),
+                "auxiliary learner periods",
+            )
+        ),
         minimum_trace_link_fraction=_closed_fraction(
             root.get("minimum_trace_link_fraction"),
             "minimum_trace_link_fraction",
@@ -186,6 +194,16 @@ def load_evidence_boundary_config(path: str | Path) -> EvidenceBoundaryConfig:
         raise ConfigError("required_source_labels must not be empty")
     if config.learner_period != "calibration":
         raise ConfigError("learner_period must be calibration")
+    if len(set(config.auxiliary_learner_periods)) != len(
+        config.auxiliary_learner_periods
+    ) or any(
+        not period or period in {config.learner_period, "test"}
+        for period in config.auxiliary_learner_periods
+    ):
+        raise ConfigError(
+            "auxiliary_learner_periods must be unique, nonempty, and exclude "
+            "calibration/test"
+        )
     raw_files = {profile.raw_telemetry_file for profile in config.profiles}
     if not raw_files.issubset(set(config.allowed_source_files)):
         raise ConfigError("every raw trace file must be explicitly allowed")
