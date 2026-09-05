@@ -25,6 +25,7 @@ class EvidenceProfile:
 class EvidenceBoundaryConfig:
     id: str
     diagnostic_only: bool
+    main_effectiveness: bool
     source_experiment_id: str
     source_manifest_file: str
     source_usable_field: str
@@ -83,8 +84,13 @@ def load_evidence_boundary_config(path: str | Path) -> EvidenceBoundaryConfig:
     )
     if root.get("schema_version") != 1:
         raise ConfigError("evidence-boundary schema_version must equal 1")
-    if root.get("diagnostic_only") is not True:
-        raise ConfigError("evidence-boundary qualification must be diagnostic_only")
+    diagnostic_only = root.get("diagnostic_only") is True
+    main_effectiveness = root.get("main_effectiveness") is True
+    if diagnostic_only == main_effectiveness:
+        raise ConfigError(
+            "evidence boundary must select exactly one of diagnostic_only and "
+            "main_effectiveness"
+        )
 
     profiles = []
     for raw_profile in _sequence(root.get("profiles"), "evidence profiles"):
@@ -137,7 +143,8 @@ def load_evidence_boundary_config(path: str | Path) -> EvidenceBoundaryConfig:
 
     config = EvidenceBoundaryConfig(
         id=str(root.get("id", "")),
-        diagnostic_only=True,
+        diagnostic_only=diagnostic_only,
+        main_effectiveness=main_effectiveness,
         source_experiment_id=str(root.get("source_experiment_id", "")),
         source_manifest_file=str(root.get("source_manifest_file", "")),
         source_usable_field=str(root.get("source_usable_field", "")),

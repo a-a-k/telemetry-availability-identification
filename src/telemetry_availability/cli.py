@@ -728,6 +728,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "status": "valid",
                     "experiment_id": config.id,
                     "diagnostic_only": config.diagnostic_only,
+                    "main_effectiveness": config.main_effectiveness,
                     "profiles": [profile.id for profile in config.profiles],
                     "failure_laws": config.laws,
                     "expected_cells": len(config.profiles)

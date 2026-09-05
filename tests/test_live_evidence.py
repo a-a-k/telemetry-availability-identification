@@ -33,6 +33,7 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
 
     def test_contract_separates_allowed_and_privileged_sources(self) -> None:
         self.assertTrue(self.config.diagnostic_only)
+        self.assertFalse(self.config.main_effectiveness)
         self.assertEqual(self.config.expected_source_cells, 64)
         self.assertEqual(self.config.learner_period, "calibration")
         self.assertEqual(self.config.source_manifest_file, "pilot-manifest.json")
