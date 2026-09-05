@@ -4,6 +4,8 @@
 
 Status: implemented.
 
+Evidence: `milestones/M0_RANK_AND_MOMENTS.md`.
+
 - typed primitive factors and conjunctive observables;
 - known state-independent observation masks;
 - structural versus empirical identifiability;
@@ -11,6 +13,8 @@ Status: implemented.
 - four-family RQ1 workflow with nested samples and provenance.
 
 ## Phase 2: exact observed likelihood reference
+
+Status: in progress as milestone M1.
 
 - compile an episode and its mask into a likelihood factor;
 - enumerate latent states for small models independently of the simulator;

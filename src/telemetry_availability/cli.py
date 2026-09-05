@@ -7,6 +7,10 @@ from typing import Sequence
 
 from .config import load_config
 from .diagnostics import diagnose_identifiability
+from .likelihood_reference import (
+    aggregate_likelihood_reference,
+    run_likelihood_reference,
+)
 from .moments import structural_moment_rows
 from .runner import aggregate_results, run_experiment
 
@@ -46,6 +50,24 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate = commands.add_parser("aggregate", help="combine workflow experiment shards")
     aggregate.add_argument("--input-root", required=True, type=Path)
     aggregate.add_argument("--out", required=True, type=Path)
+
+    reference = commands.add_parser(
+        "run-likelihood-reference",
+        help="compare log moments with the exact observed-likelihood reference",
+    )
+    reference.add_argument("--config", required=True, type=Path)
+    reference.add_argument("--out", required=True, type=Path)
+    reference.add_argument("--family", action="append")
+    reference.add_argument("--mode", action="append")
+    reference.add_argument("--repetitions", type=int)
+    reference.add_argument("--sample-sizes", type=_comma_separated_positive_integers)
+
+    aggregate_reference = commands.add_parser(
+        "aggregate-likelihood-reference",
+        help="combine exact-likelihood reference shards",
+    )
+    aggregate_reference.add_argument("--input-root", required=True, type=Path)
+    aggregate_reference.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -118,6 +140,25 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if args.command == "aggregate":
         manifest = aggregate_results(args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "run-likelihood-reference":
+        config = load_config(args.config)
+        manifest = run_likelihood_reference(
+            config=config,
+            config_path=args.config,
+            output_directory=args.out,
+            family_names=None if args.family is None else tuple(args.family),
+            mode_names=None if args.mode is None else tuple(args.mode),
+            repetitions=args.repetitions,
+            sample_sizes=args.sample_sizes,
+        )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-likelihood-reference":
+        manifest = aggregate_likelihood_reference(args.input_root, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

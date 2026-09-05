@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 import numpy
+import scipy
 import yaml
 
 
@@ -61,6 +62,7 @@ def environment_manifest() -> dict[str, Any]:
         "dependencies": {
             "numpy": numpy.__version__,
             "PyYAML": yaml.__version__,
+            "scipy": scipy.__version__,
         },
         "git": {
             "commit": _git_value(["rev-parse", "HEAD"]),

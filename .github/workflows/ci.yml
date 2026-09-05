@@ -53,11 +53,32 @@ jobs:
           --repetitions 3
           --sample-sizes 100
 
+      - name: Run bounded exact-likelihood smoke
+        if: ${{ matrix.python-version == '3.13' }}
+        run: >-
+          python -m telemetry_availability run-likelihood-reference
+          --config configs/rq1_synthetic.yaml
+          --out workflow-results/likelihood-smoke
+          --family same_domain_replicas
+          --mode full
+          --mode no_joint_health
+          --repetitions 1
+          --sample-sizes 100
+
       - name: Upload smoke evidence
         if: ${{ matrix.python-version == '3.13' }}
         uses: actions/upload-artifact@v7
         with:
           name: smoke-${{ github.run_id }}
           path: workflow-results/smoke
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload exact-likelihood smoke evidence
+        if: ${{ matrix.python-version == '3.13' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: likelihood-smoke-${{ github.run_id }}
+          path: workflow-results/likelihood-smoke
           if-no-files-found: error
           retention-days: 14

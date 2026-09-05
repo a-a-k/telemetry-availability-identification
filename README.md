@@ -34,6 +34,13 @@ The estimator in this slice is a weighted log-moment estimator. It is a
 transparent baseline and executable check of the rank argument, not yet the
 article's proposed observed-likelihood or EM implementation.
 
+Milestone M1 adds a matched exact observed-likelihood reference for the same
+small models and masked episode records. It enumerates latent states independently
+of the simulator's sampling path and uses a bounded, analytic-gradient,
+multistart optimizer. This is the article-design B3 correctness reference; the
+log-moment implementation is labeled B2 and is not presented as the proposed
+full method.
+
 The configured RQ1 matrix has four small factor-graph families, three observation
 modes, three nested sample sizes, and 200 independently generated campaigns. It
 therefore produces 7,200 family/mode/size rows. Prefixes of sizes 100, 500, and
@@ -74,6 +81,9 @@ identifiers in its manifest.
   campaigns at sizes 100 and 500; the full tier uses the frozen values from the
   experiment configuration. Each family is an independent workflow shard, and a
   final job aggregates the raw tables.
+- M1 Exact Likelihood Reference is started manually and compares B2 and B3 on
+  paired campaign prefixes. Its aggregate includes the compressed observation
+  patterns needed to reconstruct the exact conditional likelihood.
 
 ## Generated tables
 
@@ -86,14 +96,19 @@ identifiers in its manifest.
   observation mode, and sample size.
 - manifest.json records provenance and row counts.
 
+The M1 workflow additionally emits reference_fits.csv, reference_estimates.csv,
+patterns.csv, reference_summary.csv, and paired_summary.csv. Its protocol is
+frozen in docs/M1_LIKELIHOOD_PROTOCOL.md before the non-smoke run.
+
 Generated results are intentionally ignored by Git. GitHub workflow artifacts are
 the source of experimental outputs until a reviewed result snapshot is explicitly
 frozen for the paper.
 
 ## Scope not yet implemented
 
-The current slice does not claim support for general Boolean request predicates,
-state-dependent exporter loss, temporally dependent episodes, overlapping failure
-domains, observed-data maximum likelihood, EM, uncertainty sets, live-system
-ingestion, placement transfer, or B0-B4 comparisons. These are staged in the
-roadmap rather than simulated by placeholder numbers.
+The current implementation does not claim support for general Boolean request
+predicates, state-dependent exporter loss, temporally dependent episodes,
+overlapping failure domains, the proposed sparse identification procedure, EM,
+uncertainty sets, live-system ingestion, or placement transfer. B3 is now
+implemented only as a small-model exact reference; the full B0-B4 comparison is
+still staged in the roadmap rather than simulated by placeholder numbers.
