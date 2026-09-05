@@ -18,6 +18,7 @@ from telemetry_availability.live_stochastic_pilot import (
     RenewalEvent,
     StochasticPilotError,
     _stochastic_fault_controller,
+    _trace_join_rows,
     aggregate_stochastic_freeze_pilots,
     autocorrelation_block_length,
     factor_definitions,
@@ -115,6 +116,41 @@ class StochasticFreezePilotTests(unittest.TestCase):
         )
         self.assertEqual(constant, 1)
         self.assertGreater(dependent, 1)
+
+    def test_trace_join_scans_raw_telemetry_once_and_matches_exact_tokens(self) -> None:
+        requests = [
+            {
+                "profile": "p",
+                "placement": "split",
+                "failure_law": "N",
+                "repetition": 0,
+                "period": "test",
+                "request_id": "r1",
+                "trace_id": "0123456789abcdef",
+                "semantic_success": True,
+            },
+            {
+                "profile": "p",
+                "placement": "split",
+                "failure_law": "N",
+                "repetition": 0,
+                "period": "test",
+                "request_id": "r2",
+                "trace_id": "fedcba98765432100123456789abcdef",
+                "semantic_success": False,
+            },
+        ]
+        with tempfile.TemporaryDirectory() as temporary:
+            raw_path = Path(temporary) / "raw.log"
+            raw_path.write_text(
+                "0123456789ABCDEF 0123456789abcdef "
+                "fedcba98765432100123456789abcdef "
+                "a0123456789abcdef0\n",
+                encoding="utf-8",
+            )
+            rows = _trace_join_rows(requests, raw_path)
+        self.assertEqual([row["raw_occurrences"] for row in rows], [2, 1])
+        self.assertTrue(all(row["trace_present"] for row in rows))
 
     def test_overlap_controller_does_not_release_an_active_cause(self) -> None:
         profile = select_placement_pilot_profile(

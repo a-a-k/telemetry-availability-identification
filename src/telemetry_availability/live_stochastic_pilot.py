@@ -7,9 +7,11 @@ import json
 import math
 import os
 import random
+import re
 import statistics
 import threading
 import time
+from collections import Counter
 from concurrent.futures import Future, ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 from datetime import datetime, timedelta, timezone
@@ -1331,10 +1333,19 @@ def _trace_join_rows(
     requests: list[dict[str, Any]], raw_path: Path
 ) -> list[dict[str, Any]]:
     raw = raw_path.read_text(encoding="utf-8", errors="replace").lower()
+    expected = {str(request["trace_id"]).lower() for request in requests}
+    occurrences = Counter(
+        token
+        for token in re.findall(
+            r"(?<![0-9a-f])[0-9a-f]{16,32}(?![0-9a-f])",
+            raw,
+        )
+        if token in expected
+    )
     rows = []
     for request in requests:
         trace_id = str(request["trace_id"]).lower()
-        occurrences = raw.count(trace_id)
+        count = occurrences[trace_id]
         rows.append(
             {
                 "profile": request["profile"],
@@ -1345,8 +1356,8 @@ def _trace_join_rows(
                 "request_id": request["request_id"],
                 "trace_id": trace_id,
                 "request_success": request["semantic_success"],
-                "trace_present": occurrences > 0,
-                "raw_occurrences": occurrences,
+                "trace_present": count > 0,
+                "raw_occurrences": count,
             }
         )
     return rows
