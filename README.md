@@ -191,8 +191,15 @@ mounted native collector sink without changing the workload or threshold.
 Details are recorded in
 `docs/milestones/M7A_FAULT_ACQUISITION_DIAGNOSTIC.md`. This remains a diagnostic
 namespace: only the later frozen M7 campaign can support a live prediction or
-transfer claim. M7B next verifies actual replication, load balancing, placement
-semantics, and operation-effect checks before that freeze.
+transfer claim. Completed M7B then replaced a key service with two real
+containers behind an explicit HAProxy in both applications. Its accepted
+four-cell run showed traffic on both named backends, placement-dependent
+intervention sets, semantic operation responses, complete request--trace
+linkage, and clean recovery; its first failed semantic-contract attempt is
+retained. Details are in
+`docs/milestones/M7B_REPLICATED_PLACEMENT_PILOT.md`. M7C next freezes the
+stochastic schedule and independent-repetition budget before M7 effectiveness
+outcomes are inspected.
 
 ## Generated tables
 
