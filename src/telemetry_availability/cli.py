@@ -35,6 +35,11 @@ from .live_placement_pilot import (
     prepare_placement_compose,
     run_placement_pilot,
 )
+from .live_stochastic_config import load_stochastic_pilot_config
+from .live_stochastic_pilot import (
+    aggregate_stochastic_freeze_pilots,
+    run_stochastic_freeze_pilot,
+)
 from .moments import structural_moment_rows
 from .reduction_experiment import (
     aggregate_reduction_experiment,
@@ -71,15 +76,21 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="taid")
     commands = parser.add_subparsers(dest="command", required=True)
 
-    validate = commands.add_parser("validate-config", help="validate a YAML experiment contract")
+    validate = commands.add_parser(
+        "validate-config", help="validate a YAML experiment contract"
+    )
     validate.add_argument("--config", required=True, type=Path)
 
-    diagnose = commands.add_parser("diagnose", help="report structural identifiability by family and mode")
+    diagnose = commands.add_parser(
+        "diagnose", help="report structural identifiability by family and mode"
+    )
     diagnose.add_argument("--config", required=True, type=Path)
     diagnose.add_argument("--family", action="append")
     diagnose.add_argument("--mode", action="append")
 
-    run = commands.add_parser("run", help="generate and analyze synthetic observation campaigns")
+    run = commands.add_parser(
+        "run", help="generate and analyze synthetic observation campaigns"
+    )
     run.add_argument("--config", required=True, type=Path)
     run.add_argument("--out", required=True, type=Path)
     run.add_argument("--family", action="append")
@@ -87,7 +98,9 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--repetitions", type=int)
     run.add_argument("--sample-sizes", type=_comma_separated_positive_integers)
 
-    aggregate = commands.add_parser("aggregate", help="combine workflow experiment shards")
+    aggregate = commands.add_parser(
+        "aggregate", help="combine workflow experiment shards"
+    )
     aggregate.add_argument("--input-root", required=True, type=Path)
     aggregate.add_argument("--out", required=True, type=Path)
 
@@ -342,10 +355,40 @@ def build_parser() -> argparse.ArgumentParser:
     aggregate_placement.add_argument("--config", required=True, type=Path)
     aggregate_placement.add_argument("--input-root", required=True, type=Path)
     aggregate_placement.add_argument("--out", required=True, type=Path)
+
+    validate_stochastic = commands.add_parser(
+        "validate-stochastic-freeze-pilot",
+        help="validate the remote-only stochastic schedule and budget pilot",
+    )
+    validate_stochastic.add_argument("--config", required=True, type=Path)
+
+    run_stochastic = commands.add_parser(
+        "run-stochastic-freeze-pilot",
+        help="run one remote M7C stochastic freeze-pilot cell",
+    )
+    run_stochastic.add_argument("--config", required=True, type=Path)
+    run_stochastic.add_argument("--profile", required=True)
+    run_stochastic.add_argument("--placement", required=True)
+    run_stochastic.add_argument("--law", required=True)
+    run_stochastic.add_argument("--repetition", required=True, type=int)
+    run_stochastic.add_argument("--checkout", required=True, type=Path)
+    run_stochastic.add_argument("--compose", required=True, type=Path)
+    run_stochastic.add_argument("--image-audit", required=True, type=Path)
+    run_stochastic.add_argument("--out", required=True, type=Path)
+
+    aggregate_stochastic = commands.add_parser(
+        "aggregate-stochastic-freeze-pilots",
+        help="combine all M7C stochastic freeze-pilot cells",
+    )
+    aggregate_stochastic.add_argument("--config", required=True, type=Path)
+    aggregate_stochastic.add_argument("--input-root", required=True, type=Path)
+    aggregate_stochastic.add_argument("--out", required=True, type=Path)
     return parser
 
 
-def _filter(items: Sequence[object], names: list[str] | None, label: str) -> list[object]:
+def _filter(
+    items: Sequence[object], names: list[str] | None, label: str
+) -> list[object]:
     if not names:
         return list(items)
     lookup = {getattr(item, "id"): item for item in items}
@@ -463,9 +506,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "status": "valid",
                     "experiment_id": config.id,
                     "scenarios": [item.id for item in config.scenarios],
-                    "observation_modes": [
-                        item.id for item in config.observation_modes
-                    ],
+                    "observation_modes": [item.id for item in config.observation_modes],
                 },
                 indent=2,
             )
@@ -478,9 +519,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             config=config,
             config_path=args.config,
             output_directory=args.out,
-            scenario_names=(
-                None if args.scenario is None else tuple(args.scenario)
-            ),
+            scenario_names=(None if args.scenario is None else tuple(args.scenario)),
             mode_names=None if args.mode is None else tuple(args.mode),
             repetitions=args.repetitions,
             sample_sizes=args.sample_sizes,
@@ -518,9 +557,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             config=config,
             config_path=args.config,
             output_directory=args.out,
-            scenario_names=(
-                None if args.scenario is None else tuple(args.scenario)
-            ),
+            scenario_names=(None if args.scenario is None else tuple(args.scenario)),
             mode_names=None if args.mode is None else tuple(args.mode),
             repetitions=args.repetitions,
             sample_sizes=args.sample_sizes,
@@ -591,7 +628,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "ingest-live-bundle":
         config = load_live_harness_config(args.config)
         profile = select_live_profile(config, args.benchmark)
-        bundle_directory = profile.fixture_bundle if args.bundle is None else args.bundle
+        bundle_directory = (
+            profile.fixture_bundle if args.bundle is None else args.bundle
+        )
         bundle = ingest_live_bundle(bundle_directory, config.contract, profile)
         manifest = write_ingested_bundle(bundle, args.out)
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
@@ -765,6 +804,58 @@ def main(argv: Sequence[str] | None = None) -> int:
     if args.command == "aggregate-placement-pilots":
         config = load_placement_pilot_config(args.config)
         manifest = aggregate_placement_pilots(config, args.input_root, args.out)
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-stochastic-freeze-pilot":
+        config = load_stochastic_pilot_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "pilot_only": config.pilot_only,
+                    "expected_cells": config.expected_cells,
+                    "pilot_repetitions": config.pilot_repetitions,
+                    "requests_per_cell": (
+                        config.baseline_requests + 2 * config.requests_per_period
+                    ),
+                    "candidate_period_seconds": (
+                        config.design_selection.candidate_period_seconds
+                    ),
+                    "candidate_main_repetitions": (
+                        config.design_selection.candidate_main_repetitions
+                    ),
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "run-stochastic-freeze-pilot":
+        config = load_stochastic_pilot_config(args.config)
+        manifest = run_stochastic_freeze_pilot(
+            config,
+            args.profile,
+            args.placement,
+            args.law,
+            args.repetition,
+            args.checkout,
+            args.compose,
+            args.image_audit,
+            args.out,
+        )
+        print(json.dumps(manifest["counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "aggregate-stochastic-freeze-pilots":
+        config = load_stochastic_pilot_config(args.config)
+        manifest = aggregate_stochastic_freeze_pilots(
+            config,
+            args.input_root,
+            args.out,
+        )
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
 

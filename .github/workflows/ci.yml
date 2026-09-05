@@ -62,6 +62,9 @@ jobs:
       - name: Validate replicated-placement pilot contract
         run: python -m telemetry_availability validate-placement-pilot --config configs/m7b_placement_pilot.yaml
 
+      - name: Validate stochastic freeze-pilot contract
+        run: python -m telemetry_availability validate-stochastic-freeze-pilot --config configs/m7c_stochastic_freeze_pilot.yaml
+
       - name: Ingest both live-contract fixtures
         if: ${{ matrix.python-version == '3.13' }}
         run: |

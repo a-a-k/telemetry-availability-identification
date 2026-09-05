@@ -17,7 +17,7 @@ profiles:
     base_url: http://127.0.0.1:8080
     readiness_path: /
     telemetry_kind: jaeger_api
-    telemetry_source: http://127.0.0.1:16686/api/traces?service=nginx-web-server&lookback=1h&limit=1000
+    telemetry_source: http://127.0.0.1:16686/api/traces?service=nginx-web-server&lookback=2h&limit=10000
     operations: [compose_post, read_home_timeline, read_user_timeline]
     images:
       "deathstarbench/social-network-microservices:latest": sha256:a845266e98ce15d204ee7b98d41a2a95820af525013ce70f14104f5b9b5e92b6
