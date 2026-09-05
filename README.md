@@ -172,6 +172,10 @@ identifiers in its manifest.
   renewal processes for individual, communication, and domain factors. Its
   predeclared rule selects only the M7 duration, campaign-pair count, and
   transition guard; no method outcome can affect that selection.
+- M7C-R records the original no-candidate stopping condition and the
+  protocol-permitted narrowing from per-cell precision to the equal-weight
+  16-stratum macro contrast. It retains the 0.015 threshold and selects 10
+  independent campaigns per stratum.
 - M7D Learner Evidence Boundary Qualification streams both native trace formats,
   normalizes calibration-only trace graphs and health evidence, physically
   sequesters test outcomes, and rejects controller/event fields in learner
@@ -207,8 +211,13 @@ linkage, and clean recovery; its first failed semantic-contract attempt is
 retained. Details are in
 `docs/milestones/M7B_REPLICATED_PLACEMENT_PILOT.md`. M7C next freezes the
 stochastic schedule and independent-repetition budget before M7 effectiveness
-outcomes are inspected. M7D then qualifies the executable anti-leakage boundary
-in `docs/M7D_EVIDENCE_BOUNDARY_PROTOCOL.md` before any main-analysis fit.
+outcomes are inspected. M7C and its transparent resource recovery are complete:
+900-second periods, a one-second transition guard, and 10 campaigns in each of
+16 strata are frozen in
+`docs/milestones/M7C_STOCHASTIC_FREEZE_PILOT.md`. M7D is also complete: all 64
+pilot schemas passed the executable anti-leakage boundary documented in
+`docs/milestones/M7D_LEARNER_EVIDENCE_BOUNDARY.md`. No main-analysis fit was
+used for either decision.
 
 ## Generated tables
 

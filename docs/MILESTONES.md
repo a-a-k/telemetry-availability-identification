@@ -20,8 +20,8 @@ tests, configuration validation, and bounded smoke cases.
 | M7P | Remote runtime and native-telemetry feasibility pilot | Complete | `milestones/M7P_RUNTIME_FEASIBILITY_PILOT.md`; never used as effectiveness evidence |
 | M7A | Fault-control, health-audit, and request--trace linkage diagnostic | Complete | `milestones/M7A_FAULT_ACQUISITION_DIAGNOSTIC.md`; excluded from effectiveness evidence |
 | M7B | Replicated placement, load-balancing, and effect-semantics pilot | Complete | `milestones/M7B_REPLICATED_PLACEMENT_PILOT.md`; excluded from effectiveness evidence |
-| M7C | Stochastic schedule and repetition-budget freeze pilot | In progress | `M7C_STOCHASTIC_FREEZE_PILOT_PROTOCOL.md`; excluded from effectiveness evidence |
-| M7D | Learner/evaluator boundary and native-trace normalization | In progress | `M7D_EVIDENCE_BOUNDARY_PROTOCOL.md`; diagnostic only and excluded from effectiveness evidence |
+| M7C | Stochastic schedule and repetition-budget freeze pilot | Complete | `milestones/M7C_STOCHASTIC_FREEZE_PILOT.md`; includes documented M7C-R claim narrowing and excludes all pilot data from effectiveness evidence |
+| M7D | Learner/evaluator boundary and native-trace normalization | Complete | `milestones/M7D_LEARNER_EVIDENCE_BOUNDARY.md`; diagnostic only and excluded from effectiveness evidence |
 | M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
 
 The order may expose a scientific stopping condition. In particular, failure to
