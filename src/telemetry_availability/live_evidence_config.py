@@ -26,6 +26,9 @@ class EvidenceBoundaryConfig:
     id: str
     diagnostic_only: bool
     source_experiment_id: str
+    source_manifest_file: str
+    source_usable_field: str
+    required_source_labels: dict[str, Any]
     expected_source_cells: int
     learner_period: str
     minimum_trace_link_fraction: float
@@ -136,6 +139,11 @@ def load_evidence_boundary_config(path: str | Path) -> EvidenceBoundaryConfig:
         id=str(root.get("id", "")),
         diagnostic_only=True,
         source_experiment_id=str(root.get("source_experiment_id", "")),
+        source_manifest_file=str(root.get("source_manifest_file", "")),
+        source_usable_field=str(root.get("source_usable_field", "")),
+        required_source_labels=dict(
+            _mapping(root.get("required_source_labels"), "required source labels")
+        ),
         expected_source_cells=_positive_int(
             root.get("expected_source_cells"), "expected_source_cells"
         ),
@@ -154,8 +162,21 @@ def load_evidence_boundary_config(path: str | Path) -> EvidenceBoundaryConfig:
         denied_learner_field_tokens=denied,
         path=config_path,
     )
-    if not config.id or not config.source_experiment_id:
+    if (
+        not config.id
+        or not config.source_experiment_id
+        or not config.source_usable_field
+    ):
         raise ConfigError("experiment ids must be nonempty")
+    if (
+        Path(config.source_manifest_file).name != config.source_manifest_file
+        or not config.source_manifest_file
+    ):
+        raise ConfigError("source_manifest_file must be a plain file name")
+    if config.source_manifest_file not in config.allowed_source_files:
+        raise ConfigError("source_manifest_file must be explicitly allowed")
+    if not config.required_source_labels:
+        raise ConfigError("required_source_labels must not be empty")
     if config.learner_period != "calibration":
         raise ConfigError("learner_period must be calibration")
     raw_files = {profile.raw_telemetry_file for profile in config.profiles}

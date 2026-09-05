@@ -35,6 +35,8 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
         self.assertTrue(self.config.diagnostic_only)
         self.assertEqual(self.config.expected_source_cells, 64)
         self.assertEqual(self.config.learner_period, "calibration")
+        self.assertEqual(self.config.source_manifest_file, "pilot-manifest.json")
+        self.assertEqual(self.config.required_source_labels, {"pilot_only": True})
         self.assertFalse(
             set(self.config.allowed_source_files).intersection(
                 self.config.privileged_source_files
@@ -161,7 +163,7 @@ class LiveEvidenceBoundaryTests(unittest.TestCase):
                     "test": {"requests": 1},
                 },
             }
-            (source / "pilot-manifest.json").write_text(
+            (source / self.config.source_manifest_file).write_text(
                 json.dumps(manifest), encoding="utf-8"
             )
             request_rows = [

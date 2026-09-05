@@ -537,7 +537,7 @@ def qualify_evidence_cell(
     evaluator.mkdir(parents=True, exist_ok=True)
     audit_directory.mkdir(parents=True, exist_ok=True)
 
-    manifest_path = source / "pilot-manifest.json"
+    manifest_path = source / config.source_manifest_file
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     profile = config.profile(str(manifest.get("profile", "")))
     identity = {
@@ -709,8 +709,11 @@ def qualify_evidence_cell(
         "source_experiment_mismatches": int(
             manifest.get("experiment_id") != config.source_experiment_id
         ),
-        "source_not_pilot_only": int(manifest.get("pilot_only") is not True),
-        "source_unusable": int(manifest.get("usable_for_m7_freeze") is not True),
+        "source_label_mismatches": sum(
+            manifest.get(key) != value
+            for key, value in config.required_source_labels.items()
+        ),
+        "source_unusable": int(manifest.get(config.source_usable_field) is not True),
         "missing_allowed_source_files": len(missing_allowed),
         "calibration_request_count_mismatches": int(
             len(learner_rows) != expected_calibration
@@ -797,7 +800,7 @@ def qualify_evidence_boundary(
     root = Path(input_root)
     output = Path(output_directory)
     output.mkdir(parents=True, exist_ok=True)
-    manifest_paths = sorted(root.rglob("pilot-manifest.json"))
+    manifest_paths = sorted(root.rglob(config.source_manifest_file))
     summaries: list[dict[str, Any]] = []
     identities: list[tuple[str, str, str, int]] = []
     source_run_ids: set[str] = set()

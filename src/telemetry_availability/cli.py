@@ -884,6 +884,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                     "experiment_id": config.id,
                     "diagnostic_only": config.diagnostic_only,
                     "source_experiment_id": config.source_experiment_id,
+                    "source_manifest_file": config.source_manifest_file,
+                    "source_usable_field": config.source_usable_field,
                     "expected_source_cells": config.expected_source_cells,
                     "learner_period": config.learner_period,
                     "profiles": [profile.id for profile in config.profiles],
