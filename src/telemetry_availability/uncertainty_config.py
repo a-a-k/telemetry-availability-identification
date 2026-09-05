@@ -15,6 +15,8 @@ class UncertaintyExperimentConfig:
     id: str
     confidence_level: float
     branch_tolerance: float
+    branch_tolerance_scale: float
+    branch_minimum_tolerance: float
     branch_max_nodes_per_domain: int
     simulation_episodes: int
     local_smoke_max_dataset_fits: int
@@ -34,6 +36,8 @@ def load_uncertainty_config(path: str | Path) -> UncertaintyExperimentConfig:
         id=str(experiment["id"]),
         confidence_level=float(experiment["confidence_level"]),
         branch_tolerance=float(experiment["branch_tolerance"]),
+        branch_tolerance_scale=float(experiment["branch_tolerance_scale"]),
+        branch_minimum_tolerance=float(experiment["branch_minimum_tolerance"]),
         branch_max_nodes_per_domain=int(experiment["branch_max_nodes_per_domain"]),
         simulation_episodes=int(experiment["simulation_episodes"]),
         local_smoke_max_dataset_fits=int(experiment["local_smoke_max_dataset_fits"]),
@@ -42,8 +46,14 @@ def load_uncertainty_config(path: str | Path) -> UncertaintyExperimentConfig:
     )
     if not 0.0 < result.confidence_level < 1.0:
         raise ConfigError("confidence_level must lie in (0, 1)")
-    if not 0.0 < result.branch_tolerance < 1.0:
-        raise ConfigError("branch_tolerance must lie in (0, 1)")
+    if not (
+        0.0
+        < result.branch_minimum_tolerance
+        <= result.branch_tolerance
+        < 1.0
+        and result.branch_tolerance_scale > 0.0
+    ):
+        raise ConfigError("branch tolerances and scale are invalid")
     if (
         result.branch_max_nodes_per_domain <= 0
         or result.simulation_episodes <= 0

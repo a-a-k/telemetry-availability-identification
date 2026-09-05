@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import csv
 import json
+import math
 import os
 import statistics
 import time
@@ -74,6 +75,7 @@ SET_FIELDS = (
     "repetition",
     "sample_size",
     "constraint_count",
+    "branch_tolerance",
     "observable_set_covers_truth",
     "target_set_covers_all_truth",
     "transfer_identifiability_status",
@@ -625,6 +627,13 @@ def run_uncertainty_experiment(
                     )
 
                     range_start = time.perf_counter()
+                    branch_tolerance = max(
+                        config.branch_minimum_tolerance,
+                        min(
+                            config.branch_tolerance,
+                            config.branch_tolerance_scale / math.sqrt(sample_size),
+                        ),
+                    )
                     domain_a, domain_b, evidence = extract_simultaneous_evidence(
                         model,
                         prefix,
@@ -635,7 +644,7 @@ def run_uncertainty_experiment(
                         policy,
                         domain_a,
                         domain_b,
-                        config.branch_tolerance,
+                        branch_tolerance,
                         config.branch_max_nodes_per_domain,
                     )
                     range_seconds = time.perf_counter() - range_start
@@ -650,6 +659,7 @@ def run_uncertainty_experiment(
                         {
                             **base,
                             "constraint_count": len(evidence),
+                            "branch_tolerance": branch_tolerance,
                             "observable_set_covers_truth": observable_covered,
                             "target_set_covers_all_truth": target_covered,
                             "transfer_identifiability_status": proposed.identification_status,
@@ -788,6 +798,8 @@ def run_uncertainty_experiment(
         "transfer_config_sha256": file_sha256(config.transfer_config_path),
         "confidence_level": config.confidence_level,
         "branch_tolerance": config.branch_tolerance,
+        "branch_tolerance_scale": config.branch_tolerance_scale,
+        "branch_minimum_tolerance": config.branch_minimum_tolerance,
         "branch_max_nodes_per_domain": config.branch_max_nodes_per_domain,
         "simulation_episodes": config.simulation_episodes,
         "scenarios": [scenario.id for scenario in scenarios],

@@ -47,10 +47,14 @@ union = u + v - u * v / g
 
 with `0 <= u,v <= g <= 1`. A branch-and-bound procedure starts from this box,
 contracts it with all confidence constraints, and discards a box only when its
-interval image cannot intersect a required statistic interval. It stops when
-every dimension is at most 0.02 or after 12,000 visited nodes per domain. If the
-node limit is reached, every unprocessed box is retained; truncation can widen,
-but cannot intentionally narrow, the reported envelope.
+interval image cannot intersect a required statistic interval. The maximum box
+width at sample size `n` is fixed before the full run as
+`max(0.004, min(0.02, 0.20 / sqrt(n)))`: 0.0200, 0.00894, and 0.00447 for the
+three nested sizes. A finer large-sample grid prevents discretization from
+masking statistical contraction. The search also stops after 12,000 visited
+nodes per domain. If the node limit is reached, every unprocessed box is
+retained; truncation can widen, but cannot intentionally narrow, the reported
+envelope.
 
 Monotonic formulas enclose current, split, and added-replica availability over
 the retained boxes. Direct algebra is used for the two changes and the choice
