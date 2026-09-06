@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "id": "m9h_pmx_source_declared_entrypoint",
+  "status": "frozen_before_first_remote_entrypoint_invocation",
+  "diagnostic_only": true,
+  "accuracy_scoring": "forbidden",
+  "m7_evidence_access": "forbidden",
+  "new_live_collection": "forbidden",
+  "scientific_priority": {
+    "method": "PMX_performability_extension",
+    "persists_if_application_cost_is_high": true,
+    "m9g_negative_generalizes_to_source_declared_command": false,
+    "tested_artifacts_represent_all_pmx_or_palladio": false,
+    "retriever_result_generalizes_to_ecosystem": false,
+    "m7_interpretation_changes": false
+  },
+  "evidence": {
+    "m9g": {
+      "run_id": 34049195927,
+      "head_sha": "a69881a3fb6ab48b3ee0980d9c1470d260de3e5b",
+      "conclusion": "success",
+      "decision_status": "historical_output_recovered_launcher_unresolved",
+      "next_milestone": "m9h_pmx_source_entrypoint_recovery_and_manual_pcm_parallel",
+      "artifacts": {
+        "recovery": {
+          "id": 9994208636,
+          "name": "m9g-pmx-recovery-34049195927",
+          "size_in_bytes": 239138,
+          "sha256": "4c593fc596173f0e4468adbfe730980eacf7039e028cfd783ecb3c6ee09f9ca8",
+          "manifest_path": "contract/recovery-contract-manifest.json",
+          "manifest_bytes": 12043,
+          "manifest_sha256": "13f5650792047cb86722ea3b7dd3c734269fd99b8c5a34f201179b6f6523d678",
+          "launcher_manifest_path": "launcher/launcher-probe-manifest.json",
+          "launcher_manifest_bytes": 1637,
+          "launcher_manifest_sha256": "bb9b45c794bb832dabb351459a2170862e83bc92b768a740acb98416c91944c3"
+        },
+        "application": {
+          "id": 9994097055,
+          "name": "m9g-application-delta-34049195927",
+          "size_in_bytes": 4837,
+          "sha256": "b6f5c299192d6e6d6534151cbd05b9cf55b2a20114e7b87be502d8cf9b3a1b5f",
+          "manifest_path": "application-audit-manifest.json",
+          "manifest_bytes": 2731,
+          "manifest_sha256": "e2c9ac012bb9438f414e10913a5f8a51df108d8fa01b36ddb817203952403427"
+        },
+        "decision": {
+          "id": 9994214714,
+          "name": "m9g-joint-decision-34049195927",
+          "size_in_bytes": 2429,
+          "sha256": "86ff94be118f8c92a61d694a8064f7d57096e244ab194c4c6a58113723df9c33",
+          "manifest_path": "decision-manifest.json",
+          "manifest_bytes": 2176,
+          "manifest_sha256": "6581f939781385297c6754f96a32259d101eafd23db26b7c4110294cffe3aaf9"
+        }
+      }
+    },
+    "demonstration": {
+      "commit": "9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2",
+      "jar": {
+        "path": "main.jar",
+        "bytes": 65729095,
+        "sha256": "befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013"
+      },
+      "options_path": "Options.txt",
+      "trace_path": "traces/jaegercustomers.json",
+      "historical_semantic_signature": "4e2f00daefd89ce4ccde30074cbf09deb65a2d44736d6ccf0cacace8f004f695"
+    },
+    "m9f_control": {
+      "config_path": "configs/m9f_pmx_performability_audit.json",
+      "config_bytes": 17804,
+      "config_sha256": "c7eece0639b5d41e57173595021a23ffeaaca93475adad637a079fdadd992c40",
+      "expected_failure_probability": 0.1,
+      "absolute_tolerance": 1e-12
+    }
+  },
+  "source_contract": {
+    "gogo_command": "main:main -of Options.txt",
+    "scope": "main",
+    "function": "main",
+    "descriptor_path": "contract/command-registration-evidence.csv",
+    "descriptor_sha256": "cad7666b099c19b6c47d2906a21c1458961c4824372e7fb4cbe6d47bf7bcecce",
+    "java_source_path": "contract/core-main.java.txt",
+    "java_source_sha256": "0da63b19ce4f261551070f01593096e0e79f14d96f2ac6802911354e0d6544f2",
+    "required_markers": [
+      "osgi.command.scope=main",
+      "osgi.command.function=main",
+      "public void main(String[] args)",
+      "new Option(\"of\", \"options-file\"",
+      "System.exit(0)"
+    ],
+    "candidate_search_allowed": false,
+    "m9g_guessed_candidates_repeated": false
+  },
+  "execution": {
+    "java_distribution": "temurin",
+    "java_version": "11",
+    "jvm_properties": [
+      "-DLog4jContextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector"
+    ],
+    "startup_stabilization_seconds": 20,
+    "internal_timeout_seconds": 180,
+    "stdin_lines": [
+      "main:main -of Options.txt",
+      "exit 0"
+    ],
+    "screen_repeats": 1,
+    "confirmation_repeats": 2,
+    "conditions": [
+      "published_original",
+      "single_error_control"
+    ],
+    "required_core_suffixes": [
+      ".allocation",
+      ".repository",
+      ".resourceenvironment",
+      ".system",
+      ".usagemodel"
+    ],
+    "required_log_markers": [
+      "Executing reader org.palladiosimulator.pmx.reader.otlp.ReaderOpenTelemetry",
+      "Executing transformer org.palladiosimulator.pmx.transformer.tracetointernaltrace.otlp.TransformerTraceToInternalTraceBasic",
+      "Executing transformer org.palladiosimulator.pmx.transformer.internaltracetosystem.otlp.TransformerInternalTraceToSystemBasic",
+      "Executing transformer org.palladiosimulator.pmx.transformer.systemtopcm.TransformerSystemToPCMBasic",
+      "Executing transformer org.palladiosimulator.pmx.transformer.systemtopcm.failureprobabilities.TransformerSystemToPCMFailureDependencies",
+      "Executing writer org.palladiosimulator.pmx.writer.basic.PCMWriter"
+    ]
+  },
+  "manual_pcm_parallel": {
+    "status": "retained_as_separately_labelled_contingency",
+    "credited_as_pmx_automation": false,
+    "executed_or_scored_in_m9h": false,
+    "reference": "docs/milestones/M9D_PALLADIO_ALIGNED_COMPARISON.md"
+  },
+  "runtime": {
+    "python": "3.13.15",
+    "workflow_jobs": 3,
+    "job_timeout_minutes": 360,
+    "remote_only_full_execution": true
+  },
+  "repository_locks": [
+    {
+      "path": "docs/M9H_PMX_SOURCE_ENTRYPOINT_PROTOCOL.md",
+      "bytes": 6034,
+      "sha256": "05ce40cab469151a17004a3d16331bf72063256ebe6834429a7b475086c635f1"
+    },
+    {
+      "path": "docs/milestones/M9G_PMX_RECOVERY_AND_APPLICATION_DELTA.md",
+      "bytes": 10910,
+      "sha256": "b5ab6a0dae141dc9c75e21f4b9d69d78f69f8c6f85fa7d811756aca6e355e4c8"
+    },
+    {
+      "path": "configs/m9g_pmx_recovery.json",
+      "bytes": 9188,
+      "sha256": "96e053c29f37cda6761455e1270c530099a551784d165cfa9f2592fe5bdc2d1c"
+    },
+    {
+      "path": "configs/m9f_pmx_performability_audit.json",
+      "bytes": 17804,
+      "sha256": "c7eece0639b5d41e57173595021a23ffeaaca93475adad637a079fdadd992c40"
+    }
+  ],
+  "manual_actions_log": {
+    "path": "docs/M9H_MANUAL_ACTIONS.csv",
+    "initial_size_in_bytes": 1170,
+    "initial_sha256": "d1d7b263de0dac5534dcb8456c623d17ce0cccf8ac21823ef6063c0c44924e8e"
+  }
+}
