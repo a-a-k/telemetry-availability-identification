@@ -9,6 +9,7 @@ from unittest.mock import patch
 from zipfile import ZipFile
 
 from telemetry_availability.palladio_bootstrap import (
+    apply_palladio_target_platform_lock,
     audit_palladio_example,
     audit_palladio_product,
     audit_palladio_source,
@@ -45,8 +46,14 @@ class PalladioBootstrapTests(unittest.TestCase):
             with ZipFile(archive, "w") as product:
                 product.writestr(
                     "Palladio/features/"
-                    "org.palladiosimulator.reliability.feature_5.2.2.jar",
-                    b"feature",
+                    "org.palladiosimulator.reliability.feature_5.2.2/feature.xml",
+                    b"<feature/>",
+                )
+                product.writestr(
+                    "Palladio/features/"
+                    "org.palladiosimulator.reliability.feature_5.2.2/"
+                    "META-INF/MANIFEST.MF",
+                    b"Manifest-Version: 1.0\n",
                 )
                 product.writestr(
                     "Palladio/plugins/"
@@ -69,8 +76,55 @@ class PalladioBootstrapTests(unittest.TestCase):
             audit = audit_palladio_product(config_path, archive, output)
 
             self.assertEqual(audit["status"], "pinned_match")
-            self.assertEqual(len(audit["reliability_files"]), 3)
+            self.assertEqual(audit["required_feature"]["packaging"], "exploded")
+            self.assertEqual(len(audit["reliability_files"]), 4)
             self.assertTrue(output.is_file())
+
+    def test_historical_target_lock_checks_and_replaces_exact_bytes(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            payload = json.loads(CONFIG.read_text(encoding="utf-8"))
+            lock = payload["target_platform_lock"]
+            original = (
+                "before\n"
+                + lock["mutable_repository_url"]
+                + "\nafter\n"
+            ).encode("utf-8")
+            patched = original.replace(
+                lock["mutable_repository_url"].encode("utf-8"),
+                lock["pinned_repository_url"].encode("utf-8"),
+            )
+            target = root / "palladio.target"
+            target.write_bytes(original)
+            lock["artifact_bytes"] = len(original)
+            lock["original_sha256"] = hashlib.sha256(original).hexdigest()
+            lock["patched_sha256"] = hashlib.sha256(patched).hexdigest()
+            evidence_dir = root / "evidence"
+            evidence_dir.mkdir()
+            evidence_payload = b"fixed repository metadata"
+            (evidence_dir / "content.jar").write_bytes(evidence_payload)
+            lock["repository_evidence"] = [
+                {
+                    "relative_path": "content.jar",
+                    "bytes": len(evidence_payload),
+                    "sha256": hashlib.sha256(evidence_payload).hexdigest(),
+                }
+            ]
+            config_path = root / "lock.json"
+            config_path.write_text(json.dumps(payload), encoding="utf-8")
+
+            manifest = apply_palladio_target_platform_lock(
+                config_path,
+                target,
+                evidence_dir,
+                root / "manifest.json",
+            )
+
+            self.assertEqual(target.read_bytes(), patched)
+            self.assertEqual(
+                manifest["status"], "historical_dependency_lock_applied"
+            )
+            self.assertFalse(manifest["analyzer_checkout_modified"])
 
     @patch(
         "telemetry_availability.palladio_bootstrap._git_head",
@@ -164,6 +218,7 @@ class PalladioBootstrapTests(unittest.TestCase):
         self.assertEqual(workflow.count("timeout-minutes: 360"), 3)
         for job in ("source_build:", "product_audit:", "official_example:"):
             self.assertIn(f"  {job}", workflow)
+        self.assertEqual(workflow.count("lock-palladio-target-platform"), 2)
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ concurrency:
 
 jobs:
   source_build:
-    name: Build the untouched pinned analyzer source
+    name: Build pinned source with the historical dependency lock
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
@@ -47,6 +47,30 @@ jobs:
           python -m telemetry_availability validate-palladio-bootstrap --config configs/m9a_palladio_bootstrap.json
           test "$(git -C palladio-source rev-parse HEAD)" = "a694e570afb705dc9e0470dc321e77b7219dcea4"
 
+      - name: Reconstruct and audit the release-date target platform
+        run: |
+          m9a_maven_repo="${RUNNER_TEMP}/m9a-maven-repository"
+          evidence_dir="workflow-results/m9a-source-build/target-lock/repository"
+          mkdir -p "$m9a_maven_repo" "$evidence_dir"
+          coordinate="$(jq -r '.target_platform_lock.coordinate' configs/m9a_palladio_bootstrap.json)"
+          mvn -B -ntp "-Dmaven.repo.local=${m9a_maven_repo}" \
+            dependency:get "-Dartifact=${coordinate}"
+          target_file="${m9a_maven_repo}/org/palladiosimulator/palladio-target-platforms/0.1.0/palladio-target-platforms-0.1.0-palladio-2023-03.target"
+          repository_url="$(jq -r '.target_platform_lock.pinned_repository_url' configs/m9a_palladio_bootstrap.json)"
+          while IFS= read -r relative_path; do
+            mkdir -p "${evidence_dir}/$(dirname "$relative_path")"
+            curl --fail --location --retry 5 --retry-all-errors \
+              --output "${evidence_dir}/${relative_path}" \
+              "${repository_url}${relative_path}"
+          done < <(jq -r '.target_platform_lock.repository_evidence[].relative_path' configs/m9a_palladio_bootstrap.json)
+          python -m telemetry_availability lock-palladio-target-platform \
+            --config configs/m9a_palladio_bootstrap.json \
+            --target-file "$target_file" \
+            --repository-evidence-dir "$evidence_dir" \
+            --out workflow-results/m9a-source-build/target-lock/manifest.json
+          echo "M9A_MAVEN_REPO=${m9a_maven_repo}" >> "$GITHUB_ENV"
+          git -C palladio-source diff --exit-code
+
       - name: Build unmodified Palladio source
         run: |
           mkdir -p workflow-results/m9a-source-build
@@ -54,7 +78,8 @@ jobs:
           mvn -version > workflow-results/m9a-source-build/maven-version.txt 2>&1
           set -o pipefail
           /usr/bin/time -v -o workflow-results/m9a-source-build/resource-usage.txt \
-            xvfb-run -a mvn -B -ntp -f palladio-source/pom.xml clean verify \
+            xvfb-run -a mvn -B -ntp "-Dmaven.repo.local=${M9A_MAVEN_REPO}" \
+            -f palladio-source/pom.xml clean verify \
             2>&1 | tee workflow-results/m9a-source-build/build.log
           test "${PIPESTATUS[0]}" -eq 0
           git -C palladio-source diff --exit-code
@@ -171,6 +196,30 @@ jobs:
           test "$(git -C palladio-source rev-parse HEAD)" = "a694e570afb705dc9e0470dc321e77b7219dcea4"
           test "$(git -C palladio-examples rev-parse HEAD)" = "4a8dc455216774435fefd42965b848851f7658ee"
 
+      - name: Reconstruct and audit the release-date target platform
+        run: |
+          m9a_maven_repo="${RUNNER_TEMP}/m9a-maven-repository"
+          evidence_dir="workflow-results/m9a-official-example/target-lock/repository"
+          mkdir -p "$m9a_maven_repo" "$evidence_dir"
+          coordinate="$(jq -r '.target_platform_lock.coordinate' configs/m9a_palladio_bootstrap.json)"
+          mvn -B -ntp "-Dmaven.repo.local=${m9a_maven_repo}" \
+            dependency:get "-Dartifact=${coordinate}"
+          target_file="${m9a_maven_repo}/org/palladiosimulator/palladio-target-platforms/0.1.0/palladio-target-platforms-0.1.0-palladio-2023-03.target"
+          repository_url="$(jq -r '.target_platform_lock.pinned_repository_url' configs/m9a_palladio_bootstrap.json)"
+          while IFS= read -r relative_path; do
+            mkdir -p "${evidence_dir}/$(dirname "$relative_path")"
+            curl --fail --location --retry 5 --retry-all-errors \
+              --output "${evidence_dir}/${relative_path}" \
+              "${repository_url}${relative_path}"
+          done < <(jq -r '.target_platform_lock.repository_evidence[].relative_path' configs/m9a_palladio_bootstrap.json)
+          python -m telemetry_availability lock-palladio-target-platform \
+            --config configs/m9a_palladio_bootstrap.json \
+            --target-file "$target_file" \
+            --repository-evidence-dir "$evidence_dir" \
+            --out workflow-results/m9a-official-example/target-lock/manifest.json
+          echo "M9A_MAVEN_REPO=${m9a_maven_repo}" >> "$GITHUB_ENV"
+          git -C palladio-source diff --exit-code
+
       - name: Overlay the recorded headless test harness only
         run: |
           test_bundle="palladio-source/tests/org.palladiosimulator.reliability.tests"
@@ -196,7 +245,8 @@ jobs:
           mvn -version > workflow-results/m9a-official-example/maven-version.txt 2>&1
           set -o pipefail
           /usr/bin/time -v -o workflow-results/m9a-official-example/resource-usage.txt \
-            xvfb-run -a mvn -B -ntp -f palladio-source/pom.xml clean verify \
+            xvfb-run -a mvn -B -ntp "-Dmaven.repo.local=${M9A_MAVEN_REPO}" \
+            -f palladio-source/pom.xml clean verify \
             2>&1 | tee workflow-results/m9a-official-example/build-and-test.log
           test "${PIPESTATUS[0]}" -eq 0
 

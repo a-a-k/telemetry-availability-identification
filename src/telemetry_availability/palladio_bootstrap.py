@@ -35,12 +35,32 @@ class PalladioExampleLock:
 
 
 @dataclass(frozen=True)
+class PalladioFileLock:
+    relative_path: str
+    bytes: int
+    sha256: str
+
+
+@dataclass(frozen=True)
+class PalladioTargetPlatformLock:
+    coordinate: str
+    artifact_url: str
+    artifact_bytes: int
+    original_sha256: str
+    mutable_repository_url: str
+    pinned_repository_url: str
+    patched_sha256: str
+    historical_basis: str
+    repository_evidence: tuple[PalladioFileLock, ...]
+
+
+@dataclass(frozen=True)
 class PalladioProductLock:
     url: str
     expected_bytes: int
     sha256: str | None
-    required_feature: str
-    required_solver_bundle: str
+    required_feature_id: str
+    required_solver_bundle_id: str
 
 
 @dataclass(frozen=True)
@@ -57,6 +77,7 @@ class PalladioBootstrapConfig:
     id: str
     diagnostic_only: bool
     analyzer: PalladioSourceLock
+    target_platform_lock: PalladioTargetPlatformLock
     official_example: PalladioExampleLock
     product: PalladioProductLock
     runtime: PalladioRuntimeLock
@@ -89,6 +110,20 @@ def _commit(data: Mapping[str, Any], key: str, label: str) -> str:
     return value
 
 
+def _sha256_string(data: Mapping[str, Any], key: str, label: str) -> str:
+    value = _required_string(data, key, label)
+    if not _SHA256_RE.fullmatch(value):
+        raise ValueError(f"{label}.{key} must be a lowercase SHA-256")
+    return value
+
+
+def _positive_integer(data: Mapping[str, Any], key: str, label: str) -> int:
+    value = data.get(key)
+    if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+        raise ValueError(f"{label}.{key} must be a positive integer")
+    return value
+
+
 def load_palladio_bootstrap_config(path: Path) -> PalladioBootstrapConfig:
     with path.open("r", encoding="utf-8") as handle:
         root = _mapping(json.load(handle), "root")
@@ -118,6 +153,76 @@ def load_palladio_bootstrap_config(path: Path) -> PalladioBootstrapConfig:
         raise ValueError("analyzer.repository must be the official repository")
     if analyzer.release_tag != f"releases/{analyzer.bundle_version}":
         raise ValueError("analyzer release tag and bundle version disagree")
+
+    target_data = _mapping(root.get("target_platform_lock"), "target_platform_lock")
+    evidence_data = target_data.get("repository_evidence")
+    if not isinstance(evidence_data, list) or not evidence_data:
+        raise ValueError("target_platform_lock.repository_evidence must be non-empty")
+    repository_evidence: list[PalladioFileLock] = []
+    seen_evidence_paths: set[str] = set()
+    for index, raw_lock in enumerate(evidence_data):
+        label = f"target_platform_lock.repository_evidence[{index}]"
+        lock_data = _mapping(raw_lock, label)
+        relative_path = _required_string(lock_data, "relative_path", label)
+        path_parts = Path(relative_path).parts
+        if (
+            Path(relative_path).is_absolute()
+            or ".." in path_parts
+            or relative_path in seen_evidence_paths
+        ):
+            raise ValueError(f"{label}.relative_path must be unique and relative")
+        seen_evidence_paths.add(relative_path)
+        repository_evidence.append(
+            PalladioFileLock(
+                relative_path=relative_path,
+                bytes=_positive_integer(lock_data, "bytes", label),
+                sha256=_sha256_string(lock_data, "sha256", label),
+            )
+        )
+    target_platform_lock = PalladioTargetPlatformLock(
+        coordinate=_required_string(target_data, "coordinate", "target_platform_lock"),
+        artifact_url=_required_string(
+            target_data, "artifact_url", "target_platform_lock"
+        ),
+        artifact_bytes=_positive_integer(
+            target_data, "artifact_bytes", "target_platform_lock"
+        ),
+        original_sha256=_sha256_string(
+            target_data, "original_sha256", "target_platform_lock"
+        ),
+        mutable_repository_url=_required_string(
+            target_data, "mutable_repository_url", "target_platform_lock"
+        ),
+        pinned_repository_url=_required_string(
+            target_data, "pinned_repository_url", "target_platform_lock"
+        ),
+        patched_sha256=_sha256_string(
+            target_data, "patched_sha256", "target_platform_lock"
+        ),
+        historical_basis=_required_string(
+            target_data, "historical_basis", "target_platform_lock"
+        ),
+        repository_evidence=tuple(repository_evidence),
+    )
+    if target_platform_lock.coordinate != (
+        "org.palladiosimulator:palladio-target-platforms:"
+        "0.1.0:target:palladio-2023-03"
+    ):
+        raise ValueError("target-platform coordinate must remain the upstream one")
+    if target_platform_lock.artifact_url != (
+        "https://repo.maven.apache.org/maven2/org/palladiosimulator/"
+        "palladio-target-platforms/0.1.0/"
+        "palladio-target-platforms-0.1.0-palladio-2023-03.target"
+    ):
+        raise ValueError("target-platform artifact URL must be the official Maven URL")
+    if target_platform_lock.mutable_repository_url != (
+        "https://updatesite.mdsd.tools/ecore-workflow/releases/latest/"
+    ):
+        raise ValueError("unexpected mutable MDSD repository URL")
+    if target_platform_lock.pinned_repository_url != (
+        "https://updatesite.mdsd.tools/ecore-workflow/releases/1.0.0/"
+    ):
+        raise ValueError("MDSD Ecore Workflow must be historically pinned to 1.0.0")
 
     example_data = _mapping(root.get("official_example"), "official_example")
     expected_probability = example_data.get("expected_success_probability")
@@ -167,22 +272,15 @@ def load_palladio_bootstrap_config(path: Path) -> PalladioBootstrapConfig:
         not isinstance(product_sha, str) or not _SHA256_RE.fullmatch(product_sha)
     ):
         raise ValueError("product.sha256 must be a lowercase SHA-256 or null")
-    expected_bytes = product_data.get("expected_bytes")
-    if (
-        isinstance(expected_bytes, bool)
-        or not isinstance(expected_bytes, int)
-        or expected_bytes <= 0
-    ):
-        raise ValueError("product.expected_bytes must be a positive integer")
     product = PalladioProductLock(
         url=_required_string(product_data, "url", "product"),
-        expected_bytes=expected_bytes,
+        expected_bytes=_positive_integer(product_data, "expected_bytes", "product"),
         sha256=product_sha,
-        required_feature=_required_string(
-            product_data, "required_feature", "product"
+        required_feature_id=_required_string(
+            product_data, "required_feature_id", "product"
         ),
-        required_solver_bundle=_required_string(
-            product_data, "required_solver_bundle", "product"
+        required_solver_bundle_id=_required_string(
+            product_data, "required_solver_bundle_id", "product"
         ),
     )
     release_path = f"/releases/{analyzer.bundle_version}/"
@@ -190,14 +288,12 @@ def load_palladio_bootstrap_config(path: Path) -> PalladioBootstrapConfig:
         "https://updatesite.palladio-simulator.com/palladio-bench-product/"
     ) or release_path not in product.url:
         raise ValueError("product URL must be the versioned official release URL")
-    if product.required_feature != (
-        f"org.palladiosimulator.reliability.feature_{analyzer.bundle_version}.jar"
+    if product.required_feature_id != "org.palladiosimulator.reliability.feature":
+        raise ValueError("unexpected required reliability feature ID")
+    if product.required_solver_bundle_id != (
+        "org.palladiosimulator.reliability.solver"
     ):
-        raise ValueError("required feature version disagrees with analyzer version")
-    if product.required_solver_bundle != (
-        f"org.palladiosimulator.reliability.solver_{analyzer.bundle_version}.jar"
-    ):
-        raise ValueError("required solver version disagrees with analyzer version")
+        raise ValueError("unexpected required reliability solver bundle ID")
 
     runtime_data = _mapping(root.get("runtime"), "runtime")
     runtime = PalladioRuntimeLock(
@@ -220,6 +316,7 @@ def load_palladio_bootstrap_config(path: Path) -> PalladioBootstrapConfig:
         id=experiment_id,
         diagnostic_only=True,
         analyzer=analyzer,
+        target_platform_lock=target_platform_lock,
         official_example=example,
         product=product,
         runtime=runtime,
@@ -247,6 +344,103 @@ def _write_json(path: Path, payload: Mapping[str, Any]) -> None:
         handle.write("\n")
 
 
+def apply_palladio_target_platform_lock(
+    config_path: Path,
+    target_file: Path,
+    repository_evidence_dir: Path,
+    output: Path,
+) -> dict[str, Any]:
+    """Replace one mutable upstream URL in Maven's cached target descriptor.
+
+    The analyzer checkout is deliberately not changed.  The replacement
+    reconstructs the external dependency state that existed when Palladio
+    5.2.2 was published, and every byte used to justify that replacement is
+    checked against the committed lock before the cached descriptor is edited.
+    """
+
+    config = load_palladio_bootstrap_config(config_path)
+    lock = config.target_platform_lock
+    if not target_file.is_file():
+        raise ValueError("upstream Palladio target-platform artifact is missing")
+    original_bytes = target_file.read_bytes()
+    if len(original_bytes) != lock.artifact_bytes:
+        raise ValueError(
+            f"target-platform artifact has {len(original_bytes)} bytes, "
+            f"expected {lock.artifact_bytes}"
+        )
+    original_sha = hashlib.sha256(original_bytes).hexdigest()
+    if original_sha != lock.original_sha256:
+        raise ValueError(
+            f"target-platform artifact SHA-256 is {original_sha}, expected "
+            f"{lock.original_sha256}"
+        )
+    try:
+        original_text = original_bytes.decode("utf-8")
+    except UnicodeDecodeError as error:
+        raise ValueError("target-platform artifact is not UTF-8") from error
+    replacement_count = original_text.count(lock.mutable_repository_url)
+    if replacement_count != 1:
+        raise ValueError(
+            "target-platform artifact must contain the mutable repository URL once"
+        )
+    patched_bytes = original_text.replace(
+        lock.mutable_repository_url, lock.pinned_repository_url
+    ).encode("utf-8")
+    patched_sha = hashlib.sha256(patched_bytes).hexdigest()
+    if patched_sha != lock.patched_sha256:
+        raise ValueError(
+            f"patched target-platform SHA-256 is {patched_sha}, expected "
+            f"{lock.patched_sha256}"
+        )
+
+    evidence: list[dict[str, Any]] = []
+    for file_lock in lock.repository_evidence:
+        evidence_path = repository_evidence_dir / file_lock.relative_path
+        if not evidence_path.is_file():
+            raise ValueError(
+                f"pinned repository evidence is missing: {file_lock.relative_path}"
+            )
+        actual_bytes = evidence_path.stat().st_size
+        actual_sha = _sha256(evidence_path)
+        if actual_bytes != file_lock.bytes or actual_sha != file_lock.sha256:
+            raise ValueError(
+                "pinned repository evidence disagrees with its lock: "
+                f"{file_lock.relative_path}"
+            )
+        evidence.append(
+            {
+                "relative_path": file_lock.relative_path,
+                "bytes": actual_bytes,
+                "sha256": actual_sha,
+            }
+        )
+
+    target_file.write_bytes(patched_bytes)
+    payload: dict[str, Any] = {
+        "schema_version": 1,
+        "kind": "palladio_historical_target_platform_lock",
+        "diagnostic_only": True,
+        "coordinate": lock.coordinate,
+        "artifact_url": lock.artifact_url,
+        "original_artifact": {
+            "bytes": len(original_bytes),
+            "sha256": original_sha,
+        },
+        "replacement": {
+            "from": lock.mutable_repository_url,
+            "to": lock.pinned_repository_url,
+            "count": replacement_count,
+            "patched_sha256": patched_sha,
+        },
+        "historical_basis": lock.historical_basis,
+        "repository_evidence": evidence,
+        "analyzer_checkout_modified": False,
+        "status": "historical_dependency_lock_applied",
+    }
+    _write_json(output, payload)
+    return payload
+
+
 def audit_palladio_source(
     config_path: Path, checkout: Path, build_log: Path, output: Path
 ) -> dict[str, Any]:
@@ -264,8 +458,16 @@ def audit_palladio_source(
         / "target"
         / "repository"
     )
-    feature_matches = list(site.rglob(config.product.required_feature))
-    solver_matches = list(site.rglob(config.product.required_solver_bundle))
+    feature_name = (
+        f"{config.product.required_feature_id}_"
+        f"{config.analyzer.bundle_version}.jar"
+    )
+    solver_name = (
+        f"{config.product.required_solver_bundle_id}_"
+        f"{config.analyzer.bundle_version}.jar"
+    )
+    feature_matches = list(site.rglob(feature_name))
+    solver_matches = list(site.rglob(solver_name))
     if len(feature_matches) != 1 or len(solver_matches) != 1:
         raise ValueError("built update site lacks the pinned feature or solver bundle")
 
@@ -315,30 +517,73 @@ def audit_palladio_product(
             f"product archive SHA-256 is {actual_sha}, expected {config.product.sha256}"
         )
 
+    expected_feature_stem = (
+        f"{config.product.required_feature_id}_{config.analyzer.bundle_version}"
+    )
+    expected_solver_name = (
+        f"{config.product.required_solver_bundle_id}_"
+        f"{config.analyzer.bundle_version}.jar"
+    )
     try:
         with ZipFile(archive) as product_zip:
             files = [name for name in product_zip.namelist() if not name.endswith("/")]
-            feature_paths = [
+            jar_feature_paths = [
                 name
                 for name in files
-                if Path(name).name == config.product.required_feature
+                if Path(name).name == f"{expected_feature_stem}.jar"
+            ]
+            exploded_feature_paths = [
+                name
+                for name in files
+                if Path(name).name == "feature.xml"
+                and Path(name).parent.name == expected_feature_stem
             ]
             solver_paths = [
                 name
                 for name in files
-                if Path(name).name == config.product.required_solver_bundle
+                if Path(name).name == expected_solver_name
             ]
+            feature_paths = jar_feature_paths + exploded_feature_paths
             reliability_paths = sorted(
                 name
                 for name in files
                 if (
-                    "/plugins/org.palladiosimulator.reliability" in name
-                    or "/features/org.palladiosimulator.reliability" in name
+                    (
+                        "plugins" in Path(name).parts
+                        and Path(name).name.startswith(
+                            "org.palladiosimulator.reliability"
+                        )
+                        and name.endswith(".jar")
+                        and ".source_" not in name
+                    )
+                    or (
+                        "features" in Path(name).parts
+                        and (
+                            Path(name).name == f"{expected_feature_stem}.jar"
+                            or expected_feature_stem in Path(name).parts
+                        )
+                    )
                 )
-                and name.endswith(".jar")
-                and ".source_" not in name
             )
             if len(feature_paths) != 1 or len(solver_paths) != 1:
+                diagnostic_payload = {
+                    "schema_version": 1,
+                    "kind": "palladio_bench_product_audit",
+                    "diagnostic_only": True,
+                    "source_url": config.product.url,
+                    "archive": {
+                        "bytes": actual_bytes,
+                        "sha256": actual_sha,
+                        "expected_sha256": config.product.sha256,
+                    },
+                    "expected_feature_stem": expected_feature_stem,
+                    "expected_solver_name": expected_solver_name,
+                    "feature_candidates": feature_paths,
+                    "solver_candidates": solver_paths,
+                    "reliability_archive_candidates": reliability_paths,
+                    "status": "bundle_inventory_mismatch",
+                }
+                _write_json(output, diagnostic_payload)
                 raise ValueError(
                     "product archive lacks the exact pinned reliability feature or solver"
                 )
@@ -369,7 +614,10 @@ def audit_palladio_product(
             "expected_sha256": config.product.sha256,
             "pin_status": pin_status,
         },
-        "required_feature": feature_paths[0],
+        "required_feature": {
+            "relative_path": feature_paths[0],
+            "packaging": "jar" if jar_feature_paths else "exploded",
+        },
         "required_solver_bundle": solver_paths[0],
         "reliability_files": reliability_files,
         "status": pin_status,

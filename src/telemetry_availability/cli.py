@@ -53,6 +53,7 @@ from .live_validation_config import load_frozen_live_validation_config
 from .m7_diagnostic_analysis import run_m7_diagnostic_audit
 from .moments import structural_moment_rows
 from .palladio_bootstrap import (
+    apply_palladio_target_platform_lock,
     audit_palladio_example,
     audit_palladio_product,
     audit_palladio_source,
@@ -499,6 +500,17 @@ def build_parser() -> argparse.ArgumentParser:
         help="validate the remote-only pinned Palladio bootstrap contract",
     )
     validate_palladio.add_argument("--config", required=True, type=Path)
+
+    lock_palladio_target = commands.add_parser(
+        "lock-palladio-target-platform",
+        help="audit and historically pin Palladio's mutable target dependency",
+    )
+    lock_palladio_target.add_argument("--config", required=True, type=Path)
+    lock_palladio_target.add_argument("--target-file", required=True, type=Path)
+    lock_palladio_target.add_argument(
+        "--repository-evidence-dir", required=True, type=Path
+    )
+    lock_palladio_target.add_argument("--out", required=True, type=Path)
 
     audit_palladio_source_parser = commands.add_parser(
         "audit-palladio-source",
@@ -1185,6 +1197,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                 sort_keys=True,
             )
         )
+        return 0
+
+    if args.command == "lock-palladio-target-platform":
+        manifest = apply_palladio_target_platform_lock(
+            args.config,
+            args.target_file,
+            args.repository_evidence_dir,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
         return 0
 
     if args.command == "audit-palladio-source":
