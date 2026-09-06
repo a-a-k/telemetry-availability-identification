@@ -83,6 +83,9 @@ jobs:
       - name: Validate Palladio bootstrap contract
         run: python -m telemetry_availability validate-palladio-bootstrap --config configs/m9a_palladio_bootstrap.json
 
+      - name: Validate Palladio semantic-control contract
+        run: python -m telemetry_availability validate-palladio-controls --config configs/m9b_palladio_semantic_controls.json
+
       - name: Ingest both live-contract fixtures
         if: ${{ matrix.python-version == '3.13' }}
         run: |

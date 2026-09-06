@@ -59,6 +59,13 @@ from .palladio_bootstrap import (
     audit_palladio_source,
     load_palladio_bootstrap_config,
 )
+from .palladio_controls import (
+    audit_palladio_capability_source,
+    audit_palladio_control_models,
+    audit_palladio_control_results,
+    generate_palladio_control_models,
+    load_palladio_controls_config,
+)
 from .reduction_experiment import (
     aggregate_reduction_experiment,
     run_reduction_experiment,
@@ -554,6 +561,61 @@ def build_parser() -> argparse.ArgumentParser:
         "--example-checkout", required=True, type=Path
     )
     audit_palladio_example_parser.add_argument("--out", required=True, type=Path)
+
+    validate_palladio_controls = commands.add_parser(
+        "validate-palladio-controls",
+        help="validate the frozen remote-only M9B Palladio control contract",
+    )
+    validate_palladio_controls.add_argument("--config", required=True, type=Path)
+
+    generate_palladio_controls = commands.add_parser(
+        "generate-palladio-controls",
+        help="generate the frozen hand-checkable PCM control models",
+    )
+    generate_palladio_controls.add_argument("--config", required=True, type=Path)
+    generate_palladio_controls.add_argument("--out", required=True, type=Path)
+    generate_palladio_controls.add_argument(
+        "--manifest", required=True, type=Path
+    )
+
+    audit_palladio_models = commands.add_parser(
+        "audit-palladio-control-models",
+        help="independently parse and audit generated M9B PCM control models",
+    )
+    audit_palladio_models.add_argument("--config", required=True, type=Path)
+    audit_palladio_models.add_argument("--models", required=True, type=Path)
+    audit_palladio_models.add_argument("--pcm-ecore", required=True, type=Path)
+    audit_palladio_models.add_argument(
+        "--bootstrap-config", required=True, type=Path
+    )
+    audit_palladio_models.add_argument("--out", required=True, type=Path)
+
+    audit_palladio_capabilities = commands.add_parser(
+        "audit-palladio-capability-source",
+        help="audit pinned replication and communication semantics in analyzer source",
+    )
+    audit_palladio_capabilities.add_argument(
+        "--config", required=True, type=Path
+    )
+    audit_palladio_capabilities.add_argument(
+        "--analyzer-checkout", required=True, type=Path
+    )
+    audit_palladio_capabilities.add_argument("--out", required=True, type=Path)
+
+    audit_palladio_results = commands.add_parser(
+        "audit-palladio-control-results",
+        help="audit M9B Palladio outputs against the frozen independent oracles",
+    )
+    audit_palladio_results.add_argument("--config", required=True, type=Path)
+    audit_palladio_results.add_argument(
+        "--model-manifest", required=True, type=Path
+    )
+    audit_palladio_results.add_argument(
+        "--capability-manifest", required=True, type=Path
+    )
+    audit_palladio_results.add_argument("--result", required=True, type=Path)
+    audit_palladio_results.add_argument("--models", required=True, type=Path)
+    audit_palladio_results.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -1227,6 +1289,65 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.result,
             args.analyzer_checkout,
             args.example_checkout,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-palladio-controls":
+        config = load_palladio_controls_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "diagnostic_only": config.diagnostic_only,
+                    "comparison_status": config.comparison_status,
+                    "analyzer_commit": config.analyzer_commit,
+                    "model_count": len(config.models),
+                    "case_count": len(config.cases),
+                    "repeat_runs": config.repeat_runs,
+                    "job_timeout_minutes": config.job_timeout_minutes,
+                    "remote_only": config.remote_only,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "generate-palladio-controls":
+        manifest = generate_palladio_control_models(
+            args.config, args.out, args.manifest
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-control-models":
+        manifest = audit_palladio_control_models(
+            args.config,
+            args.models,
+            args.pcm_ecore,
+            args.bootstrap_config,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-capability-source":
+        manifest = audit_palladio_capability_source(
+            args.config, args.analyzer_checkout, args.out
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-control-results":
+        manifest = audit_palladio_control_results(
+            args.config,
+            args.model_manifest,
+            args.capability_manifest,
+            args.result,
+            args.models,
             args.out,
         )
         print(json.dumps(manifest, indent=2, sort_keys=True))

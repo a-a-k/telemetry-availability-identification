@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "id": "m9b_palladio_semantic_controls",
+  "diagnostic_only": true,
+  "comparison_status": "not_started",
+  "analyzer": {
+    "repository": "https://github.com/PalladioSimulator/Palladio-Analyzer-Reliability.git",
+    "commit": "a694e570afb705dc9e0470dc321e77b7219dcea4",
+    "visitor_path": "bundles/org.palladiosimulator.reliability.solver/src/org/palladiosimulator/reliability/solver/pcm2markov/MarkovSeffVisitor.java",
+    "visitor_bytes": 60862,
+    "visitor_sha256": "b95c1a89bc51857f7e51b56f7e03e7af22f960090429926962ee30e2d085040e",
+    "source_markers": [
+      "The Reliability solver does not support replication yet",
+      "Picking one of the called Allocation contexts",
+      "names.add(\"MessageTransfer(2)\");"
+    ]
+  },
+  "pcm_metamodel": {
+    "repository": "https://github.com/PalladioSimulator/Palladio-Core-PCM.git",
+    "release_tag": "releases/5.2.2",
+    "commit": "5fbcc3409e02687881f88ab78b6242d8acd2677c",
+    "ecore_path": "bundles/org.palladiosimulator.pcm/model/pcm.ecore",
+    "ecore_bytes": 312718,
+    "ecore_sha256": "04a1c8b753bdf4e957b7ba7d00440ab09a1774ceca758356210c886138efe5c8",
+    "network_documentation_marker": "Specifies the probability that a service call over this communication link fails."
+  },
+  "bootstrap_lock": {
+    "config_path": "configs/m9a_palladio_bootstrap.json",
+    "config_sha256": "a7fd6e784612b4ba2df06f4ef2de4a4755a23a873540857f181831718825bc1d"
+  },
+  "repeat_runs": 2,
+  "probability_tolerance": 1e-12,
+  "network_parameter_contract": {
+    "documented_call_failure_probability": 0.1,
+    "documented_call_success_reference": 0.9,
+    "raw_q_solver_success_oracle": 0.81,
+    "mapped_link_failure_probability": 0.05131670194948623,
+    "mapped_solver_success_oracle": 0.9,
+    "mapping": "q_link = 1 - sqrt(1 - p_call), assuming equal independent request and response transfers"
+  },
+  "runtime": {
+    "java_distribution": "temurin",
+    "java_version": 17,
+    "job_timeout_minutes": 360,
+    "remote_only": true
+  },
+  "models": [
+    {
+      "id": "software_semantics",
+      "kind": "software_suite",
+      "expected_physical_states": 1,
+      "cases": [
+        {
+          "id": "single_p0",
+          "kind": "single",
+          "parameters": {"failure_probability": 0.0},
+          "expected_success_probability": 1.0
+        },
+        {
+          "id": "single_p20",
+          "kind": "single",
+          "parameters": {"failure_probability": 0.2},
+          "expected_success_probability": 0.8
+        },
+        {
+          "id": "single_p100",
+          "kind": "single",
+          "parameters": {"failure_probability": 1.0},
+          "expected_success_probability": 0.0
+        },
+        {
+          "id": "fallback_perfect_alternative",
+          "kind": "fallback",
+          "parameters": {
+            "primary_failure_probability": 0.2,
+            "alternative_failure_probability": 0.0
+          },
+          "expected_success_probability": 1.0
+        },
+        {
+          "id": "fallback_nominal",
+          "kind": "fallback",
+          "parameters": {
+            "primary_failure_probability": 0.2,
+            "alternative_failure_probability": 0.3
+          },
+          "expected_success_probability": 0.94
+        },
+        {
+          "id": "fallback_failed_alternative",
+          "kind": "fallback",
+          "parameters": {
+            "primary_failure_probability": 0.2,
+            "alternative_failure_probability": 1.0
+          },
+          "expected_success_probability": 0.8
+        },
+        {
+          "id": "conditional_b0",
+          "kind": "conditional",
+          "parameters": {
+            "branch_probability": 0.0,
+            "failure_probability": 0.4
+          },
+          "expected_success_probability": 1.0
+        },
+        {
+          "id": "conditional_b25",
+          "kind": "conditional",
+          "parameters": {
+            "branch_probability": 0.25,
+            "failure_probability": 0.4
+          },
+          "expected_success_probability": 0.9
+        },
+        {
+          "id": "conditional_b100",
+          "kind": "conditional",
+          "parameters": {
+            "branch_probability": 1.0,
+            "failure_probability": 0.4
+          },
+          "expected_success_probability": 0.6
+        }
+      ]
+    },
+    {
+      "id": "network_q0",
+      "kind": "network",
+      "expected_physical_states": 1,
+      "cases": [
+        {
+          "id": "network_q0",
+          "kind": "network",
+          "parameters": {"link_failure_probability": 0.0},
+          "expected_success_probability": 1.0
+        }
+      ]
+    },
+    {
+      "id": "network_q10_raw",
+      "kind": "network",
+      "expected_physical_states": 1,
+      "cases": [
+        {
+          "id": "network_q10_raw",
+          "kind": "network",
+          "parameters": {"link_failure_probability": 0.1},
+          "expected_success_probability": 0.81
+        }
+      ]
+    },
+    {
+      "id": "network_call_failure_10_mapped",
+      "kind": "network",
+      "expected_physical_states": 1,
+      "cases": [
+        {
+          "id": "network_call_failure_10_mapped",
+          "kind": "network",
+          "parameters": {"link_failure_probability": 0.05131670194948623},
+          "expected_success_probability": 0.9
+        }
+      ]
+    },
+    {
+      "id": "network_q100",
+      "kind": "network",
+      "expected_physical_states": 1,
+      "cases": [
+        {
+          "id": "network_q100",
+          "kind": "network",
+          "parameters": {"link_failure_probability": 1.0},
+          "expected_success_probability": 0.0
+        }
+      ]
+    },
+    {
+      "id": "independent_redundant_paths",
+      "kind": "redundancy",
+      "expected_physical_states": 4,
+      "cases": [
+        {
+          "id": "independent_redundant_paths",
+          "kind": "redundant_paths",
+          "parameters": {
+            "common_mttf": 1.0,
+            "common_mttr": 0.0,
+            "path_a_mttf": 0.8,
+            "path_a_mttr": 0.2,
+            "path_b_mttf": 0.7,
+            "path_b_mttr": 0.3
+          },
+          "expected_success_probability": 0.94
+        }
+      ]
+    },
+    {
+      "id": "shared_domain_redundant_paths",
+      "kind": "redundancy",
+      "expected_physical_states": 8,
+      "cases": [
+        {
+          "id": "shared_domain_redundant_paths",
+          "kind": "shared_domain",
+          "parameters": {
+            "common_mttf": 0.9,
+            "common_mttr": 0.1,
+            "path_a_mttf": 0.8,
+            "path_a_mttr": 0.2,
+            "path_b_mttf": 0.7,
+            "path_b_mttr": 0.3
+          },
+          "expected_success_probability": 0.846
+        }
+      ]
+    }
+  ]
+}

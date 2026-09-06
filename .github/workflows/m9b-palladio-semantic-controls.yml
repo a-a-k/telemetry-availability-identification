@@ -1,0 +1,249 @@
+name: M9B Palladio Semantic Controls
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m9b-palladio-semantic-controls-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  model_contract:
+    name: Generate and independently audit the frozen PCM controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out study repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install and validate the M9B contract
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability validate-palladio-controls \
+            --config configs/m9b_palladio_semantic_controls.json
+
+      - name: Download the pinned PCM 5.2.2 metamodel evidence
+        run: |
+          mkdir -p workflow-results/m9b-model-contract
+          pcm_commit="$(jq -r '.pcm_metamodel.commit' configs/m9b_palladio_semantic_controls.json)"
+          pcm_path="$(jq -r '.pcm_metamodel.ecore_path' configs/m9b_palladio_semantic_controls.json)"
+          curl --fail --location --retry 5 --retry-all-errors \
+            --output workflow-results/m9b-model-contract/pcm.ecore \
+            "https://raw.githubusercontent.com/PalladioSimulator/Palladio-Core-PCM/${pcm_commit}/${pcm_path}"
+
+      - name: Generate and structurally audit all control models
+        run: |
+          set -o pipefail
+          /usr/bin/time -v -o workflow-results/m9b-model-contract/resource-usage.txt \
+            bash -c '
+              python -m telemetry_availability generate-palladio-controls \
+                --config configs/m9b_palladio_semantic_controls.json \
+                --out workflow-results/m9b-model-contract/models \
+                --manifest workflow-results/m9b-model-contract/generation-manifest.json &&
+              python -m telemetry_availability audit-palladio-control-models \
+                --config configs/m9b_palladio_semantic_controls.json \
+                --models workflow-results/m9b-model-contract/models \
+                --pcm-ecore workflow-results/m9b-model-contract/pcm.ecore \
+                --bootstrap-config configs/m9a_palladio_bootstrap.json \
+                --out workflow-results/m9b-model-contract/model-contract-manifest.json
+            ' 2>&1 | tee workflow-results/m9b-model-contract/model-contract.log
+          test "${PIPESTATUS[0]}" -eq 0
+
+      - name: Retain the exact audited PCM inputs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9b-palladio-model-contract-${{ github.run_id }}
+          path: workflow-results/m9b-model-contract
+          if-no-files-found: error
+          retention-days: 90
+
+  semantic_controls:
+    name: Execute all controls through pinned Palladio 5.2.2
+    needs: model_contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out study repository
+        uses: actions/checkout@v7
+
+      - name: Check out pinned Palladio reliability source
+        uses: actions/checkout@v7
+        with:
+          repository: PalladioSimulator/Palladio-Analyzer-Reliability
+          ref: a694e570afb705dc9e0470dc321e77b7219dcea4
+          path: palladio-source
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Set up pinned Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install and validate the M9B contract
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability validate-palladio-controls \
+            --config configs/m9b_palladio_semantic_controls.json
+          test "$(git -C palladio-source rev-parse HEAD)" = \
+            "a694e570afb705dc9e0470dc321e77b7219dcea4"
+
+      - name: Download the independently audited PCM inputs
+        uses: actions/download-artifact@v8
+        with:
+          name: m9b-palladio-model-contract-${{ github.run_id }}
+          path: workflow-input/m9b-model-contract
+
+      - name: Reconstruct and audit the release-date target platform
+        run: |
+          m9b_maven_repo="${RUNNER_TEMP}/m9b-maven-repository"
+          evidence_dir="workflow-results/m9b-semantic-controls/target-lock/repository"
+          mkdir -p "$m9b_maven_repo" "$evidence_dir"
+          coordinate="$(jq -r '.target_platform_lock.coordinate' configs/m9a_palladio_bootstrap.json)"
+          mvn -B -ntp "-Dmaven.repo.local=${m9b_maven_repo}" \
+            dependency:get "-Dartifact=${coordinate}"
+          target_file="${m9b_maven_repo}/org/palladiosimulator/palladio-target-platforms/0.1.0/palladio-target-platforms-0.1.0-palladio-2023-03.target"
+          repository_url="$(jq -r '.target_platform_lock.pinned_repository_url' configs/m9a_palladio_bootstrap.json)"
+          while IFS= read -r relative_path; do
+            mkdir -p "${evidence_dir}/$(dirname "$relative_path")"
+            curl --fail --location --retry 5 --retry-all-errors \
+              --output "${evidence_dir}/${relative_path}" \
+              "${repository_url}${relative_path}"
+          done < <(jq -r '.target_platform_lock.repository_evidence[].relative_path' configs/m9a_palladio_bootstrap.json)
+          python -m telemetry_availability lock-palladio-target-platform \
+            --config configs/m9a_palladio_bootstrap.json \
+            --target-file "$target_file" \
+            --repository-evidence-dir "$evidence_dir" \
+            --out workflow-results/m9b-semantic-controls/target-lock/manifest.json
+          echo "M9B_MAVEN_REPO=${m9b_maven_repo}" >> "$GITHUB_ENV"
+          git -C palladio-source diff --exit-code
+
+      - name: Audit analyzer capability boundaries from pinned source
+        run: >-
+          python -m telemetry_availability audit-palladio-capability-source
+          --config configs/m9b_palladio_semantic_controls.json
+          --analyzer-checkout palladio-source
+          --out workflow-results/m9b-semantic-controls/capability-manifest.json
+
+      - name: Overlay the recorded semantic-control harness only
+        run: |
+          test_bundle="palladio-source/tests/org.palladiosimulator.reliability.tests"
+          cp palladio/harness/META-INF/MANIFEST.MF "$test_bundle/META-INF/MANIFEST.MF"
+          cp palladio/harness/src/org/palladiosimulator/reliability/tests/SemanticControlsTest.java \
+            "$test_bundle/src/org/palladiosimulator/reliability/tests/SemanticControlsTest.java"
+          git -C palladio-source status --short > \
+            workflow-results/m9b-semantic-controls/harness-overlay.txt
+          test "$(git -C palladio-source diff --name-only)" = \
+            "tests/org.palladiosimulator.reliability.tests/META-INF/MANIFEST.MF"
+          test "$(git -C palladio-source ls-files --others --exclude-standard)" = \
+            "tests/org.palladiosimulator.reliability.tests/src/org/palladiosimulator/reliability/tests/SemanticControlsTest.java"
+
+      - name: Run the full semantic-control suite twice
+        env:
+          TAID_PALLADIO_CONTROLS_ROOT: ${{ github.workspace }}/workflow-input/m9b-model-contract/models
+          TAID_PALLADIO_RESULT: ${{ github.workspace }}/workflow-results/m9b-semantic-controls/raw-result.json
+        run: |
+          export TAID_REPEAT_RUNS="$(jq -r '.repeat_runs' configs/m9b_palladio_semantic_controls.json)"
+          export TAID_PROBABILITY_TOLERANCE="$(jq -r '.probability_tolerance' configs/m9b_palladio_semantic_controls.json)"
+          export TAID_EXPECTED_MODEL_COUNT="$(jq '.models | length' configs/m9b_palladio_semantic_controls.json)"
+          export TAID_EXPECTED_CASE_COUNT="$(jq '[.models[].cases[]] | length' configs/m9b_palladio_semantic_controls.json)"
+          java -version > workflow-results/m9b-semantic-controls/java-version.txt 2>&1
+          mvn -version > workflow-results/m9b-semantic-controls/maven-version.txt 2>&1
+          set -o pipefail
+          /usr/bin/time -v -o workflow-results/m9b-semantic-controls/resource-usage.txt \
+            xvfb-run -a mvn -B -ntp "-Dmaven.repo.local=${M9B_MAVEN_REPO}" \
+            -f palladio-source/pom.xml clean verify \
+            2>&1 | tee workflow-results/m9b-semantic-controls/build-and-test.log
+          test "${PIPESTATUS[0]}" -eq 0
+
+      - name: Collect test reports
+        if: ${{ always() }}
+        run: |
+          report_root="palladio-source/tests/org.palladiosimulator.reliability.tests/target/surefire-reports"
+          if [[ -d "$report_root" ]]; then
+            cp -R "$report_root" workflow-results/m9b-semantic-controls/surefire-reports
+          fi
+
+      - name: Retain raw solver evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9b-palladio-semantic-controls-${{ github.run_id }}
+          path: workflow-results/m9b-semantic-controls
+          if-no-files-found: error
+          retention-days: 90
+
+  acceptance_audit:
+    name: Audit solver results against predeclared independent oracles
+    needs: [model_contract, semantic_controls]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out study repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install and validate the M9B contract
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability validate-palladio-controls \
+            --config configs/m9b_palladio_semantic_controls.json
+
+      - name: Download exact model and solver artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9b-palladio-*-${{ github.run_id }}
+          path: workflow-input
+
+      - name: Audit all results and cross-control relationships
+        run: |
+          mkdir -p workflow-results/m9b-acceptance
+          set -o pipefail
+          /usr/bin/time -v -o workflow-results/m9b-acceptance/resource-usage.txt \
+            python -m telemetry_availability audit-palladio-control-results \
+              --config configs/m9b_palladio_semantic_controls.json \
+              --model-manifest workflow-input/m9b-palladio-model-contract-${{ github.run_id }}/model-contract-manifest.json \
+              --capability-manifest workflow-input/m9b-palladio-semantic-controls-${{ github.run_id }}/capability-manifest.json \
+              --result workflow-input/m9b-palladio-semantic-controls-${{ github.run_id }}/raw-result.json \
+              --models workflow-input/m9b-palladio-model-contract-${{ github.run_id }}/models \
+              --out workflow-results/m9b-acceptance/acceptance-manifest.json \
+            2>&1 | tee workflow-results/m9b-acceptance/acceptance.log
+          test "${PIPESTATUS[0]}" -eq 0
+
+      - name: Retain accepted semantic-control evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9b-palladio-acceptance-${{ github.run_id }}
+          path: workflow-results/m9b-acceptance
+          if-no-files-found: error
+          retention-days: 90
