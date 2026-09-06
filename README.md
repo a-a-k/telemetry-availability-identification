@@ -243,7 +243,15 @@ identifiers in its manifest.
   later headless OpenTelemetry PMX performability extension as the scientific
   priority for M9F. That route is audited before a partially manual PCM fallback
   is selected; any required completion remains explicitly measured rather than
-  credited to automation.
+  credited to automation. M9F has now completed that audit. The paper,
+  historical source lineage, later embedded source snapshot, and binary were
+  recovered, but four isolated standalone invocations all reached a 900-second
+  watchdog after emitting only `osgi> gosh: stopping shell` and produced no PCM
+  file. This is a launcher-route reproducibility and application-cost result,
+  not evidence against PMX's scientific priority or the wider Palladio
+  ecosystem. M9G next diagnoses that launcher/source/container route while
+  independently measuring the adapter and information delta for the two fixed
+  applications; no M7 accuracy interpretation changes.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

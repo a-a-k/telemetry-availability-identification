@@ -82,7 +82,7 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A through M9D are complete. M9C byte-audited accepted M8B and pinned
+Status: M8A through M9F are complete. M9C byte-audited accepted M8B and pinned
 application sources, emitted all 16 required correspondence rows, and matched
 the external structural oracle for both operation templates under both logical
 placements. M9D then completed the aligned-input debugging comparison on
@@ -145,3 +145,17 @@ application costs before deciding whether a partially manual PCM continuation
 is necessary. Accuracy and new live confirmation remain deferred until an
 independently parameterized comparator exists and supports a precision
 calculation.
+
+M9F separately audited the prioritized later PMX performability route. Its
+accepted three-job run verified the paper, historical source lineage,
+demonstration commit, embedded later source snapshot, and public binary. Under
+the tested standalone launcher contract, however, all four predeclared
+invocations emitted only `osgi> gosh: stopping shell`, became CPU-idle, reached
+their 900-second watchdogs, and wrote no result file. The exact historical
+container chain is also unavailable because its published references use
+mutable `latest` tags without retained digests. This establishes neither an
+absence of the claimed transformation nor a limitation of PMX/Palladio as a
+whole. M9G therefore proceeds on two explicitly separate tracks: diagnose and
+recover the public launcher/source/container route, and measure the adapter and
+information work needed for the fixed M7 applications. A manual PCM route, if
+used, remains separately labelled and cannot substitute for PMX evidence.
