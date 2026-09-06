@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import csv
+import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from telemetry_availability.live_validation_analysis import HealthTick, QualifiedCell
 from telemetry_availability.m7_causal_diagnostics import (
@@ -110,10 +112,16 @@ class M7CausalDiagnosticTests(unittest.TestCase):
         self.assertEqual(sum(row["count"] for row in reasons), 2)
 
     def test_full_diagnostic_is_forbidden_locally(self) -> None:
-        with self.assertRaisesRegex(M7DiagnosticError, "only in GitHub Actions"):
-            run_m7_causal_diagnostics(  # type: ignore[arg-type]
-                None, None, Path("missing"), Path("missing"), Path("missing"), Path("out")
-            )
+        with patch.dict(os.environ, {"GITHUB_ACTIONS": "false"}):
+            with self.assertRaisesRegex(M7DiagnosticError, "only in GitHub Actions"):
+                run_m7_causal_diagnostics(  # type: ignore[arg-type]
+                    None,
+                    None,
+                    Path("missing"),
+                    Path("missing"),
+                    Path("missing"),
+                    Path("out"),
+                )
 
 
 if __name__ == "__main__":
