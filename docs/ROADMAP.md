@@ -82,11 +82,12 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A through M9F are complete. M9C byte-audited accepted M8B and pinned
-application sources, emitted all 16 required correspondence rows, and matched
-the external structural oracle for both operation templates under both logical
-placements. M9D then completed the aligned-input debugging comparison on
-preserved M7 evidence.
+Status: M8A through M9F are complete. M9G's diagnostic dual-track protocol and
+three-job remote implementation are frozen; its first remote evidence run is
+pending. M9C byte-audited accepted M8B and pinned application sources, emitted
+all 16 required correspondence rows, and matched the external structural oracle
+for both operation templates under both logical placements. M9D then completed
+the aligned-input debugging comparison on preserved M7 evidence.
 
 Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 
@@ -159,3 +160,13 @@ whole. M9G therefore proceeds on two explicitly separate tracks: diagnose and
 recover the public launcher/source/container route, and measure the adapter and
 information work needed for the fixed M7 applications. A manual PCM route, if
 used, remains separately labelled and cannot substitute for PMX evidence.
+
+M9G now freezes those tracks before further execution. The launcher job first
+audits the public historical job output, then screens four ordered OSGi/Gogo
+commands on the byte-pinned JAR and confirms only the first output-eligible
+route against the historical semantic signature and the one-error-in-ten
+mechanism control. Independently, the application job reads all 160 learner
+bundles and four separately labelled raw schema samples from the preserved M7
+artifact, without opening evaluator inputs. A third job applies the joint
+decision rule. All three jobs have 360-minute limits; M9G performs no accuracy
+scoring and authorizes no collection.

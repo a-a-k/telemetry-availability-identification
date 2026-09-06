@@ -249,9 +249,11 @@ identifiers in its manifest.
   watchdog after emitting only `osgi> gosh: stopping shell` and produced no PCM
   file. This is a launcher-route reproducibility and application-cost result,
   not evidence against PMX's scientific priority or the wider Palladio
-  ecosystem. M9G next diagnoses that launcher/source/container route while
-  independently measuring the adapter and information delta for the two fixed
-  applications; no M7 accuracy interpretation changes.
+  ecosystem. M9G has frozen a dual-track diagnostic: four ordered OSGi/Gogo
+  launcher screens plus conditional mechanism confirmations, and an independent
+  learner-only audit of all 160 preserved bundles with four raw schema samples
+  kept separate. Its exactly three remote jobs each have a 360-minute timeout.
+  It neither scores accuracy nor changes the M7 interpretation.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

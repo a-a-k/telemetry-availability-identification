@@ -1,0 +1,272 @@
+name: M9G PMX launcher recovery and application delta
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m9g-pmx-recovery-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9g_pmx_recovery.json
+  M9F_CONFIG: configs/m9f_pmx_performability_audit.json
+  PYTHON_VERSION: 3.13.15
+  JAVA_VERSION: "11"
+  GITLAB_BASE: https://se-gitlab-extern.fzi.de
+  DEMO_PROJECT_PATH: SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci
+  DEMO_COMMIT: 9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+  PMX_JOB_ID: "1984"
+  PMX_JAR_SHA256: befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013
+  HISTORICAL_ARTIFACT_SHA256: 4ae91b639ceeb8ec7c1403bfeabb2b0b5af3a3bf8a6676d6dd94a3662ad8bdb0
+  SCREEN_TIMEOUT_SECONDS: "120"
+  M8_RUN_ID: "34016153918"
+  M8_ARTIFACT_ID: "9983956440"
+  M8_ARTIFACT_NAME: m8-preserved-m7-evidence-33990678586-34016153918
+
+jobs:
+  launcher_and_evidence_recovery:
+    name: Recover historical output and screen pinned Gogo launchers
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Set up declared Java runtime
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Install exact analysis environment and validate the frozen protocol
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_recovery validate --config "$CONFIG"
+
+      - name: Download and byte-verify the pinned demonstration and historical output
+        shell: bash
+        run: |
+          set -euo pipefail
+          demo="workflow-input/m9g/demo"
+          historical="workflow-input/m9g/historical"
+          mkdir -p "$demo/traces" "$historical"
+          raw_base="$GITLAB_BASE/$DEMO_PROJECT_PATH/-/raw/$DEMO_COMMIT"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/.gitlab-ci.yml" --output "$demo/.gitlab-ci.yml"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/Options.txt" --output "$demo/Options.txt"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/traces/jaegercustomers.json" --output "$demo/traces/jaegercustomers.json"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/main.jar" --output "$demo/main.jar"
+          curl --fail --location --retry 8 --retry-all-errors "$GITLAB_BASE/api/v4/projects/50/jobs/$PMX_JOB_ID/artifacts" --output "$historical/job-1984-artifacts.zip"
+          echo "$PMX_JAR_SHA256  $demo/main.jar" | sha256sum --check
+          echo "$HISTORICAL_ARTIFACT_SHA256  $historical/job-1984-artifacts.zip" | sha256sum --check
+          unzip -q "$historical/job-1984-artifacts.zip" -d "$historical/extracted"
+
+      - name: Generate the frozen one-error-in-ten mechanism control
+        shell: bash
+        run: >-
+          python -m telemetry_availability.pmx_performability make-error-control
+          --config "$M9F_CONFIG"
+          --demonstration-root workflow-input/m9g/demo
+          --output-trace workflow-input/m9g/control/traces/jaegercustomers-error-control.json
+          --output-options workflow-input/m9g/control/Options.txt
+          --manifest workflow-input/m9g/control/control-manifest.json
+
+      - name: Audit historical models and the embedded command contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9g-recovery/contract
+          /usr/bin/time -v -o workflow-results/m9g-recovery/contract/resource-usage.txt python -m telemetry_availability.pmx_recovery audit-recovery-evidence --config "$CONFIG" --demonstration-root workflow-input/m9g/demo --historical-archive workflow-input/m9g/historical/job-1984-artifacts.zip --historical-root workflow-input/m9g/historical/extracted --out workflow-results/m9g-recovery/contract
+          java -version > workflow-results/m9g-recovery/contract/java-version.txt 2>&1
+
+      - name: Screen every frozen Gogo command and confirm only the selected route
+        shell: bash
+        run: |
+          set -euo pipefail
+          jar_path="$GITHUB_WORKSPACE/workflow-input/m9g/demo/main.jar"
+          execution_root="$GITHUB_WORKSPACE/workflow-results/m9g-recovery/raw"
+
+          run_probe() {
+            condition="$1"
+            repeat="$2"
+            candidate_id="$3"
+            command="$4"
+            input_root="$5"
+            run_root="$6"
+            mkdir -p "$run_root/results" "$run_root/traces"
+            cp "$input_root/Options.txt" "$run_root/Options.txt"
+            cp "$input_root"/traces/* "$run_root/traces/"
+            printf '%s\nexit\n' "$command" > "$run_root/stdin.txt"
+            started_at="$(date --utc --iso-8601=seconds)"
+            started_epoch="$(date +%s)"
+            printf '%s\n' "$started_at" > "$run_root/started-at-utc.txt"
+            printf 'event=start condition=%s repeat=%s candidate=%s at=%s\n' "$condition" "$repeat" "$candidate_id" "$started_at" > "$run_root/watchdog.log"
+            set +e
+            (
+              cd "$run_root"
+              /usr/bin/time -v -o resource-usage.txt timeout --signal=TERM --kill-after=10s "$SCREEN_TIMEOUT_SECONDS"s java -DLog4jContextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector -jar "$jar_path" < stdin.txt > stdout.log 2>&1
+            )
+            exit_code="$?"
+            set -e
+            finished_at="$(date --utc --iso-8601=seconds)"
+            elapsed="$(($(date +%s) - started_epoch))"
+            printf '%s\n' "$exit_code" > "$run_root/exit-code.txt"
+            printf '%s\n' "$elapsed" > "$run_root/elapsed-seconds.txt"
+            printf '%s\n' "$finished_at" > "$run_root/finished-at-utc.txt"
+            printf 'event=finish condition=%s repeat=%s candidate=%s at=%s elapsed_seconds=%s exit_code=%s\n' "$condition" "$repeat" "$candidate_id" "$finished_at" "$elapsed" "$exit_code" >> "$run_root/watchdog.log"
+          }
+
+          while IFS=$'\t' read -r candidate_id command; do
+            run_probe published_original 1 "$candidate_id" "$command" "$GITHUB_WORKSPACE/workflow-input/m9g/demo" "$execution_root/screen/$candidate_id"
+          done < <(
+            jq -r '.launcher.candidate_order[] | [.id, .command] | @tsv' "$CONFIG"
+          )
+
+          python -m telemetry_availability.pmx_recovery select-launcher --config "$CONFIG" --candidate-root "$execution_root/screen" --out "$execution_root/launcher-selection.json"
+
+          selected_id="$(jq -r '.selected.id // empty' "$execution_root/launcher-selection.json")"
+          selected_command="$(jq -r '.selected.command // empty' "$execution_root/launcher-selection.json")"
+          if [[ -n "$selected_id" ]]; then
+            for condition in published_original single_error_control; do
+              if [[ "$condition" == "published_original" ]]; then
+                input_root="$GITHUB_WORKSPACE/workflow-input/m9g/demo"
+              else
+                input_root="$GITHUB_WORKSPACE/workflow-input/m9g/control"
+              fi
+              for repeat in 1 2; do
+                run_probe "$condition" "$repeat" "$selected_id" "$selected_command" "$input_root" "$execution_root/confirmation/$condition/repeat-$repeat"
+              done
+            done
+          fi
+
+          python -m telemetry_availability.pmx_recovery record-launcher-probes --config "$CONFIG" --recovery-contract workflow-results/m9g-recovery/contract/recovery-contract-manifest.json --selection "$execution_root/launcher-selection.json" --execution-root "$execution_root" --out workflow-results/m9g-recovery/launcher
+
+      - name: Upload historical, launcher, and raw execution evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9g-pmx-recovery-${{ github.run_id }}
+          path: workflow-results/m9g-recovery
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
+
+  application_information_audit:
+    name: Audit learner-only PMX application information coverage
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate the frozen protocol
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_recovery validate --config "$CONFIG"
+
+      - name: Capture and download the exact preserved M7 artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9g/metadata workflow-input/m9g/m8-source
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$M8_ARTIFACT_ID" > workflow-input/m9g/metadata/m8-preserved.json
+          gh run download "$M8_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8_ARTIFACT_NAME" --dir workflow-input/m9g/m8-source
+
+      - name: Audit all learner bundles and the separate raw schema subset
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9g-application
+          /usr/bin/time -v -o workflow-results/m9g-application/resource-usage.txt python -m telemetry_availability.pmx_recovery audit-application-delta --config "$CONFIG" --artifact-metadata workflow-input/m9g/metadata/m8-preserved.json --preserved-root workflow-input/m9g/m8-source/m8-preserved --out workflow-results/m9g-application
+          cp workflow-input/m9g/metadata/m8-preserved.json workflow-results/m9g-application/artifact-metadata.json
+
+      - name: Upload application-information evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9g-application-delta-${{ github.run_id }}
+          path: workflow-results/m9g-application
+          if-no-files-found: warn
+          retention-days: 90
+
+  joint_decision:
+    name: Apply frozen joint decision without accuracy outcomes
+    needs: [launcher_and_evidence_recovery, application_information_audit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate the frozen protocol
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_recovery validate --config "$CONFIG"
+
+      - name: Download both independent evidence tracks
+        uses: actions/download-artifact@v8
+        with:
+          name: m9g-pmx-recovery-${{ github.run_id }}
+          path: workflow-input/m9g/recovery
+
+      - name: Download application-information evidence
+        uses: actions/download-artifact@v8
+        with:
+          name: m9g-application-delta-${{ github.run_id }}
+          path: workflow-input/m9g/application
+
+      - name: Apply the frozen joint decision rules
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9g-decision
+          /usr/bin/time -v -o workflow-results/m9g-decision/resource-usage.txt python -m telemetry_availability.pmx_recovery decide --config "$CONFIG" --recovery-contract workflow-input/m9g/recovery/contract/recovery-contract-manifest.json --launcher-probe workflow-input/m9g/recovery/launcher/launcher-probe-manifest.json --application-audit workflow-input/m9g/application/application-audit-manifest.json --out workflow-results/m9g-decision
+
+      - name: Upload the frozen M9G decision
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9g-joint-decision-${{ github.run_id }}
+          path: workflow-results/m9g-decision
+          if-no-files-found: error
+          retention-days: 90
