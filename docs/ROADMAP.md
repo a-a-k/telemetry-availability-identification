@@ -82,8 +82,8 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A complete; M8B diagnostic decomposition is next under the separately
-labelled M8 protocol.
+Status: M8A and M8B complete under the separately labelled M8 protocol;
+commit-pinned Palladio bootstrap and semantic controls are next.
 
 Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 
@@ -93,3 +93,9 @@ Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 - bootstrap and semantically validate a pinned Palladio reliability analyzer;
 - compare fixed estimators and PCM/Palladio on aligned inputs before collecting
   any new live confirmation.
+
+M8B found no test-health alignment mismatch and no normalized-output drift in
+the four retained raw samples. It localized overprediction mainly to
+OpenTelemetry Demo, especially checkout, and confirmed mixed target support
+under communication faults without assigning a unique cause. These are
+exploratory restrictions on the next comparison, not a revised M7 result.

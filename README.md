@@ -203,9 +203,13 @@ identifiers in its manifest.
 - M8A preserved all 165 M7 artifacts for 90 days and independently reconstructed
   all 36,459 request-derived score rows, 117 summaries, and the primary
   equal-stratum contrast with zero mismatches. This rejects the tested
-  identity, denominator, Brier-formula, and aggregation explanations, but does
-  not yet explain the observed bias or topology ambiguity. M8B performs that
-  causal diagnosis.
+  identity, denominator, Brier-formula, and aggregation explanations.
+- M8B aligned all 576,000 test requests, exactly replayed all 32 normalized or
+  derived outputs from the four retained raw samples, and localized
+  overprediction mainly to OpenTelemetry Demo and checkout. Mixed target support
+  remains concentrated under communication faults, but no unique causal
+  mechanism is established. The next step is a pinned Palladio reliability
+  analyzer with hand-checkable semantic controls, not a post-hoc change to M7.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

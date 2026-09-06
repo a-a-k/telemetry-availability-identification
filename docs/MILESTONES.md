@@ -26,7 +26,7 @@ tests, configuration validation, and bounded smoke cases.
 | M7F | Separate no-fit four-cell main-path preflight | Complete | `milestones/M7F_NO_FIT_PREFLIGHT.md`; accepted after a retained provenance-wiring failure and excluded from effectiveness evidence |
 | M7 | Frozen live validation and placement transfer | Complete; primary incomplete | `milestones/M7_FROZEN_LIVE_VALIDATION.md`; 160/160 technical success, 117/160 primary pairs, no superiority claim |
 | M8A | Preserve M7 evidence and independently audit identities, scores, and aggregation | Complete | `milestones/M8A_M7_EVIDENCE_AND_ARITHMETIC_AUDIT.md`; 165 artifacts preserved, 36,459 scores independently reproduced, zero mismatches |
-| M8B | Decompose M7 bias, temporal behavior, semantic failures, and topology ambiguity | In progress | `M8_M7_DIAGNOSTIC_PROTOCOL.md`; post-result causal diagnostic |
+| M8B | Decompose M7 bias, temporal behavior, semantic failures, and topology ambiguity | Complete | `milestones/M8B_M7_CAUSAL_DIAGNOSTICS.md`; all 576,000 test requests aligned, 32/32 normalized replay files matched, discrepancy localized but cause unresolved |
 
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference
