@@ -1,5 +1,17 @@
 # M9E: Palladio full-path automation feasibility
 
+## Post-result scope correction
+
+After this report was committed, the later PMX performability extension was
+brought explicitly into scope. The original M9E triage had assessed only the
+legacy PMX distribution and was therefore incomplete. The accepted Retriever
+run and all 5/15 gate results below remain valid for the tested release, but
+`partially_manual_PCM_required` is only that branch's outcome and does not
+demote PMX or characterize the Palladio ecosystem. M9F now prioritizes a
+separate executable and semantic audit of the headless OpenTelemetry PMX route.
+The evidence and revised ordering are recorded in
+[`M9E_PMX_PERFORMABILITY_CORRECTION.md`](../M9E_PMX_PERFORMABILITY_CORRECTION.md).
+
 ## Outcome
 
 M9E is complete. A byte-pinned PCM-5.2-compatible Retriever release was run
@@ -10,16 +22,16 @@ neither application received a usage model, the selected operation or call
 behavior, replicas or logical failure domains, or reliability parameters.
 
 Each application therefore passed 5 of 15 predeclared readiness gates and
-failed the same remaining 10. The frozen decision is
+failed the same remaining 10. The frozen Retriever-branch decision is
 `partially_manual_PCM_required`. No incomplete model was solved or scored, no
 held-out accuracy outcome was read, and no new live collection was authorized.
 
 This is a result about the tested Retriever release, its available rules, and
 the two fixed applications. It is not evidence that Palladio is inaccurate and
-does not represent every PCM automation route. It closes a provenance question
-left open by M9D: a reliability-ready PCM comparator cannot be described as
-automatically extracted in this setting. The next comparator must expose and
-measure its source-grounded manual completion.
+does not represent every Retriever version or PCM automation route. It closes
+a provenance question left open by M9D for this branch: its output cannot be
+described as a reliability-ready automatically extracted comparator. Any
+completion of that output must be exposed and measured.
 
 The M7 position remains unchanged. Published calculations show no established
 predictive gain and retain discrepancies with observations; their causes are
@@ -69,7 +81,7 @@ plan rather than selecting a deliberately weak comparator.
 
 | Candidate | Audited scope | M9E disposition |
 |---|---|---|
-| PMX | Kieker-log extraction of architectural performance models; official page marks it unmaintained | Not executed: M7 has native/OpenTelemetry evidence, and an adapter plus reliability semantics would first have to be invented |
+| PMX | M9E considered only the legacy Kieker-oriented distribution described by the old official page | Original non-execution rationale superseded: the later headless OpenTelemetry performability extension is separately audited in M9F |
 | CIPM | Continuous extraction/calibration of architectural performance models with technology-specific Java and tailored Lua transformations | Not executed: the published route does not provide the required MTTF/MTTR, link-failure, domain, replication, and semantic-residual extraction for these applications |
 | Retriever | Static PCM extraction from heterogeneous project artifacts with registered technology rules | Executed: the selected release has directly relevant Docker and ECMAScript rules and emits PCM 5.2 files |
 
@@ -186,21 +198,21 @@ does not automatically yield a model capable of the required reliability
 prediction. Its successful exit and four files establish executable plumbing;
 the 10 semantic failures establish the completion work still needed.
 
-This result reduces the straw-man risk in the eventual comparison in two ways.
-First, it tests the closest executable public structural route rather than an
-arbitrary hand-built weak baseline. Second, it prevents the missing operation,
-deployment, and reliability information from being added manually and then
-described as automatic. The limitation is equally important: custom Retriever
-rules, another version, or another PCM tool chain could behave differently.
+This result reduces the straw-man risk in the eventual comparison for the
+Retriever branch in two ways. First, it tests a real executable public
+structural route rather than an arbitrary hand-built weak baseline. Second, it
+prevents missing operation, deployment, and reliability information from being
+added manually and then described as automatic. The limitation is equally
+important: custom Retriever rules, another version, or another PCM tool chain
+could behave differently. In particular, the later PMX performability
+extension cannot be inferred from this Retriever result.
 
-M9F will therefore implement a **partially manual PCM** development baseline
-on preserved learner evidence. Every added operation signature, component,
-connector, SEFF, usage scenario, replica/domain mapping, and reliability
-parameter must have recorded provenance and active human time where applicable.
-Automatic Retriever shells and source diagnostics remain inputs, not credit for
-elements they did not generate. The development baseline may be debugged on
-M7 material but cannot convert that material into confirmation. Only after it
-emits independently parameterized predictions can paired development
-differences support a precision calculation and a frozen independent-
-confirmation design.
-
+M9F therefore audits and executes the published **PMX performability** route
+before choosing the implementation form of the next comparator. Missing
+capabilities count as adapter, instrumentation, or manual-application cost; they
+do not cancel PMX's scientific priority. A partially manual PCM development
+baseline remains a fallback or explicit variant, with every added operation,
+connector, SEFF, replica/domain mapping, and reliability parameter retaining
+provenance and human-effort accounting. No development path can convert M7
+material into confirmation. Only an independently parameterized prediction can
+support a precision calculation and a frozen independent-confirmation design.

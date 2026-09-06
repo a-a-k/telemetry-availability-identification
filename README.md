@@ -233,14 +233,17 @@ identifiers in its manifest.
   B2 established predictive gain, while the positive prediction--observation
   discrepancy remained. Held-out outcomes entered only after the raw solver
   artifact existed. M7's published no-established-gain result and unresolved
-  overall interpretation therefore remain unchanged. M9E completed the next
-  full-path feasibility gate: after auditing PMX/CIPM scope, it ran a
-  byte-pinned, PCM-5.2-compatible Retriever release on both complete source
-  trees. Retriever exited zero and emitted four PCM files per application, but
-  they were empty shells; each application passed 5/15 frozen readiness gates.
-  No model was scored. The next comparator is consequently labelled `partially
-  manual PCM`, with every completion and its provenance logged rather than
-  credited to automatic extraction.
+  overall interpretation therefore remain unchanged. M9E completed a
+  full-path feasibility gate for a byte-pinned, PCM-5.2-compatible Retriever
+  release on both complete source trees. Retriever exited zero and emitted four
+  PCM files per application, but they were empty shells; each application
+  passed 5/15 frozen readiness gates. No model was scored. This establishes the
+  cost of the tested Retriever branch, not a limitation of all Retriever
+  versions or the Palladio ecosystem. A post-result correction restores the
+  later headless OpenTelemetry PMX performability extension as the scientific
+  priority for M9F. That route is audited before a partially manual PCM fallback
+  is selected; any required completion remains explicitly measured rather than
+  credited to automation.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

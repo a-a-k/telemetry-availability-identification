@@ -126,20 +126,22 @@ technical bridge, not an independent architecture-extraction route or
 predictive accuracy. The next phase must freeze the information boundary and
 independent-confirmation design before any new live collection.
 
-M9E is the first gate in that phase. It retains PMX and CIPM in a documented
-candidate audit and remotely probes the compatible Retriever 5.2 product on
-both complete pinned application trees. Fifteen predeclared gates distinguish a
-structural PCM extraction from a reliability-ready full path. M9E performs no
-accuracy scoring, does not fill missing model elements, and authorizes no new
-live collection. If either application fails a gate, the next baseline is
-explicitly partially manual and its additions must be measured.
+M9E is the first gate in that phase. It remotely probes the compatible
+Retriever 5.2 product on both complete pinned application trees. Fifteen
+predeclared gates distinguish a structural PCM extraction from a
+reliability-ready full path. M9E performs no accuracy scoring, does not fill
+missing model elements, and authorizes no new live collection. Its result is
+limited to the tested Retriever release and rules.
 
 M9E is complete. Retriever exited successfully and emitted repository, system,
 allocation, and resource-environment files for both applications, but the files
 were empty shells. Each application passed only the extractor and four
 file-presence gates (5/15); usage, operation/call, replica/domain, and all four
-reliability-semantic gates failed. The frozen next step is M9F: construct the
-source-grounded partially manual PCM baseline on preserved development
-evidence, logging the origin and human effort of every completion. Accuracy and
-new live confirmation remain deferred until that baseline produces an
-independently parameterized prediction and supports a precision calculation.
+reliability-semantic gates failed. A post-result correction records that the
+initial triage omitted the later headless OpenTelemetry PMX performability
+extension. M9F therefore gives that published route scientific priority and
+audits its source, binary, pipeline reproducibility, generated semantics, and
+application costs before deciding whether a partially manual PCM continuation
+is necessary. Accuracy and new live confirmation remain deferred until an
+independently parameterized comparator exists and supports a precision
+calculation.
