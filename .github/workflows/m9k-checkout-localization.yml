@@ -1,0 +1,209 @@
+name: M9K checkout overprediction localization
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: m9k-checkout-localization-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9k_checkout_localization.json
+  PYTHON_VERSION: 3.13.15
+  M8A_RUN_ID: "34016153918"
+  M8A_PRESERVED_ARTIFACT: m8-preserved-m7-evidence-33990678586-34016153918
+  M8A_AUDIT_ARTIFACT: m8a-m7-integrity-arithmetic-34016153918
+  M8B_RUN_ID: "34017401101"
+  M8B_ARTIFACT: m8b-m7-causal-diagnostics-34017401101
+  M9J_RUN_ID: "34054064325"
+  M9J_ARTIFACT: m9j-carrier-decision-34054064325
+
+jobs:
+  checkout_localization_contract:
+    name: Verify retained identities and freeze the checkout target
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9K
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_localization validate --config "$CONFIG"
+
+      - name: Capture exact artifact metadata and bounded retained inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          metadata="workflow-input/m9k/metadata"
+          mkdir -p "$metadata" workflow-input/m9k/m8a-audit workflow-input/m9k/m8b workflow-input/m9k/m9j
+          for role in m8a_preserved m8a_audit m8b m9j_decision; do
+            artifact_id="$(jq -r ".evidence.${role}.artifact_id" "$CONFIG")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id" > "$metadata/${role}.json"
+          done
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9k/m8a-audit
+          gh run download "$M8B_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8B_ARTIFACT" --dir workflow-input/m9k/m8b
+          gh run download "$M9J_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9J_ARTIFACT" --dir workflow-input/m9k/m9j
+
+      - name: Build the frozen checkout localization contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9k-contract
+          /usr/bin/time -v -o workflow-results/m9k-contract/resource-usage.txt python -m telemetry_availability.checkout_localization build-contract \
+            --config "$CONFIG" \
+            --m8a-preserved-metadata workflow-input/m9k/metadata/m8a_preserved.json \
+            --m8a-audit-metadata workflow-input/m9k/metadata/m8a_audit.json \
+            --m8b-metadata workflow-input/m9k/metadata/m8b.json \
+            --m9j-metadata workflow-input/m9k/metadata/m9j_decision.json \
+            --m8a-audit-root workflow-input/m9k/m8a-audit \
+            --m8b-root workflow-input/m9k/m8b \
+            --m9j-root workflow-input/m9k/m9j \
+            --out workflow-results/m9k-contract
+
+      - name: Upload checkout localization contract
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9k-checkout-contract-${{ github.run_id }}
+          path: workflow-results/m9k-contract
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  checkout_localization:
+    name: Decompose checkout overprediction on retained evidence
+    needs: [checkout_localization_contract]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9K
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_localization validate --config "$CONFIG"
+
+      - name: Download exact checkout contract
+        uses: actions/download-artifact@v8
+        with:
+          name: m9k-checkout-contract-${{ github.run_id }}
+          path: workflow-input/m9k/contract
+
+      - name: Download immutable M8 evidence inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9k/m8a-preserved workflow-input/m9k/m8a-audit workflow-input/m9k/m8b
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_PRESERVED_ARTIFACT" --dir workflow-input/m9k/m8a-preserved
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9k/m8a-audit
+          gh run download "$M8B_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8B_ARTIFACT" --dir workflow-input/m9k/m8b
+
+      - name: Audit and decompose the forty checkout campaigns
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9k-localization
+          /usr/bin/time -v -o workflow-results/m9k-localization/resource-usage.txt python -m telemetry_availability.checkout_localization localize \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9k/contract/contract-manifest.json \
+            --qualified-root workflow-input/m9k/m8a-preserved/m8-preserved/qualified \
+            --analysis-root workflow-input/m9k/m8a-preserved/m8-preserved/analysis \
+            --m8a-audit-root workflow-input/m9k/m8a-audit \
+            --m8b-root workflow-input/m9k/m8b \
+            --out workflow-results/m9k-localization
+
+      - name: Upload checkout localization evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9k-checkout-localization-${{ github.run_id }}
+          path: workflow-results/m9k-localization
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
+
+  checkout_localization_decision:
+    name: Apply the frozen localization rule
+    needs: [checkout_localization_contract, checkout_localization]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9K
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_localization validate --config "$CONFIG"
+
+      - name: Download checkout contract and localization evidence
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9k-checkout-*-${{ github.run_id }}
+          path: workflow-input/m9k/current
+
+      - name: Apply the frozen M9K decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9k-decision
+          /usr/bin/time -v -o workflow-results/m9k-decision/resource-usage.txt python -m telemetry_availability.checkout_localization decide \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9k/current/m9k-checkout-contract-${GITHUB_RUN_ID}/contract-manifest.json \
+            --localization-manifest workflow-input/m9k/current/m9k-checkout-localization-${GITHUB_RUN_ID}/localization-manifest.json \
+            --out workflow-results/m9k-decision
+
+      - name: Upload M9K decision
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9k-checkout-decision-${{ github.run_id }}
+          path: workflow-results/m9k-decision
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90

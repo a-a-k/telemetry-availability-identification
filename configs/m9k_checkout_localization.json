@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "id": "m9k_single_operation_overestimation_localization",
+  "status": "frozen_before_first_m9k_remote_localization",
+  "diagnostic_only": true,
+  "changes_m7_predictions_or_scores": false,
+  "new_live_collection": "forbidden",
+  "pmx_invocation": "forbidden",
+  "article_position": {
+    "direction_remains_substantive": true,
+    "claimed_advantage_demonstrated": false,
+    "specified_model_calculation_supported": true,
+    "better_predictive_accuracy_demonstrated": false,
+    "lower_end_to_end_automation_cost_than_pmx_demonstrated": false,
+    "overall_success_or_failure_decided": false
+  },
+  "evidence": {
+    "m7_source_run_id": 33990678586,
+    "m7_source_commit": "b1925736f314da610debd23a586d7b7d00cae7ca",
+    "m8a_preserved": {
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505",
+      "artifact_id": 9983956440,
+      "artifact_name": "m8-preserved-m7-evidence-33990678586-34016153918",
+      "size_in_bytes": 78577341,
+      "sha256": "978b380bf54be67ec13b2ebbfaac4464ee5653106ee68176fefcf2db4e85e271",
+      "expires_at": "2026-12-05T06:18:35Z"
+    },
+    "m8a_audit": {
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505",
+      "artifact_id": 9983956747,
+      "artifact_name": "m8a-m7-integrity-arithmetic-34016153918",
+      "size_in_bytes": 737045,
+      "sha256": "eca453e577ccac02f26716660062664355dde046748456b4695caa7480ba3439",
+      "expires_at": "2026-12-05T06:18:35Z",
+      "files": {
+        "manifest.json": {"bytes": 4292, "sha256": "e0c923926006d920207a236e7d74ac440806bb30af8e99c9ae5ff4a8142ace1e"},
+        "file-inventory.csv": {"bytes": 259037, "sha256": "fe526c86bc8d0a5c425d40d4a3a5a10401607920663517805aa8f55436534dcd"},
+        "identity-audit.csv": {"bytes": 27347, "sha256": "1363408f91961459e4e9eb1d48def9616c86927b38690478b7b94ac9b08fe7b4"}
+      }
+    },
+    "m8b": {
+      "run_id": 34017401101,
+      "head_sha": "a8737e9519da2fcfafb7cedd999c4c1867653d5b",
+      "artifact_id": 9984348911,
+      "artifact_name": "m8b-m7-causal-diagnostics-34017401101",
+      "size_in_bytes": 1107059,
+      "sha256": "2448a7f5a42e323a4cd41e74fbb3b8c9104d70f89c5e1c5de5ecd250caf42cb6",
+      "expires_at": "2026-12-05T06:47:07Z",
+      "files": {
+        "manifest.json": {"bytes": 4405, "sha256": "d04d875b01333fd4461ae89bcc41d454afd7e98b484c417c2a5e4bf81a1e9971"},
+        "bias-detail.csv": {"bytes": 373324, "sha256": "074c1cb4f9296e2c3bd3d9191859a512035b4e3dcf8525e285453d115f68e8f4"},
+        "bias-strata.csv": {"bytes": 30004, "sha256": "7cc34fe3fcf79117eff6c3c9a547d0a69e08e9bdf945d2a2086549bfb6ba9ac2"},
+        "temporal-campaign-operation.csv": {"bytes": 69429, "sha256": "535d235c29ac3264b8ce743403fe9cf309d056f66404e5dd03fe5f239c06d5ea"}
+      }
+    },
+    "m9j_decision": {
+      "run_id": 34054064325,
+      "head_sha": "6ad7679941f7303af81b569736deb5b8fe8b1933",
+      "artifact_id": 9995457506,
+      "artifact_name": "m9j-carrier-decision-34054064325",
+      "size_in_bytes": 2196,
+      "sha256": "eb23b1d27499ccab0f9b2d6091f1905416e8e764e2fea082e2c4c2953c67be03",
+      "expires_at": "2026-12-05T19:10:48Z",
+      "manifest": {"path": "decision-manifest.json", "bytes": 1924, "sha256": "9b7b12533df64b86038828a71a13723e9e9f8fccb64161818ff73024d463f482"},
+      "machine_status": "pmx_carrier_negative_pass_positive_unresolved",
+      "external_tool_diagnostic_closed": true,
+      "additional_pmx_repair_run_authorized": false
+    },
+    "frozen_analysis": {
+      "manifest.json": {"sha256": "94a67139bef116d7d356261f28b1b842365b8a42a6d71d03c13d5666fa64f5fe"},
+      "predictions.csv": {"sha256": "b19ffcba80c029d16e972fda58bce459c8114da8734511fa7f29948e9cb1fd60"}
+    }
+  },
+  "target_selection": {
+    "source": "accepted_M8B_bias_detail_before_M9K",
+    "metric": "unweighted_mean_prediction_minus_test_stable_over_emitted_proposed_rows",
+    "profile": "opentelemetry_demo",
+    "operation": "checkout",
+    "selected_mean": 0.17806941533026183,
+    "selected_emitted_rows": 55,
+    "ranking": [
+      {"profile": "opentelemetry_demo", "operation": "checkout", "emitted_rows": 55, "mean": 0.17806941533026183},
+      {"profile": "opentelemetry_demo", "operation": "add_to_cart", "emitted_rows": 52, "mean": 0.061708153634028554},
+      {"profile": "opentelemetry_demo", "operation": "browse_product", "emitted_rows": 54, "mean": 0.061267294608565365},
+      {"profile": "deathstarbench_social_network", "operation": "read_user_timeline", "emitted_rows": 65, "mean": 0.03126402083431309},
+      {"profile": "deathstarbench_social_network", "operation": "compose_post", "emitted_rows": 65, "mean": -0.000879095838354103},
+      {"profile": "deathstarbench_social_network", "operation": "read_home_timeline", "emitted_rows": 80, "mean": -0.006172839506172867}
+    ]
+  },
+  "cohort": {
+    "profile": "opentelemetry_demo",
+    "operation": "checkout",
+    "placements": ["colocated", "split"],
+    "failure_laws": ["N", "ND"],
+    "excluded_failure_laws": ["NC", "NCD"],
+    "exclusion_reason": "remove_the_known_communication_topology_ambiguity_before_localizing_the_noncommunication_overprediction",
+    "repetitions": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "expected_cells": 40,
+    "expected_qualified_files_per_cell": 9,
+    "expected_selected_files": 360,
+    "method": "proposed",
+    "mode": "sampled_mixed",
+    "scope": "current",
+    "view": "stable",
+    "prediction_status": "identified_exact_likelihood",
+    "requires_target_group": true,
+    "m8b_known_summary": {
+      "rows": 40,
+      "mean_prediction": 0.9470192674169405,
+      "mean_test_stable_rate": 0.773958749559624,
+      "mean_signed_error": 0.17306051785731663,
+      "mean_clean_residual": 0.9938271604938272,
+      "mean_route_prediction": 0.9529013746679779
+    }
+  },
+  "localization": {
+    "health_route_signal": "max(replica_a_path,replica_b_path)",
+    "alignment_tolerance_seconds": 1.25,
+    "transition_guard_seconds_each_side": 1,
+    "periods": ["calibration", "test"],
+    "views": ["all_sequence", "stable"],
+    "decomposition_view": "stable",
+    "identity": "q*r_model-y=q*(r_model-r_observed)+r_observed*(q-y_given_route_up)-(1-r_observed)*y_given_route_down",
+    "components": ["route_state_exposure", "route_up_residual_invariance", "route_down_success_offset"],
+    "counterfactuals_are_diagnostic_not_revised_predictions": true,
+    "test_outcomes_may_select_target_or_threshold": false,
+    "tolerance": 1e-12,
+    "minimum_alignment_fraction": 0.995,
+    "minimum_stable_requests_per_cell_period": 500,
+    "minimum_positive_cells_for_dominance": 32,
+    "minimum_known_mean_gap": 0.10,
+    "bootstrap": {
+      "unit": "campaign_within_placement_by_failure_law_stratum",
+      "resamples": 10000,
+      "seed": 20260906,
+      "confidence_level": 0.95
+    },
+    "dominance_rule": "largest_positive_component_with_stratified_bootstrap_lower_bound_above_runner_up_and_same_sign_in_at_least_32_of_40_cells",
+    "calibration_corroboration_required": true
+  },
+  "decision": {
+    "route_up_residual": "checkout_overprediction_localized_to_fault_period_route_up_residual_mismatch",
+    "route_state_exposure": "checkout_overprediction_localized_to_route_state_exposure_mismatch",
+    "unresolved": "checkout_overprediction_decomposed_but_not_uniquely_localized",
+    "integrity_fail": "m9k_evidence_or_reconstruction_integrity_failed",
+    "next_route_up_residual": "m9l_checkout_route_up_failure_cause_discrimination",
+    "next_route_state_exposure": "m9l_checkout_exposure_conditioned_route_model_test",
+    "next_unresolved": "m9l_checkout_minimal_discriminating_instrumentation"
+  },
+  "repository_locks": [
+    {"path": "configs/m7_frozen_live.yaml", "bytes": 4748, "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a"},
+    {"path": "configs/m7_evidence_boundary.yaml", "bytes": 2117, "sha256": "cde1ce49c15caaf03f27fa63594cc3396e81153716037fc9708cf060ac674448"},
+    {"path": "requirements.txt", "bytes": 41, "sha256": "c08d853f6dd527570717ebe50bdd0ace08563598f1ebe42fb4b534ea4afefd88"},
+    {"path": "src/telemetry_availability/live_validation_analysis.py", "bytes": 68555, "sha256": "0b58ddd271a6eccbdd3d1f2879fae6e333825c4a95f2667ad1ecb1d12c646132"},
+    {"path": "src/telemetry_availability/live_validation_config.py", "bytes": 23728, "sha256": "661a733ea24941a8749b7bf6ac874cb1688a0b17e539683c02c142ce88ba6702"},
+    {"path": "src/telemetry_availability/m7_causal_diagnostics.py", "bytes": 44135, "sha256": "bdb48af19dccbb1e23bcbfadfd4317f5602a4ea9e74e7193f8f749f411b6ad82"},
+    {"path": "docs/milestones/M8B_M7_CAUSAL_DIAGNOSTICS.md", "bytes": 12148, "sha256": "e9ff535c2da59098b4afa92f6b5f537bc546f8fded3e1aad658258064abdb0a2"},
+    {"path": "docs/milestones/M9J_PMX_CARRIER_CONTROL.md", "bytes": 8784, "sha256": "fd7ea2ede1cf6bebb1f6a1074e9f39c3f50c1758fa310fcece05cd69866ec571"}
+  ],
+  "manual_actions_log": "docs/M9K_MANUAL_ACTIONS.csv",
+  "workflow": {
+    "jobs": 3,
+    "job_timeout_minutes": 360,
+    "heavy_analysis_only_in_github_actions": true,
+    "artifact_retention_days": 90
+  },
+  "interpretation_guardrails": {
+    "diagnostic_counterfactual_is_revised_m7_prediction": false,
+    "single_operation_result_generalizes_to_other_operations": false,
+    "route_up_residual_mismatch_uniquely_identifies_physical_cause": false,
+    "posthoc_localization_is_confirmatory_accuracy_evidence": false,
+    "m9j_machine_gate_is_rewritten": false,
+    "pmx_scientific_priority_reduced": false,
+    "new_collection_is_authorized": false,
+    "overall_article_verdict_changes": false
+  }
+}
