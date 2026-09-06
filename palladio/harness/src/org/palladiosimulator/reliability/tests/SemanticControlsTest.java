@@ -214,6 +214,8 @@ public class SemanticControlsTest {
             assertTrue(Files.isRegularFile(modelRoot.resolve("default.resourceenvironment")));
             final Map<String, ProbabilityResult> firstResults = new HashMap<>();
             for (int repetition = 0; repetition < repeatRuns; repetition++) {
+                System.out.println("TAID_M9B_MODEL_START model_id=" + modelId
+                        + " repetition=" + repetition);
                 final List<ProbabilityResult> results = solve(modelRoot);
                 final Set<String> scenarioIds = new HashSet<>();
                 for (final ProbabilityResult result : results) {

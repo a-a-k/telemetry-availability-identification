@@ -107,6 +107,19 @@ class PalladioControlsTests(unittest.TestCase):
             self.assertEqual(manifest["model_count"], 7)
             self.assertEqual(manifest["case_count"], 15)
             self.assertEqual(len(list(models.rglob("default.*"))), 35)
+            software_repository = (
+                models / "software_semantics" / "default.repository"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "internalFailureOccurrenceDescriptions__SoftwareInducedFailureType=",
+                software_repository,
+            )
+            self.assertEqual(
+                software_repository.count(
+                    "@internalFailureOccurrenceDescriptions__InternalAction.0"
+                ),
+                12,
+            )
 
     def test_model_audit_rejects_post_generation_parameter_change(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -243,6 +256,7 @@ class PalladioControlsTests(unittest.TestCase):
         self.assertIn('getEStructuralFeature("entityName")', harness)
         self.assertIn("result.getScenario().eGet(nameFeature)", harness)
         self.assertNotIn("getScenario().getEntityName()", harness)
+        self.assertIn("TAID_M9B_MODEL_START", harness)
         self.assertIn("TAID_EXPECTED_CASE_COUNT", harness)
         self.assertNotIn("TAID_EXPECTED_SUCCESS", harness)
 

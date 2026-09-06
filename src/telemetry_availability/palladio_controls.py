@@ -517,6 +517,39 @@ def _software_action(case: PalladioControlCase) -> str:
     raise AssertionError(case.kind)
 
 
+def _software_failure_reverse_references(
+    model: PalladioControlModel,
+) -> tuple[str, ...]:
+    references: list[str] = []
+    for index, case in enumerate(model.cases):
+        base = (
+            "//@components__Repository.0/"
+            f"@serviceEffectSpecifications__BasicComponent.{index}"
+        )
+        if case.kind == "single":
+            references.append(
+                f"{base}/@steps_Behaviour.1/"
+                "@internalFailureOccurrenceDescriptions__InternalAction.0"
+            )
+        elif case.kind == "fallback":
+            for behaviour_index in range(2):
+                references.append(
+                    f"{base}/@steps_Behaviour.1/"
+                    "@recoveryActionBehaviours__RecoveryAction."
+                    f"{behaviour_index}/@steps_Behaviour.1/"
+                    "@internalFailureOccurrenceDescriptions__InternalAction.0"
+                )
+        elif case.kind == "conditional":
+            references.append(
+                f"{base}/@steps_Behaviour.1/@branches_Branch.0/"
+                "@branchBehaviour_BranchTransition/@steps_Behaviour.1/"
+                "@internalFailureOccurrenceDescriptions__InternalAction.0"
+            )
+        else:
+            raise AssertionError(case.kind)
+    return tuple(references)
+
+
 def _software_repository(model: PalladioControlModel) -> str:
     seffs = []
     signatures = []
@@ -528,6 +561,9 @@ def _software_repository(model: PalladioControlModel) -> str:
         signatures.append(
             f'    <signatures__OperationInterface id="_sig_{case.id}" entityName="{case.id}"/>'
         )
+    failure_reverse_references = " ".join(
+        _software_failure_reverse_references(model)
+    )
     return _xml(
         f"""
         <?xml version="1.0" encoding="UTF-8"?>
@@ -539,7 +575,7 @@ def _software_repository(model: PalladioControlModel) -> str:
           <interfaces__Repository xsi:type="repository:OperationInterface" id="_sw_interface" entityName="software-controls">
         {chr(10).join(signatures)}
           </interfaces__Repository>
-          <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_sw_failure" entityName="controlled-software-failure"/>
+          <failureTypes__Repository xsi:type="reliability:SoftwareInducedFailureType" id="_sw_failure" entityName="controlled-software-failure" internalFailureOccurrenceDescriptions__SoftwareInducedFailureType="{failure_reverse_references}"/>
         </repository:Repository>
         """
     )
@@ -1289,6 +1325,32 @@ def _audit_software_model(
     failure_types = _children(repository, "failureTypes__Repository")
     if len(failure_types) != 1 or _xsi_type(failure_types[0]) != "SoftwareInducedFailureType":
         raise ValueError("software controls must define one software failure type")
+    descriptions = _descendants(
+        repository, "internalFailureOccurrenceDescriptions__InternalAction"
+    )
+    expected_description_count = sum(
+        2 if case.kind == "fallback" else 1 for case in model.cases
+    )
+    reverse_references = failure_types[0].attrib.get(
+        "internalFailureOccurrenceDescriptions__SoftwareInducedFailureType", ""
+    ).split()
+    if len(descriptions) != expected_description_count:
+        raise ValueError("software control failure-description count is incorrect")
+    if (
+        len(reverse_references) != expected_description_count
+        or len(set(reverse_references)) != expected_description_count
+        or any(
+            not reference.startswith(
+                "//@components__Repository.0/"
+                "@serviceEffectSpecifications__BasicComponent."
+            )
+            or not reference.endswith(
+                "@internalFailureOccurrenceDescriptions__InternalAction.0"
+            )
+            for reference in reverse_references
+        )
+    ):
+        raise ValueError("software failure-type reverse references are incomplete")
     bound = _assert_case_bindings(model, repository, trees["usagemodel"])
     records: list[dict[str, object]] = []
     for case in model.cases:
