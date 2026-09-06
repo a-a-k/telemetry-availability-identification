@@ -261,11 +261,15 @@ identifiers in its manifest.
   contained no internal software failure. M9I then recovered all 25 relevant
   embedded sources and localized the distinction loss: error detection runs
   before the marked Spring child is merged into its Tomcat parent, while the
-  internal error marker is not propagated or recomputed. M9J prospectively
-  tests the exact surviving-carrier contract with matched true/false controls
-  and closes the present bounded PMX diagnostic. Every result branch then moves
-  to M9K's frozen single-operation localization of the proposed model's largest
-  checkout overprediction; it does not trigger open-ended tool repair.
+  internal error marker is not propagated or recomputed. M9J's matched carrier
+  controls then closed the bounded PMX diagnostic. Carrier false reproduced the
+  historical model, while both carrier-true runs created a repeat-exact 0.1
+  failure in the generated `VisitResource.read` SEFF. The strict prospective
+  gate remains failed because its unlabeled stdout aggregate was assigned to an
+  underidentified slot; retained PCM reference resolution records the intended
+  operation without rewriting that gate. Work now moves to M9K's frozen
+  single-operation localization of the proposed model's largest checkout
+  overprediction, not to open-ended tool repair.
   Separately, 0/160 qualified learner bundles retained raw
   spans. Four raw samples are learner-only schema-adaptable, but lack the direct
   Spring-WebMVC instrumentation semantics and OTel needs a format adapter. No
