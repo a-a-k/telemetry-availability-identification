@@ -214,8 +214,15 @@ identifiers in its manifest.
   analyzer commit under an audited release-date dependency lock, and ran the
   official `ReliabilityTest` twice. Both solver calls returned `0.375`, conserved
   probability mass exactly, and matched an independently parsed recovery-tree
-  oracle. This validates the integration boundary only; M9B next tests richer
-  semantics before any mapping of M7 into PCM.
+  oracle. This validates the integration boundary only.
+- M9B generated seven independently audited PCM control groups and ran 15
+  frozen semantic cases twice. Every solver value matched its external oracle,
+  with zero repeat and probability-mass residuals. The source and model audits
+  also expose two non-negotiable mapping limits: automatic allocation
+  replication is unsupported, and one raw link probability is applied to both
+  request and response transfer. M9C now builds the explicit correspondence
+  table and one minimal operation model per application before any aligned
+  accuracy comparison.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

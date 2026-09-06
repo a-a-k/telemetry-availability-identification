@@ -1,6 +1,7 @@
 # M9B: Palladio semantic-control protocol
 
-Status: frozen before the first remote Palladio execution.
+Status: completed. Frozen before the first remote Palladio execution; accepted
+evidence is recorded in `milestones/M9B_PALLADIO_SEMANTIC_CONTROLS.md`.
 
 ## Purpose and scientific boundary
 

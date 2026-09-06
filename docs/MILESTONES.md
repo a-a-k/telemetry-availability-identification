@@ -28,7 +28,8 @@ tests, configuration validation, and bounded smoke cases.
 | M8A | Preserve M7 evidence and independently audit identities, scores, and aggregation | Complete | `milestones/M8A_M7_EVIDENCE_AND_ARITHMETIC_AUDIT.md`; 165 artifacts preserved, 36,459 scores independently reproduced, zero mismatches |
 | M8B | Decompose M7 bias, temporal behavior, semantic failures, and topology ambiguity | Complete | `milestones/M8B_M7_CAUSAL_DIAGNOSTICS.md`; all 576,000 test requests aligned, 32/32 normalized replay files matched, discrepancy localized but cause unresolved |
 | M9A | Pin, build, inventory, and reproduce the official Palladio reliability analyzer example | Complete | `milestones/M9A_PALLADIO_RELIABILITY_BOOTSTRAP.md`; accepted three-job run pinned the product, rebuilt 5.2.2 under an audited historical target lock, and matched the independent 0.375 oracle twice |
-| M9B | Validate Palladio semantics on independent hand-checkable reliability controls | In progress | `M9B_PALLADIO_SEMANTIC_CONTROLS_PROTOCOL.md`; 15 predeclared cases cover boundaries, fallback, explicit redundancy, a shared domain, communication mapping, and conditional execution before any M7 mapping |
+| M9B | Validate Palladio semantics on independent hand-checkable reliability controls | Complete | `milestones/M9B_PALLADIO_SEMANTIC_CONTROLS.md`; all 15 predeclared cases matched their external oracles twice, with explicit replication and communication-mapping limits |
+| M9C | Define the M7-to-PCM correspondence and build one minimal operation model per application | In progress | Mapping table and application-model protocol follow the completed M9B semantic gate; no aligned accuracy comparison is admitted yet |
 
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference

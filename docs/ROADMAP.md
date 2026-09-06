@@ -82,8 +82,9 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A, M8B, and the commit-pinned M9A Palladio bootstrap are complete;
-independent Palladio semantic controls are in progress as M9B.
+Status: M8A, M8B, the commit-pinned M9A Palladio bootstrap, and the M9B
+semantic controls are complete; application correspondence and minimal PCM
+models are in progress as M9C.
 
 Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 
@@ -103,6 +104,8 @@ exploratory restrictions on the next comparison, not a revised M7 result.
 M9A rebuilt Palladio reliability 5.2.2 under an audited historical target lock,
 byte-pinned its official product, and reproduced the official example at
 success probability 0.375 in two calls, exactly matching a hand-checkable XMI
-oracle. This proves the integration boundary, not comparative validity. M9B
-must now exercise the mechanisms that matter for the eventual aligned
-comparison before any M7-to-PCM mapping is admitted.
+oracle. M9B then matched all 15 frozen mechanism-level controls twice. It also
+confirmed that automatic allocation replication is unsupported and that a raw
+link failure parameter is applied to both request and response transfer. M9C
+must now make those constraints explicit in the application mapping; neither
+milestone establishes comparative validity.
