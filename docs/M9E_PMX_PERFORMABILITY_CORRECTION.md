@@ -76,13 +76,16 @@ Three public repositories/artifacts can be pinned:
    JAR with Git blob ID `cd46b43e3632b242bd670d898c597cd7772f5e2c`.
    The associated public pipeline 1120 completed successfully in 2024.
 
-The last repository does not publish the corresponding plugin source or a
-license file. Its pipeline refers to PMX, Palladio-runtime, and gnuplot images
-through mutable `latest` tags. On 2026-09-06 the unauthenticated GitLab registry
-API still listed the three repositories but returned no retained tags. Thus
-the paper demonstrates an executed full chain, while exact present-day source
-and container reproduction must be audited rather than presumed impossible or
-presumed complete.
+The last repository does not provide a standalone source/build project or a
+license file for the later plugins. The JAR does, however, embed Java source
+snapshots under `OSGI-OPT/src`, including the error detector, aggregation, and
+failure-probability transformer; M9F audits those snapshots independently. The
+published pipeline refers to PMX, Palladio-runtime, and gnuplot images through
+mutable `latest` tags. On 2026-09-06 the unauthenticated GitLab registry API
+still listed the three repositories but returned no retained tags. Thus the
+paper demonstrates an executed full chain, while exact present-day source,
+binary, and container reproduction must be classified separately rather than
+presumed impossible or presumed complete.
 
 ## Revised next milestone
 

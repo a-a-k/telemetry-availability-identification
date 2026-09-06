@@ -1,0 +1,316 @@
+name: M9F PMX performability audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m9f-pmx-performability-audit-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9f_pmx_performability_audit.json
+  PYTHON_VERSION: 3.13.15
+  JAVA_VERSION: "11"
+  PMX_CORE_COMMIT: 9ee8b8745c0c0bb3dfc1b529906fc001525a7ce5
+  PMX_PCM_COMMIT: 6ec1cb7387efc236c0e55f44ed5c79acb5fd9d33
+  DEMO_COMMIT: 9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+  GITLAB_PROJECT_ID: "50"
+  GITLAB_PIPELINE_ID: "1120"
+  GITLAB_BASE: https://se-gitlab-extern.fzi.de
+  DEMO_PROJECT_PATH: SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci
+  PMX_JAR_SHA256: befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013
+  PMX_INTERNAL_TIMEOUT_SECONDS: "4500"
+
+jobs:
+  provenance_contract:
+    name: Audit paper, source lineage, demo, and containers
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Validate frozen M9F contract
+        run: python -m telemetry_availability.pmx_performability validate --config "$CONFIG"
+
+      - name: Clone exact historical PMX sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9f/historical
+          git clone --filter=blob:none --no-checkout \
+            https://github.com/ptreyer/org.palladiosimulator.pmxupgrade.git \
+            workflow-input/m9f/historical/pmx_opentracing_refactor
+          git -C workflow-input/m9f/historical/pmx_opentracing_refactor \
+            checkout --detach "$PMX_CORE_COMMIT"
+          git clone --filter=blob:none --no-checkout \
+            https://github.com/ptreyer/org.palladiosimulator.pmxupgrade-pcm.git \
+            workflow-input/m9f/historical/pmx_pcm_companion
+          git -C workflow-input/m9f/historical/pmx_pcm_companion \
+            checkout --detach "$PMX_PCM_COMMIT"
+
+      - name: Download byte-pinned paper and small demonstration artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9f/demo/traces workflow-input/m9f/metadata/registry
+          curl --fail --location --retry 8 --retry-all-errors \
+            "https://fb-swt.gi.de/fileadmin/FB/SWT/Softwaretechnik-Trends/Verzeichnis/Band_45_Heft_1/SSP24_26_camera-ready_8969.pdf" \
+            --output workflow-input/m9f/performability-paper.pdf
+          raw_base="$GITLAB_BASE/$DEMO_PROJECT_PATH/-/raw/$DEMO_COMMIT"
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$raw_base/.gitlab-ci.yml" --output workflow-input/m9f/demo/.gitlab-ci.yml
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$raw_base/Options.txt" --output workflow-input/m9f/demo/Options.txt
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$raw_base/README.md" --output workflow-input/m9f/demo/README.md
+          for trace in jaegerapi jaegercustomers jaegervets jaegervisits; do
+            curl --fail --location --retry 8 --retry-all-errors \
+              "$raw_base/traces/$trace.json" \
+              --output "workflow-input/m9f/demo/traces/$trace.json"
+          done
+
+      - name: Snapshot public GitLab metadata and registry observations
+        shell: bash
+        run: |
+          set -euo pipefail
+          api="$GITLAB_BASE/api/v4/projects/$GITLAB_PROJECT_ID"
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$api" --output workflow-input/m9f/metadata/project.json
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$api/repository/commits/$DEMO_COMMIT" \
+            --output workflow-input/m9f/metadata/commit.json
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$api/pipelines/$GITLAB_PIPELINE_ID" \
+            --output workflow-input/m9f/metadata/pipeline.json
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$api/pipelines/$GITLAB_PIPELINE_ID/jobs?per_page=100" \
+            --output workflow-input/m9f/metadata/jobs.json
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$api/repository/tree?ref=$DEMO_COMMIT&recursive=true&per_page=100" \
+            --output workflow-input/m9f/metadata/tree.json
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$api/registry/repositories?per_page=100" \
+            --output workflow-input/m9f/metadata/registry/repositories.json
+          for repository_id in 14 15 17; do
+            curl --fail --location --retry 8 --retry-all-errors \
+              "$api/registry/repositories/$repository_id/tags?per_page=100" \
+              --output "workflow-input/m9f/metadata/registry/tags-$repository_id.json"
+          done
+
+      - name: Audit frozen provenance contract
+        shell: bash
+        run: >-
+          /usr/bin/time -v -o workflow-input/m9f/contract-resource-usage.txt
+          python -m telemetry_availability.pmx_performability audit-contract
+          --config "$CONFIG"
+          --repository-root .
+          --paper workflow-input/m9f/performability-paper.pdf
+          --historical-root workflow-input/m9f/historical
+          --demonstration-root workflow-input/m9f/demo
+          --project-metadata workflow-input/m9f/metadata/project.json
+          --commit-metadata workflow-input/m9f/metadata/commit.json
+          --pipeline-metadata workflow-input/m9f/metadata/pipeline.json
+          --jobs-metadata workflow-input/m9f/metadata/jobs.json
+          --tree-metadata workflow-input/m9f/metadata/tree.json
+          --registry-root workflow-input/m9f/metadata/registry
+          --out workflow-results/m9f-contract
+
+      - name: Retain contract resource usage
+        run: cp workflow-input/m9f/contract-resource-usage.txt workflow-results/m9f-contract/
+
+      - name: Upload provenance artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9f-pmx-contract-${{ github.run_id }}
+          path: workflow-results/m9f-contract
+          if-no-files-found: error
+          retention-days: 90
+
+  headless_probe:
+    name: Run pinned headless PMX and one-in-ten control
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Set up declared Java runtime
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Install exact analysis environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download and byte-verify the pinned demonstration
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9f/demo/traces
+          raw_base="$GITLAB_BASE/$DEMO_PROJECT_PATH/-/raw/$DEMO_COMMIT"
+          for path in .gitlab-ci.yml Options.txt README.md; do
+            curl --fail --location --retry 8 --retry-all-errors \
+              "$raw_base/$path" --output "workflow-input/m9f/demo/$path"
+          done
+          for trace in jaegerapi jaegercustomers jaegervets jaegervisits; do
+            curl --fail --location --retry 8 --retry-all-errors \
+              "$raw_base/traces/$trace.json" \
+              --output "workflow-input/m9f/demo/traces/$trace.json"
+          done
+          curl --fail --location --retry 8 --retry-all-errors \
+            "$raw_base/main.jar" --output workflow-input/m9f/demo/main.jar
+          echo "$PMX_JAR_SHA256  workflow-input/m9f/demo/main.jar" | sha256sum --check
+
+      - name: Generate the predeclared single-error mechanism control
+        shell: bash
+        run: >-
+          python -m telemetry_availability.pmx_performability make-error-control
+          --config "$CONFIG"
+          --demonstration-root workflow-input/m9f/demo
+          --output-trace workflow-input/m9f/control/traces/jaegercustomers-error-control.json
+          --output-options workflow-input/m9f/control/Options.txt
+          --manifest workflow-input/m9f/control/control-manifest.json
+
+      - name: Record Java runtime
+        shell: bash
+        run: java -version > workflow-input/m9f/java-version.txt 2>&1
+
+      - name: Execute published input and control twice without hiding failures
+        shell: bash
+        run: |
+          set -euo pipefail
+          jar_path="$GITHUB_WORKSPACE/workflow-input/m9f/demo/main.jar"
+          raw_root="$GITHUB_WORKSPACE/workflow-results/m9f-probe/raw"
+          for condition in published_original single_error_control; do
+            for repeat in 1 2; do
+              run_root="$raw_root/$condition/repeat-$repeat"
+              mkdir -p "$run_root/results" "$run_root/traces"
+              if [[ "$condition" == "published_original" ]]; then
+                cp workflow-input/m9f/demo/Options.txt "$run_root/Options.txt"
+                cp workflow-input/m9f/demo/traces/jaegercustomers.json \
+                  "$run_root/traces/jaegercustomers.json"
+              else
+                cp workflow-input/m9f/control/Options.txt "$run_root/Options.txt"
+                cp workflow-input/m9f/control/traces/jaegercustomers-error-control.json \
+                  "$run_root/traces/jaegercustomers-error-control.json"
+              fi
+              set +e
+              (
+                cd "$run_root"
+                /usr/bin/time -v -o resource-usage.txt \
+                  timeout --signal=TERM --kill-after=30s \
+                  "${PMX_INTERNAL_TIMEOUT_SECONDS}s" \
+                  java -jar "$jar_path" -of Options.txt > stdout.log 2>&1
+              )
+              exit_code=$?
+              set -e
+              printf '%s\n' "$exit_code" > "$run_root/exit-code.txt"
+            done
+          done
+
+      - name: Inventory binary, embedded source, and all executions
+        shell: bash
+        run: >-
+          python -m telemetry_availability.pmx_performability record-probe
+          --config "$CONFIG"
+          --demonstration-root workflow-input/m9f/demo
+          --execution-root workflow-results/m9f-probe/raw
+          --control-manifest workflow-input/m9f/control/control-manifest.json
+          --java-version workflow-input/m9f/java-version.txt
+          --out workflow-results/m9f-probe
+
+      - name: Upload raw PMX probe artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9f-pmx-probe-${{ github.run_id }}
+          path: workflow-results/m9f-probe
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  semantic_decision:
+    name: Classify reproducibility, semantic fit, and application cost
+    needs: [provenance_contract, headless_probe]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download upstream evidence artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9f-pmx-*-${{ github.run_id }}
+          path: workflow-input/m9f
+
+      - name: Apply frozen reproducibility and semantic-fit rules
+        shell: bash
+        run: >-
+          /usr/bin/time -v -o workflow-input/m9f/decision-resource-usage.txt
+          python -m telemetry_availability.pmx_performability audit-probe
+          --config "$CONFIG"
+          --contract-manifest workflow-input/m9f/m9f-pmx-contract-${{ github.run_id }}/contract-manifest.json
+          --probe-root workflow-input/m9f/m9f-pmx-probe-${{ github.run_id }}
+          --out workflow-results/m9f-decision
+
+      - name: Retain decision resource usage
+        run: cp workflow-input/m9f/decision-resource-usage.txt workflow-results/m9f-decision/
+
+      - name: Upload accepted decision artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9f-pmx-decision-${{ github.run_id }}
+          path: workflow-results/m9f-decision
+          if-no-files-found: error
+          retention-days: 90

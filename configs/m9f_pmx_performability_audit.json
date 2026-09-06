@@ -1,0 +1,436 @@
+{
+  "schema_version": 1,
+  "id": "m9f_pmx_performability_audit",
+  "status": "frozen_before_first_remote_pmx_execution",
+  "diagnostic_only": true,
+  "accuracy_scoring": "forbidden",
+  "new_live_collection": "forbidden",
+  "scientific_priority": {
+    "method": "PMX_performability_extension",
+    "persists_if_application_cost_is_high": true,
+    "retriever_result_generalizes_to_ecosystem": false,
+    "m7_interpretation_changes": false
+  },
+  "runtime": {
+    "remote_only_full_execution": true,
+    "job_timeout_minutes": 360,
+    "pmx_internal_timeout_seconds": 4500,
+    "headless_job_safety_minutes": 60,
+    "repeat_count_per_condition": 2,
+    "java_distribution": "temurin",
+    "java_version": "11",
+    "invocation": [
+      "java",
+      "-jar",
+      "main.jar",
+      "-of",
+      "Options.txt"
+    ]
+  },
+  "paper": {
+    "title": "Integration of Performability-Model Extraction and Performability Prediction in Continuous Integration / Continuous Delivery",
+    "url": "https://fb-swt.gi.de/fileadmin/FB/SWT/Softwaretechnik-Trends/Verzeichnis/Band_45_Heft_1/SSP24_26_camera-ready_8969.pdf",
+    "record_url": "https://publikationen.bibliothek.kit.edu/1000185446",
+    "bytes": 244692,
+    "sha256": "5d45195448d2a12c502a202721215c93d0623c1e02c7e6c9565338eff54c9a8f"
+  },
+  "repository_locks": [
+    {
+      "path": "docs/M9F_PMX_PERFORMABILITY_AUDIT_PROTOCOL.md",
+      "bytes": 8077,
+      "sha256": "feea8a13c40e7145457478e0f0557645e962c1ed4af8ac81dbf7326bc5108751"
+    },
+    {
+      "path": "docs/M9E_PMX_PERFORMABILITY_CORRECTION.md",
+      "bytes": 6168,
+      "sha256": "202800048cb9ecb7fe723893d7fda2ff6bfdcdbf6bb87734c6e26b5b9f97c7fe"
+    }
+  ],
+  "manual_actions_log": {
+    "path": "docs/M9F_MANUAL_ACTIONS.csv",
+    "initial_size_in_bytes": 1465,
+    "initial_sha256": "a38232df7d781c3752ec7238ac39981c4f7482a3082b589c6f16d740d479f735",
+    "append_only_after_preregistration": true
+  },
+  "historical_sources": [
+    {
+      "id": "pmx_opentracing_refactor",
+      "role": "historical_lineage_not_later_binary_equivalence",
+      "repository": "https://github.com/ptreyer/org.palladiosimulator.pmxupgrade.git",
+      "commit": "9ee8b8745c0c0bb3dfc1b529906fc001525a7ce5",
+      "license": "EPL-2.0",
+      "locks": [
+        {
+          "path": "LICENSE",
+          "git_blob": "e48e0963459bf4c4e175956b657a8f4a91967880",
+          "bytes": 14197,
+          "markers": [
+            "Eclipse Public License - v 2.0"
+          ]
+        },
+        {
+          "path": "pom.xml",
+          "git_blob": "c5a28abd542ddd8a23351e2cc9cd8e4585900c00",
+          "bytes": 3385,
+          "markers": [
+            "<artifactId>pmxupgrade</artifactId>",
+            "tools.descartes.librede.estimation"
+          ]
+        },
+        {
+          "path": "src/main/java/org/palladiosimulator/pmxupgrade/logic/inputreader/impl/InputReaderOpenTracingImpl.java",
+          "git_blob": "1573b569d7023aadaeec7108f63c0c709089d22d",
+          "bytes": 1117,
+          "markers": [
+            "OpenTracing standard",
+            "ObjectMapper"
+          ]
+        },
+        {
+          "path": "src/main/java/org/palladiosimulator/pmxupgrade/logic/dataprocessing/failureestimation/FailureEstimationService.java",
+          "git_blob": "1838194eda35d795f8c913b2c87be46699086b5a",
+          "bytes": 619,
+          "markers": [
+            "TODO perform failure estimation based on the span error tags",
+            "return systemModelRepository;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pmx_pcm_companion",
+      "role": "historical_pcm_builder_not_later_binary_equivalence",
+      "repository": "https://github.com/ptreyer/org.palladiosimulator.pmxupgrade-pcm.git",
+      "commit": "6ec1cb7387efc236c0e55f44ed5c79acb5fd9d33",
+      "license": "source_headers_EPL-1.0_no_root_license_file",
+      "locks": [
+        {
+          "path": "pom.xml",
+          "git_blob": "87af65d0398d4acd877118e991261ab5c0f53c89",
+          "bytes": 8320,
+          "markers": [
+            "<artifactId>pmxupgrade-pcm</artifactId>",
+            "org.palladiosimulator.pcm_4.3.0.202006280807.jar"
+          ]
+        },
+        {
+          "path": "src/main/java/org/palladiosimulator/pmxupgrade/pcm/console/PMXCommandLine.java",
+          "git_blob": "e93ef2032c6982a4c72a1b154b3faf0981f48fa3",
+          "bytes": 7019,
+          "markers": [
+            "C:\\\\Users\\\\ptreyer\\\\Documents\\\\system_example\\\\",
+            "Performance Model eXtractor(PMX)"
+          ]
+        },
+        {
+          "path": "src/main/java/org/palladiosimulator/pmxupgrade/pcm/builder/PCMBuilder.java",
+          "git_blob": "1c0cbe609b4666f9f1686bce5efd4174cf6fbe04",
+          "bytes": 28156,
+          "markers": [
+            "setFailureProbability(0.0)",
+            "createNetwork"
+          ]
+        },
+        {
+          "path": "src/main/resources/FailureTypes.repository",
+          "git_blob": "1693f09dd1102853cbec9d77502a9bc8d12e11e6",
+          "bytes": 1483,
+          "markers": [
+            "HardwareInducedFailureType",
+            "NetworkInducedFailureType"
+          ]
+        }
+      ]
+    }
+  ],
+  "demonstration": {
+    "repository": "https://se-gitlab-extern.fzi.de/SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci.git",
+    "web_url": "https://se-gitlab-extern.fzi.de/SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci",
+    "project_id": 50,
+    "commit": "9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2",
+    "historical_pipeline_id": 1120,
+    "historical_pipeline_status": "success",
+    "files": [
+      {
+        "path": ".gitlab-ci.yml",
+        "git_blob": "a6afd0722436bcc6f3f0fec55dcc0d2d47d45a78",
+        "bytes": 1833,
+        "sha256": "d6f046d8bc5f75da31e88708d0fc99be3a70612dc8c2cd1ea3a9c1623ca4bba8"
+      },
+      {
+        "path": "Options.txt",
+        "git_blob": "0ead876bf173e3017e70c6057be174b2a0f02602",
+        "bytes": 707,
+        "sha256": "7cd828213521e1a608938b05a8c2899556652d093624bde1afbaf9e5dacc597d"
+      },
+      {
+        "path": "README.md",
+        "git_blob": "ab070221485fd79390b38b1c63c88ef3d1856578",
+        "bytes": 6298,
+        "sha256": "8e581e3dc1be24dbce6fda930045f153cca06e233c8e1f942307f9039424aaed"
+      },
+      {
+        "path": "main.jar",
+        "git_blob": "cd46b43e3632b242bd670d898c597cd7772f5e2c",
+        "bytes": 65729095,
+        "sha256": "befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013"
+      },
+      {
+        "path": "traces/jaegerapi.json",
+        "git_blob": "e15aa470fe5e2b34ef8b290aa203392c9e2094d7",
+        "bytes": 796260,
+        "sha256": "09aeda1de16100677e01f5ed0695a66bc6e71eda752abbb7f106a1d402863f48"
+      },
+      {
+        "path": "traces/jaegercustomers.json",
+        "git_blob": "0c8c0fd27b45584912040eab90643cb0514557b7",
+        "bytes": 1134923,
+        "sha256": "8d9fe31ab2a89d1ed4c480101795d4ab3670d118feb776b5e5a5420085755757"
+      },
+      {
+        "path": "traces/jaegervets.json",
+        "git_blob": "7e618d2c80d226b97816d61a178e6526852ba341",
+        "bytes": 352762,
+        "sha256": "09d80616aff924a467ccf2427c0d9cb90fc9d987ef5be53ab25ce94ee3bb1c63"
+      },
+      {
+        "path": "traces/jaegervisits.json",
+        "git_blob": "1a42ff5721fff5a68f03f32abc3074c674f5df47",
+        "bytes": 332182,
+        "sha256": "80879dc264f38d99cccca6fdba9aa20da8f24f5652bda8dd3f28ea8cb36747fe"
+      }
+    ],
+    "published_plugins": [
+      "org.palladiosimulator.pmx.reader.otlp.ReaderOpenTelemetry",
+      "org.palladiosimulator.pmx.transformer.tracetointernaltrace.otlp.TransformerTraceToInternalTraceBasic",
+      "org.palladiosimulator.pmx.transformer.internaltracetosystem.otlp.TransformerInternalTraceToSystemBasic",
+      "org.palladiosimulator.pmx.transformer.systemtopcm.TransformerSystemToPCMBasic",
+      "org.palladiosimulator.pmx.transformer.systemtopcm.failureprobabilities.TransformerSystemToPCMFailureDependencies",
+      "org.palladiosimulator.pmx.writer.basic.PCMWriter"
+    ],
+    "containers": [
+      {
+        "stage": "extract",
+        "registry_repository_id": 14,
+        "reference": "se-gitlab-extern.fzi.de/sebastianweberfzi/ableitung-von-leistungsmodellen-in-ci/pmx:latest"
+      },
+      {
+        "stage": "simulate",
+        "registry_repository_id": 15,
+        "reference": "se-gitlab-extern.fzi.de/sebastianweberfzi/ableitung-von-leistungsmodellen-in-ci/palladio_runtime:latest"
+      },
+      {
+        "stage": "plot",
+        "registry_repository_id": 17,
+        "reference": "se-gitlab-extern.fzi.de/sebastianweberfzi/ableitung-von-leistungsmodellen-in-ci/gnuplot:latest"
+      }
+    ]
+  },
+  "jar_audit": {
+    "main_class": "aQute.launcher.pre.EmbeddedLauncher",
+    "bundle_version": "1.0.0.202311291416",
+    "required_java": "11",
+    "pcm_bundle": "jar/org.palladiosimulator.pcm-5.1.0.202201251356.jar",
+    "required_entries": [
+      "META-INF/MANIFEST.MF",
+      "launcher.properties",
+      "jar/org.palladiosimulator.pmx.core.jar",
+      "jar/org.palladiosimulator.pmx.reader.otlp.jar",
+      "jar/org.palladiosimulator.pmx.transformer.tracetointernaltrace.otlp.jar",
+      "jar/org.palladiosimulator.pmx.transformer.internaltracetosystem.otlp.jar",
+      "jar/org.palladiosimulator.pmx.transformer.systemtopcm.jar",
+      "jar/org.palladiosimulator.pmx.transformer.systemtopcm.failureprobabilities.jar",
+      "jar/org.palladiosimulator.pmx.writer.basic.jar",
+      "jar/org.palladiosimulator.pcm-5.1.0.202201251356.jar"
+    ],
+    "embedded_bundles": [
+      {
+        "path": "jar/org.palladiosimulator.pmx.core.jar",
+        "bytes": 243017,
+        "sha256": "fcea188f998cfb0ef7e69dad165ca2c8b66c40f8dd778dcdce98774f2695420d"
+      },
+      {
+        "path": "jar/org.palladiosimulator.pmx.reader.otlp.jar",
+        "bytes": 23779,
+        "sha256": "273159c9ebf70d1ee1b177532f57103635207ad3f9ea0b1a712a8bbf7ea6f102"
+      },
+      {
+        "path": "jar/org.palladiosimulator.pmx.transformer.tracetointernaltrace.otlp.jar",
+        "bytes": 33631,
+        "sha256": "9d62d390dea95c78863e493d8e3dd35a7c913c2bb0adec1a4f89a338abee77ba"
+      },
+      {
+        "path": "jar/org.palladiosimulator.pmx.transformer.internaltracetosystem.otlp.jar",
+        "bytes": 47709,
+        "sha256": "1f0a9b169b3778fe9b7a62ed61bbe2ff0989f3319715d21e6b0619e152e8d1a3"
+      },
+      {
+        "path": "jar/org.palladiosimulator.pmx.transformer.systemtopcm.jar",
+        "bytes": 108046,
+        "sha256": "e7e98c3b40698b6b82c80fa4c770cb68601778e8a2601fd6bb11d1b75ff5d046"
+      },
+      {
+        "path": "jar/org.palladiosimulator.pmx.transformer.systemtopcm.failureprobabilities.jar",
+        "bytes": 7938,
+        "sha256": "c9d16dfa1e9ddc412185a22abc178e2b10fe39f6ae6e098ad55427aa91a65050"
+      },
+      {
+        "path": "jar/org.palladiosimulator.pmx.writer.basic.jar",
+        "bytes": 59491,
+        "sha256": "35dd7babab4f57e4dda8755753d172f5eef5a8850e3c7bfaaed64115303c91d9"
+      }
+    ],
+    "embedded_source_checks": [
+      {
+        "id": "orchestrator_exit_status",
+        "bundle_path": "jar/org.palladiosimulator.pmx.core.jar",
+        "source_path": "OSGI-OPT/src/org/palladiosimulator/pmx/core/Main.java",
+        "markers": [
+          "new Option(\"of\", \"options-file\"",
+          "System.exit(0);"
+        ]
+      },
+      {
+        "id": "otel_reader_shape",
+        "bundle_path": "jar/org.palladiosimulator.pmx.reader.otlp.jar",
+        "source_path": "OSGI-OPT/src/org/palladiosimulator/pmx/reader/otlp/ReaderOpenTelemetry.java",
+        "markers": [
+          "TraceRecordOTLP",
+          "mapper.readValue",
+          "getProcesses()",
+          "getSpans()"
+        ]
+      },
+      {
+        "id": "error_detection",
+        "bundle_path": "jar/org.palladiosimulator.pmx.transformer.tracetointernaltrace.otlp.jar",
+        "source_path": "OSGI-OPT/src/org/palladiosimulator/pmx/transformer/tracetointernaltrace/otlp/Util.java",
+        "markers": [
+          "otel.library.name",
+          "spring-webmvc",
+          "errorKeyToDetect = \"error\"",
+          "errorValueToDetect = \"true\"",
+          "http.status_code"
+        ]
+      },
+      {
+        "id": "operation_aggregation_and_network_todo",
+        "bundle_path": "jar/org.palladiosimulator.pmx.transformer.tracetointernaltrace.otlp.jar",
+        "source_path": "OSGI-OPT/src/org/palladiosimulator/pmx/transformer/tracetointernaltrace/otlp/TraceReconstructionService.java",
+        "markers": [
+          "TODO detect network",
+          "Constants.SUCCESS",
+          "Constants.FAILURE"
+        ]
+      },
+      {
+        "id": "failure_probability_formula",
+        "bundle_path": "jar/org.palladiosimulator.pmx.transformer.systemtopcm.failureprobabilities.jar",
+        "source_path": "OSGI-OPT/src/org/palladiosimulator/pmx/transformer/systemtopcm/failureprobabilities/TransformerSystemToPCMFailureDependencies.java",
+        "markers": [
+          "InternalFailureOccurrenceDescription",
+          "SoftwareInducedFailureType",
+          "Double.parseDouble(countOfFails) / (Double.parseDouble(countOfFails) + Double.parseDouble(countOfSuccesses))"
+        ]
+      },
+      {
+        "id": "zero_link_default",
+        "bundle_path": "jar/org.palladiosimulator.pmx.transformer.systemtopcm.jar",
+        "source_path": "OSGI-OPT/src/org/palladiosimulator/pmx/transformer/systemtopcm/builder/PCMBuilder.java",
+        "markers": [
+          "setFailureProbability(0.0)",
+          "createNetwork"
+        ]
+      },
+      {
+        "id": "writer_outputs",
+        "bundle_path": "jar/org.palladiosimulator.pmx.writer.basic.jar",
+        "source_path": "OSGI-OPT/src/org/palladiosimulator/pmx/writer/basic/PCMWriter.java",
+        "markers": [
+          "extracted.repository",
+          "extracted.system",
+          "extracted.allocation",
+          "extracted.resourceenvironment",
+          "extracted.usagemodel"
+        ]
+      }
+    ]
+  },
+  "conditions": [
+    {
+      "id": "published_original",
+      "trace_path": "traces/jaegercustomers.json",
+      "options_path": "Options.txt",
+      "modified": false
+    },
+    {
+      "id": "single_error_control",
+      "trace_path": "traces/jaegercustomers-error-control.json",
+      "options_path": "Options.txt",
+      "modified": true,
+      "source_trace_path": "traces/jaegercustomers.json",
+      "trace_id": "af0f0df51dfdfc3ca3e2eae9b00b114e",
+      "span_id": "b2adec3b558fff51",
+      "operation": "VisitResource.read",
+      "tag": {
+        "key": "error",
+        "type": "bool",
+        "value": "true"
+      },
+      "eligible_operation_occurrences": 10,
+      "original_error_tags": 0,
+      "expected_failure_probability": 0.1,
+      "absolute_tolerance": 1e-12
+    }
+  ],
+  "required_core_model_suffixes": [
+    ".repository",
+    ".system",
+    ".allocation",
+    ".resourceenvironment",
+    ".usagemodel"
+  ],
+  "semantic_dimensions": [
+    {
+      "id": "trace_ingestion",
+      "required_work_if_absent": "Implement and validate a transparent adapter from preserved M7 OpenTelemetry/native evidence to the pinned Jaeger-shaped reader contract."
+    },
+    {
+      "id": "architecture_operation_flow",
+      "required_work_if_absent": "Adapt component detection and retain source-grounded operation, call, usage, allocation, and resource semantics for both applications."
+    },
+    {
+      "id": "software_operation_failure",
+      "required_work_if_absent": "Instrument or map operation failures to the exact error-tag contract and verify the generated internal failure probability."
+    },
+    {
+      "id": "host_lifecycle",
+      "required_work_if_absent": "Estimate host/domain lifecycle and map MTTF/MTTR from eligible learner evidence without evaluator leakage."
+    },
+    {
+      "id": "communication_failure",
+      "required_work_if_absent": "Estimate and map communication failure separately from operation failures and latency."
+    },
+    {
+      "id": "replication",
+      "required_work_if_absent": "Recover interchangeable replicas and explicit paths rather than interpreting arbitrary component multiplicity as redundancy."
+    },
+    {
+      "id": "common_failure_domains",
+      "required_work_if_absent": "Represent colocated and split logical failure domains explicitly and audit their transfer assumptions."
+    },
+    {
+      "id": "external_client_success",
+      "required_work_if_absent": "Add the frozen external-client success contract and semantic residual without treating every unmarked span as client success."
+    }
+  ],
+  "interpretation_guardrails": {
+    "missing_support_is_application_cost_not_scientific_disqualification": true,
+    "tested_binary_represents_all_pmx": false,
+    "tested_binary_represents_all_palladio": false,
+    "published_example_is_accuracy_evidence": false,
+    "synthetic_error_control_is_accuracy_evidence": false,
+    "historical_source_equals_later_binary_source": false,
+    "exit_zero_alone_is_success": false
+  }
+}
