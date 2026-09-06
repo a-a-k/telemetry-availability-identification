@@ -133,3 +133,13 @@ structural PCM extraction from a reliability-ready full path. M9E performs no
 accuracy scoring, does not fill missing model elements, and authorizes no new
 live collection. If either application fails a gate, the next baseline is
 explicitly partially manual and its additions must be measured.
+
+M9E is complete. Retriever exited successfully and emitted repository, system,
+allocation, and resource-environment files for both applications, but the files
+were empty shells. Each application passed only the extractor and four
+file-presence gates (5/15); usage, operation/call, replica/domain, and all four
+reliability-semantic gates failed. The frozen next step is M9F: construct the
+source-grounded partially manual PCM baseline on preserved development
+evidence, logging the origin and human effort of every completion. Accuracy and
+new live confirmation remain deferred until that baseline produces an
+independently parameterized prediction and supports a precision calculation.
