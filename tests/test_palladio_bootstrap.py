@@ -20,6 +20,7 @@ from telemetry_availability.palladio_bootstrap import (
 ROOT = Path(__file__).resolve().parents[1]
 CONFIG = ROOT / "configs" / "m9a_palladio_bootstrap.json"
 WORKFLOW = ROOT / ".github" / "workflows" / "m9a-palladio-bootstrap.yml"
+HARNESS_MANIFEST = ROOT / "palladio" / "harness" / "META-INF" / "MANIFEST.MF"
 
 
 class PalladioBootstrapTests(unittest.TestCase):
@@ -219,6 +220,10 @@ class PalladioBootstrapTests(unittest.TestCase):
         for job in ("source_build:", "product_audit:", "official_example:"):
             self.assertIn(f"  {job}", workflow)
         self.assertEqual(workflow.count("lock-palladio-target-platform"), 2)
+
+    def test_headless_harness_includes_pcm_pathmap_resources(self) -> None:
+        manifest = HARNESS_MANIFEST.read_text(encoding="utf-8")
+        self.assertIn("org.palladiosimulator.pcm.resources", manifest)
 
 
 if __name__ == "__main__":
