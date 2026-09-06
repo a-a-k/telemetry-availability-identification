@@ -175,8 +175,10 @@ def load_pmx_performability_config(path: Path) -> PMXPerformabilityConfig:
     root = _mapping(_load_json(path, "M9F config"), "root")
     if root.get("schema_version") != 1:
         raise ValueError("schema_version must equal 1")
-    if root.get("status") != "frozen_before_first_remote_pmx_execution":
-        raise ValueError("M9F status must remain frozen before PMX execution")
+    if root.get("status") != (
+        "runtime_amended_after_superseded_attempt_before_result_access"
+    ):
+        raise ValueError("M9F status must retain the transparent runtime amendment")
     if root.get("diagnostic_only") is not True:
         raise ValueError("M9F must remain diagnostic_only")
     if root.get("accuracy_scoring") != "forbidden":
@@ -201,9 +203,19 @@ def load_pmx_performability_config(path: Path) -> PMXPerformabilityConfig:
     internal_timeout = _positive_integer(
         runtime, "pmx_internal_timeout_seconds", "runtime"
     )
+    original_internal_timeout = _positive_integer(
+        runtime, "original_pmx_internal_timeout_seconds", "runtime"
+    )
+    if original_internal_timeout != 4500 or internal_timeout != 900:
+        raise ValueError("M9F must retain both original and recovery watchdogs")
     safety_minutes = _positive_integer(
         runtime, "headless_job_safety_minutes", "runtime"
     )
+    progress_interval = _positive_integer(
+        runtime, "progress_interval_seconds", "runtime"
+    )
+    if progress_interval != 30:
+        raise ValueError("M9F recovery heartbeat must remain 30 seconds")
     repeat_count = _positive_integer(runtime, "repeat_count_per_condition", "runtime")
     if repeat_count != 2:
         raise ValueError("M9F must retain two runs per condition")
@@ -217,14 +229,40 @@ def load_pmx_performability_config(path: Path) -> PMXPerformabilityConfig:
         )
     if runtime.get("remote_only_full_execution") is not True:
         raise ValueError("full PMX execution must remain remote-only")
-    if _string_list(runtime.get("invocation"), "runtime.invocation") != [
+    if _string_list(
+        runtime.get("superseded_invocation"), "runtime.superseded_invocation"
+    ) != [
         "java",
         "-jar",
         "main.jar",
         "-of",
         "Options.txt",
     ]:
-        raise ValueError("M9F invocation differs from the frozen options-file route")
+        raise ValueError("M9F superseded invocation differs")
+    if _string_list(runtime.get("invocation"), "runtime.invocation") != [
+        "java",
+        "-DLog4jContextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector",
+        "-jar",
+        "main.jar",
+        "-of",
+        "Options.txt",
+    ]:
+        raise ValueError("M9F recovery invocation differs from the embedded start route")
+
+    amendment = _mapping(root.get("runtime_amendment"), "runtime_amendment")
+    expected_amendment = {
+        "status": "frozen_before_first_recovery_execution",
+        "superseded_run_id": 34040388551,
+        "superseded_head_sha": "e1600a63271e9b2c80b73779aa7714685a1c4c0d",
+        "superseded_conclusion": "cancelled",
+        "first_invocation_observed_seconds": 1238,
+        "probe_artifact_uploaded": False,
+        "semantic_decision_started": False,
+        "generated_pcm_inspected_before_amendment": False,
+        "scientific_inputs_or_rules_changed": False,
+    }
+    if dict(amendment) != expected_amendment:
+        raise ValueError("M9F runtime amendment differs from the frozen record")
 
     paper = _mapping(root.get("paper"), "paper")
     _string(paper, "url", "paper")
@@ -998,18 +1036,35 @@ def record_pmx_probe(
             run_id = f"{condition_id}/repeat-{repeat}"
             run_root = execution_root / condition_id / f"repeat-{repeat}"
             exit_path = run_root / "exit-code.txt"
+            elapsed_path = run_root / "elapsed-seconds.txt"
+            started_path = run_root / "started-at-utc.txt"
+            finished_path = run_root / "finished-at-utc.txt"
+            watchdog_path = run_root / "watchdog.log"
             stdout_path = run_root / "stdout.log"
             resource_path = run_root / "resource-usage.txt"
             results_root = run_root / "results"
-            for required in (exit_path, stdout_path, resource_path):
+            for required in (
+                exit_path,
+                elapsed_path,
+                started_path,
+                finished_path,
+                watchdog_path,
+                stdout_path,
+                resource_path,
+            ):
                 if not required.is_file():
                     raise ValueError(f"{run_id}: missing {required.name}")
             if not results_root.is_dir():
                 raise ValueError(f"{run_id}: missing results directory")
             try:
                 exit_code = int(exit_path.read_text(encoding="utf-8").strip())
+                elapsed_seconds = int(
+                    elapsed_path.read_text(encoding="utf-8").strip()
+                )
             except ValueError as error:
-                raise ValueError(f"{run_id}: invalid exit code") from error
+                raise ValueError(f"{run_id}: invalid exit code or elapsed time") from error
+            if elapsed_seconds <= 0:
+                raise ValueError(f"{run_id}: elapsed time must be positive")
             result_files = sorted(path for path in results_root.rglob("*") if path.is_file())
             core_suffixes = sorted(
                 {path.suffix.lower() for path in result_files if path.suffix.lower() in _MODEL_SUFFIXES}
@@ -1040,6 +1095,11 @@ def record_pmx_probe(
                     "repeat": repeat,
                     "run_id": run_id,
                     "exit_code": exit_code,
+                    "timed_out": exit_code in {124, 137},
+                    "elapsed_seconds": elapsed_seconds,
+                    "started_at_utc": started_path.read_text(encoding="utf-8").strip(),
+                    "finished_at_utc": finished_path.read_text(encoding="utf-8").strip(),
+                    "watchdog_sha256": file_sha256(watchdog_path),
                     "result_files": len(result_files),
                     "core_model_suffixes": core_suffixes,
                     "stdout_sha256": file_sha256(stdout_path),
@@ -1125,6 +1185,12 @@ def record_pmx_probe(
         "runs": run_records,
         "run_count": len(run_records),
         "expected_run_count": len(config.raw["conditions"]) * config.repeat_count,
+        "runtime_invocation": config.raw["runtime"]["invocation"],
+        "internal_timeout_seconds": config.internal_timeout_seconds,
+        "progress_interval_seconds": config.raw["runtime"][
+            "progress_interval_seconds"
+        ],
+        "runtime_amendment": config.raw["runtime_amendment"],
         "accuracy_scoring_started": False,
         "new_live_collection_authorized": False,
         "files": {name: file_sha256(out / name) for name in derived_files},
@@ -1305,6 +1371,8 @@ def audit_pmx_probe(
                     "condition": condition_id,
                     "repeat": repeat,
                     "exit_code": record["exit_code"],
+                    "timed_out": record["timed_out"],
+                    "elapsed_seconds": record["elapsed_seconds"],
                     "result_files": summary["result_files"],
                     "model_files": summary["model_files"],
                     "required_core_files_present": required_present,
@@ -1541,6 +1609,8 @@ def audit_pmx_probe(
             "condition",
             "repeat",
             "exit_code",
+            "timed_out",
+            "elapsed_seconds",
             "result_files",
             "model_files",
             "required_core_files_present",

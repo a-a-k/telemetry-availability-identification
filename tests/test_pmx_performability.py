@@ -23,8 +23,17 @@ class PMXPerformabilityTests(unittest.TestCase):
     def test_frozen_contract_keeps_priority_limits_and_no_accuracy_role(self) -> None:
         config = load_pmx_performability_config(CONFIG)
         self.assertEqual(config.job_timeout_minutes, 360)
-        self.assertEqual(config.internal_timeout_seconds, 4500)
+        self.assertEqual(config.internal_timeout_seconds, 900)
         self.assertEqual(config.raw["runtime"]["headless_job_safety_minutes"], 60)
+        self.assertEqual(config.raw["runtime"]["progress_interval_seconds"], 30)
+        self.assertEqual(
+            config.raw["runtime_amendment"]["superseded_run_id"], 34040388551
+        )
+        self.assertFalse(
+            config.raw["runtime_amendment"][
+                "generated_pcm_inspected_before_amendment"
+            ]
+        )
         self.assertEqual(config.repeat_count, 2)
         self.assertEqual(config.raw["accuracy_scoring"], "forbidden")
         self.assertEqual(config.raw["new_live_collection"], "forbidden")
@@ -39,7 +48,13 @@ class PMXPerformabilityTests(unittest.TestCase):
 
         workflow = WORKFLOW.read_text(encoding="utf-8")
         self.assertEqual(workflow.count("timeout-minutes: 360"), 3)
-        self.assertIn('PMX_INTERNAL_TIMEOUT_SECONDS: "4500"', workflow)
+        self.assertIn('PMX_INTERNAL_TIMEOUT_SECONDS: "900"', workflow)
+        self.assertIn('PMX_PROGRESS_INTERVAL_SECONDS: "30"', workflow)
+        self.assertIn("event=heartbeat", workflow)
+        self.assertIn(
+            "-DLog4jContextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector",
+            workflow,
+        )
         self.assertIn("published_original single_error_control", workflow)
         self.assertNotIn("test-requests.csv", workflow)
         self.assertNotIn("scores.csv", workflow)

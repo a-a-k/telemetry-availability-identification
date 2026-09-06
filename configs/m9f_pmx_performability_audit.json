@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "m9f_pmx_performability_audit",
-  "status": "frozen_before_first_remote_pmx_execution",
+  "status": "runtime_amended_after_superseded_attempt_before_result_access",
   "diagnostic_only": true,
   "accuracy_scoring": "forbidden",
   "new_live_collection": "forbidden",
@@ -14,18 +14,39 @@
   "runtime": {
     "remote_only_full_execution": true,
     "job_timeout_minutes": 360,
-    "pmx_internal_timeout_seconds": 4500,
+    "original_pmx_internal_timeout_seconds": 4500,
+    "pmx_internal_timeout_seconds": 900,
     "headless_job_safety_minutes": 60,
+    "progress_interval_seconds": 30,
     "repeat_count_per_condition": 2,
     "java_distribution": "temurin",
     "java_version": "11",
-    "invocation": [
+    "superseded_invocation": [
       "java",
       "-jar",
       "main.jar",
       "-of",
       "Options.txt"
+    ],
+    "invocation": [
+      "java",
+      "-DLog4jContextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector",
+      "-jar",
+      "main.jar",
+      "-of",
+      "Options.txt"
     ]
+  },
+  "runtime_amendment": {
+    "status": "frozen_before_first_recovery_execution",
+    "superseded_run_id": 34040388551,
+    "superseded_head_sha": "e1600a63271e9b2c80b73779aa7714685a1c4c0d",
+    "superseded_conclusion": "cancelled",
+    "first_invocation_observed_seconds": 1238,
+    "probe_artifact_uploaded": false,
+    "semantic_decision_started": false,
+    "generated_pcm_inspected_before_amendment": false,
+    "scientific_inputs_or_rules_changed": false
   },
   "paper": {
     "title": "Integration of Performability-Model Extraction and Performability Prediction in Continuous Integration / Continuous Delivery",
@@ -44,6 +65,11 @@
       "path": "docs/M9E_PMX_PERFORMABILITY_CORRECTION.md",
       "bytes": 6168,
       "sha256": "202800048cb9ecb7fe723893d7fda2ff6bfdcdbf6bb87734c6e26b5b9f97c7fe"
+    },
+    {
+      "path": "docs/M9F_RUNTIME_AMENDMENT.md",
+      "bytes": 2418,
+      "sha256": "3e7228aaea2308d58096173e985f6034fbea17c441f1e1753835e7e6294c3992"
     }
   ],
   "manual_actions_log": {
