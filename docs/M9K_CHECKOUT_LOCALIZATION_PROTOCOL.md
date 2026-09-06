@@ -1,6 +1,6 @@
 # M9K: single-operation localization of the retained overprediction
 
-Status: frozen before the first M9K remote localization.
+Status: completed on the first remote attempt; accepted run `34055967110`.
 
 ## Question and scope
 

@@ -82,7 +82,7 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A through M9H are complete. M9G recovered the historical PMX output,
+Status: M8A through M9K are complete. M9G recovered the historical PMX output,
 bounded four unsuccessful guessed Gogo commands, and measured the application
 information delta. M9H then executed the prospectively source-derived exact
 `main:main` entrypoint and reproduced the historical PCM output, while its
@@ -93,8 +93,10 @@ the final bounded PMX diagnostic: carrier false reproduced the historical
 model, while carrier true generated a repeat-exact `VisitResource.read`
 failure probability of 0.1. Its full prospective gate failed only the frozen,
 underidentified position assigned to an unlabeled stdout aggregate and remains
-recorded as failed. M9K now localizes the proposed model's retained
-overprediction on the single predeclared checkout operation; no M9J outcome
+recorded as failed. M9K then localized the proposed model's retained
+overprediction on the single predeclared checkout operation to the boundary
+between clean residual success and health-defined route-up, with calibration
+corroboration. It did not identify the unique physical cause; no M9J outcome
 automatically authorizes further external-tool repair or an adapter. M9C byte-audited accepted M8B and pinned application sources, emitted
 all 16 required correspondence rows, and matched the external structural oracle
 for both operation templates under both logical placements. M9D then completed
@@ -215,8 +217,15 @@ not occupy its frozen slot; the report identifies the original slot mapping as
 underidentified rather than silently changing the oracle. This diagnoses one
 tested binary and adds an explicit preprocessing/application cost; it does not
 lower PMX's scientific priority or describe the whole Palladio ecosystem. M9K
-is the bounded checkout localization, and only the two diagnostic results
-together select a subsequent experiment.
+then audited all 360 selected files and exactly decomposed the 40 N/ND checkout
+campaigns. The test mean gap `+0.173061` consists of route-state exposure
+`+0.000917` (interval includes zero), route-up residual invariance `+0.180031`
+with 95% interval `[+0.172425, +0.187534]`, and route-down successes `-0.007888`.
+The residual term is positive in all 40 calibration and test campaigns, so the
+next bounded milestone is M9L's retained-evidence discrimination between
+selected-replica routing and failures that remain despite an up selected path.
+This is a physical-cause diagnostic, not a revised prediction or a new accuracy
+claim.
 
 The preliminary article assessment is that the direction remains substantive,
 but its claimed advantage has not been demonstrated. Current evidence supports

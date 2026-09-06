@@ -267,9 +267,17 @@ identifiers in its manifest.
   failure in the generated `VisitResource.read` SEFF. The strict prospective
   gate remains failed because its unlabeled stdout aggregate was assigned to an
   underidentified slot; retained PCM reference resolution records the intended
-  operation without rewriting that gate. Work now moves to M9K's frozen
-  single-operation localization of the proposed model's largest checkout
-  overprediction, not to open-ended tool repair.
+  operation without rewriting that gate. M9K then audited 360 files from the
+  40 predeclared N/ND checkout campaigns and exactly decomposed their retained
+  mean overprediction of `+0.173061`. Stationary route exposure contributed
+  only `+0.000917` (95% bootstrap interval crossing zero), while carrying the
+  clean residual into health-defined route-up requests contributed `+0.180031`
+  (`[+0.172425, +0.187534]`) and was positive in all 40 campaigns. The same
+  distinction appears in calibration, so it is not explained only by test
+  drift. This localizes a model boundary but not its physical cause; M9L next
+  uses retained calibration trace assignments to distinguish selected-replica
+  routing from internal or omitted-dependency failure, not open-ended tool
+  repair or post-hoc prediction tuning.
   Separately, 0/160 qualified learner bundles retained raw
   spans. Four raw samples are learner-only schema-adaptable, but lack the direct
   Spring-WebMVC instrumentation semantics and OTel needs a format adapter. No
