@@ -32,6 +32,7 @@ HARNESS = (
     / "tests"
     / "SemanticControlsTest.java"
 )
+HARNESS_MANIFEST = ROOT / "palladio" / "harness" / "META-INF" / "MANIFEST.MF"
 
 
 class PalladioControlsTests(unittest.TestCase):
@@ -244,6 +245,11 @@ class PalladioControlsTests(unittest.TestCase):
         self.assertNotIn("getScenario().getEntityName()", harness)
         self.assertIn("TAID_EXPECTED_CASE_COUNT", harness)
         self.assertNotIn("TAID_EXPECTED_SUCCESS", harness)
+
+    def test_harness_declares_direct_pcm_and_emf_runtime_dependencies(self) -> None:
+        manifest = HARNESS_MANIFEST.read_text(encoding="utf-8")
+        self.assertIn(" org.eclipse.emf.ecore,", manifest)
+        self.assertIn(" org.palladiosimulator.pcm,", manifest)
 
 
 if __name__ == "__main__":
