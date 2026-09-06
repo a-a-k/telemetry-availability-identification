@@ -130,6 +130,21 @@ class M7CausalDiagnosticTests(unittest.TestCase):
         self.assertEqual(parser_row["status"], "unresolved_replay_missing")
         self.assertIn("did not execute", parser_row["result"])
 
+    def test_audit_metadata_mismatch_is_not_parser_output_mismatch(self) -> None:
+        replay = [
+            {
+                "comparison_role": "normalized_or_derived_output",
+                "matches": True,
+            },
+            {"comparison_role": "source_audit_metadata", "matches": False},
+        ]
+        register = _discrepancy_rows(replay, [], [{"json_path": "source.sha"}])
+        parser_row = next(row for row in register if row["id"] == "D04")
+        boundary_row = next(row for row in register if row["id"] == "D06")
+        self.assertEqual(parser_row["status"], "not_supported_on_four_samples")
+        self.assertIn("0 of 1 normalized", parser_row["result"])
+        self.assertEqual(boundary_row["status"], "not_supported")
+
 
 if __name__ == "__main__":
     unittest.main()

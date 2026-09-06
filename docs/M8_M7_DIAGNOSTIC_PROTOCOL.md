@@ -54,6 +54,11 @@ requests are also separated as before or after route degradation, route
 recovery, or another observed signal change. These bins are diagnostic and do
 not replace the frozen primary view.
 
+Parser replay compares normalized and derived outputs separately from the
+source-audit boundary. A raw telemetry sink can continue to append between
+qualification and later artifact upload; any boundary mismatch is therefore
+reported at its exact JSON path and is not automatically called parser drift.
+
 Each candidate explanation is recorded as observation, hypothesis, test,
 result, and any versioned correction. `cause not established` is an admissible
 result. Diagnostic examples are chosen to cover mechanisms and are not treated

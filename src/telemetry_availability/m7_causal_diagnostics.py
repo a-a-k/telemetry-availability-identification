@@ -199,10 +199,20 @@ REPLAY_FIELDS = (
     "failure_law",
     "repetition",
     "filename",
+    "comparison_role",
     "original_sha256",
     "replayed_sha256",
     "matches",
     "error",
+)
+BOUNDARY_DIFFERENCE_FIELDS = (
+    "profile",
+    "placement",
+    "failure_law",
+    "repetition",
+    "json_path",
+    "original_value",
+    "replayed_value",
 )
 DISCREPANCY_FIELDS = (
     "id",
@@ -805,9 +815,10 @@ def replay_raw_samples(
     replay_root: Path,
     cells: list[QualifiedCell],
     evidence_config: EvidenceBoundaryConfig,
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     lookup = {cell.identity: cell for cell in cells}
     rows = []
+    boundary_differences = []
     filenames = (
         "cell-summary.json",
         "audit/boundary.json",
@@ -850,21 +861,84 @@ def replay_raw_samples(
                     "failure_law": identity[2],
                     "repetition": identity[3],
                     "filename": filename,
+                    "comparison_role": (
+                        "source_audit_metadata"
+                        if filename == "audit/boundary.json"
+                        else "normalized_or_derived_output"
+                    ),
                     "original_sha256": original_hash,
                     "replayed_sha256": replayed_hash,
                     "matches": bool(original_hash) and original_hash == replayed_hash,
                     "error": error,
                 }
             )
-    return rows
+        original_boundary = (
+            None if original is None else original.directory / "audit" / "boundary.json"
+        )
+        replayed_boundary = destination / "audit" / "boundary.json"
+        if (
+            original_boundary is not None
+            and original_boundary.is_file()
+            and replayed_boundary.is_file()
+        ):
+            original_values = _flatten_json(
+                json.loads(original_boundary.read_text(encoding="utf-8"))
+            )
+            replayed_values = _flatten_json(
+                json.loads(replayed_boundary.read_text(encoding="utf-8"))
+            )
+            for json_path in sorted(set(original_values) | set(replayed_values)):
+                if original_values.get(json_path) == replayed_values.get(json_path):
+                    continue
+                boundary_differences.append(
+                    {
+                        "profile": identity[0],
+                        "placement": identity[1],
+                        "failure_law": identity[2],
+                        "repetition": identity[3],
+                        "json_path": json_path,
+                        "original_value": original_values.get(json_path, "<missing>"),
+                        "replayed_value": replayed_values.get(json_path, "<missing>"),
+                    }
+                )
+    return rows, boundary_differences
+
+
+def _flatten_json(value: Any, prefix: str = "") -> dict[str, str]:
+    if isinstance(value, dict):
+        result: dict[str, str] = {}
+        for key, child in value.items():
+            path = f"{prefix}.{key}" if prefix else str(key)
+            result.update(_flatten_json(child, path))
+        return result
+    if isinstance(value, list):
+        result = {}
+        for index, child in enumerate(value):
+            result.update(_flatten_json(child, f"{prefix}[{index}]"))
+        return result
+    return {prefix: json.dumps(value, sort_keys=True)}
 
 
 def _discrepancy_rows(
-    replay: list[dict[str, Any]], temporal: list[dict[str, Any]]
+    replay: list[dict[str, Any]],
+    temporal: list[dict[str, Any]],
+    boundary_differences: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
-    replay_mismatches = sum(not row["matches"] for row in replay)
+    boundary_differences = boundary_differences or []
+    normalized = [
+        row
+        for row in replay
+        if row["comparison_role"] == "normalized_or_derived_output"
+    ]
+    audit_metadata = [
+        row for row in replay if row["comparison_role"] == "source_audit_metadata"
+    ]
+    replay_mismatches = sum(not row["matches"] for row in normalized)
+    audit_mismatches = sum(not row["matches"] for row in audit_metadata)
     replay_result = (
-        f"{replay_mismatches} of {len(replay)} replayed files differ."
+        f"{replay_mismatches} of {len(normalized)} normalized or derived files "
+        f"differ; {audit_mismatches} of {len(audit_metadata)} source-audit "
+        "metadata files differ."
         if replay
         else "Replay did not execute; no parser conclusion is available."
     )
@@ -906,6 +980,17 @@ def _discrepancy_rows(
             "status": "not_supported" if unaligned == 0 else "supported",
             "interpretation_limit": "Temporal associations do not justify changing the frozen guard or excluding operational transients.",
         },
+        {
+            "id": "D06",
+            "observation": "Retained raw-source bytes may differ from bytes hashed when qualification ran.",
+            "hypothesis": "The original evidence boundary and later raw archive name identical source-file content.",
+            "test": "Diff original and replayed evidence-boundary JSON at leaf paths.",
+            "result": f"{len(boundary_differences)} boundary leaf values differ.",
+            "status": (
+                "not_supported" if boundary_differences else "supported_on_four_samples"
+            ),
+            "interpretation_limit": "A later append can change a raw archive hash without changing any normalized learner/evaluator output; workflow ordering must be considered.",
+        },
     ]
 
 
@@ -934,10 +1019,10 @@ def run_m7_causal_diagnostics(
     temporal, windows = temporal_rows(cells, config)
     topology, branches, examples = topology_rows(cells, config)
     raw_semantics, semantic_reasons, raw_request_paths = raw_semantic_rows(raw_path)
-    replay = replay_raw_samples(
+    replay, boundary_differences = replay_raw_samples(
         raw_path, output / "parser-replay", cells, evidence_config
     )
-    discrepancies = _discrepancy_rows(replay, temporal)
+    discrepancies = _discrepancy_rows(replay, temporal, boundary_differences)
 
     outputs = (
         ("period-rates.csv", PERIOD_FIELDS, periods),
@@ -951,6 +1036,11 @@ def run_m7_causal_diagnostics(
         ("raw-semantic-diagnostics.csv", RAW_SEMANTIC_FIELDS, raw_semantics),
         ("semantic-reasons.csv", SEMANTIC_REASON_FIELDS, semantic_reasons),
         ("parser-replay-audit.csv", REPLAY_FIELDS, replay),
+        (
+            "parser-replay-boundary-differences.csv",
+            BOUNDARY_DIFFERENCE_FIELDS,
+            boundary_differences,
+        ),
         ("discrepancy-register.csv", DISCREPANCY_FIELDS, discrepancies),
     )
     for filename, fields, rows in outputs:
@@ -988,6 +1078,7 @@ def run_m7_causal_diagnostics(
             "topology_examples": len(examples),
             "raw_semantic_diagnostics": len(raw_semantics),
             "parser_replay_files": len(replay),
+            "parser_replay_boundary_differences": len(boundary_differences),
         },
         "technical_quality": {
             "qualified_cell_count_mismatches": int(
@@ -1015,8 +1106,15 @@ def run_m7_causal_diagnostics(
             "parser_replay_errors": sum(bool(row["error"]) for row in replay),
         },
         "substantive_observations_not_acceptance_gates": {
-            "parser_replay_file_mismatches": sum(
-                not bool(row["matches"]) for row in replay
+            "parser_replay_normalized_file_mismatches": sum(
+                not bool(row["matches"])
+                for row in replay
+                if row["comparison_role"] == "normalized_or_derived_output"
+            ),
+            "parser_replay_source_audit_metadata_mismatches": sum(
+                not bool(row["matches"])
+                for row in replay
+                if row["comparison_role"] == "source_audit_metadata"
             ),
             "http_2xx_semantic_failures_in_four_raw_samples": sum(
                 int(row["http_2xx_semantic_failures"]) for row in raw_semantics
