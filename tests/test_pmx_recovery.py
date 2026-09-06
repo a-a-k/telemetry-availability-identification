@@ -175,6 +175,7 @@ class PMXRecoveryTests(unittest.TestCase):
         self.assertEqual(result["spring_webmvc_spans"], 1)
         self.assertEqual(result["direct_error_true_spans"], 1)
         self.assertEqual(result["forbidden_trace_spans_selected"], 0)
+        self.assertEqual(result["malformed_jsonl_records"], 0)
 
     def test_small_otlp_schema_smoke_does_not_count_unselected_resources(self) -> None:
         def resource(service: str, trace: str, span: str) -> dict[str, object]:

@@ -921,6 +921,7 @@ def _audit_jaeger_raw(path: Path, selected: set[str], forbidden: set[str]) -> di
         "otlp_error_status_spans": 0,
         "http_status_spans": http_status,
         "forbidden_trace_spans_selected": forbidden_seen,
+        "malformed_jsonl_records": 0,
     }
 
 
