@@ -49,6 +49,7 @@ from .live_stochastic_pilot import (
 from .live_validation import run_frozen_live_cell
 from .live_validation_analysis import analyze_live_validation
 from .live_validation_config import load_frozen_live_validation_config
+from .m7_diagnostic_analysis import run_m7_diagnostic_audit
 from .moments import structural_moment_rows
 from .reduction_experiment import (
     aggregate_reduction_experiment,
@@ -448,6 +449,18 @@ def build_parser() -> argparse.ArgumentParser:
     analyze_frozen_live.add_argument(
         "--scope", required=True, choices=("preflight", "full")
     )
+
+    audit_m7 = commands.add_parser(
+        "audit-m7-evidence",
+        help="inventory preserved M7 evidence and independently audit its arithmetic",
+    )
+    audit_m7.add_argument("--config", required=True, type=Path)
+    audit_m7.add_argument("--artifact-json", required=True, type=Path)
+    audit_m7.add_argument("--qualified-root", required=True, type=Path)
+    audit_m7.add_argument("--analysis-root", required=True, type=Path)
+    audit_m7.add_argument("--raw-root", required=True, type=Path)
+    audit_m7.add_argument("--source-run-id", required=True)
+    audit_m7.add_argument("--out", required=True, type=Path)
 
     validate_recovery = commands.add_parser(
         "validate-macro-live-budget",
@@ -1021,6 +1034,20 @@ def main(argv: Sequence[str] | None = None) -> int:
         config = load_frozen_live_validation_config(args.config)
         manifest = analyze_live_validation(
             config, args.input_root, args.out, args.scope
+        )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-m7-evidence":
+        config = load_frozen_live_validation_config(args.config)
+        manifest = run_m7_diagnostic_audit(
+            config=config,
+            artifact_json=args.artifact_json,
+            qualified_root=args.qualified_root,
+            analysis_root=args.analysis_root,
+            raw_root=args.raw_root,
+            output_directory=args.out,
+            source_run_id=args.source_run_id,
         )
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0

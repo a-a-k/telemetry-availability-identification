@@ -11,20 +11,21 @@ proposed-minus-B2 Brier contrast was available for 117 campaigns and estimated
 campaigns for confirmatory interpretation, so this conditional estimate is
 descriptive rather than a passed null or superiority test.
 
-The missing predictions are themselves the main empirical result. In the
+The missing predictions are a central empirical discrepancy. In the
 primary `sampled_mixed` mode, all 80 campaigns without communication faults
 (`N` and `ND`) had supported topology for all operations. Of the 80 campaigns
 whose laws included communication faults (`NC` and `NCD`), 43 had at least one
 operation whose successful learner traces neither supported nor excluded the
-declared target group at the frozen thresholds. Proposed correctly abstained;
-these cases were not imputed or repaired after seeing test outcomes.
+declared target group at the frozen thresholds. The frozen rule abstained in
+these cases; they were not imputed or repaired after seeing test outcomes. The
+cause of the mixed trace support and the adequacy of that rule require
+post-result diagnosis.
 
 Where proposed emitted, it matched the same-model B3 optimizer exactly, as it
-must. It did not outperform the strengthened B2 comparator. The defensible
-article claim is therefore about an explicit, empirically consequential
-sufficiency boundary---stable trace support plus target identifiability---not
-about a universally sufficient trace-discovered model or a more accurate point
-estimator.
+must. The published calculation did not establish an advantage over the
+strengthened B2 comparator. Together with the prediction--observation
+discrepancy, this motivates a separately labelled diagnosis; it is not yet a
+verdict that the overall approach succeeds or fails.
 
 ## Immutable execution and artifacts
 
@@ -258,9 +259,9 @@ secondary findings cannot rescue or replace the incomplete primary estimand.
 
 ## Interpretation for the article
 
-The live result supports a narrower and more interesting answer to “when is a
-trace-discovered topological model enough?” It is enough for a point prediction
-in this implementation only when all of the following hold:
+The live result supplies three candidate conditions to investigate when asking
+“when is a trace-discovered topological model enough?” A useful point prediction
+in this implementation would require all of the following:
 
 1. retained successful traces classify each operation's dependency on the
    replicated target outside the frozen ambiguity band;
@@ -276,20 +277,21 @@ subset: both proposed and B2 overpredicted the stable test rate by roughly
 4--5 percentage points on average, and their block-compatibility fractions were
 only about 28%.
 
-The main contribution supported by M7 is therefore a falsifiable sufficiency
-check and disciplined abstention boundary. M7 does not support predictive
-superiority over strengthened B2. It also confirms the earlier anti-straw-man
-concern was addressed: B2 used the same evidence, joint health when available,
-an endpoint fallback when necessary, and new-domain path marginals for
-transfer. It was competitive throughout and significantly better in one
-predeclared secondary transfer mode on the incomplete common subset.
+M7 does not establish predictive superiority over strengthened B2. It does show
+that the implemented sufficiency check and abstention boundary are empirically
+consequential, but whether they are adequate and how they should contribute to
+the article remain open until the discrepancies are diagnosed. The earlier
+anti-straw-man concern was addressed: B2 used the same evidence, joint health
+when available, an endpoint fallback when necessary, and new-domain path
+marginals for transfer. It was competitive throughout and significantly better
+in one predeclared secondary transfer mode on the incomplete common subset.
 
-The result should be written as negative evidence against unconditional
-topological sufficiency, not hidden by reporting only the 117 emitted
-campaigns. Proposed/B3 equality should be presented as implementation
-validation. The scientific value of proposed relative to B3 is refusing
-unidentified transfer points, not improving a point estimate that both methods
-share.
+The current result should be written as absence of an established gain together
+with unresolved abstention and prediction--observation discrepancies, not
+hidden by reporting only the 117 emitted campaigns. Proposed/B3 equality is an
+implementation check. The present calculations alone do not establish whether
+refusing unidentified points is sufficient scientific value, nor whether the
+whole approach is successful or unsuccessful.
 
 ## Limitations and audit disclosures
 
@@ -334,6 +336,6 @@ share.
 - Strengthened B2 and matched B3 were not weakened or replaced after outcomes.
 - The report states the unfavorable sign, interval, p-value, adjusted secondary
   results, model-compatibility signal, and limitations.
-- M7 is scientifically closed as an inconclusive primary result that supplies
-  no support for superiority; any follow-up must be separately labelled and
-  frozen.
+- The frozen M7 calculation is closed and supplies no established superiority;
+  its causal and article-level interpretation remains open. Any follow-up is
+  separately labelled, versioned, and, where confirmatory, frozen.

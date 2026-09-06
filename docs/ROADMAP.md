@@ -79,3 +79,16 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 - preserve only audited transferable residual parameters;
 - predict availability change, configuration choice, and regret;
 - expose violations of transfer assumptions rather than refitting them away.
+
+## Phase 7: post-M7 diagnosis and Palladio comparison
+
+Status: in progress under the separately labelled M8 diagnostic protocol.
+
+Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
+
+- preserve all still-available M7 qualified, raw-sample, and analysis artifacts;
+- independently verify identities, scores, denominators, and aggregation;
+- diagnose bias, temporal behavior, semantic failures, and topology ambiguity;
+- bootstrap and semantically validate a pinned Palladio reliability analyzer;
+- compare fixed estimators and PCM/Palladio on aligned inputs before collecting
+  any new live confirmation.

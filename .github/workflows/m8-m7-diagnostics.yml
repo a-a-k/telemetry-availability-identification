@@ -1,0 +1,109 @@
+name: M8 M7 Diagnostics
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Frozen M7 run whose artifacts are preserved and audited
+        required: true
+        default: "33990678586"
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: m8-m7-diagnostics-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  preserve_and_audit:
+    name: Preserve evidence and audit M7 arithmetic
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    env:
+      SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Capture original artifact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p workflow-results/m8-source-metadata
+          gh api --paginate --slurp \
+            "repos/${GITHUB_REPOSITORY}/actions/runs/${SOURCE_RUN_ID}/artifacts?per_page=100" \
+            > workflow-results/m8-source-metadata/artifacts.json
+
+      - name: Download all qualified M7 cells
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.source_run_id }}
+          pattern: m7-qualified-*-${{ inputs.source_run_id }}
+          path: workflow-results/m8-preserved/qualified
+
+      - name: Download all raw M7 audit samples
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.source_run_id }}
+          pattern: m7-raw-audit-sample-*-${{ inputs.source_run_id }}
+          path: workflow-results/m8-preserved/raw-audit-samples
+
+      - name: Download frozen M7 analysis
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.source_run_id }}
+          pattern: m7-frozen-analysis-${{ inputs.source_run_id }}
+          path: workflow-results/m8-preserved/analysis
+
+      - name: Inventory evidence and independently audit calculations
+        run: >-
+          python -m telemetry_availability audit-m7-evidence
+          --config configs/m7_frozen_live.yaml
+          --artifact-json workflow-results/m8-source-metadata/artifacts.json
+          --qualified-root workflow-results/m8-preserved/qualified
+          --analysis-root workflow-results/m8-preserved/analysis
+          --raw-root workflow-results/m8-preserved/raw-audit-samples
+          --source-run-id "${SOURCE_RUN_ID}"
+          --out workflow-results/m8-diagnostic
+
+      - name: Upload renewed M7 evidence archive
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m8-preserved-m7-evidence-${{ inputs.source_run_id }}-${{ github.run_id }}
+          path: |
+            workflow-results/m8-source-metadata
+            workflow-results/m8-preserved
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Upload M8A diagnostic tables
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m8a-m7-integrity-arithmetic-${{ github.run_id }}
+          path: workflow-results/m8-diagnostic
+          if-no-files-found: error
+          retention-days: 90
+

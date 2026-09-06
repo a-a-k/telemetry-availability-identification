@@ -196,8 +196,10 @@ identifiers in its manifest.
   at 117/160 campaigns because trace topology was ambiguous under communication
   faults. Its conditional Brier estimate is `+0.000233` (95% CI
   `[-0.001659, +0.002124]`, `p=0.685`), where positive is unfavorable to
-  proposed. The result supports a sufficiency/abstention boundary, not
-  predictive superiority.
+  proposed. The published calculation does not establish a predictive advantage
+  and exposes abstention and prediction--observation discrepancies. Their causes
+  are not yet resolved well enough to call the overall approach successful or
+  unsuccessful; M8 begins that separately labelled diagnosis.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
@@ -241,7 +243,8 @@ fit or score and remains excluded from M7 effectiveness evidence. The full M7
 result is recorded in `docs/milestones/M7_FROZEN_LIVE_VALIDATION.md`: all
 `N/ND` campaigns were topologically supported, whereas 43 of 80 `NC/NCD`
 campaigns had at least one ambiguous operation. Proposed matched B3 wherever it
-emitted and did not beat strengthened B2.
+emitted, and the calculation established no advantage over strengthened B2;
+this is an input to diagnosis rather than a terminal verdict on the approach.
 
 ## Generated tables
 
