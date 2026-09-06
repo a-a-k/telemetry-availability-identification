@@ -1,0 +1,182 @@
+name: M9I PMX failure-semantics source diagnostic
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m9i-pmx-failure-semantics-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9i_pmx_failure_semantics.json
+  PYTHON_VERSION: 3.13.15
+  GITLAB_BASE: https://se-gitlab-extern.fzi.de
+  DEMO_PROJECT_PATH: SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci
+  DEMO_COMMIT: 9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+  PMX_JAR_SHA256: befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013
+  M9H_RUN_ID: "34050900275"
+
+jobs:
+  embedded_source_audit:
+    name: Recover exact embedded reader and failure-transformer sources
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9I
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_failure_semantics validate --config "$CONFIG"
+
+      - name: Download and byte-verify the unchanged public PMX JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9i
+          raw_base="$GITLAB_BASE/$DEMO_PROJECT_PATH/-/raw/$DEMO_COMMIT"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/main.jar" --output workflow-input/m9i/main.jar
+          echo "$PMX_JAR_SHA256  workflow-input/m9i/main.jar" | sha256sum --check
+
+      - name: Extract and audit the complete relevant embedded-source census
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9i-source
+          /usr/bin/time -v -o workflow-results/m9i-source/resource-usage.txt python -m telemetry_availability.pmx_failure_semantics audit-sources --config "$CONFIG" --jar workflow-input/m9i/main.jar --out workflow-results/m9i-source
+
+      - name: Upload exact embedded-source evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9i-embedded-source-${{ github.run_id }}
+          path: workflow-results/m9i-source
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  retained_boundary_audit:
+    name: Audit retained M9H raw-to-aggregate-to-PCM boundary
+    needs: [embedded_source_audit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9I
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_failure_semantics validate --config "$CONFIG"
+
+      - name: Download exact embedded-source evidence
+        uses: actions/download-artifact@v8
+        with:
+          name: m9i-embedded-source-${{ github.run_id }}
+          path: workflow-input/m9i/source-audit
+
+      - name: Capture accepted M9H artifact metadata and contents
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          metadata="workflow-input/m9i/metadata"
+          mkdir -p "$metadata" workflow-input/m9i/m9h-source workflow-input/m9i/m9h-probe workflow-input/m9i/m9h-decision
+          for role in source_contract probe decision; do
+            artifact_id="$(jq -r ".evidence.m9h.artifacts.${role}.id" "$CONFIG")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id" > "$metadata/${role}.json"
+          done
+          gh run download "$M9H_RUN_ID" --repo "$GITHUB_REPOSITORY" --name m9h-source-contract-34050900275 --dir workflow-input/m9i/m9h-source
+          gh run download "$M9H_RUN_ID" --repo "$GITHUB_REPOSITORY" --name m9h-entrypoint-probe-34050900275 --dir workflow-input/m9i/m9h-probe
+          gh run download "$M9H_RUN_ID" --repo "$GITHUB_REPOSITORY" --name m9h-entrypoint-decision-34050900275 --dir workflow-input/m9i/m9h-decision
+
+      - name: Audit the exact retained transformation boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9i-boundary
+          /usr/bin/time -v -o workflow-results/m9i-boundary/resource-usage.txt python -m telemetry_availability.pmx_failure_semantics audit-boundary --config "$CONFIG" --source-metadata workflow-input/m9i/metadata/source_contract.json --probe-metadata workflow-input/m9i/metadata/probe.json --decision-metadata workflow-input/m9i/metadata/decision.json --source-root workflow-input/m9i/m9h-source --probe-root workflow-input/m9i/m9h-probe --decision-root workflow-input/m9i/m9h-decision --source-audit-manifest workflow-input/m9i/source-audit/source-audit-manifest.json --out workflow-results/m9i-boundary
+
+      - name: Upload retained-boundary evidence
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9i-retained-boundary-${{ github.run_id }}
+          path: workflow-results/m9i-boundary
+          if-no-files-found: error
+          retention-days: 90
+
+  failure_semantics_decision:
+    name: Apply frozen source-and-boundary decision
+    needs: [embedded_source_audit, retained_boundary_audit]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9I
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_failure_semantics validate --config "$CONFIG"
+
+      - name: Download source and boundary evidence
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9i-*-${{ github.run_id }}
+          path: workflow-input/m9i/current
+
+      - name: Apply the frozen diagnostic decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9i-decision
+          /usr/bin/time -v -o workflow-results/m9i-decision/resource-usage.txt python -m telemetry_availability.pmx_failure_semantics decide --config "$CONFIG" --source-manifest workflow-input/m9i/current/m9i-embedded-source-${GITHUB_RUN_ID}/source-audit-manifest.json --boundary-manifest workflow-input/m9i/current/m9i-retained-boundary-${GITHUB_RUN_ID}/boundary-audit-manifest.json --out workflow-results/m9i-decision
+
+      - name: Upload M9I decision
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9i-failure-semantics-decision-${{ github.run_id }}
+          path: workflow-results/m9i-decision
+          if-no-files-found: error
+          retention-days: 90
