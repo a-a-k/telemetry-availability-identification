@@ -5,6 +5,7 @@ import json
 import math
 import re
 import subprocess
+import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Mapping
@@ -626,6 +627,125 @@ def audit_palladio_product(
     return payload
 
 
+def _derive_official_example_oracle(repository_path: Path) -> dict[str, Any]:
+    """Evaluate the hand-checkable failure tree encoded by ReliabilityTest."""
+
+    try:
+        root = ET.parse(repository_path).getroot()
+    except (ET.ParseError, OSError) as error:
+        raise ValueError("official example repository is not valid XML") from error
+    component = root.find("components__Repository")
+    if component is None:
+        raise ValueError("official example must contain one repository component")
+    seff = component.find("serviceEffectSpecifications__BasicComponent")
+    if seff is None:
+        raise ValueError("official example must contain one reliability SEFF")
+    xsi_type = "{http://www.w3.org/2001/XMLSchema-instance}type"
+    direct_steps = list(seff.findall("steps_Behaviour"))
+    direct_internal = [
+        step for step in direct_steps if step.get(xsi_type) == "seff:InternalAction"
+    ]
+    recovery_steps = [
+        step
+        for step in direct_steps
+        if step.get(xsi_type) == "seff_reliability:RecoveryAction"
+    ]
+    if len(direct_internal) != 1 or len(recovery_steps) != 1:
+        raise ValueError(
+            "official example oracle expects one initial action and one recovery action"
+        )
+    initial = direct_internal[0]
+    recovery = recovery_steps[0]
+    if (
+        initial.get("successor_AbstractAction") != recovery.get("id")
+        or recovery.get("predecessor_AbstractAction") != initial.get("id")
+    ):
+        raise ValueError("official example action sequence differs from the oracle")
+
+    behaviours = list(
+        recovery.findall("recoveryActionBehaviours__RecoveryAction")
+    )
+    if len(behaviours) != 2:
+        raise ValueError("official example oracle expects two recovery behaviours")
+    primary_id = recovery.get("primaryBehaviour__RecoveryAction")
+    primary_matches = [item for item in behaviours if item.get("id") == primary_id]
+    if len(primary_matches) != 1:
+        raise ValueError("official example recovery primary is not unique")
+    primary = primary_matches[0]
+    alternatives = [item for item in behaviours if item is not primary]
+    alternative = alternatives[0]
+    alternative_ids = primary.get(
+        "failureHandlingAlternatives__RecoveryActionBehaviour", ""
+    ).split()
+    if alternative_ids != [alternative.get("id")]:
+        raise ValueError("official example recovery alternative differs from the oracle")
+    if alternative.get(
+        "failureHandlingAlternatives__RecoveryActionBehaviour", ""
+    ).strip():
+        raise ValueError("official example oracle expects exactly one fallback")
+
+    def failure_probability(parent: ET.Element, label: str) -> tuple[float, str]:
+        actions = [
+            step
+            for step in parent.findall("steps_Behaviour")
+            if step.get(xsi_type) == "seff:InternalAction"
+        ]
+        if len(actions) != 1:
+            raise ValueError(f"official example {label} must have one internal action")
+        failures = list(
+            actions[0].findall(
+                "internalFailureOccurrenceDescriptions__InternalAction"
+            )
+        )
+        if len(failures) != 1:
+            raise ValueError(f"official example {label} must have one failure mode")
+        probability = float(failures[0].get("failureProbability", "nan"))
+        if not math.isfinite(probability) or not 0.0 <= probability <= 1.0:
+            raise ValueError(f"official example {label} failure probability is invalid")
+        failure_type = failures[0].get(
+            "softwareInducedFailureType__InternalFailureOccurrenceDescription", ""
+        )
+        if not failure_type:
+            raise ValueError(f"official example {label} failure type is missing")
+        return probability, failure_type
+
+    initial_failures = list(
+        initial.findall("internalFailureOccurrenceDescriptions__InternalAction")
+    )
+    if len(initial_failures) != 1:
+        raise ValueError("official example initial action must have one failure mode")
+    initial_failure = float(initial_failures[0].get("failureProbability", "nan"))
+    if not math.isfinite(initial_failure) or not 0.0 <= initial_failure <= 1.0:
+        raise ValueError("official example initial failure probability is invalid")
+    primary_failure, primary_failure_type = failure_probability(
+        primary, "primary recovery"
+    )
+    alternative_failure, alternative_failure_type = failure_probability(
+        alternative, "alternative recovery"
+    )
+    handled_types = alternative.get(
+        "failureTypes_FailureHandlingEntity", ""
+    ).split()
+    if primary_failure_type not in handled_types:
+        raise ValueError("official example fallback does not handle primary failure")
+    recovery_success = (1.0 - primary_failure) + (
+        primary_failure * (1.0 - alternative_failure)
+    )
+    success = (1.0 - initial_failure) * recovery_success
+    return {
+        "formula": (
+            "(1-p_initial)*((1-p_primary)+"
+            "p_primary*(1-p_alternative))"
+        ),
+        "initial_failure_probability": initial_failure,
+        "primary_recovery_failure_probability": primary_failure,
+        "primary_recovery_failure_type": primary_failure_type,
+        "alternative_recovery_failure_probability": alternative_failure,
+        "alternative_recovery_failure_type": alternative_failure_type,
+        "success_probability": success,
+    }
+
+
 def audit_palladio_example(
     config_path: Path,
     result_path: Path,
@@ -666,13 +786,6 @@ def audit_palladio_example(
         mass_residuals.append(mass_residual)
     if max(successes) - min(successes) > config.official_example.probability_tolerance:
         raise ValueError("official example is not deterministic across technical repeats")
-    expected = config.official_example.expected_success_probability
-    if expected is not None and abs(successes[0] - expected) > (
-        config.official_example.probability_tolerance
-    ):
-        raise ValueError(
-            f"official example success is {successes[0]}, expected {expected}"
-        )
 
     model_root = example_checkout / config.official_example.project_path
     model_files = sorted(
@@ -684,6 +797,32 @@ def audit_palladio_example(
     )
     if len(model_files) != 5:
         raise ValueError("official ReliabilityTest must contain five PCM model files")
+    repositories = [path for path in model_files if path.suffix == ".repository"]
+    if len(repositories) != 1:
+        raise ValueError("official ReliabilityTest must contain one repository model")
+    oracle = _derive_official_example_oracle(repositories[0])
+    oracle_success = float(oracle["success_probability"])
+    if abs(successes[0] - oracle_success) > (
+        config.official_example.probability_tolerance
+    ):
+        raise ValueError(
+            f"Palladio result {successes[0]} disagrees with independent oracle "
+            f"{oracle_success}"
+        )
+    expected = config.official_example.expected_success_probability
+    if expected is not None:
+        if abs(oracle_success - expected) > (
+            config.official_example.probability_tolerance
+        ):
+            raise ValueError(
+                f"independent oracle is {oracle_success}, expected pin is {expected}"
+            )
+        if abs(successes[0] - expected) > (
+            config.official_example.probability_tolerance
+        ):
+            raise ValueError(
+                f"official example success is {successes[0]}, expected {expected}"
+            )
     pin_status = "pinned_match" if expected is not None else "discovered_not_accepted"
     payload = {
         "schema_version": 1,
@@ -696,6 +835,7 @@ def audit_palladio_example(
         "success_probabilities": successes,
         "failure_mass_residuals": mass_residuals,
         "expected_success_probability": expected,
+        "independent_oracle": oracle,
         "model_files": [
             {
                 "relative_path": path.relative_to(example_checkout).as_posix(),

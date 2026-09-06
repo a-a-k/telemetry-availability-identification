@@ -58,12 +58,22 @@ upstream analyzer code builds under the declared historical dependency lock.
 
 The upstream download directory publishes no SHA-256 alongside the product
 archive, and the example repository does not publish an expected numeric result
-for the launch file. Therefore the first successful workflow execution is a pin
-discovery run only. It records, but does not accept, the archive SHA-256 and the
-repeated example probability.
+for the launch file. Therefore workflow run `34020007973` was a pin-discovery
+run only. Two independent product downloads produced the same SHA-256,
+`c3a91f0e3a17036d7a7561f9cc49bfa142cbc8f075db5bc6dcb6a439df9749f4`.
+The solver returned `0.375` in both technical repetitions.
 
-After that run, both values are added to the committed lock. M9A is accepted
-only on a fresh execution where:
+The numeric pin is not justified by copying the solver output. An independent
+XMI-tree audit requires the official example to contain one initial internal
+action followed by a recovery action with a primary and one fallback behaviour.
+All three internal-action failure probabilities are `0.5`, so the hand oracle
+is `(1-p_initial) * ((1-p_primary) + p_primary * (1-p_alternative)) =
+0.5 * (0.5 + 0.5 * 0.5) = 0.375`. The committed audit extracts those values
+directly from the pinned repository model and requires both the oracle and the
+solver to match the numeric pin.
+
+Both discovered values are now in the committed lock. M9A is accepted only on a
+fresh execution where:
 
 - source and example Git heads equal their full pinned commits;
 - the analyzer checkout remains untouched, the one-URL historical target lock
@@ -74,8 +84,8 @@ only on a fresh execution where:
 - the product contains the exact 5.2.2 reliability feature and solver bundle;
 - two analyzer executions return finite probabilities in `[0,1]`, enumerate
   full physical-state mass, conserve success-plus-failure mass within `1e-12`,
-  agree with each other within `1e-12`, and equal the newly committed example
-  probability;
+  agree with each other within `1e-12`, and equal both the independently parsed
+  hand oracle and the committed `0.375` probability;
 - manifests, build/test logs, and model-file hashes are retained as workflow
   artifacts.
 

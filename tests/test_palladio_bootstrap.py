@@ -24,12 +24,12 @@ HARNESS_MANIFEST = ROOT / "palladio" / "harness" / "META-INF" / "MANIFEST.MF"
 
 
 class PalladioBootstrapTests(unittest.TestCase):
-    def test_repository_contract_is_valid_but_discovery_only_until_pins_exist(self) -> None:
+    def test_repository_contract_is_acceptance_ready_after_discovery(self) -> None:
         config = load_palladio_bootstrap_config(CONFIG)
         self.assertEqual(config.analyzer.bundle_version, "5.2.2")
         self.assertEqual(config.runtime.job_timeout_minutes, 360)
         self.assertTrue(config.runtime.remote_only)
-        self.assertFalse(config.acceptance_ready)
+        self.assertTrue(config.acceptance_ready)
 
     def test_timeout_change_is_rejected(self) -> None:
         payload = json.loads(CONFIG.read_text(encoding="utf-8"))
@@ -176,25 +176,61 @@ class PalladioBootstrapTests(unittest.TestCase):
             model.mkdir(parents=True)
             for suffix in (
                 ".allocation",
-                ".repository",
                 ".resourceenvironment",
                 ".system",
                 ".usagemodel",
             ):
                 (model / f"default{suffix}").write_text(suffix, encoding="utf-8")
+            (model / "default.repository").write_text(
+                """<?xml version="1.0" encoding="UTF-8"?>
+<Repository xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <components__Repository>
+    <serviceEffectSpecifications__BasicComponent>
+      <steps_Behaviour xsi:type="seff:InternalAction" id="initial"
+          successor_AbstractAction="recovery">
+        <internalFailureOccurrenceDescriptions__InternalAction
+            failureProbability="0.5"
+            softwareInducedFailureType__InternalFailureOccurrenceDescription="failure" />
+      </steps_Behaviour>
+      <steps_Behaviour xsi:type="seff_reliability:RecoveryAction" id="recovery"
+          predecessor_AbstractAction="initial"
+          primaryBehaviour__RecoveryAction="primary">
+        <recoveryActionBehaviours__RecoveryAction id="primary"
+            failureHandlingAlternatives__RecoveryActionBehaviour="alternative">
+          <steps_Behaviour xsi:type="seff:InternalAction">
+            <internalFailureOccurrenceDescriptions__InternalAction
+                failureProbability="0.5"
+                softwareInducedFailureType__InternalFailureOccurrenceDescription="failure" />
+          </steps_Behaviour>
+        </recoveryActionBehaviours__RecoveryAction>
+        <recoveryActionBehaviours__RecoveryAction id="alternative"
+            failureTypes_FailureHandlingEntity="failure">
+          <steps_Behaviour xsi:type="seff:InternalAction">
+            <internalFailureOccurrenceDescriptions__InternalAction
+                failureProbability="0.5"
+                softwareInducedFailureType__InternalFailureOccurrenceDescription="failure" />
+          </steps_Behaviour>
+        </recoveryActionBehaviours__RecoveryAction>
+      </steps_Behaviour>
+    </serviceEffectSpecifications__BasicComponent>
+  </components__Repository>
+</Repository>
+""",
+                encoding="utf-8",
+            )
             result = root / "result.json"
             result.write_text(
                 json.dumps(
                     {
                         "repetitions": [
                             {
-                                "success_probability": 0.875,
-                                "failure_probability_sum": 0.125,
+                                "success_probability": 0.375,
+                                "failure_probability_sum": 0.625,
                                 "physical_state_probability": 1.0,
                             },
                             {
-                                "success_probability": 0.875,
-                                "failure_probability_sum": 0.125,
+                                "success_probability": 0.375,
+                                "failure_probability_sum": 0.625,
                                 "physical_state_probability": 1.0,
                             },
                         ]
@@ -211,8 +247,11 @@ class PalladioBootstrapTests(unittest.TestCase):
                 root / "example-audit.json",
             )
 
-            self.assertEqual(audit["status"], "discovered_not_accepted")
-            self.assertEqual(audit["success_probabilities"], [0.875, 0.875])
+            self.assertEqual(audit["status"], "pinned_match")
+            self.assertEqual(audit["success_probabilities"], [0.375, 0.375])
+            self.assertEqual(
+                audit["independent_oracle"]["success_probability"], 0.375
+            )
 
     def test_remote_workflow_has_three_360_minute_jobs(self) -> None:
         workflow = WORKFLOW.read_text(encoding="utf-8")
