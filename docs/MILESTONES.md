@@ -24,7 +24,7 @@ tests, configuration validation, and bounded smoke cases.
 | M7D | Learner/evaluator boundary and native-trace normalization | Complete | `milestones/M7D_LEARNER_EVIDENCE_BOUNDARY.md`; diagnostic only and excluded from effectiveness evidence |
 | M7E | Frozen main acquisition, strong comparators, matched likelihood, and campaign inference | Complete | `milestones/M7E_ANALYSIS_FREEZE.md`; completed before any M7 remote request |
 | M7F | Separate no-fit four-cell main-path preflight | Complete | `milestones/M7F_NO_FIT_PREFLIGHT.md`; accepted after a retained provenance-wiring failure and excluded from effectiveness evidence |
-| M7 | Frozen live validation and placement transfer | Planned | report follows the campaign runs |
+| M7 | Frozen live validation and placement transfer | Complete; primary incomplete | `milestones/M7_FROZEN_LIVE_VALIDATION.md`; 160/160 technical success, 117/160 primary pairs, no superiority claim |
 
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference

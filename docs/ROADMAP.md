@@ -41,6 +41,11 @@ Evidence: `milestones/M2_STRUCTURE_PRESERVING_REDUCTION.md`.
 
 ## Phase 4: uncertainty
 
+Status: implemented in M4, with directed assumption stress in M5.
+
+Evidence: `milestones/M4_SIMULTANEOUS_UNCERTAINTY.md` and
+`milestones/M5_DIRECTED_STRESS_TESTS.md`.
+
 - independent-campaign calibration on synthetic data;
 - simultaneous observable-probability constraints for small ambiguous models;
 - extrema of target availability over compatible parameter sets;
@@ -49,6 +54,12 @@ Evidence: `milestones/M2_STRUCTURE_PRESERVING_REDUCTION.md`.
 
 ## Phase 5: live ingestion and frozen validation
 
+Status: implemented in M6 and M7. M7 completed technically, while its
+predeclared primary contrast is incomplete and supports no superiority claim.
+
+Evidence: `milestones/M6_LIVE_INGESTION_HARNESS.md` and
+`milestones/M7_FROZEN_LIVE_VALIDATION.md`.
+
 - versioned adapters for traces, lifecycle/health, deployment, and mesh evidence;
 - explicit operation specifications and external-client success audit;
 - immutable calibration model followed by independent test periods;
@@ -56,6 +67,13 @@ Evidence: `milestones/M2_STRUCTURE_PRESERVING_REDUCTION.md`.
 - B0-B4 comparisons and predeclared ablations.
 
 ## Phase 6: placement transfer
+
+Status: implemented synthetically in M3 and evaluated on the frozen live M7
+matrix. The live transfer result is conditional on topology support and the
+declared homogeneous-new-domain assumption.
+
+Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
+`milestones/M7_FROZEN_LIVE_VALIDATION.md`.
 
 - replace known placement metadata without target-configuration calibration;
 - preserve only audited transferable residual parameters;

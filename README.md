@@ -191,6 +191,13 @@ identifiers in its manifest.
   because a parsed scope argument was not forwarded; it is retained and no row
   from it is reused. All three M7 workflow jobs now have a 360-minute safety
   timeout.
+- M7 is complete as an executed live study. All 160 campaigns and the frozen
+  analysis succeeded, but the primary proposed-minus-B2 contrast is incomplete
+  at 117/160 campaigns because trace topology was ambiguous under communication
+  faults. Its conditional Brier estimate is `+0.000233` (95% CI
+  `[-0.001659, +0.002124]`, `p=0.685`), where positive is unfavorable to
+  proposed. The result supports a sufficiency/abstention boundary, not
+  predictive superiority.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
@@ -230,7 +237,11 @@ pilot schemas passed the executable anti-leakage boundary documented in
 `docs/milestones/M7D_LEARNER_EVIDENCE_BOUNDARY.md`. No main-analysis fit was
 used for either decision. The separate M7F main-path preflight is documented in
 `docs/milestones/M7F_NO_FIT_PREFLIGHT.md`; its accepted run also performed no
-fit or score and remains excluded from M7 effectiveness evidence.
+fit or score and remains excluded from M7 effectiveness evidence. The full M7
+result is recorded in `docs/milestones/M7_FROZEN_LIVE_VALIDATION.md`: all
+`N/ND` campaigns were topologically supported, whereas 43 of 80 `NC/NCD`
+campaigns had at least one ambiguous operation. Proposed matched B3 wherever it
+emitted and did not beat strengthened B2.
 
 ## Generated tables
 
@@ -258,6 +269,12 @@ coverage/width/diagnostic summaries. Its protocol deliberately permits the
 unchanged method to fail under violated assumptions; empirical performance is
 not a build gate.
 
+The M7 workflow emits per-cell/mode diagnostics, current and transfer
+predictions, held-out scores, method summaries, frozen paired contrasts, and an
+analysis manifest. Its primary row is deliberately marked incomplete when any
+campaign abstains; the workflow does not impute missing predictions to obtain a
+favorable result.
+
 Generated results are intentionally ignored by Git. GitHub workflow artifacts are
 the source of experimental outputs until a reviewed result snapshot is explicitly
 frozen for the paper.
@@ -269,5 +286,7 @@ predicates, overlapping failure domains, general sparse elimination, or EM. M2
 is one proved compiler rule, not a general factor-graph solver. M3 supports one
 explicit two-domain placement transfer. M5's state-dependent loss and temporal
 dependence are directed stress generators, not general estimators for those
-mechanisms. M6 provides ingestion and upstream-integration evidence only; live
-effectiveness and live placement transfer remain untested until M7.
+mechanisms. M7 tests live current and transfer prediction only for the exact two
+benchmark revisions and declared logical domains. Its incomplete primary result
+does not establish effectiveness superiority, physical domain independence, or
+unconditional trace-topology sufficiency.
