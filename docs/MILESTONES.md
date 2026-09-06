@@ -30,7 +30,7 @@ tests, configuration validation, and bounded smoke cases.
 | M9A | Pin, build, inventory, and reproduce the official Palladio reliability analyzer example | Complete | `milestones/M9A_PALLADIO_RELIABILITY_BOOTSTRAP.md`; accepted three-job run pinned the product, rebuilt 5.2.2 under an audited historical target lock, and matched the independent 0.375 oracle twice |
 | M9B | Validate Palladio semantics on independent hand-checkable reliability controls | Complete | `milestones/M9B_PALLADIO_SEMANTIC_CONTROLS.md`; all 15 predeclared cases matched their external oracles twice, with explicit replication and communication-mapping limits |
 | M9C | Define the M7-to-PCM correspondence and build one minimal operation model per application | Complete | `milestones/M9C_PALLADIO_APPLICATION_MAPPING.md`; 16/16 mapping rows and four source-grounded operation-placement PCM instances passed, with eight solver records matching frozen structural oracles |
-| M9D | Compare fixed M7 estimators and Palladio on aligned preserved inputs | In progress | Exploratory debugging comparison begins only after the completed M9C semantic and application-mapping gates |
+| M9D | Compare fixed M7 estimators and PCM/Palladio on aligned preserved inputs | In progress; protocol frozen | `M9D_PALLADIO_ALIGNED_INPUT_PROTOCOL.md`; 240 fixed primary-mask opportunities, learner-only replay, 184 expected admitted PCM models, and downstream held-out scoring are frozen before execution |
 
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference

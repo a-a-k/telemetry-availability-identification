@@ -73,6 +73,13 @@ from .palladio_mapping import (
     generate_palladio_application_models,
     load_palladio_mapping_config,
 )
+from .palladio_aligned import (
+    audit_palladio_aligned_evidence,
+    audit_palladio_aligned_results,
+    load_palladio_aligned_config,
+    prepare_palladio_aligned_models,
+    stage_palladio_aligned_learner_input,
+)
 from .reduction_experiment import (
     aggregate_reduction_experiment,
     run_reduction_experiment,
@@ -696,6 +703,104 @@ def build_parser() -> argparse.ArgumentParser:
     audit_palladio_application_output.add_argument(
         "--out", required=True, type=Path
     )
+
+    validate_palladio_aligned = commands.add_parser(
+        "validate-palladio-aligned-comparison",
+        help="validate the frozen remote-only M9D aligned-input contract",
+    )
+    validate_palladio_aligned.add_argument("--config", required=True, type=Path)
+
+    audit_palladio_aligned_input = commands.add_parser(
+        "audit-palladio-aligned-evidence",
+        help="audit all accepted M7/M8A/M9C inputs for M9D",
+    )
+    audit_palladio_aligned_input.add_argument("--config", required=True, type=Path)
+    audit_palladio_aligned_input.add_argument(
+        "--m8a-preserved-metadata", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--m8a-audit-metadata", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--m9c-contract-metadata", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--m9c-solver-metadata", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--m9c-acceptance-metadata", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--qualified-root", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--analysis-root", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument("--raw-root", required=True, type=Path)
+    audit_palladio_aligned_input.add_argument(
+        "--audit-root", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--m9c-contract-root", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--m9c-acceptance-root", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument(
+        "--repository-root", required=True, type=Path
+    )
+    audit_palladio_aligned_input.add_argument("--out", required=True, type=Path)
+
+    stage_palladio_aligned = commands.add_parser(
+        "stage-palladio-aligned-learner-input",
+        help="stage the physically learner-only M9D evidence tree",
+    )
+    stage_palladio_aligned.add_argument("--config", required=True, type=Path)
+    stage_palladio_aligned.add_argument(
+        "--qualified-root", required=True, type=Path
+    )
+    stage_palladio_aligned.add_argument("--out", required=True, type=Path)
+
+    prepare_palladio_aligned = commands.add_parser(
+        "prepare-palladio-aligned-models",
+        help="replay frozen learner fits and generate admitted M9D PCM models",
+    )
+    prepare_palladio_aligned.add_argument("--config", required=True, type=Path)
+    prepare_palladio_aligned.add_argument(
+        "--learner-root", required=True, type=Path
+    )
+    prepare_palladio_aligned.add_argument(
+        "--analysis-root", required=True, type=Path
+    )
+    prepare_palladio_aligned.add_argument(
+        "--evidence-manifest", required=True, type=Path
+    )
+    prepare_palladio_aligned.add_argument("--models", required=True, type=Path)
+    prepare_palladio_aligned.add_argument("--out", required=True, type=Path)
+
+    audit_palladio_aligned_output = commands.add_parser(
+        "audit-palladio-aligned-results",
+        help="audit M9D solver fidelity and score held-out outcomes",
+    )
+    audit_palladio_aligned_output.add_argument("--config", required=True, type=Path)
+    audit_palladio_aligned_output.add_argument("--contract", required=True, type=Path)
+    audit_palladio_aligned_output.add_argument("--result", required=True, type=Path)
+    audit_palladio_aligned_output.add_argument(
+        "--qualified-root", required=True, type=Path
+    )
+    audit_palladio_aligned_output.add_argument(
+        "--analysis-root", required=True, type=Path
+    )
+    audit_palladio_aligned_output.add_argument(
+        "--audit-root", required=True, type=Path
+    )
+    audit_palladio_aligned_output.add_argument(
+        "--m8a-preserved-metadata", required=True, type=Path
+    )
+    audit_palladio_aligned_output.add_argument(
+        "--m8a-audit-metadata", required=True, type=Path
+    )
+    audit_palladio_aligned_output.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -1488,6 +1593,82 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.model_manifest,
             args.result,
             args.models,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-palladio-aligned-comparison":
+        config = load_palladio_aligned_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "role": "exploratory_post_result_debugging",
+                    "observation_mode": config.observation_mode,
+                    "opportunities": dict(config.expected_opportunities),
+                    "expected_models": config.expected_models,
+                    "expected_raw_runs": config.expected_raw_runs,
+                    "technical_repetitions": config.technical_repetitions,
+                    "job_timeout_minutes": 360,
+                    "remote_only_full_execution": True,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "audit-palladio-aligned-evidence":
+        manifest = audit_palladio_aligned_evidence(
+            args.config,
+            args.m8a_preserved_metadata,
+            args.m8a_audit_metadata,
+            args.m9c_contract_metadata,
+            args.m9c_solver_metadata,
+            args.m9c_acceptance_metadata,
+            args.qualified_root,
+            args.analysis_root,
+            args.raw_root,
+            args.audit_root,
+            args.m9c_contract_root,
+            args.m9c_acceptance_root,
+            args.repository_root,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "stage-palladio-aligned-learner-input":
+        manifest = stage_palladio_aligned_learner_input(
+            args.config, args.qualified_root, args.out
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "prepare-palladio-aligned-models":
+        manifest = prepare_palladio_aligned_models(
+            args.config,
+            args.learner_root,
+            args.analysis_root,
+            args.evidence_manifest,
+            args.models,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-aligned-results":
+        manifest = audit_palladio_aligned_results(
+            args.config,
+            args.contract,
+            args.result,
+            args.qualified_root,
+            args.analysis_root,
+            args.audit_root,
+            args.m8a_preserved_metadata,
+            args.m8a_audit_metadata,
             args.out,
         )
         print(json.dumps(manifest, indent=2, sort_keys=True))

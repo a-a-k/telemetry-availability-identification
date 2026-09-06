@@ -108,9 +108,14 @@ success probability 0.375 in two calls, exactly matching a hand-checkable XMI
 oracle. M9B then matched all 15 frozen mechanism-level controls twice. It also
 confirmed that automatic allocation replication is unsupported and that a raw
 link failure parameter is applied to both request and response transfer. M9C
-M9C encodes those constraints explicitly: source-grounded mandatory target calls,
+encodes those constraints explicitly: source-grounded mandatory target calls,
 two explicit paths, logical common domains, a marginal two-transfer link
 mapping, and a semantic residual. Its synthetic witness is a structural test,
 not an M7 estimate or comparative-validity claim. All eight remote solver
-records matched the frozen oracle; M9D now introduces preserved M7 calibration
-inputs without refitting the historical estimators.
+records matched the frozen oracle. M9D now introduces preserved M7 calibration
+inputs without changing the historical estimators: the PCM solver receives a
+learner-only replay of the matched B3 parameter realization, B0/B2 remain
+direct comparators, and evaluator outcomes are joined only downstream. Its
+frozen first comparison covers the two preselected M7B routing probes under the
+primary `sampled_mixed` mask; it is not an independent architecture-extraction
+comparison.

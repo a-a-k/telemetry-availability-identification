@@ -89,6 +89,9 @@ jobs:
       - name: Validate Palladio application-mapping contract
         run: python -m telemetry_availability validate-palladio-application-mapping --config configs/m9c_palladio_application_mapping.json
 
+      - name: Validate Palladio aligned-input comparison contract
+        run: python -m telemetry_availability validate-palladio-aligned-comparison --config configs/m9d_palladio_aligned_comparison.json
+
       - name: Ingest both live-contract fixtures
         if: ${{ matrix.python-version == '3.13' }}
         run: |

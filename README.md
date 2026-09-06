@@ -225,7 +225,12 @@ identifiers in its manifest.
   correspondence table, and instantiated each selected operation for colocated
   and split logical domains. All eight solver records matched the predeclared
   structural witness; this is not an accuracy result. M9D now starts the
-  exploratory aligned-input comparison on preserved M7 material.
+  exploratory aligned-input comparison on preserved M7 material. Its frozen
+  role is deliberately narrow: `PCM-PAR/B3-parameters` reuses the learner-only
+  likelihood realization, while B0 and strengthened B2 remain direct fixed
+  comparators. The primary M7 mask yields 240 predeclared operation-level
+  opportunities and 184 admitted PCM models; held-out accuracy is joined only
+  after the raw solver artifact exists.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
