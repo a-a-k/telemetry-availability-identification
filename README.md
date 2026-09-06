@@ -220,9 +220,11 @@ identifiers in its manifest.
   with zero repeat and probability-mass residuals. The source and model audits
   also expose two non-negotiable mapping limits: automatic allocation
   replication is unsupported, and one raw link probability is applied to both
-  request and response transfer. M9C now builds the explicit correspondence
-  table and one minimal operation model per application before any aligned
-  accuracy comparison.
+  request and response transfer. The M9C protocol is now frozen: it audits the
+  accepted M8B topology evidence and exact application sources, emits the
+  mandatory 16-row correspondence table, and instantiates each selected
+  operation for colocated and split logical domains. Its predeclared synthetic
+  witness tests model structure only; aligned M7 accuracy remains a later step.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

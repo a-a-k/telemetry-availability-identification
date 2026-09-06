@@ -1,0 +1,406 @@
+{
+  "schema_version": 1,
+  "id": "m9c_palladio_application_mapping",
+  "diagnostic_only": true,
+  "accuracy_comparison_status": "not_started",
+  "selection_rule": "The two operations were frozen in M7B as the routing probes for their replicated target services; they were not selected using Palladio output or comparative accuracy.",
+  "analyzer_lock": {
+    "repository": "https://github.com/PalladioSimulator/Palladio-Analyzer-Reliability.git",
+    "commit": "a694e570afb705dc9e0470dc321e77b7219dcea4",
+    "pcm_commit": "5fbcc3409e02687881f88ab78b6242d8acd2677c",
+    "m9a_config_path": "configs/m9a_palladio_bootstrap.json",
+    "m9a_config_sha256": "a7fd6e784612b4ba2df06f4ef2de4a4755a23a873540857f181831718825bc1d",
+    "m9b_config_path": "configs/m9b_palladio_semantic_controls.json",
+    "m9b_config_sha256": "37fb11b921c547d3e5c0bbb8211a7bd7c65911ac828e25c7d96a0430628e7cef"
+  },
+  "runtime": {
+    "java_distribution": "temurin",
+    "java_version": 17,
+    "repeat_runs": 2,
+    "probability_tolerance": 1e-12,
+    "job_timeout_minutes": 360,
+    "remote_only": true
+  },
+  "accepted_m8b_evidence": {
+    "repository": "a-a-k/telemetry-availability-identification",
+    "run_id": 34017401101,
+    "artifact_id": 9984348911,
+    "artifact_name": "m8b-m7-causal-diagnostics-34017401101",
+    "artifact_size_bytes": 1107059,
+    "artifact_digest": "sha256:2448a7f5a42e323a4cd41e74fbb3b8c9104d70f89c5e1c5de5ecd250caf42cb6",
+    "artifact_expires_at": "2026-12-05T06:47:07Z",
+    "head_commit": "a8737e9519da2fcfafb7cedd999c4c1867653d5b",
+    "source_run_id": 33990678586,
+    "files": {
+      "manifest.json": null,
+      "topology-branches.csv": "0413566af76fae7ae30c1e711dd7718b3963fac53a884b74d379c553f65f4adc",
+      "topology-diagnostics.csv": "adb8debea7876ad428d5900949672e60745f75e46296b2df6ad01dc4c92b16b5",
+      "topology-examples.csv": "76edbb78436b83e4a0558cd228056ab8a046f32c0e93ef53e1326e16a695bc78"
+    }
+  },
+  "study_evidence": [
+    {
+      "path": "configs/m6_live_harness.yaml",
+      "bytes": 2323,
+      "sha256": "3047d2793f06c9ced3394b7900cd0192e1afd42ca9cb37c945f8348168479131",
+      "markers": ["read_user_timeline", "browse_product"]
+    },
+    {
+      "path": "configs/m7_runtime_pilot.yaml",
+      "bytes": 4575,
+      "sha256": "07806dadfc33ac66c3732a8234f6fc75e7fb1d8b7272a7bf81166be9d5849cb8",
+      "markers": ["6ecb09706140f8730b5385c08f1386c654c3c526", "8c47d47c9ac27710d2b2a153bcd53e483bffe66d"]
+    },
+    {
+      "path": "configs/m7b_placement_pilot.yaml",
+      "bytes": 1406,
+      "sha256": "e913e1090d63061242608784f079bbd9827dc11927f8b21e48bb74530eea677a",
+      "markers": ["target_port: 9090", "target_port: 3550", "routing_probe_operation: read_user_timeline", "routing_probe_operation: browse_product"]
+    },
+    {
+      "path": "configs/m7_frozen_live.yaml",
+      "bytes": 4748,
+      "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a",
+      "markers": ["requires_target_group: true", "read_user_timeline", "browse_product"]
+    },
+    {
+      "path": "src/telemetry_availability/live_pilot.py",
+      "bytes": 27528,
+      "sha256": "44bf953759067e7be6ef78e5ac34b752503605ef556de7fced760f88f08c8e90",
+      "markers": ["http_2xx_and_timeline_json", "http_2xx_and_expected_product", "OLJCESPC7Z"]
+    },
+    {
+      "path": "src/telemetry_availability/live_placement_pilot.py",
+      "bytes": 53208,
+      "sha256": "78c940f1767b97f0b949d6b26338aa9ccaba001f6d9e55e9f9c7b2359af70be0",
+      "markers": ["balance roundrobin", "default-server inter 500ms fall 1 rise 1", "timeout connect 1s"]
+    }
+  ],
+  "evidence_classes": [
+    "observed_m8b",
+    "frozen_study_contract",
+    "pinned_upstream_source",
+    "manual_equivalence_assumption",
+    "synthetic_structural_witness",
+    "unsupported",
+    "unidentified"
+  ],
+  "stationary_encoding": {
+    "scope": "A random request in a stable interval; HAProxy detection and recovery transients are outside the model.",
+    "route_formula_colocated": "g * (ea * ca + (1 - ea * ca) * eb * cb)",
+    "route_formula_split": "ga * ea * ca + (1 - ga * ea * ca) * gb * eb * cb",
+    "operation_formula": "residual_success * route_success",
+    "communication_mapping": "q_pcm = 1 - sqrt(c_path), so the analyzer's two equal independent message transfers preserve one-call success c_path.",
+    "replication_encoding": "Two explicit assembly and allocation paths in a recovery action; this is a stationary success-equivalent Boolean OR, not a claim that PCM natively executes HAProxy round robin or retries a failed request.",
+    "mttf_mttr_encoding": "For a stationary availability A, use the dimensionless normalization MTTF=A and MTTR=1-A. These are solver ratio coordinates, not estimates of durations.",
+    "unsupported": [
+      "HAProxy health-check detection and recovery transients",
+      "temporal correlation of Docker network-disconnect intervals",
+      "literal round-robin request ordering and connection reuse",
+      "separate identification of MTTF and MTTR from one availability",
+      "causal allocation of the residual probability to collapsed internal dependencies"
+    ]
+  },
+  "structural_witness": {
+    "provenance": "synthetic_structural_witness",
+    "not_an_m7_estimate": true,
+    "residual_success": 0.97,
+    "common_domain_availability": 0.9,
+    "individual_availability_a": 0.8,
+    "individual_availability_b": 0.7,
+    "communication_call_success_a": 0.9,
+    "communication_call_success_b": 0.85
+  },
+  "applications": [
+    {
+      "id": "deathstarbench_social_network",
+      "operation": "read_user_timeline",
+      "entry_service": "nginx-web-server",
+      "target_service": "user-timeline-service",
+      "target_port": 9090,
+      "proxy_mode": "tcp",
+      "success_rule": "HTTP 2xx and a timeline JSON array with the frozen post fields, or the exact upstream empty-object representation",
+      "timeout_rule": "A client-side timeout or missing HTTP response is failure",
+      "upstream": {
+        "repository": "https://github.com/delimitrou/DeathStarBench.git",
+        "commit": "6ecb09706140f8730b5385c08f1386c654c3c526"
+      },
+      "source_evidence": [
+        {
+          "path": "socialNetwork/wrk2/scripts/social-network/read-user-timeline.lua",
+          "bytes": 704,
+          "git_blob": "02f8a7e883acb54a690ca71f54668cfee5dfd96c",
+          "sha256": "b27bd2b1228365157fff90a1eee31c38268eda800f044544d22bf40019b52fed",
+          "markers": ["/wrk2-api/user-timeline/read?", "local method = \"GET\""]
+        },
+        {
+          "path": "socialNetwork/nginx-web-server/lua-scripts/wrk2-api/user-timeline/read.lua",
+          "bytes": 3818,
+          "git_blob": "6a740800b543048cd87fc9679eee439067d74ef2",
+          "sha256": "3b138dff7314ac0ba6ebf904bceea59c0bb9a5e53176eb4f2ad318864717b693",
+          "markers": ["UserTimelineServiceClient, \"user-timeline-service\" .. k8s_suffix, 9090", "pcall(client.ReadUserTimeline", "ngx.exit(ngx.HTTP_OK)"]
+        },
+        {
+          "path": "socialNetwork/src/UserTimelineService/UserTimelineHandler.h",
+          "bytes": 13597,
+          "git_blob": "a1e8f34d8e421e82996b8540424f3c4b88554714",
+          "sha256": "e703f56659bfc62c75bfced86681931e6e2ace069a6e3080138e5ea883062478",
+          "markers": ["void UserTimelineHandler::ReadUserTimeline", "zrevrange", "post_client->ReadPosts"]
+        },
+        {
+          "path": "socialNetwork/docker-compose.yml",
+          "bytes": 7331,
+          "git_blob": "23ad783330e63b21555f69bc5e63c1672198950e",
+          "sha256": "b2b3dec888d099a60101b8a3d1eae9bf71ef18ef64b557942048db905ec4d529",
+          "markers": ["user-timeline-service:", "entrypoint: UserTimelineService", "nginx-thrift:"]
+        }
+      ],
+      "m8b_summary": {
+        "normal_or_domain_rows": 40,
+        "normal_or_domain_confirmed": 40,
+        "normal_or_domain_trace_support": 45624,
+        "normal_or_domain_target_fraction": 1.0,
+        "normal_or_domain_replica_a_assignments": 23177,
+        "normal_or_domain_replica_b_assignments": 22447,
+        "communication_rows": 40,
+        "communication_confirmed": 25,
+        "communication_ambiguous": 15,
+        "communication_trace_support": 43401,
+        "communication_replica_a_assignments": 18052,
+        "communication_replica_b_assignments": 17641,
+        "branch_rows": 160,
+        "successful_requests": 89025,
+        "successful_traces": 89025,
+        "successful_traces_with_target": 81317,
+        "successful_traces_without_target": 7708
+      },
+      "mapping": [
+        {
+          "element": "request_success",
+          "source_statement": "The counted client requires HTTP 2xx and the frozen timeline JSON shape; timeout is failure.",
+          "pcm_encoding": "Scenario success multiplied by an operation-level residual action calibrated to the same semantic outcome.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_with_abstraction"
+        },
+        {
+          "element": "operation_path",
+          "source_statement": "Valid driver input reaches nginx, synchronously invokes UserTimelineService, reads Redis and conditionally MongoDB, then invokes PostStorageService.",
+          "pcm_encoding": "Mandatory entry-to-target call; target-internal cache/database/post-storage behavior is collapsed into the semantic residual.",
+          "evidence_class": "pinned_upstream_source",
+          "status": "supported_with_collapsed_dependencies"
+        },
+        {
+          "element": "replication",
+          "source_statement": "M7 replaces the target with two backends behind health-checked HAProxy round robin.",
+          "pcm_encoding": "Two explicit paths with failure handling, used only as the stationary Boolean-OR success equivalent.",
+          "evidence_class": "manual_equivalence_assumption",
+          "status": "supported_for_stable_marginal_only"
+        },
+        {
+          "element": "individual_failure",
+          "source_statement": "Each target replica is independently paused and its container/backend state is sampled.",
+          "pcm_encoding": "One required physical resource per explicit replica path.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_for_stationary_availability"
+        },
+        {
+          "element": "communication_failure",
+          "source_statement": "Each target replica is independently disconnected from its Docker network for intervals.",
+          "pcm_encoding": "One link per path with square-root mapping that preserves the marginal success of the analyzer's request and response transfers.",
+          "evidence_class": "manual_equivalence_assumption",
+          "status": "marginal_only_temporal_dependence_unsupported"
+        },
+        {
+          "element": "common_domain",
+          "source_statement": "A common-domain pause affects both colocated replicas and a separate domain factor affects each split replica.",
+          "pcm_encoding": "One shared gating resource for colocated paths; split-domain availability is combined into each independent path resource.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_with_split_path_composition"
+        },
+        {
+          "element": "parameters",
+          "source_statement": "M9C uses only non-empirical witness values; M7 availability inputs are not consumed.",
+          "pcm_encoding": "Dimensionless MTTF/MTTR ratio coordinates and mapped link probabilities.",
+          "evidence_class": "synthetic_structural_witness",
+          "status": "structural_test_only"
+        },
+        {
+          "element": "placement",
+          "source_statement": "Colocated/split denote injected logical failure-domain membership; all containers still share one CI host and the proxy is outside those injected domains.",
+          "pcm_encoding": "Dependence changes between one shared gate and two independent path factors; no physical-host claim.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_as_logical_fault_placement"
+        }
+      ]
+    },
+    {
+      "id": "opentelemetry_demo",
+      "operation": "browse_product",
+      "entry_service": "frontend",
+      "target_service": "product-catalog",
+      "target_port": 3550,
+      "proxy_mode": "grpc_h2",
+      "success_rule": "HTTP 2xx and a JSON object whose id equals the frozen product OLJCESPC7Z",
+      "timeout_rule": "A client-side timeout or missing HTTP response is failure",
+      "upstream": {
+        "repository": "https://github.com/open-telemetry/opentelemetry-demo.git",
+        "commit": "8c47d47c9ac27710d2b2a153bcd53e483bffe66d"
+      },
+      "source_evidence": [
+        {
+          "path": "src/load-generator/locustfile.py",
+          "bytes": 11763,
+          "git_blob": "4a4a5f5d1285cad46ae40199078cb4d3c6191e17",
+          "sha256": "a9170f957e7a811ba87137da4bf6228d804e784e6c66b44e1622b8b269dc35b2",
+          "markers": ["def browse_product(self):", "self.client.get(\"/api/products/\" + product)"]
+        },
+        {
+          "path": "src/frontend/pages/api/products/[productId]/index.ts",
+          "bytes": 881,
+          "git_blob": "eb624657964f831ba5e578c2833cbe6432f99a57",
+          "sha256": "d8a106c1c9587461ae2486b23b96108baffac4dbaa2f2a1c589584d06af8185a",
+          "markers": ["ProductCatalogService.getProduct", "res.status(200).json(product)"]
+        },
+        {
+          "path": "src/frontend/gateways/rpc/ProductCatalog.gateway.ts",
+          "bytes": 855,
+          "git_blob": "18d83053edf2a52d2b14497efff0fc17f6092a89",
+          "sha256": "84227c8fdfd084af8b5ce454a0ea31f251d04c31d5b307ff46631a87914d6c48",
+          "markers": ["PRODUCT_CATALOG_ADDR", "client.getProduct({ id }"]
+        },
+        {
+          "path": "src/frontend/services/ProductCatalog.service.ts",
+          "bytes": 1198,
+          "git_blob": "9854531c6357348e1fbcb765eb668513d91aa9fb",
+          "sha256": "e9e716da6575beb15b43828e79b46f30978f50b47da47b581b76777039653724",
+          "markers": ["defaultCurrencyCode = 'USD'", "ProductCatalogGateway.getProduct"]
+        },
+        {
+          "path": "src/product-catalog/main.go",
+          "bytes": 13032,
+          "git_blob": "b28a14a638ea8a81d7afd44227bc40d31b6b9beb",
+          "sha256": "3e1e7bba0f11e69b550df38eafb2e1cd366dcde216b2c25762134d46d13290b7",
+          "markers": ["func (p *productCatalog) GetProduct", "getProductFromDB"]
+        },
+        {
+          "path": "compose.yaml",
+          "bytes": 24592,
+          "git_blob": "f4d748255882190229bc92bd6649d0a7c5e07338",
+          "sha256": "62d520870c255485b113f44f7e2127ab54410684c3881c43f60e511a2b12088e",
+          "markers": ["product-catalog:", "PRODUCT_CATALOG_ADDR", "PRODUCT_CATALOG_PORT"]
+        }
+      ],
+      "m8b_summary": {
+        "normal_or_domain_rows": 40,
+        "normal_or_domain_confirmed": 40,
+        "normal_or_domain_trace_support": 44806,
+        "normal_or_domain_target_fraction": 1.0,
+        "normal_or_domain_replica_a_assignments": 22302,
+        "normal_or_domain_replica_b_assignments": 22504,
+        "communication_rows": 40,
+        "communication_confirmed": 14,
+        "communication_ambiguous": 26,
+        "communication_trace_support": 42294,
+        "communication_replica_a_assignments": 13558,
+        "communication_replica_b_assignments": 13150,
+        "branch_rows": 160,
+        "successful_requests": 87100,
+        "successful_traces": 87100,
+        "successful_traces_with_target": 71514,
+        "successful_traces_without_target": 15586
+      },
+      "mapping": [
+        {
+          "element": "request_success",
+          "source_statement": "The counted client requires HTTP 2xx and the exact frozen product id; timeout is failure.",
+          "pcm_encoding": "Scenario success multiplied by an operation-level residual action calibrated to the same semantic outcome.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_with_abstraction"
+        },
+        {
+          "element": "operation_path",
+          "source_statement": "The GET handler synchronously invokes ProductCatalog.GetProduct; the fixed empty currency code selects USD and does not invoke Currency.",
+          "pcm_encoding": "Mandatory entry-to-target call; feature-flag and PostgreSQL behavior inside product-catalog is collapsed into the semantic residual.",
+          "evidence_class": "pinned_upstream_source",
+          "status": "supported_with_collapsed_dependencies"
+        },
+        {
+          "element": "replication",
+          "source_statement": "M7 replaces the target with two h2 backends behind health-checked HAProxy round robin.",
+          "pcm_encoding": "Two explicit paths with failure handling, used only as the stationary Boolean-OR success equivalent.",
+          "evidence_class": "manual_equivalence_assumption",
+          "status": "supported_for_stable_marginal_only"
+        },
+        {
+          "element": "individual_failure",
+          "source_statement": "Each target replica is independently paused and its container/backend state is sampled.",
+          "pcm_encoding": "One required physical resource per explicit replica path.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_for_stationary_availability"
+        },
+        {
+          "element": "communication_failure",
+          "source_statement": "Each target replica is independently disconnected from its Docker network for intervals.",
+          "pcm_encoding": "One link per path with square-root mapping that preserves the marginal success of the analyzer's request and response transfers.",
+          "evidence_class": "manual_equivalence_assumption",
+          "status": "marginal_only_temporal_dependence_unsupported"
+        },
+        {
+          "element": "common_domain",
+          "source_statement": "A common-domain pause affects both colocated replicas and a separate domain factor affects each split replica.",
+          "pcm_encoding": "One shared gating resource for colocated paths; split-domain availability is combined into each independent path resource.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_with_split_path_composition"
+        },
+        {
+          "element": "parameters",
+          "source_statement": "M9C uses only non-empirical witness values; M7 availability inputs are not consumed.",
+          "pcm_encoding": "Dimensionless MTTF/MTTR ratio coordinates and mapped link probabilities.",
+          "evidence_class": "synthetic_structural_witness",
+          "status": "structural_test_only"
+        },
+        {
+          "element": "placement",
+          "source_statement": "Colocated/split denote injected logical failure-domain membership; all containers still share one CI host and the proxy is outside those injected domains.",
+          "pcm_encoding": "Dependence changes between one shared gate and two independent path factors; no physical-host claim.",
+          "evidence_class": "frozen_study_contract",
+          "status": "supported_as_logical_fault_placement"
+        }
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "deathstarbench_social_network__read_user_timeline__colocated",
+      "application": "deathstarbench_social_network",
+      "operation": "read_user_timeline",
+      "placement": "colocated",
+      "expected_physical_states": 8,
+      "expected_success_probability": 0.7740018
+    },
+    {
+      "id": "deathstarbench_social_network__read_user_timeline__split",
+      "application": "deathstarbench_social_network",
+      "operation": "read_user_timeline",
+      "placement": "split",
+      "expected_physical_states": 4,
+      "expected_success_probability": 0.81140112
+    },
+    {
+      "id": "opentelemetry_demo__browse_product__colocated",
+      "application": "opentelemetry_demo",
+      "operation": "browse_product",
+      "placement": "colocated",
+      "expected_physical_states": 8,
+      "expected_success_probability": 0.7740018
+    },
+    {
+      "id": "opentelemetry_demo__browse_product__split",
+      "application": "opentelemetry_demo",
+      "operation": "browse_product",
+      "placement": "split",
+      "expected_physical_states": 4,
+      "expected_success_probability": 0.81140112
+    }
+  ]
+}

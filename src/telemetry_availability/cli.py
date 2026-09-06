@@ -66,6 +66,13 @@ from .palladio_controls import (
     generate_palladio_control_models,
     load_palladio_controls_config,
 )
+from .palladio_mapping import (
+    audit_palladio_application_evidence,
+    audit_palladio_application_models,
+    audit_palladio_application_results,
+    generate_palladio_application_models,
+    load_palladio_mapping_config,
+)
 from .reduction_experiment import (
     aggregate_reduction_experiment,
     run_reduction_experiment,
@@ -616,6 +623,79 @@ def build_parser() -> argparse.ArgumentParser:
     audit_palladio_results.add_argument("--result", required=True, type=Path)
     audit_palladio_results.add_argument("--models", required=True, type=Path)
     audit_palladio_results.add_argument("--out", required=True, type=Path)
+
+    validate_palladio_mapping = commands.add_parser(
+        "validate-palladio-application-mapping",
+        help="validate the frozen M9C evidence and application-model contract",
+    )
+    validate_palladio_mapping.add_argument("--config", required=True, type=Path)
+
+    audit_palladio_mapping_evidence = commands.add_parser(
+        "audit-palladio-application-evidence",
+        help="audit accepted M8B evidence and commit-pinned application sources",
+    )
+    audit_palladio_mapping_evidence.add_argument(
+        "--config", required=True, type=Path
+    )
+    audit_palladio_mapping_evidence.add_argument(
+        "--m8b-input-root", required=True, type=Path
+    )
+    audit_palladio_mapping_evidence.add_argument(
+        "--artifact-metadata", required=True, type=Path
+    )
+    audit_palladio_mapping_evidence.add_argument(
+        "--upstream-root", required=True, type=Path
+    )
+    audit_palladio_mapping_evidence.add_argument(
+        "--repository-root", required=True, type=Path
+    )
+    audit_palladio_mapping_evidence.add_argument("--out", required=True, type=Path)
+
+    generate_palladio_applications = commands.add_parser(
+        "generate-palladio-application-models",
+        help="generate the two frozen application PCM templates and placements",
+    )
+    generate_palladio_applications.add_argument(
+        "--config", required=True, type=Path
+    )
+    generate_palladio_applications.add_argument("--out", required=True, type=Path)
+    generate_palladio_applications.add_argument(
+        "--manifest", required=True, type=Path
+    )
+
+    audit_palladio_applications = commands.add_parser(
+        "audit-palladio-application-models",
+        help="independently parse and audit the generated M9C PCM models",
+    )
+    audit_palladio_applications.add_argument("--config", required=True, type=Path)
+    audit_palladio_applications.add_argument("--models", required=True, type=Path)
+    audit_palladio_applications.add_argument(
+        "--repository-root", required=True, type=Path
+    )
+    audit_palladio_applications.add_argument("--out", required=True, type=Path)
+
+    audit_palladio_application_output = commands.add_parser(
+        "audit-palladio-application-results",
+        help="audit repeated M9C solver results against the frozen structural oracles",
+    )
+    audit_palladio_application_output.add_argument(
+        "--config", required=True, type=Path
+    )
+    audit_palladio_application_output.add_argument(
+        "--evidence-manifest", required=True, type=Path
+    )
+    audit_palladio_application_output.add_argument(
+        "--model-manifest", required=True, type=Path
+    )
+    audit_palladio_application_output.add_argument(
+        "--result", required=True, type=Path
+    )
+    audit_palladio_application_output.add_argument(
+        "--models", required=True, type=Path
+    )
+    audit_palladio_application_output.add_argument(
+        "--out", required=True, type=Path
+    )
     return parser
 
 
@@ -1346,6 +1426,66 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.config,
             args.model_manifest,
             args.capability_manifest,
+            args.result,
+            args.models,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "validate-palladio-application-mapping":
+        config = load_palladio_mapping_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "diagnostic_only": True,
+                    "accuracy_comparison_status": "not_started",
+                    "applications": [item.id for item in config.applications],
+                    "operations": [item.operation for item in config.applications],
+                    "model_count": len(config.models),
+                    "repeat_runs": config.repeat_runs,
+                    "job_timeout_minutes": config.job_timeout_minutes,
+                    "remote_only": True,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "audit-palladio-application-evidence":
+        manifest = audit_palladio_application_evidence(
+            args.config,
+            args.m8b_input_root,
+            args.artifact_metadata,
+            args.upstream_root,
+            args.repository_root,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "generate-palladio-application-models":
+        manifest = generate_palladio_application_models(
+            args.config, args.out, args.manifest
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-application-models":
+        manifest = audit_palladio_application_models(
+            args.config, args.models, args.repository_root, args.out
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-application-results":
+        manifest = audit_palladio_application_results(
+            args.config,
+            args.evidence_manifest,
+            args.model_manifest,
             args.result,
             args.models,
             args.out,
