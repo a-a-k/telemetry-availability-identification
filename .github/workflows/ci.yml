@@ -80,6 +80,9 @@ jobs:
       - name: Validate post-stopping macro-resource contract
         run: python -m telemetry_availability validate-macro-live-budget --config configs/m7c_macro_precision_recovery.yaml
 
+      - name: Validate Palladio bootstrap contract
+        run: python -m telemetry_availability validate-palladio-bootstrap --config configs/m9a_palladio_bootstrap.json
+
       - name: Ingest both live-contract fixtures
         if: ${{ matrix.python-version == '3.13' }}
         run: |

@@ -1,0 +1,227 @@
+name: M9A Palladio Reliability Bootstrap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: m9a-palladio-bootstrap-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source_build:
+    name: Build the untouched pinned analyzer source
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out study repository
+        uses: actions/checkout@v7
+
+      - name: Check out pinned Palladio reliability source
+        uses: actions/checkout@v7
+        with:
+          repository: PalladioSimulator/Palladio-Analyzer-Reliability
+          ref: a694e570afb705dc9e0470dc321e77b7219dcea4
+          path: palladio-source
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Set up pinned Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install and validate bootstrap contract
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability validate-palladio-bootstrap --config configs/m9a_palladio_bootstrap.json
+          test "$(git -C palladio-source rev-parse HEAD)" = "a694e570afb705dc9e0470dc321e77b7219dcea4"
+
+      - name: Build unmodified Palladio source
+        run: |
+          mkdir -p workflow-results/m9a-source-build
+          java -version > workflow-results/m9a-source-build/java-version.txt 2>&1
+          mvn -version > workflow-results/m9a-source-build/maven-version.txt 2>&1
+          set -o pipefail
+          /usr/bin/time -v -o workflow-results/m9a-source-build/resource-usage.txt \
+            xvfb-run -a mvn -B -ntp -f palladio-source/pom.xml clean verify \
+            2>&1 | tee workflow-results/m9a-source-build/build.log
+          test "${PIPESTATUS[0]}" -eq 0
+          git -C palladio-source diff --exit-code
+
+      - name: Audit pinned build outputs
+        run: >-
+          python -m telemetry_availability audit-palladio-source
+          --config configs/m9a_palladio_bootstrap.json
+          --checkout palladio-source
+          --build-log workflow-results/m9a-source-build/build.log
+          --out workflow-results/m9a-source-build/manifest.json
+
+      - name: Retain source-build evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9a-palladio-source-build-${{ github.run_id }}
+          path: workflow-results/m9a-source-build
+          if-no-files-found: error
+          retention-days: 90
+
+  product_audit:
+    name: Hash and inventory the official binary product
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out study repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install and validate bootstrap contract
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability validate-palladio-bootstrap --config configs/m9a_palladio_bootstrap.json
+
+      - name: Download versioned Palladio Bench product
+        run: |
+          mkdir -p workflow-results/m9a-product
+          url="$(jq -r '.product.url' configs/m9a_palladio_bootstrap.json)"
+          curl --fail --location --retry 5 --retry-all-errors \
+            --dump-header workflow-results/m9a-product/response-headers.txt \
+            --output workflow-results/m9a-product/Palladio.linux.gtk.x86_64.zip \
+            "$url"
+
+      - name: Audit product archive and reliability bundles
+        run: >-
+          python -m telemetry_availability audit-palladio-product
+          --config configs/m9a_palladio_bootstrap.json
+          --archive workflow-results/m9a-product/Palladio.linux.gtk.x86_64.zip
+          --out workflow-results/m9a-product/manifest.json
+
+      - name: Remove unneeded binary after hashing
+        if: ${{ always() }}
+        run: rm -f workflow-results/m9a-product/Palladio.linux.gtk.x86_64.zip
+
+      - name: Retain product audit evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9a-palladio-product-audit-${{ github.run_id }}
+          path: workflow-results/m9a-product
+          if-no-files-found: error
+          retention-days: 90
+
+  official_example:
+    name: Execute the pinned official reliability example twice
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out study repository
+        uses: actions/checkout@v7
+
+      - name: Check out pinned Palladio reliability source
+        uses: actions/checkout@v7
+        with:
+          repository: PalladioSimulator/Palladio-Analyzer-Reliability
+          ref: a694e570afb705dc9e0470dc321e77b7219dcea4
+          path: palladio-source
+
+      - name: Check out pinned official example models
+        uses: actions/checkout@v7
+        with:
+          repository: PalladioSimulator/Palladio-Example-Models
+          ref: 4a8dc455216774435fefd42965b848851f7658ee
+          path: palladio-examples
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Set up pinned Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install and validate bootstrap contract
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability validate-palladio-bootstrap --config configs/m9a_palladio_bootstrap.json
+          test "$(git -C palladio-source rev-parse HEAD)" = "a694e570afb705dc9e0470dc321e77b7219dcea4"
+          test "$(git -C palladio-examples rev-parse HEAD)" = "4a8dc455216774435fefd42965b848851f7658ee"
+
+      - name: Overlay the recorded headless test harness only
+        run: |
+          test_bundle="palladio-source/tests/org.palladiosimulator.reliability.tests"
+          cp palladio/harness/META-INF/MANIFEST.MF "$test_bundle/META-INF/MANIFEST.MF"
+          cp palladio/harness/src/org/palladiosimulator/reliability/tests/OfficialExampleTest.java \
+            "$test_bundle/src/org/palladiosimulator/reliability/tests/OfficialExampleTest.java"
+          mkdir -p workflow-results/m9a-official-example
+          git -C palladio-source status --short > workflow-results/m9a-official-example/harness-overlay.txt
+          test "$(git -C palladio-source diff --name-only)" = \
+            "tests/org.palladiosimulator.reliability.tests/META-INF/MANIFEST.MF"
+          test "$(git -C palladio-source ls-files --others --exclude-standard)" = \
+            "tests/org.palladiosimulator.reliability.tests/src/org/palladiosimulator/reliability/tests/OfficialExampleTest.java"
+
+      - name: Run the official model through Palladio twice
+        env:
+          TAID_OFFICIAL_EXAMPLE_DIR: ${{ github.workspace }}/palladio-examples/ReliabilityTest
+          TAID_PALLADIO_RESULT: ${{ github.workspace }}/workflow-results/m9a-official-example/raw-result.json
+        run: |
+          export TAID_REPEAT_RUNS="$(jq -r '.official_example.repeat_runs' configs/m9a_palladio_bootstrap.json)"
+          export TAID_PROBABILITY_TOLERANCE="$(jq -r '.official_example.probability_tolerance' configs/m9a_palladio_bootstrap.json)"
+          export TAID_EXPECTED_SUCCESS_PROBABILITY="$(jq -r '.official_example.expected_success_probability // ""' configs/m9a_palladio_bootstrap.json)"
+          java -version > workflow-results/m9a-official-example/java-version.txt 2>&1
+          mvn -version > workflow-results/m9a-official-example/maven-version.txt 2>&1
+          set -o pipefail
+          /usr/bin/time -v -o workflow-results/m9a-official-example/resource-usage.txt \
+            xvfb-run -a mvn -B -ntp -f palladio-source/pom.xml clean verify \
+            2>&1 | tee workflow-results/m9a-official-example/build-and-test.log
+          test "${PIPESTATUS[0]}" -eq 0
+
+      - name: Audit repeated official-example result
+        run: >-
+          python -m telemetry_availability audit-palladio-example
+          --config configs/m9a_palladio_bootstrap.json
+          --result workflow-results/m9a-official-example/raw-result.json
+          --analyzer-checkout palladio-source
+          --example-checkout palladio-examples
+          --out workflow-results/m9a-official-example/manifest.json
+
+      - name: Collect test reports
+        if: ${{ always() }}
+        run: |
+          report_root="palladio-source/tests/org.palladiosimulator.reliability.tests/target/surefire-reports"
+          if [[ -d "$report_root" ]]; then
+            cp -R "$report_root" workflow-results/m9a-official-example/surefire-reports
+          fi
+
+      - name: Retain official-example evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9a-palladio-official-example-${{ github.run_id }}
+          path: workflow-results/m9a-official-example
+          if-no-files-found: error
+          retention-days: 90

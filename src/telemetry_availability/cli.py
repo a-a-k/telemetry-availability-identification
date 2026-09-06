@@ -52,6 +52,12 @@ from .live_validation_analysis import analyze_live_validation
 from .live_validation_config import load_frozen_live_validation_config
 from .m7_diagnostic_analysis import run_m7_diagnostic_audit
 from .moments import structural_moment_rows
+from .palladio_bootstrap import (
+    audit_palladio_example,
+    audit_palladio_product,
+    audit_palladio_source,
+    load_palladio_bootstrap_config,
+)
 from .reduction_experiment import (
     aggregate_reduction_experiment,
     run_reduction_experiment,
@@ -487,6 +493,55 @@ def build_parser() -> argparse.ArgumentParser:
     recover_budget.add_argument("--config", required=True, type=Path)
     recover_budget.add_argument("--input-root", required=True, type=Path)
     recover_budget.add_argument("--out", required=True, type=Path)
+
+    validate_palladio = commands.add_parser(
+        "validate-palladio-bootstrap",
+        help="validate the remote-only pinned Palladio bootstrap contract",
+    )
+    validate_palladio.add_argument("--config", required=True, type=Path)
+
+    audit_palladio_source_parser = commands.add_parser(
+        "audit-palladio-source",
+        help="audit the commit-pinned Palladio reliability source build",
+    )
+    audit_palladio_source_parser.add_argument("--config", required=True, type=Path)
+    audit_palladio_source_parser.add_argument(
+        "--checkout", required=True, type=Path
+    )
+    audit_palladio_source_parser.add_argument(
+        "--build-log", required=True, type=Path
+    )
+    audit_palladio_source_parser.add_argument("--out", required=True, type=Path)
+
+    audit_palladio_product_parser = commands.add_parser(
+        "audit-palladio-product",
+        help="hash and inventory the pinned Palladio Bench binary product",
+    )
+    audit_palladio_product_parser.add_argument(
+        "--config", required=True, type=Path
+    )
+    audit_palladio_product_parser.add_argument(
+        "--archive", required=True, type=Path
+    )
+    audit_palladio_product_parser.add_argument("--out", required=True, type=Path)
+
+    audit_palladio_example_parser = commands.add_parser(
+        "audit-palladio-example",
+        help="audit repeated execution of the official Palladio reliability example",
+    )
+    audit_palladio_example_parser.add_argument(
+        "--config", required=True, type=Path
+    )
+    audit_palladio_example_parser.add_argument(
+        "--result", required=True, type=Path
+    )
+    audit_palladio_example_parser.add_argument(
+        "--analyzer-checkout", required=True, type=Path
+    )
+    audit_palladio_example_parser.add_argument(
+        "--example-checkout", required=True, type=Path
+    )
+    audit_palladio_example_parser.add_argument("--out", required=True, type=Path)
     return parser
 
 
@@ -1110,6 +1165,49 @@ def main(argv: Sequence[str] | None = None) -> int:
                 sort_keys=True,
             )
         )
+        return 0
+
+    if args.command == "validate-palladio-bootstrap":
+        config = load_palladio_bootstrap_config(args.config)
+        print(
+            json.dumps(
+                {
+                    "status": "valid",
+                    "experiment_id": config.id,
+                    "diagnostic_only": config.diagnostic_only,
+                    "analyzer_commit": config.analyzer.commit,
+                    "example_commit": config.official_example.commit,
+                    "product_sha256": config.product.sha256,
+                    "acceptance_ready": config.acceptance_ready,
+                    "job_timeout_minutes": config.runtime.job_timeout_minutes,
+                },
+                indent=2,
+                sort_keys=True,
+            )
+        )
+        return 0
+
+    if args.command == "audit-palladio-source":
+        manifest = audit_palladio_source(
+            args.config, args.checkout, args.build_log, args.out
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-product":
+        manifest = audit_palladio_product(args.config, args.archive, args.out)
+        print(json.dumps(manifest, indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "audit-palladio-example":
+        manifest = audit_palladio_example(
+            args.config,
+            args.result,
+            args.analyzer_checkout,
+            args.example_checkout,
+            args.out,
+        )
+        print(json.dumps(manifest, indent=2, sort_keys=True))
         return 0
 
     raise AssertionError(f"unhandled command {args.command}")
