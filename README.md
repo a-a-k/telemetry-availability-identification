@@ -224,13 +224,16 @@ identifiers in its manifest.
   evidence and exact application sources, emitted the mandatory 16-row
   correspondence table, and instantiated each selected operation for colocated
   and split logical domains. All eight solver records matched the predeclared
-  structural witness; this is not an accuracy result. M9D now starts the
-  exploratory aligned-input comparison on preserved M7 material. Its frozen
-  role is deliberately narrow: `PCM-PAR/B3-parameters` reuses the learner-only
-  likelihood realization, while B0 and strengthened B2 remain direct fixed
-  comparators. The primary M7 mask yields 240 predeclared operation-level
-  opportunities and 184 admitted PCM models; held-out accuracy is joined only
-  after the raw solver artifact exists.
+  structural witness; this is not an accuracy result. M9D then completed the
+  exploratory aligned-input comparison on preserved M7 material. It replayed
+  160 learner-only fits, generated 184 admitted PCM models, and solved each
+  twice. Palladio matched the direct B3/proposed probability within `3.34e-16`,
+  validating the technical bridge only. Current admissible coverage was
+  119/160 and transfer coverage 65/80; no common-support Brier comparison with
+  B2 established predictive gain, while the positive prediction--observation
+  discrepancy remained. Held-out outcomes entered only after the raw solver
+  artifact existed. M7's published no-established-gain result and unresolved
+  overall interpretation therefore remain unchanged.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

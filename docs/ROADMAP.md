@@ -82,10 +82,11 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A through M9C are complete. M9C byte-audited accepted M8B and pinned
+Status: M8A through M9D are complete. M9C byte-audited accepted M8B and pinned
 application sources, emitted all 16 required correspondence rows, and matched
 the external structural oracle for both operation templates under both logical
-placements. The aligned-input debugging comparison is now in progress as M9D.
+placements. M9D then completed the aligned-input debugging comparison on
+preserved M7 evidence.
 
 Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 
@@ -112,10 +113,15 @@ encodes those constraints explicitly: source-grounded mandatory target calls,
 two explicit paths, logical common domains, a marginal two-transfer link
 mapping, and a semantic residual. Its synthetic witness is a structural test,
 not an M7 estimate or comparative-validity claim. All eight remote solver
-records matched the frozen oracle. M9D now introduces preserved M7 calibration
-inputs without changing the historical estimators: the PCM solver receives a
-learner-only replay of the matched B3 parameter realization, B0/B2 remain
-direct comparators, and evaluator outcomes are joined only downstream. Its
-frozen first comparison covers the two preselected M7B routing probes under the
-primary `sampled_mixed` mask; it is not an independent architecture-extraction
-comparison.
+records matched the frozen oracle. M9D introduced preserved M7 calibration
+inputs without changing the historical estimators: the PCM solver received a
+learner-only replay of the matched B3 parameter realization, B0/B2 remained
+direct comparators, and evaluator outcomes were joined only downstream. The
+first-attempt run generated 184 admitted PCM instances and 368 measured solver
+records. Palladio matched the independent oracle and direct B3/proposed result
+within `3.34e-16`, but no common-support Brier comparison with B2 established a
+gain. Current coverage was 119/160 and transfer coverage 65/80, with every
+missing prediction retained as topology ambiguity. This validates the aligned
+technical bridge, not an independent architecture-extraction route or
+predictive accuracy. The next phase must freeze the information boundary and
+independent-confirmation design before any new live collection.
