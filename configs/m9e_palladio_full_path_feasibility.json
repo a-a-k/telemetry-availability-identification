@@ -1,0 +1,535 @@
+{
+  "schema_version": 1,
+  "id": "m9e-palladio-full-path-feasibility-v1",
+  "status": "frozen_before_first_remote_extractor_execution",
+  "diagnostic_only": true,
+  "accuracy_scoring": "forbidden",
+  "question": "Can a compatible public PCM extraction route produce a Palladio reliability-ready model for both fixed M7 operations without inheriting our fitted B3 vector or generated M9C/M9D XMI?",
+  "claim_boundary": {
+    "failed_gate_is_not_palladio_accuracy_evidence": true,
+    "tested_retriever_is_not_all_pcm_automation": true,
+    "structural_extraction_is_not_reliability_parameter_extraction": true,
+    "incomplete_output_must_not_be_scored": true,
+    "new_live_collection_authorized": false,
+    "m7_interpretation_changed": false
+  },
+  "runtime": {
+    "python": "CPython 3.13.15",
+    "dependencies": {
+      "numpy": "2.4.4",
+      "scipy": "1.17.1",
+      "PyYAML": "6.0.2"
+    },
+    "job_timeout_minutes": 360,
+    "retriever_internal_timeout_seconds": 5400,
+    "extractor_repetitions_per_application": 1,
+    "remote_only_full_execution": true,
+    "runtime_is_feasibility_accounting_not_benchmarking": true
+  },
+  "evidence": {
+    "m9c_mapping": {
+      "path": "configs/m9c_palladio_application_mapping.json",
+      "sha256": "0d8c15ef30cfff5cb2e4e5cb83cfcc6d02fc566cceb1b6d5778d68bb0c877d27"
+    },
+    "m9d_acceptance": {
+      "repository": "a-a-k/telemetry-availability-identification",
+      "run_id": 34032057172,
+      "head_commit": "c9efc2aa0b0d805f66d6c60af17bd7cd39f0b243",
+      "artifact_id": 9989055135,
+      "artifact_name": "m9d-palladio-acceptance-34032057172",
+      "artifact_size_bytes": 192824,
+      "artifact_sha256": "b535d249ac542ed69fd5e6286ffe7a84620879ed447114c7eb587f99723e6dec",
+      "manifest_sha256": "f75e3df48ab96a707bd2229ba85a210e36e1ae2bd107b6ceb6e267e886af1ce6",
+      "expires_at": "2026-12-05T12:05:00Z"
+    },
+    "manual_actions_log": {
+      "path": "docs/M9E_MANUAL_ACTIONS.csv",
+      "initial_size_in_bytes": 1040,
+      "initial_sha256": "34e0f1f058d10dcd0663dd2f446637429fe222200e3420c9bc0a40b5c2faef96",
+      "append_only_after_preregistration": true,
+      "planned_rows_are_not_completed_work": true
+    },
+    "repository_locks": [
+      {
+        "path": "docs/M9E_PALLADIO_FULL_PATH_FEASIBILITY_PROTOCOL.md",
+        "bytes": 8213,
+        "sha256": "872417edb51669e8b1fec1e69d5a6751303a1b7f14c0470ee3649647dc69cbf9"
+      },
+      {
+        "path": "src/telemetry_availability/palladio_fullpath.py",
+        "bytes": 44571,
+        "sha256": "07f27b505f123bc83e4ec40effdc4b376217a011d6ec9dab04515d7a45849b8c"
+      },
+      {
+        "path": "src/telemetry_availability/cli.py",
+        "bytes": 66995,
+        "sha256": "73f6fe78fc4bbc74a249fa121f883766f0798861f4f93fb1ab6e346d80a50a79"
+      },
+      {
+        "path": ".github/workflows/m9e-palladio-full-path-feasibility.yml",
+        "bytes": 12083,
+        "sha256": "9e00897864047a750c673f4ffd7e1e1b5814037539175b977d24e2cd46f3652d"
+      },
+      {
+        "path": "docs/milestones/M9D_PALLADIO_ALIGNED_COMPARISON.md",
+        "bytes": 17626,
+        "sha256": "19fc42f2ac3ca4c9e97d061841605147e4c7912b629416d98e12a573684d714c"
+      }
+    ]
+  },
+  "automation_candidates": [
+    {
+      "id": "PMX",
+      "source_url": "https://se.informatik.uni-wuerzburg.de/en/tools/pmx/",
+      "scope": "measurement-derived architectural performance models",
+      "input_contract": "Kieker monitoring logs",
+      "reliability_parameter_output": "not documented for the PAR MTTF/MTTR, failure-type, shared-domain, communication, and semantic-residual fields",
+      "disposition": "not_executed_incompatible_input_and_scope",
+      "reason": "The official page marks PMX unmaintained; M7 supplies native/OpenTelemetry evidence rather than Kieker records, and converting inputs would create a new adapter rather than test the published route."
+    },
+    {
+      "id": "CIPM",
+      "source_url": "https://doi.org/10.1007/s10515-025-00521-9",
+      "scope": "continuous extraction and calibration of architectural performance models and parametric performance dependencies",
+      "input_contract": "technology-specific Java and tailored Lua model/change transformations plus performance instrumentation",
+      "reliability_parameter_output": "not specified for the reliability fields required by the pinned PAR analyzer",
+      "disposition": "not_executed_no_compatible_reliability_pipeline",
+      "reason": "Running a performance-parameter pipeline on C++/Go/TypeScript services would not establish reliability-model extraction and would require new technology rules."
+    },
+    {
+      "id": "Retriever",
+      "source_url": "https://github.com/PalladioSimulator/Palladio-ReverseEngineering-Retriever",
+      "scope": "static PCM component, interface, connector, deployment, and optional SEFF extraction from heterogeneous software artifacts",
+      "input_contract": "complete pinned source repositories and explicit technology rules",
+      "reliability_parameter_output": "to be classified from the retained raw output against the frozen gates",
+      "disposition": "execute_remote_compatible_structural_probe",
+      "reason": "It is executable, PCM-5.2 compatible at the selected release, and exposes Docker and ECMAScript rules relevant to a documented subset of the two applications."
+    }
+  ],
+  "retriever": {
+    "repository": "https://github.com/PalladioSimulator/Palladio-ReverseEngineering-Retriever.git",
+    "tag": "v5.2.0.202408280745",
+    "commit": "6b42ab8438ded3beb3e84b72abd3ea6faef3ce35",
+    "release_id": 172294110,
+    "asset_id": 188798221,
+    "asset_name": "org.palladiosimulator.retriever.product-linux.gtk.x86_64.zip",
+    "asset_size_bytes": 100404945,
+    "asset_sha256": "61e12934a0b1dad3b7814e367dfed81f5ef09769e0e85a976a6c548b0ede464a",
+    "pcm_compatibility_reason": "The selected 5.2 release matches the PCM 5.2 metamodel line used by the pinned M9A-M9D analyzer; current Retriever main has moved its product version to 6.0.0.",
+    "source_locks": [
+      {
+        "path": "README.md",
+        "bytes": 12166,
+        "sha256": "41ed311e3b88356cdae8ebbd5cf0aebb2af84b4e9732452e0d17b254097caf0f",
+        "markers": [
+          "technology-specific rules",
+          "automatically extract static components of a system",
+          "Software performance, reliability, and maintenance analyses are already available as part of a complementary tool chain."
+        ]
+      },
+      {
+        "path": "action.yml",
+        "bytes": 22134,
+        "sha256": "b1333573c16aa7508e0766b5df7f29b8f7f1d44c1e98300d1e6d28ae89168a45",
+        "markers": [
+          "Reverse-engineers a project''s source into a Palladio Component Model.",
+          "org.palladiosimulator.retriever.extraction.rules.maven,org.palladiosimulator.retriever.extraction.rules.spring"
+        ]
+      },
+      {
+        "path": "bundles/org.palladiosimulator.retriever.extraction.rules/plugin.xml",
+        "bytes": 2937,
+        "sha256": "63efa01504521dea2e96b5884890df879b7860d07c4b0c055e37400692813c2c",
+        "markers": [
+          "org.palladiosimulator.retriever.extraction.rules.docker",
+          "org.palladiosimulator.retriever.extraction.rules.ecmascript"
+        ]
+      },
+      {
+        "path": "bundles/org.palladiosimulator.retriever.mocore/src/org/palladiosimulator/retriever/mocore/surrogate/element/LinkResourceSpecification.java",
+        "bytes": 1028,
+        "sha256": "dd7c510fbf0158f0f3a7296d1287f7376fd47b0ba16fb7a0b55596e49064a293",
+        "markers": [
+          "final double failureProbability = 0D;",
+          "value.setFailureProbability(failureProbability);"
+        ]
+      },
+      {
+        "path": "bundles/org.palladiosimulator.retriever.core/src/org/palladiosimulator/retriever/core/workflow/PersistenceJob.java",
+        "bytes": 3891,
+        "sha256": "e06a3cad25cae01cb1232a500748c73c1bc58efd2aaa2c103ecfc4a01718b6d8",
+        "markers": [
+          "ModelSaver.saveRepository",
+          "ModelSaver.saveSystem",
+          "ModelSaver.saveResourceEnvironment",
+          "ModelSaver.saveAllocation"
+        ],
+        "forbidden_markers": [
+          "ModelSaver.saveUsageModel"
+        ]
+      }
+    ]
+  },
+  "applications": [
+    {
+      "id": "deathstarbench_social_network",
+      "repository": "https://github.com/delimitrou/DeathStarBench.git",
+      "commit": "6ecb09706140f8730b5385c08f1386c654c3c526",
+      "operation": "read_user_timeline",
+      "retriever_rules": [
+        "org.palladiosimulator.retriever.extraction.rules.docker"
+      ],
+      "operation_markers": [
+        "UserTimeline",
+        "user-timeline"
+      ],
+      "entry_markers": [
+        "nginx-web-server",
+        "nginx"
+      ],
+      "target_markers": [
+        "user-timeline-service",
+        "UserTimelineService"
+      ],
+      "replica_markers": [
+        "replica-a",
+        "replica-b"
+      ],
+      "domain_markers": [
+        "domain_a",
+        "domain_b"
+      ],
+      "source_evidence": [
+        {
+          "path": "socialNetwork/wrk2/scripts/social-network/read-user-timeline.lua",
+          "bytes": 704,
+          "sha256": "b27bd2b1228365157fff90a1eee31c38268eda800f044544d22bf40019b52fed",
+          "markers": [
+            "/wrk2-api/user-timeline/read?",
+            "local method = \"GET\""
+          ],
+          "language": "Lua",
+          "retriever_rule_support": false,
+          "support_note": "No Lua discoverer/rule is registered in the selected Retriever release."
+        },
+        {
+          "path": "socialNetwork/nginx-web-server/lua-scripts/wrk2-api/user-timeline/read.lua",
+          "bytes": 3818,
+          "sha256": "3b138dff7314ac0ba6ebf904bceea59c0bb9a5e53176eb4f2ad318864717b693",
+          "markers": [
+            "UserTimelineServiceClient, \"user-timeline-service\" .. k8s_suffix, 9090",
+            "pcall(client.ReadUserTimeline",
+            "ngx.exit(ngx.HTTP_OK)"
+          ],
+          "language": "Lua",
+          "retriever_rule_support": false,
+          "support_note": "The mandatory entry-to-target call is in Lua, for which this release has no rule."
+        },
+        {
+          "path": "socialNetwork/src/UserTimelineService/UserTimelineHandler.h",
+          "bytes": 13597,
+          "sha256": "e703f56659bfc62c75bfced86681931e6e2ace069a6e3080138e5ea883062478",
+          "markers": [
+            "void UserTimelineHandler::ReadUserTimeline",
+            "zrevrange",
+            "post_client->ReadPosts"
+          ],
+          "language": "C++",
+          "retriever_rule_support": false,
+          "support_note": "No C++ discoverer/rule is registered in the selected Retriever release."
+        },
+        {
+          "path": "socialNetwork/docker-compose.yml",
+          "bytes": 7331,
+          "sha256": "b2b3dec888d099a60101b8a3d1eae9bf71ef18ef64b557942048db905ec4d529",
+          "markers": [
+            "user-timeline-service:",
+            "entrypoint: UserTimelineService",
+            "nginx-thrift:"
+          ],
+          "language": "Docker Compose YAML",
+          "retriever_rule_support": true,
+          "support_note": "The Docker rule can inspect declared containers and deployment relations, not C++/Lua call semantics."
+        }
+      ]
+    },
+    {
+      "id": "opentelemetry_demo",
+      "repository": "https://github.com/open-telemetry/opentelemetry-demo.git",
+      "commit": "8c47d47c9ac27710d2b2a153bcd53e483bffe66d",
+      "operation": "browse_product",
+      "retriever_rules": [
+        "org.palladiosimulator.retriever.extraction.rules.docker",
+        "org.palladiosimulator.retriever.extraction.rules.ecmascript"
+      ],
+      "operation_markers": [
+        "ProductCatalog",
+        "getProduct",
+        "product-catalog"
+      ],
+      "entry_markers": [
+        "frontend"
+      ],
+      "target_markers": [
+        "product-catalog",
+        "ProductCatalog"
+      ],
+      "replica_markers": [
+        "replica-a",
+        "replica-b"
+      ],
+      "domain_markers": [
+        "domain_a",
+        "domain_b"
+      ],
+      "source_evidence": [
+        {
+          "path": "src/load-generator/locustfile.py",
+          "bytes": 11763,
+          "sha256": "a9170f957e7a811ba87137da4bf6228d804e784e6c66b44e1622b8b269dc35b2",
+          "markers": [
+            "def browse_product(self):",
+            "self.client.get(\"/api/products/\" + product)"
+          ],
+          "language": "Python",
+          "retriever_rule_support": false,
+          "support_note": "No Python discoverer/rule is registered; this is the workload label, not the service SEFF."
+        },
+        {
+          "path": "src/frontend/pages/api/products/[productId]/index.ts",
+          "bytes": 881,
+          "sha256": "d8a106c1c9587461ae2486b23b96108baffac4dbaa2f2a1c589584d06af8185a",
+          "markers": [
+            "ProductCatalogService.getProduct",
+            "res.status(200).json(product)"
+          ],
+          "language": "TypeScript",
+          "retriever_rule_support": true,
+          "support_note": "The ECMAScript route is the closest registered rule; actual TypeScript parsing remains an empirical probe outcome."
+        },
+        {
+          "path": "src/frontend/gateways/rpc/ProductCatalog.gateway.ts",
+          "bytes": 855,
+          "sha256": "84227c8fdfd084af8b5ce454a0ea31f251d04c31d5b307ff46631a87914d6c48",
+          "markers": [
+            "PRODUCT_CATALOG_ADDR",
+            "client.getProduct({ id }"
+          ],
+          "language": "TypeScript",
+          "retriever_rule_support": true,
+          "support_note": "Potential ECMAScript structural evidence; gRPC semantics are not assumed supported."
+        },
+        {
+          "path": "src/frontend/services/ProductCatalog.service.ts",
+          "bytes": 1198,
+          "sha256": "e9e716da6575beb15b43828e79b46f30978f50b47da47b581b76777039653724",
+          "markers": [
+            "defaultCurrencyCode = 'USD'",
+            "ProductCatalogGateway.getProduct"
+          ],
+          "language": "TypeScript",
+          "retriever_rule_support": true,
+          "support_note": "Potential ECMAScript behavior evidence; branch and reliability semantics are separately gated."
+        },
+        {
+          "path": "src/product-catalog/main.go",
+          "bytes": 13032,
+          "sha256": "3e1e7bba0f11e69b550df38eafb2e1cd366dcde216b2c25762134d46d13290b7",
+          "markers": [
+            "func (p *productCatalog) GetProduct",
+            "getProductFromDB"
+          ],
+          "language": "Go",
+          "retriever_rule_support": false,
+          "support_note": "No Go discoverer/rule is registered in the selected Retriever release."
+        },
+        {
+          "path": "compose.yaml",
+          "bytes": 24592,
+          "sha256": "62d520870c255485b113f44f7e2127ab54410684c3881c43f60e511a2b12088e",
+          "markers": [
+            "product-catalog:",
+            "PRODUCT_CATALOG_ADDR",
+            "PRODUCT_CATALOG_PORT"
+          ],
+          "language": "Docker Compose YAML",
+          "retriever_rule_support": true,
+          "support_note": "The Docker rule can inspect deployment declarations, not Go service internals or injected M7 replica domains."
+        }
+      ]
+    }
+  ],
+  "information_boundary": [
+    {
+      "element": "request_success",
+      "our_pipeline_input": "frozen semantic external-client rule and calibration outcomes",
+      "retriever_automatic_input": "source/deployment artifacts only",
+      "full_path_pcm_requirement": "operation-specific success and timeout semantics plus a usage scenario",
+      "pre_result_classification": "manual_or_separate_workload_contract_required"
+    },
+    {
+      "element": "operation_path",
+      "our_pipeline_input": "sampled native traces plus declared operation specification",
+      "retriever_automatic_input": "Docker/ECMAScript static rules; no C++ Go Lua or Python rules in the pinned registry",
+      "full_path_pcm_requirement": "entry-to-target SEFF call and relevant conditional behavior",
+      "pre_result_classification": "partial_language_support_probe"
+    },
+    {
+      "element": "replication",
+      "our_pipeline_input": "M7 declared two-backend routing metadata and replica-resolved traces",
+      "retriever_automatic_input": "upstream source repository before the M7 runtime overlay",
+      "full_path_pcm_requirement": "two explicit replica paths because PAR native allocation replication is unsupported",
+      "pre_result_classification": "manual_or_experiment_overlay_required"
+    },
+    {
+      "element": "individual_failure",
+      "our_pipeline_input": "sampled independent replica health",
+      "retriever_automatic_input": "no calibration telemetry supplied to the static probe",
+      "full_path_pcm_requirement": "positive MTTF and MTTR or justified stationary ratio coordinates",
+      "pre_result_classification": "separate_reliability_parameterization_required"
+    },
+    {
+      "element": "communication_failure",
+      "our_pipeline_input": "sampled traces health and known mechanism class without controller event times",
+      "retriever_automatic_input": "placeholder link construction defaults failure probability to zero",
+      "full_path_pcm_requirement": "nonzero learned or documented link failure and two-transfer mapping",
+      "pre_result_classification": "separate_reliability_parameterization_required"
+    },
+    {
+      "element": "common_domain",
+      "our_pipeline_input": "declared logical domain membership and sampled joint health",
+      "retriever_automatic_input": "ordinary source/deployment relations",
+      "full_path_pcm_requirement": "one colocated gate or two split-domain factors with stated dependence",
+      "pre_result_classification": "manual_domain_semantics_or_direct_probe_required"
+    },
+    {
+      "element": "parameters",
+      "our_pipeline_input": "learner-only observable moments or likelihood",
+      "retriever_automatic_input": "static source and deployment artifacts",
+      "full_path_pcm_requirement": "all reliability values with provenance and censoring/identification status",
+      "pre_result_classification": "separate_reliability_parameterization_required"
+    },
+    {
+      "element": "placement",
+      "our_pipeline_input": "declared injected logical placement; physical CI host is shared",
+      "retriever_automatic_input": "upstream Docker Compose without the generated M7 two-replica overlay",
+      "full_path_pcm_requirement": "the exact colocated/split logical fault-domain transformation",
+      "pre_result_classification": "manual_or_experiment_overlay_required"
+    }
+  ],
+  "readiness_gates": [
+    {
+      "id": "extractor_exit_zero",
+      "required_for_ready": true,
+      "evidence_rule": "The retained process exit code equals zero.",
+      "manual_completion": "Diagnose the exact extractor/tool integration failure before model interpretation.",
+      "allowed_provenance": "tool log and pinned source only"
+    },
+    {
+      "id": "repository_model_present",
+      "required_for_ready": true,
+      "evidence_rule": "At least one .repository file exists.",
+      "manual_completion": "Create or repair the PCM repository and record every component/interface decision.",
+      "allowed_provenance": "pinned application source and extractor output"
+    },
+    {
+      "id": "system_model_present",
+      "required_for_ready": true,
+      "evidence_rule": "At least one .system file exists.",
+      "manual_completion": "Compose entry, router, and target instances and log each connector.",
+      "allowed_provenance": "pinned application source and declared deployment"
+    },
+    {
+      "id": "allocation_model_present",
+      "required_for_ready": true,
+      "evidence_rule": "At least one .allocation file exists.",
+      "manual_completion": "Add explicit allocation contexts without claiming unsupported native replication.",
+      "allowed_provenance": "declared deployment and M9B capability boundary"
+    },
+    {
+      "id": "resource_environment_present",
+      "required_for_ready": true,
+      "evidence_rule": "At least one .resourceenvironment file exists.",
+      "manual_completion": "Create the logical resource containers and links with explicit provenance.",
+      "allowed_provenance": "declared deployment and calibration evidence"
+    },
+    {
+      "id": "usage_model_present",
+      "required_for_ready": true,
+      "evidence_rule": "At least one .usagemodel file exists.",
+      "manual_completion": "Add exactly the frozen operation scenario and record this as manual workload mapping.",
+      "allowed_provenance": "frozen M7 operation and success contract"
+    },
+    {
+      "id": "selected_operation_present",
+      "required_for_ready": true,
+      "evidence_rule": "A predeclared operation marker occurs in a PCM model file.",
+      "manual_completion": "Map the fixed operation to a PCM signature without selecting a different favorable path.",
+      "allowed_provenance": "M9C source evidence"
+    },
+    {
+      "id": "entry_and_target_present",
+      "required_for_ready": true,
+      "evidence_rule": "Predeclared entry and target markers both occur in PCM files.",
+      "manual_completion": "Add or correct entry and target components from pinned source/deployment evidence.",
+      "allowed_provenance": "M9C source evidence and deployment"
+    },
+    {
+      "id": "operation_call_behavior_present",
+      "required_for_ready": true,
+      "evidence_rule": "A ResourceDemandingSEFF and ExternalCallAction are both present.",
+      "manual_completion": "Author the source-grounded mandatory call/branch SEFF and log collapsed dependencies.",
+      "allowed_provenance": "M9C source evidence"
+    },
+    {
+      "id": "two_explicit_replicas_present",
+      "required_for_ready": true,
+      "evidence_rule": "Both frozen replica markers occur in PCM files.",
+      "manual_completion": "Instantiate two explicit paths and record the manual M7 overlay mapping.",
+      "allowed_provenance": "frozen M7 routing/deployment contract"
+    },
+    {
+      "id": "logical_failure_domains_present",
+      "required_for_ready": true,
+      "evidence_rule": "Both logical domain markers occur in PCM files.",
+      "manual_completion": "Encode colocated and split logical domain membership without a physical-host claim.",
+      "allowed_provenance": "frozen M7 logical placement contract"
+    },
+    {
+      "id": "reliability_failure_types_present",
+      "required_for_ready": true,
+      "evidence_rule": "A PCM reliability failure type or internal failure occurrence exists.",
+      "manual_completion": "Create typed failure semantics for residual, resource, and communication mechanisms.",
+      "allowed_provenance": "PAR metamodel plus fixed operation semantics"
+    },
+    {
+      "id": "resource_mttf_mttr_present",
+      "required_for_ready": true,
+      "evidence_rule": "Finite positive MTTF and MTTR attributes both occur.",
+      "manual_completion": "Estimate durations with censoring-aware calibration or declare ratio-only coordinates; do not infer two times from one availability.",
+      "allowed_provenance": "learner-only health evidence or independently documented values"
+    },
+    {
+      "id": "nonzero_link_failure_present",
+      "required_for_ready": true,
+      "evidence_rule": "At least one finite link failureProbability is strictly positive and at most one.",
+      "manual_completion": "Estimate and map communication-call reliability; do not retain Retriever's zero placeholder as an estimate.",
+      "allowed_provenance": "learner-only trace/health evidence and M9B two-transfer semantics"
+    },
+    {
+      "id": "semantic_success_residual_present",
+      "required_for_ready": true,
+      "evidence_rule": "An internal failure occurrence and a nonzero failure probability occur in the model.",
+      "manual_completion": "Map the external semantic-success boundary and collapsed dependencies to an explicit residual.",
+      "allowed_provenance": "frozen semantic request contract and learner calibration outcomes"
+    }
+  ],
+  "decision": {
+    "automatic_full_path_ready_rule": "all 15 gates pass for both applications",
+    "otherwise_baseline_label": "partially_manual_PCM_required",
+    "do_not_solve_or_score_incomplete_output": true,
+    "retain_raw_output_on_nonzero_exit": true,
+    "full_path_contrast_variance_available_before_probe": false,
+    "confirmation_repetition_count_frozen": false
+  }
+}

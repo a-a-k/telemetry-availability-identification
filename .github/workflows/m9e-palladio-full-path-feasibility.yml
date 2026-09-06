@@ -1,0 +1,270 @@
+name: M9E Palladio full-path feasibility
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m9e-palladio-full-path-feasibility-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9e_palladio_full_path_feasibility.json
+  PYTHON_VERSION: 3.13.15
+  RETRIEVER_TAG: v5.2.0.202408280745
+  RETRIEVER_COMMIT: 6b42ab8438ded3beb3e84b72abd3ea6faef3ce35
+  RETRIEVER_ASSET: org.palladiosimulator.retriever.product-linux.gtk.x86_64.zip
+  RETRIEVER_ASSET_SHA256: 61e12934a0b1dad3b7814e367dfed81f5ef09769e0e85a976a6c548b0ede464a
+  DSB_COMMIT: 6ecb09706140f8730b5385c08f1386c654c3c526
+  OTEL_COMMIT: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+
+jobs:
+  automation_contract:
+    name: Audit tools, accepted evidence, and application sources
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python - <<'PY'
+          import sys
+          import numpy
+          import scipy
+          import yaml
+          assert sys.implementation.name == "cpython"
+          assert sys.version.split()[0] == "3.13.15"
+          assert numpy.__version__ == "2.4.4"
+          assert scipy.__version__ == "1.17.1"
+          assert yaml.__version__ == "6.0.2"
+          PY
+
+      - name: Validate frozen M9E contract
+        run: python -m telemetry_availability.palladio_fullpath validate --config "$CONFIG"
+
+      - name: Clone exact Retriever and application sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9e/upstream
+          git clone --filter=blob:none --no-checkout https://github.com/PalladioSimulator/Palladio-ReverseEngineering-Retriever.git workflow-input/m9e/retriever-source
+          git -C workflow-input/m9e/retriever-source checkout --detach "$RETRIEVER_COMMIT"
+          git clone --filter=blob:none --no-checkout https://github.com/delimitrou/DeathStarBench.git workflow-input/m9e/upstream/deathstarbench_social_network
+          git -C workflow-input/m9e/upstream/deathstarbench_social_network checkout --detach "$DSB_COMMIT"
+          git clone --filter=blob:none --no-checkout https://github.com/open-telemetry/opentelemetry-demo.git workflow-input/m9e/upstream/opentelemetry_demo
+          git -C workflow-input/m9e/upstream/opentelemetry_demo checkout --detach "$OTEL_COMMIT"
+
+      - name: Download and identify accepted M9D evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9e/m9d-acceptance workflow-input/m9e/metadata
+          gh api repos/${{ github.repository }}/actions/artifacts/9989055135 > workflow-input/m9e/metadata/m9d-artifact.json
+          gh run download 34032057172 --repo "${{ github.repository }}" --name m9d-palladio-acceptance-34032057172 --dir workflow-input/m9e/m9d-acceptance
+          gh api repos/PalladioSimulator/Palladio-ReverseEngineering-Retriever/releases/tags/$RETRIEVER_TAG > workflow-input/m9e/metadata/retriever-release.json
+
+      - name: Audit the full-path evidence contract
+        shell: bash
+        run: >-
+          /usr/bin/time -v -o workflow-input/m9e/contract-resource-usage.txt
+          python -m telemetry_availability.palladio_fullpath audit-contract
+          --config "$CONFIG"
+          --retriever-checkout workflow-input/m9e/retriever-source
+          --retriever-release-metadata workflow-input/m9e/metadata/retriever-release.json
+          --m9c-config configs/m9c_palladio_application_mapping.json
+          --m9d-acceptance-root workflow-input/m9e/m9d-acceptance
+          --m9d-artifact-metadata workflow-input/m9e/metadata/m9d-artifact.json
+          --upstream-root workflow-input/m9e/upstream
+          --repository-root .
+          --out workflow-results/m9e-contract
+
+      - name: Retain contract evidence
+        run: cp workflow-input/m9e/contract-resource-usage.txt workflow-results/m9e-contract/
+
+      - name: Upload contract artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9e-fullpath-contract-${{ github.run_id }}
+          path: workflow-results/m9e-contract
+          if-no-files-found: error
+          retention-days: 90
+
+  retriever_probe:
+    name: Run pinned Retriever on both complete source trees
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and runtime helpers
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          sudo apt-get update
+          sudo apt-get install -y xvfb unzip
+
+      - name: Download and byte-verify Retriever product
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9e/retriever-product/deathstarbench_social_network
+          mkdir -p workflow-input/m9e/retriever-product/opentelemetry_demo
+          curl --fail --location --retry 5 --retry-all-errors \
+            "https://github.com/PalladioSimulator/Palladio-ReverseEngineering-Retriever/releases/download/$RETRIEVER_TAG/$RETRIEVER_ASSET" \
+            --output "workflow-input/m9e/$RETRIEVER_ASSET"
+          echo "$RETRIEVER_ASSET_SHA256  workflow-input/m9e/$RETRIEVER_ASSET" | sha256sum --check
+          unzip -q "workflow-input/m9e/$RETRIEVER_ASSET" -d workflow-input/m9e/retriever-product/deathstarbench_social_network
+          unzip -q "workflow-input/m9e/$RETRIEVER_ASSET" -d workflow-input/m9e/retriever-product/opentelemetry_demo
+          chmod +x workflow-input/m9e/retriever-product/deathstarbench_social_network/eclipse
+          chmod +x workflow-input/m9e/retriever-product/opentelemetry_demo/eclipse
+
+      - name: Clone exact complete application sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9e/upstream
+          git clone --filter=blob:none --no-checkout https://github.com/delimitrou/DeathStarBench.git workflow-input/m9e/upstream/deathstarbench_social_network
+          git -C workflow-input/m9e/upstream/deathstarbench_social_network checkout --detach "$DSB_COMMIT"
+          git clone --filter=blob:none --no-checkout https://github.com/open-telemetry/opentelemetry-demo.git workflow-input/m9e/upstream/opentelemetry_demo
+          git -C workflow-input/m9e/upstream/opentelemetry_demo checkout --detach "$OTEL_COMMIT"
+
+      - name: Execute DeathStarBench probe without converting failure to missing evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          app=deathstarbench_social_network
+          mkdir -p "workflow-results/m9e-probe/$app/models"
+          set +e
+          /usr/bin/time -v -o "workflow-results/m9e-probe/$app/resource-usage.txt" \
+            timeout --signal=TERM --kill-after=30s 5400s \
+            xvfb-run -a "workflow-input/m9e/retriever-product/$app/eclipse" -nosplash \
+            -i "$GITHUB_WORKSPACE/workflow-input/m9e/upstream/$app" \
+            -o "$GITHUB_WORKSPACE/workflow-results/m9e-probe/$app/models" \
+            -r org.palladiosimulator.retriever.extraction.rules.docker \
+            > "workflow-results/m9e-probe/$app/retriever.log" 2>&1
+          exit_code=$?
+          set -e
+          python -m telemetry_availability.palladio_fullpath record-probe \
+            --config "$CONFIG" --application "$app" \
+            --source-root "workflow-input/m9e/upstream/$app" \
+            --model-root "workflow-results/m9e-probe/$app/models" \
+            --log "workflow-results/m9e-probe/$app/retriever.log" \
+            --resource-usage "workflow-results/m9e-probe/$app/resource-usage.txt" \
+            --exit-code "$exit_code" --out "workflow-results/m9e-probe/$app"
+
+      - name: Execute OpenTelemetry Demo probe without converting failure to missing evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          app=opentelemetry_demo
+          mkdir -p "workflow-results/m9e-probe/$app/models"
+          set +e
+          /usr/bin/time -v -o "workflow-results/m9e-probe/$app/resource-usage.txt" \
+            timeout --signal=TERM --kill-after=30s 5400s \
+            xvfb-run -a "workflow-input/m9e/retriever-product/$app/eclipse" -nosplash \
+            -i "$GITHUB_WORKSPACE/workflow-input/m9e/upstream/$app" \
+            -o "$GITHUB_WORKSPACE/workflow-results/m9e-probe/$app/models" \
+            -r org.palladiosimulator.retriever.extraction.rules.docker,org.palladiosimulator.retriever.extraction.rules.ecmascript \
+            > "workflow-results/m9e-probe/$app/retriever.log" 2>&1
+          exit_code=$?
+          set -e
+          python -m telemetry_availability.palladio_fullpath record-probe \
+            --config "$CONFIG" --application "$app" \
+            --source-root "workflow-input/m9e/upstream/$app" \
+            --model-root "workflow-results/m9e-probe/$app/models" \
+            --log "workflow-results/m9e-probe/$app/retriever.log" \
+            --resource-usage "workflow-results/m9e-probe/$app/resource-usage.txt" \
+            --exit-code "$exit_code" --out "workflow-results/m9e-probe/$app"
+
+      - name: Upload raw probe artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9e-retriever-probe-${{ github.run_id }}
+          path: workflow-results/m9e-probe
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  acceptance_and_decision:
+    name: Apply frozen reliability-readiness gates
+    needs: [automation_contract, retriever_probe]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download upstream job artifacts
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9e-*-${{ github.run_id }}
+          path: workflow-input/m9e
+
+      - name: Apply frozen gates without accuracy data
+        shell: bash
+        run: >-
+          /usr/bin/time -v -o workflow-input/m9e/acceptance-resource-usage.txt
+          python -m telemetry_availability.palladio_fullpath audit-probe
+          --config "$CONFIG"
+          --contract-manifest workflow-input/m9e/m9e-fullpath-contract-${{ github.run_id }}/contract-manifest.json
+          --probe-root workflow-input/m9e/m9e-retriever-probe-${{ github.run_id }}
+          --out workflow-results/m9e-acceptance
+
+      - name: Retain decision resource use
+        run: cp workflow-input/m9e/acceptance-resource-usage.txt workflow-results/m9e-acceptance/
+
+      - name: Upload acceptance artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9e-fullpath-acceptance-${{ github.run_id }}
+          path: workflow-results/m9e-acceptance
+          if-no-files-found: error
+          retention-days: 90

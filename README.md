@@ -233,7 +233,13 @@ identifiers in its manifest.
   B2 established predictive gain, while the positive prediction--observation
   discrepancy remained. Held-out outcomes entered only after the raw solver
   artifact existed. M7's published no-established-gain result and unresolved
-  overall interpretation therefore remain unchanged.
+  overall interpretation therefore remain unchanged. M9E now freezes the next
+  full-path feasibility gate. It audits PMX/CIPM scope and runs a byte-pinned,
+  PCM-5.2-compatible Retriever release on both complete source trees. No model
+  is scored: 15 frozen gates first determine whether the output contains the
+  operation, deployment, usage, replication, failure-domain, and reliability
+  parameters required by PAR. Missing fields force the label `partially manual
+  PCM` and an explicit work log rather than an invented automatic baseline.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

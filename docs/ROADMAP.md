@@ -125,3 +125,11 @@ missing prediction retained as topology ambiguity. This validates the aligned
 technical bridge, not an independent architecture-extraction route or
 predictive accuracy. The next phase must freeze the information boundary and
 independent-confirmation design before any new live collection.
+
+M9E is the first gate in that phase. It retains PMX and CIPM in a documented
+candidate audit and remotely probes the compatible Retriever 5.2 product on
+both complete pinned application trees. Fifteen predeclared gates distinguish a
+structural PCM extraction from a reliability-ready full path. M9E performs no
+accuracy scoring, does not fill missing model elements, and authorizes no new
+live collection. If either application fails a gate, the next baseline is
+explicitly partially manual and its additions must be measured.
