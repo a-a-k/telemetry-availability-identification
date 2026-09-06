@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 from telemetry_availability.live_validation_analysis import HealthTick, QualifiedCell
 from telemetry_availability.m7_causal_diagnostics import (
+    _discrepancy_rows,
     _nearest_index,
     _transitions,
     raw_semantic_rows,
@@ -122,6 +123,12 @@ class M7CausalDiagnosticTests(unittest.TestCase):
                     Path("missing"),
                     Path("out"),
                 )
+
+    def test_empty_replay_cannot_reject_parser_hypothesis(self) -> None:
+        register = _discrepancy_rows([], [])
+        parser_row = next(row for row in register if row["id"] == "D04")
+        self.assertEqual(parser_row["status"], "unresolved_replay_missing")
+        self.assertIn("did not execute", parser_row["result"])
 
 
 if __name__ == "__main__":

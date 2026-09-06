@@ -819,7 +819,7 @@ def replay_raw_samples(
         "evaluator/test-requests.csv",
         "evaluator/test-health.csv",
     )
-    for manifest_path in sorted(raw_root.rglob("pilot-manifest.json")):
+    for manifest_path in sorted(raw_root.rglob(evidence_config.source_manifest_file)):
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         identity = (
             str(manifest["profile"]),
@@ -863,6 +863,20 @@ def _discrepancy_rows(
     replay: list[dict[str, Any]], temporal: list[dict[str, Any]]
 ) -> list[dict[str, Any]]:
     replay_mismatches = sum(not row["matches"] for row in replay)
+    replay_result = (
+        f"{replay_mismatches} of {len(replay)} replayed files differ."
+        if replay
+        else "Replay did not execute; no parser conclusion is available."
+    )
+    replay_status = (
+        "unresolved_replay_missing"
+        if not replay
+        else (
+            "not_supported_on_four_samples"
+            if replay_mismatches == 0
+            else "supported_on_retained_samples"
+        )
+    )
     unaligned = sum(int(row["unaligned_requests"]) for row in temporal)
     return [
         {
@@ -879,8 +893,8 @@ def _discrepancy_rows(
             "observation": "Communication-law campaigns often yielded mixed target-service support in successful traces.",
             "hypothesis": "Current parser drift produced the mixed support in retained raw samples.",
             "test": "Replay current normalization for four raw NCD/r0 samples and compare nine outputs byte-for-byte.",
-            "result": f"{replay_mismatches} of {len(replay)} replayed files differ.",
-            "status": "not_supported_on_four_samples" if replay_mismatches == 0 else "supported_on_retained_samples",
+            "result": replay_result,
+            "status": replay_status,
             "interpretation_limit": "Only four cells retain raw spans; exact replay cannot distinguish genuine conditional paths from source-time span loss.",
         },
         {
@@ -980,6 +994,21 @@ def run_m7_causal_diagnostics(
                 len(cells) != config.expected_cells
             ),
             "raw_sample_count_mismatches": int(len(raw_request_paths) != 4),
+            "parser_replay_sample_count_mismatches": int(
+                len(
+                    {
+                        (
+                            row["profile"],
+                            row["placement"],
+                            row["failure_law"],
+                            row["repetition"],
+                        )
+                        for row in replay
+                    }
+                )
+                != 4
+            ),
+            "parser_replay_file_count_mismatches": int(len(replay) != 36),
             "test_alignment_mismatches": sum(
                 int(row["unaligned_requests"]) for row in temporal
             ),
@@ -1015,7 +1044,13 @@ def run_m7_causal_diagnostics(
     fatal = {
         key: value
         for key, value in manifest["technical_quality"].items()
-        if key in {"qualified_cell_count_mismatches", "raw_sample_count_mismatches"}
+        if key
+        in {
+            "qualified_cell_count_mismatches",
+            "raw_sample_count_mismatches",
+            "parser_replay_sample_count_mismatches",
+            "parser_replay_file_count_mismatches",
+        }
         and value
     }
     if fatal:
