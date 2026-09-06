@@ -73,6 +73,21 @@ class PalladioApplicationMappingTests(unittest.TestCase):
             expected_application_success(config, "split"), 0.81140112, places=15
         )
 
+    def test_every_study_marker_is_in_its_byte_locked_file(self) -> None:
+        payload = json.loads(CONFIG.read_text(encoding="utf-8"))
+        for record in payload["study_evidence"]:
+            path = ROOT / record["path"]
+            content = path.read_bytes()
+            self.assertEqual(len(content), record["bytes"], record["path"])
+            self.assertEqual(
+                hashlib.sha256(content).hexdigest(),
+                record["sha256"],
+                record["path"],
+            )
+            text = content.decode("utf-8")
+            for marker in record["markers"]:
+                self.assertIn(marker, text, f"{record['path']}: {marker}")
+
     def test_generator_and_independent_structural_audit_agree(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             models, _, manifest = self._generate_and_audit(Path(temporary))
