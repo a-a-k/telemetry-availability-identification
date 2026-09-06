@@ -82,8 +82,8 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A and M8B complete under the separately labelled M8 protocol;
-commit-pinned Palladio bootstrap and semantic controls are next.
+Status: M8A, M8B, and the commit-pinned M9A Palladio bootstrap are complete;
+independent Palladio semantic controls are in progress as M9B.
 
 Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 
@@ -99,3 +99,10 @@ the four retained raw samples. It localized overprediction mainly to
 OpenTelemetry Demo, especially checkout, and confirmed mixed target support
 under communication faults without assigning a unique cause. These are
 exploratory restrictions on the next comparison, not a revised M7 result.
+
+M9A rebuilt Palladio reliability 5.2.2 under an audited historical target lock,
+byte-pinned its official product, and reproduced the official example at
+success probability 0.375 in two calls, exactly matching a hand-checkable XMI
+oracle. This proves the integration boundary, not comparative validity. M9B
+must now exercise the mechanisms that matter for the eventual aligned
+comparison before any M7-to-PCM mapping is admitted.

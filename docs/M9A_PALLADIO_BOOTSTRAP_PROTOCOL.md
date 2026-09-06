@@ -1,5 +1,8 @@
 # M9A: Palladio reliability bootstrap protocol
 
+Status: complete. Accepted results and retained evidence are recorded in
+`milestones/M9A_PALLADIO_RELIABILITY_BOOTSTRAP.md`.
+
 ## Purpose and boundary
 
 M9A establishes a reproducible, commit-pinned execution boundary for the

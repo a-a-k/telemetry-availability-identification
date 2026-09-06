@@ -210,6 +210,12 @@ identifiers in its manifest.
   remains concentrated under communication faults, but no unique causal
   mechanism is established. The next step is a pinned Palladio reliability
   analyzer with hand-checkable semantic controls, not a post-hoc change to M7.
+- M9A pinned the official Palladio Bench 5.2.2 archive, rebuilt the corresponding
+  analyzer commit under an audited release-date dependency lock, and ran the
+  official `ReliabilityTest` twice. Both solver calls returned `0.375`, conserved
+  probability mass exactly, and matched an independently parsed recovery-tree
+  oracle. This validates the integration boundary only; M9B next tests richer
+  semantics before any mapping of M7 into PCM.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
