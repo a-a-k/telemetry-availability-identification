@@ -1,0 +1,72 @@
+name: M8B M7 Causal Diagnostics
+
+on:
+  workflow_dispatch:
+    inputs:
+      preservation_run_id:
+        description: Successful M8A run containing the renewed M7 evidence archive
+        required: true
+        default: "34016153918"
+      source_run_id:
+        description: Frozen M7 source run represented by that archive
+        required: true
+        default: "33990678586"
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: m8b-m7-causal-diagnostics-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  diagnose:
+    name: Decompose M7 discrepancies and replay retained raw samples
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+
+      - name: Download renewed M7 evidence archive
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: ${{ inputs.preservation_run_id }}
+          pattern: m8-preserved-m7-evidence-${{ inputs.source_run_id }}-${{ inputs.preservation_run_id }}
+          path: workflow-results/m8b-source
+
+      - name: Run fixed post-M7 diagnostic decomposition
+        run: >-
+          python -m telemetry_availability diagnose-m7-discrepancies
+          --config configs/m7_frozen_live.yaml
+          --evidence-config configs/m7_evidence_boundary.yaml
+          --qualified-root workflow-results/m8b-source/m8-preserved/qualified
+          --analysis-root workflow-results/m8b-source/m8-preserved/analysis
+          --raw-root workflow-results/m8b-source/m8-preserved/raw-audit-samples
+          --out workflow-results/m8b-diagnostic
+
+      - name: Upload M8B diagnostic tables and replay outputs
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m8b-m7-causal-diagnostics-${{ github.run_id }}
+          path: workflow-results/m8b-diagnostic
+          if-no-files-found: error
+          retention-days: 90
+

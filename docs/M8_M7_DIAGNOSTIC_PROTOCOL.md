@@ -48,6 +48,11 @@ prediction, and test rates by application, operation, failure law, and
 placement. It will show full sequences and transition-relative strata, inspect
 timeouts and semantic failures, enumerate successful traces with and without
 the target service, and replay normalization on the four retained raw samples.
+Before execution, transition distance bands are fixed at at most one second,
+one to five seconds, five to fifteen seconds, and more than fifteen seconds;
+requests are also separated as before or after route degradation, route
+recovery, or another observed signal change. These bins are diagnostic and do
+not replace the frozen primary view.
 
 Each candidate explanation is recorded as observation, hypothesis, test,
 result, and any versioned correction. `cause not established` is an admissible
@@ -66,4 +71,3 @@ M8A can reject artifact, identifier, denominator, score-formula, and aggregation
 explanations. It cannot by itself explain overprediction or mixed topology
 support, validate Palladio, or establish whether the article's approach is
 successful. M8B remains exploratory because it follows inspection of M7.
-

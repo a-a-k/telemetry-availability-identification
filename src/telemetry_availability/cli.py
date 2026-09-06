@@ -11,6 +11,7 @@ from .likelihood_reference import (
     aggregate_likelihood_reference,
     run_likelihood_reference,
 )
+from .m7_causal_diagnostics import run_m7_causal_diagnostics
 from .live_budget_recovery import (
     load_macro_budget_recovery_config,
     recover_macro_budget,
@@ -461,6 +462,17 @@ def build_parser() -> argparse.ArgumentParser:
     audit_m7.add_argument("--raw-root", required=True, type=Path)
     audit_m7.add_argument("--source-run-id", required=True)
     audit_m7.add_argument("--out", required=True, type=Path)
+
+    diagnose_m7 = commands.add_parser(
+        "diagnose-m7-discrepancies",
+        help="decompose M7 bias, time, semantics, and topology on preserved evidence",
+    )
+    diagnose_m7.add_argument("--config", required=True, type=Path)
+    diagnose_m7.add_argument("--evidence-config", required=True, type=Path)
+    diagnose_m7.add_argument("--qualified-root", required=True, type=Path)
+    diagnose_m7.add_argument("--analysis-root", required=True, type=Path)
+    diagnose_m7.add_argument("--raw-root", required=True, type=Path)
+    diagnose_m7.add_argument("--out", required=True, type=Path)
 
     validate_recovery = commands.add_parser(
         "validate-macro-live-budget",
@@ -1048,6 +1060,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             raw_root=args.raw_root,
             output_directory=args.out,
             source_run_id=args.source_run_id,
+        )
+        print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
+        return 0
+
+    if args.command == "diagnose-m7-discrepancies":
+        config = load_frozen_live_validation_config(args.config)
+        evidence_config = load_evidence_boundary_config(args.evidence_config)
+        manifest = run_m7_causal_diagnostics(
+            config=config,
+            evidence_config=evidence_config,
+            qualified_root=args.qualified_root,
+            analysis_root=args.analysis_root,
+            raw_root=args.raw_root,
+            output_directory=args.out,
         )
         print(json.dumps(manifest["row_counts"], indent=2, sort_keys=True))
         return 0
