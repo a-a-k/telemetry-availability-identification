@@ -253,8 +253,14 @@ identifiers in its manifest.
   artifact contains five complete PCM models and the full PMX transformation
   sequence, while all four frozen guessed Gogo commands were unregistered and
   emitted no model. Crucially, embedded source declares the exact command as
-  `main:main`; M9H tests that route prospectively rather than treating M9G as a
-  negative test of PMX. Separately, 0/160 qualified learner bundles retained raw
+  `main:main`; M9H tested that route prospectively rather than treating M9G as a
+  negative test of PMX. The exact command reproduced the historical five-model
+  semantic signature in its screen and both original confirmations and exited
+  cleanly. Its two frozen one-error confirmations also completed, but remained
+  identical to the original: the logs exposed no failure aggregate and the PCM
+  contained no internal software failure. M9I therefore audits the embedded
+  failure-detection predicates and retained transformation boundary before a
+  new control is frozen. Separately, 0/160 qualified learner bundles retained raw
   spans. Four raw samples are learner-only schema-adaptable, but lack the direct
   Spring-WebMVC instrumentation semantics and OTel needs a format adapter. No
   accuracy outcome was read and the M7 interpretation remains unchanged.

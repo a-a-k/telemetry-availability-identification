@@ -82,10 +82,12 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A through M9G are complete. M9G recovered the historical PMX output,
+Status: M8A through M9H are complete. M9G recovered the historical PMX output,
 bounded four unsuccessful guessed Gogo commands, and measured the application
-information delta. Its embedded-source evidence prospectively defines M9H's
-exact `main:main` entrypoint test. M9C byte-audited accepted M8B and pinned application sources, emitted
+information delta. M9H then executed the prospectively source-derived exact
+`main:main` entrypoint and reproduced the historical PCM output, while its
+frozen one-error control remained semantically unchanged. M9I now audits that
+failure-semantics boundary before any new dynamic control. M9C byte-audited accepted M8B and pinned application sources, emitted
 all 16 required correspondence rows, and matched the external structural oracle
 for both operation templates under both logical placements. M9D then completed
 the aligned-input debugging comparison on preserved M7 evidence.
@@ -173,3 +175,17 @@ zero raw streams in 160 qualified learner bundles. Four separate raw samples
 were learner-filterable and schema-adaptable, but none had the audited direct
 Spring-WebMVC instrumentation marker; OTel additionally requires a format
 adapter. No evaluator input, accuracy outcome, or new collection entered M9G.
+
+M9H resolved the launcher question on its first remote attempt. The exact
+`main:main -of Options.txt` command derived independently from the embedded DS
+descriptor and Java source entered the transformation, exited zero, produced
+all five core PCM files, completed all six log stages, and matched the
+historical semantic signature in one screen and two confirmations. The same
+chain ran twice on the frozen one-error-in-ten trace control, but both outputs
+remained identical to the unchanged model: no internal software failure and no
+nonzero probability appeared. Raw stdout reported the same success counts and
+`Failure: null` values in both conditions. Therefore launcher recovery is no
+longer an open explanation, but the error-to-internal-failure mapping is. M9I
+uses embedded source and retained M9H evidence to localize that boundary before
+freezing another mechanism test. This sequence does not score accuracy, revise
+M7, authorize collection, or generalize one binary to PMX/Palladio as a whole.
