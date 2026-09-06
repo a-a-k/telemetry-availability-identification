@@ -1,6 +1,7 @@
 # M9C: Palladio application-mapping protocol
 
-Status: frozen before the first remote Palladio execution.
+Status: frozen before the first remote Palladio execution; completed with
+accepted evidence recorded in `milestones/M9C_PALLADIO_APPLICATION_MAPPING.md`.
 
 ## Purpose and boundary
 

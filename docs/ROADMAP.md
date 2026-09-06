@@ -82,10 +82,10 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A, M8B, the commit-pinned M9A Palladio bootstrap, and the M9B
-semantic controls are complete. The M9C application-correspondence protocol is
-now frozen before remote execution: it byte-audits accepted M8B and pinned
-application sources, then tests two operation templates under both placements.
+Status: M8A through M9C are complete. M9C byte-audited accepted M8B and pinned
+application sources, emitted all 16 required correspondence rows, and matched
+the external structural oracle for both operation templates under both logical
+placements. The aligned-input debugging comparison is now in progress as M9D.
 
 Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 
@@ -108,7 +108,9 @@ success probability 0.375 in two calls, exactly matching a hand-checkable XMI
 oracle. M9B then matched all 15 frozen mechanism-level controls twice. It also
 confirmed that automatic allocation replication is unsupported and that a raw
 link failure parameter is applied to both request and response transfer. M9C
-encodes those constraints explicitly: source-grounded mandatory target calls,
+M9C encodes those constraints explicitly: source-grounded mandatory target calls,
 two explicit paths, logical common domains, a marginal two-transfer link
 mapping, and a semantic residual. Its synthetic witness is a structural test,
-not an M7 estimate or comparative-validity claim.
+not an M7 estimate or comparative-validity claim. All eight remote solver
+records matched the frozen oracle; M9D now introduces preserved M7 calibration
+inputs without refitting the historical estimators.
