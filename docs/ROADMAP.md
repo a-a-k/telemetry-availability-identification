@@ -86,8 +86,10 @@ Status: M8A through M9H are complete. M9G recovered the historical PMX output,
 bounded four unsuccessful guessed Gogo commands, and measured the application
 information delta. M9H then executed the prospectively source-derived exact
 `main:main` entrypoint and reproduced the historical PCM output, while its
-frozen one-error control remained semantically unchanged. M9I now audits that
-failure-semantics boundary before any new dynamic control. M9C byte-audited accepted M8B and pinned application sources, emitted
+frozen one-error control remained semantically unchanged. M9I recovered the
+exact embedded source and localized that result to an error marker lost while
+the Spring child is merged into its surviving Tomcat parent. M9J now tests the
+source-implied carrier contract prospectively. M9C byte-audited accepted M8B and pinned application sources, emitted
 all 16 required correspondence rows, and matched the external structural oracle
 for both operation templates under both logical placements. M9D then completed
 the aligned-input debugging comparison on preserved M7 evidence.
@@ -189,3 +191,17 @@ longer an open explanation, but the error-to-internal-failure mapping is. M9I
 uses embedded source and retained M9H evidence to localize that boundary before
 freezing another mechanism test. This sequence does not score accuracy, revise
 M7, authorize collection, or generalize one binary to PMX/Palladio as a whole.
+
+M9I completed the source-level diagnosis without another PMX invocation. It
+byte-audited all 25 Java sources across the exact reader, trace-to-internal,
+internal-to-system, and failure-probability bundles and reverified all four M9H
+confirmation boundaries. The retained string-valued `error="true"` tag matches
+the reader and detector contract. The marked Spring child is detected before
+merging, but its internal `SpanContainsError` marker is not copied when the
+child's operation/tags are merged into the same-process Tomcat parent; error
+detection is not rerun. The surviving parent is therefore counted as success,
+and the downstream probability transformer receives no failure count. M9J
+freezes a matched true/false control on that exact surviving carrier, with the
+retained child-true result as a merge-loss witness. This diagnoses one tested
+binary and adds an explicit preprocessing/application cost; it does not lower
+PMX's scientific priority or describe the whole Palladio ecosystem.

@@ -258,9 +258,12 @@ identifiers in its manifest.
   semantic signature in its screen and both original confirmations and exited
   cleanly. Its two frozen one-error confirmations also completed, but remained
   identical to the original: the logs exposed no failure aggregate and the PCM
-  contained no internal software failure. M9I therefore audits the embedded
-  failure-detection predicates and retained transformation boundary before a
-  new control is frozen. Separately, 0/160 qualified learner bundles retained raw
+  contained no internal software failure. M9I then recovered all 25 relevant
+  embedded sources and localized the distinction loss: error detection runs
+  before the marked Spring child is merged into its Tomcat parent, while the
+  internal error marker is not propagated or recomputed. M9J prospectively
+  tests the exact surviving-carrier contract with matched true/false controls.
+  Separately, 0/160 qualified learner bundles retained raw
   spans. Four raw samples are learner-only schema-adaptable, but lack the direct
   Spring-WebMVC instrumentation semantics and OTel needs a format adapter. No
   accuracy outcome was read and the M7 interpretation remains unchanged.
