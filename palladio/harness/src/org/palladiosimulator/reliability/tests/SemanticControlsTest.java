@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.junit.Test;
 import org.palladiosimulator.analyzer.workflow.core.ConstantsContainer;
 import org.palladiosimulator.analyzer.workflow.core.blackboard.PCMResourceSetPartition;
@@ -69,7 +70,12 @@ public class SemanticControlsTest {
         final long totalStates;
 
         ProbabilityResult(final MarkovTransformationResult result) {
-            scenarioId = result.getScenario().getEntityName();
+            final EStructuralFeature nameFeature = result.getScenario().eClass()
+                    .getEStructuralFeature("entityName");
+            assertNotNull("PCM scenario must expose its entityName feature", nameFeature);
+            final Object name = result.getScenario().eGet(nameFeature);
+            assertTrue("PCM scenario entityName must be a string", name instanceof String);
+            scenarioId = (String) name;
             success = result.getSuccessProbability();
             failure = result.getCumulatedFailureTypeProbabilities().values().stream()
                     .mapToDouble(Double::doubleValue).sum();

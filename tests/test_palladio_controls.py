@@ -239,7 +239,9 @@ class PalladioControlsTests(unittest.TestCase):
 
     def test_harness_reports_named_scenarios_without_expected_values(self) -> None:
         harness = HARNESS.read_text(encoding="utf-8")
-        self.assertIn("getScenario().getEntityName()", harness)
+        self.assertIn('getEStructuralFeature("entityName")', harness)
+        self.assertIn("result.getScenario().eGet(nameFeature)", harness)
+        self.assertNotIn("getScenario().getEntityName()", harness)
         self.assertIn("TAID_EXPECTED_CASE_COUNT", harness)
         self.assertNotIn("TAID_EXPECTED_SUCCESS", harness)
 
