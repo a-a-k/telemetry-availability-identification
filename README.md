@@ -200,6 +200,12 @@ identifiers in its manifest.
   and exposes abstention and prediction--observation discrepancies. Their causes
   are not yet resolved well enough to call the overall approach successful or
   unsuccessful; M8 begins that separately labelled diagnosis.
+- M8A preserved all 165 M7 artifacts for 90 days and independently reconstructed
+  all 36,459 request-derived score rows, 117 summaries, and the primary
+  equal-stratum contrast with zero mismatches. This rejects the tested
+  identity, denominator, Brier-formula, and aggregation explanations, but does
+  not yet explain the observed bias or topology ambiguity. M8B performs that
+  causal diagnosis.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.

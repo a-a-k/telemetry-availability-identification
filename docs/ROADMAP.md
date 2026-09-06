@@ -82,7 +82,8 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: in progress under the separately labelled M8 diagnostic protocol.
+Status: M8A complete; M8B diagnostic decomposition is next under the separately
+labelled M8 protocol.
 
 Evidence contract: `M8_M7_DIAGNOSTIC_PROTOCOL.md`.
 
