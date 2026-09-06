@@ -89,7 +89,10 @@ information delta. M9H then executed the prospectively source-derived exact
 frozen one-error control remained semantically unchanged. M9I recovered the
 exact embedded source and localized that result to an error marker lost while
 the Spring child is merged into its surviving Tomcat parent. M9J now tests the
-source-implied carrier contract prospectively. M9C byte-audited accepted M8B and pinned application sources, emitted
+source-implied carrier contract prospectively as the final bounded PMX
+diagnostic in this sequence. M9K then localizes the proposed model's retained
+overprediction on the single predeclared checkout operation; no M9J outcome
+automatically authorizes further external-tool repair or an adapter. M9C byte-audited accepted M8B and pinned application sources, emitted
 all 16 required correspondence rows, and matched the external structural oracle
 for both operation templates under both logical placements. M9D then completed
 the aligned-input debugging comparison on preserved M7 evidence.
@@ -204,4 +207,12 @@ and the downstream probability transformer receives no failure count. M9J
 freezes a matched true/false control on that exact surviving carrier, with the
 retained child-true result as a merge-loss witness. This diagnoses one tested
 binary and adds an explicit preprocessing/application cost; it does not lower
-PMX's scientific priority or describe the whole Palladio ecosystem.
+PMX's scientific priority or describe the whole Palladio ecosystem. Regardless
+of its result, the next milestone is the bounded checkout localization in M9K.
+Only the two diagnostic results together select a subsequent experiment.
+
+The preliminary article assessment is that the direction remains substantive,
+but its claimed advantage has not been demonstrated. Current evidence supports
+the correctness of the calculation for the specified model; it establishes
+neither superior predictive accuracy nor lower end-to-end cost of automatically
+obtaining a forecast than PMX.

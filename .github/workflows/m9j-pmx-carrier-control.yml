@@ -1,0 +1,244 @@
+name: M9J PMX source-implied carrier controls
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m9j-pmx-carrier-control-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9j_pmx_carrier_control.json
+  PYTHON_VERSION: 3.13.15
+  JAVA_VERSION: "11"
+  GITLAB_BASE: https://se-gitlab-extern.fzi.de
+  DEMO_PROJECT_PATH: SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci
+  DEMO_COMMIT: 9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+  PMX_JAR_SHA256: befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013
+  SOURCE_COMMAND: main:main -of Options.txt
+  STARTUP_STABILIZATION_SECONDS: "20"
+  PMX_INTERNAL_TIMEOUT_SECONDS: "180"
+  M9I_RUN_ID: "34052517285"
+
+jobs:
+  carrier_control_contract:
+    name: Verify M9I source evidence and build exact carrier controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9J
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_carrier_control validate --config "$CONFIG"
+
+      - name: Capture accepted M9I artifact metadata and contents
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          metadata="workflow-input/m9j/metadata"
+          mkdir -p "$metadata" workflow-input/m9j/m9i-source workflow-input/m9j/m9i-boundary workflow-input/m9j/m9i-decision
+          for role in source boundary decision; do
+            artifact_id="$(jq -r ".evidence.m9i.artifacts.${role}.id" "$CONFIG")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id" > "$metadata/${role}.json"
+          done
+          gh run download "$M9I_RUN_ID" --repo "$GITHUB_REPOSITORY" --name m9i-embedded-source-34052517285 --dir workflow-input/m9j/m9i-source
+          gh run download "$M9I_RUN_ID" --repo "$GITHUB_REPOSITORY" --name m9i-retained-boundary-34052517285 --dir workflow-input/m9j/m9i-boundary
+          gh run download "$M9I_RUN_ID" --repo "$GITHUB_REPOSITORY" --name m9i-failure-semantics-decision-34052517285 --dir workflow-input/m9j/m9i-decision
+
+      - name: Download and byte-verify the unchanged author inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          demo="workflow-input/m9j/demo"
+          mkdir -p "$demo/traces"
+          raw_base="$GITLAB_BASE/$DEMO_PROJECT_PATH/-/raw/$DEMO_COMMIT"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/Options.txt" --output "$demo/Options.txt"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/traces/jaegercustomers.json" --output "$demo/traces/jaegercustomers.json"
+          echo "7cd828213521e1a608938b05a8c2899556652d093624bde1afbaf9e5dacc597d  $demo/Options.txt" | sha256sum --check
+          echo "8d9fe31ab2a89d1ed4c480101795d4ab3670d118feb776b5e5a5420085755757  $demo/traces/jaegercustomers.json" | sha256sum --check
+
+      - name: Build the frozen source-implied control contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9j-contract
+          /usr/bin/time -v -o workflow-results/m9j-contract/resource-usage.txt python -m telemetry_availability.pmx_carrier_control build-contract --config "$CONFIG" --source-metadata workflow-input/m9j/metadata/source.json --boundary-metadata workflow-input/m9j/metadata/boundary.json --decision-metadata workflow-input/m9j/metadata/decision.json --source-root workflow-input/m9j/m9i-source --boundary-root workflow-input/m9j/m9i-boundary --decision-root workflow-input/m9j/m9i-decision --demonstration-root workflow-input/m9j/demo --out workflow-results/m9j-contract
+
+      - name: Upload carrier-control contract
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9j-carrier-contract-${{ github.run_id }}
+          path: workflow-results/m9j-contract
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  carrier_control_probe:
+    name: Run matched source-implied carrier controls
+    needs: [carrier_control_contract]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Set up declared Java runtime
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      - name: Install exact analysis environment and validate M9J
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_carrier_control validate --config "$CONFIG"
+
+      - name: Download exact carrier-control contract
+        uses: actions/download-artifact@v8
+        with:
+          name: m9j-carrier-contract-${{ github.run_id }}
+          path: workflow-input/m9j/contract
+
+      - name: Download and byte-verify the unchanged public PMX JAR
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9j/demo
+          raw_base="$GITLAB_BASE/$DEMO_PROJECT_PATH/-/raw/$DEMO_COMMIT"
+          curl --fail --location --retry 8 --retry-all-errors "$raw_base/main.jar" --output workflow-input/m9j/demo/main.jar
+          echo "$PMX_JAR_SHA256  workflow-input/m9j/demo/main.jar" | sha256sum --check
+
+      - name: Execute both controls twice and record the frozen oracles
+        shell: bash
+        run: |
+          set -euo pipefail
+          jar_path="$GITHUB_WORKSPACE/workflow-input/m9j/demo/main.jar"
+          contract_root="$GITHUB_WORKSPACE/workflow-input/m9j/contract"
+          execution_root="$GITHUB_WORKSPACE/workflow-results/m9j-probe/raw"
+
+          run_probe() {
+            condition="$1"
+            repeat="$2"
+            input_root="$contract_root/controls/$condition"
+            run_root="$execution_root/$condition/repeat-$repeat"
+            mkdir -p "$run_root/results" "$run_root/traces"
+            cp "$input_root/Options.txt" "$run_root/Options.txt"
+            cp "$input_root"/traces/* "$run_root/traces/"
+            printf '%s\nexit 0\n' "$SOURCE_COMMAND" > "$run_root/stdin.txt"
+            started_at="$(date --utc --iso-8601=seconds)"
+            started_epoch="$(date +%s)"
+            printf '%s\n' "$started_at" > "$run_root/started-at-utc.txt"
+            printf 'event=start condition=%s repeat=%s at=%s\n' "$condition" "$repeat" "$started_at" > "$run_root/watchdog.log"
+            set +e
+            (
+              cd "$run_root"
+              /usr/bin/time -v -o resource-usage.txt timeout --signal=TERM --kill-after=10s "$PMX_INTERNAL_TIMEOUT_SECONDS"s bash -c '(sleep "$1"; date --utc --iso-8601=seconds > command-sent-at-utc.txt; cat stdin.txt) | java -DLog4jContextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector -jar "$2"' bash "$STARTUP_STABILIZATION_SECONDS" "$jar_path" > stdout.log 2>&1
+            )
+            exit_code="$?"
+            set -e
+            finished_at="$(date --utc --iso-8601=seconds)"
+            elapsed="$(($(date +%s) - started_epoch))"
+            printf '%s\n' "$exit_code" > "$run_root/exit-code.txt"
+            printf '%s\n' "$elapsed" > "$run_root/elapsed-seconds.txt"
+            printf '%s\n' "$finished_at" > "$run_root/finished-at-utc.txt"
+            printf 'event=finish condition=%s repeat=%s at=%s elapsed_seconds=%s exit_code=%s\n' "$condition" "$repeat" "$finished_at" "$elapsed" "$exit_code" >> "$run_root/watchdog.log"
+          }
+
+          for condition in carrier_error_false carrier_error_true; do
+            for repeat in 1 2; do
+              run_probe "$condition" "$repeat"
+            done
+          done
+
+          python -m telemetry_availability.pmx_carrier_control record-probe --config "$CONFIG" --contract-root workflow-input/m9j/contract --execution-root "$execution_root" --out workflow-results/m9j-probe
+          java -version > workflow-results/m9j-probe/java-version.txt 2>&1
+
+      - name: Upload carrier-control evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9j-carrier-probe-${{ github.run_id }}
+          path: workflow-results/m9j-probe
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
+
+  carrier_control_decision:
+    name: Apply frozen carrier-control decision
+    needs: [carrier_control_contract, carrier_control_probe]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9J
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_carrier_control validate --config "$CONFIG"
+
+      - name: Download carrier contract and probe
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9j-carrier-*-${{ github.run_id }}
+          path: workflow-input/m9j/current
+
+      - name: Apply the frozen paired decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9j-decision
+          /usr/bin/time -v -o workflow-results/m9j-decision/resource-usage.txt python -m telemetry_availability.pmx_carrier_control decide --config "$CONFIG" --contract-manifest workflow-input/m9j/current/m9j-carrier-contract-${GITHUB_RUN_ID}/control-contract-manifest.json --probe-manifest workflow-input/m9j/current/m9j-carrier-probe-${GITHUB_RUN_ID}/carrier-probe-manifest.json --out workflow-results/m9j-decision
+
+      - name: Upload M9J decision
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9j-carrier-decision-${{ github.run_id }}
+          path: workflow-results/m9j-decision
+          if-no-files-found: error
+          retention-days: 90

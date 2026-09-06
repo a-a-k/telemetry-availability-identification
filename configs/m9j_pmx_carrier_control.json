@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "id": "m9j_pmx_source_implied_carrier_controls",
+  "status": "frozen_before_first_m9j_remote_pmx_invocation",
+  "mechanism_test_only": true,
+  "accuracy_scoring": "forbidden",
+  "m7_evidence_access": "forbidden",
+  "new_live_collection": "forbidden",
+  "scientific_priority": {
+    "method": "PMX_performability_extension",
+    "persists_if_application_cost_is_high": true,
+    "tested_binary_represents_all_pmx_or_palladio": false,
+    "retriever_result_generalizes_to_ecosystem": false,
+    "m7_interpretation_changes": false
+  },
+  "evidence": {
+    "m9i": {
+      "run_id": 34052517285,
+      "head_sha": "dac1921e86285f1b28db47c7fbc8c49834c69649",
+      "conclusion": "success",
+      "decision_status": "pmx_exact_failure_sources_and_collapse_boundary_recovered",
+      "artifacts": {
+        "source": {
+          "id": 9994975626,
+          "name": "m9i-embedded-source-34052517285",
+          "size_in_bytes": 39200,
+          "sha256": "26d16c1e9ad2a7606729143b50a306d9eed7f948dfd64b8cfe8b93cbcff7d4f6",
+          "manifest_path": "source-audit-manifest.json",
+          "manifest_bytes": 1545,
+          "manifest_sha256": "865789aedcfab3c62d77def985ed81187bbd57f946d2f4b32e902943457a0a1e"
+        },
+        "boundary": {
+          "id": 9994981969,
+          "name": "m9i-retained-boundary-34052517285",
+          "size_in_bytes": 4751,
+          "sha256": "d609af730b1112127554b9130870c7c69edd32a9cdda7cb0469ba88ce6788132",
+          "manifest_path": "boundary-audit-manifest.json",
+          "manifest_bytes": 5973,
+          "manifest_sha256": "0883aa3dcfa0f47b0effacce79d00ccf535e5b12ed97e2428649ed2d50e641ee"
+        },
+        "decision": {
+          "id": 9994988574,
+          "name": "m9i-failure-semantics-decision-34052517285",
+          "size_in_bytes": 2202,
+          "sha256": "17925309d2c6d60bfe3f7dbf9ef403acbb75d0f4d6a639bfb67ff6254968ff3d",
+          "manifest_path": "decision-manifest.json",
+          "manifest_bytes": 1864,
+          "manifest_sha256": "7968f529997a42ee023e317fe6ef3e448b3ccd1c63cdbef4e2edbbdfc58990c6"
+        }
+      }
+    },
+    "demonstration": {
+      "project_path": "SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci",
+      "commit": "9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2",
+      "files": [
+        {"path": "Options.txt", "bytes": 707, "sha256": "7cd828213521e1a608938b05a8c2899556652d093624bde1afbaf9e5dacc597d"},
+        {"path": "traces/jaegercustomers.json", "bytes": 1134923, "sha256": "8d9fe31ab2a89d1ed4c480101795d4ab3670d118feb776b5e5a5420085755757"},
+        {"path": "main.jar", "bytes": 65729095, "sha256": "befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013"}
+      ]
+    }
+  },
+  "source_checks": [
+    {
+      "id": "tag_value_is_string",
+      "artifact_path": "sources/reader_otlp/org/palladiosimulator/pmx/reader/otlp/model/TagOTLP.java",
+      "bytes": 783,
+      "sha256": "b1a1aa3fcb91347dca51c4d3872cb1c3ebbe99d7df97fcc245750c557841f7c5",
+      "markers": ["private String value;", "public void setValue(String value)"]
+    },
+    {
+      "id": "exact_error_detector",
+      "artifact_path": "sources/trace_to_internal/org/palladiosimulator/pmx/transformer/tracetointernaltrace/otlp/Util.java",
+      "bytes": 3346,
+      "sha256": "dfa1ea8317b4d18049bafc1723ed5ef14bf444c6ae71eb04eea08975fbc9627b",
+      "markers": ["errorStringForAttributes = \"SpanContainsError\"", "errorKeyToDetect = \"error\"", "errorValueToDetect = \"true\"", "errorTagKeys = Arrays.asList(\"http.status_code\")", "targetSpan.addAttribute(errorTagKey, sourceSpan.getAttribute(errorTagKey))"]
+    },
+    {
+      "id": "detect_then_merge_without_marker_copy",
+      "artifact_path": "sources/trace_to_internal/org/palladiosimulator/pmx/transformer/tracetointernaltrace/otlp/SpanTree.java",
+      "bytes": 3676,
+      "sha256": "e8269722e7d0af5ed900c21db40bd04e6b285b65287b354117239c7bc7662117",
+      "markers": ["this.detectErrors();", "this.mergeSpansPerProcess();", "Util.setSpanAttributes(childSpan, this.span, EnumSet.of(Attributes.OPERATION, Attributes.TAGS, Attributes.ERRORS))", "childsTreesToRemove.add(childTree)"]
+    },
+    {
+      "id": "success_failure_aggregation",
+      "artifact_path": "sources/trace_to_internal/org/palladiosimulator/pmx/transformer/tracetointernaltrace/otlp/TraceReconstructionService.java",
+      "bytes": 13435,
+      "sha256": "92ec5a688fbe5c597a54861c9a4c0a36d79846542e4ef23579843f9ac77c9b66",
+      "markers": ["spanTree.mergeSpans();", "span.getAttribute(Util.errorStringForAttributes) == null", "operation.addAttribute(Constants.SUCCESS, \"1\")", "operation.addAttribute(Constants.FAILURE, \"1\")"]
+    },
+    {
+      "id": "pcm_probability_formula",
+      "artifact_path": "sources/failure_probabilities/org/palladiosimulator/pmx/transformer/systemtopcm/failureprobabilities/TransformerSystemToPCMFailureDependencies.java",
+      "bytes": 3217,
+      "sha256": "811bc686e774c714c8faca6430691a108ef0efda24555ff31a19ed709fce8699",
+      "markers": ["if (countOfFails == null)", "if (probability != 0)", "Double.parseDouble(countOfFails) / (Double.parseDouble(countOfFails) + Double.parseDouble(countOfSuccesses))"]
+    }
+  ],
+  "target": {
+    "trace_id": "af0f0df51dfdfc3ca3e2eae9b00b114e",
+    "spring_child_span_id": "b2adec3b558fff51",
+    "surviving_carrier_span_id": "9e0a042aa79207bc",
+    "process_id": "p2",
+    "final_operation": "VisitResource.read",
+    "child_original_operation": "VisitResource.read",
+    "carrier_original_operation": "GET /pets/visits",
+    "child_instrumentation_contains": "spring-webmvc",
+    "carrier_instrumentation_contains": "tomcat",
+    "relationship": "CHILD_OF_same_process",
+    "original_error_tags": 0
+  },
+  "controls": [
+    {
+      "id": "carrier_error_false",
+      "output_trace_path": "traces/jaegercustomers-carrier-error-false.json",
+      "tag": {"key": "error", "type": "bool", "value": "false"},
+      "expected_success_aggregates": [10, 10, 9, 10, 1],
+      "expected_failure_aggregates": [null, null, null, null, null],
+      "expected_nonzero_repository_probabilities": [],
+      "expected_internal_failure_minimum": 0,
+      "expected_semantic_signature": "4e2f00daefd89ce4ccde30074cbf09deb65a2d44736d6ccf0cacace8f004f695"
+    },
+    {
+      "id": "carrier_error_true",
+      "output_trace_path": "traces/jaegercustomers-carrier-error-true.json",
+      "tag": {"key": "error", "type": "bool", "value": "true"},
+      "expected_success_aggregates": [10, 9, 9, 10, 1],
+      "expected_failure_aggregates": [null, "1", null, null, null],
+      "expected_nonzero_repository_probabilities": [0.1],
+      "expected_internal_failure_minimum": 1,
+      "expected_semantic_signature": "different_from_historical"
+    }
+  ],
+  "retained_witness": {
+    "condition": "single_error_control",
+    "tag_location": "spring_child_span_id",
+    "tag_value": "true",
+    "success_aggregates": [10, 10, 9, 10, 1],
+    "failure_aggregates": [null, null, null, null, null],
+    "nonzero_repository_probabilities": [],
+    "repeats": 2,
+    "accuracy_evidence": false
+  },
+  "execution": {
+    "command": "main:main -of Options.txt",
+    "startup_stabilization_seconds": 20,
+    "internal_timeout_seconds": 180,
+    "confirmation_repeats": 2,
+    "java_distribution": "temurin",
+    "java_version": "11",
+    "exit_command": "exit 0",
+    "required_log_markers": [
+      "Executing reader org.palladiosimulator.pmx.reader.otlp.ReaderOpenTelemetry",
+      "Executing transformer org.palladiosimulator.pmx.transformer.tracetointernaltrace.otlp.TransformerTraceToInternalTraceBasic",
+      "Executing transformer org.palladiosimulator.pmx.transformer.internaltracetosystem.otlp.TransformerInternalTraceToSystemBasic",
+      "Executing transformer org.palladiosimulator.pmx.transformer.systemtopcm.TransformerSystemToPCMBasic",
+      "Executing transformer org.palladiosimulator.pmx.transformer.systemtopcm.failureprobabilities.TransformerSystemToPCMFailureDependencies",
+      "Executing writer org.palladiosimulator.pmx.writer.basic.PCMWriter"
+    ],
+    "required_core_suffixes": [".allocation", ".repository", ".resourceenvironment", ".system", ".usagemodel"],
+    "absolute_probability_tolerance": 1e-12
+  },
+  "baseline_oracle": {
+    "operation_order": ["OwnerResource.findOwner", "VisitResource.read", "OwnerResource.createOwner", "PetResource.processCreationForm", "OwnerResource.findAll"],
+    "target_operation_index": 1,
+    "surviving_target_executions": 10,
+    "positive_failures": 1,
+    "positive_successes": 9,
+    "positive_probability": 0.1,
+    "derived_before_remote_execution": true
+  },
+  "decision": {
+    "both_conditions_pass": "pmx_source_implied_carrier_failure_contract_reproduced",
+    "false_pass_true_fail": "pmx_carrier_negative_pass_positive_unresolved",
+    "false_fail": "pmx_carrier_pair_invalid_negative_control_failed",
+    "execution_integrity_fail": "m9j_execution_or_evidence_integrity_failed",
+    "next_if_both_pass": "m9k_single_operation_overestimation_localization",
+    "next_otherwise": "m9k_single_operation_overestimation_localization"
+  },
+  "repository_locks": [
+    {"path": "configs/m9i_pmx_failure_semantics.json", "bytes": 8622, "sha256": "b5d22dc23ba303f0011ddb7cee08311741acb8f597ac9bdf3880b085f74ba62a"},
+    {"path": "src/telemetry_availability/pmx_failure_semantics.py", "bytes": 45069, "sha256": "ca8d96e9c9913903561923021fb889e5178cadad6329b3cd1843380207f7d9bb"},
+    {"path": "docs/M9I_PMX_FAILURE_SEMANTICS_PROTOCOL.md", "bytes": 6622, "sha256": "411f5ce2577e59eaded286739c6ce8e7358ba6dc80a7e1a00a445e109299c775"},
+    {"path": "docs/milestones/M9I_PMX_FAILURE_SEMANTICS.md", "bytes": 9862, "sha256": "4f834c9580b6f0d31eac0758d3593c3654cd78255ff7f5ba70921a4dc5a0e8f2"},
+    {"path": "docs/M9I_MANUAL_ACTIONS.csv", "bytes": 2137, "sha256": "b70f89e5122a8550091005f8c2a98bab3b09040217a33921c1c03d1ff9537f47"}
+  ],
+  "manual_actions_log": "docs/M9J_MANUAL_ACTIONS.csv",
+  "workflow": {
+    "jobs": 3,
+    "job_timeout_minutes": 360,
+    "dynamic_pmx_runs": 4,
+    "heavy_runs_only_in_github_actions": true,
+    "artifact_retention_days": 90
+  },
+  "interpretation_guardrails": {
+    "mechanism_control_is_accuracy_evidence": false,
+    "carrier_control_is_natural_application_compatibility": false,
+    "application_cost_reduces_scientific_priority": false,
+    "tested_binary_represents_all_pmx_or_palladio": false,
+    "retriever_result_generalizes_to_ecosystem": false,
+    "manual_pcm_credited_as_pmx": false,
+    "m7_interpretation_changes": false
+  }
+}
