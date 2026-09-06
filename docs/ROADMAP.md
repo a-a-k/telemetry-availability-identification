@@ -82,9 +82,10 @@ Evidence: `milestones/M3_NON_DIRECT_PLACEMENT_TRANSFER.md` and
 
 ## Phase 7: post-M7 diagnosis and Palladio comparison
 
-Status: M8A through M9F are complete. M9G's diagnostic dual-track protocol and
-three-job remote implementation are frozen; its first remote evidence run is
-pending. M9C byte-audited accepted M8B and pinned application sources, emitted
+Status: M8A through M9G are complete. M9G recovered the historical PMX output,
+bounded four unsuccessful guessed Gogo commands, and measured the application
+information delta. Its embedded-source evidence prospectively defines M9H's
+exact `main:main` entrypoint test. M9C byte-audited accepted M8B and pinned application sources, emitted
 all 16 required correspondence rows, and matched the external structural oracle
 for both operation templates under both logical placements. M9D then completed
 the aligned-input debugging comparison on preserved M7 evidence.
@@ -161,12 +162,14 @@ recover the public launcher/source/container route, and measure the adapter and
 information work needed for the fixed M7 applications. A manual PCM route, if
 used, remains separately labelled and cannot substitute for PMX evidence.
 
-M9G now freezes those tracks before further execution. The launcher job first
-audits the public historical job output, then screens four ordered OSGi/Gogo
-commands on the byte-pinned JAR and confirms only the first output-eligible
-route against the historical semantic signature and the one-error-in-ten
-mechanism control. Independently, the application job reads all 160 learner
-bundles and four separately labelled raw schema samples from the preserved M7
-artifact, without opening evaluator inputs. A third job applies the joint
-decision rule. All three jobs have 360-minute limits; M9G performs no accuracy
-scoring and authorizes no collection.
+M9G completed both tracks. It byte-audited all fourteen files in the public
+historical job artifact and recovered five complete PCM models plus their full
+transformation log. Its four frozen guessed Gogo commands were all unregistered,
+wrote no output, and reached 120-second watchdogs. The same static audit found
+the exact embedded declaration `scope=main`, `function=main`; because
+`main:main` was not among the frozen candidates, the M9G negative is not
+generalized to it and M9H tests it prospectively. The application audit found
+zero raw streams in 160 qualified learner bundles. Four separate raw samples
+were learner-filterable and schema-adaptable, but none had the audited direct
+Spring-WebMVC instrumentation marker; OTel additionally requires a format
+adapter. No evaluator input, accuracy outcome, or new collection entered M9G.

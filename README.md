@@ -249,11 +249,15 @@ identifiers in its manifest.
   watchdog after emitting only `osgi> gosh: stopping shell` and produced no PCM
   file. This is a launcher-route reproducibility and application-cost result,
   not evidence against PMX's scientific priority or the wider Palladio
-  ecosystem. M9G has frozen a dual-track diagnostic: four ordered OSGi/Gogo
-  launcher screens plus conditional mechanism confirmations, and an independent
-  learner-only audit of all 160 preserved bundles with four raw schema samples
-  kept separate. Its exactly three remote jobs each have a 360-minute timeout.
-  It neither scores accuracy nor changes the M7 interpretation.
+  ecosystem. M9G completed its dual-track diagnostic. The public historical
+  artifact contains five complete PCM models and the full PMX transformation
+  sequence, while all four frozen guessed Gogo commands were unregistered and
+  emitted no model. Crucially, embedded source declares the exact command as
+  `main:main`; M9H tests that route prospectively rather than treating M9G as a
+  negative test of PMX. Separately, 0/160 qualified learner bundles retained raw
+  spans. Four raw samples are learner-only schema-adaptable, but lack the direct
+  Spring-WebMVC instrumentation semantics and OTel needs a format adapter. No
+  accuracy outcome was read and the M7 interpretation remains unchanged.
 
 The successful remote integration evidence and its limitations are recorded in
 `docs/milestones/M6_LIVE_INGESTION_HARNESS.md`.
