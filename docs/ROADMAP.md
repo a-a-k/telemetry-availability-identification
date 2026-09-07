@@ -262,3 +262,15 @@ but its claimed advantage has not been demonstrated. Current evidence supports
 the correctness of the calculation for the specified model; it establishes
 neither superior predictive accuracy nor lower end-to-end cost of automatically
 obtaining a forecast than PMX.
+
+M9P's separate no-fit preflight is now accepted in run 34115470738. All four
+fresh placement/law cells passed source, seed, timing and physical evidence
+separation checks, with zero fits or comparison scores. The initial dispatch's
+Git-normalized CSV byte mismatch is retained and repaired without a design
+change. The main acquisition/analysis implementation, matched controls and
+three-quantity family inference passed 241 tests. The next execution is the
+frozen 120-cell main workflow, gated by exact preflight and implementation
+identities; no preflight observation enters confirmation. Complete native main
+streams will be retained for 90 days alongside separated learner/evaluator
+bundles. PMX application input constraints and a calibration-identity derivation
+were documented without a new PMX run or a claim about prospective outcomes.
