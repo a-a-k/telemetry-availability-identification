@@ -180,6 +180,7 @@ def freeze_candidates(input_root, out):
     live.write_csv(out / "calibration-audit.csv", audits)
     live.write_csv(out / "model-input-costs.csv", costs)
     live.write_json(out / "learner-input-seals.json", input_seals)
+    fitted = [json.loads(row["fit_json"]) for row in candidates if row["method"] in LOGITS]
     manifest = {"status": "all_prospective_candidates_frozen", "cells": len(audits), "methods": list(METHODS),
                 "candidate_rows": len(candidates), "source_run_id": os.environ["GITHUB_RUN_ID"],
                 "source_commit": os.environ["GITHUB_SHA"], "config_sha256": file_sha256(live.CONFIG),
@@ -187,6 +188,17 @@ def freeze_candidates(input_root, out):
                 "learner_adequacy_passed": all(r["adequacy_passed"] for r in audits),
                 "fit_integrity_passed": bool(all_fits_passed),
                 "mean_within_cell_interval_prediction_span": float(np.mean([r["interval_prediction_span"] for r in audits])),
+                "quality": {
+                    "minimum_stable_calibration_requests": min(r["stable_aligned_requests"] for r in audits),
+                    "minimum_one_path_requests": min(r["one_path_up_requests"] for r in audits),
+                    "minimum_one_path_episodes": min(r["one_path_up_episodes"] for r in audits),
+                    "minimum_early_requests": min(r["early_one_path_requests"] for r in audits),
+                    "minimum_late_requests": min(r["late_one_path_requests"] for r in audits),
+                    "maximum_age_interval_width": max(r["maximum_age_interval_width"] for r in audits),
+                    "maximum_equivalent_prediction_range": max(fit["equivalent_prediction_range"] for fit in fitted),
+                    "minimum_finite_starts": min(fit["finite_starts"] for fit in fitted),
+                    "minimum_converged_starts": min(fit["converged_starts"] for fit in fitted),
+                },
                 "test_outcomes_accessed": False, "test_health_accessed": False,
                 "raw_traces_staged": False, "candidate_selection_after_test": False,
                 "calibration_diagnostics_are_descriptive": True,
@@ -311,6 +323,8 @@ def evaluate(input_root, candidates, out):
         live.write_csv(out / name, values)
     live.write_json(out / "inference.json", intervals)
     result = {**decision, "gates": gates, "intervals": intervals, "descriptive_method_means": descriptive,
+              "quality": {"minimum_stable_test_requests": min(r["stable_aligned_requests"] for r in test_audits),
+                          "maximum_test_age_interval_width": max(r["maximum_age_interval_width"] for r in test_audits)},
               "candidate_seal_sha256": file_sha256(candidates / "seal.json"),
               "source_run_id": os.environ["GITHUB_RUN_ID"], "source_commit": os.environ["GITHUB_SHA"],
               "analysis_implementation_sha256": file_sha256(Path(__file__)), "config_sha256": file_sha256(live.CONFIG),
