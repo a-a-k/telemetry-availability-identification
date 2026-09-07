@@ -977,8 +977,10 @@ def route_state_vector(
 class CandidateLikelihoodData:
     template: Any
     consistency: np.ndarray
+    class_masks: np.ndarray
     log_outcomes: np.ndarray
     multiplicities: np.ndarray
+    probability_floor: float
 
 
 def _candidate_likelihood_data(
@@ -995,29 +997,47 @@ def _candidate_likelihood_data(
     records = list(compressed)
     template = _latent_template(placement)
     consistency = np.ones((len(records), len(template.bits)), dtype=bool)
-    log_outcomes = np.zeros((len(records), len(template.bits)), dtype=float)
     or_route = route_state_vector(placement, "m7_single_demand_or")
     checkout_route = route_state_vector(placement, method, weights)
+    signatures = sorted(
+        {(float(or_route[index]), float(checkout_route[index])) for index in range(len(template.bits))}
+    )
+    class_masks = np.asarray(
+        [
+            [
+                float(or_route[index]) == signature[0]
+                and float(checkout_route[index]) == signature[1]
+                for index in range(len(template.bits))
+            ]
+            for signature in signatures
+        ],
+        dtype=float,
+    )
+    log_outcomes = np.zeros((len(records), len(signatures)), dtype=float)
     for row_index, (observed, outcomes) in enumerate(records):
         for signal_index, value in enumerate(observed):
             if value is not None:
                 consistency[row_index] &= template.signals[:, signal_index] == value
-        for operation, (attempts, successes) in zip(operations, outcomes, strict=True):
-            if not attempts:
-                continue
-            route = checkout_route if operation == "checkout" else or_route
-            probability = np.clip(
-                float(prepared.q_by_operation[operation]) * route,
-                floor,
-                1.0 - floor,
-            )
-            log_outcomes[row_index] += successes * np.log(probability)
-            log_outcomes[row_index] += (attempts - successes) * np.log1p(-probability)
+        for class_index, signature in enumerate(signatures):
+            for operation, (attempts, successes) in zip(operations, outcomes, strict=True):
+                if not attempts:
+                    continue
+                route = signature[1] if operation == "checkout" else signature[0]
+                probability = min(
+                    max(float(prepared.q_by_operation[operation]) * route, floor),
+                    1.0 - floor,
+                )
+                log_outcomes[row_index, class_index] += successes * math.log(probability)
+                log_outcomes[row_index, class_index] += (
+                    attempts - successes
+                ) * math.log1p(-probability)
     return CandidateLikelihoodData(
         template=template,
         consistency=consistency,
+        class_masks=class_masks,
         log_outcomes=log_outcomes,
         multiplicities=np.asarray([compressed[record] for record in records], dtype=float),
+        probability_floor=floor,
     )
 
 
@@ -1029,20 +1049,20 @@ def _candidate_objective(
     parameters = {
         name: float(value) for name, value in zip(names, values, strict=True)
     }
-    probabilities = _state_probabilities(data.template, parameters)
-    log_state = np.full(probabilities.shape, -math.inf, dtype=float)
-    positive = probabilities > 0.0
-    log_state[positive] = np.log(probabilities[positive])
-    records = np.where(
-        data.consistency,
-        data.log_outcomes + log_state[np.newaxis, :],
-        -math.inf,
-    )
-    masses = logsumexp(records, axis=1)
-    if not np.all(np.isfinite(masses)):
-        return math.inf
-    result = -float(data.multiplicities @ masses)
-    return result if math.isfinite(result) else math.inf
+    if not all(math.isfinite(value) for value in parameters.values()):
+        return 1e100
+    try:
+        probabilities = _state_probabilities(data.template, parameters)
+    except (ValueError, FloatingPointError, RuntimeError):
+        return 1e100
+    consistent_mass = data.consistency.astype(float) * probabilities[np.newaxis, :]
+    class_masses = consistent_mass @ data.class_masks.T
+    log_terms = np.log(np.maximum(class_masses, data.probability_floor)) + data.log_outcomes
+    record_logs = logsumexp(log_terms, axis=1)
+    if not np.all(np.isfinite(record_logs)):
+        return 1e100
+    result = -float(data.multiplicities @ record_logs)
+    return result if math.isfinite(result) else 1e100
 
 
 def _fit_structural_candidate(

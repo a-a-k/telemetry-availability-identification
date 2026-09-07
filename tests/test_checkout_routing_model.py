@@ -185,7 +185,8 @@ class CheckoutRoutingModelTests(unittest.TestCase):
         for index in range(60):
             pa = int(index % 5 != 0)
             pb = int(index % 7 != 0)
-            ticks.append(HealthTick(at=1000.0 + index, elapsed_seconds=index, signals=(pa, pb, pa, pb)))
+            signals = (0, 0, 1, 1) if index == 0 else (pa, pb, pa, pb)
+            ticks.append(HealthTick(at=1000.0 + index, elapsed_seconds=index, signals=signals))
             for operation_index, operation in enumerate(operations):
                 requests.append(
                     RequestRecord(
