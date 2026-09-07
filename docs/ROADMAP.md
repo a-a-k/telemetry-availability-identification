@@ -284,3 +284,13 @@ audit 34128536931 describes timestamp/root disagreement and costs without anothe
 PMX invocation or a revised gate. The next PMX work is the correspondence between
 observed operation errors and an external semantic request, including propagated
 failures and omitted requests. Full-path comparative availability remains open.
+
+M9R completed its bounded retained-model control in run 34131147623. The raw
+repositories fail on missing contained software failure types. Explicit type
+completion removes that boundary but all twelve modified-model attempts return
+invalid zero-mass results after loop-PMF exceptions, including the zero-error
+control. The analytical inclusive/local composition oracles were not reached.
+All sixteen attempts, the initial pre-solver path failure and measured costs
+are reported; no additional PMX invocation or live evidence was used. A valid
+solver-compatible representation remains a prerequisite for the independent
+availability comparison. The current control does not enter a rewrite loop.
