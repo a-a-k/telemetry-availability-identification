@@ -1,0 +1,61 @@
+name: M9Q retained PMX usage-source audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect_retained_binary_source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Download the same binary for source inspection only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9q-source workflow-results/m9q-source
+          curl --fail --location --retry 8 --retry-all-errors 'https://se-gitlab-extern.fzi.de/SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci/-/raw/9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2/main.jar' --output workflow-input/m9q-source/main.jar
+          echo 'befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013  workflow-input/m9q-source/main.jar' | sha256sum --check
+      - name: Preserve complete embedded core and PCM-transformer Java sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib, io, json, os
+          from pathlib import Path, PurePosixPath
+          from zipfile import ZipFile
+          jar = Path('workflow-input/m9q-source/main.jar')
+          out = Path('workflow-results/m9q-source')
+          records = []
+          with ZipFile(jar) as outer:
+              for role, name in [('core', 'jar/org.palladiosimulator.pmx.core.jar'), ('pcm', 'jar/org.palladiosimulator.pmx.transformer.systemtopcm.jar')]:
+                  data = outer.read(name)
+                  with ZipFile(io.BytesIO(data)) as inner:
+                      for member in sorted(inner.namelist()):
+                          if not member.startswith('OSGI-OPT/src/') or not member.endswith('.java'):
+                              continue
+                          relative = PurePosixPath(member.removeprefix('OSGI-OPT/src/'))
+                          assert not relative.is_absolute() and '..' not in relative.parts
+                          content = inner.read(member)
+                          path = out / 'sources' / role / Path(relative)
+                          path.parent.mkdir(parents=True, exist_ok=True)
+                          path.write_bytes(content)
+                          records.append({'bundle': name, 'bundle_sha256': hashlib.sha256(data).hexdigest(), 'path': path.relative_to(out).as_posix(), 'bytes': len(content), 'sha256': hashlib.sha256(content).hexdigest()})
+          assert records and {r['bundle'] for r in records} == {'jar/org.palladiosimulator.pmx.core.jar', 'jar/org.palladiosimulator.pmx.transformer.systemtopcm.jar'}
+          manifest = {'kind': 'm9q_embedded_usage_source_audit', 'jar_sha256': hashlib.sha256(jar.read_bytes()).hexdigest(), 'run_id': os.environ['GITHUB_RUN_ID'], 'head_sha': os.environ['GITHUB_SHA'], 'dynamic_pmx_invocations': 0, 'files': records}
+          (out / 'source-manifest.json').write_text(json.dumps(manifest, indent=2, sort_keys=True) + '\n')
+          print(json.dumps({'source_files': len(records), 'dynamic_pmx_invocations': 0}))
+          PY
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: m9q-usage-source-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9q-source
+          if-no-files-found: error
+          retention-days: 90
