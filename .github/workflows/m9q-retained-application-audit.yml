@@ -1,0 +1,29 @@
+name: M9Q retained application description
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  retained_description:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Verify retained archives and describe the frozen mismatches
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/audit_m9q_retained_application.py
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: m9q-retained-application-description-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9q-retained-application
+          if-no-files-found: error
+          retention-days: 90
