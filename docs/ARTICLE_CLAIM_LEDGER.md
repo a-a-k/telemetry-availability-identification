@@ -55,6 +55,14 @@ independence. They distinguish assumption-driven point identification from
 precision supported by the weaker observation contract; the six LP checks use
 artificial inputs only. The atom-LP method is established prior work.
 
+[Conjunctive-observation target theorems](CONJUNCTIVE_OBSERVATION_TARGET_THEOREMS.md)
+prove equality of masked observation laws from complete supported moments,
+give a global criterion for polynomial/Boolean targets under that monomial
+observation law, and prove the duplicate-membership product reduction. An
+isolated exact rational reference has seven bounded unit tests. This does not
+solve arbitrary Boolean observation models, establish computational scalability,
+or replace the historical M0/M2/M3 evidence with new empirical results.
+
 [The calibration identity](M9P_CALIBRATION_IDENTITY.md) explains why an age curve
 can improve conditional prediction while its calibration-weighted marginal
 forecast remains close to a state-only or endpoint estimate. The exact identity
