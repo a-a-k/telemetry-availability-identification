@@ -13,6 +13,24 @@ Every inference panel is marked as blocked if any registered adequacy gate
 fails. The conditional diagnostic is explicitly distinguished from the
 learner-only marginal forecast.
 
+## Completed-run summary audit
+
+`scripts/audit_m9p_completed_summary.py --out OUTPUT` first requires the main
+run to be completely successful at the frozen head and attempt. It verifies
+all 124 completed jobs and all 485 declared source/summary artifact records,
+using the same one-day retention tolerance as the frozen 90-day retention gate.
+It downloads only the five generated summary archives, verifies their ZIP
+byte lengths and SHA-256 digests, checks candidate/evaluation file seals and
+the candidate-upload/access order, and compares the readiness file locks to
+the exact frozen Git bytes. It checks reported matrix identities, without
+recomputing predictions, scores, bootstrap intervals or decisions.
+
+The additional cost summary adds the final audit job to the remote report's
+explicitly incomplete runner-hour total and aggregates the generated cost
+rows once per method. Native telemetry, learner bundles and evaluator bundles
+are not downloaded. The full artifact API snapshot, compact artifact locks
+and verification report accompany the five local summary archives.
+
 ## Reproduction
 
 Use a separate plotting environment; the experiment dependencies are unchanged.
