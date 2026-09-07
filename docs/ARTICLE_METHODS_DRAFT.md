@@ -207,6 +207,14 @@ to separate conditional mechanism information, marginal gain relative to a
 state-only model, and adequacy of the mean forecast. Its outcome belongs in the
 completed-run report rather than being inferred from M9N.
 
+This temporal extension is an explicitly specified conditional-response model
+for checkout. It was developed through the preceding source and retained-data
+diagnosis; the signature compiler did not automatically discover it. Confirming
+that curve would not independently confirm the original static execution law,
+identify every underlying fault cause, or extend the conjunctive-observation
+theorem to a dynamic router. The mathematical and live results retain these
+different model classes and development histories.
+
 The conditional comparison uses observed test health to ask whether age carries
 mechanism information. The marginal forecast is produced from learner data
 before test access. Both may be useful, but they answer different questions.

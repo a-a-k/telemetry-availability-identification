@@ -20,6 +20,9 @@ its proposed contributions are not automatically established results.
 An affirmative answer to an earlier question does not establish a later one.
 In particular, a correct solver and identified parameters for a static route
 model do not establish the adequacy of that route model for checkout requests.
+Conversely, independently confirming M9P's explicitly specified temporal
+response curve would not validate the original static route law or establish
+that the identification compiler automatically discovered that curve.
 
 ## Evidence and permitted scope
 
