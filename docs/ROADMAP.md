@@ -246,6 +246,17 @@ and stable-endpoint controls, separate marginal and conditional claims, and
 explicit health-information costs. No new collection or general article claim
 is authorized by the M9N result itself.
 
+M9O completed that preregistration and its full remote precision-planning audit
+in first-attempt run 34113304974. The frozen inflated-variance rule selected
+30 fresh campaigns in each of four strata, 120 total and 62 nominal runner-hours.
+The primary conditional temporal contrast, matched state-only marginal
+equivalence, and marginal mean calibration have separate simultaneous-interval
+criteria. A matched stable endpoint is retained as an additional descriptive
+control. These are planned observations, not independent evidence already
+collected. The next gate is acquisition/analysis implementation and a separate
+four-cell no-fit preflight under new namespace and seed roots; the full matrix
+must follow that gate. Independent PMX parameterization remains outstanding.
+
 The preliminary article assessment is that the direction remains substantive,
 but its claimed advantage has not been demonstrated. Current evidence supports
 the correctness of the calculation for the specified model; it establishes
