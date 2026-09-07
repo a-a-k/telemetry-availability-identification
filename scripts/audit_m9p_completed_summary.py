@@ -243,7 +243,7 @@ def audit(root):
         "source_request_bytes": sum(int(row["raw_request_bytes"]) for row in acquisition),
         "source_health_bytes": sum(int(row["raw_health_bytes"]) for row in acquisition),
         "learner_request_rows": sum(int(row["learner_request_rows"]) for row in acquisition),
-        "health_ticks": sum(int(row["health_ticks"]) for row in acquisition),
+        "calibration_health_ticks": sum(int(row["health_ticks"]) for row in acquisition),
         "method_costs": methods,
         "summary_artifacts": {label: {field: by_name[name][field] for field in
             ("id", "name", "size_in_bytes", "digest", "created_at", "expires_at")}
