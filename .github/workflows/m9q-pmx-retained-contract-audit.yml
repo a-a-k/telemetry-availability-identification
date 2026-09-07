@@ -1,0 +1,51 @@
+name: M9Q retained observed-operation contract audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  retained_contract_audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install exact analysis dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m unittest discover -s tests -p test_pmx_usage_contract_audit.py -q
+      - name: Download the pinned original failure and static sources
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9q-review/metadata
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10018916274" > workflow-input/m9q-review/metadata/conformance.json
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10019108592" > workflow-input/m9q-review/metadata/source.json
+          gh run download 34122721945 --repo "$GITHUB_REPOSITORY" --name m9q-adapter-conformance-34122721945-a1 --dir workflow-input/m9q-review/retained
+          gh run download 34123438744 --repo "$GITHUB_REPOSITORY" --name m9q-usage-source-34123438744-a1 --dir workflow-input/m9q-review/source
+      - name: Audit retained reconstruction and source-grounded usage semantics
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9q-review
+          /usr/bin/time -v -o workflow-results/m9q-review/resource-usage.txt python -m telemetry_availability.pmx_usage_contract_audit --config configs/m9q_usage_oracle_review.json --retained workflow-input/m9q-review/retained --source-root workflow-input/m9q-review/source --metadata workflow-input/m9q-review/metadata --out workflow-results/m9q-review
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: m9q-retained-contract-audit-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9q-review
+          if-no-files-found: error
+          retention-days: 90
