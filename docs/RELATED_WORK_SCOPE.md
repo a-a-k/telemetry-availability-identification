@@ -129,6 +129,19 @@ automation or monitoring-cost claim must be framed. Our acquisition bytes and
 runner/process timers do not measure an instrumented-versus-uninstrumented
 monitoring effect.
 
+**Friederich and Lazarova-Molnar (2022), _Data-Driven Reliability Modeling of
+Smart Manufacturing Systems Using Process Mining_.** The full conference paper
+specifies event and resource-state logs, extracts a Petri-net process, adds
+resource fault models, and estimates activity/failure/repair distributions.
+Sections 3.1.4 and 3.2 use timestamped resource-state changes for the fitted
+durations. Section 4's data come from a simulated flow line; Section 5 places
+further validation and timed-transition policy identification in future work.
+This supplies a concrete extraction-and-parameterization predecessor, beyond
+a general aspiration to automate modeling. Its observed resource histories
+are a different input contract from our masked primitive/path inference; that
+distinction must not become an unsupported claim about all later versions of
+the authors' method. [WSC proceedings, full text](https://informs-sim.org/wsc22papers/254.pdf).
+
 **Friederich and Lazarova-Molnar (2025), _Data-driven Reliability Assessment of
 Manufacturing Systems Using Process Mining_.** The publisher's abstract
 describes extraction, simulation, validation and decision support, demonstrated
