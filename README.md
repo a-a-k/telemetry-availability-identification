@@ -277,11 +277,13 @@ identifiers in its manifest.
   drift. M9L then allocated `+0.171370` of the calibration residual to requests
   with an observed target-replica path loss while the two-path union remained
   up. Trace resolution was complete, but the retained set still is not a
-  per-call HAProxy decision log. M9M is therefore preregistered to test a
-  source-grounded request-level routing model: it audits the three mandatory
-  ProductCatalog call sites, freezes learner-only predictions before evaluator
-  access, and treats all intermediate routing laws as sensitivities rather than
-  post-hoc model choices.
+  per-call HAProxy decision log. M9M then froze six source-grounded
+  request-level candidates before evaluator access. M7 OR overpredicted by
+  `+0.173061`; the primary trace-requirement model improved Brier but
+  overcorrected to `-0.068427`. AND and OR bracketed 39/40 cells, yet no
+  intermediate model closed the signed gap, and the closest sensitivity was
+  not promoted. M9N therefore tests the registered temporal-failover branch
+  using calibration-only timing before any further collection.
   Separately, 0/160 qualified learner bundles retained raw
   spans. Four raw samples are learner-only schema-adaptable, but lack the direct
   Spring-WebMVC instrumentation semantics and OTel needs a format adapter. No

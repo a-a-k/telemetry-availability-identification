@@ -224,12 +224,14 @@ with 95% interval `[+0.172425, +0.187534]`, and route-down successes `-0.007888`
 The residual term is positive in all 40 calibration and test campaigns. M9L's
 retained-evidence discrimination then localized `+0.171370` of the calibration
 residual to observed replica-path loss while the aggregate union remained up,
-with complete trace resolution but no exact per-call assignment claim. M9M is
-now preregistered: it audits three required ProductCatalog call sites, stages a
-learner-only boundary, freezes the full routing-candidate matrix before opening
-the evaluator, and forbids selecting a sensitivity by its test score. This is
-an exploratory single-operation model test, not a revised M7 or article-level
-accuracy claim.
+with complete trace resolution but no exact per-call assignment claim. M9M then
+audited three required ProductCatalog call sites and froze all request-level
+candidates before opening the evaluator. OR overpredicted by `+0.173061`, while
+the primary trace-requirement model reduced Brier but underpredicted by
+`-0.068427`; its interval excluded zero. Static AND and OR bracketed 39/40
+cells, but no intermediate law closed the gap and none was selected by its test
+score. The accepted branch is a calibration-only temporal-failover model in
+M9N, not a revised M7 or article-level accuracy claim.
 
 The preliminary article assessment is that the direction remains substantive,
 but its claimed advantage has not been demonstrated. Current evidence supports
