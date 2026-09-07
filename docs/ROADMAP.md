@@ -274,3 +274,13 @@ identities; no preflight observation enters confirmation. Complete native main
 streams will be retained for 90 days alongside separated learner/evaluator
 bundles. PMX application input constraints and a calibration-identity derivation
 were documented without a new PMX run or a claim about prospective outcomes.
+
+The main M9P run 34118845320 is collecting its frozen 120 fresh campaigns.
+M9Q's separate historical application census is complete in run 34125799582:
+DeathStarBench lacks the explicit SERVER marking required by this adapter, while
+OpenTelemetry's selected operations, errors and call edges are retained but its
+generated workload differs from the parent-root contract. The retained-output
+audit 34128536931 describes timestamp/root disagreement and costs without another
+PMX invocation or a revised gate. The next PMX work is the correspondence between
+observed operation errors and an external semantic request, including propagated
+failures and omitted requests. Full-path comparative availability remains open.

@@ -1,7 +1,7 @@
 # Working claim ledger for the SIMPAT continuation
 
 Status: evidence organization while M9P independent acquisition is running and
-M9Q proceeds from repaired conformance to its application census. This is not an article verdict or a substitute for
+M9Q's four-sample application census is complete. This is not an article verdict or a substitute for
 the missing experiments. The original SIMPAT design remains a research plan;
 its proposed contributions are not automatically established results.
 
@@ -37,7 +37,7 @@ model do not establish the adequacy of that route model for checkout requests.
 | [M9K–M](milestones/M9M_CHECKOUT_ROUTING_MODEL.md) | Checkout's static-route discrepancy was localized using source, learner telemetry and preserved outcomes; static AND and OR bracket most examined cells. | Reused M7 evidence supports mechanism development. A path-failure association is not an observed backend assignment for every individual call. |
 | [M9N](milestones/M9N_CHECKOUT_TEMPORAL_FAILOVER.md) | The temporal mechanism diagnostic improved conditional fit and closed the signed marginal gap on reused data, while state-only and temporal marginal forecasts were nearly identical. | Reused test evidence; no independently confirmed incremental marginal value from age. Conditional held-out health is diagnostic input, not part of a marginal learner-only forecast. |
 | [M9O](milestones/M9O_TEMPORAL_CONFIRMATION_DESIGN.md), [M9P protocol](M9P_TEMPORAL_CONFIRMATION_PROTOCOL.md) | A 120-campaign independent design freezes conditional replication, marginal temporal/state comparison and signed-error adequacy, with matched endpoint controls. | Collection is running. No result or inferential conclusion may be filled in from M9N, the no-fit preflight, or incomplete main batches. |
-| [M9Q conformance](milestones/M9Q_PMX_OBSERVED_OPERATION_CONFORMANCE.md) | The measured observed-server adapter retained all six artificial inventories and structural/error correspondences, after a source-grounded repair of the failed workload-node oracle. | Original prospective gate remains failed; the repaired acceptance and pending historical census do not establish full external-request availability, temporal failover or a calibrated performance model. |
+| [M9Q conformance](milestones/M9Q_PMX_OBSERVED_OPERATION_CONFORMANCE.md), [application census](milestones/M9Q_PMX_APPLICATION_CENSUS.md) | After the explicit artificial-oracle repair, the four historical samples yielded two no-SERVER-input cases and two fully retained observed-server inventories with matching operation/error and structural checks, but mismatched usage entries. | Original failures remain; timestamp-based workload entry selection differs from parent-root semantics. No full external-request mapping, calibrated performance model or availability forecast is established. |
 
 ## Mathematical material that can be developed independently of pending outcomes
 
@@ -48,6 +48,12 @@ indistinguishable-observation counterexample when those assumptions are relaxed.
 The inclusion–exclusion extension is a mathematical observation, not an
 implemented scalable estimator for arbitrary graphs or a novelty claim for the
 union formula.
+
+[Sharp two-path bounds](B2_SHARP_OBSERVABLE_BOUNDS.md) now give the exact attainable
+target intervals under containment alone and under communication-vector/health
+independence. They distinguish assumption-driven point identification from
+precision supported by the weaker observation contract; the six LP checks use
+artificial inputs only. The atom-LP method is established prior work.
 
 [The calibration identity](M9P_CALIBRATION_IDENTITY.md) explains why an age curve
 can improve conditional prediction while its calibration-weighted marginal
@@ -83,8 +89,8 @@ comparison; runner times and artifact sizes do not establish that effect.
 
 - Complete and audit all preregistered M9P campaigns, frozen candidates,
   evaluation outputs, adequacy gates and simultaneous intervals.
-- Complete M9Q's gated four-sample application census, retaining the original
-  conformance failure, explicit oracle repair and unresolved operation coverage.
+- Use the completed M9Q census and retained failures to define the next semantic
+  mapping; no extra launcher or extractor repair is needed to report this stage.
 - Specify the remaining independent PMX availability comparison only after
   observed-operation errors, propagated failures, missing requests, replication
   and external semantic outcomes have a defensible correspondence.
