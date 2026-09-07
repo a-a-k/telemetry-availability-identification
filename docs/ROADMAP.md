@@ -221,11 +221,15 @@ then audited all 360 selected files and exactly decomposed the 40 N/ND checkout
 campaigns. The test mean gap `+0.173061` consists of route-state exposure
 `+0.000917` (interval includes zero), route-up residual invariance `+0.180031`
 with 95% interval `[+0.172425, +0.187534]`, and route-down successes `-0.007888`.
-The residual term is positive in all 40 calibration and test campaigns, so the
-next bounded milestone is M9L's retained-evidence discrimination between
-selected-replica routing and failures that remain despite an up selected path.
-This is a physical-cause diagnostic, not a revised prediction or a new accuracy
-claim.
+The residual term is positive in all 40 calibration and test campaigns. M9L's
+retained-evidence discrimination then localized `+0.171370` of the calibration
+residual to observed replica-path loss while the aggregate union remained up,
+with complete trace resolution but no exact per-call assignment claim. M9M is
+now preregistered: it audits three required ProductCatalog call sites, stages a
+learner-only boundary, freezes the full routing-candidate matrix before opening
+the evaluator, and forbids selecting a sensitivity by its test score. This is
+an exploratory single-operation model test, not a revised M7 or article-level
+accuracy claim.
 
 The preliminary article assessment is that the direction remains substantive,
 but its claimed advantage has not been demonstrated. Current evidence supports

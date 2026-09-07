@@ -274,10 +274,14 @@ identifiers in its manifest.
   clean residual into health-defined route-up requests contributed `+0.180031`
   (`[+0.172425, +0.187534]`) and was positive in all 40 campaigns. The same
   distinction appears in calibration, so it is not explained only by test
-  drift. This localizes a model boundary but not its physical cause; M9L next
-  uses retained calibration trace assignments to distinguish selected-replica
-  routing from internal or omitted-dependency failure, not open-ended tool
-  repair or post-hoc prediction tuning.
+  drift. M9L then allocated `+0.171370` of the calibration residual to requests
+  with an observed target-replica path loss while the two-path union remained
+  up. Trace resolution was complete, but the retained set still is not a
+  per-call HAProxy decision log. M9M is therefore preregistered to test a
+  source-grounded request-level routing model: it audits the three mandatory
+  ProductCatalog call sites, freezes learner-only predictions before evaluator
+  access, and treats all intermediate routing laws as sensitivities rather than
+  post-hoc model choices.
   Separately, 0/160 qualified learner bundles retained raw
   spans. Four raw samples are learner-only schema-adaptable, but lack the direct
   Spring-WebMVC instrumentation semantics and OTel needs a format adapter. No

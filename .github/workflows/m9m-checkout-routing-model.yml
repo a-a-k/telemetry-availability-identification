@@ -1,0 +1,251 @@
+name: M9M checkout request-level routing model
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: m9m-checkout-routing-model-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9m_checkout_routing_model.json
+  PYTHON_VERSION: 3.13.15
+  M8A_RUN_ID: "34016153918"
+  M8A_PRESERVED_ARTIFACT: m8-preserved-m7-evidence-33990678586-34016153918
+  M8A_AUDIT_ARTIFACT: m8a-m7-integrity-arithmetic-34016153918
+  M9L_RUN_ID: "34085244404"
+  M9L_CONTRACT_ARTIFACT: m9l-failure-cause-contract-34085244404
+  M9L_DISCRIMINATION_ARTIFACT: m9l-failure-cause-discrimination-34085244404
+  M9L_DECISION_ARTIFACT: m9l-failure-cause-decision-34085244404
+
+jobs:
+  routing_contract:
+    name: Verify M9L branch and three-call source contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Check out pinned OpenTelemetry Demo source
+        uses: actions/checkout@v7
+        with:
+          repository: open-telemetry/opentelemetry-demo
+          ref: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+          path: workflow-input/m9m/upstream/opentelemetry-demo
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9M
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_routing_model validate --config "$CONFIG"
+
+      - name: Capture artifact metadata and bounded upstream evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          metadata="workflow-input/m9m/metadata"
+          mkdir -p "$metadata" workflow-input/m9m/m8a-audit workflow-input/m9m/m9l-contract workflow-input/m9m/m9l-discrimination workflow-input/m9m/m9l-decision
+          for role in m8a_preserved m8a_audit m9l_contract m9l_discrimination m9l_decision; do
+            artifact_id="$(jq -r ".evidence.${role}.artifact_id" "$CONFIG")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id" > "$metadata/${role}.json"
+          done
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9m/m8a-audit
+          gh run download "$M9L_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9L_CONTRACT_ARTIFACT" --dir workflow-input/m9m/m9l-contract
+          gh run download "$M9L_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9L_DISCRIMINATION_ARTIFACT" --dir workflow-input/m9m/m9l-discrimination
+          gh run download "$M9L_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9L_DECISION_ARTIFACT" --dir workflow-input/m9m/m9l-decision
+
+      - name: Build frozen routing-model contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9m-contract
+          /usr/bin/time -v -o workflow-results/m9m-contract/resource-usage.txt python -m telemetry_availability.checkout_routing_model build-contract \
+            --config "$CONFIG" \
+            --m8a-preserved-metadata workflow-input/m9m/metadata/m8a_preserved.json \
+            --m8a-audit-metadata workflow-input/m9m/metadata/m8a_audit.json \
+            --m9l-contract-metadata workflow-input/m9m/metadata/m9l_contract.json \
+            --m9l-discrimination-metadata workflow-input/m9m/metadata/m9l_discrimination.json \
+            --m9l-decision-metadata workflow-input/m9m/metadata/m9l_decision.json \
+            --m8a-audit-root workflow-input/m9m/m8a-audit \
+            --m9l-contract-root workflow-input/m9m/m9l-contract \
+            --m9l-discrimination-root workflow-input/m9m/m9l-discrimination \
+            --m9l-decision-root workflow-input/m9m/m9l-decision \
+            --upstream-root workflow-input/m9m/upstream/opentelemetry-demo \
+            --out workflow-results/m9m-contract
+
+      - name: Upload M9M contract
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9m-checkout-routing-contract-${{ github.run_id }}
+          path: workflow-results/m9m-contract
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  learner_candidate_freeze:
+    name: Fit and freeze learner-only routing candidates
+    needs: [routing_contract]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9M
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_routing_model validate --config "$CONFIG"
+
+      - name: Download immutable M9M contract
+        uses: actions/download-artifact@v8
+        with:
+          name: m9m-checkout-routing-contract-${{ github.run_id }}
+          path: workflow-input/m9m/contract
+
+      - name: Download retained evidence for bounded staging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9m/m8a-preserved workflow-input/m9m/m8a-audit
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_PRESERVED_ARTIFACT" --dir workflow-input/m9m/m8a-preserved
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9m/m8a-audit
+
+      - name: Stage learner-only files and remove combined source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m telemetry_availability.checkout_routing_model stage-learner \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9m/contract/contract-manifest.json \
+            --qualified-root workflow-input/m9m/m8a-preserved/m8-preserved/qualified \
+            --m8a-audit-root workflow-input/m9m/m8a-audit \
+            --out workflow-input/m9m/learner-only
+          combined_root="$(realpath workflow-input/m9m/m8a-preserved)"
+          case "$combined_root" in
+            "$GITHUB_WORKSPACE"/workflow-input/m9m/m8a-preserved) ;;
+            *) echo "Refusing to remove unexpected path: $combined_root" >&2; exit 1 ;;
+          esac
+          rm -rf -- "$combined_root"
+          test ! -e workflow-input/m9m/m8a-preserved
+          test ! -e workflow-input/m9m/learner-only/m7-qualified-opentelemetry_demo-colocated-N-r0-33990678586/evaluator
+
+      - name: Fit and freeze all predeclared candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9m-candidates
+          /usr/bin/time -v -o workflow-results/m9m-candidates/resource-usage.txt python -m telemetry_availability.checkout_routing_model freeze-candidates \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9m/contract/contract-manifest.json \
+            --learner-root workflow-input/m9m/learner-only \
+            --out workflow-results/m9m-candidates
+
+      - name: Upload immutable candidate matrix
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9m-checkout-routing-candidates-${{ github.run_id }}
+          path: workflow-results/m9m-candidates
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
+
+  heldout_evaluation:
+    name: Score frozen candidates on retained evaluator
+    needs: [routing_contract, learner_candidate_freeze]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9M
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_routing_model validate --config "$CONFIG"
+
+      - name: Download contract and already-frozen candidates
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9m-checkout-routing-*-${{ github.run_id }}
+          path: workflow-input/m9m/current
+
+      - name: Download retained evaluator only after candidate freeze
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9m/evaluation/m8a-preserved workflow-input/m9m/evaluation/m8a-audit
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_PRESERVED_ARTIFACT" --dir workflow-input/m9m/evaluation/m8a-preserved
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9m/evaluation/m8a-audit
+
+      - name: Audit and score frozen candidate matrix
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9m-evaluation
+          /usr/bin/time -v -o workflow-results/m9m-evaluation/resource-usage.txt python -m telemetry_availability.checkout_routing_model evaluate \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9m/current/m9m-checkout-routing-contract-${GITHUB_RUN_ID}/contract-manifest.json \
+            --candidate-root workflow-input/m9m/current/m9m-checkout-routing-candidates-${GITHUB_RUN_ID} \
+            --qualified-root workflow-input/m9m/evaluation/m8a-preserved/m8-preserved/qualified \
+            --analysis-root workflow-input/m9m/evaluation/m8a-preserved/m8-preserved/analysis \
+            --m8a-audit-root workflow-input/m9m/evaluation/m8a-audit \
+            --out workflow-results/m9m-evaluation
+
+      - name: Upload M9M held-out evaluation
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9m-checkout-routing-evaluation-${{ github.run_id }}
+          path: workflow-results/m9m-evaluation
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
