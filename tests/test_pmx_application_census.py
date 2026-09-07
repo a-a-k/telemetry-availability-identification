@@ -4,11 +4,28 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from telemetry_availability.pmx_application_census import AdapterError, prepare, summarize
+from telemetry_availability.pmx_application_census import AdapterError, historical_learner_ids, prepare, summarize
 from telemetry_availability.pmx_observed_operations import file_sha256
 
 
 class ApplicationCensusTests(unittest.TestCase):
+    def test_historical_sentinels_are_excluded_and_overlap_is_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'trace-join.csv'
+            path.write_text('period,trace_id,request_success\nsentinel,aa,unused\nbaseline,bb,unused\ncalibration,cc,unused\ntest,dd,unused\n')
+            selected, audit = historical_learner_ids(path)
+            self.assertEqual(selected, {'bb', 'cc'})
+            self.assertEqual(audit['excluded_test_or_sentinel_trace_ids'], 2)
+            self.assertEqual(audit['period_rows']['sentinel'], 1)
+            self.assertFalse(audit['outcome_columns_used'])
+            with path.open('a') as stream:
+                stream.write('sentinel,bb,unused\n')
+            with self.assertRaisesRegex(AdapterError, 'excluded_overlap'):
+                historical_learner_ids(path)
+            path.write_text('period,trace_id\nunknown,aa\n')
+            with self.assertRaisesRegex(AdapterError, 'unknown_historical_period'):
+                historical_learner_ids(path)
+
     def test_rejected_acceptance_prevents_historical_input_access(self):
         with patch.dict('os.environ', {'GITHUB_ACTIONS': 'true'}), \
              patch('telemetry_availability.pmx_application_census.validate', return_value={}), \

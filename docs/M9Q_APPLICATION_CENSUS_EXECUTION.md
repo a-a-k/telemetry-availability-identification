@@ -51,3 +51,29 @@ projection costs, PMX invocation costs and shared source preparation are reporte
 separately. Engineering effort and total monitoring overhead are not inferred
 from these timers. The result determines what further semantic mapping is needed
 for an independent PMX availability comparison; it does not itself provide it.
+
+## Retained pre-extraction technical amendment
+
+Run 34125261493 at `5868cac7503a44d9462559871441821e9327c803` passed the
+repaired-acceptance gate and source byte checks, then failed before parsing the
+first native stream or invoking PMX. The generic three-period membership reader
+rejected the historical `sentinel` label. The frozen M7 collector explicitly
+creates those requests in `_semantic_sentinels` and prepends them to
+`trace-join.csv`; they are outside baseline/calibration and were excluded by
+the earlier M9G selection rule.
+
+The repaired application boundary accepts exactly baseline, calibration, test
+and sentinel labels, retains only the first two, and rejects any learner trace
+ID also present in test or sentinel. Other labels remain errors. It records
+period counts without using outcome columns. The required 3,840 learner IDs,
+four samples, native adapter, model oracle, binary and invocation budgets are
+unchanged. The original config and code are retained at the tested Git commit;
+the new config records this amendment and renewed implementation hashes.
+
+The failed source-preparation artifact 10019825925 (719 compressed bytes,
+SHA-256 `170684aa53f895407ce4b39e5e29b3d5ad4a5b6da0be3bd4e1d4468fcde1e018`)
+and its empty four-sample census artifact 10019840031 (504 compressed bytes,
+SHA-256 `e6a04b1921a498e574d8bbda0b31e2d3314a62b549f9d0b4247199ebcf3aa08b`)
+are preserved with 90-day retention. The census records four missing outputs,
+zero extractor invocations and zero forecasts. This is a membership-parser
+correction before model extraction, not a change selected by model accuracy.

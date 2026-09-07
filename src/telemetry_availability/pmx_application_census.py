@@ -15,7 +15,7 @@ from typing import Any
 from xml.etree import ElementTree as ET
 
 from .pmx_adapter_conformance import JAR_SHA, OPTIONS_SHA, compare_pcm, inspect_pcm, validate_config
-from .pmx_observed_operations import AdapterError, convert, file_sha256, read_native, select_learner_ids, write_conversion
+from .pmx_observed_operations import AdapterError, _id, convert, file_sha256, read_native, write_conversion
 from .pmx_usage_contract_audit import _metadata, aggregated_entry_counts, reconstructed_inventory, usage_details
 
 
@@ -61,6 +61,29 @@ def check_gate(config_path: Path, review: Path, metadata: Path) -> dict[str, Any
             "review_file_sha256": lock["file_sha256"], "checked_at": datetime.now(timezone.utc).isoformat()}
 
 
+def historical_learner_ids(path: Path) -> tuple[set[str], dict[str, Any]]:
+    """The M7 join includes declared semantic sentinels before the three periods."""
+    selected, excluded = set(), set()
+    periods: Counter[str] = Counter()
+    with path.open(encoding="utf-8-sig", newline="") as source:
+        reader = csv.DictReader(source)
+        if not {"period", "trace_id"}.issubset(reader.fieldnames or []):
+            raise AdapterError("missing_historical_membership_columns")
+        for row in reader:
+            period = row["period"]
+            if period not in {"baseline", "calibration", "test", "sentinel"}:
+                raise AdapterError("unknown_historical_period")
+            periods[period] += 1
+            if not row["trace_id"]:
+                continue
+            trace_id = _id(row["trace_id"])
+            (selected if period in {"baseline", "calibration"} else excluded).add(trace_id)
+    if selected & excluded:
+        raise AdapterError("historical_learner_excluded_overlap")
+    return selected, {"period_rows": dict(periods), "selected_trace_ids": len(selected),
+                      "excluded_test_or_sentinel_trace_ids": len(excluded), "outcome_columns_used": False}
+
+
 def prepare(config_path: Path, source_root: Path, audit_root: Path, metadata_root: Path,
             review: Path, options: Path, out: Path) -> dict[str, Any]:
     _remote()
@@ -101,7 +124,7 @@ def prepare(config_path: Path, source_root: Path, audit_root: Path, metadata_roo
         if identity != expected_identity:
             raise AdapterError("historical_campaign_identity_differs")
         started = time.perf_counter()
-        selected = select_learner_ids(directory / "trace-join.csv")
+        selected, selection_audit = historical_learner_ids(directory / "trace-join.csv")
         if len(selected) != 3840:
             raise AdapterError("historical_learner_selection_count_differs")
         grouped, parse_audit = read_native(directory / sample["native_file"], selected, sample["native_format"])
@@ -110,6 +133,7 @@ def prepare(config_path: Path, source_root: Path, audit_root: Path, metadata_roo
         target = out / sample["key"]
         write_conversion(result, target / "adapter")
         _write(target / "adapter/parse_audit.json", parse_audit)
+        _write(target / "adapter/selection_audit.json", selection_audit)
         _write(target / "traces/observed.json", result["envelope"])
         (target / "Options.txt").write_text(original_options.replace("traces/jaegercustomers.json", "traces/observed.json"), encoding="utf-8")
         roots = [span for trace in result["envelope"]["data"] for span in trace["spans"] if not span["references"]]
