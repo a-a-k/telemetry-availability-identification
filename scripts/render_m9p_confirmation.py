@@ -136,7 +136,7 @@ def render(candidate_path, evaluation_path, audit_path, output, illustrative_onl
                 fontsize=12, weight="bold", color="#142b43")
         ax.text(0, 1.36, subtitle, transform=ax.transAxes, fontsize=9, color="#4b5563")
         status = evaluation[decision].replace("_", " ")
-        ax.text(0, 1.02, f"{estimate:+.6f}  [{low:+.6f}, {high:+.6f}]",
+        ax.text(0, 1.02, f"{estimate:+.6g}  [{low:+.6g}, {high:+.6g}]",
                 transform=ax.transAxes, fontsize=9, color=color)
         ax.text(1, 1.02, status, transform=ax.transAxes, ha="right", fontsize=9)
     source_note = ("Artificial inputs only; no campaign results or artifact census verified."

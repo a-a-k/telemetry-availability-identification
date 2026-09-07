@@ -2,8 +2,8 @@
 
 Status: a focused primary-source comparison for the current mathematical and
 experimental claims, not an exhaustive literature review. Read on 2026-09-07.
-The main M9P result and M9R composition result are still pending when this
-version is written. This ledger does not select favorable comparators or turn
+The main M9P result is pending; M9R's bounded composition census is complete
+without a valid probability. This ledger does not select favorable comparators or turn
 an implementation difficulty into evidence of scientific superiority.
 
 ## Identification and the observation contract
@@ -41,6 +41,18 @@ paper's main contribution characterizes identification by topology and monitor
 placement under controllable cycle-free paths. Our duplicate-membership product
 reduction shares that elementary inseparability mechanism; it does not establish
 a new minimum-monitor placement algorithm. [Author-hosted paper](https://www.commsp.ee.ic.ac.uk/~wiser/publications/Liang/NetworkTomography-IMC13.pdf).
+
+**Nguyen and Thiran (2007), _Network Loss Inference with Second Order
+Statistics of End-to-End Flows_.** Section 3.1 first collapses indistinguishable
+consecutive links into virtual links and removes unobserved columns. Sections
+3–5 then use covariances across flow snapshots to identify link-loss variances
+under declared routing and sampling assumptions; the mean-loss inference also
+uses the congestion/variance relation. This is a close precedent for explicit
+alias reduction and obtaining information beyond marginal path means. Its
+random snapshot log rates and covariance system differ from our Bernoulli
+joint-success moments. We must not identify those two uses of “second order,”
+or claim that link-alias reduction originated here.
+[Conference paper, full text](https://conferences.sigcomm.org/imc/2007/papers/imc70.pdf).
 
 **Geiger, Meek and Sturmfels (2006), _On the Toric Algebra of Graphical Models_.**
 Section 2 connects monomial parameterizations with log-linear statistical models;
@@ -116,6 +128,25 @@ to our deployment. It identifies the existing research line against which any
 automation or monitoring-cost claim must be framed. Our acquisition bytes and
 runner/process timers do not measure an instrumented-versus-uninstrumented
 monitoring effect.
+
+**Friederich and Lazarova-Molnar (2025), _Data-driven Reliability Assessment of
+Manufacturing Systems Using Process Mining_.** The publisher's abstract
+describes extraction, simulation, validation and decision support, demonstrated
+with two flow-line cases. This already occupies the broad claim of a data-driven
+reliability-model lifecycle, although it addresses manufacturing. Only the
+abstract and publication metadata were accessible in this check; no comparison
+of its detailed identifiability guarantees is inferred from their absence in
+the abstract. The issue date is August 2025 and the online-first date is
+30 December 2024. [Publisher page](https://journals.sagepub.com/doi/10.1177/00375497241302866),
+[author-institution record](https://portal.findresearcher.sdu.dk/en/publications/data-driven-reliability-assessment-of-manufacturing-systems-using/).
+
+The authors' earlier equipment-centric study explicitly describes using event
+logs and resource-state logs to extract stochastic Petri nets, simulate them,
+and validate a wafer-fabrication case. Thus combining interaction/event and
+state evidence for reliability simulation also has direct precedents. This
+statement uses the author institution's abstract, not an unverified claim about
+its handling of partial observability or causal fault separation.
+[Friederich, Cai, Gan and Lazarova-Molnar, SIGSIM-PADS 2023](https://portal.findresearcher.sdu.dk/en/publications/equipment-centric-data-driven-reliability-assessment-of-complex-m/).
 
 ## Consequences for the current article argument
 
