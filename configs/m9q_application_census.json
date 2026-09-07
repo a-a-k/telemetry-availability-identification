@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "id": "m9q_historical_application_census",
+  "samples": [
+    {
+      "key": "deathstar-colocated",
+      "profile": "deathstarbench_social_network",
+      "placement": "colocated",
+      "artifact_directory": "m7-raw-audit-sample-deathstarbench_social_network-colocated-NCD-r0-33990678586",
+      "native_file": "raw-telemetry.json",
+      "native_format": "jaeger_json_v1",
+      "declared_host": "github-runner-33990678586-deathstar-colocated-NCD-r0"
+    },
+    {
+      "key": "deathstar-split",
+      "profile": "deathstarbench_social_network",
+      "placement": "split",
+      "artifact_directory": "m7-raw-audit-sample-deathstarbench_social_network-split-NCD-r0-33990678586",
+      "native_file": "raw-telemetry.json",
+      "native_format": "jaeger_json_v1",
+      "declared_host": "github-runner-33990678586-deathstar-split-NCD-r0"
+    },
+    {
+      "key": "otel-colocated",
+      "profile": "opentelemetry_demo",
+      "placement": "colocated",
+      "artifact_directory": "m7-raw-audit-sample-opentelemetry_demo-colocated-NCD-r0-33990678586",
+      "native_file": "raw-telemetry.log",
+      "native_format": "otlp_jsonl_v1",
+      "declared_host": "github-runner-33990678586-otel-colocated-NCD-r0"
+    },
+    {
+      "key": "otel-split",
+      "profile": "opentelemetry_demo",
+      "placement": "split",
+      "artifact_directory": "m7-raw-audit-sample-opentelemetry_demo-split-NCD-r0-33990678586",
+      "native_file": "raw-telemetry.log",
+      "native_format": "otlp_jsonl_v1",
+      "declared_host": "github-runner-33990678586-otel-split-NCD-r0"
+    }
+  ],
+  "internal_watchdog_seconds": 1800,
+  "technical_repetitions": 1,
+  "scope": "historical_learner_observed_operation_fidelity_no_availability_score",
+  "inventory_file_sha256": "fe526c86bc8d0a5c425d40d4a3a5a10401607920663517805aa8f55436534dcd",
+  "artifacts": {
+    "preserved": {
+      "id": 9983956440,
+      "name": "m8-preserved-m7-evidence-33990678586-34016153918",
+      "size_in_bytes": 78577341,
+      "digest": "978b380bf54be67ec13b2ebbfaac4464ee5653106ee68176fefcf2db4e85e271",
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505"
+    },
+    "inventory": {
+      "id": 9983956747,
+      "name": "m8a-m7-integrity-arithmetic-34016153918",
+      "size_in_bytes": 737045,
+      "digest": "eca453e577ccac02f26716660062664355dde046748456b4695caa7480ba3439",
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505"
+    }
+  },
+  "repository_locks": [
+    {
+      "path": "configs/m9q_application_acceptance.json",
+      "bytes": 1543,
+      "sha256": "e26176185559c6ebb390c01d98bac359d3bc38dbf2552683218d5a5a59325772"
+    },
+    {
+      "path": "docs/M9Q_APPLICATION_CENSUS_EXECUTION.md",
+      "bytes": 3527,
+      "sha256": "124f4d26da3fe9e1fe17b4b7172af0cd5eb359ed0f9ae7d9fcc6810ff0628109"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_census.py",
+      "bytes": 16220,
+      "sha256": "6ad4987f470ac26713c8a8ca0d9444bb13756d2b1e376b17d9682a0a120fa094"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_usage_contract_audit.py",
+      "bytes": 10059,
+      "sha256": "77f53abd092e91914fb8ecea7325a5f968657f872239fa804c19a207002bff05"
+    },
+    {
+      "path": "tests/test_pmx_application_census.py",
+      "bytes": 3308,
+      "sha256": "4528ba2a4948ca7f219933a33688a7e4eb99dc60a27b8ccfac2c91290bd6f283"
+    },
+    {
+      "path": ".github/workflows/m9q-pmx-application-census.yml",
+      "bytes": 7271,
+      "sha256": "6b1149e0a57b10e0ac8f31b3e81ec3d80410f25b895ab0e8e8a50fb64bfbe8b8"
+    }
+  ]
+}

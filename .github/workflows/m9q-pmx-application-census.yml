@@ -1,0 +1,158 @@
+name: M9Q historical PMX application census
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: m9q-application-census-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PYTHON_VERSION: 3.13.15
+  CONFIG: configs/m9q_application_census.json
+  AUTHOR_BASE: https://se-gitlab-extern.fzi.de/SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci/-/raw/9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+
+jobs:
+  learner_preparation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install exact environment and validate the frozen census
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_application_census validate --config "$CONFIG"
+      - name: Verify the accepted repaired contract before source access
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9q-app/metadata
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/10019357941" > workflow-input/m9q-app/metadata/review.json
+          gh run download 34124080148 --repo "$GITHUB_REPOSITORY" --name m9q-retained-contract-audit-34124080148-a1 --dir workflow-input/m9q-app/review
+          python -m telemetry_availability.pmx_application_census gate --config "$CONFIG" --review workflow-input/m9q-app/review/retained-contract-audit.json --metadata-root workflow-input/m9q-app/metadata
+      - name: Retrieve exact historical sources and their independent inventory
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/9983956440" > workflow-input/m9q-app/metadata/preserved.json
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/9983956747" > workflow-input/m9q-app/metadata/inventory.json
+          gh run download 34016153918 --repo "$GITHUB_REPOSITORY" --name m8-preserved-m7-evidence-33990678586-34016153918 --dir workflow-input/m9q-app/preserved
+          gh run download 34016153918 --repo "$GITHUB_REPOSITORY" --name m8a-m7-integrity-arithmetic-34016153918 --dir workflow-input/m9q-app/inventory
+          curl --fail --location --retry 8 --retry-all-errors "$AUTHOR_BASE/Options.txt" --output workflow-input/m9q-app/Options.txt
+      - name: Build all four learner-only observed-operation contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9q-app
+          /usr/bin/time -v -o workflow-results/m9q-app/preparation-resource-usage.txt python -m telemetry_availability.pmx_application_census prepare --config "$CONFIG" --source-root workflow-input/m9q-app/preserved/m8-preserved --audit-root workflow-input/m9q-app/inventory --metadata-root workflow-input/m9q-app/metadata --review workflow-input/m9q-app/review/retained-contract-audit.json --options workflow-input/m9q-app/Options.txt --out workflow-results/m9q-app/learners
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: m9q-application-learners-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9q-app
+          if-no-files-found: error
+          retention-days: 90
+
+  application:
+    needs: learner_preparation
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        sample: [deathstar-colocated, deathstar-split, otel-colocated, otel-split]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "11"
+      - name: Install exact environment and validate the frozen census
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.pmx_application_census validate --config "$CONFIG"
+      - name: Receive only the published learner contracts
+        uses: actions/download-artifact@v8
+        with:
+          name: m9q-application-learners-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-input/m9q-app/learners
+      - name: Obtain the pinned PMX binary
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 8 --retry-all-errors "$AUTHOR_BASE/main.jar" --output workflow-input/m9q-app/main.jar
+          echo 'befe481ab6f9db9d7b283a2ca810b9ec11a368e4ddc8cb6c669b73590d431013  workflow-input/m9q-app/main.jar' | sha256sum --check
+      - name: Extract once and audit the complete observed projection
+        env:
+          SAMPLE: ${{ matrix.sample }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m telemetry_availability.pmx_application_census execute --config "$CONFIG" --contract "workflow-input/m9q-app/learners/learners/$SAMPLE" --jar workflow-input/m9q-app/main.jar --out "workflow-results/m9q-app/$SAMPLE"
+          java -version > "workflow-results/m9q-app/$SAMPLE/java-version.txt" 2>&1
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: m9q-application-result-${{ matrix.sample }}-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9q-app/${{ matrix.sample }}
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
+
+  census:
+    needs: [learner_preparation, application]
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install exact analysis environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: m9q-application-result-*-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-input/m9q-app/results
+      - name: Report all four sample identities including missing outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m telemetry_availability.pmx_application_census summarize --config "$CONFIG" --inputs workflow-input/m9q-app/results --out workflow-results/m9q-app-census
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: m9q-application-census-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9q-app-census
+          if-no-files-found: error
+          retention-days: 90
