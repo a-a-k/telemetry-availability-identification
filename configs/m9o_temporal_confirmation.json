@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "id": "m9o_independent_temporal_confirmation_preregistration",
+  "source_run_id": 34111689492,
+  "source_head_sha": "16907146aaa32fac648a4d514956dce6e101c4a4",
+  "required_branch": "temporal_model_with_b0_advantage_on_reused_test",
+  "new_collection_in_this_workflow": false,
+  "pmx_invocation": false,
+  "pilot_is_independent_confirmation": false,
+  "artifacts": {
+    "evaluation": {
+      "id": 10014697606,
+      "name": "m9n-checkout-temporal-evaluation-34111689492",
+      "size_in_bytes": 62670,
+      "sha256": "ff8d15ec006bfed4eb694c9d888567f0fb3d6337c3d730f9251d10630a8b4c3b"
+    },
+    "candidates": {
+      "id": 10014640872,
+      "name": "m9n-checkout-temporal-candidates-34111689492",
+      "size_in_bytes": 46566,
+      "sha256": "1659e65c220a9e79949ed8bbf541c88a957fd190506db5d19817685780fc7038"
+    }
+  },
+  "input_files": {
+    "evaluation/evaluation-manifest.json": {"bytes": 34352, "sha256": "af12932512e18617e8bfe6eb5ec00afbe682e9236a56315a141ba4e18b923daf"},
+    "evaluation/marginal-scores.csv": {"bytes": 76779, "sha256": "8163eca591ca844b3dc561a895fd79399a2555ccd4bf7dc84afb30f361029ebe"},
+    "evaluation/conditional-cell-scores.csv": {"bytes": 59254, "sha256": "cbab1979d80300093db75d6ea24f412da2278cb8e8cd37623befbed06a9a1992"},
+    "candidates/candidate-predictions.csv": {"bytes": 78703, "sha256": "9806736e3818ec1dcf563cf07ce2b16a338bc5a54021b1f2ff08323df917273b"}
+  },
+  "planning": {
+    "strata": 4,
+    "pilot_campaigns_per_stratum": 10,
+    "family_alpha": 0.05,
+    "variance_envelope_alpha": 0.05,
+    "minimum_variance_multiplier": 4.0,
+    "repetition_grid": [10, 15, 20, 30, 40],
+    "metrics": {
+      "conditional_temporal_minus_state_brier": {"half_width": 0.003},
+      "marginal_temporal_minus_state_brier": {"half_width": 0.002},
+      "marginal_temporal_signed_error": {"half_width": 0.02}
+    },
+    "working_normal_approximation_is_a_precision_guarantee": false,
+    "effect_size_power_claim": false
+  },
+  "confirmation": {
+    "profile": "opentelemetry_demo",
+    "benchmark_commit": "8c47d47c9ac27710d2b2a153bcd53e483bffe66d",
+    "operation": "checkout",
+    "placements": ["colocated", "split"],
+    "failure_laws": ["N", "ND"],
+    "baseline_seconds": 60,
+    "calibration_seconds": 900,
+    "test_seconds": 900,
+    "request_rate_per_second": 4,
+    "request_namespace": "m9p-temporal-confirm-v1",
+    "base_seed": 2026090701,
+    "preflight_base_seed": 2026090702,
+    "analysis_seed": 2026090703,
+    "bootstrap_resamples": 10000,
+    "main_base_seed_must_differ_from": [770032, 770033, 770034, 770035, 770036],
+    "primary": "temporal_logit_midpoint",
+    "controls": ["learner_state_only", "matched_stable_endpoint", "all_calibration_endpoint", "source_500ms_failover"],
+    "signed_error_equivalence_margin": 0.03,
+    "marginal_brier_equivalence_margin": 0.002,
+    "candidate_selection_after_test": false,
+    "prospective_methods_refit_on_new_learner_only": true,
+    "new_full_matrix_requires_separate_no_fit_preflight": true,
+    "preflight_excluded_from_confirmation": true,
+    "independently_parameterized_pmx_is_available": false,
+    "pmx_or_general_accuracy_claim_authorized": false,
+    "job_timeout_minutes": 360
+  },
+  "repository_locks": {
+    "src/telemetry_availability/checkout_temporal_failover.py": {"bytes": 87961, "sha256": "f4ed99d6aca6993ae2ef6980a6f5e178c8c4aa8d948fb426248ed66358d3f78a"},
+    "docs/milestones/M9N_CHECKOUT_TEMPORAL_FAILOVER.md": {"bytes": 11713, "sha256": "80a3373720dcd9f6d1790949f7cf80dbbbc6230aca3f6a81f055ae1cf5b58ada"},
+    "configs/m7_frozen_live.yaml": {"bytes": 4748, "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a"}
+  }
+}
