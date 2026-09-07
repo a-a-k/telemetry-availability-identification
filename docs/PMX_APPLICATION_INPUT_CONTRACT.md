@@ -21,7 +21,7 @@ their controls or revise their machine decisions.
 | Boundary | Exact source behavior | Consequence for an application adapter |
 |---|---|---|
 | JSON envelope | `ReaderOpenTelemetry` consumes `TraceRecordOTLP.data`, with per-trace processes and spans. `SpanOTLP` describes the Jaeger-shaped model. | Convert the native OTLP resource/scope envelope explicitly; the bundle name does not imply acceptance of arbitrary OTLP JSON. Preserve trace/span IDs and references. |
-| Time units | The reader converts span start and duration from nanoseconds to microseconds. | Declare input units and validate a known duration. Copying conventional Jaeger-shaped numeric values without checking their units is insufficient. |
+| Time units | `SpanOTLP` getters first convert JSON microseconds to nanoseconds; `ReaderOpenTelemetry` then converts them back to microseconds. | The JSON boundary expects microseconds. Convert native OTLP nanoseconds explicitly and validate a known duration; inspecting only the reader's final conversion would identify the wrong boundary unit. |
 | Tags | The retained model's tag values are strings. | Apply an explicit typed-value conversion; preserve the original native representation in an audit sidecar. |
 | Trace admission | `checkTrace` requires at least one span passing `Util.checkSpan`, which checks the Spring-WebMVC library marker and excludes several named controller/handler patterns. | A native server-span selection policy must be specified and tested. An adapter-produced compatibility marker must be disclosed as adaptation, not claimed to be original application instrumentation. |
 | Error preservation | Errors are detected before tree merging; M9I showed that a removed child's internal error marker is not propagated to its surviving carrier. | Validate carrier ownership and aggregation for the chosen operation boundaries. A recognized tag on any child is insufficient. |
@@ -35,6 +35,13 @@ failure transformation: the observed execution path increments counts in
 `TraceReconstructionService`, and the downstream PCM transformer consumes those
 counts. M9J exercised that route. A source stub must not be used to claim that
 the demonstrated functional-failure mechanism is absent.
+
+The time-unit conclusion follows the complete accessor path: `SpanOTLP.java`
+lines 78-87 convert both stored numeric fields using `MICROSECONDS.toNanos`,
+before the reader performs its inverse conversion. A native OTLP epoch value
+must therefore not be copied into this JSON field as nanoseconds. Timestamp
+and duration quantization must be part of the future adapter's conformance
+contract.
 
 The reconstruction source also contains unfinished network/failed-call mapping
 comments. Those comments alone do not establish an ecosystem limitation. The
