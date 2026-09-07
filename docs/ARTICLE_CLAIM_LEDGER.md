@@ -73,8 +73,9 @@ one, and it does not predict the pending independent intervals.
 For an eventual theorem statement, keep algebraic identification, estimator
 consistency, finite-sample coverage and model adequacy separate. The current
 source and experiments do not establish all four for an unrestricted live
-microservice system. The nearest literature and novelty attribution still
-need a focused comparison before making a novelty claim.
+microservice system. The [focused primary-source comparison](RELATED_WORK_SCOPE.md)
+now attributes the network-tomography, algebraic, probability-bound and model-
+calibration antecedents. It is not an exhaustive novelty result.
 
 ## Information and cost accounting
 
@@ -102,7 +103,7 @@ comparison; runner times and artifact sizes do not establish that effect.
 - Specify the remaining independent PMX availability comparison only after
   observed-operation errors, propagated failures, missing requests, replication
   and external semantic outcomes have a defensible correspondence.
-- State and check the restricted mathematical propositions, then compare their
-  scope and novelty with the nearest primary literature.
+- Keep the proved restricted propositions and exact reference distinct from
+  novelty and scalability claims; retain the primary-source attributions.
 - Form the final article claims from that evidence, retaining unfavorable
   comparators and coverage limitations.

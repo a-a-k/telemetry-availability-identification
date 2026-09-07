@@ -5,7 +5,8 @@ law behind M0/M2 and extends the target argument to finite polynomials, includin
 Boolean reliability targets. It does not change any frozen experiment or assert
 novelty for log-linear identification. Log transforms of delivery probabilities,
 rank conditions, and inseparable combinations are established in network
-tomography; see [Ma et al., IMC 2013, Sections 1–2](https://www.commsp.ee.ic.ac.uk/~wiser/publications/Liang/NetworkTomography-IMC13.pdf).
+tomography; see [Bu et al., SIGMETRICS 2002, Section 3](https://nickduffield.net/download/papers/Bu_tomography_02.pdf)
+and [Ma et al., IMC 2013, Sections 1–2](https://www.commsp.ee.ic.ac.uk/~wiser/publications/Liang/NetworkTomography-IMC13.pdf).
 Monomial maps and log-linear models also belong to established algebraic
 statistics; [Geiger, Meek and Sturmfels, 2006, Section 2](https://math.berkeley.edu/~bernd/AOS0092.pdf)
 provides that background. The explicit propositions below are proved here for
