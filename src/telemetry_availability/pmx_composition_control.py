@@ -116,6 +116,11 @@ def prepare(config_path, inputs, out):
     _remote()
     config = validate(config_path)
     metadata = _download(config, inputs)
+    if 'prior_preparation_failure_run' in config:
+        previous = subprocess.check_output(['gh', 'run', 'view', str(config['prior_preparation_failure_run']),
+                                            '--repo', os.environ['GITHUB_REPOSITORY'], '--log-failed'])
+        out.mkdir(parents=True, exist_ok=True)
+        (out / 'prior-preparation-failure.log').write_bytes(previous)
     contract = _read(inputs / 'contract/contract-manifest.json')
     for name, digest in contract['files'].items():
         assert _hash(inputs / 'contract' / name) == digest
@@ -133,7 +138,7 @@ def prepare(config_path, inputs, out):
     variants = [('raw', None), ('types', .72), ('conditional_local', .8), ('zero', 1.0)]
     for variant_index, (variant, expected) in enumerate(variants):
         for repetition in (1, 2):
-            source = inputs / f'probe/raw/nested_errors/repeat-{repetition}'
+            source = inputs / f'probe/probe/raw/nested_errors/repeat-{repetition}'
             resolved = _read(source / 'resolved-pcm.json')
             for name, digest in resolved['model_files'].items():
                 assert _hash(source / 'results' / name) == digest

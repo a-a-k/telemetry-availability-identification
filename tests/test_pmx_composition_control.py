@@ -51,6 +51,34 @@ class PmxCompositionControlTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 prepare(Path('missing'), Path('missing'), Path('missing'))
 
+    def test_nested_archive_layout_stages_all_variants_without_changing_other_files(self):
+        from telemetry_availability.pmx_adapter_conformance import fixture
+        from telemetry_availability.pmx_composition_control import SUFFIXES
+        with tempfile.TemporaryDirectory() as temporary, patch.dict(os.environ, {
+            'GITHUB_ACTIONS': 'true', 'GITHUB_RUN_ID': 'unit-run', 'GITHUB_SHA': 'unit-head',
+        }), patch('telemetry_availability.pmx_composition_control._download', return_value=[]):
+            root = Path(temporary)
+            config = root / 'config.json'
+            config.write_text(json.dumps({'repository_locks': [], 'expected_models': 8, 'solver_passes': 2}))
+            contract = root / 'inputs/contract'
+            (contract / 'nested_errors/traces').mkdir(parents=True)
+            (contract / 'contract-manifest.json').write_text(json.dumps({'files': {}}))
+            (contract / 'nested_errors/traces/observed.json').write_text(json.dumps(fixture('nested_errors')[0]['envelope']))
+            extra = '<components__Repository id="child"><serviceEffectSpecifications__BasicComponent id="child-seff"><steps_Behaviour id="child-action"><internalFailureOccurrenceDescriptions__InternalAction failureProbability="0.1" softwareInducedFailureType__InternalFailureOccurrenceDescription="child-missing"/></steps_Behaviour></serviceEffectSpecifications__BasicComponent></components__Repository>'
+            repository = XML.replace('</repository:Repository>', extra + '</repository:Repository>')
+            for repeat in (1, 2):
+                source = root / f'inputs/probe/probe/raw/nested_errors/repeat-{repeat}'
+                (source / 'results').mkdir(parents=True)
+                for suffix in SUFFIXES:
+                    (source / f'results/extracted.{suffix}').write_text(repository if suffix == 'repository' else '<fixture/>')
+                (source / 'resolved-pcm.json').write_text(json.dumps({'model_files': {
+                    p.name: _hash(p) for p in (source / 'results').iterdir()}}))
+            result = prepare(config, root / 'inputs', root / 'out')
+            self.assertEqual(len(result['models']), 8)
+            for model in result['models']:
+                self.assertEqual(model['changed_files'], [] if model['variant'] == 'raw' else ['extracted.repository'])
+                self.assertEqual(all(r['resolved'] for r in model['failure_references']), model['variant'] != 'raw')
+
     def test_census_keeps_missing_and_unphysical_results(self):
         with tempfile.TemporaryDirectory() as temporary, patch.dict(os.environ, {
             'GITHUB_ACTIONS': 'true', 'GITHUB_RUN_ID': 'unit-run', 'GITHUB_SHA': 'unit-head',

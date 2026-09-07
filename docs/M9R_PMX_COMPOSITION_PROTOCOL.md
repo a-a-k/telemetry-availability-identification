@@ -76,3 +76,15 @@ retries and omitted requests remain separate. A failure here triggers a scoped
 report of the unresolved bridge; it does not authorize an open-ended sequence
 of loader, metadata or model rewrites. The frozen M9P confirmation continues
 independently to its final evaluation and retention audit.
+
+## Pre-solver archive-path amendment
+
+Run 34130882723 at `044c1e905f3ddefe6fbf2f12d1da7880ca6cc7ab` verified the
+two complete archives and the artificial contract, then failed before writing
+the first model because the extraction artifact itself contains a `probe/`
+directory. The staging reader omitted that archive-internal level. No Palladio
+build or solve ran and no probabilities were observed. The original run and
+code remain preserved; the next contract retains its failed-job log. The
+correction adds the one explicit path level and an artificial archived-layout
+regression. The eight variants, edits, software oracles and solver configuration
+are unchanged.
