@@ -152,6 +152,7 @@ jobs:
             --config "$CONFIG" \
             --contract-manifest workflow-input/m9m/contract/contract-manifest.json \
             --qualified-root workflow-input/m9m/m8a-preserved/m8-preserved/qualified \
+            --analysis-root workflow-input/m9m/m8a-preserved/m8-preserved/analysis \
             --m8a-audit-root workflow-input/m9m/m8a-audit \
             --out workflow-input/m9m/learner-only
           combined_root="$(realpath workflow-input/m9m/m8a-preserved)"
@@ -162,6 +163,7 @@ jobs:
           rm -rf -- "$combined_root"
           test ! -e workflow-input/m9m/m8a-preserved
           test ! -e workflow-input/m9m/learner-only/m7-qualified-opentelemetry_demo-colocated-N-r0-33990678586/evaluator
+          test -f workflow-input/m9m/learner-only/frozen-m7-predictor-reference.csv
 
       - name: Fit and freeze all predeclared candidates
         shell: bash

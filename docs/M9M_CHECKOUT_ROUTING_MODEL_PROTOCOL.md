@@ -1,7 +1,8 @@
 # M9M: checkout request-level routing-model test
 
-Status: frozen before the first M9M remote candidate generation or evaluator
-access.
+Status: frozen before the first M9M remote candidate generation; technically
+amended after failed integrity checks but before any held-out metric was
+computed.
 
 ## Question
 
@@ -40,10 +41,15 @@ and marker identities before any model is fitted.
 
 ## Information boundary
 
-The workflow has three sequential jobs. The middle job first stages only the
-six selected learner/boundary files per cell. It neither copies nor parses an
-evaluator file. The combined source download is then removed, and candidate
-generation receives only that staged tree plus the contract.
+The workflow has three sequential jobs. The middle job first stages the six
+selected learner/boundary files per cell plus an 80-row predictor-only
+reference extracted from the SHA-256-locked M7 `predictions.csv`. The reference
+contains fixed identities, OR/B2 probabilities, and residual probabilities;
+it contains no test request, empirical outcome, error, or score. Staging
+verifies the complete source schema and copies exactly the eleven declared
+columns. It neither copies nor parses an evaluator file. The combined source
+download is then removed, and candidate generation receives only that bounded
+tree plus the contract.
 
 The request-footprint estimator uses baseline checkout traces retained by the
 same deterministic `sampled_mixed` 0.7 trace rule. Selection and weighting do
@@ -82,8 +88,32 @@ The intermediate laws are mechanism sensitivities, not a menu from which the
 best test score may be selected. Candidate-specific likelihood refitting uses
 only sampled learner health and calibration outcomes, the same clean-baseline
 `q`, parameter bounds, multistart count, and numerical tolerances as M7. The
-original OR prediction must reproduce frozen M7 exactly. All alternative fits
-must be finite and stable across likelihood-equivalent starts within `1e-4`.
+original OR and B2 predictions are carried from the locked predictor-only M7
+reference and must therefore reproduce frozen M7 within `1e-10`. OR is also
+refitted from the learner inputs as an implementation audit, but this numerical
+rerun does not replace the frozen predictor. All alternative fits must be
+finite and stable across likelihood-equivalent starts within `1e-4`.
+
+## Technical amendments before held-out scoring
+
+The first run stopped in the contract job because the registered digest of the
+711-byte M9L decision matrix had been transcribed incorrectly. The second
+stopped in the candidate job because the generalized likelihood had omitted
+M7's per-route-class probability floor. Both failures occurred without an
+evaluator artifact in the fitting job.
+
+The third run uploaded the complete candidate matrix and then stopped at the
+evaluator's first integrity check, before constructing any held-out score. B2
+matched the frozen M7 matrix exactly. A fresh OR optimization of the identical
+learner likelihood differed in 78 of 120 checked fields at the deliberately
+strict `1e-10` threshold; the largest absolute difference was only
+`7.723766071165983e-09`, far below the already frozen `1e-4` equivalent-fit
+tolerance. The correction does not relax either tolerance and does not change
+a model, probability, outcome, metric, branch, or candidate order. It carries
+the already published frozen OR/B2 predictor values through the sanitized
+reference described above, while retaining the OR refit and checking its
+difference against `1e-4`. This amendment was made without access to a test
+outcome or held-out metric.
 
 ## Held-out scoring and branches
 

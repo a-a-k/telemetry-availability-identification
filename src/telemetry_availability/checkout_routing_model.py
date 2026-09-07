@@ -74,6 +74,42 @@ LEARNER_FILES = (
     "learner/requests.csv",
     "learner/topology-edges.csv",
 )
+FROZEN_REFERENCE_NAME = "frozen-m7-predictor-reference.csv"
+FROZEN_REFERENCE_FIELDS = (
+    "profile",
+    "placement",
+    "failure_law",
+    "repetition",
+    "mode",
+    "scope",
+    "operation",
+    "method",
+    "prediction",
+    "route_prediction",
+    "residual_success_probability",
+)
+FROZEN_ANALYSIS_FIELDS = (
+    "profile",
+    "failure_law",
+    "repetition",
+    "mode",
+    "scope",
+    "source_placement",
+    "target_placement",
+    "method",
+    "operation",
+    "requires_target_group",
+    "prediction",
+    "status",
+    "route_prediction",
+    "residual_success_probability",
+    "fit_nll",
+    "fit_status",
+    "identification_rank",
+    "identification_dimension",
+    "target_gradient_residual",
+    "multistart_prediction_range",
+)
 
 
 @dataclass(frozen=True)
@@ -337,9 +373,15 @@ def load_checkout_routing_model_config(
     )
     if (
         boundary.get("candidate_job_input")
-        != "selected_learner_and_boundary_files_only"
+        != "selected_learner_and_boundary_files_plus_sanitized_frozen_m7_predictor_reference"
         or boundary.get("evaluator_files_parsed_or_copied") is not False
         or boundary.get("test_outcomes_accessed") is not False
+        or boundary.get("frozen_predictor_reference_source")
+        != "sha256_locked_frozen_analysis_predictions.csv"
+        or boundary.get("frozen_predictor_reference_rows") != 80
+        or boundary.get("frozen_predictor_reference_contains_test_outcomes") is not False
+        or tuple(boundary.get("frozen_predictor_reference_fields", []))
+        != FROZEN_REFERENCE_FIELDS
         or boundary.get("footprint_period") != "baseline"
         or boundary.get("footprint_outcomes_read") is not False
         or boundary.get("trace_sampling_mode") != "sampled_mixed"
@@ -755,6 +797,7 @@ def stage_learner_inputs(
     config_path: str | Path,
     contract_manifest_path: Path,
     qualified_root: Path,
+    analysis_root: Path,
     m8a_audit_root: Path,
     out: Path,
 ) -> Mapping[str, Any]:
@@ -773,6 +816,14 @@ def stage_learner_inputs(
         m8a_audit_root,
         _object(evidence["m8a_audit"]["files"], "M8A files"),
         "m8a_audit",
+    )
+    frozen_prediction_spec = _object(
+        evidence["frozen_analysis"]["predictions.csv"], "frozen predictions"
+    )
+    _audit_file(
+        analysis_root / "predictions.csv",
+        frozen_prediction_spec,
+        "frozen predictions.csv",
     )
     inventory_rows = _rows(m8a_audit_root / "file-inventory.csv")
     inventory = {
@@ -831,19 +882,96 @@ def stage_learner_inputs(
         ],
         file_rows,
     )
+    source_reference_rows = _rows(analysis_root / "predictions.csv")
+    if (
+        not source_reference_rows
+        or tuple(source_reference_rows[0]) != FROZEN_ANALYSIS_FIELDS
+    ):
+        raise CheckoutRoutingModelError("frozen M7 prediction schema differs")
+    reference_rows = [
+        {
+            "profile": row["profile"],
+            "placement": row["source_placement"],
+            "failure_law": row["failure_law"],
+            "repetition": int(row["repetition"]),
+            "mode": row["mode"],
+            "scope": row["scope"],
+            "operation": row["operation"],
+            "method": (
+                "m7_single_demand_or"
+                if row["method"] == "proposed"
+                else REFERENCE_MODEL
+            ),
+            "prediction": _finite(row["prediction"], "frozen prediction"),
+            "route_prediction": _finite(
+                row["route_prediction"], "frozen route prediction"
+            ),
+            "residual_success_probability": _finite(
+                row["residual_success_probability"], "frozen residual"
+            ),
+        }
+        for row in source_reference_rows
+        if row["profile"] == config.profile
+        and row["operation"] == config.operation
+        and row["source_placement"] in config.placements
+        and row["target_placement"] == row["source_placement"]
+        and row["failure_law"] in config.failure_laws
+        and int(row["repetition"]) in config.repetitions
+        and row["method"] in {"proposed", "B2"}
+        and row["mode"] == "sampled_mixed"
+        and row["scope"] == "current"
+    ]
+    reference_by_key = {_candidate_key(row): row for row in reference_rows}
+    expected_reference_keys = {
+        (*identity, method)
+        for identity in _expected_identities(config)
+        for method in ("m7_single_demand_or", REFERENCE_MODEL)
+    }
+    if (
+        len(reference_rows) != 80
+        or len(reference_by_key) != 80
+        or set(reference_by_key) != expected_reference_keys
+    ):
+        raise CheckoutRoutingModelError("frozen M7 predictor reference matrix differs")
+    for row in reference_rows:
+        for field in (
+            "prediction",
+            "route_prediction",
+            "residual_success_probability",
+        ):
+            if not 0.0 <= float(row[field]) <= 1.0:
+                raise CheckoutRoutingModelError(
+                    f"frozen M7 predictor reference {field} is outside [0,1]"
+                )
+    reference_rows.sort(key=_candidate_key)
+    _write_csv(
+        out / FROZEN_REFERENCE_NAME,
+        list(FROZEN_REFERENCE_FIELDS),
+        reference_rows,
+    )
     manifest: dict[str, Any] = {
         "schema_version": 1,
         "kind": "m9m_learner_only_stage",
-        "status": "learner_only_inputs_staged",
+        "status": "learner_and_frozen_predictor_reference_staged",
         "config_sha256": file_sha256(config.path),
         "contract_manifest_sha256": file_sha256(contract_manifest_path),
         "qualified_manifest_census": census,
         "selected_cells": config.expected_cells,
         "staged_files": len(file_rows),
+        "frozen_predictor_reference_rows": len(reference_rows),
+        "frozen_predictor_reference_source_sha256": file_sha256(
+            analysis_root / "predictions.csv"
+        ),
+        "frozen_predictor_reference_fields": list(FROZEN_REFERENCE_FIELDS),
+        "frozen_predictor_reference_contains_test_outcomes": False,
+        "frozen_prediction_files_parsed": 1,
         "evaluator_files_parsed": 0,
         "evaluator_files_copied": 0,
         "test_outcomes_accessed": False,
-        "files": {"learner-file-audit.csv": file_sha256(out / "learner-file-audit.csv")},
+        "files": {
+            "learner-file-audit.csv": file_sha256(out / "learner-file-audit.csv"),
+            FROZEN_REFERENCE_NAME: file_sha256(out / FROZEN_REFERENCE_NAME),
+        },
         "environment": environment_manifest(),
     }
     _write_json(out / "stage-manifest.json", manifest)
@@ -1183,17 +1311,39 @@ def generate_candidates(
     if (
         contract.get("status") != "m9l_branch_source_and_information_boundary_verified"
         or contract.get("config_sha256") != file_sha256(config.path)
-        or stage.get("status") != "learner_only_inputs_staged"
+        or stage.get("status") != "learner_and_frozen_predictor_reference_staged"
         or stage.get("config_sha256") != file_sha256(config.path)
         or stage.get("contract_manifest_sha256") != file_sha256(contract_manifest_path)
         or stage.get("selected_cells") != config.expected_cells
+        or stage.get("frozen_predictor_reference_rows") != 80
+        or stage.get("frozen_predictor_reference_source_sha256")
+        != config.raw["evidence"]["frozen_analysis"]["predictions.csv"]["sha256"]
+        or stage.get("frozen_predictor_reference_fields")
+        != list(FROZEN_REFERENCE_FIELDS)
+        or stage.get("frozen_predictor_reference_contains_test_outcomes") is not False
         or stage.get("evaluator_files_parsed") != 0
         or stage.get("evaluator_files_copied") != 0
         or stage.get("test_outcomes_accessed") is not False
         or file_sha256(learner_root / "learner-file-audit.csv")
         != stage.get("files", {}).get("learner-file-audit.csv")
+        or file_sha256(learner_root / FROZEN_REFERENCE_NAME)
+        != stage.get("files", {}).get(FROZEN_REFERENCE_NAME)
     ):
         raise CheckoutRoutingModelError("M9M learner stage contract differs")
+
+    reference_rows = _rows(learner_root / FROZEN_REFERENCE_NAME)
+    reference_by_key = {_candidate_key(row): row for row in reference_rows}
+    expected_reference_keys = {
+        (*identity, method)
+        for identity in _expected_identities(config)
+        for method in ("m7_single_demand_or", REFERENCE_MODEL)
+    }
+    if (
+        len(reference_rows) != 80
+        or len(reference_by_key) != 80
+        or set(reference_by_key) != expected_reference_keys
+    ):
+        raise CheckoutRoutingModelError("staged frozen M7 predictor reference differs")
 
     m7_path = config.path.resolve().parent / "m7_frozen_live.yaml"
     frozen = load_frozen_live_validation_config(m7_path)
@@ -1215,6 +1365,7 @@ def generate_candidates(
     candidate_rows: list[dict[str, Any]] = []
     footprint_rows: list[dict[str, Any]] = []
     fit_rows: list[dict[str, Any]] = []
+    or_refit_to_frozen_differences: list[float] = []
     seen: set[tuple[str, str, str, int]] = set()
     for manifest_path in manifests:
         cell = _load_learner_cell(manifest_path.parents[1])
@@ -1236,9 +1387,18 @@ def generate_candidates(
         if exact.best is None:
             raise CheckoutRoutingModelError(f"M7 OR fit missing: {cell.identity}")
         m7_rows = predict_cell(cell, prepared, exact, analysis, scope="current")
-        proposed = _find_m7_prediction(m7_rows, "proposed", config.operation)
-        b2 = _find_m7_prediction(m7_rows, "B2", config.operation)
+        refit_proposed = _find_m7_prediction(m7_rows, "proposed", config.operation)
+        refit_b2 = _find_m7_prediction(m7_rows, "B2", config.operation)
+        proposed = reference_by_key[(*cell.identity, "m7_single_demand_or")]
+        b2 = reference_by_key[(*cell.identity, REFERENCE_MODEL)]
         q = _finite(proposed["residual_success_probability"], "checkout q")
+        or_refit_to_frozen_differences.extend(
+            abs(
+                _finite(proposed[field], f"frozen M7 OR {field}")
+                - _finite(refit_proposed[field], f"refit M7 OR {field}")
+            )
+            for field in ("prediction", "route_prediction", "residual_success_probability")
+        )
         base = {
             "profile": cell.profile,
             "placement": cell.placement,
@@ -1318,7 +1478,7 @@ def generate_candidates(
                     b2["residual_success_probability"], "M7 B2 q"
                 ),
                 "fit_nll": exact.best.nll,
-                "fit_status": str(b2["status"]),
+                "fit_status": str(refit_b2["status"]),
                 "finite_starts": len(exact.candidates),
                 "converged_starts": sum(item.converged for item in exact.candidates),
                 "equivalent_prediction_range": "",
@@ -1328,6 +1488,10 @@ def generate_candidates(
 
     if seen != _expected_identities(config) or len(candidate_rows) != 240 or len(fit_rows) != 200:
         raise CheckoutRoutingModelError("M9M frozen candidate matrix differs")
+    if max(or_refit_to_frozen_differences) > config.fit_range_tolerance:
+        raise CheckoutRoutingModelError(
+            "M9M OR refit differs from frozen prediction beyond fit tolerance"
+        )
     trace_gates = all(
         int(row["resolved_footprints"]) >= config.minimum_footprints
         and float(row["resolution_fraction"]) >= config.minimum_resolution
@@ -1376,6 +1540,9 @@ def generate_candidates(
     )
     shutil.copy2(learner_root / "learner-file-audit.csv", out / "learner-file-audit.csv")
     shutil.copy2(learner_root / "stage-manifest.json", out / "stage-manifest.json")
+    shutil.copy2(
+        learner_root / FROZEN_REFERENCE_NAME, out / FROZEN_REFERENCE_NAME
+    )
     manifest: dict[str, Any] = {
         "schema_version": 1,
         "kind": "m9m_checkout_candidate_freeze",
@@ -1393,8 +1560,13 @@ def generate_candidates(
             "minimum_resolution_fraction": min(float(row["resolution_fraction"]) for row in footprint_rows),
             "minimum_both_replica_fraction": min(float(row["both_replica_fraction"]) for row in footprint_rows),
             "maximum_equivalent_prediction_range": max(fit_ranges),
+            "maximum_or_refit_to_frozen_probability_difference": max(
+                or_refit_to_frozen_differences
+            ),
         },
-        "candidate_job_received_learner_only_stage": True,
+        "candidate_job_received_learner_plus_frozen_predictor_reference_stage": True,
+        "frozen_m7_predictor_reference_rows": len(reference_rows),
+        "frozen_m7_predictor_reference_used_for_or_and_b2": True,
         "evaluator_files_present_during_model_fit": False,
         "evaluator_files_parsed": 0,
         "test_outcomes_accessed": False,
@@ -1411,6 +1583,7 @@ def generate_candidates(
                 "fit-audit.csv",
                 "learner-file-audit.csv",
                 "stage-manifest.json",
+                FROZEN_REFERENCE_NAME,
             )
         },
         "environment": environment_manifest(),
@@ -1939,6 +2112,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     stage.add_argument("--config", type=Path, required=True)
     stage.add_argument("--contract-manifest", type=Path, required=True)
     stage.add_argument("--qualified-root", type=Path, required=True)
+    stage.add_argument("--analysis-root", type=Path, required=True)
     stage.add_argument("--m8a-audit-root", type=Path, required=True)
     stage.add_argument("--out", type=Path, required=True)
 
@@ -1980,6 +2154,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             args.config,
             args.contract_manifest,
             args.qualified_root,
+            args.analysis_root,
             args.m8a_audit_root,
             args.out,
         )

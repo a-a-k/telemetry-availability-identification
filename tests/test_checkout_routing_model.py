@@ -56,6 +56,7 @@ class CheckoutRoutingModelTests(unittest.TestCase):
         self.assertEqual(workflow.count("runs-on: ubuntu-latest"), 3)
         self.assertIn("stage-learner", workflow)
         self.assertIn("test ! -e workflow-input/m9m/m8a-preserved", workflow)
+        self.assertIn("frozen-m7-predictor-reference.csv", workflow)
         self.assertIn("already-frozen candidates", workflow)
         self.assertNotIn("docker compose", workflow.lower())
         self.assertNotIn("java -jar", workflow)
@@ -64,7 +65,9 @@ class CheckoutRoutingModelTests(unittest.TestCase):
         protocol = PROTOCOL.read_text(encoding="utf-8")
         self.assertIn("three required", protocol)
         self.assertIn("exact per-call backend decision", protocol)
+        self.assertIn("predictor-only", protocol)
         self.assertIn("copies nor parses an", protocol)
+        self.assertIn("before constructing any held-out score", protocol)
         self.assertIn("not a menu from which the", protocol)
         self.assertIn("independent confirmation", protocol)
         self.assertIn("All three jobs use", protocol)
@@ -319,6 +322,7 @@ class CheckoutRoutingModelTests(unittest.TestCase):
                     CONFIG,
                     Path("contract.json"),
                     Path("qualified"),
+                    Path("analysis"),
                     Path("m8a"),
                     Path("out"),
                 )
