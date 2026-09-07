@@ -9,7 +9,31 @@ is not a one-to-one implementation of MODELS reviewer requests. The venue-level
 claim here is about constructing, identifying, validating, and using a simulation
 input model from heterogeneous telemetry.
 
-## Current vertical slice
+## Current evidence and article material
+
+The [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) distinguishes supported
+statements from open comparisons; the [milestone index](docs/MILESTONES.md)
+links the complete experimental history. The [methods draft](docs/ARTICLE_METHODS_DRAFT.md)
+connects the restricted identification results, implemented reduction,
+uncertainty assumptions and semantic validation. Close prior work is attributed
+in the [source comparison](docs/RELATED_WORK_SCOPE.md).
+
+[M9N](docs/milestones/M9N_CHECKOUT_TEMPORAL_FAILOVER.md) localized a temporal
+checkout mechanism on retained data. Its [independent M9P confirmation](docs/M9P_TEMPORAL_CONFIRMATION_PROTOCOL.md)
+is collecting 120 fresh campaigns in run
+[34118845320](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34118845320).
+The [completed PMX application census](docs/milestones/M9Q_PMX_APPLICATION_CENSUS.md)
+and [bounded composition control](docs/milestones/M9R_PMX_INCLUSIVE_ERROR_COMPOSITION.md)
+retain extraction/mapping and solver limits; they establish no independent
+PMX request-availability forecast or predictive superiority over it.
+
+The separate [exact polynomial-target reference](docs/CONJUNCTIVE_OBSERVATION_TARGET_THEOREMS.md)
+and [two-path bounds](docs/B2_SHARP_OBSERVABLE_BOUNDS.md) state their population
+assumptions explicitly. They do not retrospectively replace frozen experiment
+outputs. Full experiments run in GitHub Actions; local checks are limited to
+source inspection, bounded artificial smokes and generated aggregate reports.
+
+## Implemented model and experiments
 
 The first executable slice covers the conjunctive primitive-factor submodel used
 by the planned T1 identifiability result. Independent Bernoulli primitives denote
