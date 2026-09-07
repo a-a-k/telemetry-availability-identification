@@ -1,6 +1,6 @@
 # M9L: checkout route-up failure-cause discrimination
 
-Status: frozen before the first M9L remote discrimination.
+Status: completed on the first remote attempt; accepted run `34085244404`.
 
 ## Question and boundary
 
