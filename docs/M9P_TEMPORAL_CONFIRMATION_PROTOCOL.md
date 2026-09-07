@@ -73,3 +73,43 @@ No conditional result constitutes an advance forecast. No single-operation
 confirmation settles the independent PMX comparison or an article-wide accuracy,
 automation-cost or novelty claim. The endpoint controls and the full-health
 input cost must remain visible in interpretation.
+
+## Frozen analysis implementation
+
+The prospective implementation retains state-only, lower/midpoint/upper logit,
+source 500 ms, matched stable endpoint and all-calibration endpoint: seven
+methods per campaign. PAVA is not included in this confirmation; M9O allowed
+sensitivity retention without promotion. The eight-start M9N likelihood and
+its bounds, one-path episode representation and marginal averaging are imported
+unchanged, with the new analysis seed. The original M9N global calibration
+recovery test is descriptive here; M9O fixed three inferential quantities and
+retained per-cell adequacy and optimizer gates, not an additional inferential
+family. Lower/midpoint/upper mean within-cell prediction span must remain at
+most 0.02. A failed adequacy gate suppresses confirmatory claims while all
+computed scores and the three intervals remain published.
+
+The main workflow has readiness, acquisition, learner-only candidate freeze,
+evaluation and retention/cost audit jobs. Readiness verifies the accepted
+preflight run, exact audit artifact and file, source/configuration bytes,
+retention and the final implementation hashes. Candidate generation rejects
+unexpected files, evaluator directories, historical sources, incomplete
+matrices and mixed run attempts. There is no automatic partial rerun or
+missing-campaign omission. The candidate artifact is checked through the
+Actions API before any evaluator download.
+
+All 120 successful main cells also retain complete raw sources, including
+native telemetry, for 90 days. This additional preservation is fixed before
+main acquisition and is independent of scores. It prevents loss of the native
+input needed for subsequent source/adapter audits. The learner job still
+downloads only the sanitized learner bundles. Failed raw attempts retain the
+seven-day diagnostic policy; the post-run audit records artifact sizes,
+expiry, source bytes and runner time.
+
+The input-cost table separates actual shared request-file bytes, health bytes,
+health rows, model fitting time and common parsing/episode construction time.
+The all-calibration endpoint also records the minimal CSV projection of its
+required outcome counts. Shared parser timing is explicitly not an isolated
+endpoint implementation benchmark. Trace bytes are zero for the seven model
+inputs, but native-trace qualification and collection costs are charged
+separately. No lower end-to-end cost claim is inferred from a zero model-input
+trace column or from a shared preprocessing measurement.

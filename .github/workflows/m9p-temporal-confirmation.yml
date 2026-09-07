@@ -1,0 +1,312 @@
+name: M9P Independent Temporal Confirmation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+  packages: read
+
+concurrency:
+  group: m9p-independent-temporal-confirmation
+  cancel-in-progress: false
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install pinned environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Verify accepted preflight and committed implementation before collection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python -m telemetry_availability.temporal_confirmation_gate readiness
+          --out workflow-results/readiness
+      - uses: actions/upload-artifact@v7
+        with:
+          name: m9p-readiness-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/readiness
+          if-no-files-found: error
+          retention-days: 90
+
+  campaign:
+    needs: readiness
+    name: main / ${{ matrix.placement }} / ${{ matrix.law }} / r${{ matrix.repetition }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        application:
+          - profile: opentelemetry_demo
+            repository: open-telemetry/opentelemetry-demo
+            commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+            compose_file: compose.yaml
+        placement: [colocated, split]
+        law: [N, ND]
+        repetition: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29]
+    steps:
+      - name: Check out frozen experiment repository
+        uses: actions/checkout@v7
+
+      - name: Check out exact benchmark revision
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.application.repository }}
+          ref: ${{ matrix.application.commit }}
+          path: upstream
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install pinned analysis dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.temporal_confirmation_live validate
+
+      - name: Record runner resources
+        run: |
+          out="workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+          mkdir -p "$out"
+          uname -a > "$out/runner.txt"
+          docker version >> "$out/runner.txt"
+          docker compose version >> "$out/runner.txt"
+          free -h >> "$out/runner.txt"
+          df -h >> "$out/runner.txt"
+
+      - name: Render, digest-lock, and replicate benchmark
+        env:
+          DEMO_VERSION: "3.0.0"
+          LOCUST_AUTOSTART: "false"
+          LOCUST_HEADLESS: "true"
+          LOCUST_BROWSER_TRAFFIC_ENABLED: "false"
+        run: |
+          out="workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+          if [[ "${{ matrix.application.profile }}" == "opentelemetry_demo" ]]; then
+            export OTEL_COLLECTOR_CONFIG_EXTRAS="$GITHUB_WORKSPACE/configs/live/otel-pilot-collector-extra.yml"
+            docker compose --env-file upstream/.env -f "upstream/${{ matrix.application.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=(--telemetry-output-directory "$GITHUB_WORKSPACE/$out")
+          else
+            docker compose -f "upstream/${{ matrix.application.compose_file }}" config --format json > "$out/rendered-compose.json"
+            telemetry_args=()
+          fi
+          python -m telemetry_availability pin-live-compose \
+            --config configs/m7_runtime_pilot.yaml \
+            --profile "${{ matrix.application.profile }}" \
+            --input "$out/rendered-compose.json" \
+            --out "$out/base-pinned-compose.json" \
+            --audit "$out/base-image-lock-audit.json" \
+            "${telemetry_args[@]}"
+          python -m telemetry_availability prepare-placement-compose \
+            --config configs/m7b_placement_pilot.yaml \
+            --profile "${{ matrix.application.profile }}" \
+            --placement "${{ matrix.placement }}" \
+            --input "$out/base-pinned-compose.json" \
+            --base-audit "$out/base-image-lock-audit.json" \
+            --out "$out/pinned-compose.json" \
+            --audit "$out/image-lock-audit.json" \
+            --haproxy "$out/haproxy.cfg"
+
+      - name: Pull and start replicated benchmark
+        run: |
+          compose="workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json"
+          docker compose -f "$compose" pull
+          docker compose -f "$compose" up -d --no-build --wait --wait-timeout 360
+
+      - name: Collect frozen main campaign with fresh provenance
+        run: >-
+          python -m telemetry_availability.temporal_confirmation_live run-cell
+          --scope full --placement "${{ matrix.placement }}" --law "${{ matrix.law }}"
+          --repetition "${{ matrix.repetition }}" --checkout upstream
+          --compose "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json" --image-audit "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/image-lock-audit.json" --out "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}"
+
+      - name: Qualify and publish separate learner and evaluator bundles without fitting
+        run: >-
+          python -m telemetry_availability.temporal_confirmation_live qualify
+          --scope full --source "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}" --out workflow-results/separated
+
+      - name: Compact runtime diagnostics
+        if: ${{ always() }}
+        run: |
+          docker compose -f "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json" ps --format json > "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/compose-ps.json" || true
+          docker stats --no-stream --format '{{json .}}' > "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/docker-stats.jsonl" || true
+
+      - name: Failure logs
+        if: ${{ failure() }}
+        run: docker compose -f "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json" logs --no-color > "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/compose.log" 2>&1 || true
+
+      - name: Preserve successful full source including native telemetry
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9p-main-raw-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Preserve failed original source attempt
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9p-main-raw-failure-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Preserve learner main bundle
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9p-main-learner-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/separated/learner-bundle
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Preserve evaluator main bundle
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9p-main-evaluator-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/separated/evaluator-bundle
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Preserve audit main bundle
+        if: ${{ success() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9p-main-audit-${{ matrix.placement }}-${{ matrix.law }}-r${{ matrix.repetition }}-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/separated/audit-bundle
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Tear down benchmark
+        if: ${{ always() }}
+        run: docker compose -f "workflow-results/m9p-raw/${{ matrix.application.profile }}/${{ matrix.placement }}/${{ matrix.law }}/r${{ matrix.repetition }}/pinned-compose.json" down --volumes --remove-orphans || true
+
+  candidates:
+    name: Freeze all predictions on learner-only artifacts
+    needs: campaign
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    outputs:
+      artifact_id: ${{ steps.frozen.outputs.artifact-id }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install pinned environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: m9p-main-learner-*-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-input/learner
+      - name: Fit all prospective models without evaluator evidence
+        run: >-
+          python -m telemetry_availability.temporal_confirmation_analysis freeze-candidates
+          --input-root workflow-input/learner --out workflow-results/candidates
+      - uses: actions/upload-artifact@v7
+        id: frozen
+        with:
+          name: m9p-candidates-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/candidates
+          if-no-files-found: error
+          retention-days: 90
+
+  evaluation:
+    name: Score untouched evaluation and all three frozen quantities
+    needs: [campaign, candidates]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install pinned environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Record immutable candidate upload before any evaluator download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python -m telemetry_availability.temporal_confirmation_gate before-evaluator
+          --candidate-artifact-id "${{ needs.candidates.outputs.artifact_id }}"
+          --out workflow-results/access
+      - uses: actions/download-artifact@v8
+        with:
+          name: m9p-candidates-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-input/candidates
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: m9p-main-evaluator-*-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-input/evaluator
+      - name: Apply frozen family inference without candidate selection
+        run: >-
+          python -m telemetry_availability.temporal_confirmation_analysis evaluate
+          --input-root workflow-input/evaluator --candidates workflow-input/candidates
+          --out workflow-results/evaluation
+      - uses: actions/upload-artifact@v7
+        with:
+          name: m9p-evaluation-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/evaluation
+          if-no-files-found: error
+          retention-days: 90
+      - uses: actions/upload-artifact@v7
+        with:
+          name: m9p-evaluator-access-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/access
+          if-no-files-found: error
+          retention-days: 90
+
+  audit:
+    name: Audit retained source and information costs
+    needs: [campaign, candidates, evaluation]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Install pinned environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: m9p-main-audit-*-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-input/acquisition-audit
+      - name: Audit source coverage retention and acquisition costs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python -m telemetry_availability.temporal_confirmation_gate audit-main
+          --input-root workflow-input/acquisition-audit --out workflow-results/main-audit
+      - uses: actions/upload-artifact@v7
+        with:
+          name: m9p-main-final-audit-${{ github.run_id }}-a${{ github.run_attempt }}
+          path: workflow-results/main-audit
+          if-no-files-found: error
+          retention-days: 90
