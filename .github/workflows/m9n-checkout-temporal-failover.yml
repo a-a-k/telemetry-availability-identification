@@ -1,0 +1,250 @@
+name: M9N checkout temporal-failover model
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: m9n-checkout-temporal-failover-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9n_checkout_temporal_failover.json
+  PYTHON_VERSION: 3.13.15
+  M8A_RUN_ID: "34016153918"
+  M8A_PRESERVED_ARTIFACT: m8-preserved-m7-evidence-33990678586-34016153918
+  M8A_AUDIT_ARTIFACT: m8a-m7-integrity-arithmetic-34016153918
+  M9M_RUN_ID: "34089829138"
+  M9M_CONTRACT_ARTIFACT: m9m-checkout-routing-contract-34089829138
+  M9M_CANDIDATE_ARTIFACT: m9m-checkout-routing-candidates-34089829138
+  M9M_EVALUATION_ARTIFACT: m9m-checkout-routing-evaluation-34089829138
+
+jobs:
+  temporal_contract:
+    name: Verify M9M branch and temporal information contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out experiment repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9N
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_temporal_failover validate --config "$CONFIG"
+
+      - name: Capture accepted artifact metadata and bounded manifests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          metadata="workflow-input/m9n/metadata"
+          mkdir -p "$metadata" workflow-input/m9n/m8a-audit workflow-input/m9n/m9m-contract workflow-input/m9n/m9m-candidates workflow-input/m9n/m9m-evaluation
+          for role in m8a_preserved m8a_audit; do
+            artifact_id="$(jq -r ".evidence.${role}.artifact_id" "$CONFIG")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id" > "$metadata/${role}.json"
+          done
+          for role in contract candidates evaluation; do
+            artifact_id="$(jq -r ".evidence.m9m.${role}.artifact_id" "$CONFIG")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id" > "$metadata/m9m_${role}.json"
+          done
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9n/m8a-audit
+          gh run download "$M9M_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9M_CONTRACT_ARTIFACT" --dir workflow-input/m9n/m9m-contract
+          gh run download "$M9M_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9M_CANDIDATE_ARTIFACT" --dir workflow-input/m9n/m9m-candidates
+          gh run download "$M9M_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9M_EVALUATION_ARTIFACT" --dir workflow-input/m9n/m9m-evaluation
+
+      - name: Build frozen temporal contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9n-contract
+          /usr/bin/time -v -o workflow-results/m9n-contract/resource-usage.txt python -m telemetry_availability.checkout_temporal_failover build-contract \
+            --config "$CONFIG" \
+            --m8a-preserved-metadata workflow-input/m9n/metadata/m8a_preserved.json \
+            --m8a-audit-metadata workflow-input/m9n/metadata/m8a_audit.json \
+            --m9m-contract-metadata workflow-input/m9n/metadata/m9m_contract.json \
+            --m9m-candidates-metadata workflow-input/m9n/metadata/m9m_candidates.json \
+            --m9m-evaluation-metadata workflow-input/m9n/metadata/m9m_evaluation.json \
+            --m8a-audit-root workflow-input/m9n/m8a-audit \
+            --m9m-contract-root workflow-input/m9n/m9m-contract \
+            --m9m-candidate-root workflow-input/m9n/m9m-candidates \
+            --m9m-evaluation-root workflow-input/m9n/m9m-evaluation \
+            --out workflow-results/m9n-contract
+
+      - name: Upload M9N contract
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9n-checkout-temporal-contract-${{ github.run_id }}
+          path: workflow-results/m9n-contract
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  learner_candidate_freeze:
+    name: Fit and freeze learner-only temporal candidates
+    needs: [temporal_contract]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9N
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_temporal_failover validate --config "$CONFIG"
+
+      - name: Download immutable M9N contract
+        uses: actions/download-artifact@v8
+        with:
+          name: m9n-checkout-temporal-contract-${{ github.run_id }}
+          path: workflow-input/m9n/contract
+
+      - name: Download retained evidence for bounded staging
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9n/m8a-preserved workflow-input/m9n/m8a-audit workflow-input/m9n/m9m-candidates
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_PRESERVED_ARTIFACT" --dir workflow-input/m9n/m8a-preserved
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9n/m8a-audit
+          gh run download "$M9M_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9M_CANDIDATE_ARTIFACT" --dir workflow-input/m9n/m9m-candidates
+
+      - name: Stage learner-only timing and remove combined sources before fit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m telemetry_availability.checkout_temporal_failover stage-learner \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9n/contract/contract-manifest.json \
+            --qualified-root workflow-input/m9n/m8a-preserved/m8-preserved/qualified \
+            --analysis-root workflow-input/m9n/m8a-preserved/m8-preserved/analysis \
+            --m8a-audit-root workflow-input/m9n/m8a-audit \
+            --m9m-candidate-root workflow-input/m9n/m9m-candidates \
+            --out workflow-input/m9n/learner-only
+          for source in m8a-preserved m9m-candidates; do
+            combined_root="$(realpath "workflow-input/m9n/$source")"
+            case "$combined_root" in
+              "$GITHUB_WORKSPACE/workflow-input/m9n/$source") ;;
+              *) echo "Refusing to remove unexpected path: $combined_root" >&2; exit 1 ;;
+            esac
+            rm -rf -- "$combined_root"
+            test ! -e "workflow-input/m9n/$source"
+          done
+          test -f workflow-input/m9n/learner-only/frozen-predictor-references.csv
+          test -z "$(find workflow-input/m9n/learner-only -type d -name evaluator -print -quit)"
+
+      - name: Fit and freeze all predeclared temporal candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9n-candidates
+          /usr/bin/time -v -o workflow-results/m9n-candidates/resource-usage.txt python -m telemetry_availability.checkout_temporal_failover freeze-candidates \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9n/contract/contract-manifest.json \
+            --learner-root workflow-input/m9n/learner-only \
+            --out workflow-results/m9n-candidates
+
+      - name: Upload immutable temporal candidate matrix
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9n-checkout-temporal-candidates-${{ github.run_id }}
+          path: workflow-results/m9n-candidates
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  heldout_evaluation:
+    name: Score frozen marginal forecasts and conditional mechanism diagnostics
+    needs: [temporal_contract, learner_candidate_freeze]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9N
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_temporal_failover validate --config "$CONFIG"
+
+      - name: Download contract and already-frozen candidates
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9n-checkout-temporal-*-${{ github.run_id }}
+          path: workflow-input/m9n/current
+
+      - name: Download retained evaluator only after candidate freeze
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9n/evaluation/m8a-preserved workflow-input/m9n/evaluation/m8a-audit
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_PRESERVED_ARTIFACT" --dir workflow-input/m9n/evaluation/m8a-preserved
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9n/evaluation/m8a-audit
+
+      - name: Audit and score frozen predictions and parameters
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9n-evaluation
+          /usr/bin/time -v -o workflow-results/m9n-evaluation/resource-usage.txt python -m telemetry_availability.checkout_temporal_failover evaluate \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9n/current/m9n-checkout-temporal-contract-${GITHUB_RUN_ID}/contract-manifest.json \
+            --candidate-root workflow-input/m9n/current/m9n-checkout-temporal-candidates-${GITHUB_RUN_ID} \
+            --qualified-root workflow-input/m9n/evaluation/m8a-preserved/m8-preserved/qualified \
+            --m8a-audit-root workflow-input/m9n/evaluation/m8a-audit \
+            --out workflow-results/m9n-evaluation
+
+      - name: Upload M9N held-out evaluation
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9n-checkout-temporal-evaluation-${{ github.run_id }}
+          path: workflow-results/m9n-evaluation
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90

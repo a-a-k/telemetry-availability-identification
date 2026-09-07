@@ -1,0 +1,262 @@
+{
+  "schema_version": 1,
+  "id": "m9n_checkout_temporal_failover_model",
+  "status": "frozen_before_first_m9n_remote_candidate_generation_or_evaluator_access",
+  "diagnostic_only": true,
+  "posthoc_to_m7_m9l_and_m9m": true,
+  "changes_m7_or_m9m_predictions_or_scores": false,
+  "new_live_collection": "forbidden",
+  "pmx_invocation": "forbidden",
+  "article_position": {
+    "direction_remains_substantive": true,
+    "claimed_advantage_demonstrated": false,
+    "specified_model_calculation_supported": true,
+    "better_predictive_accuracy_demonstrated": false,
+    "lower_end_to_end_automation_cost_than_pmx_demonstrated": false,
+    "overall_success_or_failure_decided": false
+  },
+  "evidence": {
+    "m7_source_run_id": 33990678586,
+    "m7_source_commit": "b1925736f314da610debd23a586d7b7d00cae7ca",
+    "m8a_preserved": {
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505",
+      "artifact_id": 9983956440,
+      "artifact_name": "m8-preserved-m7-evidence-33990678586-34016153918",
+      "size_in_bytes": 78577341,
+      "sha256": "978b380bf54be67ec13b2ebbfaac4464ee5653106ee68176fefcf2db4e85e271",
+      "expires_at": "2026-12-05T06:18:35Z"
+    },
+    "m8a_audit": {
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505",
+      "artifact_id": 9983956747,
+      "artifact_name": "m8a-m7-integrity-arithmetic-34016153918",
+      "size_in_bytes": 737045,
+      "sha256": "eca453e577ccac02f26716660062664355dde046748456b4695caa7480ba3439",
+      "expires_at": "2026-12-05T06:18:35Z",
+      "files": {
+        "manifest.json": {"bytes": 4292, "sha256": "e0c923926006d920207a236e7d74ac440806bb30af8e99c9ae5ff4a8142ace1e"},
+        "file-inventory.csv": {"bytes": 259037, "sha256": "fe526c86bc8d0a5c425d40d4a3a5a10401607920663517805aa8f55436534dcd"}
+      }
+    },
+    "frozen_analysis": {
+      "predictions.csv": {"bytes": 3877747, "sha256": "b19ffcba80c029d16e972fda58bce459c8114da8734511fa7f29948e9cb1fd60"}
+    },
+    "m9m": {
+      "run_id": 34089829138,
+      "head_sha": "718bf3b1145be2c918980603039e6c784bf76d96",
+      "status": "checkout_trace_requirement_model_overshoots",
+      "next_experiment": "m9n_checkout_temporal_failover_model",
+      "contract": {
+        "artifact_id": 10006434761,
+        "artifact_name": "m9m-checkout-routing-contract-34089829138",
+        "size_in_bytes": 4256,
+        "sha256": "be8dd8390d5ebd527bb944856c8912888e4ac37cfa566a3f7a2a0a77c8ebbb78",
+        "expires_at": "2026-12-06T06:12:52Z",
+        "files": {
+          "contract-manifest.json": {"bytes": 7667, "sha256": "42926e9250ee4bbfcd1ff0daa4e9634bd313d1e20ce81ad068fffac89fb4e64b"}
+        }
+      },
+      "candidates": {
+        "artifact_id": 10006468922,
+        "artifact_name": "m9m-checkout-routing-candidates-34089829138",
+        "size_in_bytes": 37059,
+        "sha256": "8607a709c45e203179107e9cc4d90a90f2cb8793150c292dcc5315581ad25f4a",
+        "expires_at": "2026-12-06T06:12:52Z",
+        "files": {
+          "candidate-manifest.json": {"bytes": 2459, "sha256": "c6d1b34f77a4c9c8071e0727b6f98768b2512f4e5b7aa6e154f8d94ea8e9a7a6"},
+          "candidate-predictions.csv": {"bytes": 48996, "sha256": "b9031c4707cf4e2b6f04aad941957b5680edce35c31f62798b17388115a3cbdb"}
+        }
+      },
+      "evaluation": {
+        "artifact_id": 10006485419,
+        "artifact_name": "m9m-checkout-routing-evaluation-34089829138",
+        "size_in_bytes": 29548,
+        "sha256": "14564b687003a22d951c40e6c891c51a5528527f80c91db19b20b7185b198cc3",
+        "expires_at": "2026-12-06T06:12:52Z",
+        "files": {
+          "evaluation-manifest.json": {"bytes": 8751, "sha256": "8b0eb6125fd936441d1c21b467f18193bf3d71698207cc3b80e9dac43e30cff2"},
+          "decision-matrix.csv": {"bytes": 1166, "sha256": "f01e998d3db0916ddec3eee2e13291354a4b181d2cc0e17f27e48520cb96fe71"}
+        }
+      }
+    }
+  },
+  "source_contract": {
+    "operation": "checkout",
+    "successful_request_target_call_sites": 3,
+    "routing_policy": "haproxy_roundrobin",
+    "backend_health_check_interval_seconds": 0.5,
+    "backend_health_check_fall": 1,
+    "backend_health_check_rise": 1,
+    "ordinary_health_poll_seconds": 1.0,
+    "literal_per_call_assignment_observed": false,
+    "persistent_connection_identity_observed": false,
+    "temporal_hypothesis": "effective_one_path_up_success_changes_with_observed_path_episode_age",
+    "source_500ms_model_is_a_falsifiable_reference_not_the_primary_fit": true
+  },
+  "design_probe": {
+    "scope": "schema_and_bounded_calibration_feasibility_only",
+    "cells": [
+      ["opentelemetry_demo", "colocated", "N", 0],
+      ["opentelemetry_demo", "split", "ND", 0]
+    ],
+    "trees_read": ["learner"],
+    "evaluator_files_read": 0,
+    "full_matrix_computed_locally": false,
+    "probe_cells_are_not_independent_confirmation": true,
+    "remaining_design_is_exploratory": true
+  },
+  "cohort": {
+    "profile": "opentelemetry_demo",
+    "operation": "checkout",
+    "placements": ["colocated", "split"],
+    "failure_laws": ["N", "ND"],
+    "repetitions": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "expected_cells": 40,
+    "expected_qualified_files_per_cell": 9,
+    "expected_selected_files": 360,
+    "evaluation_view": "stable",
+    "health_alignment_tolerance_seconds": 1.25,
+    "transition_guard_seconds_each_side": 1,
+    "minimum_stable_test_requests_per_cell": 500
+  },
+  "information_boundary": {
+    "candidate_job_input": "five_learner_boundary_files_per_cell_plus_sanitized_frozen_predictors",
+    "learner_files": [
+      "audit/boundary.json",
+      "learner/deployment.json",
+      "learner/health.csv",
+      "learner/manifest.json",
+      "learner/requests.csv"
+    ],
+    "test_outcomes_accessed_during_fit": false,
+    "test_health_accessed_during_fit": false,
+    "candidate_artifact_precedes_evaluator_access": true,
+    "full_ordinary_calibration_health_is_additional_input": true,
+    "additional_input_cost_must_be_reported": true,
+    "conditional_test_health_score_is_diagnostic_not_a_forecast": true
+  },
+  "temporal_representation": {
+    "path_state": "two_haproxy_backend_usable_indicators",
+    "episode_change": "change_in_ordered_pair_pa_pb_at_an_ordinary_health_tick",
+    "first_observed_episode": "left_censored_and_excluded_only_when_exactly_one_path_is_up",
+    "transition_time_interval": "previous_tick_exclusive_to_first_new_state_tick_inclusive",
+    "age_views": ["lower", "midpoint", "upper"],
+    "primary_age_view": "midpoint",
+    "near_any_four_signal_transition_excluded_seconds_each_side": 1,
+    "source_delay_seconds": 0.5,
+    "monotone_bin_edges_seconds": [0, 1, 2, 4, 8, 23],
+    "late_recovery_threshold_seconds": 4,
+    "interval_width_limit_seconds": 1.1
+  },
+  "models": {
+    "primary": "temporal_logit_midpoint",
+    "candidate_order": [
+      "m7_single_demand_or",
+      "m9m_static_and",
+      "m9m_trace_requirement",
+      "m9m_two_client_affinity",
+      "source_500ms_failover",
+      "learner_state_only",
+      "temporal_logit_lower",
+      "temporal_logit_midpoint",
+      "temporal_logit_upper",
+      "temporal_monotone_bins",
+      "m7_b0_endpoint",
+      "m7_b2_marginal_reference"
+    ],
+    "one_path_formulas": {
+      "source_500ms_failover": "min(max(age_seconds/0.5,0),1)",
+      "learner_state_only": "sigmoid(beta0)",
+      "temporal_logit_lower": "sigmoid(beta0+beta1*log1p(lower_age_seconds))",
+      "temporal_logit_midpoint": "sigmoid(beta0+beta1*log1p(midpoint_age_seconds))",
+      "temporal_logit_upper": "sigmoid(beta0+beta1*log1p(upper_age_seconds))",
+      "temporal_monotone_bins": "weighted_PAVA_of_Jeffreys_bin_rates"
+    },
+    "both_paths_up_route": 1.0,
+    "neither_path_up_route": 0.0,
+    "clean_residual": "unchanged_Jeffreys_baseline_checkout_q",
+    "fit_period": "stable_calibration_checkout_requests",
+    "marginal_prediction_exposure": "same_stable_calibration_checkout_covariates_without_outcome_reuse_in_averaging",
+    "optimizer": "bounded_8_start_LBFGSB",
+    "parameter_bounds": {"beta0": [-12, 12], "beta1": [-12, 12]},
+    "maximum_equivalent_multistart_prediction_range": 0.0001,
+    "numerical_probability_floor": 1e-12,
+    "candidate_selection_after_test": false,
+    "sensitivity_candidates_are_not_promoted_by_best_test_score": true
+  },
+  "adequacy": {
+    "minimum_stable_calibration_checkout_requests_per_cell": 500,
+    "minimum_stable_one_path_up_requests_per_cell": 100,
+    "minimum_one_path_up_episodes_per_cell": 8,
+    "minimum_early_one_path_requests_per_cell": 20,
+    "minimum_late_one_path_requests_per_cell": 20,
+    "minimum_cells_with_positive_late_minus_early_recovery": 32,
+    "calibration_recovery_interval_lower_must_exceed_zero": true
+  },
+  "evaluation": {
+    "primary_marginal_metric": "bernoulli_brier_score",
+    "secondary_marginal_metrics": ["signed_prediction_error", "absolute_prediction_error"],
+    "conditional_metric": "request_level_brier_using_frozen_curve_and_heldout_ordinary_health",
+    "conditional_role": "mechanism_diagnostic_only",
+    "strong_accuracy_reference": "m7_b0_endpoint",
+    "structural_reference": "m7_single_demand_or",
+    "closure_margin_absolute_probability": 0.03,
+    "interval_sensitivity_maximum_mean_prediction_span": 0.02,
+    "support_requires_conditional_brier_upper_bound_below_state_only": true,
+    "predictive_advantage_requires_paired_brier_and_absolute_error_upper_bounds_below_b0": true,
+    "aggregation": "equal_campaign_weight_within_equal_placement_by_failure_law_strata",
+    "bootstrap": {
+      "unit": "campaign_within_placement_by_failure_law_stratum",
+      "resamples": 10000,
+      "seed": 20260909,
+      "confidence_level": 0.95
+    }
+  },
+  "decision": {
+    "temporal_with_b0_advantage": "temporal_model_with_b0_advantage_on_reused_test",
+    "temporal_without_b0_advantage": "temporal_mechanism_supported_without_b0_advantage",
+    "conditional_only": "conditional_temporal_mechanism_but_marginal_inconclusive",
+    "underpredicts": "temporal_model_underpredicts",
+    "overpredicts": "temporal_model_overpredicts",
+    "no_recovery": "no_calibration_temporal_recovery",
+    "inconclusive": "temporal_model_inconclusive",
+    "integrity_fail": "temporal_information_or_fit_integrity_failed",
+    "next_supported": "m9o_independent_temporal_confirmation_preregistration",
+    "next_without_b0_advantage": "m9o_temporal_information_cost_and_confirmation_design",
+    "next_conditional_only": "m9o_marginalization_and_assignment_instrumentation_preregistration",
+    "next_miss": "m9o_minimal_haproxy_assignment_instrumentation_preregistration",
+    "next_no_recovery": "m9o_checkout_dependency_and_timeout_semantics",
+    "next_integrity_fail": "m9o_minimal_temporal_evidence_preregistration"
+  },
+  "repository_locks": [
+    {"path": "configs/m7_frozen_live.yaml", "bytes": 4748, "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a"},
+    {"path": "configs/m9m_checkout_routing_model.json", "bytes": 13771, "sha256": "783435b2983b941620ccd04de190beb6967886a8fce24b5a3d326714a805e167"},
+    {"path": "src/telemetry_availability/checkout_routing_model.py", "bytes": 86933, "sha256": "9833739e025387981c5e08836e842bd9b203620f2503f853208f20ec1bf834b5"},
+    {"path": "src/telemetry_availability/live_validation_analysis.py", "bytes": 68555, "sha256": "0b58ddd271a6eccbdd3d1f2879fae6e333825c4a95f2667ad1ecb1d12c646132"},
+    {"path": "src/telemetry_availability/live_placement_pilot.py", "bytes": 53208, "sha256": "78c940f1767b97f0b949d6b26338aa9ccaba001f6d9e55e9f9c7b2359af70be0"},
+    {"path": "requirements.txt", "bytes": 41, "sha256": "c08d853f6dd527570717ebe50bdd0ace08563598f1ebe42fb4b534ea4afefd88"},
+    {"path": "docs/milestones/M9M_CHECKOUT_ROUTING_MODEL.md", "bytes": 12002, "sha256": "feaf4b6455b887c0f710dd0e126474feaec95369b62ce848b44e2ca3e9b2e745"}
+  ],
+  "manual_actions_log": "docs/M9N_MANUAL_ACTIONS.csv",
+  "workflow": {
+    "jobs": 3,
+    "job_timeout_minutes": 360,
+    "heavy_analysis_only_in_github_actions": true,
+    "artifact_retention_days": 90
+  },
+  "interpretation_guardrails": {
+    "reused_test_is_independent_confirmation": false,
+    "two_cell_probe_is_confirmatory": false,
+    "conditional_test_health_score_is_deployable_forecast": false,
+    "best_sensitivity_score_selects_a_model": false,
+    "single_operation_generalizes": false,
+    "m7_or_m9m_claim_is_retroactively_revised": false,
+    "better_overall_accuracy_is_demonstrated": false,
+    "lower_end_to_end_cost_than_pmx_is_demonstrated": false,
+    "pmx_scientific_priority_is_reduced": false,
+    "literal_haproxy_per_call_choice_is_observed": false,
+    "overall_article_verdict_changes": false
+  }
+}
