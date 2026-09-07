@@ -38,6 +38,7 @@ tests, configuration validation, and bounded smoke cases.
 | M9I | Audit embedded PMX failure-detection semantics against the retained M9H input/log boundary | Complete | `milestones/M9I_PMX_FAILURE_SEMANTICS.md`; first-attempt run 34052517285 recovered 25 exact sources and all four retained boundaries, localizing the child-error loss to a pre-detection span merge that does not propagate `SpanContainsError` |
 | M9J | Test the exact source-implied surviving-carrier failure contract | Complete | `milestones/M9J_PMX_CARRIER_CONTROL.md`; first-attempt run 34054064325 reproduced the negative model and generated a repeat-exact `VisitResource.read` probability of 0.1 under carrier true. The full prospective oracle failed an underidentified stdout-slot assumption, retained without another PMX run |
 | M9K | Localize the retained proposed-model overprediction on one operation | Complete | `milestones/M9K_CHECKOUT_LOCALIZATION.md`; first-attempt run 34055967110 audited 360 retained files and localized the checkout gap to route-up residual invariance, with calibration corroboration and no revised prediction |
+| M9L | Discriminate observable causes within checkout's route-up residual | Preregistered; remote run pending | Exhaustive calibration request/interval/trace taxonomy with missingness gates and test-only aggregate temporal corroboration; no refit, PMX invocation, or collection |
 
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference

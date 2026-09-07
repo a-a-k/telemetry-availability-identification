@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "id": "m9l_checkout_route_up_failure_cause_discrimination",
+  "status": "frozen_before_first_m9l_remote_discrimination",
+  "diagnostic_only": true,
+  "changes_m7_predictions_or_scores": false,
+  "new_live_collection": "forbidden",
+  "pmx_invocation": "forbidden",
+  "article_position": {
+    "direction_remains_substantive": true,
+    "claimed_advantage_demonstrated": false,
+    "specified_model_calculation_supported": true,
+    "better_predictive_accuracy_demonstrated": false,
+    "lower_end_to_end_automation_cost_than_pmx_demonstrated": false,
+    "overall_success_or_failure_decided": false
+  },
+  "evidence": {
+    "m7_source_run_id": 33990678586,
+    "m7_source_commit": "b1925736f314da610debd23a586d7b7d00cae7ca",
+    "m8a_preserved": {
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505",
+      "artifact_id": 9983956440,
+      "artifact_name": "m8-preserved-m7-evidence-33990678586-34016153918",
+      "size_in_bytes": 78577341,
+      "sha256": "978b380bf54be67ec13b2ebbfaac4464ee5653106ee68176fefcf2db4e85e271",
+      "expires_at": "2026-12-05T06:18:35Z"
+    },
+    "m8a_audit": {
+      "run_id": 34016153918,
+      "head_sha": "7a9744f6bf2db69424efc2ae0197714ebee42505",
+      "artifact_id": 9983956747,
+      "artifact_name": "m8a-m7-integrity-arithmetic-34016153918",
+      "size_in_bytes": 737045,
+      "sha256": "eca453e577ccac02f26716660062664355dde046748456b4695caa7480ba3439",
+      "expires_at": "2026-12-05T06:18:35Z",
+      "files": {
+        "manifest.json": {"bytes": 4292, "sha256": "e0c923926006d920207a236e7d74ac440806bb30af8e99c9ae5ff4a8142ace1e"},
+        "file-inventory.csv": {"bytes": 259037, "sha256": "fe526c86bc8d0a5c425d40d4a3a5a10401607920663517805aa8f55436534dcd"}
+      }
+    },
+    "m9k_localization": {
+      "run_id": 34055967110,
+      "head_sha": "9b69491a1e0ca76e6a656aae977c1c5c2b8e3d88",
+      "artifact_id": 9995975814,
+      "artifact_name": "m9k-checkout-localization-34055967110",
+      "size_in_bytes": 33696,
+      "sha256": "98b17af2b8555f8e58b3df4fa55ab046356f4ccdc07fb824d008feff0ec116af",
+      "expires_at": "2026-12-05T19:47:09Z",
+      "files": {
+        "localization-manifest.json": {"bytes": 4418, "sha256": "d650993388103ef37486e4ca5938d9fa95a6da5bddfb9f7d29d12ff5e1aaca8b"},
+        "cell-decomposition.csv": {"bytes": 24437, "sha256": "346ea85092af6c2ecf059455643a1be9a8690dbcf3b22b9c434aaf19a0999b82"},
+        "period-state.csv": {"bytes": 25582, "sha256": "5dd518040ba697e06e398ae1e2cb2c74eda66b146e243f9f2939c785ec21bb2e"},
+        "bootstrap-summary.csv": {"bytes": 1171, "sha256": "1710b7aaa008777e4f2741a6a97bdfd7eceeca85fe84a3b772bf31f63bb3c1b7"}
+      }
+    },
+    "m9k_decision": {
+      "run_id": 34055967110,
+      "head_sha": "9b69491a1e0ca76e6a656aae977c1c5c2b8e3d88",
+      "artifact_id": 9995981451,
+      "artifact_name": "m9k-checkout-decision-34055967110",
+      "size_in_bytes": 2262,
+      "sha256": "395a94a4625e060ee2b5b87d5f6ea3caa671519253745924cdcd2d5f6cb3f5df",
+      "expires_at": "2026-12-05T19:47:09Z",
+      "files": {
+        "decision-manifest.json": {"bytes": 2132, "sha256": "c88a067948144f0096ce415fc0d730084f0c39552ebca2c549ad43f8f01c9f66"}
+      },
+      "machine_status": "checkout_overprediction_localized_to_fault_period_route_up_residual_mismatch",
+      "classification": "route_up_residual",
+      "next_experiment": "m9l_checkout_route_up_failure_cause_discrimination"
+    }
+  },
+  "cohort": {
+    "profile": "opentelemetry_demo",
+    "operation": "checkout",
+    "placements": ["colocated", "split"],
+    "failure_laws": ["N", "ND"],
+    "repetitions": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    "expected_cells": 40,
+    "expected_qualified_files_per_cell": 9,
+    "expected_selected_files": 360,
+    "primary_period": "calibration",
+    "test_role": "aggregate_interval_corroboration_without_trace_graph",
+    "start_population": "original_M9K_stable_route_up_requests",
+    "additional_full_trace_role": "posthoc_physical_cause_diagnostic_not_forecast_input",
+    "test_trace_graph_access": "forbidden"
+  },
+  "classification": {
+    "start_alignment_tolerance_seconds": 1.25,
+    "completion_alignment_tolerance_seconds": 1.25,
+    "transition_guard_seconds_each_side": 1,
+    "interval_rule": "inclusive_tick_indices_from_nearest_start_through_nearest_completion",
+    "aggregate_route_signal": "max(replica_a_path,replica_b_path)",
+    "trace_usable_rule": "trace_present_and_positive_span_count_and_nonempty_subset_of_a_b_matching_target_replica_count",
+    "precedence": [
+      "completion_health_unresolved",
+      "aggregate_union_lost_during_request",
+      "trace_target_unresolved_union_continuous",
+      "target_path_down_at_start_union_continuous",
+      "target_path_lost_during_request_union_continuous",
+      "target_paths_continuously_up"
+    ],
+    "candidate_components": {
+      "aggregate_interval_loss": ["aggregate_union_lost_during_request"],
+      "observed_replica_path_loss": ["target_path_down_at_start_union_continuous", "target_path_lost_during_request_union_continuous"],
+      "observed_paths_continuously_up": ["target_paths_continuously_up"],
+      "evidence_unresolved": ["completion_health_unresolved", "trace_target_unresolved_union_continuous"]
+    },
+    "calibration_identity": "sum_class_of_(failures-(1-q)*requests)/all_stable_requests_equals_M9K_route_up_residual_invariance",
+    "test_identity": "aggregate_interval_plus_continuous_plus_completion_unresolved_equals_M9K_route_up_residual_invariance",
+    "tolerance": 1e-12,
+    "minimum_completion_alignment_fraction": 0.995,
+    "minimum_route_up_stable_requests_per_cell": 500,
+    "minimum_mean_resolved_target_trace_fraction": 0.60,
+    "trace_resolution_equivalence_margin": 0.10,
+    "minimum_positive_cells_for_dominance": 32,
+    "bootstrap": {
+      "unit": "campaign_within_placement_by_failure_law_stratum",
+      "resamples": 10000,
+      "seed": 20260907,
+      "confidence_level": 0.95
+    },
+    "dominance_rule": "largest_positive_candidate_with_lower_bound_above_zero_and_all_three_pairwise_difference_lower_bounds_above_zero_and_positive_in_at_least_32_of_40_cells",
+    "aggregate_interval_requires_test_corroboration": true,
+    "replica_or_continuously_up_requires_trace_adequacy": true,
+    "timeout_is_descriptive_not_a_cause_assignment": true
+  },
+  "decision": {
+    "aggregate_interval_loss": "checkout_residual_localized_to_within_request_aggregate_path_loss",
+    "observed_replica_path_loss": "checkout_residual_localized_to_observed_replica_path_loss",
+    "observed_paths_continuously_up": "checkout_residual_persists_with_observed_target_paths_continuously_up",
+    "evidence_unresolved": "checkout_route_up_failure_cause_unresolved_by_retained_evidence",
+    "integrity_fail": "m9l_evidence_or_reconstruction_integrity_failed",
+    "next_aggregate_interval_loss": "m9m_checkout_request_duration_state_model_test",
+    "next_observed_replica_path_loss": "m9m_checkout_request_level_routing_model_test",
+    "next_observed_paths_continuously_up": "m9m_checkout_dependency_and_timeout_semantics",
+    "next_evidence_unresolved": "m9m_checkout_minimal_discriminating_instrumentation"
+  },
+  "repository_locks": [
+    {"path": "configs/m7_frozen_live.yaml", "bytes": 4748, "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a"},
+    {"path": "configs/m7_evidence_boundary.yaml", "bytes": 2117, "sha256": "cde1ce49c15caaf03f27fa63594cc3396e81153716037fc9708cf060ac674448"},
+    {"path": "configs/m9k_checkout_localization.json", "bytes": 9593, "sha256": "00a0a6972a495ea7574d08f2a1b5806565fe60aa8d031e1123a735976528edbb"},
+    {"path": "requirements.txt", "bytes": 41, "sha256": "c08d853f6dd527570717ebe50bdd0ace08563598f1ebe42fb4b534ea4afefd88"},
+    {"path": "src/telemetry_availability/live_validation_analysis.py", "bytes": 68555, "sha256": "0b58ddd271a6eccbdd3d1f2879fae6e333825c4a95f2667ad1ecb1d12c646132"},
+    {"path": "src/telemetry_availability/checkout_localization.py", "bytes": 58950, "sha256": "6587f1d97663f458d4129db727cb448bfcef4b1bbcf71bcbbca8b0f88d827da3"},
+    {"path": "docs/milestones/M9K_CHECKOUT_LOCALIZATION.md", "bytes": 9209, "sha256": "c56fb93430b2293967c37f634d5ce8ee9ed481b44c13dd636632d6d72a9f13e2"}
+  ],
+  "manual_actions_log": "docs/M9L_MANUAL_ACTIONS.csv",
+  "workflow": {
+    "jobs": 3,
+    "job_timeout_minutes": 360,
+    "heavy_analysis_only_in_github_actions": true,
+    "artifact_retention_days": 90
+  },
+  "interpretation_guardrails": {
+    "full_retained_trace_is_credited_as_original_sampled_forecast_input": false,
+    "trace_replica_set_is_exact_call_time_or_load_balancer_choice": false,
+    "continuous_observed_target_path_proves_all_dependencies_healthy": false,
+    "posthoc_classification_is_confirmatory_accuracy_evidence": false,
+    "single_operation_result_generalizes": false,
+    "m7_predictions_or_scores_change": false,
+    "pmx_scientific_priority_reduced": false,
+    "new_collection_is_authorized": false,
+    "overall_article_verdict_changes": false
+  }
+}

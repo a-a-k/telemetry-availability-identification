@@ -1,0 +1,207 @@
+name: M9L checkout route-up failure causes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: m9l-checkout-failure-causes-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  CONFIG: configs/m9l_checkout_failure_causes.json
+  PYTHON_VERSION: 3.13.15
+  M8A_RUN_ID: "34016153918"
+  M8A_PRESERVED_ARTIFACT: m8-preserved-m7-evidence-33990678586-34016153918
+  M8A_AUDIT_ARTIFACT: m8a-m7-integrity-arithmetic-34016153918
+  M9K_RUN_ID: "34055967110"
+  M9K_LOCALIZATION_ARTIFACT: m9k-checkout-localization-34055967110
+  M9K_DECISION_ARTIFACT: m9k-checkout-decision-34055967110
+
+jobs:
+  failure_cause_contract:
+    name: Verify M9K branch and retained evidence identities
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9L
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_failure_causes validate --config "$CONFIG"
+
+      - name: Capture exact metadata and bounded retained inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          metadata="workflow-input/m9l/metadata"
+          mkdir -p "$metadata" workflow-input/m9l/m8a-audit workflow-input/m9l/m9k-localization workflow-input/m9l/m9k-decision
+          for role in m8a_preserved m8a_audit m9k_localization m9k_decision; do
+            artifact_id="$(jq -r ".evidence.${role}.artifact_id" "$CONFIG")"
+            gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id" > "$metadata/${role}.json"
+          done
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9l/m8a-audit
+          gh run download "$M9K_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9K_LOCALIZATION_ARTIFACT" --dir workflow-input/m9l/m9k-localization
+          gh run download "$M9K_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9K_DECISION_ARTIFACT" --dir workflow-input/m9l/m9k-decision
+
+      - name: Build frozen failure-cause contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9l-contract
+          /usr/bin/time -v -o workflow-results/m9l-contract/resource-usage.txt python -m telemetry_availability.checkout_failure_causes build-contract \
+            --config "$CONFIG" \
+            --m8a-preserved-metadata workflow-input/m9l/metadata/m8a_preserved.json \
+            --m8a-audit-metadata workflow-input/m9l/metadata/m8a_audit.json \
+            --m9k-localization-metadata workflow-input/m9l/metadata/m9k_localization.json \
+            --m9k-decision-metadata workflow-input/m9l/metadata/m9k_decision.json \
+            --m8a-audit-root workflow-input/m9l/m8a-audit \
+            --m9k-localization-root workflow-input/m9l/m9k-localization \
+            --m9k-decision-root workflow-input/m9l/m9k-decision \
+            --out workflow-results/m9l-contract
+
+      - name: Upload failure-cause contract
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9l-failure-cause-contract-${{ github.run_id }}
+          path: workflow-results/m9l-contract
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
+
+  failure_cause_discrimination:
+    name: Classify retained checkout route-up requests
+    needs: [failure_cause_contract]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9L
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_failure_causes validate --config "$CONFIG"
+
+      - name: Download exact failure-cause contract
+        uses: actions/download-artifact@v8
+        with:
+          name: m9l-failure-cause-contract-${{ github.run_id }}
+          path: workflow-input/m9l/contract
+
+      - name: Download immutable M8A and M9K evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-input/m9l/m8a-preserved workflow-input/m9l/m8a-audit workflow-input/m9l/m9k-localization
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_PRESERVED_ARTIFACT" --dir workflow-input/m9l/m8a-preserved
+          gh run download "$M8A_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M8A_AUDIT_ARTIFACT" --dir workflow-input/m9l/m8a-audit
+          gh run download "$M9K_RUN_ID" --repo "$GITHUB_REPOSITORY" --name "$M9K_LOCALIZATION_ARTIFACT" --dir workflow-input/m9l/m9k-localization
+
+      - name: Audit and discriminate route-up failure classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9l-discrimination
+          /usr/bin/time -v -o workflow-results/m9l-discrimination/resource-usage.txt python -m telemetry_availability.checkout_failure_causes discriminate \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9l/contract/contract-manifest.json \
+            --qualified-root workflow-input/m9l/m8a-preserved/m8-preserved/qualified \
+            --m8a-audit-root workflow-input/m9l/m8a-audit \
+            --m9k-localization-root workflow-input/m9l/m9k-localization \
+            --out workflow-results/m9l-discrimination
+
+      - name: Upload failure-cause evidence
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9l-failure-cause-discrimination-${{ github.run_id }}
+          path: workflow-results/m9l-discrimination
+          if-no-files-found: warn
+          include-hidden-files: true
+          retention-days: 90
+
+  failure_cause_decision:
+    name: Apply frozen failure-cause decision
+    needs: [failure_cause_contract, failure_cause_discrimination]
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up exact Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install exact analysis environment and validate M9L
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -m telemetry_availability.checkout_failure_causes validate --config "$CONFIG"
+
+      - name: Download failure-cause contract and evidence
+        uses: actions/download-artifact@v8
+        with:
+          pattern: m9l-failure-cause-*-${{ github.run_id }}
+          path: workflow-input/m9l/current
+
+      - name: Apply frozen M9L decision
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p workflow-results/m9l-decision
+          /usr/bin/time -v -o workflow-results/m9l-decision/resource-usage.txt python -m telemetry_availability.checkout_failure_causes decide \
+            --config "$CONFIG" \
+            --contract-manifest workflow-input/m9l/current/m9l-failure-cause-contract-${GITHUB_RUN_ID}/contract-manifest.json \
+            --discrimination-manifest workflow-input/m9l/current/m9l-failure-cause-discrimination-${GITHUB_RUN_ID}/discrimination-manifest.json \
+            --out workflow-results/m9l-decision
+
+      - name: Upload M9L decision
+        uses: actions/upload-artifact@v7
+        with:
+          name: m9l-failure-cause-decision-${{ github.run_id }}
+          path: workflow-results/m9l-decision
+          if-no-files-found: error
+          include-hidden-files: true
+          retention-days: 90
