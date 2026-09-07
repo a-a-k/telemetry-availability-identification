@@ -78,6 +78,11 @@ microservice system. The [focused primary-source comparison](RELATED_WORK_SCOPE.
 now attributes the network-tomography, algebraic, probability-bound and model-
 calibration antecedents. It is not an exhaustive novelty result.
 
+The [methods draft](ARTICLE_METHODS_DRAFT.md) now assembles these definitions,
+restricted results, implementation boundaries and validation requirements into
+connected article text. It leaves pending M9P numbers and the independent PMX
+accuracy comparison open, without changing the initial design into a result.
+
 ## Information and cost accounting
 
 Matched prediction accuracy requires a common operation, semantic outcome,
