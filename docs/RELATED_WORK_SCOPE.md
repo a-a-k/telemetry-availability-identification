@@ -148,6 +148,17 @@ statement uses the author institution's abstract, not an unverified claim about
 its handling of partial observability or causal fault separation.
 [Friederich, Cai, Gan and Lazarova-Molnar, SIGSIM-PADS 2023](https://portal.findresearcher.sdu.dk/en/publications/equipment-centric-data-driven-reliability-assessment-of-complex-m/).
 
+## Target exposure and transport
+
+**Sugiyama, Krauledat and Müller (2007), _Covariate Shift Adaptation by
+Importance Weighted Cross Validation_.** Sections 1–2 distinguish changing
+input distributions from a stable conditional response law; the theoretical
+setup assumes known finite density ratios before considering empirical
+estimation. Context reweighting therefore must be attributed to that established
+research line. Our target-exposure identity and two-context illustration do
+not establish a new adaptation method or justify invariance after a failure or
+deployment intervention. [JMLR full text](https://jmlr.org/papers/volume8/sugiyama07a/sugiyama07a.pdf).
+
 ## Consequences for the current article argument
 
 The reportable contribution must be narrower than discovery of log-linear

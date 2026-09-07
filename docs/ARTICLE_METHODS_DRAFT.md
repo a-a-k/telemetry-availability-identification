@@ -214,7 +214,10 @@ The [intercept identity](M9P_CALIBRATION_IDENTITY.md) explains why an age curve
 can improve conditional scores while giving nearly the same calibration-
 weighted mean as a state-only or matched endpoint estimate. No conclusion about
 a different future exposure distribution follows without a separate transport
-and validation argument.
+and validation argument. The [target-exposure note](TARGET_EXPOSURE_AND_MEAN_FORECASTS.md)
+gives the exact difference identity, a total-variation bound and an attainable
+two-context example. It also retains a reweighted stratified endpoint as a
+necessary matched comparator for any future exposure-transfer assessment.
 
 External comparison also requires a semantic input contract. A software error
 recorded on a parent operation can include a propagated child error. Treating

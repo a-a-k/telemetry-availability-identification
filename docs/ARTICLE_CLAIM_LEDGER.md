@@ -70,6 +70,10 @@ forecast remains close to a state-only or endpoint estimate. The exact identity
 requires its stated intercept, interior-solution, response-factor and target-
 weight conditions. It is not a bound for every fit with a response factor near
 one, and it does not predict the pending independent intervals.
+The [target-exposure note](TARGET_EXPOSURE_AND_MEAN_FORECASTS.md) states when
+equal calibration means can separate under different target weights, including
+sharp two-context ambiguity and a matched reweighted endpoint. Its artificial
+example is not a live transport experiment or an extension of M9P's estimand.
 
 For an eventual theorem statement, keep algebraic identification, estimator
 consistency, finite-sample coverage and model adequacy separate. The current
