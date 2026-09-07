@@ -1,7 +1,7 @@
 # Working claim ledger for the SIMPAT continuation
 
-Status: evidence organization while M9P independent acquisition and M9Q adapter
-conformance are running. This is not an article verdict or a substitute for
+Status: evidence organization while M9P independent acquisition is running and
+M9Q proceeds from repaired conformance to its application census. This is not an article verdict or a substitute for
 the missing experiments. The original SIMPAT design remains a research plan;
 its proposed contributions are not automatically established results.
 
@@ -37,7 +37,7 @@ model do not establish the adequacy of that route model for checkout requests.
 | [M9K–M](milestones/M9M_CHECKOUT_ROUTING_MODEL.md) | Checkout's static-route discrepancy was localized using source, learner telemetry and preserved outcomes; static AND and OR bracket most examined cells. | Reused M7 evidence supports mechanism development. A path-failure association is not an observed backend assignment for every individual call. |
 | [M9N](milestones/M9N_CHECKOUT_TEMPORAL_FAILOVER.md) | The temporal mechanism diagnostic improved conditional fit and closed the signed marginal gap on reused data, while state-only and temporal marginal forecasts were nearly identical. | Reused test evidence; no independently confirmed incremental marginal value from age. Conditional held-out health is diagnostic input, not part of a marginal learner-only forecast. |
 | [M9O](milestones/M9O_TEMPORAL_CONFIRMATION_DESIGN.md), [M9P protocol](M9P_TEMPORAL_CONFIRMATION_PROTOCOL.md) | A 120-campaign independent design freezes conditional replication, marginal temporal/state comparison and signed-error adequacy, with matched endpoint controls. | Collection is running. No result or inferential conclusion may be filled in from M9N, the no-fit preflight, or incomplete main batches. |
-| [M9Q protocol](M9Q_PMX_OBSERVED_OPERATION_PROTOCOL.md) | A prospective measured adapter explicitly maps observed server trees and their error-frequency denominators to the pinned PMX reader. | Conformance is pending; even success would not establish full external-request availability, temporal failover or a calibrated performance model. |
+| [M9Q conformance](milestones/M9Q_PMX_OBSERVED_OPERATION_CONFORMANCE.md) | The measured observed-server adapter retained all six artificial inventories and structural/error correspondences, after a source-grounded repair of the failed workload-node oracle. | Original prospective gate remains failed; the repaired acceptance and pending historical census do not establish full external-request availability, temporal failover or a calibrated performance model. |
 
 ## Mathematical material that can be developed independently of pending outcomes
 
@@ -83,8 +83,8 @@ comparison; runner times and artifact sizes do not establish that effect.
 
 - Complete and audit all preregistered M9P campaigns, frozen candidates,
   evaluation outputs, adequacy gates and simultaneous intervals.
-- Complete the bounded M9Q conformance and its gated four-sample application
-  census, retaining every failure and any unresolved operation coverage.
+- Complete M9Q's gated four-sample application census, retaining the original
+  conformance failure, explicit oracle repair and unresolved operation coverage.
 - Specify the remaining independent PMX availability comparison only after
   observed-operation errors, propagated failures, missing requests, replication
   and external semantic outcomes have a defensible correspondence.
