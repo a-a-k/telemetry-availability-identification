@@ -97,6 +97,14 @@ matrices and mixed run attempts. There is no automatic partial rerun or
 missing-campaign omission. The candidate artifact is checked through the
 Actions API before any evaluator download.
 
+Declare repetition as the outer matrix dimension, then the four placement/law
+combinations, with at most 20 concurrent acquisitions. This interleaves intended
+stratum submission instead of deliberately submitting all 30 repetitions of one
+stratum first. Actual runner start/end times remain recorded; concurrent job
+scheduling is not assumed to preserve a deterministic completion order. The
+frozen 120 identities, their seed derivations and all analysis weights are
+unchanged. This scheduling choice is made before any main acquisition.
+
 All 120 successful main cells also retain complete raw sources, including
 native telemetry, for 90 days. This additional preservation is fixed before
 main acquisition and is independent of scores. It prevents loss of the native
