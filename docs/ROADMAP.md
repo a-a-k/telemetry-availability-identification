@@ -233,6 +233,19 @@ cells, but no intermediate law closed the gap and none was selected by its test
 score. The accepted branch is a calibration-only temporal-failover model in
 M9N, not a revised M7 or article-level accuracy claim.
 
+M9N is complete. Its first run, 34111689492, passed all information and fitting
+gates and froze 480 candidates before the evaluator download. All 40 learner
+cells exhibited positive late-minus-early recovery, with a mean contrast of
+0.385794. The primary marginal signed error was -0.008023 with a 95% interval
+containing zero, and paired Brier improved over frozen M7 B0 by 0.001497.
+However, the age-free learner state-only marginal forecast was almost identical.
+The clear additional age signal appears in conditional Brier given test health,
+not an established incremental advance forecast advantage. The registered M9O
+branch therefore preregisters independent confirmation with matched state-only
+and stable-endpoint controls, separate marginal and conditional claims, and
+explicit health-information costs. No new collection or general article claim
+is authorized by the M9N result itself.
+
 The preliminary article assessment is that the direction remains substantive,
 but its claimed advantage has not been demonstrated. Current evidence supports
 the correctness of the calculation for the specified model; it establishes
