@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "id": "m9p_independent_temporal_confirmation",
+  "design_source_run_id": 34113304974,
+  "design_file": "configs/m9p-design.json",
+  "matrix_file": "configs/m9p-prospective-campaigns.csv",
+  "confirmation": {
+    "profile": "opentelemetry_demo",
+    "benchmark_commit": "8c47d47c9ac27710d2b2a153bcd53e483bffe66d",
+    "operation": "checkout",
+    "placements": [
+      "colocated",
+      "split"
+    ],
+    "failure_laws": [
+      "N",
+      "ND"
+    ],
+    "baseline_seconds": 60,
+    "calibration_seconds": 900,
+    "test_seconds": 900,
+    "request_rate_per_second": 4,
+    "request_namespace": "m9p-temporal-confirm-v1",
+    "base_seed": 2026090701,
+    "preflight_base_seed": 2026090702,
+    "analysis_seed": 2026090703,
+    "bootstrap_resamples": 10000,
+    "main_base_seed_must_differ_from": [
+      770032,
+      770033,
+      770034,
+      770035,
+      770036
+    ],
+    "primary": "temporal_logit_midpoint",
+    "controls": [
+      "learner_state_only",
+      "matched_stable_endpoint",
+      "all_calibration_endpoint",
+      "source_500ms_failover"
+    ],
+    "signed_error_equivalence_margin": 0.03,
+    "marginal_brier_equivalence_margin": 0.002,
+    "candidate_selection_after_test": false,
+    "prospective_methods_refit_on_new_learner_only": true,
+    "new_full_matrix_requires_separate_no_fit_preflight": true,
+    "preflight_excluded_from_confirmation": true,
+    "independently_parameterized_pmx_is_available": false,
+    "pmx_or_general_accuracy_claim_authorized": false,
+    "job_timeout_minutes": 360
+  },
+  "preflight_request_namespace": "m9p-temporal-preflight-v1",
+  "request_namespace_execution_suffix": "-run{GITHUB_RUN_ID}-a{GITHUB_RUN_ATTEMPT}",
+  "artifact_retention_days": 90,
+  "raw_failure_retention_days": 7,
+  "preflight_raw_retention_days": 7,
+  "repository_locks": {
+    "configs/m9p-design.json": {
+      "bytes": 2525,
+      "sha256": "7d18996f33c01d5f09d0244b5d2a9bd3b45c44e43d2b53b89e85be2c87faecfc"
+    },
+    "configs/m9p-prospective-campaigns.csv": {
+      "bytes": 8250,
+      "sha256": "ceb54a1600049e464c2002a71a905c00bb013793fa4494a7a84bdf6b430d685e"
+    },
+    "configs/m9o_temporal_confirmation.json": {
+      "bytes": 3694,
+      "sha256": "c93d22f75ed43fe0760443d30d7dad8c72173e660672800b6e8558c84ec6dee2"
+    },
+    "configs/m7_frozen_live.yaml": {
+      "bytes": 4748,
+      "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a"
+    },
+    "configs/m7c_stochastic_freeze_pilot.yaml": {
+      "bytes": 1966,
+      "sha256": "ac205ae35d2bb3737a7b9c351b869d194bcfa745a94faab37c08b87f7fbe6b30"
+    },
+    "configs/m7b_placement_pilot.yaml": {
+      "bytes": 1406,
+      "sha256": "e913e1090d63061242608784f079bbd9827dc11927f8b21e48bb74530eea677a"
+    },
+    "configs/m7_runtime_pilot.yaml": {
+      "bytes": 4575,
+      "sha256": "07806dadfc33ac66c3732a8234f6fc75e7fb1d8b7272a7bf81166be9d5849cb8"
+    },
+    "configs/m7_evidence_boundary.yaml": {
+      "bytes": 2117,
+      "sha256": "cde1ce49c15caaf03f27fa63594cc3396e81153716037fc9708cf060ac674448"
+    },
+    "configs/live/otel-pilot-collector-extra.yml": {
+      "bytes": 466,
+      "sha256": "c0282a1267aaf7e1f7407845e551508c122e2cdc5954302d1cc7935112f0f781"
+    },
+    "requirements.txt": {
+      "bytes": 41,
+      "sha256": "c08d853f6dd527570717ebe50bdd0ace08563598f1ebe42fb4b534ea4afefd88"
+    },
+    "src/telemetry_availability/live_stochastic_pilot.py": {
+      "bytes": 87759,
+      "sha256": "c2fddc0581763ad9ade4a81be7a7ba548ad455acc839353e8ab34076d7079834"
+    },
+    "src/telemetry_availability/live_stochastic_config.py": {
+      "bytes": 11890,
+      "sha256": "f9fd2cb9165cfa435903989273730cd98b2c52286fe754b20c4bbca0e0f3f0d5"
+    },
+    "src/telemetry_availability/live_evidence.py": {
+      "bytes": 36909,
+      "sha256": "a20e474f9b78c5e189f7cde7f9ba7019b436b26e78531168e9bb2766edec17e1"
+    },
+    "src/telemetry_availability/live_evidence_config.py": {
+      "bytes": 7998,
+      "sha256": "2c2df98275ea7b8c474c6ab072ff857b6006676179f0ba60557a4951f91b8a36"
+    },
+    "src/telemetry_availability/live_validation_config.py": {
+      "bytes": 23728,
+      "sha256": "661a733ea24941a8749b7bf6ac874cb1688a0b17e539683c02c142ce88ba6702"
+    },
+    "src/telemetry_availability/live_placement_pilot.py": {
+      "bytes": 53208,
+      "sha256": "78c940f1767b97f0b949d6b26338aa9ccaba001f6d9e55e9f9c7b2359af70be0"
+    },
+    "src/telemetry_availability/live_placement_config.py": {
+      "bytes": 10662,
+      "sha256": "6c3961c23e09bad529fd4700baa64fc428ebcee64cf6dec8d29b5d9f05492947"
+    },
+    "src/telemetry_availability/live_pilot.py": {
+      "bytes": 27528,
+      "sha256": "44bf953759067e7be6ef78e5ac34b752503605ef556de7fced760f88f08c8e90"
+    },
+    "src/telemetry_availability/live_pilot_config.py": {
+      "bytes": 6440,
+      "sha256": "0bebd59f4898b5f2779f768f7a056954a0dce254c1dcc8ddb2611d5f6d22ed9c"
+    },
+    "src/telemetry_availability/live_fault_campaign.py": {
+      "bytes": 33914,
+      "sha256": "055ad0d33c0e3a08a52bc68edb3ce3976862511ba29334d37db835dadb3c811a"
+    },
+    "src/telemetry_availability/checkout_temporal_failover.py": {
+      "bytes": 87961,
+      "sha256": "f4ed99d6aca6993ae2ef6980a6f5e178c8c4aa8d948fb426248ed66358d3f78a"
+    },
+    "src/telemetry_availability/checkout_routing_model.py": {
+      "bytes": 86933,
+      "sha256": "9833739e025387981c5e08836e842bd9b203620f2503f853208f20ec1bf834b5"
+    },
+    "src/telemetry_availability/live_validation_analysis.py": {
+      "bytes": 68555,
+      "sha256": "0b58ddd271a6eccbdd3d1f2879fae6e333825c4a95f2667ad1ecb1d12c646132"
+    }
+  }
+}
