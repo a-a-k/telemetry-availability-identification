@@ -36,14 +36,14 @@ Transfer: только source calibration + объявленное измене�
 
 ## Условия допуска и ближайшая работа
 
-| Условие | Состояние после итерации 011 |
+| Условие | Состояние после итерации 016 |
 | --- | --- |
-| Конкретный G/R/P/Φ и observation law основной модели | Есть ограниченный искусственный демонстратор; прикладной класс не квалифицирован. |
-| Семантическая и идентификационная линии | Полные S1/I1 для прямых MCAR primitive probes; не доказано соответствие native compound observations. Новизна F/I не закрыта. |
-| Граф реально влияет на прогноз, replay, A/B и unsupported | 25 контролей пройдены; это только control version. |
+| Конкретный G/R/P/Φ и observation law основной модели | Есть exact demonstrator и applied joint-law candidate create_visit; окончательный основной класс не выбран. |
+| Семантическая и идентификационная линии | S1/I1, I2 transfer ambiguity и I3 joint/masked sharp bounds с controls; соответствие business event и новизна F/I не закрыты. |
+| Граф реально влияет на прогноз, replay, A/B и unsupported | 25 исходных controls + пять joint-law/parser controls; applied build/replay и structural/equivalence checks прошли (run 34215477704). |
 | Контракты десяти операций / поддержка новым методом | Прикладные contracts технически квалифицированы; поддержка G* отдельно не установлена. |
-| Технический пример нового метода для каждого из трёх приложений | 0/3. M7/PMX technical fit не засчитывается. |
+| Технический пример нового метода для каждого из трёх приложений | Технический graph candidate для Petclinic create_visit продемонстрирован (1/3); окончательный G* ещё не выбран. M7/PMX technical fit не засчитывается. |
 | Frozen G0/G-ID/G*, refinements/ablations, H-records, analysis/missingness | Не завершено. |
-| Изоляция future evaluator и seals | Квалифицирована у isolated M7/PMX; требуется end-to-end для нового graph builder. |
+| Изоляция future evaluator и seals | Квалифицированы ordinary-only graph builder и model-only replay (6/1 actual data reads); полная future candidate→evaluator цепочка остаётся. |
 
 Следующий результат — observation/source map реальных входов и technical graph chain, начиная с одной операции, затем по приложению. После этого выбираются максимум два различимых механизма и замораживается причинный пакет с собственным бюджетом. Основная матрица запускается только после выполнения всей таблицы, независимо от ожидаемого знака результатов.

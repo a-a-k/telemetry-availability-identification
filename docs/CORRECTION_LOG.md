@@ -27,3 +27,10 @@
 ## HAProxy last-result prefix и область v3 inputs
 
 [Итерация 014](iterations/014-v3-ordinary-input-and-joint-law.md): remote ordinary inventory выявил UP/`* L7OK`, который historical exact-string decoder считает неуспешным. Official HAProxy 3.0 semantics: prefix означает in-progress с сохранённым последним результатом. Новый graph observation parser сохраняет оба признака; raw acquisition/PMX не меняются. Требуется аудит affected historical M7/Petclinic fits и versioned reanalysis; размеры изменения прогнозов пока неизвестны. Privileged Docker states остаются только в historical/diagnostic роли, новый ordinary-only consumer прошёл actual six-file read audit.
+
+
+## V3 applied graph chain and historical prefix census preparation (2026-09-08)
+
+Run 34215477704 at e257c8e passed two create_visit graph builds, isolated saved-model replays and qualification. [Result](milestones/PETCLINIC_GRAPH_OBSERVATION_TECHNICAL.md), [30-point iteration](iterations/016-petclinic-graph-observation-result.md). Technical probabilities 771/901 and 820/901 are conditional on the declared ideal graph approximation; no main accuracy claim.
+
+The star-prefix correction is now a separate version in `health_prefix_audit.py`, with three bounded controls and a [frozen census protocol](HEALTH_PREFIX_AUDIT_PROTOCOL.md). The correction removes only the documented prefix before calling the untouched historical decoder. Nine source artifact locks cover 160 M7 calibration/test and eight Petclinic calibration cases. The remote census will report all 328 files; no new fit/outcome/PMX access. Changed observations, affected fits/metrics and auxiliary-series dependency scope are not yet quantified. This does not assign the parser defect as a scientific cause.
