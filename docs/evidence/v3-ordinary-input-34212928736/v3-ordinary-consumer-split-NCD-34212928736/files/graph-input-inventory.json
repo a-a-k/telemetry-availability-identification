@@ -1,0 +1,309 @@
+{
+  "application_prediction_qualified": false,
+  "compound_observation_law_qualified": false,
+  "graphs": {
+    "create_visit": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 807,
+          "supporting_spans": 807,
+          "target": "visits-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "observed_db_client_peer",
+          "source": "visits-service",
+          "supporting_attempts": 807,
+          "supporting_spans": 807,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "1": 2421,
+        "2": 1707,
+        "3": 1800
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "observed-db-client-30f7b3f9b2fb3df3": "observed_client_peer_not_native_server",
+        "visits-service": "native_service"
+      },
+      "observed_database_peer_count": 1,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "visits-service": [
+          "visits-service-replica-a",
+          "visits-service-replica-b"
+        ]
+      },
+      "spans": 5928
+    },
+    "list_owners": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "customers-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 11,
+          "observation_type": "observed_db_client_peer",
+          "source": "customers-service",
+          "supporting_attempts": 900,
+          "supporting_spans": 9900,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "1": 2700,
+        "2": 1800,
+        "3": 10800
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "customers-service": "native_service",
+        "observed-db-client-30f7b3f9b2fb3df3": "observed_client_peer_not_native_server"
+      },
+      "observed_database_peer_count": 1,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "customers-service": [
+          "customers-service"
+        ]
+      },
+      "spans": 15300
+    },
+    "list_vets": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "vets-service"
+        ],
+        [
+          "vets-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "vets-service"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "2": 1800,
+        "3": 900
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "vets-service": "native_service"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "vets-service": [
+          "vets-service"
+        ]
+      },
+      "spans": 2700
+    },
+    "owner_details_with_visits": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ],
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "customers-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 804,
+          "supporting_spans": 804,
+          "target": "visits-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "observed_db_client_peer",
+          "source": "customers-service",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "observed_db_client_peer",
+          "source": "visits-service",
+          "supporting_attempts": 804,
+          "supporting_spans": 804,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "1": 4308,
+        "2": 2604,
+        "3": 3504
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "customers-service": "native_service",
+        "observed-db-client-30f7b3f9b2fb3df3": "observed_client_peer_not_native_server",
+        "visits-service": "native_service"
+      },
+      "observed_database_peer_count": 1,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "customers-service": [
+          "customers-service"
+        ],
+        "visits-service": [
+          "visits-service-replica-a",
+          "visits-service-replica-b"
+        ]
+      },
+      "spans": 10416
+    }
+  },
+  "inventory_seconds": 0.6064218750000023,
+  "main_campaigns": 0,
+  "manifest": {
+    "baseline_attempts": 0,
+    "data_role": "development_technical",
+    "docker_state_fields": 0,
+    "estimated_model_files": 0,
+    "external_attempts": 3600,
+    "failure_law": "NCD",
+    "inferred_graph_files": 0,
+    "injection_schedule_fields": 0,
+    "native_instrumentation": "otel-native-calibration with explicit attribute whitelist",
+    "operations": {
+      "create_visit": 900,
+      "list_owners": 900,
+      "list_vets": 900,
+      "owner_details_with_visits": 900
+    },
+    "placement": "split",
+    "probe_mask_limitation": "legacy collector jointly queried Docker inspection and HAProxy; missingness not assumed independent",
+    "probe_observation_law": "raw HAProxy status/last-check; stateful and possibly delayed; not direct primitive MCAR",
+    "probe_ticks": 901,
+    "profile": "spring_petclinic_microservices",
+    "repetition": 0,
+    "role": "ordinary_calibration",
+    "source_quality_selection": "previously acquired development data; no post-test usability fields exported",
+    "test_attempts": 0,
+    "version": "v3-ordinary-calibration-1"
+  },
+  "model_fits": 0,
+  "original_input_seal": {
+    "files": {
+      "declarations.json": "ba9570d81b5a4abe4025b79e535212bc823db7abbc811f92ea50af092de02ab3",
+      "manifest.json": "4cb6b9381782dad9c27e3f7e2327c15cea69b02f7112677dd02a07259eda77a3",
+      "native.json": "a52224c42c104f3464a3863249d0762c50ef6023aa00762981c45011da48dcc8",
+      "probes.json": "00d80b5831dbcf40884173276ccd8ff9e632caf3e1d304106de8678a94655703",
+      "requests.json": "21cf07536166ef0e39e12c0adc8b2ceae86c3617a1ab26ed9ce147893aa7a996"
+    },
+    "version": "v3-ordinary-calibration-1"
+  },
+  "probe_status_counts": {
+    "a": {
+      "DOWN / * L4TOUT": 30,
+      "DOWN / * L7TOUT": 96,
+      "DOWN / L4TOUT": 40,
+      "DOWN / L7TOUT": 84,
+      "UP / * L7OK": 23,
+      "UP / L7OK": 628
+    },
+    "b": {
+      "DOWN / * L4TOUT": 32,
+      "DOWN / * L7TOUT": 120,
+      "DOWN / L4TOUT": 49,
+      "DOWN / L7TOUT": 68,
+      "UP / * L7OK": 27,
+      "UP / L7OK": 605
+    }
+  },
+  "scope": "ordinary_input_and_native_graph_inventory_only"
+}

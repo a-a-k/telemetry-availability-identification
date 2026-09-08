@@ -22,3 +22,8 @@
 ## V3: графовая цепочка вместо M7 как основного объекта
 
 Авторская [v3](SIMPAT_CORRECTION_V3.md) выявляет несоответствие роли M7 заявленной графовой проверке. Симптом и воспроизведение: topology-edges.csv не участвует в historical solver, что уже зафиксировано в ORIGINAL_MODEL_NO_ML_SPECIFICATION.md. Исправление: M7 оставлен сравнительным вариантом; добавлен bounded graph replay с 25 A/B/unsupported controls, историческая correspondence map и новый admission/analysis draft. Старые данные и frozen fits не переписаны; main campaigns=0. Полные 30 статусов и затронутые будущие расчёты — [итерация 011](iterations/011-v3-graph-chain-and-evidence.md). Технические Petclinic/PMX результаты перенесены в собственной области, а не зачтены G*.
+
+
+## HAProxy last-result prefix и область v3 inputs
+
+[Итерация 014](iterations/014-v3-ordinary-input-and-joint-law.md): remote ordinary inventory выявил UP/`* L7OK`, который historical exact-string decoder считает неуспешным. Official HAProxy 3.0 semantics: prefix означает in-progress с сохранённым последним результатом. Новый graph observation parser сохраняет оба признака; raw acquisition/PMX не меняются. Требуется аудит affected historical M7/Petclinic fits и versioned reanalysis; размеры изменения прогнозов пока неизвестны. Privileged Docker states остаются только в historical/diagnostic роли, новый ordinary-only consumer прошёл actual six-file read audit.
