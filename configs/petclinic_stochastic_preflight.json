@@ -1,0 +1,72 @@
+{
+  "stage": "petclinic-eight-condition-technical-preflight-v1",
+  "scope": "technical_preflight",
+  "main_effectiveness": false,
+  "profiles": [
+    "spring_petclinic_microservices"
+  ],
+  "placements": [
+    "colocated",
+    "split"
+  ],
+  "laws": [
+    "N",
+    "NC",
+    "ND",
+    "NCD"
+  ],
+  "repetitions": 1,
+  "expected_campaigns": 8,
+  "expected_operation_cells": 32,
+  "baseline_seconds": 60,
+  "calibration_seconds": 900,
+  "test_seconds": 900,
+  "request_rate_per_second": 4,
+  "request_workers": 16,
+  "base_seed": 771301,
+  "inter_period_recovery_seconds": 70,
+  "trace_flush_seconds": 20,
+  "minimum_baseline_success_fraction_each_operation": 0.95,
+  "minimum_successful_trace_link_fraction": 0.95,
+  "minimum_health_observation_fraction": 0.95,
+  "minimum_successful_assignments_each_replica": 1,
+  "runtime_config": "configs/petclinic_runtime_v3.json",
+  "source_renewal_config": "configs/m7_frozen_live.yaml",
+  "learner_health_format": "raw HAProxy L7OK is preserved; old L4-only decoder must not be used",
+  "known_non_target_dependencies": [
+    "api-gateway",
+    "customers-service",
+    "vets-service",
+    "database",
+    "visits-service-proxy"
+  ],
+  "model_fits": 0,
+  "confirmatory_tests": 0,
+  "accepted_runtime": {
+    "run_id": 34201555957,
+    "head_sha": "301756d39fa6aec8b110dd1d89d0228282684e7c",
+    "summary_file": "docs/evidence/petclinic-v3-34201555957/bootstrap-summary.json",
+    "summary_sha256": "7f470ff086dd119f3ecfd876430ea954aee6ae993648dd83a0773fa38c644d98"
+  },
+  "repository_locks": {
+    "src/telemetry_availability/petclinic_stochastic_preflight.py": "13f45443d9fc9f77e6a4a38214d7c732d325dad6711cf80a7f0c0ee24265136d",
+    "src/telemetry_availability/petclinic_runtime_v3.py": "f487c8ec25a4f9aa62b327115c56a9e071a726a7d6783ae90047e574f9b2ab9b",
+    "src/telemetry_availability/petclinic_contract_v2.py": "19d21cf56f71ae1dca076c795dbe2e5c9a89e5b529620dd35f4b9d48490cbf99",
+    "src/telemetry_availability/live_stochastic_pilot.py": "c2fddc0581763ad9ade4a81be7a7ba548ad455acc839353e8ab34076d7079834",
+    "src/telemetry_availability/live_evidence.py": "a20e474f9b78c5e189f7cde7f9ba7019b436b26e78531168e9bb2766edec17e1",
+    "src/telemetry_availability/live_fault_campaign.py": "055ad0d33c0e3a08a52bc68edb3ce3976862511ba29334d37db835dadb3c811a",
+    "src/telemetry_availability/live_placement_pilot.py": "78c940f1767b97f0b949d6b26338aa9ccaba001f6d9e55e9f9c7b2359af70be0",
+    "src/telemetry_availability/live_validation_config.py": "661a733ea24941a8749b7bf6ac874cb1688a0b17e539683c02c142ce88ba6702",
+    "src/telemetry_availability/live_stochastic_config.py": "f9fd2cb9165cfa435903989273730cd98b2c52286fe754b20c4bbca0e0f3f0d5",
+    "src/telemetry_availability/pmx_observed_operations.py": "251d8769118f188d12288dfe933bd499aaf643fa36388cd59543a86161ab36e0",
+    "src/telemetry_availability/pmx_recovery.py": "76e67c104860dac96d45f9b888bee4418f3c38002f0880aaad5033ca1d7a1b81",
+    "src/telemetry_availability/runner.py": "ac8ef36be8e87b32eaaba0504df2ef5292da1c01b594ba40bf0ff4f28216153a",
+    "configs/petclinic_runtime_v3.json": "8ab8ce1335b9f81356085966e887a9a86b48c06d95b01e6f43207aba06c53160",
+    "configs/petclinic_runtime_v2.json": "1851ac982a464e5e9e51a26500e1a6f1270faa8847390b5aa936ff0911812564",
+    "configs/m7_frozen_live.yaml": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a",
+    "configs/m7c_stochastic_freeze_pilot.yaml": "ac205ae35d2bb3737a7b9c351b869d194bcfa745a94faab37c08b87f7fbe6b30",
+    "configs/m7b_placement_pilot.yaml": "e913e1090d63061242608784f079bbd9827dc11927f8b21e48bb74530eea677a",
+    "scripts/restore_petclinic_image.py": "032d96d46ea567029262cd8aaa65633ed02f9f46710687fb194aed7adf88f975",
+    ".github/workflows/petclinic-stochastic-preflight.yml": "2e23044d26dfda309fe94cbdc361f9308e7c1c2e59f7c8afe69865f8f006735f"
+  }
+}

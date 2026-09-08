@@ -1,0 +1,81 @@
+name: Petclinic technical preflight all eight stochastic conditions
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        placement: [colocated, split]
+        law: [N, NC, ND, NCD]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Install pinned environment and verify qualified runtime and implementation locks
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          python -c "from telemetry_availability.petclinic_stochastic_preflight import config_objects; config_objects()"
+      - name: Restore the exact source-built image and audit all bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/restore_petclinic_image.py
+      - name: Acquire 60s baseline, 900s calibration and 900s test; seal separate roles without fits
+        run: |
+          mkdir -p workflow-results/petclinic-technical
+          /usr/bin/time -v -o workflow-results/petclinic-technical/resource-usage.txt python -m telemetry_availability.petclinic_stochastic_preflight --bundle workflow-input/petclinic-build --out workflow-results/petclinic-technical --placement '${{ matrix.placement }}' --law '${{ matrix.law }}'
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-technical-raw-${{ matrix.placement }}-${{ matrix.law }}-${{ github.run_id }}
+          path: workflow-results/petclinic-technical
+          retention-days: 90
+          if-no-files-found: error
+          compression-level: 1
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-technical-learner-${{ matrix.placement }}-${{ matrix.law }}-${{ github.run_id }}
+          path: workflow-results/petclinic-technical/learner-bundle
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-technical-evaluator-${{ matrix.placement }}-${{ matrix.law }}-${{ github.run_id }}
+          path: workflow-results/petclinic-technical/evaluator-bundle
+          retention-days: 90
+          if-no-files-found: error
+      - name: Export compact qualification summaries and costs
+        if: ${{ always() }}
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          source=Path('workflow-results/petclinic-technical')
+          out=Path('workflow-results/technical-compact')
+          out.mkdir(parents=True,exist_ok=True)
+          for name in ['technical-summary.json','periods.json','resource-usage.txt','logs/compose-up.log.resource-usage.txt','logs/compose-down.log.resource-usage.txt']:
+              path=source/name
+              if path.is_file(): shutil.copyfile(path,out/path.name)
+          for role in ['learner','evaluator']:
+              path=source/(role+'-bundle')/'seal.json'
+              if path.is_file(): shutil.copyfile(path,out/(role+'-seal.json'))
+          path=Path('workflow-results/petclinic-v2-compact/image-restore-audit.json')
+          if path.is_file(): shutil.copyfile(path,out/path.name)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-technical-compact-${{ matrix.placement }}-${{ matrix.law }}-${{ github.run_id }}
+          path: workflow-results/technical-compact
+          retention-days: 90
+          if-no-files-found: error

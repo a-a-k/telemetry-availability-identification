@@ -1,0 +1,228 @@
+{
+  "name": "petclinic-study",
+  "networks": {
+    "application": {
+      "name": "petclinic-study-application"
+    },
+    "database": {
+      "name": "petclinic-study-database"
+    },
+    "telemetry": {
+      "name": "petclinic-study-telemetry"
+    }
+  },
+  "services": {
+    "api-gateway": {
+      "command": [
+        "java",
+        "-Xms64m",
+        "-Xmx320m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-javaagent:/app/opentelemetry-javaagent.jar",
+        "-jar",
+        "/app/api-gateway.jar"
+      ],
+      "depends_on": [
+        "database",
+        "collector"
+      ],
+      "environment": {
+        "OTEL_BSP_SCHEDULE_DELAY": "1000",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://collector:4318",
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+        "OTEL_LOGS_EXPORTER": "none",
+        "OTEL_METRICS_EXPORTER": "none",
+        "OTEL_RESOURCE_ATTRIBUTES": "service.instance.id=api-gateway,study.replica=,study.domain=unfaulted",
+        "OTEL_SERVICE_NAME": "api-gateway",
+        "OTEL_TRACES_SAMPLER": "always_on",
+        "SPRING_APPLICATION_JSON": "{\"server.port\": 8080, \"spring.cloud.config.enabled\": false, \"eureka.client.enabled\": false, \"spring.sql.init.mode\": \"never\", \"spring.jpa.hibernate.ddl-auto\": \"none\", \"spring.jpa.open-in-view\": false, \"management.tracing.export.enabled\": false, \"management.tracing.export.zipkin.enabled\": false, \"spring.autoconfigure.exclude\": [\"org.springframework.boot.micrometer.tracing.brave.autoconfigure.BraveAutoConfiguration\", \"org.springframework.boot.micrometer.tracing.autoconfigure.MicrometerTracingAutoConfiguration\"], \"management.endpoints.web.exposure.include\": \"health,info\", \"spring.datasource.url\": \"jdbc:mysql://database:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false\", \"spring.datasource.username\": \"root\", \"spring.datasource.password\": \"petclinic-study\", \"spring.datasource.driver-class-name\": \"com.mysql.cj.jdbc.Driver\", \"spring.datasource.hikari.maximum-pool-size\": 5, \"spring.datasource.hikari.minimum-idle\": 1, \"spring.cloud.discovery.client.simple.instances.visits-service[0].uri\": \"http://visits-service:8080\", \"spring.cloud.discovery.client.simple.instances.customers-service[0].uri\": \"http://customers-service:8080\", \"spring.cloud.discovery.client.simple.instances.vets-service[0].uri\": \"http://vets-service:8080\", \"spring.cloud.gateway.server.webflux.default-filters\": [{\"name\": \"Retry\", \"args\": {\"retries\": 1, \"statuses\": \"SERVICE_UNAVAILABLE\", \"methods\": \"POST\"}}], \"spring.cloud.gateway.server.webflux.routes\": [{\"id\": \"vets\", \"uri\": \"lb://vets-service\", \"predicates\": [\"Path=/api/vet/**\"], \"filters\": [\"StripPrefix=2\", {\"name\": \"CircuitBreaker\", \"args\": {\"name\": \"vetsCircuitBreaker\", \"fallbackUri\": \"forward:/fallback\"}}]}, {\"id\": \"visits\", \"uri\": \"lb://visits-service\", \"predicates\": [\"Path=/api/visit/**\"], \"filters\": [\"StripPrefix=2\", {\"name\": \"CircuitBreaker\", \"args\": {\"name\": \"visitsCircuitBreaker\", \"fallbackUri\": \"forward:/fallback\"}}]}, {\"id\": \"customers\", \"uri\": \"lb://customers-service\", \"predicates\": [\"Path=/api/customer/**\"], \"filters\": [\"StripPrefix=2\", {\"name\": \"CircuitBreaker\", \"args\": {\"name\": \"customersCircuitBreaker\", \"fallbackUri\": \"forward:/fallback\"}}]}]}"
+      },
+      "image": "petclinic-study:3858f9c630cf",
+      "mem_limit": "768m",
+      "networks": [
+        "application",
+        "telemetry"
+      ],
+      "ports": [
+        "127.0.0.1:18080:8080"
+      ]
+    },
+    "collector": {
+      "command": [
+        "--config=/etc/study/collector.json"
+      ],
+      "image": "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.159.0@sha256:1f2c54a30e713fac6b3ae77a1ec84010c2007e29ced8ec666214fc2f6739c1cc",
+      "networks": [
+        "telemetry"
+      ],
+      "user": "0:0",
+      "volumes": [
+        "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-results/petclinic-v3-probe/collector.json:/etc/study/collector.json:ro",
+        "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-results/petclinic-v3-probe/traces:/output"
+      ]
+    },
+    "customers-service": {
+      "command": [
+        "java",
+        "-Xms64m",
+        "-Xmx320m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-javaagent:/app/opentelemetry-javaagent.jar",
+        "-jar",
+        "/app/customers-service.jar"
+      ],
+      "depends_on": [
+        "database",
+        "collector"
+      ],
+      "environment": {
+        "OTEL_BSP_SCHEDULE_DELAY": "1000",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://collector:4318",
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+        "OTEL_LOGS_EXPORTER": "none",
+        "OTEL_METRICS_EXPORTER": "none",
+        "OTEL_RESOURCE_ATTRIBUTES": "service.instance.id=customers-service,study.replica=,study.domain=unfaulted",
+        "OTEL_SERVICE_NAME": "customers-service",
+        "OTEL_TRACES_SAMPLER": "always_on",
+        "SPRING_APPLICATION_JSON": "{\"server.port\": 8080, \"spring.cloud.config.enabled\": false, \"eureka.client.enabled\": false, \"spring.sql.init.mode\": \"never\", \"spring.jpa.hibernate.ddl-auto\": \"none\", \"spring.jpa.open-in-view\": false, \"management.tracing.export.enabled\": false, \"management.tracing.export.zipkin.enabled\": false, \"spring.autoconfigure.exclude\": [\"org.springframework.boot.micrometer.tracing.brave.autoconfigure.BraveAutoConfiguration\", \"org.springframework.boot.micrometer.tracing.autoconfigure.MicrometerTracingAutoConfiguration\"], \"management.endpoints.web.exposure.include\": \"health,info\", \"spring.datasource.url\": \"jdbc:mysql://database:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false\", \"spring.datasource.username\": \"root\", \"spring.datasource.password\": \"petclinic-study\", \"spring.datasource.driver-class-name\": \"com.mysql.cj.jdbc.Driver\", \"spring.datasource.hikari.maximum-pool-size\": 5, \"spring.datasource.hikari.minimum-idle\": 1}"
+      },
+      "image": "petclinic-study:3858f9c630cf",
+      "mem_limit": "768m",
+      "networks": [
+        "application",
+        "telemetry",
+        "database"
+      ]
+    },
+    "database": {
+      "command": [
+        "--innodb-buffer-pool-size=128M",
+        "--max-connections=64"
+      ],
+      "environment": {
+        "MYSQL_DATABASE": "petclinic",
+        "MYSQL_ROOT_HOST": "%",
+        "MYSQL_ROOT_PASSWORD": "petclinic-study"
+      },
+      "image": "mysql:8.4@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb",
+      "mem_limit": "768m",
+      "networks": [
+        "database"
+      ],
+      "volumes": [
+        "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/petclinic-build/sql:/docker-entrypoint-initdb.d:ro"
+      ]
+    },
+    "vets-service": {
+      "command": [
+        "java",
+        "-Xms64m",
+        "-Xmx320m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-javaagent:/app/opentelemetry-javaagent.jar",
+        "-jar",
+        "/app/vets-service.jar"
+      ],
+      "depends_on": [
+        "database",
+        "collector"
+      ],
+      "environment": {
+        "OTEL_BSP_SCHEDULE_DELAY": "1000",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://collector:4318",
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+        "OTEL_LOGS_EXPORTER": "none",
+        "OTEL_METRICS_EXPORTER": "none",
+        "OTEL_RESOURCE_ATTRIBUTES": "service.instance.id=vets-service,study.replica=,study.domain=unfaulted",
+        "OTEL_SERVICE_NAME": "vets-service",
+        "OTEL_TRACES_SAMPLER": "always_on",
+        "SPRING_APPLICATION_JSON": "{\"server.port\": 8080, \"spring.cloud.config.enabled\": false, \"eureka.client.enabled\": false, \"spring.sql.init.mode\": \"never\", \"spring.jpa.hibernate.ddl-auto\": \"none\", \"spring.jpa.open-in-view\": false, \"management.tracing.export.enabled\": false, \"management.tracing.export.zipkin.enabled\": false, \"spring.autoconfigure.exclude\": [\"org.springframework.boot.micrometer.tracing.brave.autoconfigure.BraveAutoConfiguration\", \"org.springframework.boot.micrometer.tracing.autoconfigure.MicrometerTracingAutoConfiguration\"], \"management.endpoints.web.exposure.include\": \"health,info\", \"spring.datasource.url\": \"jdbc:mysql://database:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false\", \"spring.datasource.username\": \"root\", \"spring.datasource.password\": \"petclinic-study\", \"spring.datasource.driver-class-name\": \"com.mysql.cj.jdbc.Driver\", \"spring.datasource.hikari.maximum-pool-size\": 5, \"spring.datasource.hikari.minimum-idle\": 1}"
+      },
+      "image": "petclinic-study:3858f9c630cf",
+      "mem_limit": "768m",
+      "networks": [
+        "application",
+        "telemetry",
+        "database"
+      ]
+    },
+    "visits-service": {
+      "image": "haproxy:3.0-alpine@sha256:34cc7d1f6142464d7d2b73e2a1eef7392556dbf304160aef543e513cfd9e5162",
+      "networks": [
+        "application"
+      ],
+      "ports": [
+        "127.0.0.1:18404:8404"
+      ],
+      "volumes": [
+        "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-results/petclinic-v3-probe/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+      ]
+    },
+    "visits-service-replica-a": {
+      "command": [
+        "java",
+        "-Xms64m",
+        "-Xmx320m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-javaagent:/app/opentelemetry-javaagent.jar",
+        "-jar",
+        "/app/visits-service.jar"
+      ],
+      "depends_on": [
+        "database",
+        "collector"
+      ],
+      "environment": {
+        "OTEL_BSP_SCHEDULE_DELAY": "1000",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://collector:4318",
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+        "OTEL_LOGS_EXPORTER": "none",
+        "OTEL_METRICS_EXPORTER": "none",
+        "OTEL_RESOURCE_ATTRIBUTES": "service.instance.id=visits-service-replica-a,study.replica=a,study.domain=domain_a",
+        "OTEL_SERVICE_NAME": "visits-service",
+        "OTEL_TRACES_SAMPLER": "always_on",
+        "SPRING_APPLICATION_JSON": "{\"server.port\": 8080, \"spring.cloud.config.enabled\": false, \"eureka.client.enabled\": false, \"spring.sql.init.mode\": \"never\", \"spring.jpa.hibernate.ddl-auto\": \"none\", \"spring.jpa.open-in-view\": false, \"management.tracing.export.enabled\": false, \"management.tracing.export.zipkin.enabled\": false, \"spring.autoconfigure.exclude\": [\"org.springframework.boot.micrometer.tracing.brave.autoconfigure.BraveAutoConfiguration\", \"org.springframework.boot.micrometer.tracing.autoconfigure.MicrometerTracingAutoConfiguration\"], \"management.endpoints.web.exposure.include\": \"health,info\", \"spring.datasource.url\": \"jdbc:mysql://database:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false\", \"spring.datasource.username\": \"root\", \"spring.datasource.password\": \"petclinic-study\", \"spring.datasource.driver-class-name\": \"com.mysql.cj.jdbc.Driver\", \"spring.datasource.hikari.maximum-pool-size\": 5, \"spring.datasource.hikari.minimum-idle\": 1}"
+      },
+      "image": "petclinic-study:3858f9c630cf",
+      "mem_limit": "768m",
+      "networks": [
+        "application",
+        "telemetry",
+        "database"
+      ]
+    },
+    "visits-service-replica-b": {
+      "command": [
+        "java",
+        "-Xms64m",
+        "-Xmx320m",
+        "-XX:MaxMetaspaceSize=192m",
+        "-javaagent:/app/opentelemetry-javaagent.jar",
+        "-jar",
+        "/app/visits-service.jar"
+      ],
+      "depends_on": [
+        "database",
+        "collector"
+      ],
+      "environment": {
+        "OTEL_BSP_SCHEDULE_DELAY": "1000",
+        "OTEL_EXPORTER_OTLP_ENDPOINT": "http://collector:4318",
+        "OTEL_EXPORTER_OTLP_PROTOCOL": "http/protobuf",
+        "OTEL_LOGS_EXPORTER": "none",
+        "OTEL_METRICS_EXPORTER": "none",
+        "OTEL_RESOURCE_ATTRIBUTES": "service.instance.id=visits-service-replica-b,study.replica=b,study.domain=domain_a",
+        "OTEL_SERVICE_NAME": "visits-service",
+        "OTEL_TRACES_SAMPLER": "always_on",
+        "SPRING_APPLICATION_JSON": "{\"server.port\": 8080, \"spring.cloud.config.enabled\": false, \"eureka.client.enabled\": false, \"spring.sql.init.mode\": \"never\", \"spring.jpa.hibernate.ddl-auto\": \"none\", \"spring.jpa.open-in-view\": false, \"management.tracing.export.enabled\": false, \"management.tracing.export.zipkin.enabled\": false, \"spring.autoconfigure.exclude\": [\"org.springframework.boot.micrometer.tracing.brave.autoconfigure.BraveAutoConfiguration\", \"org.springframework.boot.micrometer.tracing.autoconfigure.MicrometerTracingAutoConfiguration\"], \"management.endpoints.web.exposure.include\": \"health,info\", \"spring.datasource.url\": \"jdbc:mysql://database:3306/petclinic?allowPublicKeyRetrieval=true&useSSL=false\", \"spring.datasource.username\": \"root\", \"spring.datasource.password\": \"petclinic-study\", \"spring.datasource.driver-class-name\": \"com.mysql.cj.jdbc.Driver\", \"spring.datasource.hikari.maximum-pool-size\": 5, \"spring.datasource.hikari.minimum-idle\": 1}"
+      },
+      "image": "petclinic-study:3858f9c630cf",
+      "mem_limit": "768m",
+      "networks": [
+        "application",
+        "telemetry",
+        "database"
+      ]
+    }
+  }
+}
