@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "stage": "petclinic-source-runtime-bootstrap-v1",
+  "development_only": true,
+  "source_repository": "spring-petclinic/spring-petclinic-microservices",
+  "source_commit": "3858f9c630cf989bb6809a86edf47c2be78dc9f1",
+  "inspected_external_config_commit": "323993ce2519c6d02df63e08bf4458d123d3b611",
+  "external_config_server_used": false,
+  "modules": ["customers-service", "visits-service", "vets-service", "api-gateway"],
+  "images": {
+    "java": "eclipse-temurin:17-jre@sha256:13cc28a6cc72a38ce1f00c906be3580c1a3e604b8984d694f369a96742abc93b",
+    "database": "mysql:8.4@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb",
+    "proxy": "haproxy:3.0-alpine@sha256:34cc7d1f6142464d7d2b73e2a1eef7392556dbf304160aef543e513cfd9e5162",
+    "collector": "ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.159.0@sha256:1f2c54a30e713fac6b3ae77a1ec84010c2007e29ced8ec666214fc2f6739c1cc"
+  },
+  "java_agent": {
+    "url": "https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.31.1/opentelemetry-javaagent.jar",
+    "sha256": "bbf83c151b6400709e2f225bdd07a04f839d9d13b8b93464241333fd25d3e3ba"
+  },
+  "operation_deadline_seconds": 2.0,
+  "operations": ["list_owners", "owner_details_with_visits", "create_visit", "list_vets"],
+  "immutable_read_owner_id": 6,
+  "write_owner_id": 1,
+  "write_pet_id": 1,
+  "write_date": "2026-09-01",
+  "response_limit_bytes": 1048576,
+  "startup_deadline_seconds": 420,
+  "trace_flush_seconds": 20,
+  "fault_settle_seconds": 5,
+  "bootstrap_requests_per_operation_per_control": 8,
+  "controls": ["normal", "one_path_a", "one_path_b", "no_replica", "live_process_communication_failure", "recovered"],
+  "main_campaigns": 0,
+  "model_fits": 0
+}
