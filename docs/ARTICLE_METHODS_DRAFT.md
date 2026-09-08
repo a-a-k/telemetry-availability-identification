@@ -1,8 +1,11 @@
 # Methods draft: identification and use of a telemetry-parameterized model
 
-Working methodological text, updated 8 September 2026. This draft consolidates the
-implemented restricted method and its proved scope. Independent M9P results are
-reported in the [completed-run report](milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md). It does not substitute a failed
+Working methodological text, updated 8 September 2026. Under the accepted
+[correction plan](SIMPAT_CORRECTION_PLAN.md), the primary method estimates
+parameters of its declared stochastic model without ML or learned forecast
+corrections. The [complete M7 census](milestones/M7_COMPLETE_OPERATION_CENSUS.md)
+reports all six original operations. M9N-M9P below is retained as separate
+temporal-regression diagnostics, outside the primary method and its evidence. It does not substitute a failed
 integration control for the outstanding independent PMX accuracy comparison.
 It is not a final abstract, novelty verdict or claim that the initial article
 design has been fully realized.

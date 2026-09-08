@@ -1,7 +1,8 @@
 # Working claim ledger for the SIMPAT continuation
 
-Status: updated 8 September 2026 after completed M9P confirmation, M9Q/M9R
-censuses and qualified M9S/M9U solver/request controls. This is not an article verdict or a substitute for the missing
+Status: updated 8 September 2026 after the author correction plan and the complete
+160-campaign / 480-operation M7 census. The primary method excludes ML and
+learned forecast corrections. M9N-M9P remains separate temporal-regression diagnostics. This is not an article verdict or a substitute for the missing
 independent PMX comparison. The original SIMPAT design remains a research plan;
 its proposed contributions are not automatically established results.
 
@@ -45,6 +46,15 @@ that the identification compiler automatically discovered that curve.
 | [M9S PMF bridge](milestones/M9S_PMX_PMF_BRIDGE.md) | Equivalent integer-loop encoding plus the disclosed failure-type containment bridge yields all 16 positive software-oracle passes, including inclusive 0.72 versus conditional-local 0.8; eight unchanged negative records reproduce. | This resolves the demonstrated artificial-model solver boundary. It does not establish local-failure independence or an independently parameterized live availability comparison. |
 | [M9T request census](milestones/M9T_PMX_REQUEST_CORRESPONDENCE.md) | All four historical learner samples retain their native request traces; compound OTel requests explain multiple HTTP roots and DeathStar failures may lack span-error flags. | Descriptive development census; external semantic outcomes and inferred operation boundaries must be explicitly charged in the next adapter. |
 
+The [complete M7 operation census](milestones/M7_COMPLETE_OPERATION_CENSUS.md)
+accounts for all 160 campaigns and 480 operation cells. It retains every original
+prediction or abstention and both observed views, reproduces 36,459 scores and
+117 historical summaries, and publishes coverage next to per-operation errors.
+No new independent campaign is claimed. Original current/full coverage is
+370/480; checkout MAE is 24.462 percentage points on 55/80 supported cells,
+versus 23.492 for B2 on those same cells. This bounds the implemented static
+predicate's empirical adequacy; it is not a verdict about every model in G/R/P/Φ.
+
 ## Mathematical material and its scope
 
 M9U adds a qualified external-request contract: all 12 PMX extractions and all
@@ -52,9 +62,11 @@ M9U adds a qualified external-request contract: all 12 PMX extractions and all
 conditional-local abstention when a child error is swallowed. This supports the
 software mapping in [the report](milestones/M9U_PMX_REQUEST_CONFORMANCE.md).
 The endpoint-assisted synthetic wrapper is additional information; the controls
-do not establish native-only discovery of semantic request success. The independent
-historical forecasts are frozen separately in M9V and remain development before
-fresh confirmation.
+do not establish native-only discovery of semantic request success. M9V is historical development. Its original 24 PMX forecast slots abstained;
+the recovery then retained 14 first-pass solver records before an OTel
+StackOverflowError. Those partial passes are not qualified completed forecasts.
+The retained audit [34193396638](evidence/m9v-context-34193396638/call-context-audit.json)
+finds cycles in all six OTel operation graphs and none in the six DeathStar graphs.
 
 [B2 observable-target notes](B2_OBSERVABLE_TARGET_NOTES.md) separate an observable
 route functional from unique identification of all hidden factors, state the
@@ -120,14 +132,18 @@ comparison; runner times and artifact sizes do not establish that effect.
 
 ## Items to resolve before completing the article argument
 
-- Carry the completed M9P result into the article with all three decisions,
-  the small remaining mean bias, the matched endpoint and its limited target scope.
-- Use the completed M9Q census and retained failures to define the next semantic
-  mapping; no extra launcher or extractor repair is needed to report this stage.
-- Specify the remaining independent PMX availability comparison only after
-  observed-operation errors, propagated failures, missing requests, replication
-  and external semantic outcomes have a defensible correspondence.
-- Keep the proved restricted propositions and exact reference distinct from
-  novelty and scalability claims; retain the primary-source attributions.
-- Form the final article claims from that evidence, retaining unfavorable
-  comparators and coverage limitations.
+Follow the author's [correction plan](SIMPAT_CORRECTION_PLAN.md) and record all
+[22 criteria](SIMPAT_ITERATION_CHECKLIST.md) after each iteration. The [iteration
+records](iterations/001-m7-complete-census.md) distinguish completed evidence
+from remaining obligations.
+
+- Map the original G/R/P/Φ formalism, all probability sources and semantic limits
+  to code; keep the primary forecasting path free of temporal regression.
+- Complete the independent PMX pipeline with explicit transformations and
+  retained unsupported cases; reuse M9S and M9U qualified controls.
+- Qualify four Petclinic operations and all ten external semantic contracts.
+- Freeze and execute the single three-application 240-campaign comparison,
+  including all 800 operation cells per method, transfer and full costs.
+- Form final claims from complete accuracy, coverage and cost evidence with
+  their mathematical, information and execution assumptions. The existing
+  M9N-M9P regression diagnostics are not primary evidence for the no-ML method.
