@@ -12,7 +12,7 @@ input model from heterogeneous telemetry.
 ## Current evidence and article material
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 039](docs/iterations/039-application-execution-v2-protocol.md)
+current study. [Iteration 041](docs/iterations/041-g0-ordinary-adaptation-protocol.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. The new 240-campaign comparison has **not started**.
@@ -50,9 +50,10 @@ footprints and 284 Petclinic attempts without a Visits entry. The new
 [execution model and proofs](docs/GRAPH_EXECUTION_MODEL_V1.md) and
 [ten-operation binding protocol](docs/V3_APPLICATION_EXECUTION_V1.md) have 14
 passing bounded controls. [The first isolated result](docs/milestones/V3_APPLICATION_EXECUTION_V1_RESULT.md)
-retains eight model replays and two explicit absences. [Binding v2](docs/V3_APPLICATION_EXECUTION_V2.md)
-corrects the Petclinic probe layer and completes Valkey/optional-call declarations;
-six unaffected calculation hashes are frozen for exact verification.
+preserves eight model replays and two original absences. [Corrected binding v2](docs/milestones/V3_APPLICATION_EXECUTION_V2_RESULT.md)
+now qualifies all ten operation models,44 structural controls and exact six-operation
+invariance. [G0 adaptation](docs/G0_AINA_ORDINARY_V1.md) has seven passing source/oracle
+controls and is frozen for isolated application qualification.
 
 The implementations and M0–M9 history below retain their original scopes.
 In particular, M9N–M9P temporal regression is historical diagnostic evidence and

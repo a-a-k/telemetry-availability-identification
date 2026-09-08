@@ -1,0 +1,856 @@
+{
+  "absences": {},
+  "all_operations_accounted": 3,
+  "elapsed_seconds": 0.09420408799999791,
+  "head": "ff579825c4d6b58c1e777b7d33e8f5ddf66f949b",
+  "independent_accuracy_evaluation": false,
+  "input_seal": {
+    "files": {
+      "declarations.json": "f39f0f22ae4b2d237fe64b276e430fb0d1020551cc3adb9d5250a8a0e99d0c59",
+      "manifest.json": "c51db3f2cd0e9f9ac1eaea78b7b91bb51426ce362b60ffa0aa5754a4c187f523",
+      "native.json": "598e75ed68d47ffbc44f3cde853dc9c18fe755d56726a777f40a60cfd0681715",
+      "probes.json": "5319c13ac308366ee503c79c608a13b856f86396dded39d71cf2ef4cc0efbb17",
+      "requests.json": "6a1025e0fd1a503f76cc121831e427544c8f80ee3c69fe0b76e74fed601f0bdd"
+    },
+    "version": "v3-ordinary-calibration-identity-2"
+  },
+  "main_campaigns": 0,
+  "method": "G-EXEC-ordinary-joint-technical-v2",
+  "operations": {
+    "compose_post": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "previously opened development calibration",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "compose-post-service",
+          "home-timeline-service",
+          "media-service",
+          "nginx-web-server",
+          "post-storage-service",
+          "social-graph-service",
+          "text-service",
+          "unique-id-service",
+          "url-shorten-service",
+          "user-mention-service",
+          "user-service"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L4",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "Registered fixed compose payload; source futures/deferred work awaited; success is acknowledgement, not an independent durable-write certificate.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "compose-post-service",
+            "home-timeline-service",
+            "media-service",
+            "nginx-web-server",
+            "post-storage-service",
+            "social-graph-service",
+            "text-service",
+            "unique-id-service",
+            "url-shorten-service",
+            "user-mention-service",
+            "user-service",
+            "user-timeline-service"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "Registered fixed compose payload; source futures/deferred work awaited; success is acknowledgement, not an independent durable-write certificate.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [],
+          "deadline_ns": 2000000000,
+          "entry": "nginx-web-server",
+          "expected_attempts": 80,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "nginx-web-server",
+              "compose-post-service"
+            ],
+            [
+              "compose-post-service",
+              "home-timeline-service"
+            ],
+            [
+              "compose-post-service",
+              "media-service"
+            ],
+            [
+              "compose-post-service",
+              "post-storage-service"
+            ],
+            [
+              "compose-post-service",
+              "text-service"
+            ],
+            [
+              "compose-post-service",
+              "unique-id-service"
+            ],
+            [
+              "compose-post-service",
+              "user-service"
+            ],
+            [
+              "compose-post-service",
+              "user-timeline-service"
+            ],
+            [
+              "home-timeline-service",
+              "social-graph-service"
+            ],
+            [
+              "text-service",
+              "url-shorten-service"
+            ],
+            [
+              "text-service",
+              "user-mention-service"
+            ]
+          ],
+          "required_native_services": [
+            "compose-post-service",
+            "home-timeline-service",
+            "media-service",
+            "post-storage-service",
+            "text-service",
+            "unique-id-service",
+            "user-service",
+            "user-timeline-service",
+            "social-graph-service",
+            "url-shorten-service",
+            "user-mention-service"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 1
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 80,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"compose-post-service\",\"media-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"compose-post-service\",\"text-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"compose-post-service\",\"user-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"text-service\",\"url-shorten-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"text-service\",\"user-mention-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        }
+      },
+      "database_bindings": {},
+      "estimates": {
+        "execution": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "selected": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "selected_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_completion": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_deadline": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_selection": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        }
+      },
+      "evaluated_states": 2,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"compose-post-service\",\"home-timeline-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "home-timeline-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"compose-post-service\",\"media-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "media-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"compose-post-service\",\"post-storage-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "post-storage-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"compose-post-service\",\"text-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "text-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"compose-post-service\",\"unique-id-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "unique-id-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"compose-post-service\",\"user-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"compose-post-service\",\"user-timeline-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-timeline-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"home-timeline-service\",\"social-graph-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "home-timeline-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "social-graph-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"nginx-web-server\",\"compose-post-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "nginx-web-server",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "compose-post-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"text-service\",\"url-shorten-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "text-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "url-shorten-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"text-service\",\"user-mention-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "text-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-mention-service",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "compose-post-service": "native_service",
+        "home-timeline-service": "native_service",
+        "media-service": "native_service",
+        "nginx-web-server": "native_service",
+        "post-storage-service": "native_service",
+        "social-graph-service": "native_service",
+        "text-service": "native_service",
+        "unique-id-service": "native_service",
+        "url-shorten-service": "native_service",
+        "user-mention-service": "native_service",
+        "user-service": "native_service",
+        "user-timeline-service": "native_service"
+      },
+      "identity": {
+        "main_campaigns": 0,
+        "method": "G-EXEC-ordinary-joint-technical-v2",
+        "operation": "compose_post",
+        "placement": "colocated",
+        "profile": "deathstarbench_social_network",
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": 1000127000,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {},
+      "native_spans": 2320,
+      "observed_categories": 2,
+      "result_sha256": "ba46b17d4a3b170ef54b2646df74ec1ffff2cd2f581fd09d6fdc2221d9ab7fc0",
+      "status": "singleton_given_empirical_observation_law",
+      "unchanged_v1_calculation_verified": true
+    },
+    "read_home_timeline": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "previously opened development calibration",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "home-timeline-service",
+          "nginx-web-server",
+          "post-storage-service"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L4",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "Observed seeded timeline/storage-call class; empty or unseen cache/data branches are not automatically classified complete.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "home-timeline-service",
+            "nginx-web-server",
+            "post-storage-service"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "Observed seeded timeline/storage-call class; empty or unseen cache/data branches are not automatically classified complete.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [],
+          "deadline_ns": 2000000000,
+          "entry": "nginx-web-server",
+          "expected_attempts": 80,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "nginx-web-server",
+              "home-timeline-service"
+            ],
+            [
+              "home-timeline-service",
+              "post-storage-service"
+            ]
+          ],
+          "required_native_services": [
+            "home-timeline-service",
+            "post-storage-service"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 0
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 80,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"home-timeline-service\",\"post-storage-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"nginx-web-server\",\"home-timeline-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        }
+      },
+      "database_bindings": {},
+      "estimates": {
+        "execution": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "selected": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "selected_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_completion": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_deadline": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_selection": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        }
+      },
+      "evaluated_states": 1,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"home-timeline-service\",\"post-storage-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "home-timeline-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "post-storage-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"nginx-web-server\",\"home-timeline-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "nginx-web-server",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "home-timeline-service",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "home-timeline-service": "native_service",
+        "nginx-web-server": "native_service",
+        "post-storage-service": "native_service"
+      },
+      "identity": {
+        "main_campaigns": 0,
+        "method": "G-EXEC-ordinary-joint-technical-v2",
+        "operation": "read_home_timeline",
+        "placement": "colocated",
+        "profile": "deathstarbench_social_network",
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": null,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {},
+      "native_spans": 606,
+      "observed_categories": 1,
+      "result_sha256": "2859af460dc550fa98bee31e90c8d606b35c691c91c2c41cee779b75a9d23ab9",
+      "status": "singleton_given_empirical_observation_law",
+      "unchanged_v1_calculation_verified": true
+    },
+    "read_user_timeline": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "previously opened development calibration",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "nginx-web-server",
+          "post-storage-service"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L4",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "Observed seeded timeline/storage-call class; Redis/MongoDB internals and returned content correct under the declared fixture scope.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "nginx-web-server",
+            "post-storage-service",
+            "user-timeline-service"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "Observed seeded timeline/storage-call class; Redis/MongoDB internals and returned content correct under the declared fixture scope.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [],
+          "deadline_ns": 2000000000,
+          "entry": "nginx-web-server",
+          "expected_attempts": 80,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "nginx-web-server",
+              "user-timeline-service"
+            ],
+            [
+              "user-timeline-service",
+              "post-storage-service"
+            ]
+          ],
+          "required_native_services": [
+            "user-timeline-service",
+            "post-storage-service"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 1
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 80,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"nginx-web-server\",\"user-timeline-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        },
+        "completed:[\"user-timeline-service\",\"post-storage-service\"]": {
+          "observed_required_group_and_source_propagation_certificate": 80
+        }
+      },
+      "database_bindings": {},
+      "estimates": {
+        "execution": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "selected": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "selected_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_completion": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_deadline": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_selection": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        }
+      },
+      "evaluated_states": 2,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"nginx-web-server\",\"user-timeline-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "nginx-web-server",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-timeline-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"user-timeline-service\",\"post-storage-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "user-timeline-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "post-storage-service",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "nginx-web-server": "native_service",
+        "post-storage-service": "native_service",
+        "user-timeline-service": "native_service"
+      },
+      "identity": {
+        "main_campaigns": 0,
+        "method": "G-EXEC-ordinary-joint-technical-v2",
+        "operation": "read_user_timeline",
+        "placement": "colocated",
+        "profile": "deathstarbench_social_network",
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": 1000046000,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {},
+      "native_spans": 634,
+      "observed_categories": 2,
+      "result_sha256": "df0005d21bdaec0df89c676e7f0fd4020ae0fdd81fb9f57a6da3826110fdaa5a",
+      "status": "singleton_given_empirical_observation_law",
+      "unchanged_v1_calculation_verified": true
+    }
+  },
+  "profile": "deathstarbench_social_network",
+  "protocol_sha256": "4d1c9bc050dbd0e545a378e6c8f2653d14da9897648a8977533419aca07db086",
+  "run_id": "34251046894"
+}
