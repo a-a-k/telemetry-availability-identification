@@ -237,13 +237,21 @@ twice. For an artificial two-level serial example with root error rate 0.2,
 child error rate 0.1 and every child error propagated to the root, multiplying
 inclusive success rates gives 0.72. Under an additional independent local-root
 failure law, its conditional local rate is `(0.2-0.1)/(1-0.1)=1/9`, giving root
-success 0.8. These are analytic values; the bounded
-[M9R solver census](milestones/M9R_PMX_INCLUSIVE_ERROR_COMPOSITION.md) produced
-no valid probability and does not empirically demonstrate that contrast.
+success 0.8. The bounded [M9R solver census](milestones/M9R_PMX_INCLUSIVE_ERROR_COMPOSITION.md)
+initially produced no valid probability. The subsequent source-grounded
+[M9S bridge](milestones/M9S_PMX_PMF_BRIDGE.md) represents integer loop counts as
+equivalent point-mass distributions; all 16 positive solver controls then recover
+0.72, 0.8, 1.0 and the additional random-loop oracle 0.724. Both original failure
+boundaries reproduce. This confirms the artificial composition calculation,
+not independence of local failures in a real application.
 
 M9A–D verify pinned Palladio solver and mapping correspondence with supplied
 aligned inputs. M9Q retains observed-operation extraction and usage-mapping
 failures on four historical samples. An independently extracted architecture
+needs the external-request boundary: [M9T](milestones/M9T_PMX_REQUEST_CORRESPONDENCE.md)
+shows that the OTel driver groups several HTTP calls into one user operation
+and that DeathStar semantic timeouts need not have a native span-error flag.
+The complete independent extraction
 and independently parameterized availability forecast remain a separate
 comparison. Failed launch, extraction, serialization or solver boundaries are
 reported as those boundaries; they are not assigned zero availability or used

@@ -314,3 +314,12 @@ negative controls and independent software-composition oracles. M9R remains a
 completed historical census. A successful M9S is followed by request-level
 mapping and independent parameterization, development comparison, and a frozen
 fresh confirmation; the bridge alone does not close the scientific comparison.
+
+M9S completed in run 34187887857: all 16 positive software controls pass, all
+eight retained negative records reproduce, and all 60 prepared model files
+match their contract. M9T completed the four-sample learner correspondence
+census in run 34188479893. The next implementation is the external-request
+adapter and independent PMX parameterization, including the compound HTTP
+operation boundary and semantic failures without error-marked spans. The
+[comparison execution plan](PMX_INDEPENDENT_COMPARISON_EXECUTION.md) tracks the
+remaining development and fresh confirmation steps.

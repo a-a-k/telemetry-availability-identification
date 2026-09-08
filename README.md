@@ -30,6 +30,12 @@ and [bounded composition control](docs/milestones/M9R_PMX_INCLUSIVE_ERROR_COMPOS
 retain extraction/mapping and solver limits; they establish no independent
 PMX request-availability forecast or predictive superiority over it.
 
+The subsequent [M9S bridge](docs/milestones/M9S_PMX_PMF_BRIDGE.md) resolves the
+demonstrated solver incompatibility on all positive controls. The
+[M9T request census](docs/milestones/M9T_PMX_REQUEST_CORRESPONDENCE.md) identifies
+the compound-operation and unmarked-timeout boundaries for the
+[active independent PMX comparison](docs/PMX_INDEPENDENT_COMPARISON_EXECUTION.md).
+
 The separate [exact polynomial-target reference](docs/CONJUNCTIVE_OBSERVATION_TARGET_THEOREMS.md)
 and [two-path bounds](docs/B2_SHARP_OBSERVABLE_BOUNDS.md) state their population
 assumptions explicitly. They do not retrospectively replace frozen experiment
