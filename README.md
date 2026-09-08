@@ -12,7 +12,7 @@ input model from heterogeneous telemetry.
 ## Current evidence and article material
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 041](docs/iterations/041-g0-ordinary-adaptation-protocol.md)
+current study. [Iteration 042](docs/iterations/042-g0-ten-operation-result.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. The new 240-campaign comparison has **not started**.
@@ -53,7 +53,7 @@ passing bounded controls. [The first isolated result](docs/milestones/V3_APPLICA
 preserves eight model replays and two original absences. [Corrected binding v2](docs/milestones/V3_APPLICATION_EXECUTION_V2_RESULT.md)
 now qualifies all ten operation models,44 structural controls and exact six-operation
 invariance. [G0 adaptation](docs/G0_AINA_ORDINARY_V1.md) has seven passing source/oracle
-controls and is frozen for isolated application qualification.
+controls and [ten passing isolated application bindings](docs/milestones/V3_G0_QUALIFICATION_V1_RESULT.md), with exact replay and41 structural controls.
 
 The implementations and M0–M9 history below retain their original scopes.
 In particular, M9N–M9P temporal regression is historical diagnostic evidence and

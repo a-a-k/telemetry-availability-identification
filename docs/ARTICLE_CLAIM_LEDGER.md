@@ -233,3 +233,10 @@ Main remains 0/240. Required work includes final G0/G-ID/G* definitions, justifi
 refinements and ablations, all ten operations' support/absence, novelty and the
 semantic/identification scope, sealed evaluator access, transfer and full costs.
 The completed H study is not added to the independent main sample.
+
+
+## Technical model qualification through iteration042
+
+[Execution binding v2](milestones/V3_APPLICATION_EXECUTION_V2_RESULT.md) qualifies all10 operation graphs,44 structural controls and exact replay. All4080 calibration attempts enter the observation laws. Six unaffected results match the original calculation hashes; the original probe/peer defects remain documented. Two Petclinic execution forecasts lie13/900 below their calibration semantic fractions; this is an aggregate calibration discrepancy, not independent accuracy or a paired causal count.
+
+[G0 adaptation](milestones/V3_G0_QUALIFICATION_V1_RESULT.md) qualifies all10 source-adapted fixed-count forecasts with41 structural controls and exact replay. Shared native graph preprocessing is explicit; PMX receives no graph/model. These completed technical results update the earlier candidate-only status without changing main0/240 or closing the prospective comparison.

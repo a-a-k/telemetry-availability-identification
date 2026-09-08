@@ -1,0 +1,11 @@
+# G0 source-adapted calculation: ten-operation qualification completed
+
+Run [34252702244](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34252702244), head `497b582f65adfb9a84b0442eb025981266f20fb7`, passed all nine jobs. CI34252701386 also passed. All ten operations produce point forecasts of1, with exact independent saved-model replay and41 required-target disconnection controls returning0. All4080 previously opened calibration attempts remain in the census. This is technical qualification, not an independent accuracy comparison.
+
+The [explicit AINA adaptation](../G0_AINA_ORDINARY_V1.md) estimates the mean failed fraction in the declared eligible replica pool and applies the original source's fixed-count rounding law. Petclinic create_visit has p=521/1800 and owner_details_with_visits p=187/600; both give k=1 among two replicas and forecast1. DeathStar compose/read-user and all three OTel operations have observed p=0 and k=0. DeathStar read-home and Petclinic list operations have no eligible target pool and use the declared deterministic graph calculation. Empty-pool p is null, not an estimated zero.
+
+Thus G0 and joint reachability already differ on the two faulted Petclinic calibration operations. This follows from the declared quantization/uniform-subset adaptation; it is neither evidence of independent predictive superiority nor an attribution of business failures. G0 does not use demand, completion, deadline or business labels. The shared native graph preprocessing is charged explicitly; it is not supplied to PMX.
+
+Each source-model consumer and each saved-G0-model replayer read two model/seal files, with no blocked accesses. These are model-derived input boundaries, not a new end-to-end native extraction qualification. [Nine compact ZIPs](../evidence/v3-g0-qualification-34252702244/verified-archives.json),16954bytes and24 members, plus metadata for all15 remote artifacts are retained. Full source and G0 model payloads remain remote. Process wall/CPU/RSS evidence is retained with its technical scope.
+
+Main campaigns remain0/240. Next is the final comparison binding and the complete prospective acquisition, sealed candidates, evaluator and analysis chain; green technical jobs do not constitute main admission.

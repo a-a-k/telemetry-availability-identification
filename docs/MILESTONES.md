@@ -11,7 +11,7 @@ tests, configuration validation, and bounded smoke cases.
 ## Current v3 evidence
 
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 031 checklist](iterations/031-h-exec-sealed-study-confirmation.md)
+[complete iteration 042 checklist](iterations/042-g0-ten-operation-result.md)
 are the current authority and status. New main campaigns: **0/240**. Historical
 milestone completion below is scoped to each original protocol.
 
@@ -25,6 +25,9 @@ milestone completion below is scoped to each original protocol.
 | [B0-v3 ten operations](milestones/B0_V3_TEN_OPERATION_QUALIFICATION.md) | Raw S/N bindings qualified on three applications; technical data only. |
 | [H-EXEC final study](milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md) | 32/32 final-input qualification, eight blocks, both registered primaries pass; original 31/32 failure preserved. |
 | [Primary analysis component](V3_CAMPAIGN_ANALYSIS_COMPONENT_V1.md) | Six-contrast campaign bootstrap and coverage rules tested; full method/evaluator/stable/transfer/cost bindings pending. |
+
+| [Execution binding v2](milestones/V3_APPLICATION_EXECUTION_V2_RESULT.md) | All10 point models,44 structural controls, exact6-operation invariance; opened calibration only. |
+| [G0 adaptation](milestones/V3_G0_QUALIFICATION_V1_RESULT.md) | All10 point models, exact replay and41 structural controls; independent accuracy pending. |
 
 ## Historical milestones
 
