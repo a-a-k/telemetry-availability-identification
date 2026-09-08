@@ -1,0 +1,86 @@
+name: Petclinic bootstrap with exact verified JDK archive
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
+        with:
+          repository: spring-petclinic/spring-petclinic-microservices
+          ref: 3858f9c630cf989bb6809a86edf47c2be78dc9f1
+          path: petclinic-source
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Install exact Temurin archive; verify actual bytes
+        run: |
+          python - <<'PY'
+          import hashlib, os, pathlib, tarfile, urllib.request
+          target=pathlib.Path(os.environ['RUNNER_TEMP'])/'petclinic-jdk'
+          target.mkdir()
+          archive=target/'jdk.tar.gz'
+          url='https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.20.1%2B1/OpenJDK17U-jdk_x64_linux_hotspot_17.0.20.1_1.tar.gz'
+          urllib.request.urlretrieve(url,archive)
+          assert hashlib.sha256(archive.read_bytes()).hexdigest()=='3808d1d15e3ec6bd5b84057fb5d84c33d8a1536a258146bcea2e603fc726e08e'
+          with tarfile.open(archive) as stream: stream.extractall(target,filter='data')
+          jdk=next(target.glob('jdk-*'))
+          with open(os.environ['GITHUB_ENV'],'a') as stream: stream.write('JAVA_HOME='+str(jdk)+'\n')
+          with open(os.environ['GITHUB_PATH'],'a') as stream: stream.write(str(jdk/'bin')+'\n')
+          PY
+      - name: Install pinned study environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+          mkdir -p workflow-results/petclinic-build/logs
+          java -version 2> workflow-results/petclinic-build/logs/java-version.txt
+          mvn -version > workflow-results/petclinic-build/logs/maven-version.txt
+      - name: Build unchanged application code and retain exact reusable image
+        run: python -m telemetry_availability.petclinic_bootstrap build --source petclinic-source --out workflow-results/petclinic-build
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-build-${{ github.run_id }}
+          path: |
+            workflow-results/petclinic-build
+            !workflow-results/petclinic-build/image-context
+          retention-days: 90
+          if-no-files-found: error
+          compression-level: 1
+      - name: Verify live shared-database semantics, isolated communication faults and actual native traces
+        run: python -m telemetry_availability.petclinic_bootstrap probe --bundle workflow-results/petclinic-build --out workflow-results/petclinic-probe
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-probe-${{ github.run_id }}
+          path: workflow-results/petclinic-probe
+          retention-days: 90
+          if-no-files-found: error
+      - name: Export compact review evidence without native payloads or application image
+        if: ${{ always() }}
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          target=Path('workflow-results/petclinic-compact')
+          for part, names in {'petclinic-build':['build-manifest.json','fixture.json','logs'], 'petclinic-probe':['bootstrap-summary.json','trace-census.json','controls.json','logs','requests.json','warmup.json']}.items():
+              for name in names:
+                  source=Path('workflow-results')/part/name
+                  destination=target/part/name
+                  if not source.exists(): continue
+                  destination.parent.mkdir(parents=True,exist_ok=True)
+                  if source.is_dir(): shutil.copytree(source,destination,dirs_exist_ok=True)
+                  else: shutil.copyfile(source,destination)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-compact-${{ github.run_id }}
+          path: workflow-results/petclinic-compact
+          retention-days: 90
+          if-no-files-found: error
