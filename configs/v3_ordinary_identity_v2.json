@@ -1,0 +1,685 @@
+{
+  "version": "v3-ordinary-calibration-identity-2",
+  "profiles": {
+    "deathstarbench_social_network": {
+      "artifact": {
+        "id": 10054735751,
+        "name": "existing-ordinary-deathstarbench_social_network-34223543390",
+        "size_in_bytes": 136693,
+        "digest": "sha256:3bce411d4b1e986a4fb937f9c969da682aabc3a3a07529c42950535b6c81ecee",
+        "source_run": 34223543390,
+        "source_head": "e41468f845c8172fcb9a410ea71dd8b7792312c8"
+      },
+      "operations": [
+        "compose_post",
+        "read_home_timeline",
+        "read_user_timeline"
+      ],
+      "expected_attempts_per_operation": 80,
+      "role_scope": "retained normal technical data explicitly reused as calibration; not independent accuracy",
+      "declared_calls": {
+        "compose_post": 1,
+        "read_home_timeline": 0,
+        "read_user_timeline": 1
+      },
+      "native_source": {
+        "artifact": {
+          "id": 10047728839,
+          "name": "ten-contract-raw-deathstarbench_social_network-34205650183",
+          "size_in_bytes": 224299,
+          "digest": "sha256:8316a7aabad191165264ffec08d1307dff1e8fcb146f18ffbd5b19c1c6462851",
+          "source_run": 34205650183,
+          "source_head": "a5b71467b69dff6ee1d3d6bacc7bace5497654c1"
+        },
+        "native_name": "raw-telemetry.json",
+        "native_format": "jaeger_json_v1"
+      }
+    },
+    "opentelemetry_demo": {
+      "artifact": {
+        "id": 10054733042,
+        "name": "existing-ordinary-opentelemetry_demo-34223543390",
+        "size_in_bytes": 530069,
+        "digest": "sha256:b2162e423b70bb0b9022623bafbe715fee2bdd6676b0c05f87bfceaede20488c",
+        "source_run": 34223543390,
+        "source_head": "e41468f845c8172fcb9a410ea71dd8b7792312c8"
+      },
+      "operations": [
+        "browse_product",
+        "add_to_cart",
+        "checkout"
+      ],
+      "expected_attempts_per_operation": 80,
+      "role_scope": "retained normal technical data explicitly reused as calibration; not independent accuracy",
+      "declared_calls": {
+        "browse_product": 1,
+        "add_to_cart": 1,
+        "checkout": 3
+      },
+      "native_source": {
+        "artifact": {
+          "id": 10047760266,
+          "name": "ten-contract-raw-opentelemetry_demo-34205650183",
+          "size_in_bytes": 1094054,
+          "digest": "sha256:1067c0163251482c1f9b59b7fbd331f5c829a13d462b2a345363f88574d71b4f",
+          "source_run": 34205650183,
+          "source_head": "a5b71467b69dff6ee1d3d6bacc7bace5497654c1"
+        },
+        "native_name": "raw-telemetry.log",
+        "native_format": "otlp_jsonl_v1"
+      }
+    },
+    "spring_petclinic_microservices": {
+      "artifact": {
+        "id": 10050553358,
+        "name": "v3-ordinary-colocated-NCD-34212928736",
+        "size_in_bytes": 2403906,
+        "digest": "sha256:2961e5d2f9c34cc68fe458ec3dda07730e7888eae2056859dc2dda476c3e25de",
+        "source_run": 34212928736,
+        "source_head": "b0ddadb83868e4a80b6a4391b9c65e2269012014"
+      },
+      "operations": [
+        "list_owners",
+        "owner_details_with_visits",
+        "create_visit",
+        "list_vets"
+      ],
+      "expected_attempts_per_operation": 900,
+      "role_scope": "retained colocated/NCD calibration; no new data/independent test",
+      "declared_calls": {
+        "list_owners": 0,
+        "owner_details_with_visits": 1,
+        "create_visit": 1,
+        "list_vets": 0
+      },
+      "native_source": null
+    }
+  },
+  "new_identity_fields": [
+    "hostname",
+    "host.name"
+  ],
+  "jobs": 6,
+  "per_job_minutes": 10,
+  "max_concurrent_per_stage": 3,
+  "main_campaigns": 0,
+  "model_fits": 0,
+  "repository_locks": [
+    {
+      "path": ".github/workflows/b0-technical-v3-csv-v2.yml",
+      "sha256": "d905391e3d55ecd8f73a67ac0c6e4864ca43627b6cbb62d18562e180b2a1f211"
+    },
+    {
+      "path": ".github/workflows/b0-technical-v3.yml",
+      "sha256": "a7d823bf6756b979af626401f6eef7e6cf1f81a3edbefcbef4769205ff2fdd68"
+    },
+    {
+      "path": ".github/workflows/v3-execution-observation-audit-v1.yml",
+      "sha256": "609f1f42f15bac15b8007343bfb8321339585be5db58acf3ac5effcdacec0e24"
+    },
+    {
+      "path": ".github/workflows/v3-ordinary-identity-v2.yml",
+      "sha256": "04f267a7a0a918d73701735e44d2bb4b6ccd5555535bddb20985f97e22b38562"
+    },
+    {
+      "path": "configs/b0_frequency_v3.json",
+      "sha256": "9e5a801558544294eb42fcb870e418ac20d13df212e09e3a115825eba8746aa4"
+    },
+    {
+      "path": "configs/b0_technical_v3.json",
+      "sha256": "7421880925a056e6027942786c19386dfb524468d1df273032d39ae286a1dea6"
+    },
+    {
+      "path": "configs/existing_application_ordinary.json",
+      "sha256": "6c78e46ed2861c5e20e58e85934e0ee6de620d216cf9999facdfd403dde9cb7c"
+    },
+    {
+      "path": "docs/B0_V3_CSV_V2_CORRECTION.md",
+      "sha256": "3a07c5ebb419dd4cf0db4a95edebc6549c002f902cf6aa238838c6c09575e7e8"
+    },
+    {
+      "path": "docs/B0_V3_TECHNICAL_BINDING.md",
+      "sha256": "3ce9e4d507af7a3df550c22a0c0dc6ef489bacba06bc3011f24673290ac7566c"
+    },
+    {
+      "path": "docs/SIMPAT_CORRECTION_V3.md",
+      "sha256": "c1093c520f9aa928d06dcd9eff1d6de217f31623e303e9b035dcbd09e1599aa1"
+    },
+    {
+      "path": "docs/TEN_EXTERNAL_OPERATION_CONTRACTS.md",
+      "sha256": "62fd25af533845c4b8e7b1e80fe6d75d78b8c45d83d398d9ba76dfaa2b23aa3e"
+    },
+    {
+      "path": "docs/V3_EXECUTION_OBSERVATION_AUDIT_V1.md",
+      "sha256": "128f6b68af08396f0345053a0892d2eaa502bc02d4671d5a2ea389b064b661b2"
+    },
+    {
+      "path": "docs/V3_ORDINARY_IDENTITY_V2.md",
+      "sha256": "000c6572e40d8eb711bfcea13e64d4306f09bed28e657f5140c2d47b4437b877"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/deathstar-user-timeline.h",
+      "sha256": "e703f56659bfc62c75bfced86681931e6e2ace069a6e3080138e5ea883062478"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/sources.json",
+      "sha256": "178c25b77fb12a76680090c3de8175a205475962f136b50e2f58674144d3f285"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "420c0eb8e173998489430531aa6214e89c3459e501aba32ab9406f72f58fab3b"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "c08d853f6dd527570717ebe50bdd0ace08563598f1ebe42fb4b534ea4afefd88"
+    },
+    {
+      "path": "scripts/b0_technical_v3.py",
+      "sha256": "e48331d519cd0e6e3cc864fc878a788116a417e6d063fc2564fa92c4585fb657"
+    },
+    {
+      "path": "scripts/b0_technical_v3_csv_v2.py",
+      "sha256": "729c88f4c78ba6c23614072cc1e20f132687127fe0187d9418be24e086994f37"
+    },
+    {
+      "path": "scripts/v3_execution_observation_audit_v1.py",
+      "sha256": "e471235c4549e5127536a40dbff9551f032feb3bc27fc1727c6c8f83c2119ebb"
+    },
+    {
+      "path": "src/telemetry_availability/__init__.py",
+      "sha256": "8c4cb841ef12c5caa18070835bb7cf0c130ebd8f8fde94ea87651d0791e214f3"
+    },
+    {
+      "path": "src/telemetry_availability/__main__.py",
+      "sha256": "3d2438ae92f4746e9ffaa1f837b1fe803f6281091d1f31f8c95643716f257d9a"
+    },
+    {
+      "path": "src/telemetry_availability/b0_frequency_v3.py",
+      "sha256": "f6595cfa940477f87e1026d1231397c58833105aceb70bdea3b0145aed59b628"
+    },
+    {
+      "path": "src/telemetry_availability/b0_frequency_v3_csv_v2.py",
+      "sha256": "84507eee787fdad32e1af2c4d5d511d31735994ccbe853e5a3f3f4cd5fae6fce"
+    },
+    {
+      "path": "src/telemetry_availability/boolean_model.py",
+      "sha256": "6ab737f4bc1b9ab53de07d17e018b5e125cdb9769c31b18ed294bd9d008c00fc"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_failure_causes.py",
+      "sha256": "e34517936ebb02ee97c3df520e7e523f54f67c0ba1470fd6cbb8074c28fc85e3"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_localization.py",
+      "sha256": "6587f1d97663f458d4129db727cb448bfcef4b1bbcf71bcbbca8b0f88d827da3"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_routing_model.py",
+      "sha256": "9833739e025387981c5e08836e842bd9b203620f2503f853208f20ec1bf834b5"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_temporal_failover.py",
+      "sha256": "f4ed99d6aca6993ae2ef6980a6f5e178c8c4aa8d948fb426248ed66358d3f78a"
+    },
+    {
+      "path": "src/telemetry_availability/cli.py",
+      "sha256": "73f6fe78fc4bbc74a249fa121f883766f0798861f4f93fb1ab6e346d80a50a79"
+    },
+    {
+      "path": "src/telemetry_availability/compiler.py",
+      "sha256": "89bcd55510350a277de11a9c4e958c44577618b3795674e53aaff4dafcd9993b"
+    },
+    {
+      "path": "src/telemetry_availability/config.py",
+      "sha256": "59aa17a160d481897013ea710110669a3d8c08567662928470dc7aa78e51c610"
+    },
+    {
+      "path": "src/telemetry_availability/diagnostics.py",
+      "sha256": "432f1baa19a77322a35e6bf63fccd6ae10d31a2fd9b3f50fb8e1e61841a53bd4"
+    },
+    {
+      "path": "src/telemetry_availability/estimators.py",
+      "sha256": "0d95c5d8065eea5ab49f30cc4b96ff1c1b49f6fe4823bd09e0c6c090b47dbfe3"
+    },
+    {
+      "path": "src/telemetry_availability/existing_application_graph_observation.py",
+      "sha256": "0fea1b2b7caeea679b3f17f67c1e08092f1893335b0cca636522ed9af5d1f0f5"
+    },
+    {
+      "path": "src/telemetry_availability/existing_application_ordinary.py",
+      "sha256": "e4673b3abc447a35a82545dc470725132ed0a9498fa5e6f90789199861c6d242"
+    },
+    {
+      "path": "src/telemetry_availability/graph_observation_model.py",
+      "sha256": "e0b33096b1939341c2efda2f445d6ef31bafbdb88f5d5cf3000c92bf2f0ce079"
+    },
+    {
+      "path": "src/telemetry_availability/graph_replay_v3.py",
+      "sha256": "e65b5c3321c47448fc855e16b45fae439a069c3a0232a8f3c9b96cd03c275fb5"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_analysis_v1.py",
+      "sha256": "dc12b35758849b126b068c5286ed71b60ce3461422c634b334a2b252b32539c6"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_analysis_v2.py",
+      "sha256": "5475b1eeef92164c24203788e7e7d9b32b483873838f8a95c9d882ff7ef317e2"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_compact_v1.py",
+      "sha256": "4ee06fb6c56bcb958c4e0b21fc0586d4c8aa6694b2c2e0ba2c559176c5c90cfc"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_compact_v2.py",
+      "sha256": "d9f5da5683586ee0834e3d901ad8d369b03ba92192a49f798a95543dd7339628"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_design_v1.py",
+      "sha256": "81db5aaa2c03daf2a964ec2ec600e9ec10ac3cd5eb9d04d4758b3f4cf4771919"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_live_v1.py",
+      "sha256": "71537244e7f718f601790d4d67c4743da5f805ec38c0263aff4af9b33e4c6754"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_live_v2.py",
+      "sha256": "170434a378777d34a484e7d6061c1195f063359e087eee1d0b87b96bcd455c91"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_audit.py",
+      "sha256": "a9c5ad3131b809bc7fa79c41a66ec10c6f3133cdc172466e6189037b8de236a7"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_audit_v2.py",
+      "sha256": "28ade967a7c02a15c8469f1d94a5e7e5a0db366b428e1dbc7f1c97624a4b52a5"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_audit_v3.py",
+      "sha256": "1e1a16a09823638f93332acd87bea08259583682b70c9898eb93fdebf4f96001"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_dependency_qualification.py",
+      "sha256": "bf6d3b8be88bf0f9d9fe6fd1dc712a853ebdc3de2f1ed7a2787825208b8d934e"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_reanalysis.py",
+      "sha256": "78d357edc54dea1916f27a81398f600d67ccbc7ef7f786f562327397326bae06"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_rescore.py",
+      "sha256": "7bf52e48bf98a88e3b9f0fcf8f7e8b15403af189025fb59e724c7f73579e48ce"
+    },
+    {
+      "path": "src/telemetry_availability/isolated_stochastic_fit.py",
+      "sha256": "b2866963d73a61e70101310ac97cf44eb20527038ebc59664fdd358380de168d"
+    },
+    {
+      "path": "src/telemetry_availability/likelihood.py",
+      "sha256": "85cbf4209ed1ca28c34e852bfb918324d955330b3f023dc735cc4a5558538a33"
+    },
+    {
+      "path": "src/telemetry_availability/likelihood_reference.py",
+      "sha256": "95d604d32fa17b10dd5f12665b42af3cc41d91e49467e99baf338015947e014e"
+    },
+    {
+      "path": "src/telemetry_availability/live_budget_recovery.py",
+      "sha256": "f7f7a8df619ff044e44b15711fe2e6ec61ceaba88a7402f6b6b41d28ee82c620"
+    },
+    {
+      "path": "src/telemetry_availability/live_config.py",
+      "sha256": "06f446df6cd5b5f47017eee8108b667c73ac29907818fdc743539782a406c534"
+    },
+    {
+      "path": "src/telemetry_availability/live_evidence.py",
+      "sha256": "a20e474f9b78c5e189f7cde7f9ba7019b436b26e78531168e9bb2766edec17e1"
+    },
+    {
+      "path": "src/telemetry_availability/live_evidence_config.py",
+      "sha256": "2c2df98275ea7b8c474c6ab072ff857b6006676179f0ba60557a4951f91b8a36"
+    },
+    {
+      "path": "src/telemetry_availability/live_fault_campaign.py",
+      "sha256": "055ad0d33c0e3a08a52bc68edb3ce3976862511ba29334d37db835dadb3c811a"
+    },
+    {
+      "path": "src/telemetry_availability/live_fault_config.py",
+      "sha256": "e90796a1e878b83ca4950de8e9108eaf20e723c19ca2a4a20de37fb90761a468"
+    },
+    {
+      "path": "src/telemetry_availability/live_harness.py",
+      "sha256": "a7ae8e0e301815bb7c4793759005a32cd31e8b910d023a9160e398c594101f09"
+    },
+    {
+      "path": "src/telemetry_availability/live_ingestion.py",
+      "sha256": "abf85e38b0e28fcad50972dded056b0be24cfe212d28d403b192c2da91177708"
+    },
+    {
+      "path": "src/telemetry_availability/live_pilot.py",
+      "sha256": "44bf953759067e7be6ef78e5ac34b752503605ef556de7fced760f88f08c8e90"
+    },
+    {
+      "path": "src/telemetry_availability/live_pilot_config.py",
+      "sha256": "0bebd59f4898b5f2779f768f7a056954a0dce254c1dcc8ddb2611d5f6d22ed9c"
+    },
+    {
+      "path": "src/telemetry_availability/live_placement_config.py",
+      "sha256": "6c3961c23e09bad529fd4700baa64fc428ebcee64cf6dec8d29b5d9f05492947"
+    },
+    {
+      "path": "src/telemetry_availability/live_placement_pilot.py",
+      "sha256": "78c940f1767b97f0b949d6b26338aa9ccaba001f6d9e55e9f9c7b2359af70be0"
+    },
+    {
+      "path": "src/telemetry_availability/live_stochastic_config.py",
+      "sha256": "f9fd2cb9165cfa435903989273730cd98b2c52286fe754b20c4bbca0e0f3f0d5"
+    },
+    {
+      "path": "src/telemetry_availability/live_stochastic_pilot.py",
+      "sha256": "c2fddc0581763ad9ade4a81be7a7ba548ad455acc839353e8ab34076d7079834"
+    },
+    {
+      "path": "src/telemetry_availability/live_validation.py",
+      "sha256": "7e0856ceeb24f192201a53ae04577015810dfbdd502afc7f5a23596547c79621"
+    },
+    {
+      "path": "src/telemetry_availability/live_validation_analysis.py",
+      "sha256": "0b58ddd271a6eccbdd3d1f2879fae6e333825c4a95f2667ad1ecb1d12c646132"
+    },
+    {
+      "path": "src/telemetry_availability/live_validation_config.py",
+      "sha256": "661a733ea24941a8749b7bf6ac874cb1688a0b17e539683c02c142ce88ba6702"
+    },
+    {
+      "path": "src/telemetry_availability/m7_causal_diagnostics.py",
+      "sha256": "bdb48af19dccbb1e23bcbfadfd4317f5602a4ea9e74e7193f8f749f411b6ad82"
+    },
+    {
+      "path": "src/telemetry_availability/m7_complete_census.py",
+      "sha256": "6c52e9e48be8758d5c629ebb907f80e2993b34820f93557633004a5e4d713d58"
+    },
+    {
+      "path": "src/telemetry_availability/m7_diagnostic_analysis.py",
+      "sha256": "b08c71622fa46a5a246a192fbbc0e781694b399e54da0345135be331158895b1"
+    },
+    {
+      "path": "src/telemetry_availability/model.py",
+      "sha256": "d24be73dff2cac407332feac6a740097fea7165f5737de448cc0a8d483f2f030"
+    },
+    {
+      "path": "src/telemetry_availability/moments.py",
+      "sha256": "8a4cf581bdeb7e00d6d276e6d693f10fea163728acee9fd8548109ed73709c15"
+    },
+    {
+      "path": "src/telemetry_availability/observation.py",
+      "sha256": "52c0e8d0a8978ebda08bf82d70e50ed9954848db9f9741353ad56c6de2f320a3"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_aligned.py",
+      "sha256": "10d78cdb41f204a190fb2ae90923dca4bd3f7ef2b2d20484d46037b727782308"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_bootstrap.py",
+      "sha256": "22af48eae137b9c1b35fe23c11d8cad8b126724514b842493d7643848796f095"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_controls.py",
+      "sha256": "d21d96bfe2075c9b2fd87a9017c4e2c0f0b51c63f081b56b776af839dba9991c"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_fullpath.py",
+      "sha256": "07f27b505f123bc83e4ec40effdc4b376217a011d6ec9dab04515d7a45849b8c"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_mapping.py",
+      "sha256": "f9e9dd1711172011f0ed77e3a78e110bf47394bbeaf4ed78b6a6509987d99077"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_bootstrap.py",
+      "sha256": "4ed6ad6ba7a08a3d3108aa156ff5da04f72947a9164eabe679d1cf77be497a2c"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_contract.py",
+      "sha256": "db39f657f68a85bdf1242991337ac82c0d541510a818e56e6efdc98ba37967cc"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_contract_v2.py",
+      "sha256": "19d21cf56f71ae1dca076c795dbe2e5c9a89e5b529620dd35f4b9d48490cbf99"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_graph_observation_fit.py",
+      "sha256": "654c60bd18a8c0076f75494472750e9b2c445981b9d1a2f664f977f5666240fe"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_pmx_qualification.py",
+      "sha256": "de6d15082c6c896c717bf2d6116b1f18a107450f428793d28b07caca9d2b5a51"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_runtime_v2.py",
+      "sha256": "98409089c9cf345ffa62de19afab25b15d5acee785a76712cdbde9445b1f2e98"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_runtime_v3.py",
+      "sha256": "f487c8ec25a4f9aa62b327115c56a9e071a726a7d6783ae90047e574f9b2ab9b"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_stochastic_preflight.py",
+      "sha256": "13f45443d9fc9f77e6a4a38214d7c732d325dad6711cf80a7f0c0ee24265136d"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_stochastic_preflight_v2.py",
+      "sha256": "a79d9f2b73a56a636217aa257548000c2239b8fb418873b514459453651b6b22"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_adapter_conformance.py",
+      "sha256": "93c8528b2858161f908e31982cf781eb7d71159410565da7fd28f32583518860"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_census.py",
+      "sha256": "99eaf1f843cac82cdeecc9b9ee78b44d897419ee7de267b88eb250b6d5a06726"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_comparison.py",
+      "sha256": "22602e7f51c2fe6fa4d62a0806546a84330907eff61dde1996ae530451399e8b"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_recovery.py",
+      "sha256": "b5ac58df3d0436c55fd055ffc0f802de6a8fa9815a3087da393c70b1b1cac276"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_call_context_audit.py",
+      "sha256": "78e848dcaedb55d58766a3026aa97a8e36a4a0313cf0ba27f00dbfd7d2e28a40"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_carrier_control.py",
+      "sha256": "78c40852579978300093b5cc36ef4c1a0b20682772b26afcc70fa33cf021a275"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_composition_control.py",
+      "sha256": "18b638dab84b0c77ec070bf78403b5895ed7ac398199439fcd437ca8043e5c01"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_context_comparison.py",
+      "sha256": "986ef549513b794936a08319d43a8ea6db83be48209103b3c6e7718e17f62924"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_database_client_adapter.py",
+      "sha256": "4766997c16ab3b6342a58ba40237a54c1128eb9b50ce268861263f05a746c34b"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_database_client_controls.py",
+      "sha256": "def9318c9ccfd458a2f81b5610d42178cf7bc661c1bf94112b6a9031c4c5f8f8"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_failure_semantics.py",
+      "sha256": "ca8d96e9c9913903561923021fb889e5178cadad6329b3cd1843380207f7d9bb"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_mixed_loop_bridge.py",
+      "sha256": "421b381032b2b8da8ab6e1d2bf8de71a4bc9a3b4cf2db75dcc4322ec73ecd530"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_observed_operations.py",
+      "sha256": "251d8769118f188d12288dfe933bd499aaf643fa36388cd59543a86161ab36e0"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_performability.py",
+      "sha256": "4cd43245544e0c291c24005554a87a5c23dc97a1c391acb28a2fed07547a07dc"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_pmf_bridge.py",
+      "sha256": "1a6b8928b8d7c485d6c8c0b2ebc209a1018f5800fe9c706202e63e2d75ca85fb"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_recovery.py",
+      "sha256": "76e67c104860dac96d45f9b888bee4418f3c38002f0880aaad5033ca1d7a1b81"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_adapter.py",
+      "sha256": "820284fb67113fc1f9bf11d3c39204c99140cab28666bd77cf5cc36079616b63"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_census.py",
+      "sha256": "c3ee74765d31be7a791328908f066ddee93979def02ef0288b248a3f66747789"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_conformance.py",
+      "sha256": "2b33d1b1dc969c7e5a62fc454922d9841eefc24971db9fb8c3c358d424954f1c"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_context.py",
+      "sha256": "ed174e15de4495c9be73e278bcf178a9700ae3562ae5eafa85fba8fc0a760efe"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_controls.py",
+      "sha256": "edbb60582449a52f5f1095bf0e720c1e0e50a5b9b93e1aede2e92c24c092e09c"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_pcm.py",
+      "sha256": "2e93269c0328cbad0156d7e5c923fff1807ae2e9a9d24d0618ed910ef85b2a69"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_retained_request_audit.py",
+      "sha256": "5e468156d7c4ad16fb2426be328611c9a3c07559a2ab9018f90f06e028821031"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_source_entrypoint.py",
+      "sha256": "83cc2a6e9a2661d08a6400ec0b44ef17a061c0ac53ae49dd5b44dcf90f7fbf83"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_usage_contract_audit.py",
+      "sha256": "77f53abd092e91914fb8ecea7325a5f968657f872239fa804c19a207002bff05"
+    },
+    {
+      "path": "src/telemetry_availability/polynomial_identification.py",
+      "sha256": "8826b8eedb853361d4099653fbf3480602827b9e3269d3047d7f912af2a5eecd"
+    },
+    {
+      "path": "src/telemetry_availability/provenance.py",
+      "sha256": "4553a546eeaf840250193e4bdcae594dabb2a3a820ce127ab41632ee26a194c3"
+    },
+    {
+      "path": "src/telemetry_availability/publication_stochastic_live.py",
+      "sha256": "03b2f4fbcb7d283ac247bab1b9a27e7d303252754897f6150b95e5fe0d7b067c"
+    },
+    {
+      "path": "src/telemetry_availability/reduction_experiment.py",
+      "sha256": "4866d0ab560b006ddabf8c26a8ec69e89f5b87851ffc28b4a1446ea2cb68486b"
+    },
+    {
+      "path": "src/telemetry_availability/runner.py",
+      "sha256": "ac8ef36be8e87b32eaaba0504df2ef5292da1c01b594ba40bf0ff4f28216153a"
+    },
+    {
+      "path": "src/telemetry_availability/stress.py",
+      "sha256": "c71a8445a3445f181974c49c86888708e988b484bb6ec194fa13e95192777938"
+    },
+    {
+      "path": "src/telemetry_availability/stress_config.py",
+      "sha256": "34e97bae9cc986a42acff0e5bdfc06d52b0764027d07f6d4826b71c304ac588f"
+    },
+    {
+      "path": "src/telemetry_availability/stress_experiment.py",
+      "sha256": "630516c671d90d7888be64fdb24697aafbf80fdc0b90e23ecb5fde09867b96d1"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_analysis.py",
+      "sha256": "f0a13fd4181a515efe95a887432b1d2ec2b03e79f717897f797b6fd88f977890"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_design.py",
+      "sha256": "ff153a4e5a4039c1570e42bce49a2d31967c131530db66e31b678f005f62bfbe"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_gate.py",
+      "sha256": "5071b723e152e915be83823b8549fe5682172a0a3dd3798f087cffadeec7dd9a"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_live.py",
+      "sha256": "9a01133853e0238e3df12bb4248503a9d95c5bd13a5adcc7e326caf50ea529a6"
+    },
+    {
+      "path": "src/telemetry_availability/transfer.py",
+      "sha256": "38718666852724b60b95a07e9813c2d86e580249706ef70a42d022462f3c23a9"
+    },
+    {
+      "path": "src/telemetry_availability/transfer_config.py",
+      "sha256": "7364080d90260e00ddbddca445c3e7e22900f173b6037135ca447abe6bbcd7a7"
+    },
+    {
+      "path": "src/telemetry_availability/transfer_experiment.py",
+      "sha256": "fde310959dbaa76e8dadff90d72f6da350c450febb5545e0a147a12c5975bc40"
+    },
+    {
+      "path": "src/telemetry_availability/transfer_identifiability.py",
+      "sha256": "4d867a6d29160377ca56e90105dd7512c16d6ded7539bfdcc1dc8310a843eddb"
+    },
+    {
+      "path": "src/telemetry_availability/uncertainty.py",
+      "sha256": "8a92149913cd8fce1386eae00aa6341bb37083c911f4f7b817b63d50bd51985f"
+    },
+    {
+      "path": "src/telemetry_availability/uncertainty_config.py",
+      "sha256": "772de6d1ecdb8ab971b71910eb2f9d67e94246702bfd14b69f4bc503f8888dcd"
+    },
+    {
+      "path": "src/telemetry_availability/uncertainty_experiment.py",
+      "sha256": "38b35b87093cc182bdf58bf782c64115a541ee438ea40b3b106fbbd384492ce9"
+    },
+    {
+      "path": "src/telemetry_availability/v3_campaign_analysis_v1.py",
+      "sha256": "b2becdce9ea314f5e67346c1148504d5643b6da2d85cea3faabc89b41f2ed3cd"
+    },
+    {
+      "path": "src/telemetry_availability/v3_execution_observation_audit_v1.py",
+      "sha256": "e4295465dfbec3265077fb4a357451f9fca5498733a7aa8bc388dba9c9b3a80a"
+    },
+    {
+      "path": "src/telemetry_availability/v3_graph_input_inventory.py",
+      "sha256": "464d7285bd4c2ec7281568777a3851d07468c2f0ccc7aaba72c903442387a63b"
+    },
+    {
+      "path": "src/telemetry_availability/v3_ordinary_identity_v2.py",
+      "sha256": "ea51bbd050aae7ae91e033db07431ea70bed3b7770add40be63bc0c9b45a84ad"
+    },
+    {
+      "path": "src/telemetry_availability/v3_primary_projection.py",
+      "sha256": "0a2351806288870f0201432fd00f1dfb59335893002a97c32f7e19a2e104f24a"
+    },
+    {
+      "path": "src/telemetry_availability/whole_operation_contract.py",
+      "sha256": "bcd5094fafb599e7d96f65038b65736e7bf74b1f64889f83f76f8b0b80f6bc2c"
+    },
+    {
+      "path": "tests/test_b0_frequency_v3_csv_v2.py",
+      "sha256": "f8935613d3db5c6cd5540112b9d7019cfc1f4c68e879830936121320683db0b0"
+    },
+    {
+      "path": "tests/test_v3_execution_observation_audit_v1.py",
+      "sha256": "fcc2d663aba16283d0c69648919351d974ba8c91a162662b7cb02f3fb84c6be8"
+    },
+    {
+      "path": "tests/test_v3_ordinary_identity_v2.py",
+      "sha256": "24806bd24fe68df3736df7050c8910104fdba97e56a75052329060b3f5adf09c"
+    }
+  ]
+}
