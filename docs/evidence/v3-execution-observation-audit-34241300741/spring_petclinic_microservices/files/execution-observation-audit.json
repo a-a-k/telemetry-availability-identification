@@ -1,0 +1,897 @@
+{
+  "complete_execution_or_routing_identity_inferred_from_missing_spans": false,
+  "cross_service_clock_alignment_assumed_for_timing_diagnostics": true,
+  "declared_deadline_ns": 2000000000,
+  "elapsed_seconds": 1.4205986009999947,
+  "external_attempts": 3600,
+  "graph_inventory": {
+    "create_visit": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 764,
+          "supporting_spans": 764,
+          "target": "visits-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "observed_db_client_peer",
+          "source": "visits-service",
+          "supporting_attempts": 764,
+          "supporting_spans": 764,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "1": 2292,
+        "2": 1664,
+        "3": 1803
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "observed-db-client-30f7b3f9b2fb3df3": "observed_client_peer_not_native_server",
+        "visits-service": "native_service"
+      },
+      "observed_database_peer_count": 1,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "visits-service": [
+          "visits-service-replica-a",
+          "visits-service-replica-b"
+        ]
+      },
+      "spans": 5759
+    },
+    "list_owners": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "customers-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 11,
+          "observation_type": "observed_db_client_peer",
+          "source": "customers-service",
+          "supporting_attempts": 900,
+          "supporting_spans": 9900,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "1": 2700,
+        "2": 1800,
+        "3": 10800
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "customers-service": "native_service",
+        "observed-db-client-30f7b3f9b2fb3df3": "observed_client_peer_not_native_server"
+      },
+      "observed_database_peer_count": 1,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "customers-service": [
+          "customers-service"
+        ]
+      },
+      "spans": 15300
+    },
+    "list_vets": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "vets-service"
+        ],
+        [
+          "vets-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "vets-service"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "2": 1800,
+        "3": 900
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "vets-service": "native_service"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "vets-service": [
+          "vets-service"
+        ]
+      },
+      "spans": 2700
+    },
+    "owner_details_with_visits": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ],
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "customers-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 752,
+          "supporting_spans": 752,
+          "target": "visits-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "observed_db_client_peer",
+          "source": "customers-service",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "observed_db_client_peer",
+          "source": "visits-service",
+          "supporting_attempts": 752,
+          "supporting_spans": 752,
+          "target": "observed-db-client-30f7b3f9b2fb3df3"
+        }
+      ],
+      "external_attempts": 900,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 900,
+      "native_kinds": {
+        "1": 4204,
+        "2": 2552,
+        "3": 3452
+      },
+      "nodes": {
+        "api-gateway": "native_service",
+        "customers-service": "native_service",
+        "observed-db-client-30f7b3f9b2fb3df3": "observed_client_peer_not_native_server",
+        "visits-service": "native_service"
+      },
+      "observed_database_peer_count": 1,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "api-gateway": [
+          "api-gateway"
+        ],
+        "customers-service": [
+          "customers-service"
+        ],
+        "visits-service": [
+          "visits-service-replica-a",
+          "visits-service-replica-b"
+        ]
+      },
+      "spans": 10208
+    }
+  },
+  "input_seal": {
+    "files": {
+      "declarations.json": "7e70492121ce77acd12a152ac6659f8fc305495cfad717a88d93cc80b7e16780",
+      "manifest.json": "5ffc7d23073224163f26eecdce523a7e4615a5eedc558c2a1821bd15e8fb45c8",
+      "native.json": "e4fdf13460791152e5ec224b4710253e458bac2e0a25e96639bf5401356b420d",
+      "probes.json": "0367d31c3d61a1be42564644ef7d6f5c8a114d846724fb4e7184bec2e569424d",
+      "requests.json": "5bf1ca52510cc98181bdd3d815fbc6b845ccd95941e75145f2919ddfd28b11fa"
+    },
+    "version": "v3-ordinary-calibration-1"
+  },
+  "main_campaigns": 0,
+  "manifest": {
+    "baseline_attempts": 0,
+    "data_role": "development_technical",
+    "docker_state_fields": 0,
+    "estimated_model_files": 0,
+    "external_attempts": 3600,
+    "failure_law": "NCD",
+    "inferred_graph_files": 0,
+    "injection_schedule_fields": 0,
+    "native_instrumentation": "otel-native-calibration with explicit attribute whitelist",
+    "operations": {
+      "create_visit": 900,
+      "list_owners": 900,
+      "list_vets": 900,
+      "owner_details_with_visits": 900
+    },
+    "placement": "colocated",
+    "probe_mask_limitation": "legacy collector jointly queried Docker inspection and HAProxy; missingness not assumed independent",
+    "probe_observation_law": "raw HAProxy status/last-check; stateful and possibly delayed; not direct primitive MCAR",
+    "probe_ticks": 901,
+    "profile": "spring_petclinic_microservices",
+    "repetition": 0,
+    "role": "ordinary_calibration",
+    "source_quality_selection": "previously acquired development data; no post-test usability fields exported",
+    "test_attempts": 0,
+    "version": "v3-ordinary-calibration-1"
+  },
+  "model_fits": 0,
+  "no_error_flag_is_semantic_success": false,
+  "operations": {
+    "create_visit": {
+      "census": {
+        "attempts": 900,
+        "attempts_with_multiple_external_roots": 0,
+        "attempts_with_native": 900,
+        "attempts_with_native_but_no_error_flag": 761,
+        "attempts_with_native_end_after_declared_deadline": 21,
+        "attempts_with_native_end_after_external_completion": 41,
+        "attempts_with_native_error": 139,
+        "attempts_with_overlapping_external_roots": 0,
+        "attempts_with_root_sum_above_deadline": 21,
+        "attempts_with_root_union_above_deadline": 21,
+        "attempts_with_target_instance_for_every_observed_server": 764,
+        "attempts_with_target_replica_for_every_observed_server": 764,
+        "attempts_with_target_server": 764,
+        "attempts_with_unexplained_parent": 0,
+        "attempts_without_native": 0,
+        "external_elapsed_above_deadline": 21,
+        "failures": 159,
+        "native_error_spans": 406,
+        "spans": 5759,
+        "successes": 741,
+        "timeouts": 21,
+        "unexplained_parent_spans": 0
+      },
+      "forecast": null,
+      "forecast_status": "observation_audit_only",
+      "histograms": {
+        "external_root_count": {
+          "1": 900
+        },
+        "native_error_span_count": {
+          "0": 761,
+          "1": 1,
+          "2": 9,
+          "3": 129
+        },
+        "target_server_count": {
+          "0": 136,
+          "1": 764
+        },
+        "unexplained_parent_count": {
+          "0": 900
+        }
+      },
+      "native_status_attribute_counts": {
+        "http.response.status_code": {
+          "201": 2246,
+          "503": 395
+        },
+        "http.status_code": {},
+        "rpc.grpc.status_code": {},
+        "rpc.response.status_code": {},
+        "rpc.status_code": {}
+      },
+      "outcome_census": {
+        "failure": {
+          "attempts": 159,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 159,
+          "attempts_with_native_but_no_error_flag": 21,
+          "attempts_with_native_end_after_declared_deadline": 21,
+          "attempts_with_native_end_after_external_completion": 36,
+          "attempts_with_native_error": 138,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 21,
+          "attempts_with_root_union_above_deadline": 21,
+          "attempts_with_target_instance_for_every_observed_server": 23,
+          "attempts_with_target_replica_for_every_observed_server": 23,
+          "attempts_with_target_server": 23,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 21,
+          "failures": 159,
+          "native_error_spans": 405,
+          "spans": 571,
+          "successes": 0,
+          "timeouts": 21,
+          "unexplained_parent_spans": 0
+        },
+        "success": {
+          "attempts": 741,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 741,
+          "attempts_with_native_but_no_error_flag": 740,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 5,
+          "attempts_with_native_error": 1,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 741,
+          "attempts_with_target_replica_for_every_observed_server": 741,
+          "attempts_with_target_server": 741,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 1,
+          "spans": 5188,
+          "successes": 741,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        },
+        "timeout": {
+          "attempts": 21,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 21,
+          "attempts_with_native_but_no_error_flag": 21,
+          "attempts_with_native_end_after_declared_deadline": 21,
+          "attempts_with_native_end_after_external_completion": 21,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 21,
+          "attempts_with_root_union_above_deadline": 21,
+          "attempts_with_target_instance_for_every_observed_server": 21,
+          "attempts_with_target_replica_for_every_observed_server": 21,
+          "attempts_with_target_server": 21,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 21,
+          "failures": 21,
+          "native_error_spans": 0,
+          "spans": 147,
+          "successes": 0,
+          "timeouts": 21,
+          "unexplained_parent_spans": 0
+        }
+      },
+      "service_evidence": {
+        "api-gateway": {
+          "error_flagged_spans": 406,
+          "server_spans": 900,
+          "spans": 1939,
+          "spans_with_instance_id": 1939,
+          "spans_with_status_attribute": 1877
+        },
+        "visits-service": {
+          "error_flagged_spans": 0,
+          "server_spans": 764,
+          "spans": 3820,
+          "spans_with_instance_id": 3820,
+          "spans_with_status_attribute": 764
+        }
+      },
+      "target_instance_span_counts": {
+        "visits-service-replica-a": 390,
+        "visits-service-replica-b": 374
+      },
+      "target_replica_span_counts": {
+        "a": 390,
+        "b": 374
+      }
+    },
+    "list_owners": {
+      "census": {
+        "attempts": 900,
+        "attempts_with_multiple_external_roots": 0,
+        "attempts_with_native": 900,
+        "attempts_with_native_but_no_error_flag": 900,
+        "attempts_with_native_end_after_declared_deadline": 0,
+        "attempts_with_native_end_after_external_completion": 7,
+        "attempts_with_native_error": 0,
+        "attempts_with_overlapping_external_roots": 0,
+        "attempts_with_root_sum_above_deadline": 0,
+        "attempts_with_root_union_above_deadline": 0,
+        "attempts_with_target_instance_for_every_observed_server": 0,
+        "attempts_with_target_replica_for_every_observed_server": 0,
+        "attempts_with_target_server": 0,
+        "attempts_with_unexplained_parent": 0,
+        "attempts_without_native": 0,
+        "external_elapsed_above_deadline": 0,
+        "failures": 0,
+        "native_error_spans": 0,
+        "spans": 15300,
+        "successes": 900,
+        "timeouts": 0,
+        "unexplained_parent_spans": 0
+      },
+      "forecast": null,
+      "forecast_status": "observation_audit_only",
+      "histograms": {
+        "external_root_count": {
+          "1": 900
+        },
+        "native_error_span_count": {
+          "0": 900
+        },
+        "target_server_count": {
+          "0": 900
+        },
+        "unexplained_parent_count": {
+          "0": 900
+        }
+      },
+      "native_status_attribute_counts": {
+        "http.response.status_code": {
+          "200": 2700
+        },
+        "http.status_code": {},
+        "rpc.grpc.status_code": {},
+        "rpc.response.status_code": {},
+        "rpc.status_code": {}
+      },
+      "outcome_census": {
+        "failure": {
+          "attempts": 0,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 0,
+          "attempts_with_native_but_no_error_flag": 0,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 0,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 0,
+          "attempts_with_target_replica_for_every_observed_server": 0,
+          "attempts_with_target_server": 0,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 0,
+          "spans": 0,
+          "successes": 0,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        },
+        "success": {
+          "attempts": 900,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 900,
+          "attempts_with_native_but_no_error_flag": 900,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 7,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 0,
+          "attempts_with_target_replica_for_every_observed_server": 0,
+          "attempts_with_target_server": 0,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 0,
+          "spans": 15300,
+          "successes": 900,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        },
+        "timeout": {
+          "attempts": 0,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 0,
+          "attempts_with_native_but_no_error_flag": 0,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 0,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 0,
+          "attempts_with_target_replica_for_every_observed_server": 0,
+          "attempts_with_target_server": 0,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 0,
+          "spans": 0,
+          "successes": 0,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        }
+      },
+      "service_evidence": {
+        "api-gateway": {
+          "error_flagged_spans": 0,
+          "server_spans": 900,
+          "spans": 1800,
+          "spans_with_instance_id": 1800,
+          "spans_with_status_attribute": 1800
+        },
+        "customers-service": {
+          "error_flagged_spans": 0,
+          "server_spans": 900,
+          "spans": 13500,
+          "spans_with_instance_id": 13500,
+          "spans_with_status_attribute": 900
+        }
+      },
+      "target_instance_span_counts": {},
+      "target_replica_span_counts": {}
+    },
+    "list_vets": {
+      "census": {
+        "attempts": 900,
+        "attempts_with_multiple_external_roots": 0,
+        "attempts_with_native": 900,
+        "attempts_with_native_but_no_error_flag": 900,
+        "attempts_with_native_end_after_declared_deadline": 0,
+        "attempts_with_native_end_after_external_completion": 7,
+        "attempts_with_native_error": 0,
+        "attempts_with_overlapping_external_roots": 0,
+        "attempts_with_root_sum_above_deadline": 0,
+        "attempts_with_root_union_above_deadline": 0,
+        "attempts_with_target_instance_for_every_observed_server": 0,
+        "attempts_with_target_replica_for_every_observed_server": 0,
+        "attempts_with_target_server": 0,
+        "attempts_with_unexplained_parent": 0,
+        "attempts_without_native": 0,
+        "external_elapsed_above_deadline": 0,
+        "failures": 0,
+        "native_error_spans": 0,
+        "spans": 2700,
+        "successes": 900,
+        "timeouts": 0,
+        "unexplained_parent_spans": 0
+      },
+      "forecast": null,
+      "forecast_status": "observation_audit_only",
+      "histograms": {
+        "external_root_count": {
+          "1": 900
+        },
+        "native_error_span_count": {
+          "0": 900
+        },
+        "target_server_count": {
+          "0": 900
+        },
+        "unexplained_parent_count": {
+          "0": 900
+        }
+      },
+      "native_status_attribute_counts": {
+        "http.response.status_code": {
+          "200": 2700
+        },
+        "http.status_code": {},
+        "rpc.grpc.status_code": {},
+        "rpc.response.status_code": {},
+        "rpc.status_code": {}
+      },
+      "outcome_census": {
+        "failure": {
+          "attempts": 0,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 0,
+          "attempts_with_native_but_no_error_flag": 0,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 0,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 0,
+          "attempts_with_target_replica_for_every_observed_server": 0,
+          "attempts_with_target_server": 0,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 0,
+          "spans": 0,
+          "successes": 0,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        },
+        "success": {
+          "attempts": 900,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 900,
+          "attempts_with_native_but_no_error_flag": 900,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 7,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 0,
+          "attempts_with_target_replica_for_every_observed_server": 0,
+          "attempts_with_target_server": 0,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 0,
+          "spans": 2700,
+          "successes": 900,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        },
+        "timeout": {
+          "attempts": 0,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 0,
+          "attempts_with_native_but_no_error_flag": 0,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 0,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 0,
+          "attempts_with_target_replica_for_every_observed_server": 0,
+          "attempts_with_target_server": 0,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 0,
+          "spans": 0,
+          "successes": 0,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        }
+      },
+      "service_evidence": {
+        "api-gateway": {
+          "error_flagged_spans": 0,
+          "server_spans": 900,
+          "spans": 1800,
+          "spans_with_instance_id": 1800,
+          "spans_with_status_attribute": 1800
+        },
+        "vets-service": {
+          "error_flagged_spans": 0,
+          "server_spans": 900,
+          "spans": 900,
+          "spans_with_instance_id": 900,
+          "spans_with_status_attribute": 900
+        }
+      },
+      "target_instance_span_counts": {},
+      "target_replica_span_counts": {}
+    },
+    "owner_details_with_visits": {
+      "census": {
+        "attempts": 900,
+        "attempts_with_multiple_external_roots": 0,
+        "attempts_with_native": 900,
+        "attempts_with_native_but_no_error_flag": 752,
+        "attempts_with_native_end_after_declared_deadline": 25,
+        "attempts_with_native_end_after_external_completion": 46,
+        "attempts_with_native_error": 148,
+        "attempts_with_overlapping_external_roots": 0,
+        "attempts_with_root_sum_above_deadline": 25,
+        "attempts_with_root_union_above_deadline": 25,
+        "attempts_with_target_instance_for_every_observed_server": 752,
+        "attempts_with_target_replica_for_every_observed_server": 752,
+        "attempts_with_target_server": 752,
+        "attempts_with_unexplained_parent": 0,
+        "attempts_without_native": 0,
+        "external_elapsed_above_deadline": 25,
+        "failures": 173,
+        "native_error_spans": 148,
+        "spans": 10208,
+        "successes": 727,
+        "timeouts": 25,
+        "unexplained_parent_spans": 0
+      },
+      "forecast": null,
+      "forecast_status": "observation_audit_only",
+      "histograms": {
+        "external_root_count": {
+          "1": 900
+        },
+        "native_error_span_count": {
+          "0": 752,
+          "1": 148
+        },
+        "target_server_count": {
+          "0": 148,
+          "1": 752
+        },
+        "unexplained_parent_count": {
+          "0": 900
+        }
+      },
+      "native_status_attribute_counts": {
+        "http.response.status_code": {
+          "200": 4154,
+          "503": 137
+        },
+        "http.status_code": {},
+        "rpc.grpc.status_code": {},
+        "rpc.response.status_code": {},
+        "rpc.status_code": {}
+      },
+      "outcome_census": {
+        "failure": {
+          "attempts": 173,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 173,
+          "attempts_with_native_but_no_error_flag": 25,
+          "attempts_with_native_end_after_declared_deadline": 25,
+          "attempts_with_native_end_after_external_completion": 28,
+          "attempts_with_native_error": 148,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 25,
+          "attempts_with_root_union_above_deadline": 25,
+          "attempts_with_target_instance_for_every_observed_server": 25,
+          "attempts_with_target_replica_for_every_observed_server": 25,
+          "attempts_with_target_server": 25,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 25,
+          "failures": 173,
+          "native_error_spans": 148,
+          "spans": 1484,
+          "successes": 0,
+          "timeouts": 25,
+          "unexplained_parent_spans": 0
+        },
+        "success": {
+          "attempts": 727,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 727,
+          "attempts_with_native_but_no_error_flag": 727,
+          "attempts_with_native_end_after_declared_deadline": 0,
+          "attempts_with_native_end_after_external_completion": 18,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 0,
+          "attempts_with_root_union_above_deadline": 0,
+          "attempts_with_target_instance_for_every_observed_server": 727,
+          "attempts_with_target_replica_for_every_observed_server": 727,
+          "attempts_with_target_server": 727,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 0,
+          "failures": 0,
+          "native_error_spans": 0,
+          "spans": 8724,
+          "successes": 727,
+          "timeouts": 0,
+          "unexplained_parent_spans": 0
+        },
+        "timeout": {
+          "attempts": 25,
+          "attempts_with_multiple_external_roots": 0,
+          "attempts_with_native": 25,
+          "attempts_with_native_but_no_error_flag": 25,
+          "attempts_with_native_end_after_declared_deadline": 25,
+          "attempts_with_native_end_after_external_completion": 25,
+          "attempts_with_native_error": 0,
+          "attempts_with_overlapping_external_roots": 0,
+          "attempts_with_root_sum_above_deadline": 25,
+          "attempts_with_root_union_above_deadline": 25,
+          "attempts_with_target_instance_for_every_observed_server": 25,
+          "attempts_with_target_replica_for_every_observed_server": 25,
+          "attempts_with_target_server": 25,
+          "attempts_with_unexplained_parent": 0,
+          "attempts_without_native": 0,
+          "external_elapsed_above_deadline": 25,
+          "failures": 25,
+          "native_error_spans": 0,
+          "spans": 300,
+          "successes": 0,
+          "timeouts": 25,
+          "unexplained_parent_spans": 0
+        }
+      },
+      "service_evidence": {
+        "api-gateway": {
+          "error_flagged_spans": 148,
+          "server_spans": 900,
+          "spans": 2700,
+          "spans_with_instance_id": 2700,
+          "spans_with_status_attribute": 2639
+        },
+        "customers-service": {
+          "error_flagged_spans": 0,
+          "server_spans": 900,
+          "spans": 4500,
+          "spans_with_instance_id": 4500,
+          "spans_with_status_attribute": 900
+        },
+        "visits-service": {
+          "error_flagged_spans": 0,
+          "server_spans": 752,
+          "spans": 3008,
+          "spans_with_instance_id": 3008,
+          "spans_with_status_attribute": 752
+        }
+      },
+      "target_instance_span_counts": {
+        "visits-service-replica-a": 377,
+        "visits-service-replica-b": 375
+      },
+      "target_replica_span_counts": {
+        "a": 377,
+        "b": 375
+      }
+    }
+  },
+  "sum_of_span_durations_is_whole_operation_duration": false,
+  "timeout_census_overlaps_failure_census": true,
+  "version": "v3-execution-observation-audit-v1"
+}
