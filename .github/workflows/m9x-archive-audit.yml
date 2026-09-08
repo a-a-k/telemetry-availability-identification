@@ -1,0 +1,26 @@
+name: M9X retained archive integrity and cost metadata
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Verify actual ZIP bytes and sealed model files; export compact metadata
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/audit_m9x_archives.py
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: m9x-archive-audit-${{ github.run_id }}
+          path: workflow-results/m9x-archive-audit
+          retention-days: 90
+          if-no-files-found: error
