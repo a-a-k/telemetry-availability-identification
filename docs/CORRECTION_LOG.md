@@ -54,3 +54,8 @@ Run 34218526868 completed 168 isolated old/corrected builds, but strict replay r
 ## Full historical correction and M9X update completed (2026-09-08)
 
 Run 34220234444 at 38f5e01 passed dependency qualification and four-corner M7 rescore; historical score reproduction error0. Original strict replay failure retained. [Complete correction](milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md), [iteration 019](iterations/019-complete-health-prefix-correction.md). OTel checkout full/current MAE24.462231878→24.486352506pp, coverage55/80 unchanged. M9X all108 candidates/threeviews updated; PMX24 objects unchanged; no added campaigns or PMX calls. Auxiliary decoder-v0 consumers statically inventoried and excluded from silent corrected-evidence reuse. Main G* admission remains open.
+
+
+## H-EXEC technical admin socket correction (2026-09-08)
+
+Run34227400959 at d6fdcba failed in repaired arm at AF_UNIX connect because the absolute GitHub workspace path exceeds sun_path length. Other three arms and all preserved observations remain technical development. [V2 correction](H_EXEC_01_V2_SOCKET_CORRECTION.md) uses a validated relative socket name without changing cwd or scientific design, and preserves compact failure metadata before extraction. Complete four-arm qualification is repeated; independent study blocks remain0. [Iteration023](iterations/023-h-exec-socket-correction.md).

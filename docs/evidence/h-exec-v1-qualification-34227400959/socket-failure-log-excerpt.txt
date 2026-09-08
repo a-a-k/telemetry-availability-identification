@@ -1,0 +1,45 @@
+2026-09-08T12:42:18.4701612Z ##[endgroup]
+2026-09-08T12:43:51.7178736Z Traceback (most recent call last):
+2026-09-08T12:43:51.7197720Z   File "<frozen runpy>", line 203, in _run_module_as_main
+2026-09-08T12:43:51.7198502Z   File "<frozen runpy>", line 88, in _run_code
+2026-09-08T12:43:51.7200291Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/h_exec_live_v1.py", line 198, in <module>
+2026-09-08T12:43:51.7201704Z     main()
+2026-09-08T12:43:51.7202015Z     ~~~~^^
+2026-09-08T12:43:51.7203305Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/h_exec_live_v1.py", line 194, in main
+2026-09-08T12:43:51.7204849Z     acquire(args.out,frozen,args.phase,args.block,args.slot)
+2026-09-08T12:43:51.7205558Z     ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-08T12:43:51.7207032Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/h_exec_live_v1.py", line 142, in acquire
+2026-09-08T12:43:51.7208642Z     response = admin_command(out, 'disable server study_replicas/replica_a')
+2026-09-08T12:43:51.7210800Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/h_exec_live_v1.py", line 70, in admin_command
+2026-09-08T12:43:51.7212351Z     stream.connect(str((out/'admin/admin.sock').resolve()))
+2026-09-08T12:43:51.7212965Z     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-08T12:43:51.7213491Z OSError: AF_UNIX path too long
+2026-09-08T12:43:51.8394826Z ##[error]Process completed with exit code 1.
+2026-09-08T12:43:51.8458114Z ##[group]Run mkdir -p workflow-results/compact
+2026-09-08T12:43:51.8458723Z [36;1mmkdir -p workflow-results/compact[0m
+2026-09-08T12:43:51.8460071Z [36;1m/usr/bin/time -v -o workflow-results/compact/analysis-resource-usage.txt python -m telemetry_availability.h_exec_compact_v1 --source workflow-results/h-exec --output workflow-results/compact[0m
+2026-09-08T12:43:51.8502252Z shell: /usr/bin/bash -e {0}
+2026-09-08T12:43:51.8502537Z env:
+2026-09-08T12:43:51.8502835Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-09-08T12:43:51.8503499Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+2026-09-08T12:43:51.8503996Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-09-08T12:43:51.8504562Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-09-08T12:43:51.8504999Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+2026-09-08T12:43:51.8505585Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+2026-09-08T12:43:51.8506087Z ##[endgroup]
+2026-09-08T12:43:53.3035605Z Traceback (most recent call last):
+2026-09-08T12:43:53.3050404Z   File "<frozen runpy>", line 203, in _run_module_as_main
+2026-09-08T12:43:53.3051355Z   File "<frozen runpy>", line 88, in _run_code
+2026-09-08T12:43:53.3053974Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/h_exec_compact_v1.py", line 140, in <module>
+2026-09-08T12:43:53.3062486Z     main()
+2026-09-08T12:43:53.3062863Z     ~~~~^^
+2026-09-08T12:43:53.3064219Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/h_exec_compact_v1.py", line 134, in main
+2026-09-08T12:43:53.3065767Z     qualified=summarize(args.source,args.output,frozen)
+2026-09-08T12:43:53.3067535Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/h_exec_compact_v1.py", line 54, in summarize
+2026-09-08T12:43:53.3069859Z     routing, route_audit = routes((source/'proxy-routes.log').read_text(),selected)
+2026-09-08T12:43:53.3071277Z                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-09-08T12:43:53.3072567Z   File "/opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/pathlib/_local.py", line 546, in read_text
+2026-09-08T12:43:53.3074187Z     return PathBase.read_text(self, encoding, errors, newline)
+2026-09-08T12:43:53.3074905Z            ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-09-08T12:43:53.3076174Z   File "/opt/hostedtoolcache/Python/3.13.15/x64/lib/python3.13/pathlib/_abc.py", line 632, in read_text
+2026-09-08T12:43:53.3077964Z     with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:

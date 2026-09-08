@@ -1,0 +1,1045 @@
+{
+  "version": "H-EXEC-01-v2",
+  "status": "frozen_before_v2_technical_repeat",
+  "assignments": {
+    "qualification": [
+      {
+        "block": 0,
+        "slot": 0,
+        "arm": "sham"
+      },
+      {
+        "block": 0,
+        "slot": 1,
+        "arm": "transition"
+      },
+      {
+        "block": 0,
+        "slot": 2,
+        "arm": "repaired"
+      },
+      {
+        "block": 0,
+        "slot": 3,
+        "arm": "settled"
+      }
+    ],
+    "study": [
+      {
+        "block": 0,
+        "slot": 0,
+        "arm": "sham"
+      },
+      {
+        "block": 0,
+        "slot": 1,
+        "arm": "repaired"
+      },
+      {
+        "block": 0,
+        "slot": 2,
+        "arm": "transition"
+      },
+      {
+        "block": 0,
+        "slot": 3,
+        "arm": "settled"
+      },
+      {
+        "block": 1,
+        "slot": 0,
+        "arm": "transition"
+      },
+      {
+        "block": 1,
+        "slot": 1,
+        "arm": "settled"
+      },
+      {
+        "block": 1,
+        "slot": 2,
+        "arm": "sham"
+      },
+      {
+        "block": 1,
+        "slot": 3,
+        "arm": "repaired"
+      },
+      {
+        "block": 2,
+        "slot": 0,
+        "arm": "settled"
+      },
+      {
+        "block": 2,
+        "slot": 1,
+        "arm": "repaired"
+      },
+      {
+        "block": 2,
+        "slot": 2,
+        "arm": "transition"
+      },
+      {
+        "block": 2,
+        "slot": 3,
+        "arm": "sham"
+      },
+      {
+        "block": 3,
+        "slot": 0,
+        "arm": "sham"
+      },
+      {
+        "block": 3,
+        "slot": 1,
+        "arm": "settled"
+      },
+      {
+        "block": 3,
+        "slot": 2,
+        "arm": "repaired"
+      },
+      {
+        "block": 3,
+        "slot": 3,
+        "arm": "transition"
+      },
+      {
+        "block": 4,
+        "slot": 0,
+        "arm": "sham"
+      },
+      {
+        "block": 4,
+        "slot": 1,
+        "arm": "repaired"
+      },
+      {
+        "block": 4,
+        "slot": 2,
+        "arm": "transition"
+      },
+      {
+        "block": 4,
+        "slot": 3,
+        "arm": "settled"
+      },
+      {
+        "block": 5,
+        "slot": 0,
+        "arm": "transition"
+      },
+      {
+        "block": 5,
+        "slot": 1,
+        "arm": "sham"
+      },
+      {
+        "block": 5,
+        "slot": 2,
+        "arm": "repaired"
+      },
+      {
+        "block": 5,
+        "slot": 3,
+        "arm": "settled"
+      },
+      {
+        "block": 6,
+        "slot": 0,
+        "arm": "repaired"
+      },
+      {
+        "block": 6,
+        "slot": 1,
+        "arm": "sham"
+      },
+      {
+        "block": 6,
+        "slot": 2,
+        "arm": "transition"
+      },
+      {
+        "block": 6,
+        "slot": 3,
+        "arm": "settled"
+      },
+      {
+        "block": 7,
+        "slot": 0,
+        "arm": "transition"
+      },
+      {
+        "block": 7,
+        "slot": 1,
+        "arm": "settled"
+      },
+      {
+        "block": 7,
+        "slot": 2,
+        "arm": "sham"
+      },
+      {
+        "block": 7,
+        "slot": 3,
+        "arm": "repaired"
+      }
+    ]
+  },
+  "assignment_seeds": {
+    "qualification": 2026090810,
+    "study": 2026090811
+  },
+  "workload_seeds": {
+    "qualification": 2026090812,
+    "study": 2026090814
+  },
+  "analysis_seed": 2026090813,
+  "static_control": {
+    "path": "/favicon.ico",
+    "git_blob": "ae9cadf5115d64064416bf8f847568e5f7da4de8",
+    "bytes": 123125,
+    "source_repository": "open-telemetry/opentelemetry-demo",
+    "source_commit": "8c47d47c9ac27710d2b2a153bcd53e483bffe66d",
+    "source_path": "src/frontend/public/favicon.ico"
+  },
+  "post_request_drain_seconds": 20,
+  "baseline_seconds": 60,
+  "conditioning_seconds": 30,
+  "measurement_seconds": 30,
+  "rate_per_second": 4,
+  "whole_operation_deadline_seconds": 2,
+  "study_blocks": 8,
+  "technical_blocks": 1,
+  "max_parallel": 3,
+  "job_timeout_minutes": 30,
+  "maximum_runner_hours": 18.666666666666668,
+  "raw_archive_planning_bytes_per_cell": 200000000,
+  "raw_total_planning_bytes": 7200000000,
+  "primary_contrasts": [
+    "sham_minus_settled_checkout_success",
+    "repaired_minus_settled_checkout_success"
+  ],
+  "family_alpha": 0.05,
+  "per_contrast_alpha": 0.025,
+  "practical_effect_fraction": 0.05,
+  "bootstrap_resamples": 10000,
+  "bootstrap_percentile_interval": 0.975,
+  "diagnostic_rule": {
+    "minimum_failed_checkout_with_route_a": 10,
+    "minimum_represented_settled_blocks": 6,
+    "static_success_floor": 0.97,
+    "maximum_between_arm_static_success_gap": 0.03
+  },
+  "repository_locks": [
+    {
+      "path": ".github/workflows/h-exec-01-v2.yml",
+      "sha256": "d3964aa5925af92229e346c0f56f0da17bff93057dc92068723335213061c93e"
+    },
+    {
+      "path": "configs/existing_application_graph_observation.json",
+      "sha256": "041217827c94a782a84cc2415eaa4eccdf95d8346c84034c30ccaf7586cd5b06"
+    },
+    {
+      "path": "configs/existing_application_ordinary.json",
+      "sha256": "6c78e46ed2861c5e20e58e85934e0ee6de620d216cf9999facdfd403dde9cb7c"
+    },
+    {
+      "path": "configs/h_exec_01_v1.json",
+      "sha256": "dfe34d4dfbf65f7a9a0882b05bc81fa605a6a90db83973aafd340fdec124371b"
+    },
+    {
+      "path": "configs/health_prefix_audit.json",
+      "sha256": "4f77707a3c270b062a020337d8267bba828587d194b59d96a3b969f49f0ba441"
+    },
+    {
+      "path": "configs/health_prefix_audit_v2.json",
+      "sha256": "779a35dd2b2d92b88a6484240fa2620766f04eca6b4692d1bfbdff2027e35d3f"
+    },
+    {
+      "path": "configs/health_prefix_audit_v3.json",
+      "sha256": "1980db90e8e20a754f10ecefd54e3b7a859724511bc604c9c2f2ae1df65f9dba"
+    },
+    {
+      "path": "configs/health_prefix_reanalysis.json",
+      "sha256": "1f36fb187d97f6a0543282f16ab6cfa83b83d96bc195a526e4d8c061465190d9"
+    },
+    {
+      "path": "configs/health_prefix_rescore.json",
+      "sha256": "f467022e1b981ec317e9e61e47bcd6d45aa35863514c9294c82fdac0079f049c"
+    },
+    {
+      "path": "configs/isolated_stochastic_analysis.json",
+      "sha256": "0b5e83fc5cdfa44799506a3f9cc18a0c7b083e09bcf0101b493f628ef063f1b4"
+    },
+    {
+      "path": "configs/live/otel-pilot-collector-extra.yml",
+      "sha256": "c0282a1267aaf7e1f7407845e551508c122e2cdc5954302d1cc7935112f0f781"
+    },
+    {
+      "path": "configs/m3_transfer.yaml",
+      "sha256": "5344d8012467252130858f9e28359c173046a876efdc8d12cd692b1650e8a600"
+    },
+    {
+      "path": "configs/m4_uncertainty.yaml",
+      "sha256": "92b2a35f0447c205784706e778332fddc6d4e4c2e39108108a424a892beb1177"
+    },
+    {
+      "path": "configs/m5_stress.yaml",
+      "sha256": "8baf5616a8220f7b3922bbef14b7a23bf6d9e692342356e8eb10daf00c9d998a"
+    },
+    {
+      "path": "configs/m6_live_harness.yaml",
+      "sha256": "3047d2793f06c9ced3394b7900cd0192e1afd42ca9cb37c945f8348168479131"
+    },
+    {
+      "path": "configs/m7_complete_census.json",
+      "sha256": "76d80e9d92886d27b9f581a78250d7139fda87bd11e99e34fac0a5f282c2edf4"
+    },
+    {
+      "path": "configs/m7_evidence_boundary.yaml",
+      "sha256": "cde1ce49c15caaf03f27fa63594cc3396e81153716037fc9708cf060ac674448"
+    },
+    {
+      "path": "configs/m7_frozen_live.yaml",
+      "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a"
+    },
+    {
+      "path": "configs/m7_preflight_evidence_boundary.yaml",
+      "sha256": "6395248e972e9f5512610000229b5b0d6302576dcb1fe54a4880befc62def591"
+    },
+    {
+      "path": "configs/m7_runtime_pilot.yaml",
+      "sha256": "07806dadfc33ac66c3732a8234f6fc75e7fb1d8b7272a7bf81166be9d5849cb8"
+    },
+    {
+      "path": "configs/m7a_fault_acquisition.yaml",
+      "sha256": "e7fa21040bce3c862357f2b85952a3ee01200727dd0619aef2a5043928d72068"
+    },
+    {
+      "path": "configs/m7b_placement_pilot.yaml",
+      "sha256": "e913e1090d63061242608784f079bbd9827dc11927f8b21e48bb74530eea677a"
+    },
+    {
+      "path": "configs/m7c_macro_precision_recovery.yaml",
+      "sha256": "cd83b0f841985cf5fa9d6e6150e28bafc76c21702bb24db759c20938fd31d94b"
+    },
+    {
+      "path": "configs/m7c_stochastic_freeze_pilot.yaml",
+      "sha256": "ac205ae35d2bb3737a7b9c351b869d194bcfa745a94faab37c08b87f7fbe6b30"
+    },
+    {
+      "path": "configs/m7d_evidence_boundary.yaml",
+      "sha256": "60282d82bbe25531c463f1393e9c9c2b11630aa1b9c5f6dfcf382fb28c316827"
+    },
+    {
+      "path": "configs/m9a_palladio_bootstrap.json",
+      "sha256": "a7fd6e784612b4ba2df06f4ef2de4a4755a23a873540857f181831718825bc1d"
+    },
+    {
+      "path": "configs/m9b_palladio_semantic_controls.json",
+      "sha256": "37fb11b921c547d3e5c0bbb8211a7bd7c65911ac828e25c7d96a0430628e7cef"
+    },
+    {
+      "path": "configs/m9c_palladio_application_mapping.json",
+      "sha256": "0d8c15ef30cfff5cb2e4e5cb83cfcc6d02fc566cceb1b6d5778d68bb0c877d27"
+    },
+    {
+      "path": "configs/m9d_palladio_aligned_comparison.json",
+      "sha256": "977e701be431c3a39ff9c3c845d91b51f78838e4374822ec9690bae4597fc15e"
+    },
+    {
+      "path": "configs/m9e_palladio_full_path_feasibility.json",
+      "sha256": "1011eba15ccf41735fa82323d48e5012e0b5b580a80d0511950b76ea84f84e34"
+    },
+    {
+      "path": "configs/m9f_pmx_performability_audit.json",
+      "sha256": "c7eece0639b5d41e57173595021a23ffeaaca93475adad637a079fdadd992c40"
+    },
+    {
+      "path": "configs/m9g_pmx_recovery.json",
+      "sha256": "96e053c29f37cda6761455e1270c530099a551784d165cfa9f2592fe5bdc2d1c"
+    },
+    {
+      "path": "configs/m9h_pmx_source_entrypoint.json",
+      "sha256": "936fb53eb6492fda9cdeda9c04b2a70a28b4f77a67f51ad88a829f1a08919240"
+    },
+    {
+      "path": "configs/m9i_pmx_failure_semantics.json",
+      "sha256": "b5d22dc23ba303f0011ddb7cee08311741acb8f597ac9bdf3880b085f74ba62a"
+    },
+    {
+      "path": "configs/m9j_pmx_carrier_control.json",
+      "sha256": "4e40451f995315e1182dbe36ba388d4a27b4b895cf06641b99220b0bd25cab1d"
+    },
+    {
+      "path": "configs/m9k_checkout_localization.json",
+      "sha256": "00a0a6972a495ea7574d08f2a1b5806565fe60aa8d031e1123a735976528edbb"
+    },
+    {
+      "path": "configs/m9l_checkout_failure_causes.json",
+      "sha256": "13dc62e49bbbd7f2bf7eaa0895da5cb9f25be25bb877828ccfef373c59d4313f"
+    },
+    {
+      "path": "configs/m9m_checkout_routing_model.json",
+      "sha256": "783435b2983b941620ccd04de190beb6967886a8fce24b5a3d326714a805e167"
+    },
+    {
+      "path": "configs/m9n_checkout_temporal_failover.json",
+      "sha256": "feda40882f58adb79b4de7d736f34867ded3a0364cf4d21f443bd399d726b257"
+    },
+    {
+      "path": "configs/m9o_temporal_confirmation.json",
+      "sha256": "c93d22f75ed43fe0760443d30d7dad8c72173e660672800b6e8558c84ec6dee2"
+    },
+    {
+      "path": "configs/m9p-design.json",
+      "sha256": "7d18996f33c01d5f09d0244b5d2a9bd3b45c44e43d2b53b89e85be2c87faecfc"
+    },
+    {
+      "path": "configs/m9p-prospective-campaigns.csv",
+      "sha256": "ceb54a1600049e464c2002a71a905c00bb013793fa4494a7a84bdf6b430d685e"
+    },
+    {
+      "path": "configs/m9p_preflight_acceptance.json",
+      "sha256": "e2fa2629b04ee35539227d4593c46597cfa3883eadff0176bfac77fcc89b7177"
+    },
+    {
+      "path": "configs/m9p_temporal_confirmation.json",
+      "sha256": "b11965da68f02b97fc3dac7c6a162807779a205f4a95efa696a70283422944ec"
+    },
+    {
+      "path": "configs/m9q_application_acceptance.json",
+      "sha256": "e26176185559c6ebb390c01d98bac359d3bc38dbf2552683218d5a5a59325772"
+    },
+    {
+      "path": "configs/m9q_application_census.json",
+      "sha256": "4a633fac8d73224339cfa8b262127fbae88f23870e842b98789a422cf6dd3b7b"
+    },
+    {
+      "path": "configs/m9q_pmx_observed_operations.json",
+      "sha256": "ad9619886d889d3f1db6bb816515ea755a70c6ca50cf9ecafa7c5ca89bc0d826"
+    },
+    {
+      "path": "configs/m9q_retained_application_audit.json",
+      "sha256": "07d305fa2abd7cfe6cc154f013fc2f23212f4203d35a29066f2e275568347fa9"
+    },
+    {
+      "path": "configs/m9q_usage_oracle_review.json",
+      "sha256": "7682247a51ad181f6b029a16695b85cbfac46be1961b9304c4eaa6c1173e6480"
+    },
+    {
+      "path": "configs/m9r_pmx_composition.json",
+      "sha256": "9883e51108d2c873416ad35ffe5e5a98cea18a453c80c6e8a744e664d5313a8d"
+    },
+    {
+      "path": "configs/m9s_pmf_bridge_acceptance.json",
+      "sha256": "4f2db954d5e2599bb53fc32c591b235777be694f25c22a332818c1e590cf24af"
+    },
+    {
+      "path": "configs/m9s_pmx_pmf_bridge.json",
+      "sha256": "673de387d4d5911e56fa36d61e580a6ed8d09b181f5176e2dcc2f9db6ca6e1d0"
+    },
+    {
+      "path": "configs/m9t_pmx_request_census.json",
+      "sha256": "a446074e76ad12285fcceed6260750b6c72597a161a6bbfe1b0224e92df10b8d"
+    },
+    {
+      "path": "configs/m9u_pmx_request_conformance.json",
+      "sha256": "f27f6c9963b472150db889137d895b731835cc3b27426ee54e2f6941dbb6ac21"
+    },
+    {
+      "path": "configs/m9v_call_context_audit.json",
+      "sha256": "df7afb7273ca33f8c3db6685d8547549462cf5de0b48548f235c5414335ff56e"
+    },
+    {
+      "path": "configs/m9v_pmx_application_comparison.json",
+      "sha256": "b84c4b1ceabfa81d5215ab49a97c61189a5155e8493e97f0ea10b4f42d5fcffd"
+    },
+    {
+      "path": "configs/m9v_retained_application_recovery.json",
+      "sha256": "fe6b1bb1de6ecc29e855c29449b9e8f35568d62de95c87a25970fde8a8824584"
+    },
+    {
+      "path": "configs/m9v_retained_request_audit.json",
+      "sha256": "c0a4d6815ce13e2116d57857249fa06f8277cbd7252355b865d077a795413969"
+    },
+    {
+      "path": "configs/m9x_pmx_context_comparison.json",
+      "sha256": "0745bee9b2e4021616854d4bdc4b2671e702339e064cc0cc8c29fb37c25d3ccb"
+    },
+    {
+      "path": "configs/petclinic_bootstrap.json",
+      "sha256": "7b00849c768d626b0f86c6f3e0e218263f34bc4235b25841505412da47fc2fe9"
+    },
+    {
+      "path": "configs/petclinic_graph_observation_technical.json",
+      "sha256": "9c3d798b613a5fa1aed654a24a5f32cd4f0ff4b27dec7bb626b09af737767afa"
+    },
+    {
+      "path": "configs/petclinic_pmx_qualification.json",
+      "sha256": "4633804e0d091206ad088726571a81c709772b3c6452c5a5fb474f84772a06c6"
+    },
+    {
+      "path": "configs/petclinic_runtime_v2.json",
+      "sha256": "1851ac982a464e5e9e51a26500e1a6f1270faa8847390b5aa936ff0911812564"
+    },
+    {
+      "path": "configs/petclinic_runtime_v3.json",
+      "sha256": "8ab8ce1335b9f81356085966e887a9a86b48c06d95b01e6f43207aba06c53160"
+    },
+    {
+      "path": "configs/petclinic_stochastic_preflight.json",
+      "sha256": "c0b1df41f9e74ecd29346b63008676249bf2ddebe1ee5d603e9c689d4657db77"
+    },
+    {
+      "path": "configs/petclinic_stochastic_preflight_v2.json",
+      "sha256": "ae6188c2096e7845099deb4c14d95e0a0f69b36a810ce23a78b301d601c55159"
+    },
+    {
+      "path": "configs/publication_acquisition_derivation.json",
+      "sha256": "a03298d7d9d1876a121dd1030f947c2cf01a28323e0a3d1c381fe61939db9145"
+    },
+    {
+      "path": "configs/rq1_synthetic.yaml",
+      "sha256": "40c20441da0fabfa7c4818d4e40827fe107acc82b954eda7d52e35e455be8e6f"
+    },
+    {
+      "path": "configs/v3_ordinary_input_qualification.json",
+      "sha256": "75fe440e1268d464d58edde8a56967809a0e4e025543d58e17e1bcd457860af1"
+    },
+    {
+      "path": "docs/H_EXEC_01_PROTOCOL_V1.md",
+      "sha256": "090a7ce26dd0149aa7fee524a4556c5efb86f748efc95b9c760cbfd715745416"
+    },
+    {
+      "path": "docs/H_EXEC_01_V2_SOCKET_CORRECTION.md",
+      "sha256": "9e9b9fe31394a85f6778e6999d90cccf463b3a78625e76b8e9cc3c931d1166aa"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/.gitattributes",
+      "sha256": "a736d091663272b2e696369855958e8804cafce1d597bc70b5298ba41b521cdd"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/DeathStarBench-LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/deathstar-user-timeline.h",
+      "sha256": "e703f56659bfc62c75bfced86681931e6e2ace069a6e3080138e5ea883062478"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/opentelemetry-demo-LICENSE",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/otel-compose.yaml",
+      "sha256": "62d520870c255485b113f44f7e2127ab54410684c3881c43f60e511a2b12088e"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/otel-env.txt",
+      "sha256": "a2b408560536c84c9024067081147349773fbef21a7082d3c49bb3b46a0ca95c"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/otel-product-catalog.go",
+      "sha256": "3e1e7bba0f11e69b550df38eafb2e1cd366dcde216b2c25762134d46d13290b7"
+    },
+    {
+      "path": "docs/evidence/existing-application-semantic-sources/sources.json",
+      "sha256": "178c25b77fb12a76680090c3de8175a205475962f136b50e2f58674144d3f285"
+    },
+    {
+      "path": "pyproject.toml",
+      "sha256": "420c0eb8e173998489430531aa6214e89c3459e501aba32ab9406f72f58fab3b"
+    },
+    {
+      "path": "requirements.txt",
+      "sha256": "c08d853f6dd527570717ebe50bdd0ace08563598f1ebe42fb4b534ea4afefd88"
+    },
+    {
+      "path": "scripts/verify_staged_research_lock.py",
+      "sha256": "387388e578e95714b9dc1fa04725a261f462ef3e5632aae0c52f2e637135107e"
+    },
+    {
+      "path": "src/telemetry_availability/__init__.py",
+      "sha256": "8c4cb841ef12c5caa18070835bb7cf0c130ebd8f8fde94ea87651d0791e214f3"
+    },
+    {
+      "path": "src/telemetry_availability/__main__.py",
+      "sha256": "3d2438ae92f4746e9ffaa1f837b1fe803f6281091d1f31f8c95643716f257d9a"
+    },
+    {
+      "path": "src/telemetry_availability/boolean_model.py",
+      "sha256": "6ab737f4bc1b9ab53de07d17e018b5e125cdb9769c31b18ed294bd9d008c00fc"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_failure_causes.py",
+      "sha256": "e34517936ebb02ee97c3df520e7e523f54f67c0ba1470fd6cbb8074c28fc85e3"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_localization.py",
+      "sha256": "6587f1d97663f458d4129db727cb448bfcef4b1bbcf71bcbbca8b0f88d827da3"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_routing_model.py",
+      "sha256": "9833739e025387981c5e08836e842bd9b203620f2503f853208f20ec1bf834b5"
+    },
+    {
+      "path": "src/telemetry_availability/checkout_temporal_failover.py",
+      "sha256": "f4ed99d6aca6993ae2ef6980a6f5e178c8c4aa8d948fb426248ed66358d3f78a"
+    },
+    {
+      "path": "src/telemetry_availability/cli.py",
+      "sha256": "73f6fe78fc4bbc74a249fa121f883766f0798861f4f93fb1ab6e346d80a50a79"
+    },
+    {
+      "path": "src/telemetry_availability/compiler.py",
+      "sha256": "89bcd55510350a277de11a9c4e958c44577618b3795674e53aaff4dafcd9993b"
+    },
+    {
+      "path": "src/telemetry_availability/config.py",
+      "sha256": "59aa17a160d481897013ea710110669a3d8c08567662928470dc7aa78e51c610"
+    },
+    {
+      "path": "src/telemetry_availability/diagnostics.py",
+      "sha256": "432f1baa19a77322a35e6bf63fccd6ae10d31a2fd9b3f50fb8e1e61841a53bd4"
+    },
+    {
+      "path": "src/telemetry_availability/estimators.py",
+      "sha256": "0d95c5d8065eea5ab49f30cc4b96ff1c1b49f6fe4823bd09e0c6c090b47dbfe3"
+    },
+    {
+      "path": "src/telemetry_availability/existing_application_graph_observation.py",
+      "sha256": "0fea1b2b7caeea679b3f17f67c1e08092f1893335b0cca636522ed9af5d1f0f5"
+    },
+    {
+      "path": "src/telemetry_availability/existing_application_ordinary.py",
+      "sha256": "e4673b3abc447a35a82545dc470725132ed0a9498fa5e6f90789199861c6d242"
+    },
+    {
+      "path": "src/telemetry_availability/graph_observation_model.py",
+      "sha256": "e0b33096b1939341c2efda2f445d6ef31bafbdb88f5d5cf3000c92bf2f0ce079"
+    },
+    {
+      "path": "src/telemetry_availability/graph_replay_v3.py",
+      "sha256": "e65b5c3321c47448fc855e16b45fae439a069c3a0232a8f3c9b96cd03c275fb5"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_analysis_v1.py",
+      "sha256": "dc12b35758849b126b068c5286ed71b60ce3461422c634b334a2b252b32539c6"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_analysis_v2.py",
+      "sha256": "5475b1eeef92164c24203788e7e7d9b32b483873838f8a95c9d882ff7ef317e2"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_compact_v1.py",
+      "sha256": "4ee06fb6c56bcb958c4e0b21fc0586d4c8aa6694b2c2e0ba2c559176c5c90cfc"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_compact_v2.py",
+      "sha256": "d9f5da5683586ee0834e3d901ad8d369b03ba92192a49f798a95543dd7339628"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_design_v1.py",
+      "sha256": "81db5aaa2c03daf2a964ec2ec600e9ec10ac3cd5eb9d04d4758b3f4cf4771919"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_live_v1.py",
+      "sha256": "71537244e7f718f601790d4d67c4743da5f805ec38c0263aff4af9b33e4c6754"
+    },
+    {
+      "path": "src/telemetry_availability/h_exec_live_v2.py",
+      "sha256": "170434a378777d34a484e7d6061c1195f063359e087eee1d0b87b96bcd455c91"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_audit.py",
+      "sha256": "a9c5ad3131b809bc7fa79c41a66ec10c6f3133cdc172466e6189037b8de236a7"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_audit_v2.py",
+      "sha256": "28ade967a7c02a15c8469f1d94a5e7e5a0db366b428e1dbc7f1c97624a4b52a5"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_audit_v3.py",
+      "sha256": "1e1a16a09823638f93332acd87bea08259583682b70c9898eb93fdebf4f96001"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_dependency_qualification.py",
+      "sha256": "bf6d3b8be88bf0f9d9fe6fd1dc712a853ebdc3de2f1ed7a2787825208b8d934e"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_reanalysis.py",
+      "sha256": "78d357edc54dea1916f27a81398f600d67ccbc7ef7f786f562327397326bae06"
+    },
+    {
+      "path": "src/telemetry_availability/health_prefix_rescore.py",
+      "sha256": "7bf52e48bf98a88e3b9f0fcf8f7e8b15403af189025fb59e724c7f73579e48ce"
+    },
+    {
+      "path": "src/telemetry_availability/isolated_stochastic_fit.py",
+      "sha256": "b2866963d73a61e70101310ac97cf44eb20527038ebc59664fdd358380de168d"
+    },
+    {
+      "path": "src/telemetry_availability/likelihood.py",
+      "sha256": "85cbf4209ed1ca28c34e852bfb918324d955330b3f023dc735cc4a5558538a33"
+    },
+    {
+      "path": "src/telemetry_availability/likelihood_reference.py",
+      "sha256": "95d604d32fa17b10dd5f12665b42af3cc41d91e49467e99baf338015947e014e"
+    },
+    {
+      "path": "src/telemetry_availability/live_budget_recovery.py",
+      "sha256": "f7f7a8df619ff044e44b15711fe2e6ec61ceaba88a7402f6b6b41d28ee82c620"
+    },
+    {
+      "path": "src/telemetry_availability/live_config.py",
+      "sha256": "06f446df6cd5b5f47017eee8108b667c73ac29907818fdc743539782a406c534"
+    },
+    {
+      "path": "src/telemetry_availability/live_evidence.py",
+      "sha256": "a20e474f9b78c5e189f7cde7f9ba7019b436b26e78531168e9bb2766edec17e1"
+    },
+    {
+      "path": "src/telemetry_availability/live_evidence_config.py",
+      "sha256": "2c2df98275ea7b8c474c6ab072ff857b6006676179f0ba60557a4951f91b8a36"
+    },
+    {
+      "path": "src/telemetry_availability/live_fault_campaign.py",
+      "sha256": "055ad0d33c0e3a08a52bc68edb3ce3976862511ba29334d37db835dadb3c811a"
+    },
+    {
+      "path": "src/telemetry_availability/live_fault_config.py",
+      "sha256": "e90796a1e878b83ca4950de8e9108eaf20e723c19ca2a4a20de37fb90761a468"
+    },
+    {
+      "path": "src/telemetry_availability/live_harness.py",
+      "sha256": "a7ae8e0e301815bb7c4793759005a32cd31e8b910d023a9160e398c594101f09"
+    },
+    {
+      "path": "src/telemetry_availability/live_ingestion.py",
+      "sha256": "abf85e38b0e28fcad50972dded056b0be24cfe212d28d403b192c2da91177708"
+    },
+    {
+      "path": "src/telemetry_availability/live_pilot.py",
+      "sha256": "44bf953759067e7be6ef78e5ac34b752503605ef556de7fced760f88f08c8e90"
+    },
+    {
+      "path": "src/telemetry_availability/live_pilot_config.py",
+      "sha256": "0bebd59f4898b5f2779f768f7a056954a0dce254c1dcc8ddb2611d5f6d22ed9c"
+    },
+    {
+      "path": "src/telemetry_availability/live_placement_config.py",
+      "sha256": "6c3961c23e09bad529fd4700baa64fc428ebcee64cf6dec8d29b5d9f05492947"
+    },
+    {
+      "path": "src/telemetry_availability/live_placement_pilot.py",
+      "sha256": "78c940f1767b97f0b949d6b26338aa9ccaba001f6d9e55e9f9c7b2359af70be0"
+    },
+    {
+      "path": "src/telemetry_availability/live_stochastic_config.py",
+      "sha256": "f9fd2cb9165cfa435903989273730cd98b2c52286fe754b20c4bbca0e0f3f0d5"
+    },
+    {
+      "path": "src/telemetry_availability/live_stochastic_pilot.py",
+      "sha256": "c2fddc0581763ad9ade4a81be7a7ba548ad455acc839353e8ab34076d7079834"
+    },
+    {
+      "path": "src/telemetry_availability/live_validation.py",
+      "sha256": "7e0856ceeb24f192201a53ae04577015810dfbdd502afc7f5a23596547c79621"
+    },
+    {
+      "path": "src/telemetry_availability/live_validation_analysis.py",
+      "sha256": "0b58ddd271a6eccbdd3d1f2879fae6e333825c4a95f2667ad1ecb1d12c646132"
+    },
+    {
+      "path": "src/telemetry_availability/live_validation_config.py",
+      "sha256": "661a733ea24941a8749b7bf6ac874cb1688a0b17e539683c02c142ce88ba6702"
+    },
+    {
+      "path": "src/telemetry_availability/m7_causal_diagnostics.py",
+      "sha256": "bdb48af19dccbb1e23bcbfadfd4317f5602a4ea9e74e7193f8f749f411b6ad82"
+    },
+    {
+      "path": "src/telemetry_availability/m7_complete_census.py",
+      "sha256": "6c52e9e48be8758d5c629ebb907f80e2993b34820f93557633004a5e4d713d58"
+    },
+    {
+      "path": "src/telemetry_availability/m7_diagnostic_analysis.py",
+      "sha256": "b08c71622fa46a5a246a192fbbc0e781694b399e54da0345135be331158895b1"
+    },
+    {
+      "path": "src/telemetry_availability/model.py",
+      "sha256": "d24be73dff2cac407332feac6a740097fea7165f5737de448cc0a8d483f2f030"
+    },
+    {
+      "path": "src/telemetry_availability/moments.py",
+      "sha256": "8a4cf581bdeb7e00d6d276e6d693f10fea163728acee9fd8548109ed73709c15"
+    },
+    {
+      "path": "src/telemetry_availability/observation.py",
+      "sha256": "52c0e8d0a8978ebda08bf82d70e50ed9954848db9f9741353ad56c6de2f320a3"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_aligned.py",
+      "sha256": "10d78cdb41f204a190fb2ae90923dca4bd3f7ef2b2d20484d46037b727782308"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_bootstrap.py",
+      "sha256": "22af48eae137b9c1b35fe23c11d8cad8b126724514b842493d7643848796f095"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_controls.py",
+      "sha256": "d21d96bfe2075c9b2fd87a9017c4e2c0f0b51c63f081b56b776af839dba9991c"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_fullpath.py",
+      "sha256": "07f27b505f123bc83e4ec40effdc4b376217a011d6ec9dab04515d7a45849b8c"
+    },
+    {
+      "path": "src/telemetry_availability/palladio_mapping.py",
+      "sha256": "f9e9dd1711172011f0ed77e3a78e110bf47394bbeaf4ed78b6a6509987d99077"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_bootstrap.py",
+      "sha256": "4ed6ad6ba7a08a3d3108aa156ff5da04f72947a9164eabe679d1cf77be497a2c"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_contract.py",
+      "sha256": "db39f657f68a85bdf1242991337ac82c0d541510a818e56e6efdc98ba37967cc"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_contract_v2.py",
+      "sha256": "19d21cf56f71ae1dca076c795dbe2e5c9a89e5b529620dd35f4b9d48490cbf99"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_graph_observation_fit.py",
+      "sha256": "654c60bd18a8c0076f75494472750e9b2c445981b9d1a2f664f977f5666240fe"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_pmx_qualification.py",
+      "sha256": "de6d15082c6c896c717bf2d6116b1f18a107450f428793d28b07caca9d2b5a51"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_runtime_v2.py",
+      "sha256": "98409089c9cf345ffa62de19afab25b15d5acee785a76712cdbde9445b1f2e98"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_runtime_v3.py",
+      "sha256": "f487c8ec25a4f9aa62b327115c56a9e071a726a7d6783ae90047e574f9b2ab9b"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_stochastic_preflight.py",
+      "sha256": "13f45443d9fc9f77e6a4a38214d7c732d325dad6711cf80a7f0c0ee24265136d"
+    },
+    {
+      "path": "src/telemetry_availability/petclinic_stochastic_preflight_v2.py",
+      "sha256": "a79d9f2b73a56a636217aa257548000c2239b8fb418873b514459453651b6b22"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_adapter_conformance.py",
+      "sha256": "93c8528b2858161f908e31982cf781eb7d71159410565da7fd28f32583518860"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_census.py",
+      "sha256": "99eaf1f843cac82cdeecc9b9ee78b44d897419ee7de267b88eb250b6d5a06726"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_comparison.py",
+      "sha256": "22602e7f51c2fe6fa4d62a0806546a84330907eff61dde1996ae530451399e8b"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_recovery.py",
+      "sha256": "b5ac58df3d0436c55fd055ffc0f802de6a8fa9815a3087da393c70b1b1cac276"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_call_context_audit.py",
+      "sha256": "78e848dcaedb55d58766a3026aa97a8e36a4a0313cf0ba27f00dbfd7d2e28a40"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_carrier_control.py",
+      "sha256": "78c40852579978300093b5cc36ef4c1a0b20682772b26afcc70fa33cf021a275"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_composition_control.py",
+      "sha256": "18b638dab84b0c77ec070bf78403b5895ed7ac398199439fcd437ca8043e5c01"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_context_comparison.py",
+      "sha256": "986ef549513b794936a08319d43a8ea6db83be48209103b3c6e7718e17f62924"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_database_client_adapter.py",
+      "sha256": "4766997c16ab3b6342a58ba40237a54c1128eb9b50ce268861263f05a746c34b"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_database_client_controls.py",
+      "sha256": "def9318c9ccfd458a2f81b5610d42178cf7bc661c1bf94112b6a9031c4c5f8f8"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_failure_semantics.py",
+      "sha256": "ca8d96e9c9913903561923021fb889e5178cadad6329b3cd1843380207f7d9bb"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_mixed_loop_bridge.py",
+      "sha256": "421b381032b2b8da8ab6e1d2bf8de71a4bc9a3b4cf2db75dcc4322ec73ecd530"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_observed_operations.py",
+      "sha256": "251d8769118f188d12288dfe933bd499aaf643fa36388cd59543a86161ab36e0"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_performability.py",
+      "sha256": "4cd43245544e0c291c24005554a87a5c23dc97a1c391acb28a2fed07547a07dc"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_pmf_bridge.py",
+      "sha256": "1a6b8928b8d7c485d6c8c0b2ebc209a1018f5800fe9c706202e63e2d75ca85fb"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_recovery.py",
+      "sha256": "76e67c104860dac96d45f9b888bee4418f3c38002f0880aaad5033ca1d7a1b81"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_adapter.py",
+      "sha256": "820284fb67113fc1f9bf11d3c39204c99140cab28666bd77cf5cc36079616b63"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_census.py",
+      "sha256": "c3ee74765d31be7a791328908f066ddee93979def02ef0288b248a3f66747789"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_conformance.py",
+      "sha256": "2b33d1b1dc969c7e5a62fc454922d9841eefc24971db9fb8c3c358d424954f1c"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_context.py",
+      "sha256": "ed174e15de4495c9be73e278bcf178a9700ae3562ae5eafa85fba8fc0a760efe"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_controls.py",
+      "sha256": "edbb60582449a52f5f1095bf0e720c1e0e50a5b9b93e1aede2e92c24c092e09c"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_pcm.py",
+      "sha256": "2e93269c0328cbad0156d7e5c923fff1807ae2e9a9d24d0618ed910ef85b2a69"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_retained_request_audit.py",
+      "sha256": "5e468156d7c4ad16fb2426be328611c9a3c07559a2ab9018f90f06e028821031"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_source_entrypoint.py",
+      "sha256": "83cc2a6e9a2661d08a6400ec0b44ef17a061c0ac53ae49dd5b44dcf90f7fbf83"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_usage_contract_audit.py",
+      "sha256": "77f53abd092e91914fb8ecea7325a5f968657f872239fa804c19a207002bff05"
+    },
+    {
+      "path": "src/telemetry_availability/polynomial_identification.py",
+      "sha256": "8826b8eedb853361d4099653fbf3480602827b9e3269d3047d7f912af2a5eecd"
+    },
+    {
+      "path": "src/telemetry_availability/provenance.py",
+      "sha256": "4553a546eeaf840250193e4bdcae594dabb2a3a820ce127ab41632ee26a194c3"
+    },
+    {
+      "path": "src/telemetry_availability/publication_stochastic_live.py",
+      "sha256": "03b2f4fbcb7d283ac247bab1b9a27e7d303252754897f6150b95e5fe0d7b067c"
+    },
+    {
+      "path": "src/telemetry_availability/reduction_experiment.py",
+      "sha256": "4866d0ab560b006ddabf8c26a8ec69e89f5b87851ffc28b4a1446ea2cb68486b"
+    },
+    {
+      "path": "src/telemetry_availability/runner.py",
+      "sha256": "ac8ef36be8e87b32eaaba0504df2ef5292da1c01b594ba40bf0ff4f28216153a"
+    },
+    {
+      "path": "src/telemetry_availability/stress.py",
+      "sha256": "c71a8445a3445f181974c49c86888708e988b484bb6ec194fa13e95192777938"
+    },
+    {
+      "path": "src/telemetry_availability/stress_config.py",
+      "sha256": "34e97bae9cc986a42acff0e5bdfc06d52b0764027d07f6d4826b71c304ac588f"
+    },
+    {
+      "path": "src/telemetry_availability/stress_experiment.py",
+      "sha256": "630516c671d90d7888be64fdb24697aafbf80fdc0b90e23ecb5fde09867b96d1"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_analysis.py",
+      "sha256": "f0a13fd4181a515efe95a887432b1d2ec2b03e79f717897f797b6fd88f977890"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_design.py",
+      "sha256": "ff153a4e5a4039c1570e42bce49a2d31967c131530db66e31b678f005f62bfbe"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_gate.py",
+      "sha256": "5071b723e152e915be83823b8549fe5682172a0a3dd3798f087cffadeec7dd9a"
+    },
+    {
+      "path": "src/telemetry_availability/temporal_confirmation_live.py",
+      "sha256": "9a01133853e0238e3df12bb4248503a9d95c5bd13a5adcc7e326caf50ea529a6"
+    },
+    {
+      "path": "src/telemetry_availability/transfer.py",
+      "sha256": "38718666852724b60b95a07e9813c2d86e580249706ef70a42d022462f3c23a9"
+    },
+    {
+      "path": "src/telemetry_availability/transfer_config.py",
+      "sha256": "7364080d90260e00ddbddca445c3e7e22900f173b6037135ca447abe6bbcd7a7"
+    },
+    {
+      "path": "src/telemetry_availability/transfer_experiment.py",
+      "sha256": "fde310959dbaa76e8dadff90d72f6da350c450febb5545e0a147a12c5975bc40"
+    },
+    {
+      "path": "src/telemetry_availability/transfer_identifiability.py",
+      "sha256": "4d867a6d29160377ca56e90105dd7512c16d6ded7539bfdcc1dc8310a843eddb"
+    },
+    {
+      "path": "src/telemetry_availability/uncertainty.py",
+      "sha256": "8a92149913cd8fce1386eae00aa6341bb37083c911f4f7b817b63d50bd51985f"
+    },
+    {
+      "path": "src/telemetry_availability/uncertainty_config.py",
+      "sha256": "772de6d1ecdb8ab971b71910eb2f9d67e94246702bfd14b69f4bc503f8888dcd"
+    },
+    {
+      "path": "src/telemetry_availability/uncertainty_experiment.py",
+      "sha256": "38b35b87093cc182bdf58bf782c64115a541ee438ea40b3b106fbbd384492ce9"
+    },
+    {
+      "path": "src/telemetry_availability/v3_graph_input_inventory.py",
+      "sha256": "464d7285bd4c2ec7281568777a3851d07468c2f0ccc7aaba72c903442387a63b"
+    },
+    {
+      "path": "src/telemetry_availability/v3_primary_projection.py",
+      "sha256": "0a2351806288870f0201432fd00f1dfb59335893002a97c32f7e19a2e104f24a"
+    },
+    {
+      "path": "src/telemetry_availability/whole_operation_contract.py",
+      "sha256": "bcd5094fafb599e7d96f65038b65736e7bf74b1f64889f83f76f8b0b80f6bc2c"
+    },
+    {
+      "path": "tests/test_h_exec_compact_v1.py",
+      "sha256": "016159ef684229f1eb614f3800ca1248c9b90b6dc6c694d4b34cac590773ffd4"
+    },
+    {
+      "path": "tests/test_h_exec_design_v1.py",
+      "sha256": "a71b3352378322f7404e457ca129c277ca26b74e4d7022134dfdf15bfdf43b5a"
+    },
+    {
+      "path": "tests/test_h_exec_socket_v2.py",
+      "sha256": "25d942a08b5924b9686c2243bd5ed200886e21bffa068a48eb0f960e0fda09dd"
+    }
+  ],
+  "maximum_acquisition_runner_hours": 18,
+  "scientific_protocol_version": "H-EXEC-01-v1",
+  "adapter_correction": "relative admin socket address; explicit compact failure preservation",
+  "previous_failed_technical_run": 34227400959
+}

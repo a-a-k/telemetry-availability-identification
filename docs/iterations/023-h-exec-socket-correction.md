@@ -1,8 +1,9 @@
-# Итерация022 — frozen H-EXEC prospective package
+# Итерация023 — H-EXEC v2 technical socket correction
 
-2026-09-08, authority [v3](../SIMPAT_CORRECTION_V3.md). [Доказательства021](021-existing-application-graph-observation.md) сохраняются.
-[Протокол H-EXEC-01 v1](../H_EXEC_01_PROTOCOL_V1.md) полностью определяет4 arms, один technical block и8 независимых study blocks, source/instrumentation/roles/seeds/budget, два co-primary contrasts, exact randomized-label inference, diagnostic/negative controls и alternatives. Код и анализ замораживаются до technical outcomes; main0.
-Пока подтверждены только19 exact mathematical controls и bounded assignment/parser/instrumentation tests. Run34227400959 завершён failure: sham/transition/settled qualified, repaired остановлен AF_UNIX path too long до routing intervention; полный four-arm gate не пройден. Prospective study outcomes ещё не получены. G*, refinements и causal result не назначены.
+2026-09-08; [v3](../SIMPAT_CORRECTION_V3.md), prior [022](022-h-exec-prospective-package.md).
+V1 run34227400959 сохранил3 qualified arms и один interface failure. Полного gate и независимой H серии нет.
+[Явная correction](../H_EXEC_01_V2_SOCKET_CORRECTION.md) сохраняет v1 и меняет только адресацию admin socket/сохранение partial compact failures. Семь bounded tests прошли;19 прежних math controls не пересчитаны как новое evidence.
+V2 four-arm qualification ещё не выполнена. Scientific hypotheses/32 study campaigns/seeds/analysis thresholds неизменны; новый interface version требует собственного same-config-digest prerequisite. Main0.
 
 | ID | Статус | Доказательство / область | Остаток |
 | --- | --- | --- | --- |
@@ -37,4 +38,4 @@
 | F07 | ЧАСТИЧНО | Исторические selected source bytes теперь привязаны к published ZIP; MODELS status и metrics различаются. | Точное historical execution/data соответствие. |
 | F08 | ЧАСТИЧНО | Технические графовые кандидаты теперь есть для3/3 apps с explicit assumptions; G* ещё не выбран. | Полные semantic/identification/causal/variant main admission требования. |
 
-Шесть exact compact архивов и failure-log excerpt сохранены в docs/evidence/h-exec-v1-qualification-34227400959; full raw remote. Следующее действие: v2 relative socket address, повторный four-arm technical gate с неизменным научным протоколом. Study32 запускается только после successful qualification того же protocol hash; technical4 исключены из inference. Никакой stopping/увеличения N по observed effect или нового H-claim по одной корреляции.
+Следующее действие: freeze Git-index bytes и v2 technical repeat; ни v1 исходы, ни новый technical repeat не добавляются к8 independent study blocks. При втором безрезультатном technical подходе нужен разбор и смена способа, не слепой повтор.
