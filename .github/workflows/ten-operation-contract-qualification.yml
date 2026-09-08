@@ -1,0 +1,93 @@
+name: Existing application whole-operation contract qualification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    strategy:
+      fail-fast: false
+      max-parallel: 2
+      matrix:
+        application:
+          - profile: deathstarbench_social_network
+            repository: delimitrou/DeathStarBench
+            commit: 6ecb09706140f8730b5385c08f1386c654c3c526
+            compose_file: socialNetwork/docker-compose.yml
+          - profile: opentelemetry_demo
+            repository: open-telemetry/opentelemetry-demo
+            commit: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+            compose_file: compose.yaml
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
+        with:
+          repository: ${{ matrix.application.repository }}
+          ref: ${{ matrix.application.commit }}
+          path: upstream
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Install pinned environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Render pinned original deployment and both target replicas
+        env:
+          DEMO_VERSION: '3.0.0'
+          LOCUST_AUTOSTART: 'false'
+          LOCUST_HEADLESS: 'true'
+          LOCUST_BROWSER_TRAFFIC_ENABLED: 'false'
+        run: |
+          out=workflow-results/contracts
+          mkdir -p "$out"
+          if [[ '${{ matrix.application.profile }}' == 'opentelemetry_demo' ]]; then
+            export OTEL_COLLECTOR_CONFIG_EXTRAS="$GITHUB_WORKSPACE/configs/live/otel-pilot-collector-extra.yml"
+            docker compose --env-file upstream/.env -f 'upstream/${{ matrix.application.compose_file }}' config --format json > "$out/rendered-compose.json"
+            telemetry_args=(--telemetry-output-directory "$GITHUB_WORKSPACE/$out")
+          else
+            docker compose -f 'upstream/${{ matrix.application.compose_file }}' config --format json > "$out/rendered-compose.json"
+            telemetry_args=()
+          fi
+          python -m telemetry_availability pin-live-compose --config configs/m7_runtime_pilot.yaml --profile '${{ matrix.application.profile }}' --input "$out/rendered-compose.json" --out "$out/base-pinned-compose.json" --audit "$out/base-image-lock-audit.json" "${telemetry_args[@]}"
+          python -m telemetry_availability prepare-placement-compose --config configs/m7b_placement_pilot.yaml --profile '${{ matrix.application.profile }}' --placement colocated --input "$out/base-pinned-compose.json" --base-audit "$out/base-image-lock-audit.json" --out "$out/pinned-compose.json" --audit "$out/image-lock-audit.json" --haproxy "$out/haproxy.cfg"
+      - name: Pull and start source-pinned benchmark
+        run: |
+          /usr/bin/time -v -o workflow-results/contracts/pull-resource-usage.txt docker compose -f workflow-results/contracts/pinned-compose.json pull
+          /usr/bin/time -v -o workflow-results/contracts/start-resource-usage.txt docker compose -f workflow-results/contracts/pinned-compose.json up -d --no-build --wait --wait-timeout 360
+      - name: Qualify three external contracts under normal state
+        run: /usr/bin/time -v -o workflow-results/contracts/qualification-resource-usage.txt python scripts/qualify_existing_application_contracts.py --profile '${{ matrix.application.profile }}' --out workflow-results/contracts
+      - name: Preserve actual runtime state and logs
+        if: ${{ always() }}
+        run: |
+          docker compose -f workflow-results/contracts/pinned-compose.json ps -a --format json > workflow-results/contracts/compose-ps.json || true
+          docker stats --no-stream --format '{{json .}}' > workflow-results/contracts/docker-stats.jsonl || true
+          docker compose -f workflow-results/contracts/pinned-compose.json logs --no-color > workflow-results/contracts/services.log 2>&1 || true
+          docker compose -f workflow-results/contracts/pinned-compose.json down || true
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: ten-contract-raw-${{ matrix.application.profile }}-${{ github.run_id }}
+          path: workflow-results/contracts
+          retention-days: 90
+          if-no-files-found: error
+      - name: Compact external contract and native census
+        if: ${{ always() }}
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          source=Path('workflow-results/contracts');out=Path('workflow-results/compact');out.mkdir()
+          for name in ['contract-summary.json','semantic-effect-audit.json','requests.csv','sentinel-requests.csv','image-lock-audit.json','compose-ps.json','docker-stats.jsonl','pull-resource-usage.txt','start-resource-usage.txt','qualification-resource-usage.txt']:
+              if (source/name).is_file(): shutil.copyfile(source/name,out/name)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: ten-contract-compact-${{ matrix.application.profile }}-${{ github.run_id }}
+          path: workflow-results/compact
+          retention-days: 90
+          if-no-files-found: error
