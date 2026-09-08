@@ -44,3 +44,8 @@ Run 34217215671 failed at the first M7 learner manifest: historical qualificatio
 ## Full health-prefix census and replay boundary (2026-09-08)
 
 [Run 34217614608](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34217614608) passed at 92f0cdb. [Census](milestones/HEALTH_PREFIX_CENSUS.md): 119/160 M7 calibration cases, 117/160 test-health cases, and 8/8 Petclinic calibration cases affected. Two preparation failures preserved; the second CRLF/LF lock mismatch motivated mandatory staged Git-byte verification. No fit/accuracy effect claimed. [Iteration 017](iterations/017-health-prefix-census-and-refit.md) updates all 30 criteria and freezes a complete isolated old/corrected refit with historical parity before rescore.
+
+
+## Historical prefix refit and nonidentified replay boundary (2026-09-08)
+
+Run 34218526868 completed 168 isolated old/corrected builds, but strict replay rejected 30 raw nonidentified B3/trace_only transfer points. [Evidence](milestones/HEALTH_PREFIX_REFIT.md), [all 30 v3 criteria](iterations/018-health-prefix-refit-boundary.md). No replay tolerance is relaxed. The next [dependency protocol](HEALTH_PREFIX_DEPENDENCY_AND_RESCORE_PROTOCOL.md) carries exact historical rows for all mathematically unaffected input scopes and requires the original parity criterion for every affected refit. Actual likelihood/mask and window controls passed; full rescore remains pending.
