@@ -1,7 +1,7 @@
 # Working claim ledger for the SIMPAT continuation
 
-Status: updated 8 September 2026 after completed M9P confirmation and the M9Q/M9R
-censuses. This is not an article verdict or a substitute for the missing
+Status: updated 8 September 2026 after completed M9P confirmation, M9Q/M9R
+censuses and qualified M9S/M9U solver/request controls. This is not an article verdict or a substitute for the missing
 independent PMX comparison. The original SIMPAT design remains a research plan;
 its proposed contributions are not automatically established results.
 
@@ -46,6 +46,15 @@ that the identification compiler automatically discovered that curve.
 | [M9T request census](milestones/M9T_PMX_REQUEST_CORRESPONDENCE.md) | All four historical learner samples retain their native request traces; compound OTel requests explain multiple HTTP roots and DeathStar failures may lack span-error flags. | Descriptive development census; external semantic outcomes and inferred operation boundaries must be explicitly charged in the next adapter. |
 
 ## Mathematical material and its scope
+
+M9U adds a qualified external-request contract: all 12 PMX extractions and all
+44 pinned-solver numerical oracles pass, with exact native provenance and explicit
+conditional-local abstention when a child error is swallowed. This supports the
+software mapping in [the report](milestones/M9U_PMX_REQUEST_CONFORMANCE.md).
+The endpoint-assisted synthetic wrapper is additional information; the controls
+do not establish native-only discovery of semantic request success. The independent
+historical forecasts are frozen separately in M9V and remain development before
+fresh confirmation.
 
 [B2 observable-target notes](B2_OBSERVABLE_TARGET_NOTES.md) separate an observable
 route functional from unique identification of all hidden factors, state the

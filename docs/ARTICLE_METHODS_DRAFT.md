@@ -257,6 +257,16 @@ comparison. Failed launch, extraction, serialization or solver boundaries are
 reported as those boundaries; they are not assigned zero availability or used
 to claim superior predictive accuracy.
 
+[M9U](milestones/M9U_PMX_REQUEST_CONFORMANCE.md) subsequently qualifies the
+external-request projection and both disclosed error parameterizations on six
+artificial cases: 12 extractor invocations and all 44 numerical solver records
+pass. The wrapper carries an additional observed endpoint outcome; native times
+and provenance remain intact. A conditional-local variant abstains when a parent
+swallows a child error. The repeated-call control deliberately differs from its
+empirical request success under correlated errors, separating valid independent
+composition from an adequate dependence model. M9V freezes the following
+historical development comparison before fresh confirmation.
+
 ## Reproducibility and cost
 
 Source acquisition, semantic qualification, method-specific inputs, extraction,
