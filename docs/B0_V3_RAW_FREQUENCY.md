@@ -1,0 +1,7 @@
+# B0-v3 raw calibration frequency
+
+The author's v3 defines B0 as S/N over every calibration external attempt, without smoothing. The new version B0-v3-raw-calibration-frequency-v1 implements that definition independently of historical smoothed M7 B0. Historical code, forecasts and tables remain unchanged.
+
+Consume only the ordinary requests.json and its seal.json. Read enforcement begins before loading either file. Match request bytes against the seal; other ordinary/native/probe files need not exist and are not read. All inputs must be calibration records with exactly the declared ordinary fields, unique external IDs, valid Boolean semantic success/timeout flags and one of the explicit operation names. Failed/timeout attempts stay in N. Probability0 is a valid forecast; an operation with N=0 yields unsupported/null with a reason, not0 or a prior. Preserve S,N,timeout count and exact S/N text with each forecast.
+
+This baseline estimates the empirical frequency of the declared whole business event. It neither identifies physical failure parameters nor claims a transport model. It applies no stable-window selection and uses no native spans, health, fault schedule or evaluator data. Method-level preparation/measurement costs must still be counted in main. The CLI accepts application data only in GitHub Actions. Three local artificial tests cover S/N and zero/empty distinctions, malformed or leaked inputs, and an enforced two-file read boundary plus seal tampering. This component has not yet been bound to the main workflow; main campaigns0.
