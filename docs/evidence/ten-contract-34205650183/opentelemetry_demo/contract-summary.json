@@ -1,0 +1,265 @@
+{
+  "attempts": 240,
+  "checks": {
+    "all_normal_contracts": true,
+    "all_sentinels": true,
+    "all_timely_successes": true,
+    "exact_240_attempts": true,
+    "successful_trace_fraction_at_least_95": true,
+    "unique_attempt_ids": true
+  },
+  "fits": 0,
+  "main_campaigns": 0,
+  "operation_diagnostics": [
+    {
+      "first_failure": null,
+      "operation": "browse_product",
+      "reasons": {
+        "": 80
+      }
+    },
+    {
+      "first_failure": null,
+      "operation": "add_to_cart",
+      "reasons": {
+        "": 80
+      }
+    },
+    {
+      "first_failure": null,
+      "operation": "checkout",
+      "reasons": {
+        "": 80
+      }
+    }
+  ],
+  "operation_rates": {
+    "add_to_cart": 1.0,
+    "browse_product": 1.0,
+    "checkout": 1.0
+  },
+  "parse": {
+    "invalid_traces": {},
+    "malformed_json_records": 0
+  },
+  "period": {
+    "completed_at": "2026-09-08T08:42:10.426081Z",
+    "controller": {
+      "active_network_causes_at_end": 0,
+      "active_pause_causes_at_end": 0,
+      "confirmed": 0,
+      "errors": [],
+      "events": 0,
+      "released": 0
+    },
+    "duration_seconds": 60,
+    "planned_events": 0,
+    "planned_operations": {
+      "add_to_cart": 80,
+      "browse_product": 80,
+      "checkout": 80
+    },
+    "planned_requests": 240,
+    "started_at": "2026-09-08T08:41:10.425410Z",
+    "workload_seed": 8780557824140329900
+  },
+  "profile": "opentelemetry_demo",
+  "qualified": true,
+  "run_id": "34205650183",
+  "scope": "new_contract_interface_only",
+  "sentinel_results": [
+    {
+      "branch_class": "complete_browse_product",
+      "completed_at": "2026-09-08T08:41:09.616134+00:00",
+      "deadline_seconds": 2.0,
+      "error": "",
+      "failure_law": "N",
+      "http_steps": [
+        {
+          "completed_offset_seconds": 0.030739377000003287,
+          "operation": "browse_product",
+          "path": "/api/products/OLJCESPC7Z",
+          "remaining_budget_seconds": 1.9999914070000102,
+          "request_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000000",
+          "response_base64": "eyJpZCI6Ik9MSkNFU1BDN1oiLCJuYW1lIjoiTmF0aW9uYWwgUGFyayBGb3VuZGF0aW9uIEV4cGxvcmFzY29wZSIsImRlc2NyaXB0aW9uIjoiVGhlIE5hdGlvbmFsIFBhcmsgRm91bmRhdGlvbidzIChOUEYpIEV4cGxvcmFzY29wZSA2MEFaIGlzIGEgbWFudWFsIGFsdC1hemltdXRoLCByZWZyYWN0b3IgdGVsZXNjb3BlIHBlcmZlY3QgZm9yIGNlbGVzdGlhbCB2aWV3aW5nIG9uIHRoZSBnby4gVGhlIE5QRiBFeHBsb3Jhc2NvcGUgNjAgY2FuIHZpZXcgdGhlIHBsYW5ldHMsIG1vb24sIHN0YXIgY2x1c3RlcnMgYW5kIGJyaWdodGVyIGRlZXAgc2t5IG9iamVjdHMgbGlrZSB0aGUgT3Jpb24gTmVidWxhIGFuZCBBbmRyb21lZGEgR2FsYXh5LiIsInBpY3R1cmUiOiJOYXRpb25hbFBhcmtGb3VuZGF0aW9uRXhwbG9yYXNjb3BlLmpwZyIsInByaWNlVXNkIjp7ImN1cnJlbmN5Q29kZSI6IlVTRCIsInVuaXRzIjoxMDEsIm5hbm9zIjo5NjAwMDAwMDB9LCJjYXRlZ29yaWVzIjpbInRlbGVzY29wZXMiXX0=",
+          "response_bytes": 506,
+          "response_sha256": "19dc2bcd5a65336959286a898cdecd48cdbcd555dcc418b23f48324c447b4983",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 8.592999989787131e-06,
+          "status_code": 200,
+          "trace_id": "a2f0d76afdb026b42a155d414d8f2838"
+        }
+      ],
+      "immediate_success": true,
+      "latency_ms": 30.741760000012164,
+      "operation": "browse_product",
+      "period": "sentinel",
+      "placement": "colocated",
+      "profile": "opentelemetry_demo",
+      "repetition": 0,
+      "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000000",
+      "request_user_id": "taid-9fa1233dc50db895ce246a9a1e4e46ac7d35f3406fbfb480ab2115f6f95b3467",
+      "response_bytes": 506,
+      "response_sha256": "19dc2bcd5a65336959286a898cdecd48cdbcd555dcc418b23f48324c447b4983",
+      "scheduled_offset_seconds": 0.0,
+      "semantic_reason": "",
+      "semantic_rule": "whole_operation_contract_v1",
+      "semantic_success": true,
+      "started_at": "2026-09-08T08:41:09.585391+00:00",
+      "status_code": 200,
+      "timed_out": false,
+      "trace_header": "traceparent",
+      "trace_id": "a2f0d76afdb026b42a155d414d8f2838",
+      "trace_presence_used_for_verdict": false,
+      "write_side_effect_audit": "not_claimed_for_this_application"
+    },
+    {
+      "branch_class": "complete_add_to_cart",
+      "completed_at": "2026-09-08T08:41:09.748920+00:00",
+      "deadline_seconds": 2.0,
+      "error": "",
+      "failure_law": "N",
+      "http_steps": [
+        {
+          "completed_offset_seconds": 0.008560241999987284,
+          "operation": "browse_product",
+          "path": "/api/products/OLJCESPC7Z",
+          "remaining_budget_seconds": 1.9999692830000129,
+          "request_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000001",
+          "response_base64": "eyJpZCI6Ik9MSkNFU1BDN1oiLCJuYW1lIjoiTmF0aW9uYWwgUGFyayBGb3VuZGF0aW9uIEV4cGxvcmFzY29wZSIsImRlc2NyaXB0aW9uIjoiVGhlIE5hdGlvbmFsIFBhcmsgRm91bmRhdGlvbidzIChOUEYpIEV4cGxvcmFzY29wZSA2MEFaIGlzIGEgbWFudWFsIGFsdC1hemltdXRoLCByZWZyYWN0b3IgdGVsZXNjb3BlIHBlcmZlY3QgZm9yIGNlbGVzdGlhbCB2aWV3aW5nIG9uIHRoZSBnby4gVGhlIE5QRiBFeHBsb3Jhc2NvcGUgNjAgY2FuIHZpZXcgdGhlIHBsYW5ldHMsIG1vb24sIHN0YXIgY2x1c3RlcnMgYW5kIGJyaWdodGVyIGRlZXAgc2t5IG9iamVjdHMgbGlrZSB0aGUgT3Jpb24gTmVidWxhIGFuZCBBbmRyb21lZGEgR2FsYXh5LiIsInBpY3R1cmUiOiJOYXRpb25hbFBhcmtGb3VuZGF0aW9uRXhwbG9yYXNjb3BlLmpwZyIsInByaWNlVXNkIjp7ImN1cnJlbmN5Q29kZSI6IlVTRCIsInVuaXRzIjoxMDEsIm5hbm9zIjo5NjAwMDAwMDB9LCJjYXRlZ29yaWVzIjpbInRlbGVzY29wZXMiXX0=",
+          "response_bytes": 506,
+          "response_sha256": "19dc2bcd5a65336959286a898cdecd48cdbcd555dcc418b23f48324c447b4983",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 3.071699998713484e-05,
+          "status_code": 200,
+          "trace_id": "4bc2e39b71c0ebf06400308e76e22a93"
+        },
+        {
+          "completed_offset_seconds": 0.13270856699998035,
+          "operation": "add_to_cart",
+          "path": "/api/cart",
+          "remaining_budget_seconds": 1.9914377850000164,
+          "request_body_sha256": "eb6d34d9069f177218fb6fdcd111b2c27bae5d08a3cf8fcb114b90ec021edd31",
+          "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000001",
+          "response_base64": "eyJ1c2VySWQiOiJ0YWlkLThjNjQ2OGJmYzA1NjU5ZjMwMzNhNjUzNGMxNzg4ZmM1MDBmYjg3OTI4OGExYTMzZTFiOWIwODFmODc4Y2Y0OWQiLCJpdGVtcyI6W3sicHJvZHVjdElkIjoiT0xKQ0VTUEM3WiIsInF1YW50aXR5IjoxfV19",
+          "response_bytes": 132,
+          "response_sha256": "98b06eff2a4709710a556318b1d95dfba9414e08dba22e9d333e75b9226440d4",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 0.008562214999983553,
+          "status_code": 200,
+          "trace_id": "4bc2e39b71c0ebf06400308e76e22a93"
+        }
+      ],
+      "immediate_success": true,
+      "latency_ms": 132.71114099998726,
+      "operation": "add_to_cart",
+      "period": "sentinel",
+      "placement": "colocated",
+      "profile": "opentelemetry_demo",
+      "repetition": 0,
+      "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000001",
+      "request_user_id": "taid-8c6468bfc05659f3033a6534c1788fc500fb879288a1a33e1b9b081f878cf49d",
+      "response_bytes": 132,
+      "response_sha256": "98b06eff2a4709710a556318b1d95dfba9414e08dba22e9d333e75b9226440d4",
+      "scheduled_offset_seconds": 0.0,
+      "semantic_reason": "",
+      "semantic_rule": "whole_operation_contract_v1",
+      "semantic_success": true,
+      "started_at": "2026-09-08T08:41:09.616209+00:00",
+      "status_code": 200,
+      "timed_out": false,
+      "trace_header": "traceparent",
+      "trace_id": "4bc2e39b71c0ebf06400308e76e22a93",
+      "trace_presence_used_for_verdict": false,
+      "write_side_effect_audit": "not_claimed_for_this_application"
+    },
+    {
+      "branch_class": "complete_checkout",
+      "completed_at": "2026-09-08T08:41:10.117917+00:00",
+      "deadline_seconds": 2.0,
+      "error": "",
+      "failure_law": "N",
+      "http_steps": [
+        {
+          "completed_offset_seconds": 0.013826777999980777,
+          "operation": "browse_product",
+          "path": "/api/products/OLJCESPC7Z",
+          "remaining_budget_seconds": 1.9999658480000164,
+          "request_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000002",
+          "response_base64": "eyJpZCI6Ik9MSkNFU1BDN1oiLCJuYW1lIjoiTmF0aW9uYWwgUGFyayBGb3VuZGF0aW9uIEV4cGxvcmFzY29wZSIsImRlc2NyaXB0aW9uIjoiVGhlIE5hdGlvbmFsIFBhcmsgRm91bmRhdGlvbidzIChOUEYpIEV4cGxvcmFzY29wZSA2MEFaIGlzIGEgbWFudWFsIGFsdC1hemltdXRoLCByZWZyYWN0b3IgdGVsZXNjb3BlIHBlcmZlY3QgZm9yIGNlbGVzdGlhbCB2aWV3aW5nIG9uIHRoZSBnby4gVGhlIE5QRiBFeHBsb3Jhc2NvcGUgNjAgY2FuIHZpZXcgdGhlIHBsYW5ldHMsIG1vb24sIHN0YXIgY2x1c3RlcnMgYW5kIGJyaWdodGVyIGRlZXAgc2t5IG9iamVjdHMgbGlrZSB0aGUgT3Jpb24gTmVidWxhIGFuZCBBbmRyb21lZGEgR2FsYXh5LiIsInBpY3R1cmUiOiJOYXRpb25hbFBhcmtGb3VuZGF0aW9uRXhwbG9yYXNjb3BlLmpwZyIsInByaWNlVXNkIjp7ImN1cnJlbmN5Q29kZSI6IlVTRCIsInVuaXRzIjoxMDEsIm5hbm9zIjo5NjAwMDAwMDB9LCJjYXRlZ29yaWVzIjpbInRlbGVzY29wZXMiXX0=",
+          "response_bytes": 506,
+          "response_sha256": "19dc2bcd5a65336959286a898cdecd48cdbcd555dcc418b23f48324c447b4983",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 3.415199998357821e-05,
+          "status_code": 200,
+          "trace_id": "560fa3fca7bdd1fa0a5c1205640c76f8"
+        },
+        {
+          "completed_offset_seconds": 0.025018013999982713,
+          "operation": "add_to_cart",
+          "path": "/api/cart",
+          "remaining_budget_seconds": 1.9861713589999965,
+          "request_body_sha256": "1cbc7f72b97cf5db3bc008bdecd9f4c3121c7557a77f3727efe59b9abd13ab80",
+          "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000002",
+          "response_base64": "eyJ1c2VySWQiOiJ0YWlkLWExODQzMjI4ODdkMTkwMTk1ZjI0MGEzNDJiOGVhMDMxOTVkMmIzNDViYTQ5Yzg5MGY1YTU4Yzg4NWU2ZTkwYmUiLCJpdGVtcyI6W3sicHJvZHVjdElkIjoiT0xKQ0VTUEM3WiIsInF1YW50aXR5IjoxfV19",
+          "response_bytes": 132,
+          "response_sha256": "18b9e4dc08d7a609bb92ea1f94ee9bcff4b3e0de942f8508b2b88641ab259b05",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 0.013828641000003472,
+          "status_code": 200,
+          "trace_id": "560fa3fca7bdd1fa0a5c1205640c76f8"
+        },
+        {
+          "completed_offset_seconds": 0.3689369749999969,
+          "operation": "checkout",
+          "path": "/api/checkout",
+          "remaining_budget_seconds": 1.9749798429999998,
+          "request_body_sha256": "7b7d69ffe32ee93b5ed4e4a8a28f0ed672f67b0d361d65587b02b17173f804c0",
+          "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000002",
+          "response_base64": "eyJvcmRlcklkIjoiMGE0NzlkNzMtYWI2MS0xMWYxLTg3NTEtOGUxODI5NGEwZTgzIiwic2hpcHBpbmdUcmFja2luZ0lkIjoiYThiYmMyZDMtYThiZS00MGEwLWIxNjktMTFlMTNjMTdiNzYyIiwic2hpcHBpbmdDb3N0Ijp7ImN1cnJlbmN5Q29kZSI6IlVTRCIsInVuaXRzIjo4LCJuYW5vcyI6OTkwMDAwMDAwfSwic2hpcHBpbmdBZGRyZXNzIjp7InN0cmVldEFkZHJlc3MiOiIxNjAwIEFtcGhpdGhlYXRyZSBQYXJrd2F5IiwiY2l0eSI6Ik1vdW50YWluIFZpZXciLCJzdGF0ZSI6IkNBIiwiY291bnRyeSI6IlVuaXRlZCBTdGF0ZXMiLCJ6aXBDb2RlIjoiOTQwNDMifSwiaXRlbXMiOlt7ImNvc3QiOnsiY3VycmVuY3lDb2RlIjoiVVNEIiwidW5pdHMiOjEwMSwibmFub3MiOjk1OTk5OTk5OX0sIml0ZW0iOnsicHJvZHVjdElkIjoiT0xKQ0VTUEM3WiIsInF1YW50aXR5IjoxLCJwcm9kdWN0Ijp7ImlkIjoiT0xKQ0VTUEM3WiIsIm5hbWUiOiJOYXRpb25hbCBQYXJrIEZvdW5kYXRpb24gRXhwbG9yYXNjb3BlIiwiZGVzY3JpcHRpb24iOiJUaGUgTmF0aW9uYWwgUGFyayBGb3VuZGF0aW9uJ3MgKE5QRikgRXhwbG9yYXNjb3BlIDYwQVogaXMgYSBtYW51YWwgYWx0LWF6aW11dGgsIHJlZnJhY3RvciB0ZWxlc2NvcGUgcGVyZmVjdCBmb3IgY2VsZXN0aWFsIHZpZXdpbmcgb24gdGhlIGdvLiBUaGUgTlBGIEV4cGxvcmFzY29wZSA2MCBjYW4gdmlldyB0aGUgcGxhbmV0cywgbW9vbiwgc3RhciBjbHVzdGVycyBhbmQgYnJpZ2h0ZXIgZGVlcCBza3kgb2JqZWN0cyBsaWtlIHRoZSBPcmlvbiBOZWJ1bGEgYW5kIEFuZHJvbWVkYSBHYWxheHkuIiwicGljdHVyZSI6Ik5hdGlvbmFsUGFya0ZvdW5kYXRpb25FeHBsb3Jhc2NvcGUuanBnIiwicHJpY2VVc2QiOnsiY3VycmVuY3lDb2RlIjoiVVNEIiwidW5pdHMiOjEwMSwibmFub3MiOjk2MDAwMDAwMH0sImNhdGVnb3JpZXMiOlsidGVsZXNjb3BlcyJdfX19XX0=",
+          "response_bytes": 956,
+          "response_sha256": "959ecf0b00d57108d0b95c1cfc52e1b18db52b1c03f262f24a8a62d8135c9318",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 0.025020157000000154,
+          "status_code": 200,
+          "trace_id": "560fa3fca7bdd1fa0a5c1205640c76f8"
+        }
+      ],
+      "immediate_success": true,
+      "latency_ms": 368.93879799998786,
+      "operation": "checkout",
+      "period": "sentinel",
+      "placement": "colocated",
+      "profile": "opentelemetry_demo",
+      "repetition": 0,
+      "request_id": "ten-contract-qualification-34205650183-opentelemetry_demo-colocated-N-r0-sentinel-000002",
+      "request_user_id": "taid-a184322887d190195f240a342b8ea03195d2b345ba49c890f5a58c885e6e90be",
+      "response_bytes": 956,
+      "response_sha256": "959ecf0b00d57108d0b95c1cfc52e1b18db52b1c03f262f24a8a62d8135c9318",
+      "scheduled_offset_seconds": 0.0,
+      "semantic_reason": "",
+      "semantic_rule": "whole_operation_contract_v1",
+      "semantic_success": true,
+      "started_at": "2026-09-08T08:41:09.748978+00:00",
+      "status_code": 200,
+      "timed_out": false,
+      "trace_header": "traceparent",
+      "trace_id": "560fa3fca7bdd1fa0a5c1205640c76f8",
+      "trace_presence_used_for_verdict": false,
+      "write_side_effect_audit": "not_claimed_for_this_application"
+    }
+  ],
+  "source_commit": "8c47d47c9ac27710d2b2a153bcd53e483bffe66d",
+  "study_head": "a5b71467b69dff6ee1d3d6bacc7bace5497654c1",
+  "successes": 240,
+  "telemetry_error": ""
+}

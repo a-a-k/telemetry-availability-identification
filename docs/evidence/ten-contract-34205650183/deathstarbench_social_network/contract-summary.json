@@ -1,0 +1,217 @@
+{
+  "attempts": 240,
+  "checks": {
+    "all_normal_contracts": true,
+    "all_sentinels": true,
+    "all_timely_successes": true,
+    "exact_240_attempts": true,
+    "successful_trace_fraction_at_least_95": true,
+    "unique_attempt_ids": true
+  },
+  "fits": 0,
+  "main_campaigns": 0,
+  "operation_diagnostics": [
+    {
+      "first_failure": null,
+      "operation": "compose_post",
+      "reasons": {
+        "": 80
+      }
+    },
+    {
+      "first_failure": null,
+      "operation": "read_home_timeline",
+      "reasons": {
+        "": 80
+      }
+    },
+    {
+      "first_failure": null,
+      "operation": "read_user_timeline",
+      "reasons": {
+        "": 80
+      }
+    }
+  ],
+  "operation_rates": {
+    "compose_post": 1.0,
+    "read_home_timeline": 1.0,
+    "read_user_timeline": 1.0
+  },
+  "parse": {
+    "invalid_traces": {},
+    "malformed_json_records": 0
+  },
+  "period": {
+    "completed_at": "2026-09-08T08:41:30.078189Z",
+    "controller": {
+      "active_network_causes_at_end": 0,
+      "active_pause_causes_at_end": 0,
+      "confirmed": 0,
+      "errors": [],
+      "events": 0,
+      "released": 0
+    },
+    "duration_seconds": 60,
+    "planned_events": 0,
+    "planned_operations": {
+      "compose_post": 80,
+      "read_home_timeline": 80,
+      "read_user_timeline": 80
+    },
+    "planned_requests": 240,
+    "started_at": "2026-09-08T08:40:30.077391Z",
+    "workload_seed": 4038962749931409663
+  },
+  "profile": "deathstarbench_social_network",
+  "qualified": true,
+  "run_id": "34205650183",
+  "scope": "new_contract_interface_only",
+  "sentinel_results": [
+    {
+      "branch_class": "text_only",
+      "completed_at": "2026-09-08T08:40:29.753553+00:00",
+      "deadline_seconds": 2.0,
+      "error": "",
+      "failure_law": "N",
+      "http_steps": [
+        {
+          "completed_offset_seconds": 0.00965111200000024,
+          "operation": "compose_post",
+          "path": "/wrk2-api/post/compose",
+          "remaining_budget_seconds": 1.999936722000001,
+          "request_body_sha256": "10d7bcdfcf1f6e1843b89542bedf62ad6a13251e11ba17181886c5bb73cec8e3",
+          "request_id": "ten-contract-qualification-34205650183-deathstarbench_social_network-colocated-N-r0-sentinel-000000",
+          "response_base64": "U3VjY2Vzc2Z1bGx5IHVwbG9hZCBwb3N0Cg==",
+          "response_bytes": 25,
+          "response_sha256": "08e60fbff5ab682e67e5cbbf4ad40bb1c876e7eddc85047f4e35f52d8a95d07f",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 6.327799999894523e-05,
+          "status_code": 200,
+          "trace_id": "eede12ac691184c1"
+        }
+      ],
+      "immediate_success": true,
+      "latency_ms": 9.654087000001255,
+      "operation": "compose_post",
+      "period": "sentinel",
+      "placement": "colocated",
+      "profile": "deathstarbench_social_network",
+      "repetition": 0,
+      "request_id": "ten-contract-qualification-34205650183-deathstarbench_social_network-colocated-N-r0-sentinel-000000",
+      "request_user_id": null,
+      "response_bytes": 25,
+      "response_sha256": "08e60fbff5ab682e67e5cbbf4ad40bb1c876e7eddc85047f4e35f52d8a95d07f",
+      "scheduled_offset_seconds": 0.0,
+      "semantic_reason": "",
+      "semantic_rule": "whole_operation_contract_v1",
+      "semantic_success": true,
+      "started_at": "2026-09-08T08:40:29.743898+00:00",
+      "status_code": 200,
+      "timed_out": false,
+      "trace_header": "uber-trace-id",
+      "trace_id": "eede12ac691184c1",
+      "trace_presence_used_for_verdict": false,
+      "write_side_effect_audit": "not_claimed_for_this_application"
+    },
+    {
+      "branch_class": "complete_read_home_timeline",
+      "completed_at": "2026-09-08T08:40:29.759269+00:00",
+      "deadline_seconds": 2.0,
+      "error": "",
+      "failure_law": "N",
+      "http_steps": [
+        {
+          "completed_offset_seconds": 0.005641137999987222,
+          "operation": "read_home_timeline",
+          "path": "/wrk2-api/home-timeline/read?user_id=1&start=0&stop=10",
+          "remaining_budget_seconds": 1.9999956919999988,
+          "request_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "request_id": "ten-contract-qualification-34205650183-deathstarbench_social_network-colocated-N-r0-sentinel-000001",
+          "response_base64": "W3sidGltZXN0YW1wIjoiMTc4ODg1NjgyOTc0NSIsInVzZXJfbWVudGlvbnMiOnt9LCJwb3N0X2lkIjoiMTQ3Mzc5OTc1OTEwMzk5MTgwOCIsInRleHQiOiJ0YWlkIHBpbG90IHBvc3QgOTAwMDAwMCIsInJlcV9pZCI6Ijg4MjQ5MzI5NDM2NzQ3MzkyIiwibWVkaWEiOnt9LCJ1cmxzIjp7fSwicG9zdF90eXBlIjowLCJjcmVhdG9yIjp7InVzZXJfaWQiOiIwIiwidXNlcm5hbWUiOiJ1c2VybmFtZV8wIn19XQo=",
+          "response_bytes": 230,
+          "response_sha256": "616f45c2ec86955f9a8c73ae8140daa152c562590d36249e2bf7df5d20a0d4bc",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 4.30800000117415e-06,
+          "status_code": 200,
+          "trace_id": "e7abf911c302c2e4"
+        }
+      ],
+      "immediate_success": true,
+      "latency_ms": 5.643000999981496,
+      "operation": "read_home_timeline",
+      "period": "sentinel",
+      "placement": "colocated",
+      "profile": "deathstarbench_social_network",
+      "repetition": 0,
+      "request_id": "ten-contract-qualification-34205650183-deathstarbench_social_network-colocated-N-r0-sentinel-000001",
+      "request_user_id": null,
+      "response_bytes": 230,
+      "response_sha256": "616f45c2ec86955f9a8c73ae8140daa152c562590d36249e2bf7df5d20a0d4bc",
+      "scheduled_offset_seconds": 0.0,
+      "semantic_reason": "",
+      "semantic_rule": "whole_operation_contract_v1",
+      "semantic_success": true,
+      "started_at": "2026-09-08T08:40:29.753626+00:00",
+      "status_code": 200,
+      "timed_out": false,
+      "trace_header": "uber-trace-id",
+      "trace_id": "e7abf911c302c2e4",
+      "trace_presence_used_for_verdict": false,
+      "write_side_effect_audit": "not_claimed_for_this_application"
+    },
+    {
+      "branch_class": "complete_read_user_timeline",
+      "completed_at": "2026-09-08T08:40:29.763644+00:00",
+      "deadline_seconds": 2.0,
+      "error": "",
+      "failure_law": "N",
+      "http_steps": [
+        {
+          "completed_offset_seconds": 0.004330360000011524,
+          "operation": "read_user_timeline",
+          "path": "/wrk2-api/user-timeline/read?user_id=0&start=0&stop=10",
+          "remaining_budget_seconds": 1.9999964630000022,
+          "request_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "request_id": "ten-contract-qualification-34205650183-deathstarbench_social_network-colocated-N-r0-sentinel-000002",
+          "response_base64": "W3sidGltZXN0YW1wIjoiMTc4ODg1NjgyOTc0NSIsInVzZXJfbWVudGlvbnMiOnt9LCJwb3N0X2lkIjoiMTQ3Mzc5OTc1OTEwMzk5MTgwOCIsInRleHQiOiJ0YWlkIHBpbG90IHBvc3QgOTAwMDAwMCIsInJlcV9pZCI6Ijg4MjQ5MzI5NDM2NzQ3MzkyIiwibWVkaWEiOnt9LCJ1cmxzIjp7fSwicG9zdF90eXBlIjowLCJjcmVhdG9yIjp7InVzZXJfaWQiOiIwIiwidXNlcm5hbWUiOiJ1c2VybmFtZV8wIn19XQo=",
+          "response_bytes": 230,
+          "response_sha256": "616f45c2ec86955f9a8c73ae8140daa152c562590d36249e2bf7df5d20a0d4bc",
+          "semantic_reason": "",
+          "semantic_success": true,
+          "started_offset_seconds": 3.536999997777457e-06,
+          "status_code": 200,
+          "trace_id": "531abd050c721db5"
+        }
+      ],
+      "immediate_success": true,
+      "latency_ms": 4.331841999999142,
+      "operation": "read_user_timeline",
+      "period": "sentinel",
+      "placement": "colocated",
+      "profile": "deathstarbench_social_network",
+      "repetition": 0,
+      "request_id": "ten-contract-qualification-34205650183-deathstarbench_social_network-colocated-N-r0-sentinel-000002",
+      "request_user_id": null,
+      "response_bytes": 230,
+      "response_sha256": "616f45c2ec86955f9a8c73ae8140daa152c562590d36249e2bf7df5d20a0d4bc",
+      "scheduled_offset_seconds": 0.0,
+      "semantic_reason": "",
+      "semantic_rule": "whole_operation_contract_v1",
+      "semantic_success": true,
+      "started_at": "2026-09-08T08:40:29.759312+00:00",
+      "status_code": 200,
+      "timed_out": false,
+      "trace_header": "uber-trace-id",
+      "trace_id": "531abd050c721db5",
+      "trace_presence_used_for_verdict": false,
+      "write_side_effect_audit": "not_claimed_for_this_application"
+    }
+  ],
+  "source_commit": "6ecb09706140f8730b5385c08f1386c654c3c526",
+  "study_head": "a5b71467b69dff6ee1d3d6bacc7bace5497654c1",
+  "successes": 240,
+  "telemetry_error": ""
+}
