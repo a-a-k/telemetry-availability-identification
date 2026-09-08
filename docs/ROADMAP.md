@@ -305,3 +305,12 @@ All sixteen attempts, the initial pre-solver path failure and measured costs
 are reported; no additional PMX invocation or live evidence was used. A valid
 solver-compatible representation remains a prerequisite for the independent
 availability comparison. The current control does not enter a rewrite loop.
+
+On 8 September the user explicitly requested completing the independent PMX
+comparison. M9S is the next source-grounded repair stage: the exact solver-core
+5.2.2 parser requires a PMF while the retained PMX loops contain integer literals.
+The new protocol tests an equivalent point-mass representation against retained
+negative controls and independent software-composition oracles. M9R remains a
+completed historical census. A successful M9S is followed by request-level
+mapping and independent parameterization, development comparison, and a frozen
+fresh confirmation; the bridge alone does not close the scientific comparison.
