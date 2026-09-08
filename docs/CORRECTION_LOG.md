@@ -34,3 +34,8 @@
 Run 34215477704 at e257c8e passed two create_visit graph builds, isolated saved-model replays and qualification. [Result](milestones/PETCLINIC_GRAPH_OBSERVATION_TECHNICAL.md), [30-point iteration](iterations/016-petclinic-graph-observation-result.md). Technical probabilities 771/901 and 820/901 are conditional on the declared ideal graph approximation; no main accuracy claim.
 
 The star-prefix correction is now a separate version in `health_prefix_audit.py`, with three bounded controls and a [frozen census protocol](HEALTH_PREFIX_AUDIT_PROTOCOL.md). The correction removes only the documented prefix before calling the untouched historical decoder. Nine source artifact locks cover 160 M7 calibration/test and eight Petclinic calibration cases. The remote census will report all 328 files; no new fit/outcome/PMX access. Changed observations, affected fits/metrics and auxiliary-series dependency scope are not yet quantified. This does not assign the parser defect as a scientific cause.
+
+
+### Prefix census adapter qualification schema correction
+
+Run 34217215671 failed at the first M7 learner manifest: historical qualification is in audit/boundary.json, not manifest.usable. No completed census was produced. [v2 correction](HEALTH_PREFIX_AUDIT_V2_CORRECTION.md) preserves v1 bytes and requires the actual positive qualification flags. The same full retained census is repeated; decoder/source data unchanged.
