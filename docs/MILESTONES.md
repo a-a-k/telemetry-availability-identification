@@ -48,6 +48,9 @@ tests, configuration validation, and bounded smoke cases.
 | M9S | Qualify an equivalent integer-loop PMF bridge before completing the independent PMX comparison | Complete; bridge qualified | [Report](milestones/M9S_PMX_PMF_BRIDGE.md); run 34187887857 retains all 24 records: 16 positive oracles pass and eight negative records reproduce the prior boundaries; source/configuration frozen at fcafcd9375966817a675c76cec2e5b7c97c7d781 |
 | M9T | Inspect external-request correspondence and error propagation on all four retained learner samples | Complete as development census | [Report](milestones/M9T_PMX_REQUEST_CORRESPONDENCE.md); run 34188479893 retains 15,360 learner requests with no missing/invalid native trace; OTel compound operations explain multiple HTTP roots and DeathStar timeouts need not have span-error flags; no PMX call or evaluator access |
 
+| M9U | Qualify the external-request PMX adapter and independent error parameterizations | Complete | [Report](milestones/M9U_PMX_REQUEST_CONFORMANCE.md); run 34190274003 passes all 12 extractor contracts and 44 numerical solver oracles, with unsupported swallowed-child conditioning retained; four artifact ZIPs and 110 model files audited |
+| M9V | Independently extract and score all historical application operation cells | Frozen for execution | [Protocol](M9V_PMX_APPLICATION_COMPARISON_PROTOCOL.md); four NCD/r0 samples, all 12 operation cells, native-inclusive and conditional-local PMX, frozen proposed/B2 and endpoint controls; development before fresh confirmation |
+
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference
 must lead to a narrower claim or redesign, not to a weaker comparator.

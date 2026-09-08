@@ -323,3 +323,12 @@ adapter and independent PMX parameterization, including the compound HTTP
 operation boundary and semantic failures without error-marked spans. The
 [comparison execution plan](PMX_INDEPENDENT_COMPARISON_EXECUTION.md) tracks the
 remaining development and fresh confirmation steps.
+
+M9U completed in run 34190274003: all 12 external-request extractor contracts
+and all 44 solver probability oracles pass. The original provenance and unsupported
+conditional-propagation case remain explicit. M9V now freezes the independent
+historical application forecasts and paired evaluation; it uses all 12 user
+operation cells, whole traffic as the primary view, and both native-inclusive
+and guarded conditional-local parameterizations. Fresh confirmation follows
+development, with neither successful controls nor historical scoring substituted
+for prospective predictive validation.

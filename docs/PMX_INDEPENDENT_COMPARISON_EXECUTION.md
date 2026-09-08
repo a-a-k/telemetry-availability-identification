@@ -14,6 +14,10 @@ a control-model success for application predictive validation.
 - M9T provides the complete learner-only request/operation census for the four
   historical M7 native samples. Compound OTel user operations span multiple
   HTTP roots; DeathStar semantic timeouts need not have a native span error.
+- M9U qualifies the external-request adapter, six artificial cases extracted
+  twice, and all 44 numerical solver records in run 34190274003. The unsupported
+  conditional-local swallowed-child case is retained. M9V is the following
+  historical application development comparison, not the final confirmation.
 
 ## Next implementation and validation
 
