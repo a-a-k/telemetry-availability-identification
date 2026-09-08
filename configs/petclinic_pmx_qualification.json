@@ -1,0 +1,53 @@
+{
+  "stage": "petclinic_independent_pmx_technical_v1",
+  "main_campaigns": 0,
+  "adapter_version": "observed-database-client-endpoint-v1+observed-full-caller-context-v1",
+  "sample_keys": [
+    "colocated-N",
+    "colocated-NC",
+    "colocated-ND",
+    "colocated-NCD",
+    "split-N",
+    "split-NC",
+    "split-ND",
+    "split-NCD",
+    "controls"
+  ],
+  "expected_controls": {
+    "database_propagated": {
+      "inclusive": 0.576,
+      "conditional_local": 0.8
+    },
+    "shared_database_two_callers": {
+      "inclusive": 0.59049,
+      "conditional_local": 0.81
+    }
+  },
+  "expected_application_cases": 32,
+  "expected_forecast_slots": 64,
+  "solver_passes": 2,
+  "repository_locks": {
+    "src/telemetry_availability/pmx_database_client_adapter.py": "4766997c16ab3b6342a58ba40237a54c1128eb9b50ce268861263f05a746c34b",
+    "src/telemetry_availability/pmx_database_client_controls.py": "def9318c9ccfd458a2f81b5610d42178cf7bc661c1bf94112b6a9031c4c5f8f8",
+    "src/telemetry_availability/petclinic_pmx_qualification.py": "de6d15082c6c896c717bf2d6116b1f18a107450f428793d28b07caca9d2b5a51",
+    "src/telemetry_availability/pmx_request_adapter.py": "820284fb67113fc1f9bf11d3c39204c99140cab28666bd77cf5cc36079616b63",
+    "src/telemetry_availability/pmx_request_context.py": "ed174e15de4495c9be73e278bcf178a9700ae3562ae5eafa85fba8fc0a760efe",
+    "src/telemetry_availability/pmx_mixed_loop_bridge.py": "421b381032b2b8da8ab6e1d2bf8de71a4bc9a3b4cf2db75dcc4322ec73ecd530",
+    "src/telemetry_availability/pmx_retained_request_audit.py": "5e468156d7c4ad16fb2426be328611c9a3c07559a2ab9018f90f06e028821031",
+    "src/telemetry_availability/pmx_adapter_conformance.py": "93c8528b2858161f908e31982cf781eb7d71159410565da7fd28f32583518860",
+    "src/telemetry_availability/pmx_application_comparison.py": "22602e7f51c2fe6fa4d62a0806546a84330907eff61dde1996ae530451399e8b",
+    "src/telemetry_availability/pmx_context_comparison.py": "986ef549513b794936a08319d43a8ea6db83be48209103b3c6e7718e17f62924",
+    "src/telemetry_availability/pmx_observed_operations.py": "251d8769118f188d12288dfe933bd499aaf643fa36388cd59543a86161ab36e0",
+    "src/telemetry_availability/pmx_request_pcm.py": "2e93269c0328cbad0156d7e5c923fff1807ae2e9a9d24d0618ed910ef85b2a69",
+    "src/telemetry_availability/pmx_pmf_bridge.py": "1a6b8928b8d7c485d6c8c0b2ebc209a1018f5800fe9c706202e63e2d75ca85fb",
+    "src/telemetry_availability/isolated_stochastic_fit.py": "b2866963d73a61e70101310ac97cf44eb20527038ebc59664fdd358380de168d",
+    "scripts/prepare_petclinic_pmx_source.py": "7f8633785d2f15a63559fc1bacbc89cda29ada0e2acd1756c8289c08ab34965b",
+    "scripts/restore_petclinic_technical_learner.py": "40b5603be670c49752c2b17c550b8fe160482a71f1b2396315ae1f32227d7c12",
+    ".github/workflows/petclinic-pmx-qualification.yml": "8645b99e315d0ada8e4a083c814f738d3bd034c4719c6088cb317276f29fe524",
+    "docs/PETCLINIC_INDEPENDENT_PMX_QUALIFICATION_PROTOCOL.md": "2d458a609fc9d19323e17f53b45165998b1ee1ace75152ce5bb8b7624f5eb8a5",
+    "palladio/harness/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java": "46e0e5a36e3371193096729b533c5324caec66f2363b95b41f04af5c94209ffe",
+    "palladio/harness/META-INF/MANIFEST.MF": "10d2b84d8f5c82b995204cb2536566990f29dbe187be288350cb4d8f7e3b3b72",
+    "configs/m9a_palladio_bootstrap.json": "a7fd6e784612b4ba2df06f4ef2de4a4755a23a873540857f181831718825bc1d",
+    "configs/m9b_palladio_semantic_controls.json": "37fb11b921c547d3e5c0bbb8211a7bd7c65911ac828e25c7d96a0430628e7cef"
+  }
+}
