@@ -49,3 +49,8 @@ Run 34217215671 failed at the first M7 learner manifest: historical qualificatio
 ## Historical prefix refit and nonidentified replay boundary (2026-09-08)
 
 Run 34218526868 completed 168 isolated old/corrected builds, but strict replay rejected 30 raw nonidentified B3/trace_only transfer points. [Evidence](milestones/HEALTH_PREFIX_REFIT.md), [all 30 v3 criteria](iterations/018-health-prefix-refit-boundary.md). No replay tolerance is relaxed. The next [dependency protocol](HEALTH_PREFIX_DEPENDENCY_AND_RESCORE_PROTOCOL.md) carries exact historical rows for all mathematically unaffected input scopes and requires the original parity criterion for every affected refit. Actual likelihood/mask and window controls passed; full rescore remains pending.
+
+
+## Full historical correction and M9X update completed (2026-09-08)
+
+Run 34220234444 at 38f5e01 passed dependency qualification and four-corner M7 rescore; historical score reproduction error0. Original strict replay failure retained. [Complete correction](milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md), [iteration 019](iterations/019-complete-health-prefix-correction.md). OTel checkout full/current MAE24.462231878→24.486352506pp, coverage55/80 unchanged. M9X all108 candidates/threeviews updated; PMX24 objects unchanged; no added campaigns or PMX calls. Auxiliary decoder-v0 consumers statically inventoried and excluded from silent corrected-evidence reuse. Main G* admission remains open.

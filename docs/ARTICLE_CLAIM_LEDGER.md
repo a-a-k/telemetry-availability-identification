@@ -9,6 +9,15 @@ The [v3 graph-chain record](iterations/011-v3-graph-chain-and-evidence.md) separ
 reusable evidence from incomplete F/I/E claims. Earlier claims below retain only
 their explicitly documented historical scope; proposed contributions are not results.
 
+Current correction: [complete historical HAProxy decoder rescore](milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md)
+preserves the old version and updates all 160 M7 campaigns, eight Petclinic technical
+fits and the opened M9X comparison. M7 still has no established superiority; the
+large OTel checkout error remains. Auxiliary temporal/routing diagnostics below
+retain decoder-v0 scope and must not be cited as corrected v3 evidence without
+separate reanalysis. The [Petclinic graph replay](milestones/PETCLINIC_GRAPH_OBSERVATION_TECHNICAL.md)
+confirms a saved graph actually enters calculation for one operation; business
+adequacy and the final G* class remain unestablished.
+
 ## Separate questions before stating a contribution
 
 1. Does the observation law determine the requested quantity, even if it does
