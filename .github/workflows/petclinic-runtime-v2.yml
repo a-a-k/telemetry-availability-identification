@@ -1,0 +1,53 @@
+name: Petclinic v2 DTO and tracing qualification on retained image
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Install pinned study environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Verify source artifact, every build file and exact retained Docker image
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/restore_petclinic_image.py
+      - name: Repeat all affected semantic and native controls with corrected public DTO contract
+        run: python -m telemetry_availability.petclinic_runtime_v2 probe --bundle workflow-input/petclinic-build --out workflow-results/petclinic-v2-probe
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-v2-probe-${{ github.run_id }}
+          path: workflow-results/petclinic-v2-probe
+          retention-days: 90
+          if-no-files-found: error
+      - name: Retain compact failure and qualification evidence
+        if: ${{ always() }}
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          target=Path('workflow-results/petclinic-v2-compact')
+          target.mkdir(parents=True,exist_ok=True)
+          for name in ['bootstrap-summary.json','trace-census.json','controls.json','logs','requests.json','warmup.json','compose.json','final-containers.json']:
+              source=Path('workflow-results/petclinic-v2-probe')/name
+              if not source.exists(): continue
+              if source.is_dir(): shutil.copytree(source,target/name,dirs_exist_ok=True)
+              else: shutil.copyfile(source,target/name)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: petclinic-v2-compact-${{ github.run_id }}
+          path: workflow-results/petclinic-v2-compact
+          retention-days: 90
+          if-no-files-found: error
