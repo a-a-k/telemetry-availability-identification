@@ -11,36 +11,49 @@ input model from heterogeneous telemetry.
 
 ## Current evidence and article material
 
-The [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) distinguishes supported
-statements from open comparisons; the [milestone index](docs/MILESTONES.md)
-links the complete experimental history. The [methods draft](docs/ARTICLE_METHODS_DRAFT.md)
-connects the restricted identification results, implemented reduction,
-uncertainty assumptions and semantic validation. Close prior work is attributed
-in the [source comparison](docs/RELATED_WORK_SCOPE.md).
+The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
+current study. [Iteration 031](docs/iterations/031-h-exec-sealed-study-confirmation.md)
+records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
+[milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
+publication obligations. The new 240-campaign comparison has **not started**.
 
-[M9N](docs/milestones/M9N_CHECKOUT_TEMPORAL_FAILOVER.md) localized a temporal
-checkout mechanism on retained data. Its [completed independent M9P confirmation](docs/milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md)
-retains all 120 fresh campaigns and passes all five gates: conditional temporal
-information replicates, temporal and state-only mean forecasts are practically
-equivalent at the registered Brier tolerance, and temporal mean signed error
-is −0.014865 within the registered ±0.03 adequacy region. The matched endpoint
-control remains visible; no predictive superiority over it is established.
-The [completed PMX application census](docs/milestones/M9Q_PMX_APPLICATION_CENSUS.md)
-and [bounded composition control](docs/milestones/M9R_PMX_INCLUSIVE_ERROR_COMPOSITION.md)
-retain extraction/mapping and solver limits; they establish no independent
-PMX request-availability forecast or predictive superiority over it.
+The [original AINA audit](docs/milestones/ORIGINAL_AINA_FULL_AUDIT.md) reconciles
+250 archives and 2.5 million probes and verifies exact async-predicate invariance
+throughout the original allowed state class. Its published literal 0.001-point
+forecast-difference bound is not reproduced. The separate
+[timing audit](docs/milestones/ORIGINAL_AINA_TIMING_FEASIBILITY.md) documents
+measurement-alignment limits without assigning unobserved fault overlap.
+The [ICSE aggregate audit](docs/milestones/ORIGINAL_ICSE_AGGREGATE_AUDIT.md)
+reproduces 250 rows and all 40 printed table cells; original raw denominators
+and the 250-job execution identity remain unverified.
 
-The subsequent [M9S bridge](docs/milestones/M9S_PMX_PMF_BRIDGE.md) resolves the
-demonstrated solver incompatibility on all positive controls. The
-[M9T request census](docs/milestones/M9T_PMX_REQUEST_CORRESPONDENCE.md) identifies
-the compound-operation and unmarked-timeout boundaries for the
-[active independent PMX comparison](docs/PMX_INDEPENDENT_COMPARISON_EXECUTION.md).
+[H-EXEC](docs/milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md) confirms the
+registered routing/execution mechanism in eight blocks and all 32 study cells.
+A separately frozen replay on final immutable archives resolves the one failed
+native-parser gate while preserving every request outcome and statistic.
+The original failure remains in the record. This is scoped mechanism evidence,
+not an explanation of the historical AINA errors or qualification of final G*.
 
-The separate [exact polynomial-target reference](docs/CONJUNCTIVE_OBSERVATION_TARGET_THEOREMS.md)
-and [two-path bounds](docs/B2_SHARP_OBSERVABLE_BOUNDS.md) state their population
-assumptions explicitly. They do not retrospectively replace frozen experiment
-outputs. Full experiments run in GitHub Actions; local checks are limited to
-source inspection, bounded artificial smokes and generated aggregate reports.
+The [independent PMX development comparison](docs/milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md)
+is completed on four retained historical campaigns. Use the
+[full health-prefix correction](docs/milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md)
+for current historical arithmetic and retain explicit own/common coverage.
+[B0-v3](docs/milestones/B0_V3_TEN_OPERATION_QUALIFICATION.md) now has qualified raw
+S/N bindings for all ten operations. The new prospective G* comparison with G0
+and PMX, transfer and comparable full costs remain required. Final G*, its
+formal/identification scope and justified refinements are not yet frozen.
+
+The implementations and M0–M9 history below retain their original scopes.
+In particular, M9N–M9P temporal regression is historical diagnostic evidence and
+is outside the primary no-ML method. Those auxiliary outputs also require their
+own health-prefix reanalysis before reuse as corrected evidence. The
+[methods draft](docs/ARTICLE_METHODS_DRAFT.md),
+[source comparison](docs/RELATED_WORK_SCOPE.md),
+[polynomial-target reference](docs/CONJUNCTIVE_OBSERVATION_TARGET_THEOREMS.md) and
+[two-path bounds](docs/B2_SHARP_OBSERVABLE_BOUNDS.md) remain scoped references,
+not a declaration that all v3 admission requirements are met.
+Full experiments and native/application-model processing run in GitHub Actions;
+local work is limited to source, bounded controls and compact evidence.
 
 ## Implemented model and experiments
 

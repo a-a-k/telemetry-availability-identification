@@ -8,6 +8,26 @@ commit, workflow run, outputs, limitations, and interpretation.
 Heavy experiments are never run locally. Local execution is restricted to unit
 tests, configuration validation, and bounded smoke cases.
 
+## Current v3 evidence
+
+The [author correction v3](SIMPAT_CORRECTION_V3.md) and
+[complete iteration 031 checklist](iterations/031-h-exec-sealed-study-confirmation.md)
+are the current authority and status. New main campaigns: **0/240**. Historical
+milestone completion below is scoped to each original protocol.
+
+| Current result | Status and scope |
+| --- | --- |
+| [Historical health correction](milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md) | Full 160 M7 / 8 Petclinic correction and M9X rescore; original failures retained. |
+| [Independent PMX](milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md) | Technical/historical development comparison complete; prospective G* main pending. |
+| [AINA full audit](milestones/ORIGINAL_AINA_FULL_AUDIT.md) | 250 archives, 2.5 million probes and exact allowed-state async invariance audited. |
+| [AINA timing audit](milestones/ORIGINAL_AINA_TIMING_FEASIBILITY.md) | Full conditional timing-bound census; exact fault overlap remains unknown. |
+| [ICSE aggregate audit](milestones/ORIGINAL_ICSE_AGGREGATE_AUDIT.md) | 250 rows / 750 scalar files / 40 printed cells reproduced; raw execution provenance incomplete. |
+| [B0-v3 ten operations](milestones/B0_V3_TEN_OPERATION_QUALIFICATION.md) | Raw S/N bindings qualified on three applications; technical data only. |
+| [H-EXEC final study](milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md) | 32/32 final-input qualification, eight blocks, both registered primaries pass; original 31/32 failure preserved. |
+| [Primary analysis component](V3_CAMPAIGN_ANALYSIS_COMPONENT_V1.md) | Six-contrast campaign bootstrap and coverage rules tested; full method/evaluator/stable/transfer/cost bindings pending. |
+
+## Historical milestones
+
 | Milestone | Scope | Status | Evidence |
 |---|---|---|---|
 | M0 | Conjunctive rank and log-moment vertical slice | Complete | `milestones/M0_RANK_AND_MOMENTS.md` |

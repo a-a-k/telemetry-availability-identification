@@ -36,14 +36,14 @@ Transfer: только source calibration + объявленное измене�
 
 ## Условия допуска и ближайшая работа
 
-| Условие | Состояние после итерации 027 |
+| Условие | Состояние после итерации 031 |
 | --- | --- |
 | Конкретный G/R/P/Φ и observation law основной модели | Есть exact demonstrator и applied joint-law candidates create_visit/read_user_timeline/browse_product; окончательный основной класс не выбран. |
 | Семантическая и идентификационная линии | S1/I1, I2 transfer ambiguity и I3 joint/masked sharp bounds с controls; соответствие business event и новизна F/I не закрыты. |
 | Граф реально влияет на прогноз, replay, A/B и unsupported | 25 исходных controls + пять joint-law/parser controls; applied build/replay и structural/equivalence checks прошли (run 34215477704). |
 | Контракты десяти операций / поддержка новым методом | Прикладные contracts технически квалифицированы; поддержка G* отдельно не установлена. |
 | Технический пример нового метода для каждого из трёх приложений | Технические graph candidates для3/3 apps прошли isolated build/replay (34215477704,34224526327); source/observation assumptions ограничены. Окончательный G* ещё не выбран. |
-| Frozen G0/G-ID/G*, refinements/ablations, H-records, analysis/missingness | H-EXEC qualified4/4 и study32 выполняется; primary analysis/missingness component v1 frozen/tested. Final method bindings, refinements и остальные анализы не завершены. |
+| Frozen G0/G-ID/G*, refinements/ablations, H-records, analysis/missingness | H-EXEC final-input replay32/32 qualified, обе primary подтверждены в8 блоках; original31/32 gate сохранён. B0-v3 raw S/N10/10 qualified; primary analysis/missingness component v1 frozen/tested. Final method bindings, refinements и остальные анализы не завершены. |
 | Изоляция future evaluator и seals | Квалифицированы ordinary-only graph builder и model-only replay (6/1 actual data reads); полная future candidate→evaluator цепочка остаётся. |
 
-Технические graph chains для каждой app выполнены в явно ограниченной области. Следующий результат — завершённый H-EXEC study32 по frozen protocol, semantic/identification class и обоснованные versions/ablations с собственным бюджетом; максимум два deep mechanisms сохраняется. Основная матрица запускается только после выполнения всей таблицы, независимо от ожидаемого знака результатов.
+Технические graph chains для каждой app выполнены в явно ограниченной области. H-EXEC study32 завершён: [неизменённый анализ окончательных архивов](milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md) проходит полный допуск. Следующий результат — semantic/identification class и обоснованные versions/ablations с собственным бюджетом; максимум два deep mechanisms сохраняется. Основная матрица запускается только после выполнения всей таблицы, независимо от ожидаемого знака результатов.

@@ -146,17 +146,18 @@ comparison; runner times and artifact sizes do not establish that effect.
 
 ## Items to resolve before completing the article argument
 
-Follow the author's [correction plan](SIMPAT_CORRECTION_PLAN.md) and record all
-[22 criteria](SIMPAT_ITERATION_CHECKLIST.md) after each iteration. The [iteration
-records](iterations/001-m7-complete-census.md) distinguish completed evidence
-from remaining obligations.
+Follow the author's [correction v3](SIMPAT_CORRECTION_V3.md) and record all
+30 criteria (C01–C22 and F01–F08) after each iteration. The current
+[iteration 031](iterations/031-h-exec-sealed-study-confirmation.md) distinguishes
+completed evidence from remaining obligations.
 
 - The original G/R/P/Φ map is complete in iteration 002; retain its explicit
   limited-implementation scope and keep temporal regression outside the primary method.
 - The independent PMX pipeline now produces 12/12 inclusive and 6/12 conditional
   historical forecasts in [M9X](milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md).
   This is development evidence; the new prospective comparison remains required.
-- Qualify four Petclinic operations and all ten external semantic contracts.
+- All ten external semantic contracts and B0-v3 raw-frequency bindings are
+  technically qualified. Final graph-model support/absence for each remains required.
 - Freeze and execute the single three-application 240-campaign comparison,
   including all 800 operation cells per method, transfer and full costs.
 - Form final claims from complete accuracy, coverage and cost evidence with
@@ -170,14 +171,21 @@ graph or sync/async edge types to the solver. Its restrictions cannot be
 attributed to the whole original formalism. The historical combined loader
 preloads evaluator data; new forecasts require the isolated learner-only path.
 
-M9X closes the technical independent-extraction/calculation comparison on the four
+The original M9X report closes the technical independent-extraction/calculation comparison on the four
 retained M7 campaigns. It does not support a general superiority claim: on the
 DeathStar common subset proposed minus PMX inclusive MAE is +4.6659 percentage
 points (4/6 cells); OTel has only 1/6 common cells. PMX inclusive MAE is 9.1527
 points over 12/12 cells, versus B0 2.9015 over the same cells. Context splitting,
 the additional calibration endpoint wrapper, native inclusive failure overlap,
 and six conditional-local abstentions are explicit assumptions and limitations.
-See the [complete coverage/cost tables](evidence/m9x-34196680992/tables.md).
+See the [original coverage/cost tables](evidence/m9x-34196680992/tables.md).
+Current health-prefix-corrected arithmetic is in the
+[complete correction](milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md):
+DeathStar common proposed minus inclusive PMX MAE is +4.67616696 points
+(4/6 cells), versus +3.21236488 for conditional PMX (4/6).
+OTel inclusive common coverage is 1/6, with difference -0.98924721 points;
+conditional common coverage is 0/6 and the contrast is not estimable.
+These historical methods and viewed campaigns are not final G* or new main data.
 
 
 ## Original-source audit update, iterations024–025
@@ -186,4 +194,31 @@ See the [complete coverage/cost tables](evidence/m9x-34196680992/tables.md).
 
 [ICSE aggregate audit](milestones/ORIGINAL_ICSE_AGGREGATE_AUDIT.md) reproduces250 rows from750 scalar summaries and all40 printed table mean/SD cells. It does not identify the original250-job run or reproduce raw probe denominators. A surviving20-job rerun with matching published core code is explicitly separate. Relative percent and percentage-point error are different;50 cases of0/0 relative error remain undefined in the new audit.
 
-The [H-EXEC four-arm qualification](iterations/023-h-exec-qualified-original-aina-provenance.md) passed4/4; predeclared32-cell study34230603338 is executing under unchanged settings. No causal result, second H or final G* is assigned yet. Independent PMX technical/historical comparison is complete in its documented scopes; the new prospective G* main comparison remains required.
+The [H-EXEC four-arm qualification](iterations/023-h-exec-qualified-original-aina-provenance.md) passed4/4; the original32-cell study and final-input replay are now complete, as detailed below. No second H or final G* is assigned. Independent PMX technical/historical comparison is complete in its documented scopes; the new prospective G* main comparison remains required.
+
+## H-EXEC and technical-binding update, iteration 031
+
+[H-EXEC final immutable-input replay](milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md)
+qualifies all 32 cells and confirms both predeclared checkout contrasts within
+the registered design: sham minus settled and repaired minus settled are each
++100 percentage points over eight blocks, exact two-sided p = 0.0078125.
+All request rows, routes and statistical results reproduce the original report.
+The original 31/32 gate and one malformed-record report remain preserved;
+concurrent collector append is a plausible cause, not proven from a saved live
+read stream. The unchanged zero-malformed gate passes on final archived inputs.
+The degenerate bootstrap interval [1, 1] does not establish an exactly 100-point
+population effect. Static controls meet diagnostic tolerances, not a statistical
+equivalence test. This is one scoped routing/execution mechanism, not an identified
+mediation fraction, a cause of historical AINA bias or automatic selection of G*.
+
+[B0-v3 CSV-v2](milestones/B0_V3_TEN_OPERATION_QUALIFICATION.md) qualifies raw S/N
+for all ten operations using 4,080 calibration attempts, including all failures
+and timeouts. Its original Boolean/CSV binding failure and explicit decoder
+correction are retained. The [primary-analysis component](V3_CAMPAIGN_ANALYSIS_COMPONENT_V1.md)
+implements six paired campaign contrasts, complete common support and absence
+reporting. These technical results do not replace prospective performance data.
+
+Main remains 0/240. Required work includes final G0/G-ID/G* definitions, justified
+refinements and ablations, all ten operations' support/absence, novelty and the
+semantic/identification scope, sealed evaluator access, transfer and full costs.
+The completed H study is not added to the independent main sample.
