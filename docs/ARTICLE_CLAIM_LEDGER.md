@@ -15,8 +15,10 @@ fits and the opened M9X comparison. M7 still has no established superiority; the
 large OTel checkout error remains. Auxiliary temporal/routing diagnostics below
 retain decoder-v0 scope and must not be cited as corrected v3 evidence without
 separate reanalysis. The [Petclinic graph replay](milestones/PETCLINIC_GRAPH_OBSERVATION_TECHNICAL.md)
-confirms a saved graph actually enters calculation for one operation; business
-adequacy and the final G* class remain unestablished.
+and [DeathStar/OTel graph replays](milestones/EXISTING_APPLICATION_GRAPH_OBSERVATION.md)
+confirm saved native-derived graphs enter calculation for three applications, in
+explicitly restricted technical scopes. Business adequacy, all-ten-operation support
+and the final G* class remain unestablished.
 
 ## Separate questions before stating a contribution
 

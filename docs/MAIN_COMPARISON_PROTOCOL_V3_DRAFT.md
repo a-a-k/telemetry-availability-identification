@@ -36,14 +36,14 @@ Transfer: только source calibration + объявленное измене�
 
 ## Условия допуска и ближайшая работа
 
-| Условие | Состояние после итерации 016 |
+| Условие | Состояние после итерации 021 |
 | --- | --- |
-| Конкретный G/R/P/Φ и observation law основной модели | Есть exact demonstrator и applied joint-law candidate create_visit; окончательный основной класс не выбран. |
+| Конкретный G/R/P/Φ и observation law основной модели | Есть exact demonstrator и applied joint-law candidates create_visit/read_user_timeline/browse_product; окончательный основной класс не выбран. |
 | Семантическая и идентификационная линии | S1/I1, I2 transfer ambiguity и I3 joint/masked sharp bounds с controls; соответствие business event и новизна F/I не закрыты. |
 | Граф реально влияет на прогноз, replay, A/B и unsupported | 25 исходных controls + пять joint-law/parser controls; applied build/replay и structural/equivalence checks прошли (run 34215477704). |
 | Контракты десяти операций / поддержка новым методом | Прикладные contracts технически квалифицированы; поддержка G* отдельно не установлена. |
-| Технический пример нового метода для каждого из трёх приложений | Технический graph candidate для Petclinic create_visit продемонстрирован (1/3); окончательный G* ещё не выбран. M7/PMX technical fit не засчитывается. |
+| Технический пример нового метода для каждого из трёх приложений | Технические graph candidates для3/3 apps прошли isolated build/replay (34215477704,34224526327); source/observation assumptions ограничены. Окончательный G* ещё не выбран. |
 | Frozen G0/G-ID/G*, refinements/ablations, H-records, analysis/missingness | Не завершено. |
 | Изоляция future evaluator и seals | Квалифицированы ordinary-only graph builder и model-only replay (6/1 actual data reads); полная future candidate→evaluator цепочка остаётся. |
 
-Следующий результат — observation/source map реальных входов и technical graph chain, начиная с одной операции, затем по приложению. После этого выбираются максимум два различимых механизма и замораживается причинный пакет с собственным бюджетом. Основная матрица запускается только после выполнения всей таблицы, независимо от ожидаемого знака результатов.
+Технические graph chains для каждой app выполнены в явно ограниченной области. Следующий результат — полностью определённый prospective H-пакет (максимум два deep mechanisms), semantic/identification class и обоснованные versions/ablations с собственным бюджетом. Основная матрица запускается только после выполнения всей таблицы, независимо от ожидаемого знака результатов.

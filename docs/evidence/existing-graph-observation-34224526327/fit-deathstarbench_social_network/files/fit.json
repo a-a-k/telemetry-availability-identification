@@ -1,0 +1,118 @@
+{
+  "assumptions": {
+    "baseline_residual_q_used": false,
+    "business_adequacy_tested": false,
+    "business_event": "complete valid user timeline within 2 seconds",
+    "calibration_business_outcomes_used_for_parameters": false,
+    "edge_law": "source-declared synchronous completion; cross-service parent graph plus explicit DB CLIENT binding",
+    "fixed_live_and_successful_dependencies_are_assumptions": true,
+    "fixed_live_nodes": [
+      "nginx-web-server",
+      "post-storage-service"
+    ],
+    "future_stationarity_assumed_for_forecast": true,
+    "main_method_selected": false,
+    "missingness": "composite legacy collector; informative masks possible",
+    "native_replica_instance_identity": "unavailable; R uses declared replica names bound to ordinary proxy server labels",
+    "routing": "ideal eligible-replica choice; no delay, queue, retry or recovery process",
+    "sampling": "uniform probe ticks in a 60-second normal development window; not future population identification",
+    "signal_meaning": "last HAProxy L4 transport eligibility, not application readiness",
+    "state_law": "empirical joint masked probe categories; no independence or MCAR imputation",
+    "state_static_during_operation_assumed": true,
+    "supported_event": "ideal static synchronous reachability of explicitly required targets",
+    "unmeasured_dependency_conditions": [
+      "Redis query succeeds; MongoDB range-fill when needed succeeds; post-storage internals return correct posts; all required work completes before deadline"
+    ]
+  },
+  "database_identity_bindings": [],
+  "elapsed_seconds": 0.045561888000001716,
+  "external_attempts": 80,
+  "graph_edges": [
+    {
+      "factors": [],
+      "observed_relation": "cross_service_parent",
+      "source": "nginx-web-server",
+      "supporting_attempts": 80,
+      "supporting_spans": 80,
+      "target": "user-timeline-service",
+      "type": "sync"
+    },
+    {
+      "factors": [],
+      "observed_relation": "cross_service_parent",
+      "source": "user-timeline-service",
+      "supporting_attempts": 80,
+      "supporting_spans": 80,
+      "target": "post-storage-service",
+      "type": "sync"
+    }
+  ],
+  "graph_nodes": {
+    "nginx-web-server": "native_service",
+    "post-storage-service": "native_service",
+    "user-timeline-service": "native_service"
+  },
+  "identity": {
+    "data_role": "retained_normal_technical",
+    "method": "G-OBS-existing-normal-technical-v1",
+    "operation": "read_user_timeline",
+    "placement": "colocated",
+    "profile": "deathstarbench_social_network",
+    "scope": "current",
+    "source_ordinary_seal": {
+      "files": {
+        "declarations.json": "10e413aba9b4f46f111eb797f463711cdece8d16a7df5332b03592c8eca4f9c7",
+        "manifest.json": "88aad4107a9fcd7fcb08f8815392a66814026f6ff1b218422e7361e26d86457d",
+        "native.json": "58c0570a4803c4adc322267dc4e3984b388f750df206c73449c15b6cefb46852",
+        "probes.json": "5319c13ac308366ee503c79c608a13b856f86396dded39d71cf2ef4cc0efbb17",
+        "requests.json": "6a1025e0fd1a503f76cc121831e427544c8f80ee3c69fe0b76e74fed601f0bdd"
+      },
+      "version": "v3-ordinary-calibration-1"
+    }
+  },
+  "in_progress_counts": {
+    "a": 0,
+    "b": 0
+  },
+  "main_campaigns": 0,
+  "model_sha256": "7de5213a87c2e6336c98c3471d61541035582f10a04fa9278aef60456ba38867",
+  "native_spans": 634,
+  "prediction": {
+    "business_adequacy": "requires separate validation",
+    "categories": [
+      {
+        "compatible_states": 1,
+        "count": 60,
+        "maximum_phi": 1,
+        "minimum_phi": 1,
+        "values": [
+          true,
+          true
+        ]
+      }
+    ],
+    "event": "graph reachability of declared required targets",
+    "interval_is_confidence_interval": false,
+    "lower": 1.0,
+    "lower_exact": "1",
+    "parameter_uncertainty": "not estimated in technical chain",
+    "physical_cause_parameters_identified": false,
+    "population_identification_from_finite_sample_not_asserted": true,
+    "prediction": 1.0,
+    "samples": 60,
+    "singleton_given_empirical_observation_law": true,
+    "states_enumerated": 4,
+    "status": "estimated_graph_probability",
+    "upper": 1.0,
+    "upper_exact": "1",
+    "version": "graph-observation-law-v1"
+  },
+  "probe_ticks": 60,
+  "transfer_status": "unsupported without assumptions identifying the changed target law",
+  "unexpected_missing_parents": 0,
+  "unknown_verdict_counts": {
+    "a": 0,
+    "b": 0
+  },
+  "verified_external_boundary_roots": 80
+}
