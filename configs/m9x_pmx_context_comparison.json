@@ -1,0 +1,93 @@
+{
+  "adapter_version": "observed-full-caller-context-v1",
+  "source_run_id": 34191216681,
+  "source_head_sha": "614de39f3ed64e5b5e79e32fe9e57fd7aa0ca1fe",
+  "artifacts": [
+    {
+      "id": 10042286180,
+      "name": "m9v-application-input-34191216681",
+      "size_in_bytes": 24044527,
+      "digest": "sha256:115de0608b9069bfa04ae05c929dcf3481d466713db666ea60550cd9619065bd",
+      "role": "application"
+    }
+  ],
+  "m9u_acceptance": {
+    "source_run_id": 34190274003,
+    "source_head_sha": "76fcc134bf689270771dbabd9aaf3e2503d8bb4b",
+    "ci_run_id": 34190273356,
+    "census_sha256": "2c67902b4f162ef46410d8de8d3fd5a5230c206353b38851f0fa77e2e3af1ecd",
+    "artifacts": [
+      {
+        "id": 10042166835,
+        "name": "m9u-request-census-34190274003",
+        "size_in_bytes": 1605,
+        "digest": "sha256:dbb827fb5a9c66518e5869054d0efc09a35f0192c5f7d2056cb24677651f41cf",
+        "role": "m9u-census"
+      }
+    ]
+  },
+  "sample_keys": [
+    "deathstar-colocated",
+    "deathstar-split",
+    "otel-colocated",
+    "otel-split",
+    "controls"
+  ],
+  "expected_controls": {
+    "recursive_native_name": {
+      "inclusive": 0.576,
+      "conditional_local": 0.8
+    },
+    "cross_trace_call_order": {
+      "inclusive": 1.0,
+      "conditional_local": 1.0
+    }
+  },
+  "expected_negative_error": "java.lang.StackOverflowError",
+  "repository_locks": [
+    {
+      "path": "src/telemetry_availability/pmx_request_context.py",
+      "sha256": "ed174e15de4495c9be73e278bcf178a9700ae3562ae5eafa85fba8fc0a760efe"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_context_comparison.py",
+      "sha256": "986ef549513b794936a08319d43a8ea6db83be48209103b3c6e7718e17f62924"
+    },
+    {
+      "path": "tests/test_pmx_request_context.py",
+      "sha256": "be89545d8f5cdb3348a66e1c0a564c9a820f0a04879a97f80ed820c0698fa78d"
+    },
+    {
+      "path": "palladio/harness/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java",
+      "sha256": "46e0e5a36e3371193096729b533c5324caec66f2363b95b41f04af5c94209ffe"
+    },
+    {
+      "path": ".github/workflows/m9x-pmx-context-comparison.yml",
+      "sha256": "2da5ec5c15f643aef2afae31795dc80a47478c2c99bd04606e567c53d70b3c32"
+    },
+    {
+      "path": "docs/M9X_PMX_CONTEXT_COMPARISON_PROTOCOL.md",
+      "sha256": "db2cce85b952145f6a5f6df90aab293f9e715424ba7e6f218aa183d08d2fac07"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_application_comparison.py",
+      "sha256": "22602e7f51c2fe6fa4d62a0806546a84330907eff61dde1996ae530451399e8b"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_adapter.py",
+      "sha256": "820284fb67113fc1f9bf11d3c39204c99140cab28666bd77cf5cc36079616b63"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_mixed_loop_bridge.py",
+      "sha256": "421b381032b2b8da8ab6e1d2bf8de71a4bc9a3b4cf2db75dcc4322ec73ecd530"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_retained_request_audit.py",
+      "sha256": "5e468156d7c4ad16fb2426be328611c9a3c07559a2ab9018f90f06e028821031"
+    },
+    {
+      "path": "src/telemetry_availability/pmx_request_controls.py",
+      "sha256": "edbb60582449a52f5f1095bf0e720c1e0e50a5b9b93e1aede2e92c24c092e09c"
+    }
+  ]
+}
