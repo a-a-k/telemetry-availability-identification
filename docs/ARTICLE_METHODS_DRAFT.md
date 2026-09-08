@@ -299,3 +299,17 @@ M7 uses a fixed two-path model and does not pass its preserved full dependency
 graph or sync/async edge types to the solver. Its restrictions cannot be
 attributed to the whole original formalism. The historical combined loader
 preloads evaluator data; new forecasts require the isolated learner-only path.
+
+The completed [M9X independent development comparison](milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md)
+uses the author's pinned PMX binary and Palladio analyzer on native calibration
+observations with observed full caller contexts. Context identities prevent
+finite traces from producing recursive operation-level SEFFs; this changes
+frequency grouping and is disclosed as a versioned projection. The external
+request wrapper uses observed calibration endpoint success, which is additional
+information. No proposed graph or fitted probability is supplied to PMX.
+All 12 inclusive forecasts and six conditional-local forecasts are reported;
+the six unsupported OTel conditional cases remain in the coverage census.
+Both solver passes, eight new positive oracle records and two retained cyclic
+negative errors are available, with all original native errors preserved.
+Historical outcomes were already open; these four campaigns remain development
+data and do not enlarge the M7 sample or replace the planned prospective study.

@@ -137,10 +137,11 @@ Follow the author's [correction plan](SIMPAT_CORRECTION_PLAN.md) and record all
 records](iterations/001-m7-complete-census.md) distinguish completed evidence
 from remaining obligations.
 
-- Map the original G/R/P/Φ formalism, all probability sources and semantic limits
-  to code; keep the primary forecasting path free of temporal regression.
-- Complete the independent PMX pipeline with explicit transformations and
-  retained unsupported cases; reuse M9S and M9U qualified controls.
+- The original G/R/P/Φ map is complete in iteration 002; retain its explicit
+  limited-implementation scope and keep temporal regression outside the primary method.
+- The independent PMX pipeline now produces 12/12 inclusive and 6/12 conditional
+  historical forecasts in [M9X](milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md).
+  This is development evidence; the new prospective comparison remains required.
 - Qualify four Petclinic operations and all ten external semantic contracts.
 - Freeze and execute the single three-application 240-campaign comparison,
   including all 800 operation cells per method, transfer and full costs.
@@ -154,3 +155,12 @@ M7 uses a fixed two-path model and does not pass its preserved full dependency
 graph or sync/async edge types to the solver. Its restrictions cannot be
 attributed to the whole original formalism. The historical combined loader
 preloads evaluator data; new forecasts require the isolated learner-only path.
+
+M9X closes the technical independent-extraction/calculation comparison on the four
+retained M7 campaigns. It does not support a general superiority claim: on the
+DeathStar common subset proposed minus PMX inclusive MAE is +4.6659 percentage
+points (4/6 cells); OTel has only 1/6 common cells. PMX inclusive MAE is 9.1527
+points over 12/12 cells, versus B0 2.9015 over the same cells. Context splitting,
+the additional calibration endpoint wrapper, native inclusive failure overlap,
+and six conditional-local abstentions are explicit assumptions and limitations.
+See the [complete coverage/cost tables](evidence/m9x-34196680992/tables.md).
