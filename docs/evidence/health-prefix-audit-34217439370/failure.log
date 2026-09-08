@@ -1,0 +1,24 @@
+audit	Read preserved health only and compare historical decoder versions	﻿2026-09-08T10:49:25.8175996Z ##[group]Run mkdir -p workflow-results/health-prefix-audit
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8176499Z [36;1mmkdir -p workflow-results/health-prefix-audit[0m
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8177210Z [36;1m/usr/bin/time -v -o workflow-results/health-prefix-audit/resource-usage.txt python -m telemetry_availability.health_prefix_audit_v2[0m
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8216474Z shell: /usr/bin/bash -e {0}
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8216729Z env:
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8216994Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.15/x64
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8217447Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib/pkgconfig
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8217875Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8218255Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8218633Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.15/x64
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8219023Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.15/x64/lib
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8222007Z   GH_TOKEN: ***
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:25.8222292Z ##[endgroup]
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9518469Z Traceback (most recent call last):
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9527471Z   File "<frozen runpy>", line 203, in _run_module_as_main
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9528145Z   File "<frozen runpy>", line 88, in _run_code
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9529323Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/health_prefix_audit_v2.py", line 176, in <module>
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9530902Z     main()
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9531151Z     ~~~~^^
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9532134Z   File "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/health_prefix_audit_v2.py", line 104, in main
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9533404Z     assert sha256(Path(lock['path']).read_bytes()).hexdigest() == lock['sha256'], lock['path']
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9533982Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:26.9534400Z AssertionError: src/telemetry_availability/health_prefix_audit_v2.py
+audit	Read preserved health only and compare historical decoder versions	2026-09-08T10:49:27.0167941Z ##[error]Process completed with exit code 1.

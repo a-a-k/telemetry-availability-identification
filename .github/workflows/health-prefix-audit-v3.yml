@@ -1,0 +1,31 @@
+name: Historical HAProxy prefix impact census v3
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Read preserved health only and compare historical decoder versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p workflow-results/health-prefix-audit
+          /usr/bin/time -v -o workflow-results/health-prefix-audit/resource-usage.txt python -m telemetry_availability.health_prefix_audit_v3
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: health-prefix-audit-v3-${{ github.run_id }}
+          path: workflow-results/health-prefix-audit
+          retention-days: 90
+          if-no-files-found: error
