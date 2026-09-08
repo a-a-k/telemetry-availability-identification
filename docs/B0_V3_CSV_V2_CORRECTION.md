@@ -1,0 +1,7 @@
+# B0-v3 CSV outcome adapter v2
+
+Technical run34236024391/head4ac03edc29b48ebada56360d70ece8427a495a32 failed in all3 applications at the strict Python-bool input assertion, before any completed B0 model. Ordinary projection preserves CSV DictReader values, which encode the source Boolean fields as strings. The first component's artificial inputs used native booleans, so that test contract did not cover the actual serialized interface. Preserve original failed compact source/cost reports and failure log excerpt; this is not a scientific failure mechanism or extra independent data.
+
+New b0_frequency_v3_csv_v2 accepts native booleans and explicit case-insensitive true/false string tokens. It never uses generic truthiness (which would treat the string False as true). Integer0/1, strings0/1, whitespace, null and unknown tokens remain errors. The source requests/seals are not rewritten. All denominators, whole-event labels, no-smoothing semantics, input roles and absence handling stay the same. New preparation records the complete field-type/token census before fitting; expected real tokens are verified remotely.
+
+Two bounded controls prove exact forecast/count parity between equivalent Boolean/CSV inputs and rejection of ambiguous tokens. The frozen v1 remains unchanged; v2 has new source, workflow/config/hash locks and a linked technical repeat on the same3 archives. Full model artifacts stay remote and all source/preparation/fit costs are retained. Main0 and new independent campaigns0.
