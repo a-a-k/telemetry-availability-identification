@@ -20,6 +20,17 @@ confirm saved native-derived graphs enter calculation for three applications, in
 explicitly restricted technical scopes. Business adequacy, all-ten-operation support
 and the final G* class remain unestablished.
 
+Iterations032–036 add a complete 4080-attempt ordinary execution census and exact
+native target-replica identity recovery. They do not identify physical execution
+capability from L4 probes. [Iteration037](iterations/037-application-execution-protocol.md)
+implements a separately declared mandatory-call completion class and joint
+observation-law calculation for ten source-bound operations. Its S3/I5 proofs
+state the semantic restriction, its boundary and sharp finite masked bounds;
+the standard probability/partial-identification steps are not claimed as novel
+general theorems. Fourteen bounded controls pass; real-application execution,
+independent business adequacy, final comparator bindings and novelty assessment
+remain separate requirements.
+
 ## Separate questions before stating a contribution
 
 1. Does the observation law determine the requested quantity, even if it does

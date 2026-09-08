@@ -74,3 +74,10 @@ milestone completion below is scoped to each original protocol.
 The order may expose a scientific stopping condition. In particular, failure to
 distinguish the proposed procedure from a matched standard likelihood reference
 must lead to a narrower claim or redesign, not to a weaker comparator.
+
+
+## V3 execution identification continuation
+
+- [Ordinary execution census](milestones/V3_EXECUTION_OBSERVATION_CENSUS.md): run34241300741; all4080 calibration attempts/10operations, no outcome exclusion.
+- [Identity and joint demand](milestones/V3_ORDINARY_IDENTITY_AND_DEMAND.md): run34244994519;6/6 jobs, exact native identity recovery and explicit missing calls.
+- [Execution core and ten-operation qualification](V3_APPLICATION_EXECUTION_V1.md): iteration037;14 bounded controls, S3/I5 statements/proofs, source-bound adapter and isolated nine-job protocol. Remote execution pending; main0.

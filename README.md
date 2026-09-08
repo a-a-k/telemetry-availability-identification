@@ -12,7 +12,7 @@ input model from heterogeneous telemetry.
 ## Current evidence and article material
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 031](docs/iterations/031-h-exec-sealed-study-confirmation.md)
+current study. [Iteration 037](docs/iterations/037-application-execution-protocol.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. The new 240-campaign comparison has **not started**.
@@ -42,6 +42,15 @@ for current historical arithmetic and retain explicit own/common coverage.
 S/N bindings for all ten operations. The new prospective G* comparison with G0
 and PMX, transfer and comparable full costs remain required. Final G*, its
 formal/identification scope and justified refinements are not yet frozen.
+
+The [ordinary execution census](docs/milestones/V3_EXECUTION_OBSERVATION_CENSUS.md)
+accounts for all 4080 calibration attempts. [Identity recovery](docs/milestones/V3_ORDINARY_IDENTITY_AND_DEMAND.md)
+binds all 160 DeathStar target entries and preserves OTel's joint checkout
+footprints and 284 Petclinic attempts without a Visits entry. The new
+[execution model and proofs](docs/GRAPH_EXECUTION_MODEL_V1.md) and
+[ten-operation binding protocol](docs/V3_APPLICATION_EXECUTION_V1.md) have 14
+passing bounded controls. The isolated application build/replay is the next
+technical check; source assumptions and ambiguous forecasts remain explicit.
 
 The implementations and M0–M9 history below retain their original scopes.
 In particular, M9N–M9P temporal regression is historical diagnostic evidence and
