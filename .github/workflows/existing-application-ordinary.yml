@@ -1,0 +1,72 @@
+name: Existing applications ordinary normal-window inventory
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Restore exact source and project ordinary fields
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p workflow-results/preparation
+          /usr/bin/time -v -o workflow-results/preparation/resource-usage.txt python -m telemetry_availability.existing_application_ordinary prepare --profile '${{ matrix.profile }}'
+      - uses: actions/upload-artifact@v7
+        with:
+          name: existing-ordinary-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/ordinary
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: existing-preparation-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/preparation
+          retention-days: 90
+          if-no-files-found: error
+  inspect:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - uses: actions/download-artifact@v8
+        with:
+          name: existing-ordinary-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-input/ordinary
+      - name: Inventory actual native edges inside ordinary data boundary
+        run: |
+          mkdir -p workflow-results/inventory
+          /usr/bin/time -v -o workflow-results/inventory/resource-usage.txt python -m telemetry_availability.existing_application_ordinary inspect --profile '${{ matrix.profile }}'
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: existing-inventory-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/inventory
+          retention-days: 90
+          if-no-files-found: error
