@@ -178,3 +178,12 @@ points over 12/12 cells, versus B0 2.9015 over the same cells. Context splitting
 the additional calibration endpoint wrapper, native inclusive failure overlap,
 and six conditional-local abstentions are explicit assumptions and limitations.
 See the [complete coverage/cost tables](evidence/m9x-34196680992/tables.md).
+
+
+## Original-source audit update, iterations024–025
+
+[AINA full audit](milestones/ORIGINAL_AINA_FULL_AUDIT.md) reconciles all250 original ZIPs,25000 windows and2500000 probes. Exact enumeration of20 original graph variants proves async predicate invariance on all655360 allowed pair×state controls; all2500 retained MC estimates agree with their exact source probabilities within the predeclared family diagnostic. The old literal0.001pp forecast-difference bound is not reproduced and must not be reused. Distinguish forecast differences, signed mean error and per-window MAE; original source/author texts remain unchanged. Original fault/measurement timing and unpinned runtime are still limitations.
+
+[ICSE aggregate audit](milestones/ORIGINAL_ICSE_AGGREGATE_AUDIT.md) reproduces250 rows from750 scalar summaries and all40 printed table mean/SD cells. It does not identify the original250-job run or reproduce raw probe denominators. A surviving20-job rerun with matching published core code is explicitly separate. Relative percent and percentage-point error are different;50 cases of0/0 relative error remain undefined in the new audit.
+
+The [H-EXEC four-arm qualification](iterations/023-h-exec-qualified-original-aina-provenance.md) passed4/4; predeclared32-cell study34230603338 is executing under unchanged settings. No causal result, second H or final G* is assigned yet. Independent PMX technical/historical comparison is complete in its documented scopes; the new prospective G* main comparison remains required.
