@@ -1,0 +1,296 @@
+{
+  "application_graph_model_fits": 0,
+  "application_prediction_qualified": false,
+  "compound_observation_law_qualified": false,
+  "external_boundary_census": {
+    "compose_post": [
+      {
+        "count": 80,
+        "native_kind": "",
+        "relation": "matches_external_parent",
+        "service": "nginx-web-server"
+      }
+    ],
+    "read_home_timeline": [
+      {
+        "count": 80,
+        "native_kind": "",
+        "relation": "matches_external_parent",
+        "service": "nginx-web-server"
+      }
+    ],
+    "read_user_timeline": [
+      {
+        "count": 80,
+        "native_kind": "",
+        "relation": "matches_external_parent",
+        "service": "nginx-web-server"
+      }
+    ]
+  },
+  "graphs": {
+    "compose_post": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "home-timeline-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "media-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "post-storage-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "text-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "unique-id-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "compose-post-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-timeline-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "home-timeline-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "social-graph-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "nginx-web-server",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "compose-post-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "text-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "url-shorten-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "text-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-mention-service"
+        }
+      ],
+      "external_attempts": 80,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 80,
+      "native_kinds": {
+        "": 2320
+      },
+      "nodes": {
+        "compose-post-service": "native_service",
+        "home-timeline-service": "native_service",
+        "media-service": "native_service",
+        "nginx-web-server": "native_service",
+        "post-storage-service": "native_service",
+        "social-graph-service": "native_service",
+        "text-service": "native_service",
+        "unique-id-service": "native_service",
+        "url-shorten-service": "native_service",
+        "user-mention-service": "native_service",
+        "user-service": "native_service",
+        "user-timeline-service": "native_service"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {},
+      "spans": 2320
+    },
+    "read_home_timeline": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "home-timeline-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "post-storage-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "nginx-web-server",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "home-timeline-service"
+        }
+      ],
+      "external_attempts": 80,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 80,
+      "native_kinds": {
+        "": 606
+      },
+      "nodes": {
+        "home-timeline-service": "native_service",
+        "nginx-web-server": "native_service",
+        "post-storage-service": "native_service"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {},
+      "spans": 606
+    },
+    "read_user_timeline": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "nginx-web-server",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "user-timeline-service"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "user-timeline-service",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "post-storage-service"
+        }
+      ],
+      "external_attempts": 80,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 80,
+      "native_kinds": {
+        "": 634
+      },
+      "nodes": {
+        "nginx-web-server": "native_service",
+        "post-storage-service": "native_service",
+        "user-timeline-service": "native_service"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {},
+      "spans": 634
+    }
+  },
+  "inventory_seconds": 0.03213040500000375,
+  "main_campaigns": 0,
+  "manifest": {
+    "baseline_attempts": 0,
+    "data_role": "retained_contract_normal_window_for_technical_calibration",
+    "docker_state_fields": 0,
+    "estimated_model_files": 0,
+    "external_attempts": 240,
+    "failure_law": "N",
+    "full_operation_contract": "whole_operation_contract_v1: complete external operation within 2 seconds",
+    "inferred_graph_files": 0,
+    "injection_schedule_fields": 0,
+    "native_instrumentation": "otel-native-calibration with explicit attribute whitelist",
+    "new_independent_campaigns": 0,
+    "operations": {
+      "compose_post": 80,
+      "read_home_timeline": 80,
+      "read_user_timeline": 80
+    },
+    "original_source_head": "a5b71467b69dff6ee1d3d6bacc7bace5497654c1",
+    "original_source_period": "baseline",
+    "original_source_run": 34205650183,
+    "period_adaptation": "same 240 IDs/outcomes/times; baseline window reused as technical calibration only",
+    "placement": "colocated",
+    "probe_mask_limitation": "legacy collector jointly queried Docker inspection and HAProxy; missingness not assumed independent",
+    "probe_observation_law": "raw HAProxy status/last-check; stateful and possibly delayed; not direct primitive MCAR",
+    "probe_ticks": 60,
+    "profile": "deathstarbench_social_network",
+    "repetition": 0,
+    "role": "ordinary_calibration",
+    "source_condition": "normal state; no injected fault, no future stability or adequacy claim",
+    "source_quality_selection": "previously acquired development data; no post-test usability fields exported",
+    "test_attempts": 0,
+    "version": "v3-ordinary-calibration-1"
+  },
+  "model_fits": 0,
+  "new_independent_campaigns": 0,
+  "original_input_seal": {
+    "files": {
+      "declarations.json": "f39f0f22ae4b2d237fe64b276e430fb0d1020551cc3adb9d5250a8a0e99d0c59",
+      "manifest.json": "c7c1739233701c39b231e3980dfd715750e851838abc98113e3a03200a0979b0",
+      "native.json": "58c0570a4803c4adc322267dc4e3984b388f750df206c73449c15b6cefb46852",
+      "probes.json": "5319c13ac308366ee503c79c608a13b856f86396dded39d71cf2ef4cc0efbb17",
+      "requests.json": "6a1025e0fd1a503f76cc121831e427544c8f80ee3c69fe0b76e74fed601f0bdd"
+    },
+    "version": "v3-ordinary-calibration-1"
+  },
+  "probe_status_counts": {
+    "a": {
+      "UP / L4OK": 60
+    },
+    "b": {
+      "UP / L4OK": 60
+    }
+  },
+  "roots_per_attempt": {
+    "compose_post": {
+      "1": 80
+    },
+    "read_home_timeline": {
+      "1": 80
+    },
+    "read_user_timeline": {
+      "1": 80
+    }
+  },
+  "scope": "ordinary_input_and_native_graph_inventory_only",
+  "technical_graph_replay_qualified": false
+}

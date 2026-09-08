@@ -1,0 +1,332 @@
+{
+  "application_graph_model_fits": 0,
+  "application_prediction_qualified": false,
+  "compound_observation_law_qualified": false,
+  "external_boundary_census": {
+    "add_to_cart": [
+      {
+        "count": 160,
+        "native_kind": "2",
+        "relation": "matches_external_parent",
+        "service": "frontend-proxy"
+      }
+    ],
+    "browse_product": [
+      {
+        "count": 80,
+        "native_kind": "2",
+        "relation": "matches_external_parent",
+        "service": "frontend-proxy"
+      }
+    ],
+    "checkout": [
+      {
+        "count": 240,
+        "native_kind": "2",
+        "relation": "matches_external_parent",
+        "service": "frontend-proxy"
+      }
+    ]
+  },
+  "graphs": {
+    "add_to_cart": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 2,
+          "observation_type": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 80,
+          "supporting_spans": 160,
+          "target": "cart"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "product-catalog"
+        },
+        {
+          "max_occurrences_in_one_attempt": 2,
+          "observation_type": "cross_service_parent",
+          "source": "frontend-proxy",
+          "supporting_attempts": 80,
+          "supporting_spans": 160,
+          "target": "frontend"
+        }
+      ],
+      "external_attempts": 80,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 160,
+      "native_kinds": {
+        "1": 160,
+        "2": 720,
+        "3": 800
+      },
+      "nodes": {
+        "cart": "native_service",
+        "frontend": "native_service",
+        "frontend-proxy": "native_service",
+        "product-catalog": "native_service",
+        "unresolved-observed-database-peer": "unsupported_peer_identity"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "cart": [
+          "aa3b9d02-660d-4016-b4e9-318972b52487"
+        ]
+      },
+      "spans": 1680
+    },
+    "browse_product": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "product-catalog"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "frontend-proxy",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "frontend"
+        }
+      ],
+      "external_attempts": 80,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 80,
+      "native_kinds": {
+        "1": 80,
+        "2": 320,
+        "3": 240
+      },
+      "nodes": {
+        "frontend": "native_service",
+        "frontend-proxy": "native_service",
+        "product-catalog": "native_service",
+        "unresolved-observed-database-peer": "unsupported_peer_identity"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {},
+      "spans": 640
+    },
+    "checkout": {
+      "attempts_without_native_trace": 0,
+      "declared_dependencies": [],
+      "edges": [
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "cart",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "flagd"
+        },
+        {
+          "max_occurrences_in_one_attempt": 2,
+          "observation_type": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 80,
+          "supporting_spans": 160,
+          "target": "cart"
+        },
+        {
+          "max_occurrences_in_one_attempt": 2,
+          "observation_type": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 80,
+          "supporting_spans": 160,
+          "target": "currency"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "email"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "payment"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "product-catalog"
+        },
+        {
+          "max_occurrences_in_one_attempt": 2,
+          "observation_type": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 80,
+          "supporting_spans": 160,
+          "target": "shipping"
+        },
+        {
+          "max_occurrences_in_one_attempt": 2,
+          "observation_type": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 80,
+          "supporting_spans": 160,
+          "target": "cart"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "checkout"
+        },
+        {
+          "max_occurrences_in_one_attempt": 2,
+          "observation_type": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 80,
+          "supporting_spans": 160,
+          "target": "product-catalog"
+        },
+        {
+          "max_occurrences_in_one_attempt": 3,
+          "observation_type": "cross_service_parent",
+          "source": "frontend-proxy",
+          "supporting_attempts": 80,
+          "supporting_spans": 240,
+          "target": "frontend"
+        },
+        {
+          "max_occurrences_in_one_attempt": 1,
+          "observation_type": "cross_service_parent",
+          "source": "shipping",
+          "supporting_attempts": 80,
+          "supporting_spans": 80,
+          "target": "quote"
+        }
+      ],
+      "external_attempts": 80,
+      "forecast": null,
+      "forecast_status": "estimator_not_implemented_for_this_observation_law",
+      "missing_parent_spans": 240,
+      "native_kinds": {
+        "1": 880,
+        "2": 2080,
+        "3": 2400
+      },
+      "nodes": {
+        "cart": "native_service",
+        "checkout": "native_service",
+        "currency": "native_service",
+        "email": "native_service",
+        "flagd": "native_service",
+        "frontend": "native_service",
+        "frontend-proxy": "native_service",
+        "payment": "native_service",
+        "product-catalog": "native_service",
+        "quote": "native_service",
+        "shipping": "native_service",
+        "unresolved-observed-database-peer": "unsupported_peer_identity"
+      },
+      "observed_database_peer_count": 0,
+      "required_business_predicate_inferred": false,
+      "service_instances": {
+        "cart": [
+          "aa3b9d02-660d-4016-b4e9-318972b52487"
+        ],
+        "payment": [
+          "dbc5e734-7801-4d4d-93da-9abb93d79699"
+        ]
+      },
+      "spans": 5360
+    }
+  },
+  "inventory_seconds": 0.13155755800000435,
+  "main_campaigns": 0,
+  "manifest": {
+    "baseline_attempts": 0,
+    "data_role": "retained_contract_normal_window_for_technical_calibration",
+    "docker_state_fields": 0,
+    "estimated_model_files": 0,
+    "external_attempts": 240,
+    "failure_law": "N",
+    "full_operation_contract": "whole_operation_contract_v1: complete external operation within 2 seconds",
+    "inferred_graph_files": 0,
+    "injection_schedule_fields": 0,
+    "native_instrumentation": "otel-native-calibration with explicit attribute whitelist",
+    "new_independent_campaigns": 0,
+    "operations": {
+      "add_to_cart": 80,
+      "browse_product": 80,
+      "checkout": 80
+    },
+    "original_source_head": "a5b71467b69dff6ee1d3d6bacc7bace5497654c1",
+    "original_source_period": "baseline",
+    "original_source_run": 34205650183,
+    "period_adaptation": "same 240 IDs/outcomes/times; baseline window reused as technical calibration only",
+    "placement": "colocated",
+    "probe_mask_limitation": "legacy collector jointly queried Docker inspection and HAProxy; missingness not assumed independent",
+    "probe_observation_law": "raw HAProxy status/last-check; stateful and possibly delayed; not direct primitive MCAR",
+    "probe_ticks": 60,
+    "profile": "opentelemetry_demo",
+    "repetition": 0,
+    "role": "ordinary_calibration",
+    "source_condition": "normal state; no injected fault, no future stability or adequacy claim",
+    "source_quality_selection": "previously acquired development data; no post-test usability fields exported",
+    "test_attempts": 0,
+    "version": "v3-ordinary-calibration-1"
+  },
+  "model_fits": 0,
+  "new_independent_campaigns": 0,
+  "original_input_seal": {
+    "files": {
+      "declarations.json": "d4dd53df142f3458df5fe39cea77216aee7610f0c554f0d8865a04615099113a",
+      "manifest.json": "0b2e56539f9811c3882848f7b92a3b50beae2acf12a69039332b87bb6f557201",
+      "native.json": "2abba5c71f953d7fd810a2f5f4e13187052c05adbcefa81d3aeda953e1f68b11",
+      "probes.json": "e57d89d6be6407cdca7206038e035158d6455b74276a9931ef938247d6aef4fe",
+      "requests.json": "a35399b9fb403cb14f2ceca90c3be6920847a99725d5cfe7ce4c975cf7d7fdf8"
+    },
+    "version": "v3-ordinary-calibration-1"
+  },
+  "probe_status_counts": {
+    "a": {
+      "UP / L4OK": 60
+    },
+    "b": {
+      "UP / L4OK": 60
+    }
+  },
+  "roots_per_attempt": {
+    "add_to_cart": {
+      "2": 80
+    },
+    "browse_product": {
+      "1": 80
+    },
+    "checkout": {
+      "3": 80
+    }
+  },
+  "scope": "ordinary_input_and_native_graph_inventory_only",
+  "technical_graph_replay_qualified": false
+}

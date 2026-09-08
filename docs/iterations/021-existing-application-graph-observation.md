@@ -1,12 +1,8 @@
-# Итерация 020 — ordinary native inputs остальных двух приложений
+# Итерация 021 — source-declared graph build/replay остальных приложений
 
-2026-09-08, [план v3](../SIMPAT_CORRECTION_V3.md).
-[Исходное состояние019](019-complete-health-prefix-correction.md) и все его доказательства сохраняются.
-Новая задача: извлечь ordinary роль и фактические графы всех шести операций DeathStar/OTel из ранее сохранённых normal-window контрактных проверок.
-[Замороженный протокол](../EXISTING_APPLICATION_ORDINARY_PROTOCOL.md).
-240 attempts/app (80/operation), 60 секунд; baseline явно повторно используется как technical calibration.
-Новых независимых campaigns/test outcomes нет, main=0. Inventory не засчитывается за fitted model example.
-[Run34223543390](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34223543390), head e41468f845c8172fcb9a410ea71dd8b7792312c8, success: 2 trusted projections + 2 isolated inventories. [Результат](../milestones/EXISTING_APPLICATION_ORDINARY.md). Все прежние доказательства011–019 сохраняются.
+2026-09-08, authority [v3](../SIMPAT_CORRECTION_V3.md). [Результаты020](020-existing-application-ordinary.md) сохраняются.
+[Новый frozen protocol](../EXISTING_APPLICATION_GRAPH_OBSERVATION_PROTOCOL.md): read_user_timeline и browse_product; actual native edges, explicit required targets и совместимый source-declared DB CLIENT endpoint, joint L4 observation law, six-file builder, model-only replay, structural/equivalence checks.
+Статус freeze: remote builds ещё не выполнены. Ни один новый пример ещё не объявлен пройденным. Источник — уже открытые60-second normal windows; независимых campaigns0, main0. Все30 критериев ниже отражают доступные011–020 evidence.
 
 | ID | Статус | Доказательство / область | Остаток |
 | --- | --- | --- | --- |
@@ -41,6 +37,4 @@
 | F07 | ЧАСТИЧНО | Исторические selected source bytes теперь привязаны к published ZIP; MODELS status и metrics различаются. | Точное historical execution/data соответствие. |
 | F08 | ЧАСТИЧНО | Model candidate остаётся1/3; ordinary inputs/inventory остальных2 apps проверены и не засчитаны за модели. | Остальные приложения, условия main admission и причины/границы. |
 
-Проверено: по240 requests/60 probes на приложение; все шесть operations имеют80 связанных traces, необъяснённых родителей0. OTel add_to_cart/checkout имеют2/3 external roots на attempt. Raw L4UP наблюдался во всех120 probe ticks; это не readiness/future law. Четыре compact архива сохранены с CRC/SHA/API checks, сырые и ordinary данные локально не скачивались. Каждый isolated consumer прочёл6 разрешённых файлов, blocked0. Моделей/PMX fits/новых независимых campaigns0.
-
-Следующее действие: отдельно заморозить build/replay read_user_timeline и browse_product. DB CLIENT identity OTel пока unresolved в общем inventory; будущая source-declared completion должна проверять native contradictions и сохранять БД в required predicate. Итоговый G* и main admission не установлены.
+Следующее действие: Git-byte freeze, remote prepare/build/replay/qualification, сохранение compact результатов; при failure явная correction. Технический p=1 в normal window не доказывает business adequacy или population reliability.
