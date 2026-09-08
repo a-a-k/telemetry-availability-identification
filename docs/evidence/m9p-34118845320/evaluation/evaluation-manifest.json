@@ -1,0 +1,131 @@
+{
+  "analysis_implementation_sha256": "f0a13fd4181a515efe95a887432b1d2ec2b03e79f717897f797b6fd88f977890",
+  "candidate_seal_sha256": "8389b5457730cdd7cefd88442401403e74f3a9eb2de088db6265196ae92e57d6",
+  "conditional_score_is_advance_forecast": false,
+  "conditional_temporal_information": "replicated",
+  "config_sha256": "b11965da68f02b97fc3dac7c6a162807779a205f4a95efa696a70283422944ec",
+  "descriptive_method_means": {
+    "all_calibration_endpoint": {
+      "absolute_error": 0.05221559748652919,
+      "brier_score": 0.17266239230339658,
+      "conditional_brier_score": 0.17266239230339658,
+      "prediction": 0.7327504857063559,
+      "signed_error": -0.04668527229667821,
+      "test_success_rate": 0.7794357580030341
+    },
+    "learner_state_only": {
+      "absolute_error": 0.03569424760817479,
+      "brier_score": 0.17095143813645416,
+      "conditional_brier_score": 0.052684237261374264,
+      "prediction": 0.764531332870281,
+      "signed_error": -0.014904425132753063,
+      "test_success_rate": 0.7794357580030341
+    },
+    "matched_stable_endpoint": {
+      "absolute_error": 0.032570188954113344,
+      "brier_score": 0.170641916130286,
+      "conditional_brier_score": 0.17064191613028595,
+      "prediction": 0.775696015578848,
+      "signed_error": -0.0037397424241860998,
+      "test_success_rate": 0.7794357580030341
+    },
+    "source_500ms_failover": {
+      "absolute_error": 0.16780131711937837,
+      "brier_score": 0.19980034456125953,
+      "conditional_brier_score": 0.18663389732437116,
+      "prediction": 0.9472370751224124,
+      "signed_error": 0.16780131711937837,
+      "test_success_rate": 0.7794357580030341
+    },
+    "temporal_logit_lower": {
+      "absolute_error": 0.035690218099038544,
+      "brier_score": 0.17095156976253773,
+      "conditional_brier_score": 0.04168371074083286,
+      "prediction": 0.7645259530217434,
+      "signed_error": -0.014909804981290761,
+      "test_success_rate": 0.7794357580030341
+    },
+    "temporal_logit_midpoint": {
+      "absolute_error": 0.03566268204525825,
+      "brier_score": 0.1709493789645063,
+      "conditional_brier_score": 0.041671659922345554,
+      "prediction": 0.7645706591476243,
+      "signed_error": -0.014865098855409637,
+      "test_success_rate": 0.7794357580030341
+    },
+    "temporal_logit_upper": {
+      "absolute_error": 0.03562998588180258,
+      "brier_score": 0.1709463990058967,
+      "conditional_brier_score": 0.041636803472570746,
+      "prediction": 0.764658711179654,
+      "signed_error": -0.014777046823379986,
+      "test_success_rate": 0.7794357580030341
+    }
+  },
+  "environment": {
+    "dependencies": {
+      "PyYAML": "6.0.2",
+      "numpy": "2.4.4",
+      "scipy": "1.17.1"
+    },
+    "generated_at_utc": "2026-09-07T15:24:31.273632+00:00",
+    "git": {
+      "commit": "bc03711b3a50daa90be305986dd12769a2d8ef30",
+      "dirty": true
+    },
+    "github": {
+      "GITHUB_REF": "refs/heads/main",
+      "GITHUB_RUN_ATTEMPT": "1",
+      "GITHUB_RUN_ID": "34118845320",
+      "GITHUB_SHA": "bc03711b3a50daa90be305986dd12769a2d8ef30"
+    },
+    "implementation": "CPython",
+    "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+    "python": "3.13.15"
+  },
+  "evaluation_seconds": 24.23701460000001,
+  "gates": {
+    "complete_campaign_matrix": true,
+    "fit_integrity": true,
+    "interval_sensitivity": true,
+    "learner_adequacy": true,
+    "test_adequacy": true
+  },
+  "general_accuracy_or_pmx_claim": false,
+  "inferential_claims_admissible": true,
+  "intervals": {
+    "conditional_temporal_minus_state_brier": {
+      "campaigns": 120,
+      "confidence_level": 0.9833333333333333,
+      "estimate": -0.011012577339028719,
+      "lower": -0.011881414332026973,
+      "resamples": 10000,
+      "upper": -0.010148592690408565
+    },
+    "marginal_temporal_minus_state_brier": {
+      "campaigns": 120,
+      "confidence_level": 0.9833333333333333,
+      "estimate": -2.059171947860437e-06,
+      "lower": -4.826896483136583e-06,
+      "resamples": 10000,
+      "upper": 1.133486424391967e-07
+    },
+    "marginal_temporal_signed_error": {
+      "campaigns": 120,
+      "confidence_level": 0.9833333333333333,
+      "estimate": -0.014865098855409646,
+      "lower": -0.02351137966006366,
+      "resamples": 10000,
+      "upper": -0.0059073497595819955
+    }
+  },
+  "marginal_increment": "practically_equivalent",
+  "mean_marginal_calibration": "adequate",
+  "quality": {
+    "maximum_test_age_interval_width": 1.0279090404510498,
+    "minimum_stable_test_requests": 891
+  },
+  "source_commit": "bc03711b3a50daa90be305986dd12769a2d8ef30",
+  "source_run_id": "34118845320",
+  "status": "independent_confirmation_complete"
+}

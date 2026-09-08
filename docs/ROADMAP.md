@@ -252,10 +252,10 @@ in first-attempt run 34113304974. The frozen inflated-variance rule selected
 The primary conditional temporal contrast, matched state-only marginal
 equivalence, and marginal mean calibration have separate simultaneous-interval
 criteria. A matched stable endpoint is retained as an additional descriptive
-control. These are planned observations, not independent evidence already
-collected. The next gate is acquisition/analysis implementation and a separate
-four-cell no-fit preflight under new namespace and seed roots; the full matrix
-must follow that gate. Independent PMX parameterization remains outstanding.
+control. M9O supplied design evidence only; the subsequent acquisition/analysis
+implementation and separate four-cell no-fit preflight used new namespace and
+seed roots. The completed confirmation is reported in M9P below. Independent
+PMX parameterization remains outstanding.
 
 The preliminary article assessment is that the direction remains substantive,
 but its claimed advantage has not been demonstrated. Current evidence supports
@@ -268,14 +268,25 @@ fresh placement/law cells passed source, seed, timing and physical evidence
 separation checks, with zero fits or comparison scores. The initial dispatch's
 Git-normalized CSV byte mismatch is retained and repaired without a design
 change. The main acquisition/analysis implementation, matched controls and
-three-quantity family inference passed 241 tests. The next execution is the
-frozen 120-cell main workflow, gated by exact preflight and implementation
-identities; no preflight observation enters confirmation. Complete native main
-streams will be retained for 90 days alongside separated learner/evaluator
-bundles. PMX application input constraints and a calibration-identity derivation
+three-quantity family inference passed 241 tests. The frozen 120-cell main
+workflow followed, gated by exact preflight and implementation identities; no
+preflight observation entered confirmation. Complete native main streams are
+retained for 90 days alongside separated learner/evaluator bundles. PMX
+application input constraints and a calibration-identity derivation
 were documented without a new PMX run or a claim about prospective outcomes.
 
-The main M9P run 34118845320 is collecting its frozen 120 fresh campaigns.
+The [completed M9P report](milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md)
+records main run 34118845320 at bc03711b3a50daa90be305986dd12769a2d8ef30:
+all 120 fresh campaigns, all five scientific gates, 840 candidate/score pairs
+and 485 source/summary artifacts pass their respective audits. Conditional
+temporal information replicated (Brier difference −0.011012577), while marginal
+temporal/state Brier was practically equivalent (−0.000002059 within ±0.002).
+Temporal mean signed error was −0.014865099 with nominal 98.333% interval
+[−0.023511380, −0.005907350], inside the ±0.03 mean-bias region but below zero.
+The matched stable endpoint has smaller descriptive absolute error and marginal
+Brier; no superiority over it is established. The run used 69.051389 summed job
+runner-hours. Exact summaries, seals and the three-contrast figure are retained.
+
 M9Q's separate historical application census is complete in run 34125799582:
 DeathStarBench lacks the explicit SERVER marking required by this adapter, while
 OpenTelemetry's selected operations, errors and call edges are retained but its

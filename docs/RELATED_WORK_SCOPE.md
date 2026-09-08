@@ -2,8 +2,10 @@
 
 Status: a focused primary-source comparison for the current mathematical and
 experimental claims, not an exhaustive literature review. Read on 2026-09-07.
-The main M9P result is pending; M9R's bounded composition census is complete
-without a valid probability. This ledger does not select favorable comparators or turn
+Status updated 8 September: [M9P](milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md)
+is complete, with conditional replication and marginal practical equivalence;
+M9R's bounded composition census is complete without a valid probability.
+This ledger does not select favorable comparators or turn
 an implementation difficulty into evidence of scientific superiority.
 
 ## Identification and the observation contract
@@ -187,6 +189,7 @@ A claim of greater predictive accuracy, lower end-to-end cost, or an automatic
 choice of the smallest adequate model still needs direct evidence. The article
 should explain the qualified mathematical guarantees and the measured failure
 boundaries without presenting the historical sequence of integration attempts
-as the main contribution. M9P and the remaining independent PMX request-level
-mapping determine which stronger empirical claims can be supported; this ledger
-does not prejudge those results.
+as the main contribution. M9P now bounds the temporal model's extra marginal
+value within its registered equivalence region and passes its mean-bias criterion.
+It establishes no accuracy superiority over the matched endpoint or PMX. The
+independent PMX request-level mapping and comparison remain outstanding.

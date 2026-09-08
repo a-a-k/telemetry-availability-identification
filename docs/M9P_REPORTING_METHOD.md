@@ -1,5 +1,11 @@
 # Rendering the completed M9P aggregate results
 
+The [completed report](milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md),
+[reviewed evidence snapshot](evidence/m9p-34118845320/README.md) and
+[rendered figure](figures/m9p-confirmation/m9p-confirmation.png) are now retained
+in the repository. The automatic summary audit passed on 7 September 2026;
+the reviewed report and rendering were assembled on 8 September.
+
 The renderer was prepared before main-run candidate generation and evaluation.
 It reads only `candidate-manifest.json`, `evaluation-manifest.json` and
 `main-audit.json` from the completed run `34118845320` at

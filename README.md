@@ -19,9 +19,12 @@ uncertainty assumptions and semantic validation. Close prior work is attributed
 in the [source comparison](docs/RELATED_WORK_SCOPE.md).
 
 [M9N](docs/milestones/M9N_CHECKOUT_TEMPORAL_FAILOVER.md) localized a temporal
-checkout mechanism on retained data. Its [independent M9P confirmation](docs/M9P_TEMPORAL_CONFIRMATION_PROTOCOL.md)
-is collecting 120 fresh campaigns in run
-[34118845320](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34118845320).
+checkout mechanism on retained data. Its [completed independent M9P confirmation](docs/milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md)
+retains all 120 fresh campaigns and passes all five gates: conditional temporal
+information replicates, temporal and state-only mean forecasts are practically
+equivalent at the registered Brier tolerance, and temporal mean signed error
+is −0.014865 within the registered ±0.03 adequacy region. The matched endpoint
+control remains visible; no predictive superiority over it is established.
 The [completed PMX application census](docs/milestones/M9Q_PMX_APPLICATION_CENSUS.md)
 and [bounded composition control](docs/milestones/M9R_PMX_INCLUSIVE_ERROR_COMPOSITION.md)
 retain extraction/mapping and solver limits; they establish no independent

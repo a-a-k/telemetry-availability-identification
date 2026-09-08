@@ -1,8 +1,8 @@
 # Methods draft: identification and use of a telemetry-parameterized model
 
-Working methodological text, 7 September 2026. This draft consolidates the
-implemented restricted method and its proved scope. It leaves the independent
-M9P results to their completed-run report and does not substitute a failed
+Working methodological text, updated 8 September 2026. This draft consolidates the
+implemented restricted method and its proved scope. Independent M9P results are
+reported in the [completed-run report](milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md). It does not substitute a failed
 integration control for the outstanding independent PMX accuracy comparison.
 It is not a final abstract, novelty verdict or claim that the initial article
 design has been fully realized.
@@ -202,15 +202,18 @@ Identification answers which quantities the specified observation law can
 determine. Independent validation answers whether the specified success law
 predicts the operation's semantic outcome. M9K–M localized the static checkout
 discrepancy to one-path episodes and the request's repeated calls; M9N developed
-a temporal model on retained data. M9P freezes a new independent confirmation
-to separate conditional mechanism information, marginal gain relative to a
-state-only model, and adequacy of the mean forecast. Its outcome belongs in the
-completed-run report rather than being inferred from M9N.
+a temporal model on retained data. M9P completed a frozen 120-campaign independent
+confirmation separating conditional mechanism information, marginal gain relative
+to a state-only model, and adequacy of the mean forecast. All five gates passed:
+conditional information replicated, marginal temporal/state Brier was practically
+equivalent within ±0.002, and mean signed error was adequate within ±0.03 despite
+an entirely negative interval. The completed-run report preserves the exact
+intervals, matched endpoint controls, information costs and evidence seals.
 
 This temporal extension is an explicitly specified conditional-response model
 for checkout. It was developed through the preceding source and retained-data
 diagnosis; the signature compiler did not automatically discover it. Confirming
-that curve would not independently confirm the original static execution law,
+that curve does not independently confirm the original static execution law,
 identify every underlying fault cause, or extend the conjunctive-observation
 theorem to a dynamic router. The mathematical and live results retain these
 different model classes and development histories.

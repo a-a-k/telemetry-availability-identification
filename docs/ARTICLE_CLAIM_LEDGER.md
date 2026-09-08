@@ -1,8 +1,8 @@
 # Working claim ledger for the SIMPAT continuation
 
-Status: evidence organization while M9P independent acquisition is running and
-M9Q's four-sample application census is complete. This is not an article verdict or a substitute for
-the missing experiments. The original SIMPAT design remains a research plan;
+Status: updated 8 September 2026 after completed M9P confirmation and the M9Q/M9R
+censuses. This is not an article verdict or a substitute for the missing
+independent PMX comparison. The original SIMPAT design remains a research plan;
 its proposed contributions are not automatically established results.
 
 ## Separate questions before stating a contribution
@@ -20,8 +20,8 @@ its proposed contributions are not automatically established results.
 An affirmative answer to an earlier question does not establish a later one.
 In particular, a correct solver and identified parameters for a static route
 model do not establish the adequacy of that route model for checkout requests.
-Conversely, independently confirming M9P's explicitly specified temporal
-response curve would not validate the original static route law or establish
+Conversely, the independent confirmation of M9P's explicitly specified temporal
+response curve does not validate the original static route law or establish
 that the identification compiler automatically discovered that curve.
 
 ## Evidence and permitted scope
@@ -39,11 +39,11 @@ that the identification compiler automatically discovered that curve.
 | [M9E correction](M9E_PMX_PERFORMABILITY_CORRECTION.md), [M9H](milestones/M9H_PMX_SOURCE_ENTRYPOINT.md), [M9J](milestones/M9J_PMX_CARRIER_CONTROL.md) | A specific Retriever result has limited scope; the PMX performability command and a nonzero operation-error mechanism were subsequently recovered. | Application/integration cost does not reduce PMX's scientific relevance. The M9J prospective stdout-slot oracle failed and remains in the record. |
 | [M9K–M](milestones/M9M_CHECKOUT_ROUTING_MODEL.md) | Checkout's static-route discrepancy was localized using source, learner telemetry and preserved outcomes; static AND and OR bracket most examined cells. | Reused M7 evidence supports mechanism development. A path-failure association is not an observed backend assignment for every individual call. |
 | [M9N](milestones/M9N_CHECKOUT_TEMPORAL_FAILOVER.md) | The temporal mechanism diagnostic improved conditional fit and closed the signed marginal gap on reused data, while state-only and temporal marginal forecasts were nearly identical. | Reused test evidence; no independently confirmed incremental marginal value from age. Conditional held-out health is diagnostic input, not part of a marginal learner-only forecast. |
-| [M9O](milestones/M9O_TEMPORAL_CONFIRMATION_DESIGN.md), [M9P protocol](M9P_TEMPORAL_CONFIRMATION_PROTOCOL.md) | A 120-campaign independent design freezes conditional replication, marginal temporal/state comparison and signed-error adequacy, with matched endpoint controls. | Collection is running. No result or inferential conclusion may be filled in from M9N, the no-fit preflight, or incomplete main batches. |
+| [M9O design](milestones/M9O_TEMPORAL_CONFIRMATION_DESIGN.md), [completed M9P](milestones/M9P_INDEPENDENT_TEMPORAL_CONFIRMATION.md) | All 120 independent campaigns and all five gates pass. Conditional temporal information replicates; marginal temporal/state Brier difference is practically equivalent within ±0.002; mean temporal signed error −0.014865 is adequate within ±0.03. | Conditional scoring uses test health. The signed-error interval excludes zero despite passing the mean-bias tolerance. Matched endpoint descriptive scores are retained; neither automatic discovery nor superiority over that endpoint or PMX is established. |
 | [M9Q conformance](milestones/M9Q_PMX_OBSERVED_OPERATION_CONFORMANCE.md), [application census](milestones/M9Q_PMX_APPLICATION_CENSUS.md) | After the explicit artificial-oracle repair, the four historical samples yielded two no-SERVER-input cases and two fully retained observed-server inventories with matching operation/error and structural checks, but mismatched usage entries. | Original failures remain; timestamp-based workload entry selection differs from parent-root semantics. No full external-request mapping, calibrated performance model or availability forecast is established. |
 | [M9R composition control](milestones/M9R_PMX_INCLUSIVE_ERROR_COMPOSITION.md) | Retained native PMX models fail on uncontained failure types; explicit containment removes that boundary but subsequent loop-PMF errors yield zero evaluated physical mass, including the zero-error control. | Sixteen attempts retained, no valid probability. The inclusive/local error distinction remains analytic, not an observed 0.72-versus-0.8 solver result or evidence against the PMX ecosystem. |
 
-## Mathematical material that can be developed independently of pending outcomes
+## Mathematical material and its scope
 
 [B2 observable-target notes](B2_OBSERVABLE_TARGET_NOTES.md) separate an observable
 route functional from unique identification of all hidden factors, state the
@@ -72,7 +72,7 @@ can improve conditional prediction while its calibration-weighted marginal
 forecast remains close to a state-only or endpoint estimate. The exact identity
 requires its stated intercept, interior-solution, response-factor and target-
 weight conditions. It is not a bound for every fit with a response factor near
-one, and it does not predict the pending independent intervals.
+one, and it does not substitute for the independently measured M9P intervals.
 The [target-exposure note](TARGET_EXPOSURE_AND_MEAN_FORECASTS.md) states when
 equal calibration means can separate under different target weights, including
 sharp two-context ambiguity and a matched reweighted endpoint. Its artificial
@@ -87,8 +87,8 @@ calibration antecedents. It is not an exhaustive novelty result.
 
 The [methods draft](ARTICLE_METHODS_DRAFT.md) now assembles these definitions,
 restricted results, implementation boundaries and validation requirements into
-connected article text. It leaves pending M9P numbers and the independent PMX
-accuracy comparison open, without changing the initial design into a result.
+connected article text and links the completed M9P report. The independent PMX
+accuracy comparison remains open; the initial design is not thereby fully realized.
 
 ## Information and cost accounting
 
@@ -109,8 +109,8 @@ comparison; runner times and artifact sizes do not establish that effect.
 
 ## Items to resolve before completing the article argument
 
-- Complete and audit all preregistered M9P campaigns, frozen candidates,
-  evaluation outputs, adequacy gates and simultaneous intervals.
+- Carry the completed M9P result into the article with all three decisions,
+  the small remaining mean bias, the matched endpoint and its limited target scope.
 - Use the completed M9Q census and retained failures to define the next semantic
   mapping; no extra launcher or extractor repair is needed to report this stage.
 - Specify the remaining independent PMX availability comparison only after
