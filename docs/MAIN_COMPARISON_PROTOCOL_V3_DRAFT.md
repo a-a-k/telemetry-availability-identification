@@ -26,7 +26,7 @@ G/R/P/Φ, observation law/missingness, supported cases, estimator versions, sour
 
 10000 paired campaign bootstrap resamples внутри application×placement×failure-law strata. Campaign — кластер: методы и операции сохраняются вместе, нельзя независимо ресэмплировать requests/операции/методы. Предварительно фиксируются равные веса операций/условий, алгоритм missingness/common support и правило неоценимости пустой stratum. Каждый контраст приводится на общем покрытии; рядом собственное покрытие каждого метода и полный attempted census. Пустое общее покрытие → not estimable. Эта bootstrap процедура не обещает точное конечновыборочное семейное покрытие.
 
-До main требуется тест analysis code на искусственных campaign clusters, включая разное покрытие, пустую страту, зависимые операции и transfer pairing. Конкретная реализация весов/absence пока не заморожена; запуск по тексту без неё запрещён условием допуска v3.
+Primary analysis component v1 и [правила weights/common support](V3_CAMPAIGN_ANALYSIS_COMPONENT_V1.md) теперь реализованы:8 artificial controls, paired whole-campaign resampling, complete common campaign support и явное отсутствие оценок. Partial common cells сохраняются рядом с primary subset; empty conditions меняют явно указанную область, не подставляются нулями. Окончательные method bindings, evaluator seals/loading, stable/transfer/cost analysis и full main protocol остаются незавершёнными. Это ещё не main admission.
 
 Primary view — вся последовательность test attempts, включая переходы/timeout. Stable view дополнительна с retained fraction. Публикуются forecast, observed success, signed error, MAE pp, median/p90 absolute error, Brier, campaigns/attempts/coverage и все причины отсутствия. Ни малая ошибка, ни превосходство над PMX/B0 не являются admission gate.
 
@@ -36,14 +36,14 @@ Transfer: только source calibration + объявленное измене�
 
 ## Условия допуска и ближайшая работа
 
-| Условие | Состояние после итерации 021 |
+| Условие | Состояние после итерации 027 |
 | --- | --- |
 | Конкретный G/R/P/Φ и observation law основной модели | Есть exact demonstrator и applied joint-law candidates create_visit/read_user_timeline/browse_product; окончательный основной класс не выбран. |
 | Семантическая и идентификационная линии | S1/I1, I2 transfer ambiguity и I3 joint/masked sharp bounds с controls; соответствие business event и новизна F/I не закрыты. |
 | Граф реально влияет на прогноз, replay, A/B и unsupported | 25 исходных controls + пять joint-law/parser controls; applied build/replay и structural/equivalence checks прошли (run 34215477704). |
 | Контракты десяти операций / поддержка новым методом | Прикладные contracts технически квалифицированы; поддержка G* отдельно не установлена. |
 | Технический пример нового метода для каждого из трёх приложений | Технические graph candidates для3/3 apps прошли isolated build/replay (34215477704,34224526327); source/observation assumptions ограничены. Окончательный G* ещё не выбран. |
-| Frozen G0/G-ID/G*, refinements/ablations, H-records, analysis/missingness | Не завершено. |
+| Frozen G0/G-ID/G*, refinements/ablations, H-records, analysis/missingness | H-EXEC qualified4/4 и study32 выполняется; primary analysis/missingness component v1 frozen/tested. Final method bindings, refinements и остальные анализы не завершены. |
 | Изоляция future evaluator и seals | Квалифицированы ordinary-only graph builder и model-only replay (6/1 actual data reads); полная future candidate→evaluator цепочка остаётся. |
 
-Технические graph chains для каждой app выполнены в явно ограниченной области. Следующий результат — полностью определённый prospective H-пакет (максимум два deep mechanisms), semantic/identification class и обоснованные versions/ablations с собственным бюджетом. Основная матрица запускается только после выполнения всей таблицы, независимо от ожидаемого знака результатов.
+Технические graph chains для каждой app выполнены в явно ограниченной области. Следующий результат — завершённый H-EXEC study32 по frozen protocol, semantic/identification class и обоснованные versions/ablations с собственным бюджетом; максимум два deep mechanisms сохраняется. Основная матрица запускается только после выполнения всей таблицы, независимо от ожидаемого знака результатов.
