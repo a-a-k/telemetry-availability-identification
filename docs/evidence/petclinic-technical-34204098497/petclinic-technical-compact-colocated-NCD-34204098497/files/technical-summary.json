@@ -1,0 +1,216 @@
+{
+  "baseline_success_fractions": {
+    "create_visit": 1.0,
+    "list_owners": 1.0,
+    "list_vets": 1.0,
+    "owner_details_with_visits": 1.0
+  },
+  "calibration_health_ticks": 901,
+  "checks": {
+    "all_faults_confirmed_and_released": true,
+    "baseline_all_operations": true,
+    "both_replicas_observed": true,
+    "calibration_health": true,
+    "clean_calibration_native": true,
+    "exact_all_attempts": true,
+    "fresh_namespace": true,
+    "successful_calibration_linkage": true,
+    "test_health": true
+  },
+  "config_sha256": "ae6188c2096e7845099deb4c14d95e0a0f69b36a810ce23a78b301d601c55159",
+  "failure_law": "NCD",
+  "main_campaigns": 0,
+  "model_fits": 0,
+  "namespace": "petclinic-tech-v2-run34204098497-a1-colocated-NCD",
+  "native_bytes": 83954823,
+  "native_parse_seconds": 3.356027738999728,
+  "operation_summary": [
+    {
+      "attempts": 60,
+      "operation": "list_owners",
+      "period": "baseline",
+      "successes": 60,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 60,
+      "operation": "owner_details_with_visits",
+      "period": "baseline",
+      "successes": 60,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 60,
+      "operation": "create_visit",
+      "period": "baseline",
+      "successes": 60,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 60,
+      "operation": "list_vets",
+      "period": "baseline",
+      "successes": 60,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 900,
+      "operation": "list_owners",
+      "period": "calibration",
+      "successes": 900,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 900,
+      "operation": "owner_details_with_visits",
+      "period": "calibration",
+      "successes": 727,
+      "timed_out": 25,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 900,
+      "operation": "create_visit",
+      "period": "calibration",
+      "successes": 741,
+      "timed_out": 21,
+      "write_side_effect_without_success": 23
+    },
+    {
+      "attempts": 900,
+      "operation": "list_vets",
+      "period": "calibration",
+      "successes": 900,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 900,
+      "operation": "list_owners",
+      "period": "test",
+      "successes": 900,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 900,
+      "operation": "owner_details_with_visits",
+      "period": "test",
+      "successes": 731,
+      "timed_out": 18,
+      "write_side_effect_without_success": 0
+    },
+    {
+      "attempts": 900,
+      "operation": "create_visit",
+      "period": "test",
+      "successes": 723,
+      "timed_out": 25,
+      "write_side_effect_without_success": 27
+    },
+    {
+      "attempts": 900,
+      "operation": "list_vets",
+      "period": "test",
+      "successes": 900,
+      "timed_out": 0,
+      "write_side_effect_without_success": 0
+    }
+  ],
+  "parse": {
+    "invalid_traces": {},
+    "malformed_json_records": 0
+  },
+  "period_counts": {
+    "baseline": 240,
+    "calibration": 3600,
+    "test": 3600
+  },
+  "periods": {
+    "baseline": {
+      "completed_at": "2026-09-08T08:25:26.607287Z",
+      "controller": {
+        "active_network_causes_at_end": 0,
+        "active_pause_causes_at_end": 0,
+        "confirmed": 0,
+        "errors": [],
+        "events": 0,
+        "released": 0
+      },
+      "duration_seconds": 60,
+      "planned_events": 0,
+      "planned_operations": {
+        "create_visit": 60,
+        "list_owners": 60,
+        "list_vets": 60,
+        "owner_details_with_visits": 60
+      },
+      "planned_requests": 240,
+      "started_at": "2026-09-08T08:24:26.371962Z",
+      "workload_seed": 8326933143583288105
+    },
+    "calibration": {
+      "completed_at": "2026-09-08T08:41:37.087647Z",
+      "controller": {
+        "active_network_causes_at_end": 0,
+        "active_pause_causes_at_end": 0,
+        "confirmed": 84,
+        "errors": [],
+        "events": 84,
+        "released": 84
+      },
+      "duration_seconds": 900,
+      "planned_events": 84,
+      "planned_operations": {
+        "create_visit": 900,
+        "list_owners": 900,
+        "list_vets": 900,
+        "owner_details_with_visits": 900
+      },
+      "planned_requests": 3600,
+      "started_at": "2026-09-08T08:26:36.853048Z",
+      "workload_seed": 2356901007937287319
+    },
+    "test": {
+      "completed_at": "2026-09-08T08:57:47.715890Z",
+      "controller": {
+        "active_network_causes_at_end": 0,
+        "active_pause_causes_at_end": 0,
+        "confirmed": 81,
+        "errors": [],
+        "events": 81,
+        "released": 81
+      },
+      "duration_seconds": 900,
+      "planned_events": 81,
+      "planned_operations": {
+        "create_visit": 900,
+        "list_owners": 900,
+        "list_vets": 900,
+        "owner_details_with_visits": 900
+      },
+      "planned_requests": 3600,
+      "started_at": "2026-09-08T08:42:47.458298Z",
+      "workload_seed": 14690118734917140299
+    }
+  },
+  "placement": "colocated",
+  "profile": "spring_petclinic_microservices",
+  "repetition": 0,
+  "runtime_config_sha256": "8ab8ce1335b9f81356085966e887a9a86b48c06d95b01e6f43207aba06c53160",
+  "scope": "technical_preflight",
+  "source_run": "34204098497",
+  "study_head": "68bf0b86acab9072d0d8abfabb7c2d64d4a69546",
+  "successful_calibration_trace_fraction": 1.0,
+  "successful_replica_assignments": {
+    "a": 743,
+    "b": 725
+  },
+  "test_health_ticks": 901,
+  "usable": true
+}

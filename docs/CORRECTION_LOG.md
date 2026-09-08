@@ -17,3 +17,8 @@
 | Per-HTTP timeout не задавал deadline составной внешней операции; старый decoder отвергал L7OK | M7 checkout получал до трёх отдельных 2 s budgets; HTTP-health Petclinic требует явного L7 decoder. | [009](iterations/009-whole-operation-and-read-boundary-controls.md): versioned whole-operation driver, строгие prerequisites, isolated loader/read audit и 11 bounded controls. | Frozen historical outcomes не пересчитываются под новый contract; exact finite-state estimator сохранён. |
 
 В M9X не вводилась новая модель предложенного метода; 84 baseline/comparator rows совпадают по всем JSON-полям с M9V. Только PMX representation/coverage были пересчитаны. Новая comparative series не начиналась до принятия её окончательного протокола и qualification Petclinic.
+
+
+## V3: графовая цепочка вместо M7 как основного объекта
+
+Авторская [v3](SIMPAT_CORRECTION_V3.md) выявляет несоответствие роли M7 заявленной графовой проверке. Симптом и воспроизведение: topology-edges.csv не участвует в historical solver, что уже зафиксировано в ORIGINAL_MODEL_NO_ML_SPECIFICATION.md. Исправление: M7 оставлен сравнительным вариантом; добавлен bounded graph replay с 25 A/B/unsupported controls, историческая correspondence map и новый admission/analysis draft. Старые данные и frozen fits не переписаны; main campaigns=0. Полные 30 статусов и затронутые будущие расчёты — [итерация 011](iterations/011-v3-graph-chain-and-evidence.md). Технические Petclinic/PMX результаты перенесены в собственной области, а не зачтены G*.

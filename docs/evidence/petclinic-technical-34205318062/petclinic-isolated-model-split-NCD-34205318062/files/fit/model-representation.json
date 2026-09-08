@@ -1,0 +1,232 @@
+[
+  {
+    "declared_dependency_graph": {
+      "create_visit": [
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ],
+      "list_owners": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ]
+      ],
+      "list_vets": [
+        [
+          "api-gateway",
+          "vets-service"
+        ],
+        [
+          "vets-service",
+          "database"
+        ]
+      ],
+      "owner_details_with_visits": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ],
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ]
+    },
+    "implementation": "Fixed two-path original stochastic specialization; non-target dependencies are jointly absorbed in baseline q, not individually estimated.",
+    "known_non_target_dependencies": [
+      "api-gateway",
+      "customers-service",
+      "vets-service",
+      "database",
+      "visits-service-proxy"
+    ],
+    "limitations": [
+      "No typed general-graph solver",
+      "No explicit failover/retry/deadline/circuit-breaker dynamics",
+      "Scalar baseline residual assumes independence from target route",
+      "Split transfer assumes independent new logical domain with same estimated marginal g"
+    ],
+    "mode": "full",
+    "q_by_operation": {
+      "create_visit": 0.9918032786885246,
+      "list_owners": 0.9918032786885246,
+      "list_vets": 0.9918032786885246,
+      "owner_details_with_visits": 0.9918032786885246
+    },
+    "topology": {
+      "create_visit": {
+        "expected_requires_target": true,
+        "inferred_requires_target": true,
+        "operation": "create_visit",
+        "replica_a_assignments": 452,
+        "replica_b_assignments": 393,
+        "status": "confirmed",
+        "target_trace_fraction": 1.0,
+        "trace_support": 845
+      },
+      "list_owners": {
+        "expected_requires_target": false,
+        "inferred_requires_target": false,
+        "operation": "list_owners",
+        "replica_a_assignments": 0,
+        "replica_b_assignments": 0,
+        "status": "confirmed",
+        "target_trace_fraction": 0.0,
+        "trace_support": 960
+      },
+      "list_vets": {
+        "expected_requires_target": false,
+        "inferred_requires_target": false,
+        "operation": "list_vets",
+        "replica_a_assignments": 0,
+        "replica_b_assignments": 0,
+        "status": "confirmed",
+        "target_trace_fraction": 0.0,
+        "trace_support": 960
+      },
+      "owner_details_with_visits": {
+        "expected_requires_target": true,
+        "inferred_requires_target": true,
+        "operation": "owner_details_with_visits",
+        "replica_a_assignments": 431,
+        "replica_b_assignments": 412,
+        "status": "confirmed",
+        "target_trace_fraction": 1.0,
+        "trace_support": 843
+      }
+    }
+  },
+  {
+    "declared_dependency_graph": {
+      "create_visit": [
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ],
+      "list_owners": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ]
+      ],
+      "list_vets": [
+        [
+          "api-gateway",
+          "vets-service"
+        ],
+        [
+          "vets-service",
+          "database"
+        ]
+      ],
+      "owner_details_with_visits": [
+        [
+          "api-gateway",
+          "customers-service"
+        ],
+        [
+          "customers-service",
+          "database"
+        ],
+        [
+          "api-gateway",
+          "visits-service"
+        ],
+        [
+          "visits-service",
+          "database"
+        ]
+      ]
+    },
+    "implementation": "Fixed two-path original stochastic specialization; non-target dependencies are jointly absorbed in baseline q, not individually estimated.",
+    "known_non_target_dependencies": [
+      "api-gateway",
+      "customers-service",
+      "vets-service",
+      "database",
+      "visits-service-proxy"
+    ],
+    "limitations": [
+      "No typed general-graph solver",
+      "No explicit failover/retry/deadline/circuit-breaker dynamics",
+      "Scalar baseline residual assumes independence from target route",
+      "Split transfer assumes independent new logical domain with same estimated marginal g"
+    ],
+    "mode": "sampled_mixed",
+    "q_by_operation": {
+      "create_visit": 0.9918032786885246,
+      "list_owners": 0.9918032786885246,
+      "list_vets": 0.9918032786885246,
+      "owner_details_with_visits": 0.9918032786885246
+    },
+    "topology": {
+      "create_visit": {
+        "expected_requires_target": true,
+        "inferred_requires_target": true,
+        "operation": "create_visit",
+        "replica_a_assignments": 309,
+        "replica_b_assignments": 279,
+        "status": "confirmed",
+        "target_trace_fraction": 1.0,
+        "trace_support": 588
+      },
+      "list_owners": {
+        "expected_requires_target": false,
+        "inferred_requires_target": false,
+        "operation": "list_owners",
+        "replica_a_assignments": 0,
+        "replica_b_assignments": 0,
+        "status": "confirmed",
+        "target_trace_fraction": 0.0,
+        "trace_support": 693
+      },
+      "list_vets": {
+        "expected_requires_target": false,
+        "inferred_requires_target": false,
+        "operation": "list_vets",
+        "replica_a_assignments": 0,
+        "replica_b_assignments": 0,
+        "status": "confirmed",
+        "target_trace_fraction": 0.0,
+        "trace_support": 659
+      },
+      "owner_details_with_visits": {
+        "expected_requires_target": true,
+        "inferred_requires_target": true,
+        "operation": "owner_details_with_visits",
+        "replica_a_assignments": 300,
+        "replica_b_assignments": 277,
+        "status": "confirmed",
+        "target_trace_fraction": 1.0,
+        "trace_support": 577
+      }
+    }
+  }
+]

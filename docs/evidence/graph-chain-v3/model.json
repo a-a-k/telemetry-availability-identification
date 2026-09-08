@@ -1,0 +1,107 @@
+{
+  "extraction": {
+    "graph_coverage": "declared_complete_control",
+    "manual_fields": [
+      "replica primitive bindings",
+      "edge primitive bindings/default law",
+      "operation required targets",
+      "observation and state law assumptions"
+    ],
+    "observation_rows": 100,
+    "repeat_semantics": "same_static_state",
+    "routing": "ideal_static_reachability",
+    "trace_span_count": 5
+  },
+  "graph": {
+    "edges": [
+      {
+        "factors": [],
+        "observed_span_links": 1,
+        "source": "a",
+        "target": "target",
+        "type": "sync"
+      },
+      {
+        "factors": [],
+        "observed_span_links": 1,
+        "source": "b",
+        "target": "target",
+        "type": "sync"
+      },
+      {
+        "factors": [],
+        "observed_span_links": 1,
+        "source": "entry",
+        "target": "a",
+        "type": "sync"
+      },
+      {
+        "factors": [],
+        "observed_span_links": 1,
+        "source": "entry",
+        "target": "b",
+        "type": "sync"
+      }
+    ],
+    "services": [
+      "a",
+      "b",
+      "entry",
+      "target"
+    ]
+  },
+  "observation_law": {
+    "conditional_on_success": false,
+    "mask_independent_of_state": true,
+    "measured_primitives": [
+      "a",
+      "b"
+    ],
+    "version": "direct-primitive-mcar-v1"
+  },
+  "operation": {
+    "entry": "entry",
+    "id": "op",
+    "required": [
+      "target"
+    ],
+    "semantics": "immediate_sync_all_required"
+  },
+  "primitives": {
+    "a": {
+      "estimate": 0.8,
+      "observed_count": 100,
+      "population_observable": true,
+      "source": "direct primitive probe values",
+      "successes": 80
+    },
+    "b": {
+      "estimate": 0.5,
+      "observed_count": 100,
+      "population_observable": true,
+      "source": "direct primitive probe values",
+      "successes": 50
+    }
+  },
+  "replicas": {
+    "a": [
+      [
+        "a"
+      ]
+    ],
+    "b": [
+      [
+        "b"
+      ]
+    ],
+    "entry": [
+      []
+    ],
+    "target": [
+      []
+    ]
+  },
+  "scope": "controlled_demonstrator_only",
+  "state_law": "independent_bernoulli_primitives",
+  "version": "graph-replay-v3-control-1"
+}

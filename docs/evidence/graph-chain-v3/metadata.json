@@ -1,0 +1,47 @@
+{
+  "observation_law": {
+    "conditional_on_success": false,
+    "mask_independent_of_state": true,
+    "measured_primitives": [
+      "a",
+      "b"
+    ],
+    "version": "direct-primitive-mcar-v1"
+  },
+  "operation": {
+    "entry": "entry",
+    "id": "op",
+    "required": [
+      "target"
+    ],
+    "semantics": "immediate_sync_all_required"
+  },
+  "primitive_ids": [
+    "a",
+    "b"
+  ],
+  "purpose": "controlled_demonstrator",
+  "repeat_semantics": "same_static_state",
+  "replicas": {
+    "a": [
+      [
+        "a"
+      ]
+    ],
+    "b": [
+      [
+        "b"
+      ]
+    ],
+    "entry": [
+      []
+    ],
+    "target": [
+      []
+    ]
+  },
+  "routing": "ideal_static_reachability",
+  "state_law": "independent_bernoulli_primitives",
+  "trace_coverage": "declared_complete_control",
+  "unannotated_edge_law": "deterministic_live"
+}

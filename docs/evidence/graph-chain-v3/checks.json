@@ -1,0 +1,444 @@
+{
+  "checks": [
+    {
+      "absolute_error": 0.0,
+      "actual": 0.9,
+      "expected": 0.9,
+      "level": "A",
+      "name": "alternative_paths",
+      "states": 4
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.4,
+      "expected": 0.4,
+      "level": "A",
+      "name": "serial_required",
+      "states": 4
+    },
+    {
+      "absolute_error": 1.1102230246251565e-16,
+      "actual": 0.6299999999999999,
+      "expected": 0.63,
+      "level": "A",
+      "name": "shared_domain",
+      "states": 8
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.714,
+      "expected": 0.714,
+      "level": "A",
+      "name": "placement_changes_law_bindings",
+      "states": 16
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.925,
+      "expected": 0.925,
+      "level": "A",
+      "name": "three_replicas",
+      "states": 8
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.25,
+      "expected": 0.25,
+      "level": "A",
+      "name": "live_process_failed_communication",
+      "states": 2
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.8,
+      "expected": 0.8,
+      "level": "A",
+      "name": "optional_async",
+      "states": 4
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.0,
+      "expected": 0.0,
+      "level": "A",
+      "name": "async_is_only_required_path_counterexample",
+      "states": 4
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.8,
+      "expected": 0.8,
+      "level": "A",
+      "name": "repeat_same_static_state",
+      "states": 2
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.5,
+      "expected": 0.5,
+      "level": "A",
+      "name": "remove_only_one_effective_path",
+      "states": 4
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.9,
+      "expected": 0.9,
+      "level": "A",
+      "name": "deterministic_edge_subdivision_equivalence",
+      "states": 4
+    },
+    {
+      "absolute_error": 0.0,
+      "actual": 0.9,
+      "expected": 0.9,
+      "level": "A",
+      "name": "input_order_equivalence",
+      "states": 4
+    },
+    {
+      "indistinguishable_parameters": [
+        {
+          "a": 0.8,
+          "b": 0.25
+        },
+        {
+          "a": 0.8,
+          "b": 0.75
+        }
+      ],
+      "level": "B",
+      "name": "same_observation_law_different_target",
+      "result": {
+        "application_adequacy": "not evaluated",
+        "essential_primitives": [
+          "a",
+          "b"
+        ],
+        "event": "static synchronous reachability of every declared target",
+        "missing_essential_estimates": [
+          "b"
+        ],
+        "parameter_uncertainty": "not quantified by this demonstrator",
+        "parameters_population_identifiable": false,
+        "plug_in_missing_parameter_range": [
+          0.8,
+          1.0
+        ],
+        "prediction": null,
+        "range_is_confidence_interval": false,
+        "states_enumerated": 4,
+        "status": "target_not_identifiable",
+        "target_population_identifiable": false,
+        "version": "graph-replay-v3-control-1"
+      },
+      "target_witnesses": [
+        0.8500000000000001,
+        0.9500000000000001
+      ]
+    },
+    {
+      "level": "B",
+      "name": "nonunique_parameters_unique_target",
+      "result": {
+        "application_adequacy": "not evaluated",
+        "essential_primitives": [
+          "a"
+        ],
+        "event": "static synchronous reachability of every declared target",
+        "missing_essential_estimates": [],
+        "parameter_uncertainty": "not quantified by this demonstrator",
+        "parameters_population_identifiable": false,
+        "plug_in_missing_parameter_range": [
+          0.8,
+          0.8
+        ],
+        "prediction": 0.8,
+        "range_is_confidence_interval": false,
+        "states_enumerated": 4,
+        "status": "estimated",
+        "target_population_identifiable": true,
+        "version": "graph-replay-v3-control-1"
+      }
+    },
+    {
+      "level": "B",
+      "name": "observable_but_no_samples",
+      "result": {
+        "application_adequacy": "not evaluated",
+        "essential_primitives": [
+          "a",
+          "b"
+        ],
+        "event": "static synchronous reachability of every declared target",
+        "missing_essential_estimates": [
+          "a",
+          "b"
+        ],
+        "parameter_uncertainty": "not quantified by this demonstrator",
+        "parameters_population_identifiable": true,
+        "plug_in_missing_parameter_range": [
+          0.0,
+          1.0
+        ],
+        "prediction": null,
+        "range_is_confidence_interval": false,
+        "states_enumerated": 4,
+        "status": "insufficient_observations",
+        "target_population_identifiable": true,
+        "version": "graph-replay-v3-control-1"
+      }
+    },
+    {
+      "accuracy_gate": "none; finite sample errors reported separately",
+      "estimates": {
+        "a": {
+          "estimate": 0.8,
+          "observed_count": 20,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 16
+        },
+        "b": {
+          "estimate": 0.6,
+          "observed_count": 20,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 12
+        }
+      },
+      "level": "B",
+      "missing_rate": 0.0,
+      "n": 20,
+      "name": "mcar_n20_mask0.0",
+      "parameter_errors": {
+        "a": 0.0,
+        "b": 0.09999999999999998
+      },
+      "result": {
+        "application_adequacy": "not evaluated",
+        "essential_primitives": [
+          "a",
+          "b"
+        ],
+        "event": "static synchronous reachability of every declared target",
+        "missing_essential_estimates": [],
+        "parameter_uncertainty": "not quantified by this demonstrator",
+        "parameters_population_identifiable": true,
+        "plug_in_missing_parameter_range": [
+          0.92,
+          0.92
+        ],
+        "prediction": 0.92,
+        "range_is_confidence_interval": false,
+        "states_enumerated": 4,
+        "status": "estimated",
+        "target_population_identifiable": true,
+        "version": "graph-replay-v3-control-1"
+      },
+      "seed": 771723,
+      "target_error": 0.020000000000000018
+    },
+    {
+      "accuracy_gate": "none; finite sample errors reported separately",
+      "estimates": {
+        "a": {
+          "estimate": 0.75,
+          "observed_count": 12,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 9
+        },
+        "b": {
+          "estimate": 1.0,
+          "observed_count": 9,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 9
+        }
+      },
+      "level": "B",
+      "missing_rate": 0.5,
+      "n": 20,
+      "name": "mcar_n20_mask0.5",
+      "parameter_errors": {
+        "a": -0.050000000000000044,
+        "b": 0.5
+      },
+      "result": {
+        "application_adequacy": "not evaluated",
+        "essential_primitives": [
+          "a",
+          "b"
+        ],
+        "event": "static synchronous reachability of every declared target",
+        "missing_essential_estimates": [],
+        "parameter_uncertainty": "not quantified by this demonstrator",
+        "parameters_population_identifiable": true,
+        "plug_in_missing_parameter_range": [
+          1.0,
+          1.0
+        ],
+        "prediction": 1.0,
+        "range_is_confidence_interval": false,
+        "states_enumerated": 4,
+        "status": "estimated",
+        "target_population_identifiable": true,
+        "version": "graph-replay-v3-control-1"
+      },
+      "seed": 771773,
+      "target_error": 0.09999999999999998
+    },
+    {
+      "accuracy_gate": "none; finite sample errors reported separately",
+      "estimates": {
+        "a": {
+          "estimate": 0.76,
+          "observed_count": 200,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 152
+        },
+        "b": {
+          "estimate": 0.515,
+          "observed_count": 200,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 103
+        }
+      },
+      "level": "B",
+      "missing_rate": 0.0,
+      "n": 200,
+      "name": "mcar_n200_mask0.0",
+      "parameter_errors": {
+        "a": -0.040000000000000036,
+        "b": 0.015000000000000013
+      },
+      "result": {
+        "application_adequacy": "not evaluated",
+        "essential_primitives": [
+          "a",
+          "b"
+        ],
+        "event": "static synchronous reachability of every declared target",
+        "missing_essential_estimates": [],
+        "parameter_uncertainty": "not quantified by this demonstrator",
+        "parameters_population_identifiable": true,
+        "plug_in_missing_parameter_range": [
+          0.8836,
+          0.8836
+        ],
+        "prediction": 0.8836,
+        "range_is_confidence_interval": false,
+        "states_enumerated": 4,
+        "status": "estimated",
+        "target_population_identifiable": true,
+        "version": "graph-replay-v3-control-1"
+      },
+      "seed": 771903,
+      "target_error": -0.01639999999999997
+    },
+    {
+      "accuracy_gate": "none; finite sample errors reported separately",
+      "estimates": {
+        "a": {
+          "estimate": 0.78,
+          "observed_count": 100,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 78
+        },
+        "b": {
+          "estimate": 0.41,
+          "observed_count": 100,
+          "population_observable": true,
+          "source": "direct primitive probe values",
+          "successes": 41
+        }
+      },
+      "level": "B",
+      "missing_rate": 0.5,
+      "n": 200,
+      "name": "mcar_n200_mask0.5",
+      "parameter_errors": {
+        "a": -0.020000000000000018,
+        "b": -0.09000000000000002
+      },
+      "result": {
+        "application_adequacy": "not evaluated",
+        "essential_primitives": [
+          "a",
+          "b"
+        ],
+        "event": "static synchronous reachability of every declared target",
+        "missing_essential_estimates": [],
+        "parameter_uncertainty": "not quantified by this demonstrator",
+        "parameters_population_identifiable": true,
+        "plug_in_missing_parameter_range": [
+          0.8702,
+          0.8702
+        ],
+        "prediction": 0.8702,
+        "range_is_confidence_interval": false,
+        "states_enumerated": 4,
+        "status": "estimated",
+        "target_population_identifiable": true,
+        "version": "graph-replay-v3-control-1"
+      },
+      "seed": 771953,
+      "target_error": -0.02980000000000005
+    },
+    {
+      "level": "expected_unsupported",
+      "name": "eventual",
+      "reason": "unsupported predicate"
+    },
+    {
+      "level": "expected_unsupported",
+      "name": "success_conditioning",
+      "reason": "success-conditioned observations unsupported"
+    },
+    {
+      "level": "expected_unsupported",
+      "name": "informative_mask",
+      "reason": "informative missingness unsupported"
+    },
+    {
+      "level": "expected_unsupported",
+      "name": "execution_repeats",
+      "reason": "unsupported repeated execution"
+    },
+    {
+      "level": "expected_unsupported",
+      "name": "incomplete_graph",
+      "reason": "unknown graph completeness"
+    },
+    {
+      "level": "chain",
+      "name": "saved_model_separate_process",
+      "original_observation_paths_passed": false,
+      "prediction": 0.9,
+      "process_read_audit": false,
+      "replay_input_files": [
+        "model.json"
+      ],
+      "scope": "fresh working directory and explicit interface; not an OS sandbox"
+    }
+  ],
+  "deterministic_absolute_tolerance": 1e-12,
+  "input_sha256": {
+    "metadata.json": "cd48f5804e051e29480f950bc05e2ab191ed296647e0f0bad93a4251898134c7",
+    "model.json": "be088abf3631d4aef9a99897d580e42e2c030587f2283c0e1adb46efd4234381",
+    "observations.json": "5c1fd53f255ab45ac992ad8f0ece08d583aae435f33c7e63b5292caf683bb3f9",
+    "prediction.json": "2ae17807a2537aa0d6e95f53963b7c3947d4d861195fd6fae9257918688b9de6",
+    "traces.json": "c72a673f3c545df946368ff44ffa54f7b7b85f5030aa27cc7e26a1a43b4722e0"
+  },
+  "main_campaigns": 0,
+  "monte_carlo_solver": false,
+  "scope": "artificial_controls_only",
+  "source_sha256": {
+    "check_graph_chain_v3.py": "f2d4eed0c076b3626831f0afed02e984c81a820c0de5413c54bb09939fa7e615",
+    "graph_replay_v3.py": "e65b5c3321c47448fc855e16b45fae439a069c3a0232a8f3c9b96cd03c275fb5"
+  }
+}

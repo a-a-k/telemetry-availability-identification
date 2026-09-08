@@ -1,10 +1,13 @@
 # Working claim ledger for the SIMPAT continuation
 
-Status: updated 8 September 2026 after the author correction plan and the complete
-160-campaign / 480-operation M7 census. The primary method excludes ML and
-learned forecast corrections. M9N-M9P remains separate temporal-regression diagnostics. This is not an article verdict or a substitute for the missing
-independent PMX comparison. The original SIMPAT design remains a research plan;
-its proposed contributions are not automatically established results.
+Status: governed by [author correction v3](SIMPAT_CORRECTION_V3.md), 8 September 2026.
+M7 is a historical two-path comparator; the primary graph method must pass the
+new admission criteria. The independent PMX development comparison is documented
+in [M9X](milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md); it does not
+establish main-series accuracy. M9N–M9P remains separate regression diagnostics.
+The [v3 graph-chain record](iterations/011-v3-graph-chain-and-evidence.md) separates
+reusable evidence from incomplete F/I/E claims. Earlier claims below retain only
+their explicitly documented historical scope; proposed contributions are not results.
 
 ## Separate questions before stating a contribution
 
