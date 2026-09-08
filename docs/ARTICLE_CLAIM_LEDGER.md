@@ -147,3 +147,10 @@ from remaining obligations.
 - Form final claims from complete accuracy, coverage and cost evidence with
   their mathematical, information and execution assumptions. The existing
   M9N-M9P regression diagnostics are not primary evidence for the no-ML method.
+
+The [original-model specification](ORIGINAL_MODEL_NO_ML_SPECIFICATION.md) maps every
+G/R/P/Φ entity and every M7 probability to code, data and declared assumptions.
+M7 uses a fixed two-path model and does not pass its preserved full dependency
+graph or sync/async edge types to the solver. Its restrictions cannot be
+attributed to the whole original formalism. The historical combined loader
+preloads evaluator data; new forecasts require the isolated learner-only path.

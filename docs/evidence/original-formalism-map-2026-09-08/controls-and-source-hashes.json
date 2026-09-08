@@ -1,0 +1,233 @@
+{
+  "kind": "bounded_artificial_source_mapping_checks",
+  "data_role": "artificial known-parameter controls; not empirical validation",
+  "inputs": [
+    {
+      "path": "reference_models/original_stochconn/model.py",
+      "sha256": "820e6f5668e9292d3ea2a241de9cb1649bfb64d5ee663874a72952b21b9629cc"
+    },
+    {
+      "path": "reference_models/original_stochconn/estimators.py",
+      "sha256": "168e9a1b0e10786b0bca3f445728d5fe3122c96aba87de38be5267883bed90db"
+    },
+    {
+      "path": "reference_models/original_stochconn/LICENSE",
+      "sha256": "dc2e2f81d2d2f7937b3484a51b681e8262bec050371373a437b95872e968f7bc"
+    },
+    {
+      "path": "src/telemetry_availability/live_validation_analysis.py",
+      "sha256": "0b58ddd271a6eccbdd3d1f2879fae6e333825c4a95f2667ad1ecb1d12c646132"
+    },
+    {
+      "path": "src/telemetry_availability/live_evidence.py",
+      "sha256": "a20e474f9b78c5e189f7cde7f9ba7019b436b26e78531168e9bb2766edec17e1"
+    },
+    {
+      "path": "configs/m7_frozen_live.yaml",
+      "sha256": "42b5611f99051f52ba3c2250b2e82f50ece2ae2e275be7e13796a170b2586b6a"
+    },
+    {
+      "path": "scripts/check_original_formalism_map.py",
+      "sha256": "e01c5bce94168b671a406c08092411286a839c342c7516047646fa87b71782f6"
+    }
+  ],
+  "results": [
+    {
+      "control": "all_up",
+      "placement": "colocated",
+      "parameters": {
+        "g": 1.0,
+        "ea": 1.0,
+        "eb": 1.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "all_up",
+      "placement": "split",
+      "parameters": {
+        "g": 1.0,
+        "ea": 1.0,
+        "eb": 1.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "no_replica",
+      "placement": "colocated",
+      "parameters": {
+        "g": 1.0,
+        "ea": 0.0,
+        "eb": 0.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "no_replica",
+      "placement": "split",
+      "parameters": {
+        "g": 1.0,
+        "ea": 0.0,
+        "eb": 0.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "one_path",
+      "placement": "colocated",
+      "parameters": {
+        "g": 1.0,
+        "ea": 1.0,
+        "eb": 0.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "one_path",
+      "placement": "split",
+      "parameters": {
+        "g": 1.0,
+        "ea": 1.0,
+        "eb": 0.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 1.0,
+      "actual": 1.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "live_process_broken_communication",
+      "placement": "colocated",
+      "parameters": {
+        "g": 1.0,
+        "ea": 1.0,
+        "eb": 1.0,
+        "ca": 0.0,
+        "cb": 0.0
+      },
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "live_process_broken_communication",
+      "placement": "split",
+      "parameters": {
+        "g": 1.0,
+        "ea": 1.0,
+        "eb": 1.0,
+        "ca": 0.0,
+        "cb": 0.0
+      },
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "common_domain",
+      "placement": "colocated",
+      "parameters": {
+        "g": 0.8,
+        "ea": 1.0,
+        "eb": 1.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 0.8,
+      "actual": 0.8,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "common_domain",
+      "placement": "split",
+      "parameters": {
+        "g": 0.8,
+        "ea": 1.0,
+        "eb": 1.0,
+        "ca": 1.0,
+        "cb": 1.0
+      },
+      "expected": 0.96,
+      "actual": 0.96,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "mixed_known_parameters",
+      "placement": "colocated",
+      "parameters": {
+        "g": 0.8,
+        "ea": 0.9,
+        "eb": 0.85,
+        "ca": 0.95,
+        "cb": 0.9
+      },
+      "expected": 0.77274,
+      "actual": 0.7727400000000001,
+      "absolute_error": 1.1102230246251565e-16
+    },
+    {
+      "control": "mixed_known_parameters",
+      "placement": "split",
+      "parameters": {
+        "g": 0.8,
+        "ea": 0.9,
+        "eb": 0.85,
+        "ca": 0.95,
+        "cb": 0.9
+      },
+      "expected": 0.877392,
+      "actual": 0.8773920000000001,
+      "absolute_error": 1.1102230246251565e-16
+    },
+    {
+      "control": "replicated_logical_edge",
+      "engine": "original MODELS artifact",
+      "async_edge_probability": 1.0,
+      "expected": 0.792,
+      "actual": 0.792,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "nonblocking_async_failure",
+      "engine": "original MODELS artifact",
+      "async_edge_probability": 0.0,
+      "expected": 0.792,
+      "actual": 0.792,
+      "absolute_error": 0.0
+    },
+    {
+      "control": "eventual_requires_async",
+      "engine": "original MODELS artifact",
+      "async_edge_probability": 0.0,
+      "expected": 0.0,
+      "actual": 0.0,
+      "absolute_error": 0.0
+    }
+  ],
+  "checks": 15,
+  "maximum_absolute_error": 1.1102230246251565e-16,
+  "model_fits": 0,
+  "live_data_reads": 0,
+  "original_artifact_git_commit": "not established; exact inspected and copied files hashed"
+}

@@ -292,3 +292,10 @@ an observation contract, a target certificate, a law-preserving implemented
 reduction, an uncertainty statement under a sampling model, and an independently
 validated prediction for a declared operation. Each statement needs its own
 evidence; none alone establishes the entire sequence.
+
+The [original-model specification](ORIGINAL_MODEL_NO_ML_SPECIFICATION.md) maps every
+G/R/P/Φ entity and every M7 probability to code, data and declared assumptions.
+M7 uses a fixed two-path model and does not pass its preserved full dependency
+graph or sync/async edge types to the solver. Its restrictions cannot be
+attributed to the whole original formalism. The historical combined loader
+preloads evaluator data; new forecasts require the isolated learner-only path.
