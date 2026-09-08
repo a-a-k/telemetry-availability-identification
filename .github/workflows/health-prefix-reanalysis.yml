@@ -1,0 +1,107 @@
+name: Isolated historical health prefix refit and parity
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Restore pinned legacy sources and project only learner roles
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m telemetry_availability.health_prefix_reanalysis prepare
+      - uses: actions/upload-artifact@v7
+        with:
+          name: prefix-learners-deathstarbench_social_network-${{ github.run_id }}
+          path: workflow-results/learners/deathstarbench_social_network
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        with:
+          name: prefix-learners-opentelemetry_demo-${{ github.run_id }}
+          path: workflow-results/learners/opentelemetry_demo
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        with:
+          name: prefix-learners-spring_petclinic_microservices-${{ github.run_id }}
+          path: workflow-results/learners/spring_petclinic_microservices
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: prefix-preparation-${{ github.run_id }}
+          path: workflow-results/preparation
+          retention-days: 90
+          if-no-files-found: error
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo, spring_petclinic_microservices]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - uses: actions/download-artifact@v8
+        with:
+          name: prefix-learners-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-input/learners
+      - name: Replay legacy and corrected fits with enforced per-cell read boundaries
+        run: |
+          mkdir -p workflow-results/candidates
+          /usr/bin/time -v -o workflow-results/candidates/resource-usage.txt python -m telemetry_availability.health_prefix_reanalysis build --profile '${{ matrix.profile }}'
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: prefix-candidates-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/candidates
+          retention-days: 90
+          if-no-files-found: error
+  parity:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: prefix-candidates-*
+          path: workflow-input/candidates
+      - name: Verify all sealed predictions against historical versions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p workflow-results/comparison
+          /usr/bin/time -v -o workflow-results/comparison/resource-usage.txt python -m telemetry_availability.health_prefix_reanalysis evaluate
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: prefix-comparison-${{ github.run_id }}
+          path: workflow-results/comparison
+          retention-days: 90
+          if-no-files-found: error

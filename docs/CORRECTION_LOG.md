@@ -39,3 +39,8 @@ The star-prefix correction is now a separate version in `health_prefix_audit.py`
 ### Prefix census adapter qualification schema correction
 
 Run 34217215671 failed at the first M7 learner manifest: historical qualification is in audit/boundary.json, not manifest.usable. No completed census was produced. [v2 correction](HEALTH_PREFIX_AUDIT_V2_CORRECTION.md) preserves v1 bytes and requires the actual positive qualification flags. The same full retained census is repeated; decoder/source data unchanged.
+
+
+## Full health-prefix census and replay boundary (2026-09-08)
+
+[Run 34217614608](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34217614608) passed at 92f0cdb. [Census](milestones/HEALTH_PREFIX_CENSUS.md): 119/160 M7 calibration cases, 117/160 test-health cases, and 8/8 Petclinic calibration cases affected. Two preparation failures preserved; the second CRLF/LF lock mismatch motivated mandatory staged Git-byte verification. No fit/accuracy effect claimed. [Iteration 017](iterations/017-health-prefix-census-and-refit.md) updates all 30 criteria and freezes a complete isolated old/corrected refit with historical parity before rescore.
