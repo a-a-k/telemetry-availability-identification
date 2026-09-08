@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import subprocess
+import time
 import zipfile
 
 from telemetry_availability.isolated_stochastic_fit import verify_learner_bundle, write
@@ -25,11 +26,17 @@ def main():
     parser.add_argument('--law',choices=['N','NC','ND','NCD'],required=True)
     args=parser.parse_args()
     run=34204098497 if (args.placement,args.law)==('colocated','NCD') else 34202539028
-    run_info=json.loads(api(f'actions/runs/{run}'))
-    assert run_info['head_sha']==SOURCES[run]
     name=f'petclinic-technical-learner-{args.placement}-{args.law}-{run}'
-    artifacts=json.loads(api(f'actions/runs/{run}/artifacts?per_page=100'))['artifacts']
-    matches=[a for a in artifacts if a['name']==name]
+    for attempt in range(360):
+        run_info=json.loads(api(f'actions/runs/{run}'))
+        assert run_info['head_sha']==SOURCES[run]
+        artifacts=json.loads(api(f'actions/runs/{run}/artifacts?per_page=100'))['artifacts']
+        matches=[a for a in artifacts if a['name']==name]
+        if matches or run_info['status']=='completed':
+            break
+        if attempt%10==0:
+            print('Waiting for the declared acquisition artifact: '+name,flush=True)
+        time.sleep(30)
     if len(matches)!=1:
         raise ValueError('required retained learner artifact unavailable: '+name)
     meta=matches[0]
