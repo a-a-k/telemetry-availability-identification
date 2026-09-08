@@ -1,0 +1,27 @@
+name: Original AINA artifact and exact semantic audit v1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Verify and audit all 250 original archives remotely
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p workflow-results/aina-compact
+          /usr/bin/time -v -o workflow-results/aina-compact/resource-usage.txt python scripts/audit_original_aina_v1.py
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: original-aina-audit-compact-${{ github.run_id }}
+          path: workflow-results/aina-compact
+          retention-days: 90
+          if-no-files-found: error

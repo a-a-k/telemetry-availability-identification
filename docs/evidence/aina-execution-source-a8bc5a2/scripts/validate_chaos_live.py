@@ -1,0 +1,245 @@
+#!/usr/bin/env python3
+"""
+Orchestrate a quick validation window:
+- stop services via compose_chaos.sh (p_fail usually 1.0 to guarantee at least one kill)
+- record Locust live stats during the outage
+- assert that the chaos run actually killed something and that R_live dropped below a threshold
+The resulting summary is written to --summary and supporting files (--log, --live) can be archived.
+"""
+import argparse
+import json
+import subprocess
+import sys
+import time
+import threading
+import urllib.request
+from pathlib import Path
+
+
+def read_json_lines(path: Path):
+    rows = []
+    if not path.exists():
+        return rows
+    with path.open() as fh:
+        for line in fh:
+            line = line.strip()
+            if not line:
+                continue
+            try:
+                rows.append(json.loads(line))
+            except json.JSONDecodeError:
+                continue
+    return rows
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--disallowlist", required=True)
+    ap.add_argument("--window", type=int, default=30)
+    ap.add_argument("--p-fail", type=float, default=1.0)
+    ap.add_argument("--log", default="validation_window_log.jsonl")
+    ap.add_argument("--live", default="validation_live.json")
+    ap.add_argument("--summary", default="validation_summary.json")
+    ap.add_argument("--min-kills", type=int, default=1)
+    ap.add_argument("--max-live", type=float, default=0.99)
+    ap.add_argument("--collect-delay", type=int, default=15,
+                    help="Seconds to wait after chaos starts before capturing Locust stats.")
+    ap.add_argument("--collect-window", type=int,
+                    help="Window duration passed to collect_live.py (defaults to --window).")
+    ap.add_argument("--min-total", type=int, default=0,
+                    help="(Deprecated) Locust requirement no longer used; kept for CLI compatibility.")
+    ap.add_argument("--max-attempts", type=int, default=3,
+                    help="Retry chaos+measurement if traffic stays below min-total.")
+    ap.add_argument("--retry-sleep", type=int, default=5,
+                    help="Seconds to sleep between attempts when re-trying.")
+    ap.add_argument("--latency-p95-threshold", type=float, default=1500.0,
+                    help="Threshold passed to collect_live.py for marking latency-based failures.")
+    ap.add_argument("--probe-frontend", default="",
+                    help="Optional frontend base URL for functional probes (forwarded to collect_live.py).")
+    ap.add_argument("--probe-attempts", type=int, default=0,
+                    help="Number of checkout probes to run per window (0 disables).")
+    ap.add_argument("--probe-checkout", action="store_true", default=False,
+                    help="Forward --probe-checkout to collect_live.py (runs checkout scenario).")
+    ap.add_argument("--probe-url", default="http://localhost:8080/",
+                    help="Optional HTTP endpoint to probe during chaos; empty string disables probing.")
+    ap.add_argument("--probe-interval", type=float, default=1.0,
+                    help="Seconds between HTTP probe requests.")
+    ap.add_argument("--min-probe-failures", type=int, default=1,
+                    help="If at least this many probe requests fail, validation succeeds even if R_live stays high.")
+    args = ap.parse_args()
+
+    log_path = Path(args.log)
+    live_path = Path(args.live)
+    summary_path = Path(args.summary)
+
+    for path in (log_path, live_path, summary_path):
+        if path.exists():
+            path.unlink()
+
+    def http_probe(url, duration, interval, out):
+        end = time.monotonic() + duration
+        total = fail = 0
+        interval = max(0.1, interval)
+        while time.monotonic() < end:
+            total += 1
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "chaos-validator"})
+                with urllib.request.urlopen(req, timeout=5) as resp:
+                    resp.read(1)
+            except Exception:
+                fail += 1
+            time.sleep(interval)
+        out["probe_total"] = total
+        out["probe_fail"] = fail
+
+    def run_attempt(attempt: int):
+        before = len(read_json_lines(log_path))
+        chaos_cmd = [
+            "bash",
+            "scripts/compose_chaos.sh",
+            str(args.p_fail),
+            args.disallowlist,
+            str(args.window),
+            str(log_path),
+        ]
+        collect_window = args.collect_window or args.window
+        collect_cmd = [
+            "python3",
+            "scripts/collect_live.py",
+            "--window",
+            str(collect_window),
+            "--latency-p95-threshold",
+            str(args.latency_p95_threshold),
+            "--out",
+            str(live_path),
+        ]
+        if args.probe_frontend:
+            collect_cmd.extend(["--probe-frontend", args.probe_frontend])
+        if args.probe_attempts and args.probe_attempts > 0:
+            collect_cmd.extend(["--probe-attempts", str(args.probe_attempts)])
+        if args.probe_checkout:
+            collect_cmd.append("--probe-checkout")
+
+        print(f"[validation] attempt {attempt}: chaos window={args.window}s delay={args.collect_delay}s collect_window={collect_window}s", file=sys.stderr)
+        chaos_proc = subprocess.Popen(chaos_cmd)
+        probe_result = {"probe_total": 0, "probe_fail": 0}
+        probe_thread = None
+        if args.probe_url:
+            probe_thread = threading.Thread(
+                target=http_probe,
+                args=(args.probe_url, collect_window, args.probe_interval, probe_result),
+                daemon=True,
+            )
+            probe_thread.start()
+        try:
+            if args.collect_delay > 0:
+                time.sleep(args.collect_delay)
+            subprocess.run(collect_cmd, check=True)
+        except subprocess.CalledProcessError as e:
+            print(f"[validation] collect_live.py failed (attempt {attempt}): {e}", file=sys.stderr)
+            chaos_proc.wait()
+            return None
+        finally:
+            chaos_rc = chaos_proc.wait()
+            if chaos_rc != 0:
+                print(f"compose_chaos.sh exited with {chaos_rc}", file=sys.stderr)
+            if probe_thread:
+                probe_thread.join(timeout=collect_window + 5)
+
+        entries = read_json_lines(log_path)
+        new_entries = entries[before:]
+        last = new_entries[-1] if new_entries else (entries[-1] if entries else {})
+        if not last:
+            print(f"No chaos entries recorded in {log_path}", file=sys.stderr)
+            return None
+
+        with live_path.open() as fh:
+            live = json.load(fh)
+        r_live = float(live.get("R_live") or 0.0)
+
+        summary = {
+            "attempt": attempt,
+            "window_s": args.window,
+            "collect_window_s": collect_window,
+            "collect_delay_s": args.collect_delay,
+            "p_fail": args.p_fail,
+            "min_kills": args.min_kills,
+            "max_live": args.max_live,
+            "min_total": args.min_total,
+            "min_probe_failures": args.min_probe_failures,
+            "eligible": int(last.get("eligible") or 0),
+            "killed": int(last.get("killed") or 0),
+            "services": last.get("services"),
+            "R_live": r_live,
+            "detail": live.get("detail"),
+            "probe_total": probe_result.get("probe_total", 0),
+            "probe_fail": probe_result.get("probe_fail", 0),
+        }
+        return summary
+
+    final_summary = None
+    for attempt in range(1, args.max_attempts + 1):
+        summary = run_attempt(attempt)
+        if not summary:
+            if attempt >= args.max_attempts:
+                print("[validation] giving up after repeated collect failures", file=sys.stderr)
+                return 1
+            time.sleep(max(0, args.retry_sleep))
+            continue
+        killed = summary["killed"]
+        eligible = summary["eligible"]
+        detail = summary.get("detail") or {}
+        collect_probe_fail = int(detail.get("probe_fail") or 0)
+        extra_probe_fail = summary.get("probe_fail", 0)
+        total_probe_fail = collect_probe_fail + extra_probe_fail
+        r_live = summary["R_live"]
+        probe_ok = (args.min_probe_failures <= 0) or (total_probe_fail >= args.min_probe_failures)
+
+        if eligible <= 0:
+            print("Validation failed: no eligible services detected for chaos", file=sys.stderr)
+            return 1
+        if killed < args.min_kills:
+            print(
+                f"Validation failed: expected at least {args.min_kills} kills, got {killed}",
+                file=sys.stderr,
+            )
+            return 1
+        if r_live > args.max_live and not probe_ok:
+            if attempt >= args.max_attempts:
+                print(
+                    f"Validation failed: R_live={r_live:.4f} exceeds threshold {args.max_live} after {attempt} attempts",
+                    file=sys.stderr,
+                )
+                final_summary = summary
+                break
+            print(
+                f"[validation] attempt {attempt}: R_live={r_live:.4f} > max_live={args.max_live}, retrying...",
+                file=sys.stderr,
+            )
+            time.sleep(max(0, args.retry_sleep))
+            continue
+        final_summary = summary
+        break
+
+    if not final_summary:
+        print("Validation failed: no successful attempts recorded", file=sys.stderr)
+        return 1
+
+    with summary_path.open("w") as fh:
+        json.dump(final_summary, fh)
+    print(json.dumps(final_summary))
+
+    detail = final_summary.get("detail") or {}
+    collect_probe_fail = int(detail.get("probe_fail") or 0)
+    extra_probe_fail = final_summary.get("probe_fail", 0)
+    total_probe_fail = collect_probe_fail + extra_probe_fail
+    probe_ok = (args.min_probe_failures <= 0) or (total_probe_fail >= args.min_probe_failures)
+    if final_summary["killed"] < args.min_kills or final_summary["eligible"] <= 0:
+        return 1
+    if (final_summary["R_live"] > args.max_live) and not probe_ok:
+        return 2
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

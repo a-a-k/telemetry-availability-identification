@@ -1,0 +1,19 @@
+{
+  "GET /api/products": {
+    "entry": "frontend",
+    "any_of": ["product-catalog"]
+  },
+  "GET /api/recommendations": {
+    "entry": "frontend",
+    "any_of": ["recommendation"]
+  },
+  "GET /api/cart": {
+    "entry": "frontend",
+    "all_of": ["cart"]
+  },
+  "POST /api/checkout": {
+    "entry": "frontend",
+    "all_of": ["checkout", "cart", "payment", "shipping"],
+    "exclude_async": true
+  }
+}

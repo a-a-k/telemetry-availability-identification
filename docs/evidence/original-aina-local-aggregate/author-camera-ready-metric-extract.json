@@ -1,0 +1,37 @@
+{
+  "source": "DONE/Model Discovery and Async/camera-ready/Sources/main_camera_ready.tex",
+  "sha256": "0ef4744b34d31f25051aee7f0beb4b33e12522354c3025309d7c2dddd02381b3",
+  "bytes": 26128,
+  "sections": [
+    {
+      "first_line": 40,
+      "last_line": 45,
+      "text": "endpoint-specific success predicates, and estimate availability under independent\nfail-stop crashes via Monte Carlo simulation. We evaluate on the OpenTelemetry Demo\n(``Astronomy Shop'') with a GitHub Actions pipeline that couples graph discovery,\nsimulation, and container-kill experiments in Docker Compose. Asynchronous semantics\nchange predicted availabilities by at most 0.001 percentage points, so in this\ncase study the Kafka edge treatment is effectively irrelevant."
+    },
+    {
+      "first_line": 153,
+      "last_line": 158,
+      "text": "\\begin{equation}\n  \\hat{R}^{(m)}_u=\\frac{1}{M}\\sum_{i=1}^{M}\\!\\textit{success}^{(m)}(u,K_i),\n\\end{equation}\nwhere $K_i$ are i.i.d.\\ failure sets at fraction $p_{\\mathrm{fail}}$.\nEach trial removes failed services (and, under async semantics, Kafka edges) and checks reachability on the remaining graph.\nWe use $M=5\\times 10^{6}$ trials per job; the resulting Monte Carlo noise is negligible after averaging over repeated jobs."
+    },
+    {
+      "first_line": 182,
+      "last_line": 185,
+      "text": "\nFor the four probed endpoints (Table~\\ref{tab:endpoints}), immediate success depends on synchronous backend services.\nKafka consumer services may appear in the discovered graph, but they are not required members of any $T(u)$, so asynchronous semantics can matter\nonly if Kafka edges lie on paths to these synchronous targets."
+    },
+    {
+      "first_line": 264,
+      "last_line": 271,
+      "text": "We omit Monte Carlo error bars: with $M{=}5\\times 10^{6}$ trials per job and averaging over 50 jobs, their contribution is below the plot resolution.\n\nAt low failure fractions ($p_{\\mathrm{fail}}{=}0.1$ and $0.3$) the model is optimistic (roughly +10 and +5 percentage points).\nAt $p_{\\mathrm{fail}}{=}0.5$ the aggregate estimate is close to unbiased, while at higher failure fractions it becomes pessimistic (about $-4$ points at $0.7$ and $-12$ points at $0.9$).\nOverall, the trace-discovered connectivity model captures the degradation trend but omits mechanisms (e.g., retries and gray failures) that shape behaviour at the extremes.\n\nThe two semantics are indistinguishable at the aggregate level: values for $\\hat{R}^{(\\mathrm{all})}$ and $\\hat{R}^{(\\mathrm{async})}$ match to three decimals across all $p_{\\mathrm{fail}}$.\nFor these predicates, discounting Kafka edges does not change reachability to the synchronous targets that define immediate success."
+    },
+    {
+      "first_line": 328,
+      "last_line": 336,
+      "text": "\\subsection{Endpoint-Level Effect of Async Semantics (RQ2)}\n\nTo isolate the effect of asynchronous semantics we examine\n$\\Delta_u(p_{\\mathrm{fail}})=\\hat{R}^{(\\mathrm{async})}_u-\\hat{R}^{(\\mathrm{all})}_u$.\nAcross all endpoints and failure fractions, $|\\Delta_u|$ stays around $10^{-5}$ and fluctuates near zero (Fig.~\\ref{fig:results}b).\nThis is far below the practical threshold $\\Delta_{\\min}{=}0.01$ and below the resolution of the live measurements, so treating Kafka edges as non-blocking does not change conclusions for immediate HTTP success on this demo.\n\nThe reason is structural: the discovered Kafka edges connect producers to downstream consumers that process events after the HTTP response returns, and those consumer services are not required by the target sets in Table~\\ref{tab:endpoints}.\nIf ``success'' instead required end-to-end completion of the asynchronous workflow, Kafka reachability (and richer broker semantics) would become central."
+    },
+    {
+      "first_line": 364,
+      "last_line": 368,
+      "text": "\\textbf{RQ1.} The trace-derived connectivity model reproduces the overall degradation trend but is optimistic at low failure fractions and pessimistic when most services are down.\n\n\\textbf{RQ2.} For the studied endpoints, the async treatment changes predicted availability by at most $10^{-5}$ (0.001 percentage points), yielding no measurable benefit for immediate-response success.\n\n\\textbf{RQ3.} The bias pattern matches our prior DeathStarBench results~\\cite{krasnovsky2025modeldiscovery,gan2019deathstarbench}; a connectivity-only model is a reasonable baseline for immediate-response SLOs, while richer semantics are warranted when success depends on eventual processing or when additional failure modes dominate."
+    }
+  ]
+}
