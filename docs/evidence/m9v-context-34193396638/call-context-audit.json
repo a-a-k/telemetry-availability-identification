@@ -1,0 +1,692 @@
+{
+  "audit_commit": "7bd0a1394fd350d0129b3bf244222700364b22e9",
+  "audit_run_id": "34193396638",
+  "cases": [
+    {
+      "ancestor_repeat_examples": [],
+      "case_id": "deathstar-colocated--compose_post",
+      "cyclic_operation_components": [],
+      "cyclic_operation_labels": {},
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1204,
+        "3": 1200,
+        "4": 7921,
+        "5": 3569
+      },
+      "native_ancestor_operation_repeats": {},
+      "observed_full_caller_context_count": 18,
+      "operation_count": 18
+    },
+    {
+      "ancestor_repeat_examples": [],
+      "case_id": "deathstar-colocated--read_home_timeline",
+      "cyclic_operation_components": [],
+      "cyclic_operation_labels": {},
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1200,
+        "3": 1200,
+        "4": 1200
+      },
+      "native_ancestor_operation_repeats": {},
+      "observed_full_caller_context_count": 4,
+      "operation_count": 4
+    },
+    {
+      "ancestor_repeat_examples": [],
+      "case_id": "deathstar-colocated--read_user_timeline",
+      "cyclic_operation_components": [],
+      "cyclic_operation_labels": {},
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1584,
+        "3": 780,
+        "4": 775
+      },
+      "native_ancestor_operation_repeats": {},
+      "observed_full_caller_context_count": 9,
+      "operation_count": 7
+    },
+    {
+      "ancestor_repeat_examples": [],
+      "case_id": "deathstar-split--compose_post",
+      "cyclic_operation_components": [],
+      "cyclic_operation_labels": {},
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1203,
+        "3": 1200,
+        "4": 8178,
+        "5": 3564
+      },
+      "native_ancestor_operation_repeats": {},
+      "observed_full_caller_context_count": 17,
+      "operation_count": 17
+    },
+    {
+      "ancestor_repeat_examples": [],
+      "case_id": "deathstar-split--read_home_timeline",
+      "cyclic_operation_components": [],
+      "cyclic_operation_labels": {},
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1200,
+        "3": 1200,
+        "4": 1200
+      },
+      "native_ancestor_operation_repeats": {},
+      "observed_full_caller_context_count": 4,
+      "operation_count": 4
+    },
+    {
+      "ancestor_repeat_examples": [],
+      "case_id": "deathstar-split--read_user_timeline",
+      "cyclic_operation_components": [],
+      "cyclic_operation_labels": {},
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1355,
+        "3": 1024,
+        "4": 1018
+      },
+      "native_ancestor_operation_repeats": {},
+      "observed_full_caller_context_count": 7,
+      "operation_count": 5
+    },
+    {
+      "ancestor_repeat_examples": [
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "c68163329b6f44df",
+          "trace_id": "33554cf54a649d6b61aea85e5332b3bb"
+        },
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_ce004ccd59658c83cb2e9d69",
+            "operation_07e39e2684be6e8b1dc6996a",
+            "operation_07e39e2684be6e8b1dc6996a"
+          ],
+          "span_id": "b80793bdf667a0e5",
+          "trace_id": "33554cf54a649d6b61aea85e5332b3bb"
+        },
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "2e2bb8fd54291e78",
+          "trace_id": "e00222887d87d22a6f21e1d9a2c0d526"
+        },
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_ce004ccd59658c83cb2e9d69",
+            "operation_07e39e2684be6e8b1dc6996a",
+            "operation_07e39e2684be6e8b1dc6996a"
+          ],
+          "span_id": "e3141577fc4b2e15",
+          "trace_id": "e00222887d87d22a6f21e1d9a2c0d526"
+        }
+      ],
+      "case_id": "otel-colocated--add_to_cart",
+      "cyclic_operation_components": [
+        [
+          "operation_07e39e2684be6e8b1dc6996a"
+        ],
+        [
+          "operation_3530f4dac81f122f3833a289"
+        ]
+      ],
+      "cyclic_operation_labels": {
+        "operation_07e39e2684be6e8b1dc6996a": {
+          "instance_key": "container.id",
+          "instance_value": "b678ff33d1575aa2764fadecb2478c51b072a1b018d1e041fc5a68ff38ff2290",
+          "operation": "[\"POST /api/cart\",\"POST\",\"/api/cart\"]",
+          "service": "frontend"
+        },
+        "operation_3530f4dac81f122f3833a289": {
+          "instance_key": "container.id",
+          "instance_value": "b678ff33d1575aa2764fadecb2478c51b072a1b018d1e041fc5a68ff38ff2290",
+          "operation": "[\"GET /api/products/[productId]/index\",\"GET\",\"/api/products/[productId]/index\"]",
+          "service": "frontend"
+        }
+      },
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 2211,
+        "3": 2211,
+        "4": 2211,
+        "5": 2926
+      },
+      "native_ancestor_operation_repeats": {
+        "operation_07e39e2684be6e8b1dc6996a": 1011,
+        "operation_3530f4dac81f122f3833a289": 1013
+      },
+      "observed_full_caller_context_count": 13,
+      "operation_count": 9
+    },
+    {
+      "ancestor_repeat_examples": [
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "c8c93a2ef0aa7738",
+          "trace_id": "afe66bc24520ea353f1c1c0d2b47ef93"
+        },
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "498c63493c15f562",
+          "trace_id": "f7ceb0894db206620235c9c6429aecbe"
+        },
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "b2cf5cc45fae717b",
+          "trace_id": "a25cf8afc78658bc657d3d1d85cbfb17"
+        },
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "c751d1e7d798d8fa",
+          "trace_id": "feb9eef26a63bbe475b5566aa6499a3f"
+        }
+      ],
+      "case_id": "otel-colocated--browse_product",
+      "cyclic_operation_components": [
+        [
+          "operation_3530f4dac81f122f3833a289"
+        ]
+      ],
+      "cyclic_operation_labels": {
+        "operation_3530f4dac81f122f3833a289": {
+          "instance_key": "container.id",
+          "instance_value": "b678ff33d1575aa2764fadecb2478c51b072a1b018d1e041fc5a68ff38ff2290",
+          "operation": "[\"GET /api/products/[productId]/index\",\"GET\",\"/api/products/[productId]/index\"]",
+          "service": "frontend"
+        }
+      },
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1200,
+        "3": 1200,
+        "4": 1200,
+        "5": 948
+      },
+      "native_ancestor_operation_repeats": {
+        "operation_3530f4dac81f122f3833a289": 1017
+      },
+      "observed_full_caller_context_count": 8,
+      "operation_count": 5
+    },
+    {
+      "ancestor_repeat_examples": [
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "bd1cecbb49c4d1f2",
+          "trace_id": "df72b7d0d1a6220e4977ed1cc7252b0f"
+        },
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_ce004ccd59658c83cb2e9d69",
+            "operation_07e39e2684be6e8b1dc6996a",
+            "operation_07e39e2684be6e8b1dc6996a"
+          ],
+          "span_id": "db59a52a8e842abf",
+          "trace_id": "df72b7d0d1a6220e4977ed1cc7252b0f"
+        },
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_556f3146f2079ee87839f708",
+            "operation_45a2a8e9f8dee478a61df170",
+            "operation_45a2a8e9f8dee478a61df170"
+          ],
+          "span_id": "880c62f0746ef9b3",
+          "trace_id": "df72b7d0d1a6220e4977ed1cc7252b0f"
+        },
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_3a8a16072a42582dba793652",
+            "operation_3530f4dac81f122f3833a289",
+            "operation_3530f4dac81f122f3833a289"
+          ],
+          "span_id": "e0f9aff8ad53ac3d",
+          "trace_id": "04e75ce59db4b07b1e0154031abbf617"
+        }
+      ],
+      "case_id": "otel-colocated--checkout",
+      "cyclic_operation_components": [
+        [
+          "operation_07e39e2684be6e8b1dc6996a"
+        ],
+        [
+          "operation_3530f4dac81f122f3833a289"
+        ],
+        [
+          "operation_45a2a8e9f8dee478a61df170"
+        ]
+      ],
+      "cyclic_operation_labels": {
+        "operation_07e39e2684be6e8b1dc6996a": {
+          "instance_key": "container.id",
+          "instance_value": "b678ff33d1575aa2764fadecb2478c51b072a1b018d1e041fc5a68ff38ff2290",
+          "operation": "[\"POST /api/cart\",\"POST\",\"/api/cart\"]",
+          "service": "frontend"
+        },
+        "operation_3530f4dac81f122f3833a289": {
+          "instance_key": "container.id",
+          "instance_value": "b678ff33d1575aa2764fadecb2478c51b072a1b018d1e041fc5a68ff38ff2290",
+          "operation": "[\"GET /api/products/[productId]/index\",\"GET\",\"/api/products/[productId]/index\"]",
+          "service": "frontend"
+        },
+        "operation_45a2a8e9f8dee478a61df170": {
+          "instance_key": "container.id",
+          "instance_value": "b678ff33d1575aa2764fadecb2478c51b072a1b018d1e041fc5a68ff38ff2290",
+          "operation": "[\"POST /api/checkout\",\"POST\",\"/api/checkout\"]",
+          "service": "frontend"
+        }
+      },
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 3210,
+        "3": 3210,
+        "4": 3210,
+        "5": 4735,
+        "6": 8807,
+        "7": 2009,
+        "8": 1007
+      },
+      "native_ancestor_operation_repeats": {
+        "operation_07e39e2684be6e8b1dc6996a": 1005,
+        "operation_3530f4dac81f122f3833a289": 1007,
+        "operation_45a2a8e9f8dee478a61df170": 906
+      },
+      "observed_full_caller_context_count": 48,
+      "operation_count": 22
+    },
+    {
+      "ancestor_repeat_examples": [
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "0fae9bf31a089550",
+          "trace_id": "c8b7d9f604fef3cbd78449db3d4bd562"
+        },
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_ce004ccd59658c83cb2e9d69",
+            "operation_7e8ccf9f224ab3c48a6a45e4",
+            "operation_7e8ccf9f224ab3c48a6a45e4"
+          ],
+          "span_id": "2773a517007a71f3",
+          "trace_id": "c8b7d9f604fef3cbd78449db3d4bd562"
+        },
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "af0eafe582e79d2b",
+          "trace_id": "6d9610223e04ba7217e8c9e08f1cd2a2"
+        },
+        {
+          "operation_path": [
+            "operation_6a5638ccf0cad7153e5ad8c1",
+            "operation_ce004ccd59658c83cb2e9d69",
+            "operation_7e8ccf9f224ab3c48a6a45e4",
+            "operation_7e8ccf9f224ab3c48a6a45e4"
+          ],
+          "span_id": "9ce2866b70063b6c",
+          "trace_id": "6d9610223e04ba7217e8c9e08f1cd2a2"
+        }
+      ],
+      "case_id": "otel-split--add_to_cart",
+      "cyclic_operation_components": [
+        [
+          "operation_7e8ccf9f224ab3c48a6a45e4"
+        ],
+        [
+          "operation_a4293624b8bbbec14d4916e2"
+        ]
+      ],
+      "cyclic_operation_labels": {
+        "operation_7e8ccf9f224ab3c48a6a45e4": {
+          "instance_key": "container.id",
+          "instance_value": "9ab198f61aeaa36c9beb666e7e30e0a2056d29f6c61e8a33bc91a88fcfb63106",
+          "operation": "[\"POST /api/cart\",\"POST\",\"/api/cart\"]",
+          "service": "frontend"
+        },
+        "operation_a4293624b8bbbec14d4916e2": {
+          "instance_key": "container.id",
+          "instance_value": "9ab198f61aeaa36c9beb666e7e30e0a2056d29f6c61e8a33bc91a88fcfb63106",
+          "operation": "[\"GET /api/products/[productId]/index\",\"GET\",\"/api/products/[productId]/index\"]",
+          "service": "frontend"
+        }
+      },
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 2137,
+        "3": 2137,
+        "4": 2137,
+        "5": 2624
+      },
+      "native_ancestor_operation_repeats": {
+        "operation_7e8ccf9f224ab3c48a6a45e4": 937,
+        "operation_a4293624b8bbbec14d4916e2": 954
+      },
+      "observed_full_caller_context_count": 13,
+      "operation_count": 9
+    },
+    {
+      "ancestor_repeat_examples": [
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "08d072260c9d6ba1",
+          "trace_id": "b7226d02561bbca101fe2ffae3f1d92d"
+        },
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "8756ee8088c1a7ea",
+          "trace_id": "6b0bb60556d2026afa05d4977be504c9"
+        },
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "d9368cff0d52f4b3",
+          "trace_id": "42ff74f5434974f30a5320777c4dcaa5"
+        },
+        {
+          "operation_path": [
+            "operation_47b6e435b9dedb4f45ef6ea2",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "bde9cf34c9a0b858",
+          "trace_id": "4d793a3195990ae05b8e27403525f9a9"
+        }
+      ],
+      "case_id": "otel-split--browse_product",
+      "cyclic_operation_components": [
+        [
+          "operation_a4293624b8bbbec14d4916e2"
+        ]
+      ],
+      "cyclic_operation_labels": {
+        "operation_a4293624b8bbbec14d4916e2": {
+          "instance_key": "container.id",
+          "instance_value": "9ab198f61aeaa36c9beb666e7e30e0a2056d29f6c61e8a33bc91a88fcfb63106",
+          "operation": "[\"GET /api/products/[productId]/index\",\"GET\",\"/api/products/[productId]/index\"]",
+          "service": "frontend"
+        }
+      },
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 1200,
+        "3": 1200,
+        "4": 1200,
+        "5": 768
+      },
+      "native_ancestor_operation_repeats": {
+        "operation_a4293624b8bbbec14d4916e2": 978
+      },
+      "observed_full_caller_context_count": 8,
+      "operation_count": 5
+    },
+    {
+      "ancestor_repeat_examples": [
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "8bb6eb1a2a200197",
+          "trace_id": "f3e3b2e2489641d96d72a324f26d34f7"
+        },
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_ce004ccd59658c83cb2e9d69",
+            "operation_7e8ccf9f224ab3c48a6a45e4",
+            "operation_7e8ccf9f224ab3c48a6a45e4"
+          ],
+          "span_id": "2db1ae1ef422aa53",
+          "trace_id": "f3e3b2e2489641d96d72a324f26d34f7"
+        },
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_556f3146f2079ee87839f708",
+            "operation_6f384ce20fb77d08199e2775",
+            "operation_6f384ce20fb77d08199e2775"
+          ],
+          "span_id": "d27200c648ee54bd",
+          "trace_id": "f3e3b2e2489641d96d72a324f26d34f7"
+        },
+        {
+          "operation_path": [
+            "operation_0c86e0acc0c4d7344e066fb0",
+            "operation_3a8a16072a42582dba793652",
+            "operation_a4293624b8bbbec14d4916e2",
+            "operation_a4293624b8bbbec14d4916e2"
+          ],
+          "span_id": "af0750986bb0b386",
+          "trace_id": "b9724cba0671492d67c467dd1eddc783"
+        }
+      ],
+      "case_id": "otel-split--checkout",
+      "cyclic_operation_components": [
+        [
+          "operation_6f384ce20fb77d08199e2775"
+        ],
+        [
+          "operation_7e8ccf9f224ab3c48a6a45e4"
+        ],
+        [
+          "operation_a4293624b8bbbec14d4916e2"
+        ]
+      ],
+      "cyclic_operation_labels": {
+        "operation_6f384ce20fb77d08199e2775": {
+          "instance_key": "container.id",
+          "instance_value": "9ab198f61aeaa36c9beb666e7e30e0a2056d29f6c61e8a33bc91a88fcfb63106",
+          "operation": "[\"POST /api/checkout\",\"POST\",\"/api/checkout\"]",
+          "service": "frontend"
+        },
+        "operation_7e8ccf9f224ab3c48a6a45e4": {
+          "instance_key": "container.id",
+          "instance_value": "9ab198f61aeaa36c9beb666e7e30e0a2056d29f6c61e8a33bc91a88fcfb63106",
+          "operation": "[\"POST /api/cart\",\"POST\",\"/api/cart\"]",
+          "service": "frontend"
+        },
+        "operation_a4293624b8bbbec14d4916e2": {
+          "instance_key": "container.id",
+          "instance_value": "9ab198f61aeaa36c9beb666e7e30e0a2056d29f6c61e8a33bc91a88fcfb63106",
+          "operation": "[\"GET /api/products/[productId]/index\",\"GET\",\"/api/products/[productId]/index\"]",
+          "service": "frontend"
+        }
+      },
+      "invocation_depth_counts": {
+        "1": 1200,
+        "2": 3092,
+        "3": 3092,
+        "4": 3092,
+        "5": 4263,
+        "6": 8176,
+        "7": 1888,
+        "8": 945
+      },
+      "native_ancestor_operation_repeats": {
+        "operation_6f384ce20fb77d08199e2775": 755,
+        "operation_7e8ccf9f224ab3c48a6a45e4": 946,
+        "operation_a4293624b8bbbec14d4916e2": 965
+      },
+      "observed_full_caller_context_count": 48,
+      "operation_count": 22
+    }
+  ],
+  "evaluator_rows_read": 0,
+  "fits": 0,
+  "metadata": [
+    {
+      "archive_download_url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042332472/zip",
+      "created_at": "2026-09-08T05:39:02Z",
+      "digest": "sha256:8a0af5424337c6b682f76bfa61cca1116b3fea1195af5680dd58cad5a7234f5d",
+      "expired": false,
+      "expires_at": "2026-12-07T05:35:41Z",
+      "id": 10042332472,
+      "name": "m9v-extraction-otel-colocated-34191216681",
+      "node_id": "MDg6QXJ0aWZhY3QxMDA0MjMzMjQ3Mg==",
+      "size_in_bytes": 5244348,
+      "updated_at": "2026-09-08T05:39:02Z",
+      "url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042332472",
+      "workflow_run": {
+        "head_branch": "main",
+        "head_repository_id": 1358007116,
+        "head_sha": "614de39f3ed64e5b5e79e32fe9e57fd7aa0ca1fe",
+        "id": 34191216681,
+        "repository_id": 1358007116
+      }
+    },
+    {
+      "archive_download_url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042325891/zip",
+      "created_at": "2026-09-08T05:38:44Z",
+      "digest": "sha256:6ee1713405a5cd51eb238deb6c8d42df3b55441999c9b0aa611d23554e2a0ee1",
+      "expired": false,
+      "expires_at": "2026-12-07T05:35:41Z",
+      "id": 10042325891,
+      "name": "m9v-extraction-deathstar-colocated-34191216681",
+      "node_id": "MDg6QXJ0aWZhY3QxMDA0MjMyNTg5MQ==",
+      "size_in_bytes": 2993472,
+      "updated_at": "2026-09-08T05:38:44Z",
+      "url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042325891",
+      "workflow_run": {
+        "head_branch": "main",
+        "head_repository_id": 1358007116,
+        "head_sha": "614de39f3ed64e5b5e79e32fe9e57fd7aa0ca1fe",
+        "id": 34191216681,
+        "repository_id": 1358007116
+      }
+    },
+    {
+      "archive_download_url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042324378/zip",
+      "created_at": "2026-09-08T05:38:39Z",
+      "digest": "sha256:1fc52cdefba210f63fa2c429a6c1025fc8b98f0defe138b8c4dcbfd57b18c1bf",
+      "expired": false,
+      "expires_at": "2026-12-07T05:35:41Z",
+      "id": 10042324378,
+      "name": "m9v-extraction-otel-split-34191216681",
+      "node_id": "MDg6QXJ0aWZhY3QxMDA0MjMyNDM3OA==",
+      "size_in_bytes": 5077673,
+      "updated_at": "2026-09-08T05:38:39Z",
+      "url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042324378",
+      "workflow_run": {
+        "head_branch": "main",
+        "head_repository_id": 1358007116,
+        "head_sha": "614de39f3ed64e5b5e79e32fe9e57fd7aa0ca1fe",
+        "id": 34191216681,
+        "repository_id": 1358007116
+      }
+    },
+    {
+      "archive_download_url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042323492/zip",
+      "created_at": "2026-09-08T05:38:37Z",
+      "digest": "sha256:8baafd3fd6f4c8ec3c41fd0a77ca6039b12f49e58aec142c96f878581592e7f8",
+      "expired": false,
+      "expires_at": "2026-12-07T05:35:41Z",
+      "id": 10042323492,
+      "name": "m9v-extraction-deathstar-split-34191216681",
+      "node_id": "MDg6QXJ0aWZhY3QxMDA0MjMyMzQ5Mg==",
+      "size_in_bytes": 3017079,
+      "updated_at": "2026-09-08T05:38:37Z",
+      "url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042323492",
+      "workflow_run": {
+        "head_branch": "main",
+        "head_repository_id": 1358007116,
+        "head_sha": "614de39f3ed64e5b5e79e32fe9e57fd7aa0ca1fe",
+        "id": 34191216681,
+        "repository_id": 1358007116
+      }
+    },
+    {
+      "archive_download_url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042286180/zip",
+      "created_at": "2026-09-08T05:36:52Z",
+      "digest": "sha256:115de0608b9069bfa04ae05c929dcf3481d466713db666ea60550cd9619065bd",
+      "expired": false,
+      "expires_at": "2026-12-07T05:35:41Z",
+      "id": 10042286180,
+      "name": "m9v-application-input-34191216681",
+      "node_id": "MDg6QXJ0aWZhY3QxMDA0MjI4NjE4MA==",
+      "size_in_bytes": 24044527,
+      "updated_at": "2026-09-08T05:36:52Z",
+      "url": "https://api.github.com/repos/a-a-k/telemetry-availability-identification/actions/artifacts/10042286180",
+      "workflow_run": {
+        "head_branch": "main",
+        "head_repository_id": 1358007116,
+        "head_sha": "614de39f3ed64e5b5e79e32fe9e57fd7aa0ca1fe",
+        "id": 34191216681,
+        "repository_id": 1358007116
+      }
+    }
+  ],
+  "pmx_invocations": 0,
+  "solver_calls": 0,
+  "source_commit": "614de39f3ed64e5b5e79e32fe9e57fd7aa0ca1fe",
+  "source_run_id": 34191216681
+}
