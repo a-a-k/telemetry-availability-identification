@@ -1,0 +1,116 @@
+{
+  "seed": 771401,
+  "modes": [
+    {
+      "id": "full",
+      "health_policy": "joint",
+      "health_keep_probability": 1.0,
+      "trace_keep_probability": 1.0
+    },
+    {
+      "id": "sampled_mixed",
+      "health_policy": "joint",
+      "health_keep_probability": 0.4,
+      "trace_keep_probability": 0.7
+    }
+  ],
+  "methods": [
+    "B0",
+    "B1",
+    "B2",
+    "B3",
+    "proposed",
+    "B4"
+  ],
+  "primary_mode": "full",
+  "primary_contrast": "proposed_minus_PMX_conditional_local",
+  "primary_metric": "mae_pp",
+  "primary_view": "all_sequence",
+  "aggregation_unit": "campaign",
+  "stratum_weighting": "equal",
+  "operation_weighting": "equal",
+  "confidence_level": 0.95,
+  "secondary_multiplicity": "descriptive",
+  "time_bin_seconds": 1,
+  "health_alignment_tolerance_seconds": 1.25,
+  "transition_guard_seconds_each_side": 1,
+  "block_length_seconds": 23,
+  "sensitivity_block_length_seconds": 46,
+  "baseline_beta_prior_alpha": 0.5,
+  "baseline_beta_prior_beta": 0.5,
+  "optimizer_starts": 8,
+  "optimizer_max_iterations": 1000,
+  "parameter_epsilon": 1e-05,
+  "numerical_probability_floor": 1e-12,
+  "rank_tolerance": 1e-07,
+  "target_gradient_tolerance": 1e-06,
+  "multistart_prediction_tolerance": 0.0001,
+  "minimum_signal_observations": 20,
+  "minimum_pattern_observations": 10,
+  "minimum_operation_requests": 20,
+  "minimum_trace_operation_support": 20,
+  "required_target_trace_fraction": 0.8,
+  "maximum_nontarget_trace_fraction": 0.05,
+  "minimum_replica_trace_assignments": 5,
+  "source_placement": "colocated",
+  "target_placement": "split",
+  "homogeneous_new_domain_assumption": true,
+  "operations": {
+    "deathstarbench_social_network": [
+      {
+        "id": "compose_post",
+        "requires_target_group": true,
+        "specification_source": "frozen M7B driver contract; checked against M7 learner traces"
+      },
+      {
+        "id": "read_home_timeline",
+        "requires_target_group": false,
+        "specification_source": "frozen M7B driver contract; checked against M7 learner traces"
+      },
+      {
+        "id": "read_user_timeline",
+        "requires_target_group": true,
+        "specification_source": "frozen M7B driver contract; checked against M7 learner traces"
+      }
+    ],
+    "opentelemetry_demo": [
+      {
+        "id": "browse_product",
+        "requires_target_group": true,
+        "specification_source": "frozen M7B driver contract; checked against M7 learner traces"
+      },
+      {
+        "id": "add_to_cart",
+        "requires_target_group": true,
+        "specification_source": "frozen M7B driver contract; checked against M7 learner traces"
+      },
+      {
+        "id": "checkout",
+        "requires_target_group": true,
+        "specification_source": "frozen M7B driver contract; checked against M7 learner traces"
+      }
+    ],
+    "spring_petclinic_microservices": [
+      {
+        "id": "list_owners",
+        "requires_target_group": false,
+        "specification_source": "Pinned Petclinic controllers and qualified four-operation contract v2"
+      },
+      {
+        "id": "owner_details_with_visits",
+        "requires_target_group": true,
+        "specification_source": "Pinned Petclinic controllers and qualified four-operation contract v2"
+      },
+      {
+        "id": "create_visit",
+        "requires_target_group": true,
+        "specification_source": "Pinned Petclinic controllers and qualified four-operation contract v2"
+      },
+      {
+        "id": "list_vets",
+        "requires_target_group": false,
+        "specification_source": "Pinned Petclinic controllers and qualified four-operation contract v2"
+      }
+    ]
+  }
+}
