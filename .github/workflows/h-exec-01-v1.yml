@@ -1,0 +1,152 @@
+name: H-EXEC-01 prospective routing and execution controls
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        type: choice
+        options: [qualification, study]
+        default: qualification
+        required: true
+      qualification_run:
+        description: Successful four-arm technical run required for study
+        type: string
+        default: '0'
+        required: true
+permissions:
+  contents: read
+  actions: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m telemetry_availability.h_exec_analysis_v1 plan --phase '${{ inputs.phase }}' --qualification-run '${{ inputs.qualification_run }}'
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: h-exec-plan-${{ inputs.phase }}-${{ github.run_id }}
+          path: workflow-results/plan
+          retention-days: 90
+          if-no-files-found: error
+  acquire:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/checkout@v7
+        with:
+          repository: open-telemetry/opentelemetry-demo
+          ref: 8c47d47c9ac27710d2b2a153bcd53e483bffe66d
+          path: upstream
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - name: Install pinned environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Render pinned original deployment and both target replicas
+        env:
+          DEMO_VERSION: '3.0.0'
+          LOCUST_AUTOSTART: 'false'
+          LOCUST_HEADLESS: 'true'
+          LOCUST_BROWSER_TRAFFIC_ENABLED: 'false'
+        run: |
+          out=workflow-results/h-exec
+          mkdir -p "$out"
+          export OTEL_COLLECTOR_CONFIG_EXTRAS="$GITHUB_WORKSPACE/configs/live/otel-pilot-collector-extra.yml"
+          docker compose --env-file upstream/.env -f upstream/compose.yaml config --format json > "$out/rendered-compose.json"
+          telemetry_args=(--telemetry-output-directory "$GITHUB_WORKSPACE/$out")
+          python -m telemetry_availability pin-live-compose --config configs/m7_runtime_pilot.yaml --profile 'opentelemetry_demo' --input "$out/rendered-compose.json" --out "$out/base-pinned-compose.json" --audit "$out/base-image-lock-audit.json" "${telemetry_args[@]}"
+          python -m telemetry_availability prepare-placement-compose --config configs/m7b_placement_pilot.yaml --profile 'opentelemetry_demo' --placement colocated --input "$out/base-pinned-compose.json" --base-audit "$out/base-image-lock-audit.json" --out "$out/source-pinned-compose.json" --audit "$out/image-lock-audit.json" --haproxy "$out/source-haproxy.cfg"
+      - name: Add declared instrumentation without changing default routing policy
+        run: python -m telemetry_availability.h_exec_live_v1 instrument --out workflow-results/h-exec
+      - name: Pull and start source-pinned benchmark
+        run: |
+          /usr/bin/time -v -o workflow-results/h-exec/pull-resource-usage.txt docker compose -f workflow-results/h-exec/pinned-compose.json pull
+          image=$(python -c "import json; print(json.load(open('workflow-results/h-exec/pinned-compose.json'))['services']['product-catalog']['image'])")
+          docker run --rm --entrypoint haproxy -v "$GITHUB_WORKSPACE/workflow-results/h-exec/syntax-only-haproxy.cfg:/check.cfg:ro" "$image" -c -f /check.cfg
+          /usr/bin/time -v -o workflow-results/h-exec/start-resource-usage.txt docker compose -f workflow-results/h-exec/pinned-compose.json up -d --no-build --wait --wait-timeout 360
+      - name: Run assigned intervention with unchanged whole-operation contracts
+        run: /usr/bin/time -v -o workflow-results/h-exec/acquisition-resource-usage.txt python -m telemetry_availability.h_exec_live_v1 acquire --out workflow-results/h-exec --phase '${{ inputs.phase }}' --block '${{ matrix.block }}' --slot '${{ matrix.slot }}'
+      - name: Compute full causal-diagnostic census and technical checks
+        if: always()
+        run: |
+          mkdir -p workflow-results/compact
+          /usr/bin/time -v -o workflow-results/compact/analysis-resource-usage.txt python -m telemetry_availability.h_exec_compact_v1 --source workflow-results/h-exec --output workflow-results/compact
+      - name: Preserve actual runtime state and logs
+        if: ${{ always() }}
+        run: |
+          docker compose -f workflow-results/h-exec/pinned-compose.json ps -a --format json > workflow-results/h-exec/compose-ps.json || true
+          docker stats --no-stream --format '{{json .}}' > workflow-results/h-exec/docker-stats.jsonl || true
+          docker compose -f workflow-results/h-exec/pinned-compose.json logs --no-color > workflow-results/h-exec/services.log 2>&1 || true
+          docker compose -f workflow-results/h-exec/pinned-compose.json down || true
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: h-exec-raw-${{ inputs.phase }}-b${{ matrix.block }}-s${{ matrix.slot }}-${{ github.run_id }}
+          path: |
+            workflow-results/h-exec
+            !workflow-results/h-exec/admin/**
+          retention-days: 90
+          if-no-files-found: error
+      - name: Retain compact phase costs and runtime audit
+        if: always()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import shutil
+          source=Path('workflow-results/h-exec');out=Path('workflow-results/compact');out.mkdir(exist_ok=True)
+          for name in ['image-lock-audit.json','compose-ps.json','docker-stats.jsonl','pull-resource-usage.txt','start-resource-usage.txt','acquisition-resource-usage.txt']:
+              if (source/name).is_file(): shutil.copyfile(source/name,out/name)
+          PY
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: h-exec-compact-${{ inputs.phase }}-b${{ matrix.block }}-s${{ matrix.slot }}-${{ github.run_id }}
+          path: workflow-results/compact
+          retention-days: 90
+          if-no-files-found: error
+  analyze:
+    needs: [plan, acquire]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.13.15
+      - run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: h-exec-compact-*
+          path: workflow-input/reports
+      - run: python -m telemetry_availability.h_exec_analysis_v1 collect --phase '${{ inputs.phase }}'
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: h-exec-${{ inputs.phase }}-${{ github.run_id }}
+          path: workflow-results/analysis
+          retention-days: 90
+          if-no-files-found: error
