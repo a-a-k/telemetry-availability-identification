@@ -1,0 +1,3102 @@
+{
+  "run_id": 34199064678,
+  "head": "591e5760a0bc4802cec660c24bf12c30fd2ee7e8",
+  "actual_compact_zip_and_all_members_verified": true,
+  "warmup_attempts": 243,
+  "unique_ids": 243,
+  "main_campaigns": 0,
+  "model_fits": 0,
+  "fault_control_attempts": 0,
+  "source_commit": "3858f9c630cf989bb6809a86edf47c2be78dc9f1",
+  "source_git_blob_sha256": {
+    "spring-petclinic-customers-service/src/main/java/org/springframework/samples/petclinic/customers/model/Pet.java": "01eb6a5edba88f0e884f2f755f942b725171ff6c0860680574b765db63f3f826",
+    "spring-petclinic-api-gateway/src/main/java/org/springframework/samples/petclinic/api/dto/PetType.java": "a9e1e64a128dee6acfac2a14e034396548de927cef5c1c812d218f094554ab18"
+  },
+  "failed_gate": "All three seed-derived read contracts did not pass within 420 seconds",
+  "failure_causes": [
+    "Pet.birthDate Date/Temporal DATE serializes UTC midnight rather than bare SQL date",
+    "Gateway PetType DTO contains name only, no id",
+    "management.tracing.enabled is not the Boot 4 export switch; native duplication prevention unqualified"
+  ],
+  "last_three_public_response_examples": [
+    {
+      "client_parent_id": "8dfd7b8fbad4dc74",
+      "completed_epoch": 1788852715.5859659,
+      "error": "",
+      "latency_ms": 19.741332000080547,
+      "marker": "",
+      "method": "GET",
+      "operation": "list_owners",
+      "path": "/api/customer/owners",
+      "payload": [
+        {
+          "address": "110 W. Liberty St.",
+          "city": "Madison",
+          "firstName": "George",
+          "id": 1,
+          "lastName": "Franklin",
+          "pets": [
+            {
+              "birthDate": "2000-09-07T00:00:00.000Z",
+              "id": 1,
+              "name": "Leo",
+              "type": {
+                "id": 1,
+                "name": "cat"
+              }
+            }
+          ],
+          "telephone": "6085551023"
+        },
+        {
+          "address": "638 Cardinal Ave.",
+          "city": "Sun Prairie",
+          "firstName": "Betty",
+          "id": 2,
+          "lastName": "Davis",
+          "pets": [
+            {
+              "birthDate": "2002-08-06T00:00:00.000Z",
+              "id": 2,
+              "name": "Basil",
+              "type": {
+                "id": 6,
+                "name": "hamster"
+              }
+            }
+          ],
+          "telephone": "6085551749"
+        },
+        {
+          "address": "2693 Commerce St.",
+          "city": "McFarland",
+          "firstName": "Eduardo",
+          "id": 3,
+          "lastName": "Rodriquez",
+          "pets": [
+            {
+              "birthDate": "2000-03-07T00:00:00.000Z",
+              "id": 4,
+              "name": "Jewel",
+              "type": {
+                "id": 2,
+                "name": "dog"
+              }
+            },
+            {
+              "birthDate": "2001-04-17T00:00:00.000Z",
+              "id": 3,
+              "name": "Rosy",
+              "type": {
+                "id": 2,
+                "name": "dog"
+              }
+            }
+          ],
+          "telephone": "6085558763"
+        },
+        {
+          "address": "563 Friendly St.",
+          "city": "Windsor",
+          "firstName": "Harold",
+          "id": 4,
+          "lastName": "Davis",
+          "pets": [
+            {
+              "birthDate": "2000-11-30T00:00:00.000Z",
+              "id": 5,
+              "name": "Iggy",
+              "type": {
+                "id": 3,
+                "name": "lizard"
+              }
+            }
+          ],
+          "telephone": "6085553198"
+        },
+        {
+          "address": "2387 S. Fair Way",
+          "city": "Madison",
+          "firstName": "Peter",
+          "id": 5,
+          "lastName": "McTavish",
+          "pets": [
+            {
+              "birthDate": "2000-01-20T00:00:00.000Z",
+              "id": 6,
+              "name": "George",
+              "type": {
+                "id": 4,
+                "name": "snake"
+              }
+            }
+          ],
+          "telephone": "6085552765"
+        },
+        {
+          "address": "105 N. Lake St.",
+          "city": "Monona",
+          "firstName": "Jean",
+          "id": 6,
+          "lastName": "Coleman",
+          "pets": [
+            {
+              "birthDate": "1995-09-04T00:00:00.000Z",
+              "id": 8,
+              "name": "Max",
+              "type": {
+                "id": 1,
+                "name": "cat"
+              }
+            },
+            {
+              "birthDate": "1995-09-04T00:00:00.000Z",
+              "id": 7,
+              "name": "Samantha",
+              "type": {
+                "id": 1,
+                "name": "cat"
+              }
+            }
+          ],
+          "telephone": "6085552654"
+        },
+        {
+          "address": "1450 Oak Blvd.",
+          "city": "Monona",
+          "firstName": "Jeff",
+          "id": 7,
+          "lastName": "Black",
+          "pets": [
+            {
+              "birthDate": "1999-08-06T00:00:00.000Z",
+              "id": 9,
+              "name": "Lucky",
+              "type": {
+                "id": 5,
+                "name": "bird"
+              }
+            }
+          ],
+          "telephone": "6085555387"
+        },
+        {
+          "address": "345 Maple St.",
+          "city": "Madison",
+          "firstName": "Maria",
+          "id": 8,
+          "lastName": "Escobito",
+          "pets": [
+            {
+              "birthDate": "1997-02-24T00:00:00.000Z",
+              "id": 10,
+              "name": "Mulligan",
+              "type": {
+                "id": 2,
+                "name": "dog"
+              }
+            }
+          ],
+          "telephone": "6085557683"
+        },
+        {
+          "address": "2749 Blackhawk Trail",
+          "city": "Madison",
+          "firstName": "David",
+          "id": 9,
+          "lastName": "Schroeder",
+          "pets": [
+            {
+              "birthDate": "2000-03-09T00:00:00.000Z",
+              "id": 11,
+              "name": "Freddy",
+              "type": {
+                "id": 5,
+                "name": "bird"
+              }
+            }
+          ],
+          "telephone": "6085559435"
+        },
+        {
+          "address": "2335 Independence La.",
+          "city": "Waunakee",
+          "firstName": "Carlos",
+          "id": 10,
+          "lastName": "Estaban",
+          "pets": [
+            {
+              "birthDate": "2000-06-24T00:00:00.000Z",
+              "id": 12,
+              "name": "Lucky",
+              "type": {
+                "id": 2,
+                "name": "dog"
+              }
+            },
+            {
+              "birthDate": "2002-06-08T00:00:00.000Z",
+              "id": 13,
+              "name": "Sly",
+              "type": {
+                "id": 1,
+                "name": "cat"
+              }
+            }
+          ],
+          "telephone": "6085555487"
+        }
+      ],
+      "request_id": "bootstrap-warmup-240-list_owners",
+      "response_bytes": 2529,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91",
+      "semantic_reason": "semantic_value_mismatch",
+      "semantic_success": false,
+      "started_epoch": 1788852715.5661707,
+      "status_code": 200,
+      "timed_out": false,
+      "trace_id": "a657ea7a0c7fec1623d6e2f3ededcc3c",
+      "write_audit_required": false,
+      "write_found_without_timely_success": false
+    },
+    {
+      "client_parent_id": "ad7d4f6a02e353c2",
+      "completed_epoch": 1788852715.6191542,
+      "error": "",
+      "latency_ms": 32.97657600001003,
+      "marker": "",
+      "method": "GET",
+      "operation": "owner_details_with_visits",
+      "path": "/api/gateway/owners/6",
+      "payload": {
+        "address": "105 N. Lake St.",
+        "city": "Monona",
+        "firstName": "Jean",
+        "id": 6,
+        "lastName": "Coleman",
+        "pets": [
+          {
+            "birthDate": "1995-09-04T00:00:00.000Z",
+            "id": 8,
+            "name": "Max",
+            "type": {
+              "name": "cat"
+            },
+            "visits": [
+              {
+                "date": "2011-03-04",
+                "description": "rabies shot",
+                "id": 2,
+                "petId": 8
+              },
+              {
+                "date": "2009-06-04",
+                "description": "neutered",
+                "id": 3,
+                "petId": 8
+              }
+            ]
+          },
+          {
+            "birthDate": "1995-09-04T00:00:00.000Z",
+            "id": 7,
+            "name": "Samantha",
+            "type": {
+              "name": "cat"
+            },
+            "visits": [
+              {
+                "date": "2010-03-04",
+                "description": "rabies shot",
+                "id": 1,
+                "petId": 7
+              },
+              {
+                "date": "2008-09-04",
+                "description": "spayed",
+                "id": 4,
+                "petId": 7
+              }
+            ]
+          }
+        ],
+        "telephone": "6085552654"
+      },
+      "request_id": "bootstrap-warmup-240-owner_details_with_visits",
+      "response_bytes": 579,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006",
+      "semantic_reason": "semantic_value_mismatch",
+      "semantic_success": false,
+      "started_epoch": 1788852715.586136,
+      "status_code": 200,
+      "timed_out": false,
+      "trace_id": "3e152cc9460a137b0d65eefb3adda16b",
+      "write_audit_required": false,
+      "write_found_without_timely_success": false
+    },
+    {
+      "client_parent_id": "777d0cd511f696e2",
+      "completed_epoch": 1788852715.6297965,
+      "error": "",
+      "latency_ms": 10.311161000004176,
+      "marker": "",
+      "method": "GET",
+      "operation": "list_vets",
+      "path": "/api/vet/vets",
+      "payload": [
+        {
+          "firstName": "James",
+          "id": 1,
+          "lastName": "Carter",
+          "nrOfSpecialties": 0,
+          "specialties": []
+        },
+        {
+          "firstName": "Helen",
+          "id": 2,
+          "lastName": "Leary",
+          "nrOfSpecialties": 1,
+          "specialties": [
+            {
+              "id": 1,
+              "name": "radiology"
+            }
+          ]
+        },
+        {
+          "firstName": "Linda",
+          "id": 3,
+          "lastName": "Douglas",
+          "nrOfSpecialties": 2,
+          "specialties": [
+            {
+              "id": 3,
+              "name": "dentistry"
+            },
+            {
+              "id": 2,
+              "name": "surgery"
+            }
+          ]
+        },
+        {
+          "firstName": "Rafael",
+          "id": 4,
+          "lastName": "Ortega",
+          "nrOfSpecialties": 1,
+          "specialties": [
+            {
+              "id": 2,
+              "name": "surgery"
+            }
+          ]
+        },
+        {
+          "firstName": "Henry",
+          "id": 5,
+          "lastName": "Stevens",
+          "nrOfSpecialties": 1,
+          "specialties": [
+            {
+              "id": 1,
+              "name": "radiology"
+            }
+          ]
+        },
+        {
+          "firstName": "Sharon",
+          "id": 6,
+          "lastName": "Jenkins",
+          "nrOfSpecialties": 0,
+          "specialties": []
+        }
+      ],
+      "request_id": "bootstrap-warmup-240-list_vets",
+      "response_bytes": 653,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c",
+      "semantic_reason": "complete_timely_semantic_result",
+      "semantic_success": true,
+      "started_epoch": 1788852715.619412,
+      "status_code": 200,
+      "timed_out": false,
+      "trace_id": "5da5c1a9c41f0b1c91a5940799f585f8",
+      "write_audit_required": false,
+      "write_found_without_timely_success": false
+    }
+  ],
+  "census": [
+    {
+      "request_id": "bootstrap-warmup-0-list_owners",
+      "operation": "list_owners",
+      "trace_id": "5c25fbda4d890b6bcd23cf9b4e371465",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 107.86302900001488,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-0-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "0f69c669fada3ec7e0c5084139e85384",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 1.5642379999860623,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-0-list_vets",
+      "operation": "list_vets",
+      "trace_id": "7a54dc5bc1a60dc7726c332528e8d39a",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6256420000170237,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-3-list_owners",
+      "operation": "list_owners",
+      "trace_id": "ccc37138ce7505e1769dc9c97626c459",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 1.1073530000089704,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-3-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "1bab71611be6d4178e92a5560da2db31",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.7250779999878887,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-3-list_vets",
+      "operation": "list_vets",
+      "trace_id": "806ef90817e6063df4264159abe1d61d",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6682610000154909,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-6-list_owners",
+      "operation": "list_owners",
+      "trace_id": "eb6ce10be2b1a71d42401d1d688de5cb",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.9196809999991729,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-6-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "94778d9de458390e1b5bb1b15464c18b",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6004440000140221,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-6-list_vets",
+      "operation": "list_vets",
+      "trace_id": "a3867ace55ffc2819978d978f5a53648",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.5949629999975059,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-9-list_owners",
+      "operation": "list_owners",
+      "trace_id": "fd8e2ce7600fbddc55845c27954116f2",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 1.0085979999985284,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-9-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "dff2a1d4608cd6e7e0f34d61d85cef51",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6222939999815935,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-9-list_vets",
+      "operation": "list_vets",
+      "trace_id": "9e508755111a09f59a622e25c31ee37d",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.661387999997487,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-12-list_owners",
+      "operation": "list_owners",
+      "trace_id": "560d02f145009cdd06dcbf0b34968532",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 1.0425220000058744,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-12-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "0a295dd3127e9953c1502df31c5b6b36",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6114450000040961,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-12-list_vets",
+      "operation": "list_vets",
+      "trace_id": "7ee6536fe4a927c5549bb37f24d8130e",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.5580739999970774,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-15-list_owners",
+      "operation": "list_owners",
+      "trace_id": "0aa4e350825db0f84703ce25a5eebdab",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 1.0274929999809501,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-15-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "e0d564c5881f1d13ce04975dceffd77b",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6467810000003738,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-15-list_vets",
+      "operation": "list_vets",
+      "trace_id": "77cd5310f86c2787eca52e5987908fe8",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.656849999984388,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-18-list_owners",
+      "operation": "list_owners",
+      "trace_id": "0cbd91a6bb10c8b0d76b7d9a312a2c96",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.9691139999858933,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-18-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "b6000be3653bf089cf9794effc48f9c1",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6907020000141983,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-18-list_vets",
+      "operation": "list_vets",
+      "trace_id": "fd4492b4e65f3afc55a455e711f3e949",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.652350999985174,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-21-list_owners",
+      "operation": "list_owners",
+      "trace_id": "8267f74c7de527675f8380c67437348b",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 1.0149389999867253,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-21-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "e97a2e8ca2fa03f916df59eb6500859a",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6026679999990847,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-21-list_vets",
+      "operation": "list_vets",
+      "trace_id": "b2d1cc1cc2440eaa7a7d05e4dfb38fa3",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.5936010000198166,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-24-list_owners",
+      "operation": "list_owners",
+      "trace_id": "9fd56344dafa7b994bab1a105881fd61",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.9243300000036925,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-24-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "9faa036d8f0994608499b9a4fa18dd85",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6644329999971887,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-24-list_vets",
+      "operation": "list_vets",
+      "trace_id": "8517157240da96ad7628d0f777ad4ed7",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6539640000085001,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-27-list_owners",
+      "operation": "list_owners",
+      "trace_id": "d137bfb3adec66ddc6b3134b4b118974",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.917616999998927,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-27-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "3197c38c0811cdd731d1bd1d1754a781",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.7210889999953451,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-27-list_vets",
+      "operation": "list_vets",
+      "trace_id": "379453e9556cff886f904bc516231d04",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.5842940000206909,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-30-list_owners",
+      "operation": "list_owners",
+      "trace_id": "acd703c927255049b219a03ccfd759a1",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.9696150000024772,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-30-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "81cd9339f441f4665cab2def8e6c903f",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.6499570000073618,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-30-list_vets",
+      "operation": "list_vets",
+      "trace_id": "97dde842ae8373f4fa8fc9ab81599926",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 0.5667800000139778,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-33-list_owners",
+      "operation": "list_owners",
+      "trace_id": "8876e73b197add73931c9f0e81235911",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "whole_operation_deadline_exceeded",
+      "timed_out": true,
+      "latency_ms": 2018.1036090000077,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-33-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "a6490ce48a9588dacd3917a8fe4c2aa5",
+      "status_code": null,
+      "semantic_success": false,
+      "semantic_reason": "whole_operation_deadline_exceeded",
+      "timed_out": true,
+      "latency_ms": 2004.7261560000038,
+      "response_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "request_id": "bootstrap-warmup-33-list_vets",
+      "operation": "list_vets",
+      "trace_id": "539ec5c8b16a0d5c1108b9a813e7d404",
+      "status_code": 405,
+      "semantic_success": false,
+      "semantic_reason": "read_without_ok_status",
+      "timed_out": false,
+      "latency_ms": 911.12775900001,
+      "response_sha256": "105b8085d9e67cc149d5d88f7dbb508aa757b7aaf63cfcfbfda6de9379738a9a"
+    },
+    {
+      "request_id": "bootstrap-warmup-36-list_owners",
+      "operation": "list_owners",
+      "trace_id": "c3f14acaa4af508f8ad9d0837a28440e",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 1392.6215869999794,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-36-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "b5292d304ff800f85aca40eeaad3f10c",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 1579.9790469999948,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-36-list_vets",
+      "operation": "list_vets",
+      "trace_id": "81eddd88149ef0083632d04d02a379ec",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 1030.4546360000018,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-39-list_owners",
+      "operation": "list_owners",
+      "trace_id": "755cdc511330d4de8f5f967fd3709e9a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 73.34664699999394,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-39-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "cbd4667b35a26fb481de40b5855ef353",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 988.3278609999877,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-39-list_vets",
+      "operation": "list_vets",
+      "trace_id": "01cbaa74120a82a402597ff0077866dd",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 29.46302699999137,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-42-list_owners",
+      "operation": "list_owners",
+      "trace_id": "4e4451c84a8c2d5302dea0b9f6ab324e",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 59.493347000000085,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-42-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "36953f61a3dacb601f7356e4cf01a389",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 81.47581199997944,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-42-list_vets",
+      "operation": "list_vets",
+      "trace_id": "1c5db759772807e345f7a4f9901a0584",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 23.97581500000001,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-45-list_owners",
+      "operation": "list_owners",
+      "trace_id": "4180359dcdde6a4c06ca34c629218ec0",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 48.34974900001043,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-45-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "b6ab6f7033e096dbc8c938c39be49467",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 65.15593500000705,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-45-list_vets",
+      "operation": "list_vets",
+      "trace_id": "00d9c93033929eac479a5ead515b08e2",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 18.910134999998718,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-48-list_owners",
+      "operation": "list_owners",
+      "trace_id": "1ce78996c470310274e71307079e8f47",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 44.62242299999275,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-48-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "b84d13dc5236d0239f8a792b7c7a1d19",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 68.49251899998876,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-48-list_vets",
+      "operation": "list_vets",
+      "trace_id": "321e856aeec5eb26c7c6cb5bbe3bfdfa",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 18.60743800000364,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-51-list_owners",
+      "operation": "list_owners",
+      "trace_id": "ae19138009ba42513365ad242faa7392",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 48.50369300001489,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-51-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "8a386f610a49dec0d0d7e998a46598fc",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 59.107358999995085,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-51-list_vets",
+      "operation": "list_vets",
+      "trace_id": "0aca3ed30848d8e126a45bbbd8252af1",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 17.603046999994376,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-54-list_owners",
+      "operation": "list_owners",
+      "trace_id": "2b23e87bc37bb0c719e37a91f8da6768",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 36.284676000008176,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-54-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "1b72f6eafe5dce6d2f232f12b77d6c2a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 59.89245000000665,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-54-list_vets",
+      "operation": "list_vets",
+      "trace_id": "5d925de1e962ec15851dc8c062775999",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 18.24203099999977,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-57-list_owners",
+      "operation": "list_owners",
+      "trace_id": "7b2bd3565a9622b8f5c69c080ab5c030",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 42.542529000002105,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-57-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "2d80e740637de5a8dfc230605ce3124d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 52.523089000004575,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-57-list_vets",
+      "operation": "list_vets",
+      "trace_id": "cd54591b5d8a9daf30bbd02f3a05d9da",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 13.215453000015032,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-60-list_owners",
+      "operation": "list_owners",
+      "trace_id": "7d3306ecf8843ab88ca21687db8d2c64",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.444632999992564,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-60-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "2b025c730e563a6399e7dffa7ab6ab88",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 46.29306100000008,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-60-list_vets",
+      "operation": "list_vets",
+      "trace_id": "0b545bebedf82e134d70064fba347e05",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 13.541064000008873,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-63-list_owners",
+      "operation": "list_owners",
+      "trace_id": "eb79cf04bdc0beb393a5c16bec91c5b4",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 38.05189799999198,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-63-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "01191175d76cedc573fd32b82d72125a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 50.42202799998563,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-63-list_vets",
+      "operation": "list_vets",
+      "trace_id": "07c84a664e9c854c47c8dc2aa4c6615b",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 15.72215799998844,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-66-list_owners",
+      "operation": "list_owners",
+      "trace_id": "13307a3d2ebe26cf175c073f711421f7",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 37.440857999996524,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-66-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "e3fbbe98bbb6050f3a594236b5c0027f",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 50.108934999997246,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-66-list_vets",
+      "operation": "list_vets",
+      "trace_id": "926652f3fe3d0aa212de35d13dcee599",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 19.029657000004363,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-69-list_owners",
+      "operation": "list_owners",
+      "trace_id": "95d17f22b0ef3b5faccee5ac1cd42f76",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.675582000005534,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-69-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "73286ca171728d550fa5d8aaf3c4da77",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 46.067082999996956,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-69-list_vets",
+      "operation": "list_vets",
+      "trace_id": "634b47be562b4b7fbd8c89bf0292011e",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 11.975258000006761,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-72-list_owners",
+      "operation": "list_owners",
+      "trace_id": "a286dd6d6c48de478a2377469b73c339",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.842870000024504,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-72-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "663a1045dcb3db067ac6cf1efd95003d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 40.70527099997889,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-72-list_vets",
+      "operation": "list_vets",
+      "trace_id": "b80bf3c4567661dd3b28d2af7d5b210d",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.646279000023242,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-75-list_owners",
+      "operation": "list_owners",
+      "trace_id": "e1d26c8ada8d6d9c92acf86c6a170028",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 36.782453000000714,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-75-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "8934bb68c33bd2b483704b4891fb239f",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 43.39520899998206,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-75-list_vets",
+      "operation": "list_vets",
+      "trace_id": "52094282f4422c3f07287f587d4f429a",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 13.185538000016095,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-78-list_owners",
+      "operation": "list_owners",
+      "trace_id": "32b6befb77935404b02266c122d1f20f",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.8741189999846,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-78-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "7f8c835050f617439cc43bf413b480fc",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 71.57618500002627,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-78-list_vets",
+      "operation": "list_vets",
+      "trace_id": "06edacaadccd24c52f60e578282056ad",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 20.28991299999916,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-81-list_owners",
+      "operation": "list_owners",
+      "trace_id": "31d3f9b9efb531225bb8b366b5ab1f8e",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 36.16866499999105,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-81-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "8a2d0fd040950293eed05b51914efe21",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 53.437016999964726,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-81-list_vets",
+      "operation": "list_vets",
+      "trace_id": "d6daea54aa23b751e28df0d2b6b5822c",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 11.430091000022458,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-84-list_owners",
+      "operation": "list_owners",
+      "trace_id": "2cecd4fc402891f034333be77e8f654f",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 30.477445999963493,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-84-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "88782334bd4d0abcbbcd4e9ba96e16aa",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 40.46574099999134,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-84-list_vets",
+      "operation": "list_vets",
+      "trace_id": "5f97ed43d4fbf249182702ef8075cc96",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.519032000000152,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-87-list_owners",
+      "operation": "list_owners",
+      "trace_id": "dce30bfa02c82904a52ec49810298a6a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 33.27608199998622,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-87-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "99e56f6bef55e249ed0c8bf3caad425d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 43.408074000012675,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-87-list_vets",
+      "operation": "list_vets",
+      "trace_id": "aaaaf404b0d4141b430ef0340bf15c78",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 13.819107000017539,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-90-list_owners",
+      "operation": "list_owners",
+      "trace_id": "6ab29e7b5cf7367c8cf38321f8fbea4d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 29.409122000004118,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-90-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "96ed077f3c159296821171e2e0dd2817",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 38.92811099996152,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-90-list_vets",
+      "operation": "list_vets",
+      "trace_id": "55519856687415e70dc9ecc688f09619",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.443920000009712,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-93-list_owners",
+      "operation": "list_owners",
+      "trace_id": "65d741b75b7d53ea35fca2d0b9274114",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 33.07046800000535,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-93-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "7168cfc09789295f6bc930d829171034",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 48.84985900002903,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-93-list_vets",
+      "operation": "list_vets",
+      "trace_id": "ca08886c899af40c806787d9d5d02042",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 13.09648000000152,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-96-list_owners",
+      "operation": "list_owners",
+      "trace_id": "1f639405ea053b891c0b5aa8809682bb",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 30.749761999970815,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-96-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "6a0e90c9c2a18383f050e5e1c1fba3b1",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 49.79386700000532,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-96-list_vets",
+      "operation": "list_vets",
+      "trace_id": "9ca3568d8c0edcbe20d063e4d4c43294",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 11.477853000030791,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-99-list_owners",
+      "operation": "list_owners",
+      "trace_id": "cc46faa121e1989ae875974869a377f5",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.38015499999847,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-99-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "37385a3ab87eae6ac692ff5b6b886083",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 44.715803999963555,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-99-list_vets",
+      "operation": "list_vets",
+      "trace_id": "3b48958ada2e93be3d93341d20adbe65",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 14.602590999970744,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-102-list_owners",
+      "operation": "list_owners",
+      "trace_id": "52cd1c93971aa7fdc19541bb4c0a710f",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 27.73881100000608,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-102-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "b71af348a81a836c654cfe56a569c2fb",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 49.20663899997635,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-102-list_vets",
+      "operation": "list_vets",
+      "trace_id": "4400c478d5aad4c57b9aa81b3d26aece",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 14.344461999996838,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-105-list_owners",
+      "operation": "list_owners",
+      "trace_id": "1a0691f7180bdb77987887bf399fd239",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 30.039905000023737,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-105-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "5bb6762989169dbfeca6b7783658586a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 43.71713500000851,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-105-list_vets",
+      "operation": "list_vets",
+      "trace_id": "12a394ab7f796de97b36921e8b9c8da4",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 11.579954000012549,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-108-list_owners",
+      "operation": "list_owners",
+      "trace_id": "d09b500d3ea28a7ccbbf0abed54a5728",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 25.78582500001403,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-108-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "449ff206a8d81586e76689c2d3c0f784",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 45.40308600002163,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-108-list_vets",
+      "operation": "list_vets",
+      "trace_id": "ad113e85b004481651e27683277219f5",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 13.334838999981002,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-111-list_owners",
+      "operation": "list_owners",
+      "trace_id": "c3179b1781b7a7fb44a18f4fe13db8fd",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 27.25523500004101,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-111-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "f3ca8c996a3148d56c3ad66b4b4d4f87",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 42.439897000008386,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-111-list_vets",
+      "operation": "list_vets",
+      "trace_id": "fc70bf41a7d4f0ccde81ed214ac2b1bb",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 14.084497000055762,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-114-list_owners",
+      "operation": "list_owners",
+      "trace_id": "f01589ba79aa0a88321ca60e96ed5f3c",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 25.3483359999791,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-114-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "451bf32c3b08349dbabdce303bc9989e",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 39.48380100001714,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-114-list_vets",
+      "operation": "list_vets",
+      "trace_id": "988157960d399243a644c2d3c0bf2748",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 15.90119100001175,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-117-list_owners",
+      "operation": "list_owners",
+      "trace_id": "2909a0927a1e5d51c335a72dd785a7be",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 26.417614000024514,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-117-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "d638d5582e447d2986ebab205d46433a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 39.53172899997526,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-117-list_vets",
+      "operation": "list_vets",
+      "trace_id": "2095189d317df9b41ef6c734029cd0a6",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.177514000019983,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-120-list_owners",
+      "operation": "list_owners",
+      "trace_id": "bd1693b79e37e62ec605300e12fa1b4a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 24.122421000015493,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-120-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "4fec6499f0cc3b430baf1648a4a04f07",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 54.839227999991635,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-120-list_vets",
+      "operation": "list_vets",
+      "trace_id": "0fc8d04de195d4a1adb867657e3fbb9b",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 11.90381700001808,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-123-list_owners",
+      "operation": "list_owners",
+      "trace_id": "756163e8553ec30f01bc89900c791a9b",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 26.639183999975558,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-123-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "2f828a5a18e08bb9cf37e8a5198bc068",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 35.04717699996718,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-123-list_vets",
+      "operation": "list_vets",
+      "trace_id": "64fa4ae9744fee10111a1e94605a5deb",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.458836000054816,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-126-list_owners",
+      "operation": "list_owners",
+      "trace_id": "29cea61a1e319762854e323b3809da45",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 23.759259000030397,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-126-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "760b41c593922c99ec8c7aa3f1d48701",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 39.28863800001636,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-126-list_vets",
+      "operation": "list_vets",
+      "trace_id": "b6042699cda0e3da2e1a23ff2ddf2b61",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.58234899994659,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-129-list_owners",
+      "operation": "list_owners",
+      "trace_id": "5408b9cf73355b719a187f1c5346204a",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 25.614903000018785,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-129-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "5b8c8b8480ce34a1058dd816272d8671",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 57.45686099999148,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-129-list_vets",
+      "operation": "list_vets",
+      "trace_id": "be0e85ef14a139d6cac30ac012d71028",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 17.584187000011298,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-132-list_owners",
+      "operation": "list_owners",
+      "trace_id": "95644b916071a6d552fe65340eaae10e",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 23.506376000000273,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-132-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "68434e7722e95d9051497a47f02bff55",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 31.491995999999745,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-132-list_vets",
+      "operation": "list_vets",
+      "trace_id": "8a9d9213076f9a3d80e5e6ab4a22deb3",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.532154999988052,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-135-list_owners",
+      "operation": "list_owners",
+      "trace_id": "e33fbdc2c7408b7900bfaf9c54407a70",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 25.2904299999841,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-135-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "80338158d19dea782dfdaa6179dba4bd",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 36.010730999976204,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-135-list_vets",
+      "operation": "list_vets",
+      "trace_id": "d432a4ba10c6adbdd98415e1704266a2",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.988416999988203,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-138-list_owners",
+      "operation": "list_owners",
+      "trace_id": "e4e4e119f2df2cdd721a7e03d3b77299",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 25.56469199998901,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-138-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "f46079858c097ef25e66f8ac5774da00",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 36.78253399999676,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-138-list_vets",
+      "operation": "list_vets",
+      "trace_id": "6ac30a1e84640d147bb2388224d154a7",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.616946999959964,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-141-list_owners",
+      "operation": "list_owners",
+      "trace_id": "d1f06368d5c2c4ca0b11f889d747d9ce",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 23.450149999973746,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-141-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "2e7724423834036f1cd5b180cc578f66",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 33.08590700004288,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-141-list_vets",
+      "operation": "list_vets",
+      "trace_id": "959899addb757a6205c240a2b2d4a3cc",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.632962000011958,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-144-list_owners",
+      "operation": "list_owners",
+      "trace_id": "2078a5bca92586efaef3e36d8881cc34",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 24.022639000008894,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-144-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "3e3f9bcf4885f40f1ee6832284817054",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.37798900000644,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-144-list_vets",
+      "operation": "list_vets",
+      "trace_id": "049a392c4561d557ffbd9d63cc862fcd",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.277998999981719,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-147-list_owners",
+      "operation": "list_owners",
+      "trace_id": "1b0fef29811f96cbe5ca2d6797e49a28",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 23.883442999988347,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-147-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "6b05f5453a5d7c7dd84c865cfe6bdceb",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.25508399999444,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-147-list_vets",
+      "operation": "list_vets",
+      "trace_id": "d84486ec6fc83cc3869f3374d71a539b",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.69653599997855,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-150-list_owners",
+      "operation": "list_owners",
+      "trace_id": "c7fffdcbc39dad2e2272eb61842f59ed",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 27.14108100002477,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-150-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "19ce1a820fa8ea67dda2e53b2e33c377",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 40.425563999974656,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-150-list_vets",
+      "operation": "list_vets",
+      "trace_id": "31330f93b2dbe426a7b65eb63fd03c6e",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.98191199998655,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-153-list_owners",
+      "operation": "list_owners",
+      "trace_id": "edd10fa9a5006e9a1ca70934eb531677",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 25.498641000012867,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-153-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "f5596e2c10e28e57a278ac443e639d93",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 36.08653500003811,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-153-list_vets",
+      "operation": "list_vets",
+      "trace_id": "05a8c110b86df2fb32daa38b5680d40a",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.077719999969759,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-156-list_owners",
+      "operation": "list_owners",
+      "trace_id": "0b7b8fd1af1fcae3b21e9986febd624d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 21.87007600002744,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-156-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "c54e6e2453e32490f119e11265d581bc",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 33.52487799998016,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-156-list_vets",
+      "operation": "list_vets",
+      "trace_id": "45aa9a247dc3322d6e36be31eaa6b890",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 11.054340999976375,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-159-list_owners",
+      "operation": "list_owners",
+      "trace_id": "530662036f507c69fc60e1cc61dd47da",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.919236000007004,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-159-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "482551f79acec8e5406bdbc0c3a18384",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 35.42354399996839,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-159-list_vets",
+      "operation": "list_vets",
+      "trace_id": "3a8c579849bd817d5e2ded7ec6d20c41",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.461260000009133,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-162-list_owners",
+      "operation": "list_owners",
+      "trace_id": "0deb0ea0eabbe50ea5958516b1538ab1",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 24.141289999988658,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-162-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "572e3d48291cca9b1b8aaa7b4bbe8b11",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 37.460335999981,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-162-list_vets",
+      "operation": "list_vets",
+      "trace_id": "5c8bb216ee19d942897a2b38f12f9bbd",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.927960999993047,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-165-list_owners",
+      "operation": "list_owners",
+      "trace_id": "08e836e614ea841cb22d35d5b597c56b",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.5621120000028,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-165-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "8833281a848a362ec5dd6803c491006b",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 42.52821700004006,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-165-list_vets",
+      "operation": "list_vets",
+      "trace_id": "705da9467e418fec927e29a89858ba0f",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 15.130094000028294,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-168-list_owners",
+      "operation": "list_owners",
+      "trace_id": "5fa9d643fb481d4718cd8a614d3b0ccd",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 21.385269999996126,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-168-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "19a0df9c554d30125d5815d2a9c06032",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 33.46576400002732,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-168-list_vets",
+      "operation": "list_vets",
+      "trace_id": "79e91be6c95e98dcab182be7271c68af",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.615658000029725,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-171-list_owners",
+      "operation": "list_owners",
+      "trace_id": "5893d4b387447b7a763e954abab5d6cf",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 23.82967300002292,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-171-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "67ef4ae3dd4f6bcbb67779901575d0e6",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 30.382357000007687,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-171-list_vets",
+      "operation": "list_vets",
+      "trace_id": "045fb12bacb3e5f393f1c8dccfc67690",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.186388999964493,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-174-list_owners",
+      "operation": "list_owners",
+      "trace_id": "7d346888645e8de87c3826728870b633",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.882170999992013,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-174-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "801d0857818a9ac31753b35149db2643",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.09635299998581,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-174-list_vets",
+      "operation": "list_vets",
+      "trace_id": "08382ae2fe63201fe7be2110e11db95e",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.31787299998632,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-177-list_owners",
+      "operation": "list_owners",
+      "trace_id": "cbde5e59ffd4acfed8703e8fa6742981",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 24.77252800002816,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-177-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "42aef9debe35f00bd492d2487e56e85b",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.73916199998439,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-177-list_vets",
+      "operation": "list_vets",
+      "trace_id": "c3dd6082b3a44002e0ba8f7b65540ac2",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.926239000023543,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-180-list_owners",
+      "operation": "list_owners",
+      "trace_id": "893dbf42de43105a07ed1982307a350c",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 28.649380999979712,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-180-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "b15ca12bd37a24bfaeb127daac7ea72d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.14476000000377,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-180-list_vets",
+      "operation": "list_vets",
+      "trace_id": "a18cd847ccf26928600f6c6f393c0cf1",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 12.37394800000402,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-183-list_owners",
+      "operation": "list_owners",
+      "trace_id": "45514964c750d222888e5197de16decf",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 21.85271600001215,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-183-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "c8718f0fbc1a02db8cb77f7b4bfc1e7b",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 35.01894099997571,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-183-list_vets",
+      "operation": "list_vets",
+      "trace_id": "17e8fcf81e1f90fa1e66eaf07954e3d2",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.642079000035665,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-186-list_owners",
+      "operation": "list_owners",
+      "trace_id": "018b27cd2d6425b6724c359239e3e5ce",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.41381799996134,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-186-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "f011db90f758165cda2a28b187ae09ec",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 30.07967500002451,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-186-list_vets",
+      "operation": "list_vets",
+      "trace_id": "27a821da89b51c64e1feeb6ae3280627",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.608971999966798,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-189-list_owners",
+      "operation": "list_owners",
+      "trace_id": "e23db6f21190ca444b5481e3b1b50f76",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 23.30954099994642,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-189-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "b0a027c5dcede8d7fec3be3ee6d10ad0",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 30.115284999965297,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-189-list_vets",
+      "operation": "list_vets",
+      "trace_id": "51936fde0330cc2af9b956617edaf464",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.90559800001256,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-192-list_owners",
+      "operation": "list_owners",
+      "trace_id": "7e8e4a41991f85de8b212f1ef982ff58",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.164669999995112,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-192-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "9fb3b7774462447a4bd0688211bfa421",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 36.15627200002791,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-192-list_vets",
+      "operation": "list_vets",
+      "trace_id": "d51e31393e0a6595c2f492060aeeb236",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.856352000009338,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-195-list_owners",
+      "operation": "list_owners",
+      "trace_id": "040d23869a3a8c3248a31fcf422bdfc9",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.961699000006774,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-195-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "804de7dae17f59dba11ea7c0a95eec22",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 31.387295000001814,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-195-list_vets",
+      "operation": "list_vets",
+      "trace_id": "de373a70fc84cfde219bb04ebf1590bb",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.989745999997467,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-198-list_owners",
+      "operation": "list_owners",
+      "trace_id": "957ecf32faca6a42136aa5a1a22c2b3e",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 21.329744000013307,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-198-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "c2c784ac65309c1d08e30968050196cb",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 33.758761000001414,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-198-list_vets",
+      "operation": "list_vets",
+      "trace_id": "344890b3d35c22d8cfc75d2bf6fb448e",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.940931999982695,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-201-list_owners",
+      "operation": "list_owners",
+      "trace_id": "3947b88e8610c539738b2f57e90021b6",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 19.86351900001182,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-201-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "195ca2a56ea4644aae1f7e156408cb5e",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 28.401570999960768,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-201-list_vets",
+      "operation": "list_vets",
+      "trace_id": "61ed5ff519dd3c9661c52f7aba9982b0",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.449390999975549,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-204-list_owners",
+      "operation": "list_owners",
+      "trace_id": "59d0fe7cf069e49b4501b869c5dc90bb",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 20.925738000016736,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-204-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "9e60d5c24b6a2a162b9fda618345d6f9",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 33.82328499998266,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-204-list_vets",
+      "operation": "list_vets",
+      "trace_id": "899e955c975c41dfe1cb3484967e664a",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 9.0212039999642,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-207-list_owners",
+      "operation": "list_owners",
+      "trace_id": "8ac3dac824d9cacd5c3e3ce9e53dfedb",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.210212999993928,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-207-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "312a7a63139b9ead5a046e636844a5c3",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.79230799996458,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-207-list_vets",
+      "operation": "list_vets",
+      "trace_id": "fbdfbe92eb03f22d3819e58b18645452",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.403381999992689,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-210-list_owners",
+      "operation": "list_owners",
+      "trace_id": "d4b711334afd2b49af6c779d13cdf32c",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 22.39827599998989,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-210-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "5f68a43da2b47ed05607364d03a35eca",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 29.05957699999817,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-210-list_vets",
+      "operation": "list_vets",
+      "trace_id": "9980e1267641ceb9c98a577e76e6fcd3",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.078965999980483,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-213-list_owners",
+      "operation": "list_owners",
+      "trace_id": "4ee3888ec4ae55e6ee8a61fd4be7e475",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 21.053917000017464,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-213-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "99a1f8f81dcf570148b6d0019b03fb47",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.75181600002952,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-213-list_vets",
+      "operation": "list_vets",
+      "trace_id": "6f608ff4cd0dd25b188d5946b2062985",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.38791400003447,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-216-list_owners",
+      "operation": "list_owners",
+      "trace_id": "1c872a7552231078b9464ce2a1a13449",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 24.59406999997782,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-216-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "d096d9b9584e4614be31f730c023631d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 27.498986000011882,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-216-list_vets",
+      "operation": "list_vets",
+      "trace_id": "e642b9f856d2282330a9555d8fdb052f",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.238980999976775,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-219-list_owners",
+      "operation": "list_owners",
+      "trace_id": "9d2432f9d39f46f715a89429e0afa062",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 20.667788999958248,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-219-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "2ed011bee839d22ccf86a922d6e8b430",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 29.06788599995025,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-219-list_vets",
+      "operation": "list_vets",
+      "trace_id": "9c1dd65c3a430a422238fc878d949129",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.954453000010744,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-222-list_owners",
+      "operation": "list_owners",
+      "trace_id": "21c79ef1bbbeaed26d3ef1f5b8c586bc",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 21.909631000085028,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-222-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "c1e953dd9840eef82f5958a2fd57f2e6",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.15073400003621,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-222-list_vets",
+      "operation": "list_vets",
+      "trace_id": "0661595582e15684869c0220694d1f3c",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.876078000023881,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-225-list_owners",
+      "operation": "list_owners",
+      "trace_id": "194870dfadd1fb1354479edd8ee18c47",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 24.077193000039188,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-225-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "fca5bb4c7b62516aafae1a54f0e5dc47",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 42.639241000074435,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-225-list_vets",
+      "operation": "list_vets",
+      "trace_id": "0d99f1e6c2f6ec36c9d1d8a5f9b94f8f",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 14.683164000075521,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-228-list_owners",
+      "operation": "list_owners",
+      "trace_id": "b04ea9cf8ff396b47ef93a130b2163c9",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 19.507264000026225,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-228-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "05819847a5f32f88614688daace08800",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 26.60673399998359,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-228-list_vets",
+      "operation": "list_vets",
+      "trace_id": "e806c9ee7215b786e4573366597bde06",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.625152000035996,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-231-list_owners",
+      "operation": "list_owners",
+      "trace_id": "6c3d91ac5390ba9088f598c88cca7ca2",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 19.440201000065827,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-231-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "33c5480cf3492617d5f6dc7d3ba9ff33",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 28.27304200002345,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-231-list_vets",
+      "operation": "list_vets",
+      "trace_id": "545a289a7534e7a9646fb0958306bc09",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.153952000043319,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-234-list_owners",
+      "operation": "list_owners",
+      "trace_id": "6298de5138d2d99ee9cbe9842ae4ea97",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 20.501273000036235,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-234-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "f8593d1d2e74e34fe72cb89872a19036",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 34.43150999999034,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-234-list_vets",
+      "operation": "list_vets",
+      "trace_id": "000e1425692f3bf00e178347309470ba",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.195615000090584,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-237-list_owners",
+      "operation": "list_owners",
+      "trace_id": "93436a375301d758026554c7e8e13263",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 19.602171999963502,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-237-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "f99c8684beffb20fb273908c0ff3c81d",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.04020400005447,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-237-list_vets",
+      "operation": "list_vets",
+      "trace_id": "210d49ec0b792a9fccfce664494cf39b",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 8.234010000023773,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    },
+    {
+      "request_id": "bootstrap-warmup-240-list_owners",
+      "operation": "list_owners",
+      "trace_id": "a657ea7a0c7fec1623d6e2f3ededcc3c",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 19.741332000080547,
+      "response_sha256": "a60bfbc7184b76aa05357345f72745a5f6c856f5547b75c9534b1fc266e4bc91"
+    },
+    {
+      "request_id": "bootstrap-warmup-240-owner_details_with_visits",
+      "operation": "owner_details_with_visits",
+      "trace_id": "3e152cc9460a137b0d65eefb3adda16b",
+      "status_code": 200,
+      "semantic_success": false,
+      "semantic_reason": "semantic_value_mismatch",
+      "timed_out": false,
+      "latency_ms": 32.97657600001003,
+      "response_sha256": "78854b761a811f16c177a85e4d4acb282a34520092cff27692aea12d411ab006"
+    },
+    {
+      "request_id": "bootstrap-warmup-240-list_vets",
+      "operation": "list_vets",
+      "trace_id": "5da5c1a9c41f0b1c91a5940799f585f8",
+      "status_code": 200,
+      "semantic_success": true,
+      "semantic_reason": "complete_timely_semantic_result",
+      "timed_out": false,
+      "latency_ms": 10.311161000004176,
+      "response_sha256": "793a9552ec51344c0e4b91a69f0548eaacc7807ea81232ab4224845cca29870c"
+    }
+  ]
+}

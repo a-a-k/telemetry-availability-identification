@@ -1,0 +1,155 @@
+{
+  "config_sha256": "7b00849c768d626b0f86c6f3e0e218263f34bc4235b25841505412da47fc2fe9",
+  "costs": [
+    {
+      "command": [
+        "mvn",
+        "-B",
+        "-ntp",
+        "-DskipTests",
+        "-pl",
+        "spring-petclinic-customers-service,spring-petclinic-visits-service,spring-petclinic-vets-service,spring-petclinic-api-gateway",
+        "-am",
+        "package"
+      ],
+      "elapsed_seconds": 23.837760665999994
+    },
+    {
+      "command": [
+        "docker",
+        "build",
+        "--platform",
+        "linux/amd64",
+        "-t",
+        "petclinic-study:3858f9c630cf",
+        "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-results/petclinic-build/image-context"
+      ],
+      "elapsed_seconds": 13.446478674000005
+    },
+    {
+      "command": [
+        "docker",
+        "save",
+        "-o",
+        "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-results/petclinic-build/petclinic-image.tar",
+        "petclinic-study:3858f9c630cf"
+      ],
+      "elapsed_seconds": 4.480713180999999
+    }
+  ],
+  "files": {
+    "fixture.json": "130716c25e809532296c9c4f817b305150db5025589e3f8bab225bfe3da0a0aa",
+    "logs/image-build.log": "ca3f2bd85c959a6d84354d273fa71b95666da010537859d93f76d70b513421cb",
+    "logs/image-build.log.resource-usage.txt": "38215ae1da31b1ce9ed08c5198a98c075f218b3a3a098ac8b99adada00252ffe",
+    "logs/image-save.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/image-save.log.resource-usage.txt": "9de0f383daf2d4c9b417cafdf47ba87f190e4a2eacb44b438f14ded61aa6a451",
+    "logs/java-version.txt": "8ffd2d05de22acb2a1f82845905d499e807c7595cf7c3e7f2a2cab7e576a26de",
+    "logs/maven-build.log": "55e1f1f5e01b665a13dbca59b8abe219de05a27a6267dfbd06f3e713e148c627",
+    "logs/maven-build.log.resource-usage.txt": "a478e26a3414ee993bd0bdbe575b7b2f9012b164a23c0486527feea30ec57821",
+    "logs/maven-version.txt": "26319418b46d05f15d1474fc404064d8b6b14dc959e3a65fad322b964f895afd",
+    "petclinic-image.tar": "d3703a9bca74afb66cad89c69bd38d65b35baaf76d145c43ca5354d71da7bc5f",
+    "sql/00-customers-schema.sql": "1c6e030b62ac4afd6aa7df9fca46f52f2b89cfb9c76e54c2e2f737e6d821c024",
+    "sql/01-customers-data.sql": "6ca8d1327d662a65db58ea0da74f5201dac37238e8d31c9777c119373c776f06",
+    "sql/10-visits-schema.sql": "aa376fc9f6c99d0d1d6f84e71881ba618912db25b1f83bdb79ab06e0697217f3",
+    "sql/11-visits-data.sql": "88863383b18d40fe7c06184d3a7a16592afe504120a4b6e5ea095ab6343ca57b",
+    "sql/20-vets-schema.sql": "65cfee96a84647c714e2d38827cd8e36194e836c804f76480a0d161097e6f5a3",
+    "sql/21-vets-data.sql": "4e3beb276725d5b25c7c182e43eff5b60402d0c8e8490d2376e77feed5cbf4cd"
+  },
+  "image": {
+    "Architecture": "amd64",
+    "Author": "",
+    "Comment": "buildkit.dockerfile.v0",
+    "Config": {
+      "AttachStderr": false,
+      "AttachStdin": false,
+      "AttachStdout": false,
+      "Cmd": null,
+      "Domainname": "",
+      "Entrypoint": [
+        "/__cacert_entrypoint.sh"
+      ],
+      "Env": [
+        "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+        "JAVA_HOME=/opt/java/openjdk",
+        "LANG=en_US.UTF-8",
+        "LANGUAGE=en_US:en",
+        "LC_ALL=en_US.UTF-8",
+        "JAVA_VERSION=jdk-17.0.20+8"
+      ],
+      "Hostname": "",
+      "Image": "",
+      "Labels": {
+        "org.opencontainers.image.created": "2026-08-17T09:02:45.677319+00:00",
+        "org.opencontainers.image.description": "The Ubuntu container image maintained by Canonical\n\nUbuntu is a Debian-based Linux operating system that runs from the desktop to the cloud, to all your internet connected things.\nIt is the world's most popular operating system across public clouds and OpenStack clouds.\nIt is the number one platform for containers; from Docker to Kubernetes to LXD, Ubuntu can run your containers at scale.\nFast, secure and simple, Ubuntu powers millions of PCs worldwide.\n",
+        "org.opencontainers.image.title": "ubuntu",
+        "org.opencontainers.image.version": "26.04"
+      },
+      "OnBuild": null,
+      "OpenStdin": false,
+      "StdinOnce": false,
+      "Tty": false,
+      "User": "",
+      "Volumes": null,
+      "WorkingDir": "/app"
+    },
+    "Created": "2026-09-08T07:24:20.233565205Z",
+    "DockerVersion": "",
+    "GraphDriver": {
+      "Data": {
+        "LowerDir": "/var/lib/docker/overlay2/w10v2rs0r47deipam5d21xrdv/diff:/var/lib/docker/overlay2/aa151ab0511ce21c800ef294e8499180e72705f88022e768cee1403de94f014c/diff:/var/lib/docker/overlay2/1d460670691ae42ab18924b7f9373c5671ab7d7298b5e4bc6c003a6d394d4f05/diff:/var/lib/docker/overlay2/4cec9f8766852b3ee80c241befd54189c0dd727600ed8234a574f15e86451f25/diff:/var/lib/docker/overlay2/de4e943945ea836f19c3beb05ea2ff727435216e2d168eeec2e7e401d5a60006/diff:/var/lib/docker/overlay2/6adcbf3c28e62250cfdc10234580e6f9846450175513d28481ad8299c050a7e1/diff:/var/lib/docker/overlay2/51a6d5ec64cacb12b60dd684cd56c72f309bbc6c464434ed97379046fa5e371c/diff",
+        "MergedDir": "/var/lib/docker/overlay2/4zdjmx9hly6f2d7ogbkx9g9a8/merged",
+        "UpperDir": "/var/lib/docker/overlay2/4zdjmx9hly6f2d7ogbkx9g9a8/diff",
+        "WorkDir": "/var/lib/docker/overlay2/4zdjmx9hly6f2d7ogbkx9g9a8/work"
+      },
+      "Name": "overlay2"
+    },
+    "Id": "sha256:48a71a0f944e3cda4fcf445a66371d0f76240a6b2603fc2d1c7395779cb71a0d",
+    "Metadata": {
+      "LastTagTime": "2026-09-08T07:24:21.17628868Z"
+    },
+    "Os": "linux",
+    "Parent": "",
+    "RepoDigests": [],
+    "RepoTags": [
+      "petclinic-study:3858f9c630cf"
+    ],
+    "RootFS": {
+      "Layers": [
+        "sha256:b577adbc0b589bb7c1d3be98cc4b703e8228ab4413156754445e8b20a001c5d3",
+        "sha256:168f4b64baaa0d1f3b8a1a27acfa9cd0f29527ebda716df024dfa0e9e8f24ef9",
+        "sha256:9c9c5161ed13ecc3ae720ec532eb6f6fe1a1b449f53a3a562bbd7e91fa763eb0",
+        "sha256:d1cb3b727c6bd42269ac2864eeaa416f9b6bd872819fa3c5e223bd17187010a9",
+        "sha256:1d4ad11192b0c85c36f20779645db9d6984465e76e7bad9d5344a94742fe644a",
+        "sha256:281852bcff0e9d9b833442a8978513593145887a3f6bc64d40c2c08e510a9d25",
+        "sha256:25ebc9cd8fb9b1fa32dc65a3014ec17ff1ccfdb8bd11ece2bb43aa2413a247eb",
+        "sha256:25a5eb2b743b19a294c106cd7124d5f150f6dd1ae28cb0035379263db8ceb983"
+      ],
+      "Type": "layers"
+    },
+    "Size": 674674722
+  },
+  "image_tag": "petclinic-study:3858f9c630cf",
+  "jars": {
+    "api-gateway": {
+      "bytes": 76474581,
+      "sha256": "d9d477a497b4789ef83e20868e5a9707fc7fef7c6c5615d796583953b0161dd3"
+    },
+    "customers-service": {
+      "bytes": 92557540,
+      "sha256": "8ab7e76a6343dcf617ed40f08d7a7b3ff4bd85c1dd1ef2cec237de0f4193b4e6"
+    },
+    "vets-service": {
+      "bytes": 93616387,
+      "sha256": "98a5b5e078c3d6e57d0a8cd1c149e875faa991b2b3d152eb657a8fec1673a5f7"
+    },
+    "visits-service": {
+      "bytes": 92543506,
+      "sha256": "98d13181f434da597d8a9dc11e8694f3b0ebd566d5799565b721727e6630bbf3"
+    }
+  },
+  "java_agent_sha256": "bbf83c151b6400709e2f225bdd07a04f839d9d13b8b93464241333fd25d3e3ba",
+  "run_id": "34199064678",
+  "source_commit": "3858f9c630cf989bb6809a86edf47c2be78dc9f1",
+  "stage": "petclinic-source-runtime-bootstrap-v1",
+  "study_head": "591e5760a0bc4802cec660c24bf12c30fd2ee7e8"
+}
