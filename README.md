@@ -12,7 +12,7 @@ input model from heterogeneous telemetry.
 ## Current evidence and article material
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 045](docs/iterations/045-compact-admission-audit.md)
+current study. [Iteration 046](docs/iterations/046-preflight-failure-and-pmx-profile-v2.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. The new 240-campaign comparison has **not started**.
@@ -42,8 +42,10 @@ for current historical arithmetic and retain explicit own/common coverage.
 S/N bindings for all ten operations. The new prospective G* comparison with G0
 and PMX, transfer and comparable full costs remain required. The [final comparison bindings](docs/V3_FINAL_COMPARISON_BINDINGS_V1.md) now select
 Gstar, GID, execution ablations and the comparator versions. The complete new
-prospective workflow is frozen at `28eb21c` and full-duration preflight
-`34442870952` is running; main admission remains pending. The new
+v1 full-duration preflight `34442870952` is preserved as a
+[PMX interface failure](docs/milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md).
+The [versioned v2 correction](docs/V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md)
+requires a new complete preflight; main admission remains pending. The new
 [v3 methods chapter](docs/ARTICLE_METHODS_V3.md) and
 [contribution/evidence/limitation table](docs/ARTICLE_CLAIMS_V3.md) document the
 selected model, its proofs, parameter provenance and actual manual inputs.

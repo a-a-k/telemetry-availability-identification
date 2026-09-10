@@ -10,10 +10,10 @@ tests, configuration validation, and bounded smoke cases.
 
 ## Current v3 evidence
 
-The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` is running at frozen source `28eb21c`; this is not yet a completed milestone or main admission.
+The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` failed the PMX request-profile bridge; the [result and complete absence census](milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md) are retained. The [v2 correction](V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md) awaits a new full preflight; main admission remains closed.
 
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 045 checklist](iterations/045-compact-admission-audit.md)
+[complete iteration 046 checklist](iterations/046-preflight-failure-and-pmx-profile-v2.md)
 are the current authority and status. New main campaigns: **0/240**. Historical
 milestone completion below is scoped to each original protocol.
 

@@ -1,0 +1,32 @@
+{
+  "run_id": 34442870952,
+  "head": "28eb21c78b2ade594fd493d0fc656fa2fa6dda79",
+  "job_id": 102769372509,
+  "name": "pmx (deathstarbench_social_network, colocated, NCD, 0, deathstarbench_social_network--colocated--...",
+  "source": "GitHub completed job log",
+  "source_log_bytes": 38263,
+  "source_log_sha256": "4d8ea099c4048fe62ccb607e0f3be91f8e94597c00ccfe544c0db91ea6c32dea",
+  "excerpt_lines": [
+    "2026-09-10T06:31:12.3269237Z Traceback (most recent call last):",
+    "2026-09-10T06:31:12.3287158Z   File \"<frozen runpy>\", line 203, in _run_module_as_main",
+    "2026-09-10T06:31:12.3287886Z   File \"<frozen runpy>\", line 88, in _run_code",
+    "2026-09-10T06:31:12.3289321Z   File \"/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/v3_comparison_pmx_v1.py\", line 234, in <module>",
+    "2026-09-10T06:31:12.3290638Z     main()",
+    "2026-09-10T06:31:12.3290954Z     ~~~~^^",
+    "2026-09-10T06:31:12.3292175Z   File \"/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/v3_comparison_pmx_v1.py\", line 197, in main",
+    "2026-09-10T06:31:12.3293817Z     key = prepare(args.source.resolve(), args.options, contract, read(args.config), args.mode=='controls')",
+    "2026-09-10T06:31:12.3295746Z   File \"/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/v3_comparison_pmx_v1.py\", line 82, in prepare",
+    "2026-09-10T06:31:12.3296833Z     results, stages = projection(documents['native.json'], documents['requests.json'],",
+    "2026-09-10T06:31:12.3297376Z                       ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "2026-09-10T06:31:12.3297808Z         identity['application'], manifest['declared_host'])",
+    "2026-09-10T06:31:12.3298193Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "2026-09-10T06:31:12.3299157Z   File \"/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/v3_comparison_pmx_v1.py\", line 50, in projection",
+    "2026-09-10T06:31:12.3300162Z     base = project_campaign(grouped, rows, policy, declared_host)",
+    "2026-09-10T06:31:12.3301212Z   File \"/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/pmx_request_adapter.py\", line 145, in project_campaign",
+    "2026-09-10T06:31:12.3302669Z     projected = project_request(grouped.get(trace_id, []), request, policy, declared_host)",
+    "2026-09-10T06:31:12.3303848Z   File \"/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/src/telemetry_availability/pmx_request_adapter.py\", line 68, in project_request",
+    "2026-09-10T06:31:12.3304943Z     trace_id, wrapper_id, '', 'taid.external.' + request['profile'], request['operation'],",
+    "2026-09-10T06:31:12.3305469Z                                                  ~~~~~~~^^^^^^^^^^^",
+    "2026-09-10T06:31:12.3306037Z KeyError: 'profile'"
+  ]
+}

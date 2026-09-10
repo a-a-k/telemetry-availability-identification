@@ -1,0 +1,153 @@
+{
+  "acquisition": {
+    "acquisition_process_seconds": 2058.365955012,
+    "identity": {
+      "application": "deathstarbench_social_network",
+      "data_role": "development_preflight",
+      "law": "NCD",
+      "namespace": "v3-preflight-771603",
+      "placement": "colocated",
+      "protocol_sha256": "f6421c9e75748991a981e9e493f82dbd4942c18dd8abca1011744b9cb70455e8",
+      "repetition": 0
+    },
+    "native_bytes": 55453399,
+    "ordinary_role_bytes": 35573207,
+    "pmx_role_bytes": 35330642,
+    "process_resources": {
+      "records": [
+        {
+          "maximum_rss_bytes": 599810048.0,
+          "path": "acquisition-resource-usage.txt",
+          "system_seconds": 80.79,
+          "user_seconds": 220.71,
+          "wall_seconds": 2071.76
+        },
+        {
+          "maximum_rss_bytes": 51412992.0,
+          "path": "logs/compose-down.log.resource-usage.txt",
+          "system_seconds": 0.02,
+          "user_seconds": 0.09,
+          "wall_seconds": 12.08
+        },
+        {
+          "maximum_rss_bytes": 54693888.0,
+          "path": "logs/services.log.resource-usage.txt",
+          "system_seconds": 0.03,
+          "user_seconds": 0.13,
+          "wall_seconds": 0.22
+        },
+        {
+          "maximum_rss_bytes": 51580928.0,
+          "path": "pull-resource-usage.txt",
+          "system_seconds": 0.03,
+          "user_seconds": 0.14,
+          "wall_seconds": 27.35
+        },
+        {
+          "maximum_rss_bytes": 54583296.0,
+          "path": "start-resource-usage.txt",
+          "system_seconds": 0.03,
+          "user_seconds": 0.13,
+          "wall_seconds": 8.42
+        }
+      ],
+      "rss_scope": "per timed process/children GNU-time high-water report, not summed across concurrent processes",
+      "unknown_values_are_not_zero": true,
+      "wall_intervals_can_overlap": true
+    },
+    "shared_native_extraction_seconds": 1.5735646240000278,
+    "stages": [
+      {
+        "method": "shared_acquisition",
+        "overlaps_native_parse": true,
+        "seconds": 2058.365955012,
+        "stage": "acquisition_and_export_process_total"
+      },
+      {
+        "method": "shared_native_pool",
+        "seconds": 1.5735646240000278,
+        "stage": "native_parse"
+      }
+    ]
+  },
+  "graph": {
+    "b0_fields": [
+      "requests.json"
+    ],
+    "combined_process_seconds": 0.8666919700000051,
+    "graph_ablation_solve_is_joint": true,
+    "graph_fields": [
+      "requests.json",
+      "native.json",
+      "probes.json",
+      "declarations.json"
+    ],
+    "input_bytes": 35572691,
+    "input_loading_seconds": 0.4170013439999991,
+    "manual_integration_seconds": null,
+    "manual_reason": "historical development labor was not timed",
+    "monitoring_overhead": null,
+    "process_resources": {
+      "records": [
+        {
+          "maximum_rss_bytes": 218181632.0,
+          "path": "build-resource-usage.txt",
+          "system_seconds": 0.16,
+          "user_seconds": 2.52,
+          "wall_seconds": 2.4
+        },
+        {
+          "maximum_rss_bytes": 109293568.0,
+          "path": "replay-resource-usage.txt",
+          "system_seconds": 0.08,
+          "user_seconds": 1.39,
+          "wall_seconds": 0.92
+        }
+      ],
+      "rss_scope": "per timed process/children GNU-time high-water report, not summed across concurrent processes",
+      "unknown_values_are_not_zero": true,
+      "wall_intervals_can_overlap": true
+    },
+    "scalability_curve": null,
+    "shared_graph_extraction_charged_once": true,
+    "stages": [
+      {
+        "method": "B0",
+        "seconds": 0.006176551000002917,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "read_home_timeline",
+        "seconds": 0.11986205999999555,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "read_home_timeline",
+        "seconds": 0.002660698999996214,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "read_home_timeline",
+        "seconds": 0.00025045000000289974,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "read_home_timeline",
+        "seconds": 0.00016556399999956284,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "read_home_timeline",
+        "seconds": 7.330900000113161e-05,
+        "stage": "solve"
+      }
+    ],
+    "update_reason": "not measured; fresh reconstruction is the reported application path",
+    "update_seconds": null
+  }
+}

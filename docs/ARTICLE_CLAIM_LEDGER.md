@@ -1,6 +1,6 @@
 # Working claim ledger for the SIMPAT continuation
 
-Current editorial synthesis (10 September 2026): [v3 methods](ARTICLE_METHODS_V3.md) and [contribution/evidence/limitation table](ARTICLE_CLAIMS_V3.md). The final method set and complete pipeline are frozen at `28eb21c`; full-duration preflight `34442870952` is active, main0/240. These current definitions supersede older method-selection placeholders below without changing the scope of retained historical evidence.
+Current editorial synthesis (10 September 2026): [v3 methods](ARTICLE_METHODS_V3.md) and [contribution/evidence/limitation table](ARTICLE_CLAIMS_V3.md). The final method set and complete pipeline are frozen at `28eb21c`; full-duration preflight `34442870952` is a retained PMX interface failure. The [v2 metadata correction](V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md) requires a new full preflight, main0/240. These current definitions supersede older method-selection placeholders below without changing the scope of retained historical evidence.
 
 Status: governed by [author correction v3](SIMPAT_CORRECTION_V3.md), 8 September 2026.
 M7 is a historical two-path comparator; the primary graph method must pass the
