@@ -36,7 +36,7 @@ def main():
     if [r['scenario_p'] for r in rows]!=[.1,.3,.5,.7,.9]:raise ValueError('Scenario census differs')
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':10,'axes.titlesize':11,
         'axes.labelsize':10,'axes.spines.top':False,'axes.spines.right':False,
-        'pdf.fonttype':42,'ps.fonttype':42,'svg.hashsalt':'aina-audit-v3-figure-v1',
+        'svg.hashsalt':'aina-audit-v3-figure-v1',
         'axes.axisbelow':True,'savefig.facecolor':'white'})
     fig,axes=plt.subplots(1,2,figsize=(9.0,3.65),layout='constrained',gridspec_kw={'width_ratios':[1.12,1]})
     x=[r['scenario_p'] for r in rows]
@@ -56,7 +56,6 @@ def main():
     fig.savefig(base.with_suffix('.svg'),metadata={'Date':None,'Title':'Audited original AINA aggregate discrepancy'})
     svg=base.with_suffix('.svg')
     svg.write_bytes(('\n'.join(line.rstrip() for line in svg.read_text(encoding='utf-8').splitlines())+'\n').encode('utf-8'))
-    fig.savefig(base.with_suffix('.pdf'),metadata={'CreationDate':None,'ModDate':None,'Title':'Audited original AINA aggregate discrepancy'})
     preview=Path('.smoke/article-figures/aina-audit-v3.png');preview.parent.mkdir(parents=True,exist_ok=True)
     fig.savefig(preview,dpi=180);plt.close(fig)
     record=dict(version='aina-compact-figure-v1',source=str(SOURCE.as_posix()),source_sha256=sha256(raw).hexdigest(),
@@ -64,7 +63,7 @@ def main():
         evidence_scope='Historical original endpoint/probe experiment; not the v3 whole-business-operation endpoint',
         interpretation='Descriptive aggregates. No inferential error bars, causal attribution, new MC or independent campaigns. Lines guide the eye across five scenarios.',
         python=platform.python_version(),renderer_packages={name:importlib.metadata.version(name) for name in ('matplotlib','numpy','contourpy','pillow','fonttools','kiwisolver','cycler','pyparsing','python-dateutil')},
-        outputs={str(p.as_posix()):dict(bytes=p.stat().st_size,sha256=sha256(p.read_bytes()).hexdigest()) for p in (base.with_suffix('.svg'),base.with_suffix('.pdf'))})
+        outputs={str(p.as_posix()):dict(bytes=p.stat().st_size,sha256=sha256(p.read_bytes()).hexdigest()) for p in (base.with_suffix('.svg'),)})
     (OUT/'aina-audit-v3-provenance.json').write_bytes((json.dumps(record,indent=2)+'\n').encode())
     print(json.dumps(dict(outputs=record['outputs'],preview=str(preview))))
 

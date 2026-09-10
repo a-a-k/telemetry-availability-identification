@@ -48,7 +48,7 @@ python -m pip install matplotlib==3.11.1 numpy==2.4.4
 python scripts/render_m9p_confirmation.py --candidate INPUT/candidate-manifest.json --evaluation INPUT/evaluation-manifest.json --audit INPUT/main-audit.json --out OUTPUT
 ```
 
-The output is `m9p-confirmation.pdf`, `.svg`, `.png` and
+The output is `m9p-confirmation.svg`, `.png` and
 `figure-provenance.json`. The provenance records the exact input byte lengths
 and SHA-256 digests, renderer digest, library versions and source run/commit.
 Artifact API provenance and seal verification belong to the completed-run

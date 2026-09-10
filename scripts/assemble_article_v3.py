@@ -97,7 +97,7 @@ def main():
         excluded_author_fields='No current-manuscript authorship or affiliation is inferred from earlier papers',
         build_status=status)
     (out/'assembly-provenance.json').write_bytes((json.dumps(provenance,indent=2)+'\n').encode())
-    (out/'.gitattributes').write_bytes(b'* -text whitespace=-trailing-space,-space-before-tab,cr-at-eol\n*.pdf binary\n*.docx binary\n')
+    (out/'.gitattributes').write_bytes(b'* -text whitespace=-trailing-space,-space-before-tab,cr-at-eol\n*.docx binary\n')
     print(json.dumps(dict(renderer=version,outputs=outputs,publication_ready=False)))
 
 

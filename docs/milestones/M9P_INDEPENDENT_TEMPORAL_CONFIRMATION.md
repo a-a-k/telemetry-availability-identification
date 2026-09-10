@@ -193,7 +193,6 @@ unpacked summaries, seals, campaign-level generated tables, full artifact locks
 and completed audit. Its local Git attributes preserve their bytes. The figure
 was rendered from the three exact manifests using the previously prepared
 [reporting method](../M9P_REPORTING_METHOD.md), without fitting or rescoring.
-[PDF](../figures/m9p-confirmation/m9p-confirmation.pdf),
 [SVG](../figures/m9p-confirmation/m9p-confirmation.svg) and
 [figure provenance](../figures/m9p-confirmation/figure-provenance.json) accompany
 the PNG. The actual figure was inspected after rendering.

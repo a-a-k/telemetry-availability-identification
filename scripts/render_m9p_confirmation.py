@@ -99,7 +99,7 @@ def render(candidate_path, evaluation_path, audit_path, output, illustrative_onl
     import numpy
 
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10,
-                         "svg.fonttype": "none", "pdf.fonttype": 42,
+                         "svg.fonttype": "none",
                          "axes.spines.top": False, "axes.spines.right": False,
                          "axes.spines.left": False, "axes.edgecolor": "#9aa3af"})
     fig, axes = plt.subplots(3, 1, figsize=(10.5, 7.6))
@@ -154,7 +154,7 @@ def render(candidate_path, evaluation_path, audit_path, output, illustrative_onl
         fig.text(0.5, 0.52, "ARTIFICIAL LAYOUT CHECK — NOT RESULTS", ha="center",
                  rotation=24, fontsize=23, color="#a61c23", alpha=0.25)
     output.mkdir(parents=True, exist_ok=True)
-    for extension in ("pdf", "svg", "png"):
+    for extension in ("svg", "png"):
         fig.savefig(output / f"m9p-confirmation.{extension}", dpi=200, facecolor="white")
     plt.close(fig)
     provenance = {
