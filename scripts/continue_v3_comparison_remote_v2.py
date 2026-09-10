@@ -278,11 +278,15 @@ def collect_main(run_id):
         record['main_auditor_sha256']=sha('scripts/audit_v3_main_compact_v2.py')
         from render_v3_comparison_tables_v1 import render
         render(source,tables)
+        from export_v3_cost_scopes_v1 import export as export_cost_scopes
+        cost_scopes=export_cost_scopes(source,tables/'cost-scopes')
         record.update(analysis_available=True,comparison_sha256=sha(source),
                       remote_candidate_evaluator_integrity=report['candidate_evaluator_integrity'],
                       remote_nonempty_primary_family=report['nonempty_primary_family'],
                       retained_method_slots=report['analysis']['method_slots'],
-                      publication_tables=str(tables.as_posix()))
+                      publication_tables=str(tables.as_posix()),
+                      recorded_cost_scope_tables=str((tables/'cost-scopes').as_posix()),
+                      cost_scope_exporter_sha256=cost_scopes['exporter_sha256'])
         paths.append(tables)
     else:
         record.update(analysis_available=False, reason='No complete remote analysis artifact; all available absence/provenance records retained')
