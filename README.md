@@ -15,7 +15,7 @@ input model from heterogeneous telemetry.
 one tagged main dispatch and terminal compact retention; it does not certify publication readiness.
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 048](docs/iterations/048-verified-remote-continuation.md)
+current study. [Iteration 049](docs/iterations/049-pmx-timeout-and-article-assembly.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. [Current remote run status](docs/V3_CURRENT_REMOTE_STATUS.md)
@@ -50,10 +50,12 @@ v1 full-duration preflight `34442870952` is preserved as a
 [PMX interface failure](docs/milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md).
 The [versioned v2 correction](docs/V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md)
 is frozen at `e89e7ca`; CI `34447089240` passed and complete preflight
-`34447262633` is running. Main admission remains pending. The new
+`34447262633` completed but [one PMX process timeout](docs/milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md)
+blocks main admission. A focused exact-input diagnostic follows. The new
 [v3 methods chapter](docs/ARTICLE_METHODS_V3.md) and
 [contribution/evidence/limitation table](docs/ARTICLE_CLAIMS_V3.md) document the
 selected model, its proofs, parameter provenance and actual manual inputs. The
+[assembled working manuscript](docs/manuscript-v3/manuscript.md),
 [results chapter and vector AINA figure](docs/ARTICLE_RESULTS_V3.md) report completed
 evidence while keeping independent main results explicitly pending.
 

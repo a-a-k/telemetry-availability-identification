@@ -1,6 +1,6 @@
 # Article results: audited history, mechanism and implementation evidence
 
-Draft assembled on 10 September 2026. This chapter reports completed evidence for the [v3 methods](ARTICLE_METHODS_V3.md). It does not supply the still-pending independent main comparison. The [claim/evidence table](ARTICLE_CLAIMS_V3.md) limits attribution and generalization. At preparation, the corrected full-duration preflight `34447262633` is running at `e89e7ca91dd474d8cf2b8c4ed7c1ffc052d98569`; main remains 0/240.
+Draft assembled on 10 September 2026. This chapter reports completed evidence for the [v3 methods](ARTICLE_METHODS_V3.md). It does not supply the still-pending independent main comparison. The [claim/evidence table](ARTICLE_CLAIMS_V3.md) limits attribution and generalization. The corrected full-duration preflight `34447262633` completed at `e89e7ca91dd474d8cf2b8c4ed7c1ffc052d98569`, but a retained PMX watchdog failure prevents main admission; main remains 0/240.
 
 ## 1. Historical discrepancies survive arithmetic and provenance checks
 
@@ -74,6 +74,12 @@ All six application PMX projections fail before Java extraction because the new 
 The [full preflight failure report](milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md) preserves the artifacts, traceback excerpts, qualified subchain and complete remote descriptive analysis. Graph/replay/evaluator reads are checked against their roles; candidates remain unchanged when all-sequence and stable outcomes are scored; all candidate-freeze jobs finish before the closed evaluator downloads. The global admission gate correctly remains false because application PMX forecasts are absent.
 
 The [v2 correction](V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md) derives the legacy wrapper's profile from the sealed campaign identity, preserves the eight-field input files and rejects extra fields. Exact-schema controls reproduce the original error and show equivalence to the qualified legacy projection with that metadata supplied explicitly. It changes no graph functional, native observation, PMX failure policy or outcome. Its full-duration preflight uses a new registered seed and namespace; v1 is preserved as failed development evidence.
+
+### Second full preflight: one explicit process timeout
+
+The corrected run34447262633 completes all36 workflow jobs and resolves the request-profile interface. Nineteen of20 operation projections qualify, but DeathStarBench split `read_user_timeline` reaches the frozen1800second PMX watchdog and exits124 without a PCM repository. Both PMX variants for that cell are technical failures. The automatic admission check correctly rejects the main launch even though the provider shows a green workflow.
+
+The [v2 failure record](milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md) retains all200 method slots, all21,600 all-sequence test attempts and the exact missing forecasts. Primary PMX has13 points, six valid conditional-local refusals and one technical failure; inclusive PMX has19 points and one failure. Gstar has10 points, eight ambiguous cells and two structural refusals. The successful subchain retains48 known oracle solves and passes1293 other strict provenance/replay/read-order checks. Those checks do not remove the failed admission gates. A separately declared exact-input process diagnostic follows; the cause of the nonterminating process is not inferred from its timeout alone.
 
 ## 5. Independent main results remain a separate obligation
 

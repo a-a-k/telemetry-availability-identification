@@ -1,5 +1,5 @@
-# V3 full preflight is running
+# V3 preflight completed; PMX timeout diagnosis active
 
-Preflight34447262633 is running at e89e7ca91dd474d8cf2b8c4ed7c1ffc052d98569. Its six acquisitions completed; PMX extraction and subsequent solver/freeze/evaluation remain in progress. No main admission or main campaign is reported as completed.
+Preflight34447262633 completed all36 GitHub jobs, but the independent admission audit34453903136 rejected two failed PMX forecasts from one1800second process timeout. [Exact result](milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md). Main remains0/240; no admitted source tag or main dispatch exists.
 
-[Verified remote continuation](V3_REMOTE_CONTINUATION_V1.md) will audit this exact run before one source-tagged main dispatch. This status file is intentionally mutable; exact prior versions and immutable evidence remain in Git history and their run directories.
+A separate remote diagnosis inspects the retained DeathStarBench split read_user_timeline process and repeats its exact calibration projection once under a120second diagnostic bound. No frozen method or forecast has been changed. Any actual repair requires a separately versioned fresh full preflight.
