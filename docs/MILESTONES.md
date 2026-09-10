@@ -10,13 +10,13 @@ tests, configuration validation, and bounded smoke cases.
 
 ## Current v3 evidence
 
-[Verified remote continuation](V3_REMOTE_CONTINUATION_V1.md) automates evidence-gated admission,
+[Verified remote continuation](V3_REMOTE_CONTINUATION_V2.md) automates evidence-gated admission,
 one tagged main dispatch and terminal compact retention; it does not certify publication readiness.
 
-The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` failed the PMX request-profile bridge; the [result and complete absence census](milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md) are retained. The [v2 correction](V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md) is frozen at `e89e7ca`; CI `34447089240` passed and full preflight `34447262633` completed but [a PMX watchdog failure](milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md) blocks admission. A focused process diagnostic follows. The [results chapter and vector figure](ARTICLE_RESULTS_V3.md) report completed evidence separately.
+The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` failed the PMX request-profile bridge; the [result and complete absence census](milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md) are retained. The [v2 correction](V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md) is frozen at `e89e7ca`; CI `34447089240` passed and full preflight `34447262633` completed but [a PMX watchdog failure](milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md) blocks admission. The [minimal clock-progress repair](milestones/PMX_CLOCK_PROGRESS_QUALIFICATION_V1_RESULT.md) is now qualified. Fresh full preflight `34460574221` is running; its verified result leads directly to main240. The [results chapter and vector figure](ARTICLE_RESULTS_V3.md) report completed evidence separately.
 
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 049 checklist](iterations/049-pmx-timeout-and-article-assembly.md)
+[complete iteration 055 checklist](iterations/055-active-preflight-and-v3-continuation.md)
 are the current authority and status. See [current remote campaign status](V3_CURRENT_REMOTE_STATUS.md). Historical
 milestone completion below is scoped to each original protocol.
 

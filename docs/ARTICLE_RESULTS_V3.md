@@ -81,6 +81,12 @@ The corrected run34447262633 completes all36 workflow jobs and resolves the requ
 
 The [v2 failure record](milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md) retains all200 method slots, all21,600 all-sequence test attempts and the exact missing forecasts. Primary PMX has13 points, six valid conditional-local refusals and one technical failure; inclusive PMX has19 points and one failure. Gstar has10 points, eight ambiguous cells and two structural refusals. The successful subchain retains48 known oracle solves and passes1293 other strict provenance/replay/read-order checks. Those checks do not remove the failed admission gates. A separately declared exact-input process diagnostic follows; the cause of the nonterminating process is not inferred from its timeout alone.
 
+### Source-derived computational repair, separately qualified
+
+Pinned-source and bytecode inspection plus an observer-only replay identify a zero-width overlap and zero LibReDE step in the timed-out case. A minimal representable-clock-progress correction preserves the original interval, samples and all other JAR members outside the factory class/source. The [matched qualification](milestones/PMX_CLOCK_PROGRESS_QUALIFICATION_V1_RESULT.md) completes all20 saved application projections and four controls. All19 originally complete projections preserve every resolved field, including resource demands. The failed projection completes in23.08seconds including20seconds of startup. Seven builds yield the same derived JAR.
+
+All48 known solver-oracle records pass. The32 previously supported forecasts remain exactly unchanged, six conditional unsupported slots retain null points/reasons, and two forecasts are recovered. No business test outcome is read in this repair qualification. These results establish a scoped computational repair on development inputs. A newly versioned full-duration preflight using seed771605 must still pass before independent main admission.
+
 ## 5. Independent main results remain a separate obligation
 
 The 240-campaign main series has not yet been admitted. Consequently this chapter makes no Gstar-versus-PMX/G0 superiority claim, no equivalence claim, and no claim that the final model is independently adequate across three applications. Completed mechanisms, arithmetic audits, technical controls and development forecasts cannot substitute for that series.

@@ -11,11 +11,11 @@ input model from heterogeneous telemetry.
 
 ## Current evidence and article material
 
-[Verified remote continuation](docs/V3_REMOTE_CONTINUATION_V1.md) automates evidence-gated admission,
+[Verified remote continuation](docs/V3_REMOTE_CONTINUATION_V2.md) automates evidence-gated admission,
 one tagged main dispatch and terminal compact retention; it does not certify publication readiness.
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 049](docs/iterations/049-pmx-timeout-and-article-assembly.md)
+current study. [Iteration 055](docs/iterations/055-active-preflight-and-v3-continuation.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. [Current remote run status](docs/V3_CURRENT_REMOTE_STATUS.md)

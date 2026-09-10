@@ -49,7 +49,7 @@ def main():
         inputs[path.relative_to(ROOT).as_posix()]=sha256(raw).hexdigest()
         chapters.append(body(path,out,heading))
     # Keep the current draft explicit; main interpretation is never fabricated.
-    dispatch=DOCS/'evidence/v3-main-dispatch-v2.json'
+    dispatch=DOCS/'evidence/v3-main-dispatch-v3.json'
     status='Draft for review. The independent main comparison has not yet supplied its audited result section.'
     if dispatch.exists():
         identity=json.loads(dispatch.read_bytes());run=identity['run_id']
