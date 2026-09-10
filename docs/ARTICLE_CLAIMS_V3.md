@@ -1,6 +1,6 @@
 # V3 article: claims, prior work and evidence boundaries
 
-Prepared on 10 September 2026 alongside [the v3 methods chapter](ARTICLE_METHODS_V3.md). This is the claim table required by the [author's correction](SIMPAT_CORRECTION_V3.md), not a declaration that the article is ready for submission. The current frozen prospective pipeline is commit `27db98d32b683b14969f2734f19cf344c95ae1a7`; its full-duration six-campaign preflight is run `34460574221`. The earlier v1/v2 failures and the matched qualification of the derived PMX clock-progress repair remain explicit. Main remains 0/240 at preparation. Completed historical/technical results and still-pending prospective claims are separated below.
+Prepared on 10 September 2026 alongside [the v3 methods chapter](ARTICLE_METHODS_V3.md). This is the claim table required by the [author's correction](SIMPAT_CORRECTION_V3.md), not a declaration that the article is ready for submission. The current frozen prospective pipeline is commit `27db98d32b683b14969f2734f19cf344c95ae1a7`; its full-duration six-campaign preflight is run `34460574221`. The earlier v1/v2 failures and the matched qualification of the derived PMX clock-progress repair remain explicit. The complete preflight passed and independent main run `34465226083` is now executing; main results remain pending. Completed historical/technical results and still-pending prospective claims are separated below.
 
 ## Contribution and evidence table
 

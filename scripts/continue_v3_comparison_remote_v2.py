@@ -145,14 +145,16 @@ def wait_ci(run_id, head):
 
 
 def checklist(number, title, summary, updates):
-    source=Path('docs/iterations/055-active-preflight-and-v3-continuation.md').read_text(encoding='utf-8')
+    base=Path('docs/iterations/057-admitted-main240-and-preflight-results.md')
+    if not base.exists(): base=Path('docs/iterations/055-active-preflight-and-v3-continuation.md')
+    source=base.read_text(encoding='utf-8')
     lines=[line for line in source.splitlines() if line.startswith('| ')]
     for key,(status,evidence,remaining) in updates.items():
         lines=[f'| {key} | {status} | {evidence} | {remaining} |' if line.startswith('| '+key+' |') else line for line in lines]
     ids=[line.split('|')[1].strip() for line in lines if re.match(r'^\| [CF]\d\d \|',line)]
     require(ids==[f'C{i:02d}' for i in range(1,23)]+[f'F{i:02d}' for i in range(1,9)], 'full30criterion checklist missing')
     path=Path(f'docs/iterations/{number}-{title}.md')
-    text=f'# Iteration {number}: {title.replace("-"," ")}\n\n'+summary+'\n\nUnchanged criteria reuse iteration055 evidence; no publication claim is automatically promoted.\n\n'+'\n'.join(lines)+'\n'
+    text=f'# Iteration {number}: {title.replace("-"," ")}\n\n'+summary+'\n\nUnchanged criteria reuse the current preflight/main status evidence; no publication claim is automatically promoted.\n\n'+'\n'.join(lines)+'\n'
     retention.persist(path,text.encode())
     return path
 
@@ -239,7 +241,7 @@ def collect_main(run_id):
             admitted['protocol_sha256'] == retention.DESIGN_SHA and
             admitted['preflight_run_id'] == PREFLIGHT_RUN, 'main source lacks verified admission')
     root = Path(f'docs/evidence/v3-comparison-main-{run_id}')
-    subprocess.run([sys.executable, 'scripts/retain_v3_comparison_compact_v3.py', '--run', str(run_id),
+    subprocess.run([sys.executable, 'scripts/retain_v3_comparison_compact_v4.py', '--run', str(run_id),
                     '--head', dispatch['head'], '--mode', 'main'], check=True)
     source = root/'analysis/files/comparison.json'
     tables = Path(f'docs/tables/v3-main-{run_id}')
@@ -295,7 +297,7 @@ def collect_main(run_id):
         text+=f'\n[Generated publication tables](../tables/v3-main-{run_id}/README.md) copy all existing remote metrics, statuses and contrasts without refitting or resampling.\n'
     retention.persist(result,text.encode())
     paths.append(result)
-    check=checklist('057','independent-main-evidence-retention',
+    check=checklist('058','independent-main-evidence-retention',
         f'Main run{run_id} is terminal with conclusion{run["conclusion"]}; all available compact evidence retained. Full scientific review remains separate.',
         {'C13':('ЧАСТИЧНО','Main planned240campaign identities retained with explicit artifacts/absences; available remote8000slot analysis exported.','Inspect any missing analysis or failed strict main read-order checks.'),
          'C14':('ЧАСТИЧНО','Remote metric/contrast/coverage tables copied without refit or resampling.','Scientific interpretation of complete common support and uncertainty.'),
