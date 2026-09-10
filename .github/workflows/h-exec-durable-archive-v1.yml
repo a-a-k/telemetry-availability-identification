@@ -1,0 +1,36 @@
+name: H-EXEC durable unpublished evidence archive
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: h-exec-durable-archive-v1
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Preserve exact completed source ZIPs without model execution or publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/archive_h_exec_evidence_v1.py
+      - name: Retain compact archive provenance only
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: h-exec-durable-archive-compact-${{ github.run_id }}
+          path: |
+            .smoke/h-exec-durable-archive-v1/compact.json
+            .smoke/h-exec-durable-archive-v1/manifest.json
+          if-no-files-found: warn
+          retention-days: 90
