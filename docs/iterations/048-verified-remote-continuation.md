@@ -2,9 +2,9 @@
 
 10 September 2026. Question: can the already-authorized preflight-to-main sequence continue through long remote jobs without depending on another chat turn or the local computer? Expected result: evidence-gated, source-pinned, single-dispatch continuation and exact compact terminal retention. The final model and its323 frozen repository files remain unchanged.
 
-The [continuation protocol](../V3_REMOTE_CONTINUATION_V1.md) records exact run/head bindings, complete audit before admission, separate admitted-source CI, duplicate/uncertain-dispatch handling and terminal evidence retention. Seven artificial tests cover failed or foreign provenance, incomplete admission, duplicate dispatch, uncertain write response, unrelated completion, missing forecasts and duplicate/fabricated result cells. The publication renderer also copied the retained failed-v1 compact report into an ignored validation directory; no real model was executed locally.
+The [continuation protocol](../V3_REMOTE_CONTINUATION_V1.md) records exact run/head bindings, complete audit before admission, separate admitted-source CI, duplicate/uncertain-dispatch handling and terminal evidence retention. Ten artificial tests cover failed or foreign provenance, incomplete admission, duplicate dispatch, uncertain write response, unrelated completion, missing forecasts and duplicate/fabricated result cells. The publication renderer also copied the retained failed-v1 compact report into an ignored validation directory; no real model was executed locally.
 
-Article/results commit43d2cda is pushed and CI34449702077 succeeds. Full preflight34447262633 is still active at e89e7ca; its six acquisitions have completed. No actual main admission or main dispatch is claimed by this implementation iteration.
+Article/results commit43d2cda is pushed and CI34449702077 succeeds. Full preflight34447262633 is still active at e89e7ca; its six acquisitions have completed. No actual main admission or main dispatch is claimed by this implementation iteration. The completed automation follow-up adds a strict240campaign main audit, including last-case failure controls, and a mutable current-status page; experimental locks remain unchanged.
 
 | ID | Статус | Доказательство / область | Остаток |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ Article/results commit43d2cda is pushed and CI34449702077 succeeds. Full preflig
 | C16 | ЧАСТИЧНО | Source-only transfer explicitly nonidentified; every direction gets nullpoint/error and[0,1]targetbound; no targetinputs. | Publishactual zero pointcoverage, observedtarget/change and limitation; no usefultransferclaim. |
 | C17 | ЧАСТИЧНО | Methods/results disclose measured stage/process scopes and unknown labor/update/monitoring overhead. Plot environment is isolated from frozen experiment dependencies. | Main remote cost distributions and explicit update-cost accounting. |
 | C18 | ПРОВЕРЕНО | New coordination/export tools do not modify any of323 frozen method/config files; original failure remains. | Further experimental repairs still require separate version/preflight. |
-| C19 | ЧАСТИЧНО | Two remote continuation workflows preserve compact evidence; dispatch and source CI are recorded;7 artificial boundary tests pass. | Push/CI, actual preflight admission and main terminal retention. |
+| C19 | ЧАСТИЧНО | Two remote continuation workflows preserve compact evidence; dispatch and source CI are recorded;10 artificial boundary tests pass. | Push/CI, actual preflight admission and main terminal retention. |
 | C20 | ПРОВЕРЕНО | Admission and subsequent runs/retention operate in GitHub Actions. Local work uses artificial control cases and already-retained compact metrics only. | Keep native/models and experiment execution remote. |
 | C21 | ЧАСТИЧНО | Generated tables explicitly refuse a readiness/superiority verdict, preserve nulls and report missing support. | Complete independent interpretation and publication package. |
 | C22 | ЧАСТИЧНО | All30 criteria reviewed at048; automatic049/050 snapshots preserve unresolved publication obligations. | Complete verified preflight, main and remaining paper requirements. |

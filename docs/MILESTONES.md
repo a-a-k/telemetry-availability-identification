@@ -17,7 +17,7 @@ The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTIC
 
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
 [complete iteration 048 checklist](iterations/048-verified-remote-continuation.md)
-are the current authority and status. New main campaigns: **0/240**. Historical
+are the current authority and status. See [current remote campaign status](V3_CURRENT_REMOTE_STATUS.md). Historical
 milestone completion below is scoped to each original protocol.
 
 | Current result | Status and scope |

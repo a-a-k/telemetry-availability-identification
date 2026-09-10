@@ -211,7 +211,7 @@ def preflight():
                   workflow=WORKFLOW, raw_data_remain_remote=True)
     write(DISPATCH, record)
     progress=Path('docs/V3_CURRENT_REMOTE_STATUS.md')
-    retention.persist(progress,(f'# V3 independent main is running\n\nRun `{main["id"]}` at `{head}` uses admitted tag `{MAIN_TAG}`. '
+    progress.write_bytes((f'# V3 independent main is running\n\nRun `{main["id"]}` at `{head}` uses admitted tag `{MAIN_TAG}`. '
         f'Source CI `{ci["id"]}` passed; full preflight `{PREFLIGHT_RUN}` is qualified. '
         'All240 campaigns and800 operation cells per method remain planned, not reported as completed. '
         'The main evidence-retention workflow will retain terminal outcomes, including failures.\n').encode())
@@ -260,6 +260,18 @@ def collect_main(run_id):
                 report['head']==dispatch['head'] and str(report['run_id'])==str(run_id) and
                 report['protocol_sha256']==retention.DESIGN_SHA and
                 report['qualification_uses_forecast_error'] is False, 'main analysis identity/census differs')
+        import audit_v3_main_compact_v1 as main_audit
+        try:
+            integrity=main_audit.audit(root,run_id,dispatch['head'])
+        except (ValueError,KeyError,FileNotFoundError) as error:
+            # Preserve an explicit failed strict audit; never replace it with a success.
+            integrity=dict(version='v3-compact-main-integrity-audit-v1',qualified=False,
+                run_id=run_id,head=dispatch['head'],reason=str(error),
+                fit_or_replay_executed_locally=False)
+        write(root/'main-integrity-audit.json',integrity)
+        record['full_main_read_audit_completed']=True
+        record['strict_main_integrity_qualified']=integrity['qualified']
+        record['main_auditor_sha256']=sha('scripts/audit_v3_main_compact_v1.py')
         from render_v3_comparison_tables_v1 import render
         render(source,tables)
         record.update(analysis_available=True,comparison_sha256=sha(source),
@@ -276,7 +288,7 @@ def collect_main(run_id):
             f"Run `{run_id}` at `{dispatch['head']}` is terminal with workflow conclusion `{run['conclusion']}`. "
             'Its dispatch is bound to the qualified preflight and admitted source tag. '
             'The exact compact artifact allowlist, provider digests, extracted bytes and available final analysis seal are checked. '
-            'This retention report does not replace full run-level read-order auditing or scientific interpretation.\n\n'
+            'The separate strict integrity audit records whether every main read/seal/replay/order check qualified. Scientific interpretation remains a separate obligation.\n\n'
             f'[Collection status](../evidence/v3-comparison-main-{run_id}/collection-summary.json) and '
             f'[artifact manifest](../evidence/v3-comparison-main-{run_id}/verified-archives.json) retain all missing cases explicitly.\n')
     if source.exists():
@@ -285,16 +297,16 @@ def collect_main(run_id):
     paths.append(result)
     check=checklist('050','independent-main-evidence-retention',
         f'Main run{run_id} is terminal with conclusion{run["conclusion"]}; all available compact evidence retained. Full scientific review remains separate.',
-        {'C13':('ЧАСТИЧНО','Main planned240campaign identities retained with explicit artifacts/absences; available remote8000slot analysis exported.','Resolve any missing analysis and complete full main provenance/read-order audit.'),
+        {'C13':('ЧАСТИЧНО','Main planned240campaign identities retained with explicit artifacts/absences; available remote8000slot analysis exported.','Inspect any missing analysis or failed strict main read-order checks.'),
          'C14':('ЧАСТИЧНО','Remote metric/contrast/coverage tables copied without refit or resampling.','Scientific interpretation of complete common support and uncertainty.'),
-         'C19':('ЧАСТИЧНО','Main ZIP/member hashes, dispatch/tag identity and available comparison seal verified.','Full main audit and final publication package.'),
+         'C19':('ЧАСТИЧНО','Main ZIP/member hashes, dispatch/tag identity and available comparison seal verified.','Strict main audit result and final publication package.'),
          'C22':('ЧАСТИЧНО','All30 criteria carried with explicit main retention scope.','Resolve remaining article and evidence obligations.'),
          'F08':('ЧАСТИЧНО','Independent main has reached its terminal remote state.','Assess valid main support and final claims; failed cases remain visible.')})
     paths.append(check)
     progress=Path('docs/V3_CURRENT_REMOTE_STATUS.md')
     progress.write_bytes((f'# V3 independent main is terminal\n\nRun `{run_id}` at `{dispatch["head"]}` finished with `{run["conclusion"]}`. '
         '[Retained outcome and tables](milestones/V3_MAIN_COLLECTION_V1_RESULT.md) describe the evidence and missing cases. '
-        'Full main provenance auditing and scientific interpretation are still required; publication readiness is not asserted.\n').encode())
+        'The strict main audit result and remaining scientific interpretation are explicit; publication readiness is not asserted.\n').encode())
     paths.append(progress)
     head=commit_paths(paths,'Retain independent main evidence and complete planned result tables')
     ci=ensure_dispatch('ci.yml','main',head)

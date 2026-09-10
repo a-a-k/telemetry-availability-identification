@@ -18,7 +18,8 @@ The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
 current study. [Iteration 048](docs/iterations/048-verified-remote-continuation.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
-publication obligations. The new 240-campaign comparison has **not started**.
+publication obligations. [Current remote run status](docs/V3_CURRENT_REMOTE_STATUS.md)
+tracks preflight, admission and the independent 240-campaign comparison.
 
 The [original AINA audit](docs/milestones/ORIGINAL_AINA_FULL_AUDIT.md) reconciles
 250 archives and 2.5 million probes and verifies exact async-predicate invariance
