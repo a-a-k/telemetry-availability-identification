@@ -13,7 +13,7 @@ tests, configuration validation, and bounded smoke cases.
 The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` is running at frozen source `28eb21c`; this is not yet a completed milestone or main admission.
 
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 044 checklist](iterations/044-v3-article-methods-and-compact-retention.md)
+[complete iteration 045 checklist](iterations/045-compact-admission-audit.md)
 are the current authority and status. New main campaigns: **0/240**. Historical
 milestone completion below is scoped to each original protocol.
 

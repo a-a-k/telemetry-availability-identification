@@ -12,7 +12,7 @@ input model from heterogeneous telemetry.
 ## Current evidence and article material
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 044](docs/iterations/044-v3-article-methods-and-compact-retention.md)
+current study. [Iteration 045](docs/iterations/045-compact-admission-audit.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. The new 240-campaign comparison has **not started**.
