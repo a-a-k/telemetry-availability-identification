@@ -71,7 +71,7 @@ def main():
         inputs[review_png.relative_to(ROOT).as_posix()]=sha256(review_png.read_bytes()).hexdigest()
         lua=out/'docx-figures.lua'
         lua.write_bytes(b'function Image(image) if image.src:match("aina%-audit%-v3%.svg$") then image.src="../figures/aina-audit-v3-review.png" end return image end\n')
-        common=[executable,str(manuscript),'--standalone','--toc','--resource-path',str(out)]
+        common=[executable,str(manuscript),'--from=markdown-implicit_figures','--standalone','--toc','--resource-path',str(out)]
         subprocess.run(common+['--embed-resources','--math-method=mathml','--css',str(css),'--output',str(out/'manuscript.html')],check=True,cwd=out)
         subprocess.run(common+['--lua-filter',str(lua),'--output',str(out/'manuscript.docx')],check=True,cwd=out)
     outputs={path.name:dict(bytes=path.stat().st_size,sha256=sha256(path.read_bytes()).hexdigest())
