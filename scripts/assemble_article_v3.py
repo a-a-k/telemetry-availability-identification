@@ -16,7 +16,7 @@ DOCS=ROOT/'docs'
 TITLE='Telemetry-Driven Identification of Stochastic Availability Models for Microservice Systems'
 SOURCES=[('ARTICLE_INTRODUCTION_V3.md',None),('ARTICLE_METHODS_V3.md','Methods'),
          ('ARTICLE_RESULTS_V3.md','Results'),('ARTICLE_DISCUSSION_V3.md','Discussion'),
-         ('ARTICLE_CLAIMS_V3.md','Appendix: contribution and evidence boundaries')]
+         ('ARTICLE_REFERENCES_V3.md',None),('ARTICLE_CLAIMS_V3.md','Appendix: contribution and evidence boundaries')]
 
 
 def body(path,out,heading):
