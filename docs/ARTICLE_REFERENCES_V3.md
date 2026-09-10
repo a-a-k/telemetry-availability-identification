@@ -24,6 +24,8 @@ Krasnovsky, A. A. (2025). *Evaluating Asynchronous Semantics in Trace-Discovered
 
 Krasnovsky, A. A. (2026). *Refining Resilience Model Discovery: A Case Study on the Limited Role of Asynchronous Edges in the OpenTelemetry Demo*. AINA proceedings chapter. [DOI: 10.1007/978-3-032-23304-2_24](https://link.springer.com/chapter/10.1007/978-3-032-23304-2_24). The published chapter and preceding preprint retain their distinct titles and cited versions.
 
+Krasnovsky, A. A., and Maslovskaya, A. (2026). *Stochastic Connectivity as the Foundation of a Runtime Model for Microservice Availability Analysis*. arXiv:2607.00740v1, 1 July 2026. [Preprint version](https://arxiv.org/abs/2607.00740v1).
+
 Mazkatli, M., Monschein, D., Armbruster, M., Heinrich, R., and Koziolek, A. (2025). *Continuous integration of architectural performance models with parametric dependencies – the CIPM approach*. Automated Software Engineering 32, article 54. [DOI: 10.1007/s10515-025-00521-9](https://doi.org/10.1007/s10515-025-00521-9).
 
 Prékopa, A. (1990). *Sharp Bounds on Probabilities Using Linear Programming*. Operations Research 38(2), 227–239. [DOI: 10.1287/opre.38.2.227](https://doi.org/10.1287/opre.38.2.227).

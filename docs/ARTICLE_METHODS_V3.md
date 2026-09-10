@@ -12,7 +12,9 @@ The comparison uses three applications and ten operations, two declared placemen
 
 ## 2. Formal object and provenance of its parts
 
-The model is M = <G, R, P, Phi>. G is an operation-specific graph of observed service and database relations. R binds logical replicas to eligibility gates. P is a joint state law compatible with the observations. Phi is the operation predicate. The observation contract, including masks, is part of the identification problem. This notation organizes the earlier graph estimators; the tuple alone is not a novelty claim. The formalization's origin in the MODELS manuscript/preprint is attributed as such, without describing that manuscript as an accepted MODELS publication.
+The model is $M=\langle G,R,P,\Phi\rangle$. $G$ is an operation-specific graph of observed service and database relations. $R$ binds logical replicas to eligibility gates. $P$ is a joint state law compatible with the observations. $\Phi$ is the operation predicate. The observation contract, including masks, is part of the identification problem. This notation organizes the earlier graph estimators; the tuple alone is not a novelty claim. Its origin is the [Krasnovsky–Maslovskaya preprint](https://arxiv.org/abs/2607.00740v1), cited as a preprint rather than an accepted MODELS publication.
+
+The predecessor's Sections 4–5 already define a typed graph, replication map, general state measure and request predicates, with a product-law baseline for what-if analysis. Our implementation changes the state and observation contract: selected replicas, completion and timing belong to one request-aligned joint law, and masked observations define a set of compatible laws. The replica binding also records eligibility gates. This is a declared execution extension of the earlier object, not an implementation of every distribution or eventual-completion predicate that its general notation permits. The retained local manuscript and reference code keep their separate [byte provenance](evidence/original-formalism-map-2026-09-08/paper-provenance.json).
 
 The main model does not assume independent primitive failures. Its state comprises X, the last observed eligibility of controlled replicas; D, the joint footprint of replicas selected by mandatory target calls; C0, entry protocol completion; Cg, completion of each mandatory call group; and T, completion within the external deadline. Coordinates describe an attempted execution, including dependence induced by routing and observation. A completion coordinate is not the counterfactual capability of an unselected replica.
 
@@ -36,21 +38,34 @@ The field whitelist and physical role files are specified in [ordinary identity 
 
 ## 3. Execution semantics and the exact simplification condition
 
-Let B(s) be synchronous reachability of every declared required node in state s. Let
+Let $B(s)$ be synchronous reachability of every declared required node in state $s$. For each controlled service $v$, let $D_{vr}$ indicate that replica $r$ is demanded by a mandatory call, and let $A_{vr}(s)$ be the conjunction of that replica's eligibility gates under $R$. Define
 
-Rsel(s) = B(s) AND [for each controlled service, at least one replica is demanded and every demanded replica has all its eligibility gates true].
+$$
+R_{\mathrm{sel}}(s)=B(s)\land
+\bigwedge_{v}\left[
+\left(\bigvee_r D_{vr}(s)\right)\land
+\bigwedge_r\left(\neg D_{vr}(s)\lor A_{vr}(s)\right)
+\right].
+$$
 
-Let C(s) be C0 AND every required Cg AND the presence of each bound required synchronous edge. Define E(s) = Rsel(s) AND C(s) AND T(s). A missing required edge makes completion false even if an alternative path reaches the same service. Optional synchronous work and asynchronous work are not automatically prerequisites of immediate business completion. This is a declared immediate-completion class, not a model of eventual completion.
+Thus each controlled service must have at least one demanded replica, and every demanded replica must have all its eligibility gates true. Both replicas may be demanded within one attempt; there is no exclusive-choice or independent-routing assumption.
 
-The implemented graph functionals are B (GID), Rsel (Gselected), E (Gstar), Rsel*C (without deadline), B*C*T (without selection), and Rsel*T (without completion). All use the same discovered model and joint observation law. Thus a difference between two of these functionals isolates a mathematical guard in this model; it does not by itself identify a real-world causal mechanism.
+Let $C(s)$ be $C_0$ conjoined with every required $C_g$ and the presence of each bound required synchronous edge. Define $E(s)=R_{\mathrm{sel}}(s)\land C(s)\land T(s)$. A missing required edge makes completion false even if an alternative path reaches the same service. Optional synchronous work and asynchronous work are not automatically prerequisites of immediate business completion. This is a declared immediate-completion class, not a model of eventual completion.
 
-**Semantic statement.** For every complete state, E <= Rsel <= B, and E is no greater than any of its three single-guard ablations. For every law P,
+The implemented graph functionals are $B$ (GID), $R_{\mathrm{sel}}$ (Gselected), $E$ (Gstar), $R_{\mathrm{sel}}C$ (without deadline), $BCT$ (without selection), and $R_{\mathrm{sel}}T$ (without completion), where multiplication denotes Boolean conjunction. All use the same discovered model and joint observation law. Thus a difference between two of these functionals isolates a mathematical guard in this model; it does not by itself identify a real-world causal mechanism.
 
-E_P[B] - E_P[E] = P(B = 1, E = 0).
+**Semantic statement.** For every complete state, $E\leq R_{\mathrm{sel}}\leq B$, and $E$ is no greater than any of its three single-guard ablations. For every law $P$,
+
+$$
+\mathbb{E}_P[B]-\mathbb{E}_P[E]
+=P\{B=1,\ E=0\}.
+$$
 
 Consequently reachability and execution give the same mean exactly when P(B = 1, E = 0) = 0. They agree for every law supported on a set S exactly when B = E at every state in S.
 
 **Proof.** E is obtained by conjoining additional Boolean requirements with B. Hence B-E is the indicator of B=1 and E=0; integration gives the identity and its almost-sure equality condition. Pointwise equality on S is sufficient for every supported law. If equality fails at any state in S, a point mass at that state violates equality, proving that pointwise equality is necessary. These are elementary indicator facts, not a new general probability theorem.
+
+For a concrete strict inequality, consider one controlled service with replicas a and b. Replica a is eligible and b is not, but the request demands only b. Then $B=1$ and $R_{\mathrm{sel}}=E=0$, even if all other guards are true. Similarly, $R_{\mathrm{sel}}=C=1$ with $T=0$ distinguishes execution from the variant that omits the deadline. These are complete-state counterexamples to removing the corresponding guard without an assumption excluding such states.
 
 The condition connecting this model to measured availability is additionally Y=E almost surely within the workload/environment class. It requires correct source propagation and call-group completeness assumptions, correct content/fixture assumptions, an adequate external timing boundary, and eligibility that is necessary for the actual execution despite probe lag. The model does not establish these assumptions by observing a successful span. A stale DOWN check can coexist with successful execution; a protocol-successful response can contain corrupt required content. Both are counterexamples to automatic business equivalence. In particular, the sign of B-Y is not constrained by the preceding identity.
 
@@ -62,15 +77,26 @@ Each calibration attempt contributes a category o consisting of its observed Boo
 
 For a Boolean functional f, the sharp identified range conditional on the empirical Q is
 
-L(f) = sum_o Q(o) min_{s in F(o)} f(s),
-
-U(f) = sum_o Q(o) max_{s in F(o)} f(s).
+$$
+L(f)=\sum_o Q(o)\min_{s\in F(o)}f(s),\qquad
+U(f)=\sum_o Q(o)\max_{s\in F(o)}f(s).
+$$
 
 **Proof.** Within each category, every compatible conditional expectation lies between its minimum and maximum. Weighted summation yields the stated bounds. Selecting a minimizing or maximizing state separately in each positive-frequency category attains the respective endpoint. Therefore the bounds are sharp. The range is a singleton exactly when f is constant on every positive-frequency fiber. This finite-fiber argument is standard partial identification; the contribution here is its explicit observation contract, graph-execution binding and checked implementation.
 
 A target can be point identified while some latent coordinates remain unidentified. Conversely, a graph with many observed edges need not identify its target. Ambiguity is reported as a null point with bounds, not a midpoint or fabricated zero. A paired gap is evaluated as one functional on a common state; subtracting independently attained marginal endpoints would generally answer a different question.
 
 The exact solver enumerates the masked X/D/T control coordinates, with at most ten declared control bits. Conditional on those values, every reported functional and paired gap is affine in the single Boolean conjunction C. Replacing all masked completion bits by false or by true attains its feasible endpoints, so at most two completion candidates per control assignment suffice. These candidates are actual members of the fiber. This proves equivalence to exhaustive enumeration within the implemented class. Counts and probabilities use exact rational arithmetic. No Monte Carlo or ML is used for identification or graph prediction.
+
+**Identification algorithm.** The source declarations and permitted calibration-role files are inputs; the serialized graph model, category counts, functional bounds and point/refusal statuses are outputs.
+
+1. Extract the observed graph, bind required edges and replica gates to the source declarations, and validate every structural binding. A missing or ambiguous required binding returns an explicit unsupported status.
+2. Form one masked X/D/C/T row per calibration attempt and count identical rows. With $N$ attempts and category count $n_o$, store $Q(o)=n_o/N$ exactly; do not discard incomplete rows.
+3. For each category, enumerate its unknown control bits and the feasible completion extremes. Evaluate each functional and each paired gap on the same complete candidate state. If the category has $k_o$ unknown control bits, this requires at most $2^{k_o+1}$ candidate states, where $k_o\leq10$.
+4. Accumulate the weighted minimum and maximum for each functional. Return the common value only when its two exact bounds coincide; otherwise retain the interval and a null point.
+5. Serialize the discovered structure, bindings, counts and results, then reproduce the calculation in a separate process before sealing the forecast for later evaluation.
+
+The candidate bound concerns the finite solver after extraction; it is not a runtime bound for acquiring telemetry or integrating an application. It also does not imply that every recorded coordinate is identified. For example, in a simple reachable graph, a category with known $T=0$ and all other coordinates masked fixes $E=0$ while $B$ can still range over $[0,1]$. Removing a guard can therefore destroy point identification. The solver returns that ambiguity instead of imputing the missing states.
 
 The implementation checks at most 64 coordinates and rejects unsupported control dimensions. Artificial controls compare the reduced solver with exhaustive enumeration of every masked category in a small model, exercise known outcomes and informative masking, and verify structural changes and equivalent representations. Saved-model replay occurs in a fresh process. These checks establish arithmetic and dependence on the model structure, not population confidence coverage or adequacy for Y.
 
