@@ -93,6 +93,25 @@ The fresh full preflight, run `34460574221`, completes all 36 jobs in 49 minutes
 
 Technical qualification preserves the methods' valid refusals. Gstar supplies 12/20 points, GID and G0 18/20, B0 20/20, primary PMX 14/20 and inclusive PMX 20/20. Gstar has six masked-law ambiguities in OpenTelemetry Demo and two unexplained-parent structural refusals in DeathStarBench. Primary PMX retains six conditional-propagation/positivity refusals in OpenTelemetry Demo. No technical forecast failure remains. Low error and superiority played no role in admission.
 
+### Development accuracy does not isolate the execution contribution
+
+The registered Gstar-minus-G0 MAE differences are -7.8333 pp for DeathStarBench and -6.1528 pp for Petclinic in this development package. The corresponding Gstar-minus-PMX differences are +0.4167 and +0.3809 pp. These are point descriptions with no interval: only one complete common DeathStarBench campaign and two Petclinic campaigns (one per condition) remain. OpenTelemetry has no estimable primary contrast. The DeathStarBench contrast averages its single complete three-operation campaign; a fourth common operation cell from an incomplete campaign remains in the census but does not enter that primary estimate. These results do not establish superiority, equivalence or independent main accuracy.
+
+Comparing Gstar with G0 changes both the state-law parameterization and the execution functional. Their difference cannot identify the separate benefit of routing, completion or deadline guards. GID uses the same graph, replica bindings and joint masked law as Gstar but evaluates reachability. The guard ablations retain that common law while changing the declared functional. The following table copies existing per-cell errors from the retained [development comparison](evidence/v3-comparison-preflight-34460574221/analysis/files/comparison.json); it adds no inferential contrast or calculation on raw application data.
+
+| Application / placement / operation, NCD r0 | G0 absolute error, pp | GID absolute error, pp | Gstar absolute error, pp | Without selection absolute error, pp |
+| --- | ---: | ---: | ---: | ---: |
+| DeathStarBench / split / compose_post | 12.333333 | 12.083333 | 5.250000 | 4.750000 |
+| DeathStarBench / split / read_user_timeline | 17.583333 | 17.083333 | 1.166667 | 0.500000 |
+| Petclinic / colocated / create_visit | 17.555556 | 5.888889 | 0.000000 | 0.222222 |
+| Petclinic / colocated / owner_details_with_visits | 17.666667 | 4.888889 | 1.444444 | 0.888889 |
+| Petclinic / split / create_visit | 9.777778 | 1.000000 | 5.333333 | 4.666667 |
+| Petclinic / split / owner_details_with_visits | 12.555556 | 4.111111 | 1.555556 | 0.777778 |
+
+These are all six cells on their twelve-cell common point support with any nonzero error in the displayed methods. The other six common cells have zero error for all four methods: both DeathStarBench home-timeline cells and both placements of Petclinic list owners and list vets. The eight cells outside this common support remain explicit absences in the full census. No cell is omitted because Gstar loses.
+
+The split Petclinic create-visit example is unfavorable to the execution refinement: GID error is 1 pp and Gstar error is 5.3333 pp. Removing the selection guard also lowers Gstar's error in five of the six displayed nonzero-error cells, while increasing it in colocated create visit. Thus the independently supported H-EXEC routing mechanism does not establish that this observation-derived selection guard improves every forecast. Eligibility measurements, execution certificates and external business success remain distinct. These development observations justify reporting the original ablations and their support; they do not authorize a method change after main dispatch or a causal explanation of the residual error.
+
 ## 5. Independent main: admitted, results pending
 
 The 240-campaign main series was dispatched as [run 34465226083](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34465226083) on 10 September 2026 at 10:16:55 UTC, from source `d857ea65ca9da7fa9ae4ee1198317487475246a7` and tag `v3-main-771601-v3-admitted`. Exact-source CI 34465095817 passed. The [dispatch record](evidence/v3-main-dispatch-v3.json) binds this independent series to the qualified preflight and fresh main seed 771601. Acquisition is active; the series has not yet supplied its final audited results. Consequently this chapter makes no Gstar-versus-PMX/G0 superiority or equivalence claim. Completed mechanisms, arithmetic audits, technical controls and development forecasts cannot substitute for the pending main results.
