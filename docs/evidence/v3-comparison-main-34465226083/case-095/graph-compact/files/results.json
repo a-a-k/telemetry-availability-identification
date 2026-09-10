@@ -1,0 +1,1529 @@
+{
+  "candidate_seal_sha256": "fa79605578f1cca27b88c1e87580b69e00633084086d06a43af1a25e5a14c571",
+  "costs": {
+    "b0_fields": [
+      "requests.json"
+    ],
+    "combined_process_seconds": 3.641229661000004,
+    "graph_ablation_solve_is_joint": true,
+    "graph_fields": [
+      "requests.json",
+      "native.json",
+      "probes.json",
+      "declarations.json"
+    ],
+    "input_bytes": 117978463,
+    "input_loading_seconds": 1.1940807000000007,
+    "manual_integration_seconds": null,
+    "manual_reason": "historical development labor was not timed",
+    "monitoring_overhead": null,
+    "scalability_curve": null,
+    "shared_graph_extraction_charged_once": true,
+    "stages": [
+      {
+        "method": "B0",
+        "seconds": 0.006004305999994131,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "add_to_cart",
+        "seconds": 0.5982497769999995,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "add_to_cart",
+        "seconds": 0.004576032000002783,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "add_to_cart",
+        "seconds": 0.0025608979999987014,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "add_to_cart",
+        "seconds": 0.00032478299999638693,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "add_to_cart",
+        "seconds": 0.00010122799999834342,
+        "stage": "solve"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "browse_product",
+        "seconds": 0.21394211099999438,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "browse_product",
+        "seconds": 0.003998066999997718,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "browse_product",
+        "seconds": 0.001991529999997965,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "browse_product",
+        "seconds": 0.00022127100000091104,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "browse_product",
+        "seconds": 9.115000000292639e-05,
+        "stage": "solve"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "checkout",
+        "seconds": 1.5794027900000032,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "checkout",
+        "seconds": 0.006321272999997518,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "checkout",
+        "seconds": 0.006107243999998957,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "checkout",
+        "seconds": 0.0006861100000037368,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "checkout",
+        "seconds": 0.0001209760000051574,
+        "stage": "solve"
+      }
+    ],
+    "update_reason": "not measured; fresh reconstruction is the reported application path",
+    "update_seconds": null
+  },
+  "forecasts": {
+    "add_to_cart": {
+      "B0": {
+        "attempts": 1200,
+        "exact_fraction": "1010/1200",
+        "probability": 0.8416666666666667,
+        "reason": null,
+        "status": "ok",
+        "successes": 1010,
+        "timeouts": 187
+      },
+      "G0": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "GID": {
+        "exact_fraction": "299/300",
+        "probability": 0.9966666666666667,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_completion": {
+        "identified_lower": 0.8375,
+        "identified_upper": 0.84,
+        "lower_exact": "67/80",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "21/25"
+      },
+      "G_without_deadline": {
+        "identified_lower": 0.8375,
+        "identified_upper": 0.8408333333333333,
+        "lower_exact": "67/80",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "1009/1200"
+      },
+      "G_without_selection": {
+        "identified_lower": 0.8391666666666666,
+        "identified_upper": 0.8416666666666667,
+        "lower_exact": "1007/1200",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "101/120"
+      },
+      "Gselected": {
+        "identified_lower": 0.9916666666666667,
+        "identified_upper": 0.9941666666666666,
+        "lower_exact": "119/120",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "1193/1200"
+      },
+      "Gstar": {
+        "identified_lower": 0.8375,
+        "identified_upper": 0.84,
+        "lower_exact": "67/80",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "21/25"
+      }
+    },
+    "browse_product": {
+      "B0": {
+        "attempts": 1200,
+        "exact_fraction": "1012/1200",
+        "probability": 0.8433333333333334,
+        "reason": null,
+        "status": "ok",
+        "successes": 1012,
+        "timeouts": 185
+      },
+      "G0": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "GID": {
+        "exact_fraction": "399/400",
+        "probability": 0.9975,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_completion": {
+        "identified_lower": 0.8425,
+        "identified_upper": 0.8433333333333334,
+        "lower_exact": "337/400",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "253/300"
+      },
+      "G_without_deadline": {
+        "identified_lower": 0.8425,
+        "identified_upper": 0.8433333333333334,
+        "lower_exact": "337/400",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "253/300"
+      },
+      "G_without_selection": {
+        "identified_lower": 0.8425,
+        "identified_upper": 0.8433333333333334,
+        "lower_exact": "337/400",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "253/300"
+      },
+      "Gselected": {
+        "identified_lower": 0.9925,
+        "identified_upper": 0.9958333333333333,
+        "lower_exact": "397/400",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "239/240"
+      },
+      "Gstar": {
+        "identified_lower": 0.8425,
+        "identified_upper": 0.8433333333333334,
+        "lower_exact": "337/400",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "253/300"
+      }
+    },
+    "checkout": {
+      "B0": {
+        "attempts": 1200,
+        "exact_fraction": "845/1200",
+        "probability": 0.7041666666666667,
+        "reason": null,
+        "status": "ok",
+        "successes": 845,
+        "timeouts": 353
+      },
+      "G0": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "GID": {
+        "exact_fraction": "1199/1200",
+        "probability": 0.9991666666666666,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_completion": {
+        "identified_lower": 0.6991666666666667,
+        "identified_upper": 0.7,
+        "lower_exact": "839/1200",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "7/10"
+      },
+      "G_without_deadline": {
+        "identified_lower": 0.6941666666666667,
+        "identified_upper": 0.7,
+        "lower_exact": "833/1200",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "7/10"
+      },
+      "G_without_selection": {
+        "identified_lower": 0.6983333333333334,
+        "identified_upper": 0.7041666666666667,
+        "lower_exact": "419/600",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "169/240"
+      },
+      "Gselected": {
+        "identified_lower": 0.9475,
+        "identified_upper": 0.9875,
+        "lower_exact": "379/400",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "79/80"
+      },
+      "Gstar": {
+        "identified_lower": 0.6933333333333334,
+        "identified_upper": 0.6991666666666667,
+        "lower_exact": "52/75",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "839/1200"
+      }
+    }
+  },
+  "identity": {
+    "application": "opentelemetry_demo",
+    "data_role": "prospective_main",
+    "law": "NC",
+    "namespace": "v3-main-771601",
+    "placement": "colocated",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+    "repetition": 4
+  },
+  "operation_diagnostics": {
+    "add_to_cart": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "prospective_main",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "cart",
+          "declared-db-client-3b7432b94a4ea337",
+          "declared-db-client-3ea18c90ac5882af",
+          "frontend",
+          "frontend-proxy"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L4",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "One registered product prerequisite and add/read-cart response; cart cache/store and normal flags assumed.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "cart",
+            "frontend",
+            "frontend-proxy",
+            "product-catalog"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "One registered product prerequisite and add/read-cart response; cart cache/store and normal flags assumed.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [
+            {
+              "address": "astronomy-db",
+              "database": "astronomy_db",
+              "owner": "product-catalog",
+              "port": "5432",
+              "system": "postgresql"
+            },
+            {
+              "address": "valkey-cart",
+              "database": "0",
+              "owner": "cart",
+              "port": "6379",
+              "system": "redis"
+            }
+          ],
+          "deadline_ns": 2000000000,
+          "entry": "frontend-proxy",
+          "expected_attempts": 1200,
+          "external_roots": 2,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {
+            "[\"frontend\",\"cart\"]": 2,
+            "[\"frontend-proxy\",\"frontend\"]": 2
+          },
+          "required_native_pairs": [
+            [
+              "frontend-proxy",
+              "frontend"
+            ],
+            [
+              "frontend",
+              "product-catalog"
+            ],
+            [
+              "frontend",
+              "cart"
+            ]
+          ],
+          "required_native_services": [
+            "frontend",
+            "product-catalog",
+            "cart"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 1
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 1200,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": {
+          "observed_required_group_and_source_propagation_certificate": 1010,
+          "required_group_not_fully_observed": 190
+        },
+        "completed:[\"frontend\",\"cart\"]": {
+          "explicit_native_protocol_success": 1010,
+          "required_group_not_fully_observed": 190
+        },
+        "completed:[\"frontend\",\"product-catalog\"]": {
+          "explicit_native_protocol_success": 1183,
+          "explicit_required_call_failure": 11,
+          "required_group_not_fully_observed": 6
+        },
+        "completed:[\"frontend-proxy\",\"frontend\"]": {
+          "explicit_native_protocol_success": 1010,
+          "explicit_required_call_failure": 189,
+          "required_group_not_fully_observed": 1
+        },
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": {
+          "no_explicit_completion_certificate": 176,
+          "observed_required_group_and_source_propagation_certificate": 1007,
+          "required_group_not_fully_observed": 17
+        }
+      },
+      "database_bindings": {
+        "declared-db-client-3b7432b94a4ea337": {
+          "completed_fields": [
+            "database",
+            "port"
+          ],
+          "declared": {
+            "address": "astronomy-db",
+            "database": "astronomy_db",
+            "port": "5432",
+            "system": "postgresql"
+          },
+          "observed": {
+            "address": "astronomy-db",
+            "database": null,
+            "port": null,
+            "system": "postgresql"
+          },
+          "owner": "product-catalog",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        },
+        "declared-db-client-3ea18c90ac5882af": {
+          "completed_fields": [
+            "database"
+          ],
+          "declared": {
+            "address": "valkey-cart",
+            "database": "0",
+            "port": "6379",
+            "system": "redis"
+          },
+          "observed": {
+            "address": "valkey-cart",
+            "database": null,
+            "port": "6379",
+            "system": "redis"
+          },
+          "owner": "cart",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        }
+      },
+      "estimates": {
+        "execution": {
+          "lower": 0.8375,
+          "lower_exact": "67/80",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.84,
+          "upper_exact": "21/25"
+        },
+        "reachability": {
+          "lower": 0.9966666666666667,
+          "lower_exact": "299/300",
+          "prediction": 0.9966666666666667,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9966666666666667,
+          "upper_exact": "299/300"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.15666666666666668,
+          "lower_exact": "47/300",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.15916666666666668,
+          "upper_exact": "191/1200"
+        },
+        "selected": {
+          "lower": 0.9916666666666667,
+          "lower_exact": "119/120",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9941666666666666,
+          "upper_exact": "1193/1200"
+        },
+        "selected_minus_execution": {
+          "lower": 0.15416666666666667,
+          "lower_exact": "37/240",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.15666666666666668,
+          "upper_exact": "47/300"
+        },
+        "without_completion": {
+          "lower": 0.8375,
+          "lower_exact": "67/80",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.84,
+          "upper_exact": "21/25"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.0025,
+          "upper_exact": "1/400"
+        },
+        "without_deadline": {
+          "lower": 0.8375,
+          "lower_exact": "67/80",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.8408333333333333,
+          "upper_exact": "1009/1200"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.0008333333333333334,
+          "upper_exact": "1/1200"
+        },
+        "without_selection": {
+          "lower": 0.8391666666666666,
+          "lower_exact": "1007/1200",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.8416666666666667,
+          "upper_exact": "101/120"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0016666666666666668,
+          "lower_exact": "1/600",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.004166666666666667,
+          "upper_exact": "1/240"
+        }
+      },
+      "evaluated_states": 40,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]",
+          "observation_relation": "native_db_client",
+          "source": "cart",
+          "supporting_attempts": 1010,
+          "supporting_spans": 4040,
+          "target": "declared-db-client-3ea18c90ac5882af",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend\",\"cart\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 1010,
+          "supporting_spans": 2020,
+          "target": "cart",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend\",\"product-catalog\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 1194,
+          "supporting_spans": 1194,
+          "target": "product-catalog",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend-proxy\",\"frontend\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend-proxy",
+          "supporting_attempts": 1200,
+          "supporting_spans": 2210,
+          "target": "frontend",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]",
+          "observation_relation": "native_db_client",
+          "source": "product-catalog",
+          "supporting_attempts": 1183,
+          "supporting_spans": 1183,
+          "target": "declared-db-client-3b7432b94a4ea337",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "cart": "native_service",
+        "declared-db-client-3b7432b94a4ea337": "native_db_client_with_explicit_peer_binding",
+        "declared-db-client-3ea18c90ac5882af": "native_db_client_with_explicit_peer_binding",
+        "frontend": "native_service",
+        "frontend-proxy": "native_service",
+        "product-catalog": "native_service"
+      },
+      "identity": {
+        "application": "opentelemetry_demo",
+        "data_role": "prospective_main",
+        "law": "NC",
+        "method": "Gstar-ordinary-joint-execution-prospective-v1",
+        "namespace": "v3-main-771601",
+        "operation": "add_to_cart",
+        "placement": "colocated",
+        "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+        "repetition": 4,
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": 1000525000,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": 190,
+        "completed:[\"frontend\",\"cart\"]": 190,
+        "completed:[\"frontend\",\"product-catalog\"]": 6,
+        "completed:[\"frontend-proxy\",\"frontend\"]": 1,
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": 193,
+        "demand_a": 6,
+        "demand_b": 6,
+        "entry_completed": 1
+      },
+      "native_spans": 22707,
+      "observed_categories": 17,
+      "result_sha256": "67c7a25927b693853932b1ed3d9d8733dac716ebfa26d90607a1d481c8236fd9",
+      "stage_seconds": {
+        "extraction": 0.5982497769999995,
+        "identification": 0.004576032000002783,
+        "solve": 0.0025608979999987014
+      },
+      "status": "ambiguous"
+    },
+    "browse_product": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "prospective_main",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "declared-db-client-3b7432b94a4ea337",
+          "frontend",
+          "frontend-proxy"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L4",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "Fixed correct product; normal feature flags; declared astronomy database.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "frontend",
+            "frontend-proxy",
+            "product-catalog"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "Fixed correct product; normal feature flags; declared astronomy database.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [
+            {
+              "address": "astronomy-db",
+              "database": "astronomy_db",
+              "owner": "product-catalog",
+              "port": "5432",
+              "system": "postgresql"
+            }
+          ],
+          "deadline_ns": 2000000000,
+          "entry": "frontend-proxy",
+          "expected_attempts": 1200,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "frontend-proxy",
+              "frontend"
+            ],
+            [
+              "frontend",
+              "product-catalog"
+            ]
+          ],
+          "required_native_services": [
+            "frontend",
+            "product-catalog"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 1
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 1200,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"frontend\",\"product-catalog\"]": {
+          "explicit_native_protocol_success": 1183,
+          "explicit_required_call_failure": 10,
+          "required_group_not_fully_observed": 7
+        },
+        "completed:[\"frontend-proxy\",\"frontend\"]": {
+          "explicit_native_protocol_success": 1012,
+          "explicit_required_call_failure": 188
+        },
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": {
+          "no_explicit_completion_certificate": 172,
+          "observed_required_group_and_source_propagation_certificate": 1011,
+          "required_group_not_fully_observed": 17
+        }
+      },
+      "database_bindings": {
+        "declared-db-client-3b7432b94a4ea337": {
+          "completed_fields": [
+            "database",
+            "port"
+          ],
+          "declared": {
+            "address": "astronomy-db",
+            "database": "astronomy_db",
+            "port": "5432",
+            "system": "postgresql"
+          },
+          "observed": {
+            "address": "astronomy-db",
+            "database": null,
+            "port": null,
+            "system": "postgresql"
+          },
+          "owner": "product-catalog",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        }
+      },
+      "estimates": {
+        "execution": {
+          "lower": 0.8425,
+          "lower_exact": "337/400",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.8433333333333334,
+          "upper_exact": "253/300"
+        },
+        "reachability": {
+          "lower": 0.9975,
+          "lower_exact": "399/400",
+          "prediction": 0.9975,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9975,
+          "upper_exact": "399/400"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.15416666666666667,
+          "lower_exact": "37/240",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.155,
+          "upper_exact": "31/200"
+        },
+        "selected": {
+          "lower": 0.9925,
+          "lower_exact": "397/400",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9958333333333333,
+          "upper_exact": "239/240"
+        },
+        "selected_minus_execution": {
+          "lower": 0.15,
+          "lower_exact": "3/20",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.15333333333333332,
+          "upper_exact": "23/150"
+        },
+        "without_completion": {
+          "lower": 0.8425,
+          "lower_exact": "337/400",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.8433333333333334,
+          "upper_exact": "253/300"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.0008333333333333334,
+          "upper_exact": "1/1200"
+        },
+        "without_deadline": {
+          "lower": 0.8425,
+          "lower_exact": "337/400",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.8433333333333334,
+          "upper_exact": "253/300"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_selection": {
+          "lower": 0.8425,
+          "lower_exact": "337/400",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.8433333333333334,
+          "upper_exact": "253/300"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.0008333333333333334,
+          "upper_exact": "1/1200"
+        }
+      },
+      "evaluated_states": 42,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend\",\"product-catalog\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 1193,
+          "supporting_spans": 1193,
+          "target": "product-catalog",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend-proxy\",\"frontend\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend-proxy",
+          "supporting_attempts": 1200,
+          "supporting_spans": 1200,
+          "target": "frontend",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]",
+          "observation_relation": "native_db_client",
+          "source": "product-catalog",
+          "supporting_attempts": 1183,
+          "supporting_spans": 1183,
+          "target": "declared-db-client-3b7432b94a4ea337",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "declared-db-client-3b7432b94a4ea337": "native_db_client_with_explicit_peer_binding",
+        "frontend": "native_service",
+        "frontend-proxy": "native_service",
+        "product-catalog": "native_service"
+      },
+      "identity": {
+        "application": "opentelemetry_demo",
+        "data_role": "prospective_main",
+        "law": "NC",
+        "method": "Gstar-ordinary-joint-execution-prospective-v1",
+        "namespace": "v3-main-771601",
+        "operation": "browse_product",
+        "placement": "colocated",
+        "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+        "repetition": 4,
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": 1001488000,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {
+        "completed:[\"frontend\",\"product-catalog\"]": 7,
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": 189,
+        "demand_a": 7,
+        "demand_b": 7
+      },
+      "native_spans": 9578,
+      "observed_categories": 14,
+      "result_sha256": "85444a31bc40eca31e32c5dcde90ce2745ab23fe26b0243139c767901a8911f4",
+      "stage_seconds": {
+        "extraction": 0.21394211099999438,
+        "identification": 0.003998066999997718,
+        "solve": 0.001991529999997965
+      },
+      "status": "ambiguous"
+    },
+    "checkout": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "prospective_main",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "cart",
+          "checkout",
+          "currency",
+          "declared-db-client-3b7432b94a4ea337",
+          "declared-db-client-3ea18c90ac5882af",
+          "email",
+          "flagd",
+          "frontend",
+          "frontend-proxy",
+          "payment",
+          "quote",
+          "shipping"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L4",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "One registered item; normal flags; protocol completion assumes correct order payload. Email and EmptyCart failure are optional for response success; their elapsed work remains in T.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "cart",
+            "checkout",
+            "currency",
+            "email",
+            "flagd",
+            "frontend",
+            "frontend-proxy",
+            "payment",
+            "product-catalog",
+            "quote",
+            "shipping"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "One registered item; normal flags; protocol completion assumes correct order payload. Email and EmptyCart failure are optional for response success; their elapsed work remains in T.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [
+            {
+              "address": "astronomy-db",
+              "database": "astronomy_db",
+              "owner": "product-catalog",
+              "port": "5432",
+              "system": "postgresql"
+            },
+            {
+              "address": "valkey-cart",
+              "database": "0",
+              "owner": "cart",
+              "port": "6379",
+              "system": "redis"
+            }
+          ],
+          "deadline_ns": 2000000000,
+          "entry": "frontend-proxy",
+          "expected_attempts": 1200,
+          "external_roots": 3,
+          "ignored_rpc_methods_by_pair": {
+            "[\"checkout\",\"cart\"]": [
+              "EmptyCart"
+            ]
+          },
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {
+            "[\"checkout\",\"currency\"]": 2,
+            "[\"checkout\",\"shipping\"]": 2,
+            "[\"frontend\",\"cart\"]": 2,
+            "[\"frontend\",\"product-catalog\"]": 2,
+            "[\"frontend-proxy\",\"frontend\"]": 3
+          },
+          "required_native_pairs": [
+            [
+              "frontend-proxy",
+              "frontend"
+            ],
+            [
+              "frontend",
+              "product-catalog"
+            ],
+            [
+              "frontend",
+              "cart"
+            ],
+            [
+              "frontend",
+              "checkout"
+            ],
+            [
+              "checkout",
+              "cart"
+            ],
+            [
+              "checkout",
+              "currency"
+            ],
+            [
+              "checkout",
+              "payment"
+            ],
+            [
+              "checkout",
+              "product-catalog"
+            ],
+            [
+              "checkout",
+              "shipping"
+            ],
+            [
+              "shipping",
+              "quote"
+            ]
+          ],
+          "required_native_services": [
+            "frontend",
+            "product-catalog",
+            "cart",
+            "checkout",
+            "currency",
+            "payment",
+            "shipping",
+            "quote"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 3
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 1200,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": {
+          "no_explicit_completion_certificate": 166,
+          "observed_required_group_and_source_propagation_certificate": 846,
+          "required_group_not_fully_observed": 188
+        },
+        "completed:[\"checkout\",\"cart\"]": {
+          "explicit_native_protocol_success": 1011,
+          "required_group_not_fully_observed": 189
+        },
+        "completed:[\"checkout\",\"currency\"]": {
+          "explicit_native_protocol_success": 1003,
+          "required_group_not_fully_observed": 197
+        },
+        "completed:[\"checkout\",\"payment\"]": {
+          "explicit_native_protocol_success": 1003,
+          "required_group_not_fully_observed": 197
+        },
+        "completed:[\"checkout\",\"product-catalog\"]": {
+          "explicit_required_call_failure": 8,
+          "no_explicit_completion_certificate": 157,
+          "observed_required_group_and_source_propagation_certificate": 843,
+          "required_group_not_fully_observed": 192
+        },
+        "completed:[\"checkout\",\"shipping\"]": {
+          "explicit_native_protocol_success": 1003,
+          "required_group_not_fully_observed": 197
+        },
+        "completed:[\"frontend\",\"cart\"]": {
+          "explicit_native_protocol_success": 1012,
+          "required_group_not_fully_observed": 188
+        },
+        "completed:[\"frontend\",\"checkout\"]": {
+          "explicit_native_protocol_success": 1003,
+          "explicit_required_call_failure": 8,
+          "required_group_not_fully_observed": 189
+        },
+        "completed:[\"frontend\",\"product-catalog\"]": {
+          "explicit_native_protocol_success": 997,
+          "explicit_required_call_failure": 9,
+          "required_group_not_fully_observed": 194
+        },
+        "completed:[\"frontend-proxy\",\"frontend\"]": {
+          "explicit_native_protocol_success": 846,
+          "explicit_required_call_failure": 354
+        },
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": {
+          "no_explicit_completion_certificate": 343,
+          "observed_required_group_and_source_propagation_certificate": 846,
+          "required_group_not_fully_observed": 11
+        },
+        "completed:[\"shipping\",\"quote\"]": {
+          "explicit_native_protocol_success": 1003,
+          "required_group_not_fully_observed": 197
+        }
+      },
+      "database_bindings": {
+        "declared-db-client-3b7432b94a4ea337": {
+          "completed_fields": [
+            "database",
+            "port"
+          ],
+          "declared": {
+            "address": "astronomy-db",
+            "database": "astronomy_db",
+            "port": "5432",
+            "system": "postgresql"
+          },
+          "observed": {
+            "address": "astronomy-db",
+            "database": null,
+            "port": null,
+            "system": "postgresql"
+          },
+          "owner": "product-catalog",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        },
+        "declared-db-client-3ea18c90ac5882af": {
+          "completed_fields": [
+            "database"
+          ],
+          "declared": {
+            "address": "valkey-cart",
+            "database": "0",
+            "port": "6379",
+            "system": "redis"
+          },
+          "observed": {
+            "address": "valkey-cart",
+            "database": null,
+            "port": "6379",
+            "system": "redis"
+          },
+          "owner": "cart",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        }
+      },
+      "estimates": {
+        "execution": {
+          "lower": 0.6933333333333334,
+          "lower_exact": "52/75",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.6991666666666667,
+          "upper_exact": "839/1200"
+        },
+        "reachability": {
+          "lower": 0.9991666666666666,
+          "lower_exact": "1199/1200",
+          "prediction": 0.9991666666666666,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9991666666666666,
+          "upper_exact": "1199/1200"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.3,
+          "lower_exact": "3/10",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.30583333333333335,
+          "upper_exact": "367/1200"
+        },
+        "selected": {
+          "lower": 0.9475,
+          "lower_exact": "379/400",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9875,
+          "upper_exact": "79/80"
+        },
+        "selected_minus_execution": {
+          "lower": 0.24833333333333332,
+          "lower_exact": "149/600",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.2941666666666667,
+          "upper_exact": "353/1200"
+        },
+        "without_completion": {
+          "lower": 0.6991666666666667,
+          "lower_exact": "839/1200",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.7,
+          "upper_exact": "7/10"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.006666666666666667,
+          "upper_exact": "1/150"
+        },
+        "without_deadline": {
+          "lower": 0.6941666666666667,
+          "lower_exact": "833/1200",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.7,
+          "upper_exact": "7/10"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0008333333333333334,
+          "lower_exact": "1/1200",
+          "prediction": 0.0008333333333333334,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0008333333333333334,
+          "upper_exact": "1/1200"
+        },
+        "without_selection": {
+          "lower": 0.6983333333333334,
+          "lower_exact": "419/600",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.7041666666666667,
+          "upper_exact": "169/240"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.005,
+          "lower_exact": "1/200",
+          "prediction": 0.005,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.005,
+          "upper_exact": "1/200"
+        }
+      },
+      "evaluated_states": 91,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]",
+          "observation_relation": "native_db_client",
+          "source": "cart",
+          "supporting_attempts": 1012,
+          "supporting_spans": 7065,
+          "target": "declared-db-client-3ea18c90ac5882af",
+          "type": "sync"
+        },
+        {
+          "completion_required": false,
+          "factors": [],
+          "id": "[\"cart\",\"flagd\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "cart",
+          "supporting_attempts": 1003,
+          "supporting_spans": 1003,
+          "target": "flagd",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"checkout\",\"cart\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 1011,
+          "supporting_spans": 2014,
+          "target": "cart",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"checkout\",\"currency\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 1003,
+          "supporting_spans": 2006,
+          "target": "currency",
+          "type": "sync"
+        },
+        {
+          "completion_required": false,
+          "factors": [],
+          "id": "[\"checkout\",\"email\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 1003,
+          "supporting_spans": 1003,
+          "target": "email",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"checkout\",\"payment\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 1003,
+          "supporting_spans": 1003,
+          "target": "payment",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"checkout\",\"product-catalog\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 1008,
+          "supporting_spans": 1008,
+          "target": "product-catalog",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"checkout\",\"shipping\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "checkout",
+          "supporting_attempts": 1003,
+          "supporting_spans": 2006,
+          "target": "shipping",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend\",\"cart\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 1012,
+          "supporting_spans": 2024,
+          "target": "cart",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend\",\"checkout\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 1011,
+          "supporting_spans": 1011,
+          "target": "checkout",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend\",\"product-catalog\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend",
+          "supporting_attempts": 1192,
+          "supporting_spans": 2191,
+          "target": "product-catalog",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"frontend-proxy\",\"frontend\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "frontend-proxy",
+          "supporting_attempts": 1200,
+          "supporting_spans": 3223,
+          "target": "frontend",
+          "type": "sync"
+        },
+        {
+          "completion_required": false,
+          "factors": [],
+          "id": "[\"payment\",\"flagd\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "payment",
+          "supporting_attempts": 2,
+          "supporting_spans": 2,
+          "target": "flagd",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]",
+          "observation_relation": "native_db_client",
+          "source": "product-catalog",
+          "supporting_attempts": 1189,
+          "supporting_spans": 3184,
+          "target": "declared-db-client-3b7432b94a4ea337",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"shipping\",\"quote\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "shipping",
+          "supporting_attempts": 1003,
+          "supporting_spans": 1003,
+          "target": "quote",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "cart": "native_service",
+        "checkout": "native_service",
+        "currency": "native_service",
+        "declared-db-client-3b7432b94a4ea337": "native_db_client_with_explicit_peer_binding",
+        "declared-db-client-3ea18c90ac5882af": "native_db_client_with_explicit_peer_binding",
+        "email": "native_service",
+        "flagd": "native_service",
+        "frontend": "native_service",
+        "frontend-proxy": "native_service",
+        "payment": "native_service",
+        "product-catalog": "native_service",
+        "quote": "native_service",
+        "shipping": "native_service"
+      },
+      "identity": {
+        "application": "opentelemetry_demo",
+        "data_role": "prospective_main",
+        "law": "NC",
+        "method": "Gstar-ordinary-joint-execution-prospective-v1",
+        "namespace": "v3-main-771601",
+        "operation": "checkout",
+        "placement": "colocated",
+        "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+        "repetition": 4,
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": 1000530000,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": 354,
+        "completed:[\"checkout\",\"cart\"]": 189,
+        "completed:[\"checkout\",\"currency\"]": 197,
+        "completed:[\"checkout\",\"payment\"]": 197,
+        "completed:[\"checkout\",\"product-catalog\"]": 349,
+        "completed:[\"checkout\",\"shipping\"]": 197,
+        "completed:[\"frontend\",\"cart\"]": 188,
+        "completed:[\"frontend\",\"checkout\"]": 189,
+        "completed:[\"frontend\",\"product-catalog\"]": 194,
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": 354,
+        "completed:[\"shipping\",\"quote\"]": 197,
+        "demand_a": 106,
+        "demand_b": 94
+      },
+      "native_spans": 68974,
+      "observed_categories": 30,
+      "result_sha256": "8dba3d5be343ea3afa5eff17e27a5a3ba0b9c1d084eaca0b319cacf5f5f44a68",
+      "stage_seconds": {
+        "extraction": 1.5794027900000032,
+        "identification": 0.006321272999997518,
+        "solve": 0.006107243999998957
+      },
+      "status": "ambiguous"
+    }
+  },
+  "read_audit": {
+    "actual_data_reads": [
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/declarations.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/manifest.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/native.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/probes.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/requests.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/seal.json"
+    ],
+    "blocked": [],
+    "includes_loading_and_model_construction": true,
+    "physical_evaluator_inputs_received": false
+  }
+}

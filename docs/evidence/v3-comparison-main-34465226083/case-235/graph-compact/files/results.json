@@ -1,0 +1,1358 @@
+{
+  "candidate_seal_sha256": "72906c2659a35a47e09cb781d8e86743fddcd2a469115224db5d56f37e80a7ca",
+  "costs": {
+    "b0_fields": [
+      "requests.json"
+    ],
+    "combined_process_seconds": 1.326208483000002,
+    "graph_ablation_solve_is_joint": true,
+    "graph_fields": [
+      "requests.json",
+      "native.json",
+      "probes.json",
+      "declarations.json"
+    ],
+    "input_bytes": 48749317,
+    "input_loading_seconds": 0.48478769900000884,
+    "manual_integration_seconds": null,
+    "manual_reason": "historical development labor was not timed",
+    "monitoring_overhead": null,
+    "scalability_curve": null,
+    "shared_graph_extraction_charged_once": true,
+    "stages": [
+      {
+        "method": "B0",
+        "seconds": 0.006309569000009674,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "create_visit",
+        "seconds": 0.18004125399998827,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "create_visit",
+        "seconds": 0.0029773680000033664,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "create_visit",
+        "seconds": 0.002587638999997921,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "create_visit",
+        "seconds": 0.0001951240000011012,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "create_visit",
+        "seconds": 0.00011999500000570151,
+        "stage": "solve"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "list_owners",
+        "seconds": 0.3527322609999999,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "list_owners",
+        "seconds": 0.0021555409999933772,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "list_owners",
+        "seconds": 0.00018859200000065357,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "list_owners",
+        "seconds": 0.0001679040000084342,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "list_owners",
+        "seconds": 9.209200000270812e-05,
+        "stage": "solve"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "list_vets",
+        "seconds": 0.05634770200001071,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "list_vets",
+        "seconds": 0.0019466200000124445,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "list_vets",
+        "seconds": 0.0001925199999988081,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "list_vets",
+        "seconds": 0.00011802100000579685,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "list_vets",
+        "seconds": 5.946099999221133e-05,
+        "stage": "solve"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "owner_details_with_visits",
+        "seconds": 0.21895853899999906,
+        "stage": "extraction"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "owner_details_with_visits",
+        "seconds": 0.0031774410000053877,
+        "stage": "identification"
+      },
+      {
+        "method": "shared_graph_family",
+        "operation": "owner_details_with_visits",
+        "seconds": 0.0024279409999934387,
+        "stage": "solve"
+      },
+      {
+        "method": "G0",
+        "operation": "owner_details_with_visits",
+        "seconds": 0.0002636929999937365,
+        "stage": "identification"
+      },
+      {
+        "method": "G0",
+        "operation": "owner_details_with_visits",
+        "seconds": 0.00010111999999651289,
+        "stage": "solve"
+      }
+    ],
+    "update_reason": "not measured; fresh reconstruction is the reported application path",
+    "update_seconds": null
+  },
+  "forecasts": {
+    "create_visit": {
+      "B0": {
+        "attempts": 900,
+        "exact_fraction": "836/900",
+        "probability": 0.9288888888888889,
+        "reason": null,
+        "status": "ok",
+        "successes": 836,
+        "timeouts": 22
+      },
+      "G0": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "GID": {
+        "exact_fraction": "431/450",
+        "probability": 0.9577777777777777,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_completion": {
+        "identified_lower": 0.9244444444444444,
+        "identified_upper": 0.93,
+        "lower_exact": "208/225",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "93/100"
+      },
+      "G_without_deadline": {
+        "identified_lower": 0.9177777777777778,
+        "identified_upper": 0.9411111111111111,
+        "lower_exact": "413/450",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "847/900"
+      },
+      "G_without_selection": {
+        "exact_fraction": "23/25",
+        "probability": 0.92,
+        "reason": null,
+        "status": "ok"
+      },
+      "Gselected": {
+        "identified_lower": 0.9477777777777778,
+        "identified_upper": 0.9533333333333334,
+        "lower_exact": "853/900",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "143/150"
+      },
+      "Gstar": {
+        "exact_fraction": "413/450",
+        "probability": 0.9177777777777778,
+        "reason": null,
+        "status": "ok"
+      }
+    },
+    "list_owners": {
+      "B0": {
+        "attempts": 900,
+        "exact_fraction": "900/900",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok",
+        "successes": 900,
+        "timeouts": 0
+      },
+      "G0": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "GID": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_completion": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_deadline": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_selection": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "Gselected": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "Gstar": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      }
+    },
+    "list_vets": {
+      "B0": {
+        "attempts": 900,
+        "exact_fraction": "900/900",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok",
+        "successes": 900,
+        "timeouts": 0
+      },
+      "G0": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "GID": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_completion": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_deadline": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_selection": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "Gselected": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "Gstar": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      }
+    },
+    "owner_details_with_visits": {
+      "B0": {
+        "attempts": 900,
+        "exact_fraction": "833/900",
+        "probability": 0.9255555555555556,
+        "reason": null,
+        "status": "ok",
+        "successes": 833,
+        "timeouts": 18
+      },
+      "G0": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "GID": {
+        "exact_fraction": "287/300",
+        "probability": 0.9566666666666667,
+        "reason": null,
+        "status": "ok"
+      },
+      "G_without_completion": {
+        "identified_lower": 0.9122222222222223,
+        "identified_upper": 0.9322222222222222,
+        "lower_exact": "821/900",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "839/900"
+      },
+      "G_without_deadline": {
+        "identified_lower": 0.9122222222222223,
+        "identified_upper": 0.9322222222222222,
+        "lower_exact": "821/900",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "839/900"
+      },
+      "G_without_selection": {
+        "exact_fraction": "11/12",
+        "probability": 0.9166666666666666,
+        "reason": null,
+        "status": "ok"
+      },
+      "Gselected": {
+        "identified_lower": 0.9322222222222222,
+        "identified_upper": 0.9522222222222222,
+        "lower_exact": "839/900",
+        "probability": null,
+        "reason": "not_point_identified_under_declared_observation_law",
+        "status": "unsupported",
+        "upper_exact": "857/900"
+      },
+      "Gstar": {
+        "exact_fraction": "821/900",
+        "probability": 0.9122222222222223,
+        "reason": null,
+        "status": "ok"
+      }
+    }
+  },
+  "identity": {
+    "application": "spring_petclinic_microservices",
+    "data_role": "prospective_main",
+    "law": "NCD",
+    "namespace": "v3-main-771601",
+    "placement": "split",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+    "repetition": 4
+  },
+  "operation_diagnostics": {
+    "create_visit": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "prospective_main",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "api-gateway",
+          "declared-db-client-30f7b3f9b2fb3df3"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L7",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "201 visit payload and one persisted marker row required by evaluator; native completion assumes source save propagation, not independent SQL commit verification.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "api-gateway",
+            "visits-service"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "201 visit payload and one persisted marker row required by evaluator; native completion assumes source save propagation, not independent SQL commit verification.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [
+            "visits-service"
+          ],
+          "database_peers": [],
+          "deadline_ns": 2000000000,
+          "entry": "api-gateway",
+          "expected_attempts": 900,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "api-gateway",
+              "visits-service"
+            ]
+          ],
+          "required_native_services": [
+            "visits-service"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 1
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 900,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"visits-service\"]": {
+          "explicit_native_protocol_success": 858,
+          "explicit_required_client_failure": 42
+        },
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "no_explicit_completion_certificate": 29,
+          "observed_required_group_and_source_propagation_certificate": 836,
+          "required_group_not_fully_observed": 35
+        }
+      },
+      "database_bindings": {
+        "declared-db-client-30f7b3f9b2fb3df3": {
+          "completed_fields": [],
+          "declared": {
+            "address": "database",
+            "database": "petclinic",
+            "port": "3306",
+            "system": "mysql"
+          },
+          "observed": {
+            "address": "database",
+            "database": "petclinic",
+            "port": "3306",
+            "system": "mysql"
+          },
+          "owner": "visits-service",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        }
+      },
+      "estimates": {
+        "execution": {
+          "lower": 0.9177777777777778,
+          "lower_exact": "413/450",
+          "prediction": 0.9177777777777778,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9177777777777778,
+          "upper_exact": "413/450"
+        },
+        "reachability": {
+          "lower": 0.9577777777777777,
+          "lower_exact": "431/450",
+          "prediction": 0.9577777777777777,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9577777777777777,
+          "upper_exact": "431/450"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.04,
+          "lower_exact": "1/25",
+          "prediction": 0.04,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.04,
+          "upper_exact": "1/25"
+        },
+        "selected": {
+          "lower": 0.9477777777777778,
+          "lower_exact": "853/900",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9533333333333334,
+          "upper_exact": "143/150"
+        },
+        "selected_minus_execution": {
+          "lower": 0.03,
+          "lower_exact": "3/100",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.035555555555555556,
+          "upper_exact": "8/225"
+        },
+        "without_completion": {
+          "lower": 0.9244444444444444,
+          "lower_exact": "208/225",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.93,
+          "upper_exact": "93/100"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.006666666666666667,
+          "lower_exact": "1/150",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.012222222222222223,
+          "upper_exact": "11/900"
+        },
+        "without_deadline": {
+          "lower": 0.9177777777777778,
+          "lower_exact": "413/450",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9411111111111111,
+          "upper_exact": "847/900"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.023333333333333334,
+          "upper_exact": "7/300"
+        },
+        "without_selection": {
+          "lower": 0.92,
+          "lower_exact": "23/25",
+          "prediction": 0.92,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.92,
+          "upper_exact": "23/25"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0022222222222222222,
+          "lower_exact": "1/450",
+          "prediction": 0.0022222222222222222,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0022222222222222222,
+          "upper_exact": "1/450"
+        }
+      },
+      "evaluated_states": 47,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"api-gateway\",\"visits-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 865,
+          "supporting_spans": 865,
+          "target": "visits-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]",
+          "observation_relation": "native_db_client",
+          "source": "visits-service",
+          "supporting_attempts": 865,
+          "supporting_spans": 865,
+          "target": "declared-db-client-30f7b3f9b2fb3df3",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "api-gateway": "native_service",
+        "declared-db-client-30f7b3f9b2fb3df3": "native_db_client_with_explicit_peer_binding",
+        "visits-service": "native_service"
+      },
+      "identity": {
+        "application": "spring_petclinic_microservices",
+        "data_role": "prospective_main",
+        "law": "NCD",
+        "method": "Gstar-ordinary-joint-execution-prospective-v1",
+        "namespace": "v3-main-771601",
+        "operation": "create_visit",
+        "placement": "split",
+        "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+        "repetition": 4,
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": 1000554000,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": 64,
+        "demand_a": 35,
+        "demand_b": 35,
+        "entry_completed": 22
+      },
+      "native_spans": 6167,
+      "observed_categories": 18,
+      "result_sha256": "119ae082cef62438173173f6926f76a3d60950eba5175eaf9a72bbf6138f8c0b",
+      "stage_seconds": {
+        "extraction": 0.18004125399998827,
+        "identification": 0.0029773680000033664,
+        "solve": 0.002587638999997921
+      },
+      "status": "singleton_given_empirical_observation_law"
+    },
+    "list_owners": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "prospective_main",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "api-gateway",
+          "customers-service",
+          "declared-db-client-30f7b3f9b2fb3df3"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L7",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "Fixed ten-owner/thirteen-pet fixture; all observed customer DB CLIENT groups required; payload fixture correctness assumed.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "api-gateway",
+            "customers-service"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "Fixed ten-owner/thirteen-pet fixture; all observed customer DB CLIENT groups required; payload fixture correctness assumed.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [],
+          "deadline_ns": 2000000000,
+          "entry": "api-gateway",
+          "expected_attempts": 900,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "api-gateway",
+              "customers-service"
+            ]
+          ],
+          "required_native_services": [
+            "customers-service"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 0
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 900,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"customers-service\"]": {
+          "explicit_native_protocol_success": 900
+        },
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "observed_required_group_and_source_propagation_certificate": 900
+        }
+      },
+      "database_bindings": {
+        "declared-db-client-30f7b3f9b2fb3df3": {
+          "completed_fields": [],
+          "declared": {
+            "address": "database",
+            "database": "petclinic",
+            "port": "3306",
+            "system": "mysql"
+          },
+          "observed": {
+            "address": "database",
+            "database": "petclinic",
+            "port": "3306",
+            "system": "mysql"
+          },
+          "owner": "customers-service",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        }
+      },
+      "estimates": {
+        "execution": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "selected": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "selected_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_completion": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_deadline": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_selection": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        }
+      },
+      "evaluated_states": 1,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"api-gateway\",\"customers-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "customers-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]",
+          "observation_relation": "native_db_client",
+          "source": "customers-service",
+          "supporting_attempts": 900,
+          "supporting_spans": 9900,
+          "target": "declared-db-client-30f7b3f9b2fb3df3",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "api-gateway": "native_service",
+        "customers-service": "native_service",
+        "declared-db-client-30f7b3f9b2fb3df3": "native_db_client_with_explicit_peer_binding"
+      },
+      "identity": {
+        "application": "spring_petclinic_microservices",
+        "data_role": "prospective_main",
+        "law": "NCD",
+        "method": "Gstar-ordinary-joint-execution-prospective-v1",
+        "namespace": "v3-main-771601",
+        "operation": "list_owners",
+        "placement": "split",
+        "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+        "repetition": 4,
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": null,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {},
+      "native_spans": 15300,
+      "observed_categories": 1,
+      "result_sha256": "89231a547a6d15a6be234beea8556e45897e488d30ef254cd4f418a9ab23480e",
+      "stage_seconds": {
+        "extraction": 0.3527322609999999,
+        "identification": 0.0021555409999933772,
+        "solve": 0.00018859200000065357
+      },
+      "status": "singleton_given_empirical_observation_law"
+    },
+    "list_vets": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "prospective_main",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "api-gateway",
+          "vets-service"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L7",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "Warm @Cacheable(vets) fixture: cache initialization/database health assumed; no universal DB independence inferred from absent CLIENT spans.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "api-gateway",
+            "vets-service"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "Warm @Cacheable(vets) fixture: cache initialization/database health assumed; no universal DB independence inferred from absent CLIENT spans.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [],
+          "database_peers": [],
+          "deadline_ns": 2000000000,
+          "entry": "api-gateway",
+          "expected_attempts": 900,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "api-gateway",
+              "vets-service"
+            ]
+          ],
+          "required_native_services": [
+            "vets-service"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 0
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 900,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"vets-service\"]": {
+          "explicit_native_protocol_success": 900
+        }
+      },
+      "database_bindings": {},
+      "estimates": {
+        "execution": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "selected": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "selected_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_completion": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_deadline": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        },
+        "without_selection": {
+          "lower": 1.0,
+          "lower_exact": "1",
+          "prediction": 1.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 1.0,
+          "upper_exact": "1"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": 0.0,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0,
+          "upper_exact": "0"
+        }
+      },
+      "evaluated_states": 1,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"api-gateway\",\"vets-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "vets-service",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "api-gateway": "native_service",
+        "vets-service": "native_service"
+      },
+      "identity": {
+        "application": "spring_petclinic_microservices",
+        "data_role": "prospective_main",
+        "law": "NCD",
+        "method": "Gstar-ordinary-joint-execution-prospective-v1",
+        "namespace": "v3-main-771601",
+        "operation": "list_vets",
+        "placement": "split",
+        "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+        "repetition": 4,
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": null,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {},
+      "native_spans": 2700,
+      "observed_categories": 1,
+      "result_sha256": "17a0a50a410de15c2fcef6ef36facc0ef8abc6b5f7f92e32fe7e7eedba1a108b",
+      "stage_seconds": {
+        "extraction": 0.05634770200001071,
+        "identification": 0.0019466200000124445,
+        "solve": 0.0001925199999988081
+      },
+      "status": "singleton_given_empirical_observation_law"
+    },
+    "owner_details_with_visits": {
+      "assumptions": {
+        "baseline_residual_q_used": false,
+        "business_labels_used_for_parameters": false,
+        "calibration_duration_used_for_deadline": true,
+        "data_role": "prospective_main",
+        "fixed_node_values_are_scope_assumptions": true,
+        "graph_completeness": "observed workload/source-declared class only; unseen branches are not recovered",
+        "joint_law": "empirical request-weighted law including all attempts; no coordinate/call independence",
+        "no_error_flag_used_as_success": false,
+        "non_target_node_eligibility_fixed_true": [
+          "api-gateway",
+          "customers-service",
+          "declared-db-client-30f7b3f9b2fb3df3"
+        ],
+        "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+        "probe_alignment": "latest completed observation at or before request start; bounded age",
+        "probe_is_physical_capability": false,
+        "probe_layer": "L7",
+        "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+        "scope": "Owner6/pets7,8/four fixture visits; Visits required despite empty HTTP200 fallback; DB CLIENT groups required.",
+        "source_declared_contract": {
+          "allowed_native_services": [
+            "api-gateway",
+            "customers-service",
+            "visits-service"
+          ],
+          "assumptions": {
+            "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+            "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+            "scope": "Owner6/pets7,8/four fixture visits; Visits required despite empty HTTP200 fallback; DB CLIENT groups required.",
+            "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+            "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+          },
+          "client_route_names": [
+            "visits-service"
+          ],
+          "database_peers": [],
+          "deadline_ns": 2000000000,
+          "entry": "api-gateway",
+          "expected_attempts": 900,
+          "external_roots": 1,
+          "ignored_rpc_methods_by_pair": {},
+          "maximum_probe_age_ns": 2000000000,
+          "minimum_calls_by_pair": {},
+          "required_native_pairs": [
+            [
+              "api-gateway",
+              "customers-service"
+            ],
+            [
+              "api-gateway",
+              "visits-service"
+            ]
+          ],
+          "required_native_services": [
+            "customers-service",
+            "visits-service"
+          ],
+          "source_error_propagation_assumed": true,
+          "target_calls": 1
+        },
+        "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+        "transfer": "unsupported without additional identifying assumptions for changed joint law",
+        "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+      },
+      "attempts": 900,
+      "business_adequacy_qualified": false,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"customers-service\"]": {
+          "explicit_native_protocol_success": 900
+        },
+        "completed:[\"api-gateway\",\"visits-service\"]": {
+          "explicit_native_protocol_success": 851,
+          "explicit_required_client_failure": 49
+        },
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "no_explicit_completion_certificate": 18,
+          "observed_required_group_and_source_propagation_certificate": 882
+        },
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "no_explicit_completion_certificate": 18,
+          "observed_required_group_and_source_propagation_certificate": 833,
+          "required_group_not_fully_observed": 49
+        }
+      },
+      "database_bindings": {
+        "declared-db-client-30f7b3f9b2fb3df3": {
+          "completed_fields": [],
+          "declared": {
+            "address": "database",
+            "database": "petclinic",
+            "port": "3306",
+            "system": "mysql"
+          },
+          "observed": {
+            "address": "database",
+            "database": "petclinic",
+            "port": "3306",
+            "system": "mysql"
+          },
+          "owner": "visits-service",
+          "provenance": "native DB CLIENT relation with explicit declared endpoint completion; not native DB SERVER"
+        }
+      },
+      "estimates": {
+        "execution": {
+          "lower": 0.9122222222222223,
+          "lower_exact": "821/900",
+          "prediction": 0.9122222222222223,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9122222222222223,
+          "upper_exact": "821/900"
+        },
+        "reachability": {
+          "lower": 0.9566666666666667,
+          "lower_exact": "287/300",
+          "prediction": 0.9566666666666667,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9566666666666667,
+          "upper_exact": "287/300"
+        },
+        "reachability_minus_execution": {
+          "lower": 0.044444444444444446,
+          "lower_exact": "2/45",
+          "prediction": 0.044444444444444446,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.044444444444444446,
+          "upper_exact": "2/45"
+        },
+        "selected": {
+          "lower": 0.9322222222222222,
+          "lower_exact": "839/900",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9522222222222222,
+          "upper_exact": "857/900"
+        },
+        "selected_minus_execution": {
+          "lower": 0.02,
+          "lower_exact": "1/50",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.04,
+          "upper_exact": "1/25"
+        },
+        "without_completion": {
+          "lower": 0.9122222222222223,
+          "lower_exact": "821/900",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9322222222222222,
+          "upper_exact": "839/900"
+        },
+        "without_completion_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.02,
+          "upper_exact": "1/50"
+        },
+        "without_deadline": {
+          "lower": 0.9122222222222223,
+          "lower_exact": "821/900",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.9322222222222222,
+          "upper_exact": "839/900"
+        },
+        "without_deadline_minus_execution": {
+          "lower": 0.0,
+          "lower_exact": "0",
+          "prediction": null,
+          "status": "ambiguous",
+          "upper": 0.02,
+          "upper_exact": "1/50"
+        },
+        "without_selection": {
+          "lower": 0.9166666666666666,
+          "lower_exact": "11/12",
+          "prediction": 0.9166666666666666,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.9166666666666666,
+          "upper_exact": "11/12"
+        },
+        "without_selection_minus_execution": {
+          "lower": 0.0044444444444444444,
+          "lower_exact": "1/225",
+          "prediction": 0.0044444444444444444,
+          "status": "singleton_given_empirical_observation_law",
+          "upper": 0.0044444444444444444,
+          "upper_exact": "1/225"
+        }
+      },
+      "evaluated_states": 48,
+      "graph_edges": [
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"api-gateway\",\"customers-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "customers-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"api-gateway\",\"visits-service\"]",
+          "observation_relation": "cross_service_parent",
+          "source": "api-gateway",
+          "supporting_attempts": 851,
+          "supporting_spans": 851,
+          "target": "visits-service",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]",
+          "observation_relation": "native_db_client",
+          "source": "customers-service",
+          "supporting_attempts": 900,
+          "supporting_spans": 900,
+          "target": "declared-db-client-30f7b3f9b2fb3df3",
+          "type": "sync"
+        },
+        {
+          "completion_required": true,
+          "factors": [],
+          "id": "[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]",
+          "observation_relation": "native_db_client",
+          "source": "visits-service",
+          "supporting_attempts": 851,
+          "supporting_spans": 851,
+          "target": "declared-db-client-30f7b3f9b2fb3df3",
+          "type": "sync"
+        }
+      ],
+      "graph_nodes": {
+        "api-gateway": "native_service",
+        "customers-service": "native_service",
+        "declared-db-client-30f7b3f9b2fb3df3": "native_db_client_with_explicit_peer_binding",
+        "visits-service": "native_service"
+      },
+      "identity": {
+        "application": "spring_petclinic_microservices",
+        "data_role": "prospective_main",
+        "law": "NCD",
+        "method": "Gstar-ordinary-joint-execution-prospective-v1",
+        "namespace": "v3-main-771601",
+        "operation": "owner_details_with_visits",
+        "placement": "split",
+        "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+        "repetition": 4,
+        "scope": "current"
+      },
+      "maximum_used_probe_age_ns": 1001000000,
+      "missing_aligned_probe_attempts": 0,
+      "missing_coordinate_counts": {
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": 18,
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": 67,
+        "demand_a": 49,
+        "demand_b": 49,
+        "entry_completed": 18
+      },
+      "native_spans": 10604,
+      "observed_categories": 16,
+      "result_sha256": "4bd019f6b4dd1c514da4ad68ab50e7d3cd7bee3c7f953bba9142208087f10f91",
+      "stage_seconds": {
+        "extraction": 0.21895853899999906,
+        "identification": 0.0031774410000053877,
+        "solve": 0.0024279409999934387
+      },
+      "status": "singleton_given_empirical_observation_law"
+    }
+  },
+  "read_audit": {
+    "actual_data_reads": [
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/declarations.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/manifest.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/native.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/probes.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/requests.json",
+      "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/workflow-input/ordinary/seal.json"
+    ],
+    "blocked": [],
+    "includes_loading_and_model_construction": true,
+    "physical_evaluator_inputs_received": false
+  }
+}
