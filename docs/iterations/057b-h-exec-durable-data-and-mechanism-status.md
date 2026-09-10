@@ -1,0 +1,40 @@
+# Iteration 057b: H-EXEC evidence preserved and mechanism findings bounded
+
+10 September 2026. [Archive34481208537](../milestones/H_EXEC_DURABLE_ARCHIVE_V1_RESULT.md) succeeded from65547b0ddd5180a6fe01b647690bbf96f128dcfb, after source CI34480406211 passed. All68 source artifacts (58,302,662 bytes) remain byte-identical in draft release386297125; ZIP CRCs and provider digests pass. Only the7,700-byte compact provenance artifact was retained locally, with an exact two-member allowlist. No model execution, outcome reanalysis, additional independent campaign or publication occurred.
+
+The [mechanism status record](../V3_MECHANISM_STATUS.md) gives the result and boundary for each initial candidate explanation. H-EXEC-01 is the one selected deep mechanism; correction v3 permits at most two and does not require a second. F01 and F04 are closed for this declared scope. The results chapter now correctly says the v3 preflight passed and main34465226083 is running. All356 frozen experimental files remain unchanged. No PDF or Word output was generated or refreshed in this iteration.
+
+This is a full current review of all30 criteria; unchanged evidence follows iteration057. Main accuracy, coverage and analysis remain pending. Iteration058 is reserved for the automatic terminal main retention.
+
+| ID | Статус | Доказательство / область | Остаток |
+| --- | --- | --- | --- |
+| C01 | ПРОВЕРЕНО | The frozen Gstar implementation, direct joint-law identification and exact functional calculation pass the complete v3 development chain. | Independent business accuracy and coverage remain the running main question. |
+| C02 | ЧАСТИЧНО | Source chapters contain the formal semantics, implemented algorithm, historical and H-EXEC results; stale main-admission wording corrected. | Integrate the independent main results and final conclusions. |
+| C03 | ЧАСТИЧНО | AINA full raw audit retained; ICSE250 CSV jobs/750 scalar files reconcile exactly,40 published table cells reproduced at printed precision. | Original ICSE250-job run/ZIP identity and raw denominators unavailable; retained20-job rerun explicitly excluded as source. |
+| C04 | ПРОВЕРЕНО | Fresh v3 preflight: six full-duration campaigns and 21,600 all-sequence test attempts pass the declared acquisition/evaluation gates. | Independent main run 34465226083 is running. |
+| C05 | ЧАСТИЧНО | Все 160 M7 campaigns, 576000 all-sequence attempts и 34560 census slots/угол сохранены; новые stable windows 435761 attempts. | Полная prospective v3 main матрица. |
+| C06 | ПРОВЕРЕНО | All three applications and both logical placements complete the full v3 pipeline with the declared ten operation contracts. | Complete the main matrix; logical domains remain on a single runner per campaign. |
+| C07 | ЧАСТИЧНО | Selection/completion/deadline ablations and all masked bounds retained; ambiguouspointnull. | Independent ablation coverage/errors. |
+| C08 | ПРОВЕРЕНО | Matched PMX repair: 20 application projections, four controls, 48 solver-oracle records; 32 prior point forecasts unchanged. | Independent accuracy belongs to the pending main series. |
+| C09 | ПРОВЕРЕНО | Complete v3 PMX projection, controls, probability and read chain qualifies. | Scope is development preflight; independent main remains required. |
+| C10 | ЧАСТИЧНО | ARTICLE_METHODS_V3 and ARTICLE_CLAIMS_V3 disclose G0 adaptation, ten methods, PMX conditional/inclusive distinction and actual information access. | Prospective error/coverage and measured cost tables. |
+| C11 | ПРОВЕРЕНО | Full compact admission, all 356 frozen files, admitted source CI 34465095817 and single tagged main dispatch verified. | No additional admission experiment; complete the running main. |
+| C12 | ПРОВЕРЕНО | All six v3 source/candidate/evaluator chains pass seals, replay, actual reads and freeze-before-opening checks; global admission is true. | Main requires its own full 240-campaign integrity audit. |
+| C13 | ПРОВЕРЕНО | Complete qualified development census is retained, including all valid refusals and no technical forecast failures. | Main plans 240/800/8000 campaign/operation/method slots; acquisition continues. |
+| C14 | ЧАСТИЧНО | Publication renderer copies existing remote own/per-operation/common contrasts/stable/transfer/cost metrics without fit or bootstrap. | Main metrics and their scientific interpretation. |
+| C15 | ЧАСТИЧНО | Qualified v3 development support: Gstar 12/20, GID/G0 18/20, B0 20/20, PMX 14/20 and inclusive 20/20. | Report main own/common support, errors and absence reasons. |
+| C16 | ЧАСТИЧНО | Source-only transfer explicitly nonidentified; every direction gets nullpoint/error and[0,1]targetbound; no targetinputs. | Publishactual zero pointcoverage, observedtarget/change and limitation; no usefultransferclaim. |
+| C17 | ЧАСТИЧНО | Methods/results disclose measured stage/process scopes and unknown labor/update/monitoring overhead. Plot environment is isolated from frozen experiment dependencies. | Main remote cost distributions and explicit update-cost accounting. |
+| C18 | ПРОВЕРЕНО | All 356 v3 frozen experiment files remain unchanged by coordination and editorial work. | Retain exact source tag and all historical failures. |
+| C19 | ПРОВЕРЕНО | Preflight compact package and main dispatch retained. Archive34481208537 preserves all68 original H-EXEC/audit ZIPs byte-for-byte outside90-day Actions expiration; release386297125 remains unpublished. | Retain and audit the terminal main package; draft is not a public data deposit. |
+| C20 | ПРОВЕРЕНО | Admission and subsequent runs/retention operate in GitHub Actions. Local work uses artificial control cases and already-retained compact metrics only. | Keep native/models and experiment execution remote. |
+| C21 | ЧАСТИЧНО | Integrated manuscript preserves empty contrasts, masks, timeout and all attribution limits; no readiness verdict. | Independent main results and final scientific conclusions. |
+| C22 | ПРОВЕРЕНО | All30 criteria reviewed after completed H-EXEC archival and the mechanism-status synthesis; no new experiment or preflight. | Review actual terminal main evidence and scientific interpretation next. |
+| F01 | ПРОВЕРЕНО | Historical ICSE/AINA discrepancy, exact graph semantics and the observed execution gap are linked to the implemented question; V3_MECHANISM_STATUS records each candidate and its evidence boundary. | Historical causes remain explicitly unestablished where data are missing; no automatic second mechanism. |
+| F02 | ЧАСТИЧНО | Explicit article table distinguishes standard indicator/fiber-bound arguments, own-work development, MODELS manuscript provenance, source adaptations and applied algorithm contribution. | Final novelty wording with completed prospective evidence; no broad first/universal theorem claim. |
+| F03 | ПРОВЕРЕНО | All six fresh preflight graph chains pass saved-model replay and the complete retained audit. | Main replay and independent prediction outcomes. |
+| F04 | ПРОВЕРЕНО | Selected H-EXEC-01 has a frozen intervention, fixed conditions, alternatives, eight independent blocks and a reproducible32-cell confirmation. Full original and audit data are durably preserved. | Scope is the declared routing intervention; no AINA causal attribution, mediation fraction or second mechanism claim. |
+| F05 | ЧАСТИЧНО | V3 preserves graph semantics and legitimate ambiguities; the independently qualified PMX progress repair is explicitly disclosed. | Main adequacy and coverage; no method tuning after dispatch. |
+| F06 | ПРОВЕРЕНО | Fresh full-duration preflight passes immutable acquisition and complete source/candidate/evaluator integrity. | Repeat the declared integrity audit on the actual main evidence. |
+| F07 | ЧАСТИЧНО | OriginalICSE/AINA versusG0adaptation versusGstar versusPMX versionsdistinct; openedcalibrationnotmain. | Finalnewcomparison andhistoricalprovenancelimits. |
+| F08 | ЧАСТИЧНО | Full preflight 34460574221 is qualified; independent main 34465226083 is actually executing from its admitted source. | Finish main, its retained audit, full results and the article. |

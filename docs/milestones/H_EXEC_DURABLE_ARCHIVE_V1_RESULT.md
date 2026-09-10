@@ -1,0 +1,18 @@
+# Completed durable archive of original H-EXEC evidence
+
+10 September 2026. [Archival run 34481208537](https://github.com/a-a-k/telemetry-availability-identification/actions/runs/34481208537), source `65547b0ddd5180a6fe01b647690bbf96f128dcfb`, successfully preserves every original H-EXEC source artifact and both immutable-audit artifacts in an unpublished draft release. This closes the 90-day Actions retention obligation for these completed H-EXEC data. It does not change the study, rerun its analysis, add independent campaigns or qualify the pending main comparison.
+
+The [exact source allowlist](../../configs/h_exec_durable_archive_v1.json), SHA256 `01fe9f26cd4d1620823674cda20954f81a961bc21f53e4627f842ecf33273198`, contains 66 artifacts from original study `34230603338` and two from audit `34238008817`. All 68 original ZIPs, totaling **58,302,662 bytes**, were downloaded on the GitHub worker only. Each source run identity, artifact identity, byte count and provider SHA256 was checked, followed by ZIP path, duplicate-name, symlink and CRC checks. The archive embeds each original ZIP unchanged and verifies every embedded digest again. Thus both the original failure and later qualified interpretation remain recoverable.
+
+| Retained object | Exact identity |
+| --- | --- |
+| Unpublished draft | Release `386297125`, tag `evidence-h-exec-34230603338-v1`; target is the archiver source head above; historical source heads remain separately identified in the manifest |
+| Full source bundle | Asset `555049805`, `h-exec-34230603338-full-evidence-v1.zip`, 58,387,814 bytes, SHA256 `0854339275d5b0e62fa45f25a64dcce9166148dc1a980839ce3e7b94a12eaa72` |
+| Manifest | Asset `555049880`, 50,828 bytes, SHA256 `5075a934047516fc60890e87479fa63800e0b11a1784161fe5cbbdcfb4739c40` |
+| Local compact provenance only | Actions artifact `10153683518`, 7,700 bytes, SHA256 `cd7db9a564259b376964c400fabdae000e160fa230ac574109c4fe569490d46c`; exact members `compact.json` and `manifest.json` |
+
+The [draft release](https://github.com/a-a-k/telemetry-availability-identification/releases/tag/untagged-2484a1136d65a29301d7) is verified `draft=true`, `published_at=null`; both uploaded assets match their recorded sizes and provider digests. Draft access is restricted to authorized repository users. The data are preserved outside Actions expiration, but this is not a public data deposit or DOI. No release was published and no existing asset was overwritten.
+
+The [completion record](../evidence/h-exec-durable-archive-34481208537/compact.json), [full source manifest](../evidence/h-exec-durable-archive-34481208537/manifest.json) and [compact retention audit](../evidence/h-exec-durable-archive-34481208537/verified-archives.json) are retained byte-for-byte in the repository. The full source bundle was not downloaded locally. The [remote archiver](../../scripts/archive_h_exec_evidence_v1.py) has three passing artificial safety/byte-preservation controls and passed source CI `34480406211`; the [compact retainer](../../scripts/retain_h_exec_archive_compact_v1.py) independently checked run identity, exact allowed members, ZIP bytes/CRC, source manifest and current draft asset metadata.
+
+Scientific results remain those of the [sealed H-EXEC confirmation](H_EXEC_01_SEALED_STUDY_CONFIRMATION.md). The [mechanism status record](../V3_MECHANISM_STATUS.md) consolidates that selected result and the other candidate explanations' explicit limits. No second controlled mechanism is required by v3. Main run `34465226083` continues from its original admitted source; all 356 frozen experimental files are unchanged.
