@@ -1,7 +1,5 @@
-# V3 independent comparison: zero-step repair qualification prepared
+# V3 independent comparison: PMX repair qualified; fresh full preflight prepared
 
-Main remains0/240. V2 preflight34447262633 was rejected because one PMX extraction timed out; its failure and all200 forecast slots remain retained.
+Matched repair34458641994 and sourceCI34458577289 passed. All20 application projections, four controls and48 solver-oracle records qualify. All32 prior points are unchanged, six unsupported slots remain, and two forecasts are recovered. [Evidence](milestones/PMX_CLOCK_PROGRESS_QUALIFICATION_V1_RESULT.md).
 
-Exact-input replay, pinned source/bytecode and observer diagnostic34457354601 have now localized a zero-width LibReDE interval and zero time step. A minimal clock-progress guard preserves the original interval and observations. [Matched repair qualification](PMX_CLOCK_PROGRESS_QUALIFICATION_V1.md) covers all20 retained projections, four controls,48 solver oracle records and32 previously supported points. It must pass before a separate new full preflight and main admission.
-
-[Reviewed25page PDF](manuscript-v3/manuscript.pdf) contains the current chapters and explicit pending main results.
+The separate [v3 execution freeze](V3_COMPARISON_V3_PMX_CLOCK_CORRECTION.md) uses fresh preflight seed771605. Main remains0/240 until the new complete preflight and strict admission. Historical v1/v2 failures remain preserved.

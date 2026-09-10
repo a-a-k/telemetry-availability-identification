@@ -455,3 +455,5 @@ mechanisms. M7 tests live current and transfer prediction only for the exact two
 benchmark revisions and declared logical domains. Its incomplete primary result
 does not establish effectiveness superiority, physical domain independence, or
 unconditional trace-topology sufficiency.
+
+The PMX zero-step timeout has a separately qualified minimal repair; all32 prior point forecasts are unchanged. The next independent-comparison step is a fresh full preflight, seed771605. [Current status](docs/V3_CURRENT_REMOTE_STATUS.md).

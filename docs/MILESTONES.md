@@ -91,3 +91,5 @@ must lead to a narrower claim or redesign, not to a weaker comparator.
 - [Ordinary execution census](milestones/V3_EXECUTION_OBSERVATION_CENSUS.md): run34241300741; all4080 calibration attempts/10operations, no outcome exclusion.
 - [Identity and joint demand](milestones/V3_ORDINARY_IDENTITY_AND_DEMAND.md): run34244994519;6/6 jobs, exact native identity recovery and explicit missing calls.
 - [Execution core and ten-operation qualification](V3_APPLICATION_EXECUTION_V1.md): iteration037;14 bounded controls, S3/I5 statements/proofs, source-bound adapter and isolated nine-job protocol. Remote execution pending; main0.
+
+- PMX clock-progress repair qualified on all retained projections; fresh v3 full-preflight freeze: [result](milestones/PMX_CLOCK_PROGRESS_QUALIFICATION_V1_RESULT.md), [protocol](V3_COMPARISON_V3_PMX_CLOCK_CORRECTION.md).

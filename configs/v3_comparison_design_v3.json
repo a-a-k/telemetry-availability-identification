@@ -1,0 +1,108 @@
+{
+  "version": "v3-comparison-design-v3",
+  "status": "frozen_design_candidate_full_preflight_and_external_main_admission_required",
+  "design": {
+    "applications": {
+      "deathstarbench_social_network": [
+        "compose_post",
+        "read_home_timeline",
+        "read_user_timeline"
+      ],
+      "opentelemetry_demo": [
+        "browse_product",
+        "add_to_cart",
+        "checkout"
+      ],
+      "spring_petclinic_microservices": [
+        "list_owners",
+        "owner_details_with_visits",
+        "create_visit",
+        "list_vets"
+      ]
+    },
+    "placements": [
+      "colocated",
+      "split"
+    ],
+    "laws": [
+      "N",
+      "NC",
+      "ND",
+      "NCD"
+    ],
+    "repetitions": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "baseline_seconds": 60,
+  "calibration_seconds": 900,
+  "test_seconds": 900,
+  "request_rate_per_second": 4,
+  "request_workers": 16,
+  "deadline_seconds": 2,
+  "main_seed": 771601,
+  "preflight_seed": 771605,
+  "bootstrap_seed": 771602,
+  "main_namespace": "v3-main-771601",
+  "preflight_namespace": "v3-preflight-771605",
+  "preflight": {
+    "placements": [
+      "colocated",
+      "split"
+    ],
+    "laws": [
+      "NCD"
+    ],
+    "repetitions": [
+      0
+    ]
+  },
+  "inter_period_recovery_seconds": 70,
+  "trace_flush_seconds": 20,
+  "minimum_baseline_success_fraction": 0.95,
+  "main_campaigns": 240,
+  "main_operation_cells_per_method": 800,
+  "methods": [
+    "Gstar",
+    "GID",
+    "Gselected",
+    "G_without_deadline",
+    "G_without_selection",
+    "G_without_completion",
+    "G0",
+    "B0",
+    "PMX",
+    "PMX_inclusive"
+  ],
+  "primary_comparators": [
+    "G0",
+    "PMX"
+  ],
+  "primary_pmx_variant": "conditional_local",
+  "stable_guard_seconds": 1,
+  "stable_maximum_probe_gap_seconds": 2,
+  "retention_days": 90,
+  "max_parallel_acquisition": 20,
+  "telemetry_sealing": "stop collector before final read; exact immutable native byte hash",
+  "test_quality_uses_forecast_error": false,
+  "transfer": "unsupported changed empirical joint law; unrestricted target event bounds and explicit complete coverage census",
+  "method_binding_document": "docs/V3_FINAL_COMPARISON_BINDINGS_V1.md",
+  "prior_preflight_run": 34447262633,
+  "prior_preflight_status": "Unqualified PMX LibReDE zero-step timeout; failure retained; repaired on development data only",
+  "correction_document": "docs/V3_COMPARISON_V3_PMX_CLOCK_CORRECTION.md",
+  "pmx_clock_progress_qualification": {
+    "run_id": 34458641994,
+    "head": "f3d4061dd6468de68d61060c1d22a8066cb6d586",
+    "derived_jar_sha256": "2322880b6447754528e201553bc4e2fac00334b7d6f3ac202cfe1e3742bbbcc6",
+    "audit_sha256": "69ec0d4daf95b7ab6f57880807eb8cf141d458e495523bd94b439fb7b0cab32d"
+  }
+}
