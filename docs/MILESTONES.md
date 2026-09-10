@@ -10,8 +10,10 @@ tests, configuration validation, and bounded smoke cases.
 
 ## Current v3 evidence
 
+The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` is running at frozen source `28eb21c`; this is not yet a completed milestone or main admission.
+
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 043 checklist](iterations/043-final-bindings-and-prospective-pipeline.md)
+[complete iteration 044 checklist](iterations/044-v3-article-methods-and-compact-retention.md)
 are the current authority and status. New main campaigns: **0/240**. Historical
 milestone completion below is scoped to each original protocol.
 

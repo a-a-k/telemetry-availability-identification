@@ -1,0 +1,109 @@
+# Article methods: the v3 execution model and prospective comparison
+
+Editorial draft prepared on 10 September 2026. This chapter follows the [author's v3 correction](SIMPAT_CORRECTION_V3.md) and the frozen [comparison bindings](V3_FINAL_COMPARISON_BINDINGS_V1.md). It describes the implemented method, not a completed predictive-validation result. The six-campaign full-duration preflight was dispatched as run `34442870952` at source commit `28eb21c78b2ade594fd493d0fc656fa2fa6dda79`; the independent 240-campaign main series has not yet been admitted. Subsequent result documents must supply the actual run, frozen source, attempted census and evidence manifest. The earlier [methods draft](ARTICLE_METHODS_DRAFT.md) remains a record of the independent-primitive/log-linear development and does not define the final Gstar estimator.
+
+## 1. Estimand and unit of observation
+
+An external attempt is one invocation of a declared business operation. Its outcome Y is one only if the entire operation satisfies its response/content contract before the two-second deadline. The deadline begins before the first HTTP request and includes prerequisite requests, response bodies and semantic checks. A multi-request checkout is one attempt, not several independently scored requests. Every attempted invocation has one request identity and one propagated trace context; failed, timed-out and untraced attempts remain in the denominator. Drivers neither retry the business operation nor follow redirects. The [ten operation contracts](TEN_EXTERNAL_OPERATION_CONTRACTS.md) state the exact assertions and the limits of each success claim.
+
+For a current campaign, the target is the success probability of a future attempt drawn under that campaign's declared workload and environment. Calibration data precede a separately sealed test period. The observed test proportion estimates the target on that period; neither model output nor a successful probe defines Y. For example, an accepted DeathStarBench post is not a proof of durable storage, and checkout does not establish external payment or delivery. Petclinic visit creation has a separate persistence check; a late result remains a deadline failure.
+
+The comparison uses three applications and ten operations, two declared placements and four failure-law conditions. A campaign is the independent experimental and resampling unit. Requests within a campaign may be dependent. Source-only prediction after a placement change is a different estimand, for which the current implementation does not identify a target probability.
+
+## 2. Formal object and provenance of its parts
+
+The model is M = <G, R, P, Phi>. G is an operation-specific graph of observed service and database relations. R binds logical replicas to eligibility gates. P is a joint state law compatible with the observations. Phi is the operation predicate. The observation contract, including masks, is part of the identification problem. This notation organizes the earlier graph estimators; the tuple alone is not a novelty claim. The formalization's origin in the MODELS manuscript/preprint is attributed as such, without describing that manuscript as an accepted MODELS publication.
+
+The main model does not assume independent primitive failures. Its state comprises X, the last observed eligibility of controlled replicas; D, the joint footprint of replicas selected by mandatory target calls; C0, entry protocol completion; Cg, completion of each mandatory call group; and T, completion within the external deadline. Coordinates describe an attempted execution, including dependence induced by routing and observation. A completion coordinate is not the counterfactual capability of an unselected replica.
+
+| Model object or parameter | Observation or declaration | Implemented rule | Scope and unresolved information |
+| --- | --- | --- | --- |
+| G: service nodes and edges | Whitelisted native span service, span/parent identifiers, native kind and declared boundary context | Extract cross-service parent relations; aggregate repeated observed relations while retaining support counts | Unseen branches are not recovered; missing source-required relations produce unsupported output |
+| G: database peers | Native CLIENT spans and system/address/port/database identity | Bind explicit peers, or complete a missing field only under a unique source-backed peer declaration | A synthetic peer is not a native database SERVER span or a separate physical state process |
+| Required nodes and call groups | Versioned source inspection and external operation contract | Bind each declared mandatory group to a discovered synchronous edge | Mandatory status is not inferred merely because a call appeared; source-contract authoring is manual |
+| Optional work | Source-declared ignored error paths and actual parent chains | Exclude optional calls and their descendants from mandatory completion/selection requirements; retain their elapsed time in T | Unclassified retries, recovery from failed mandatory calls and unseen branches are outside the declared class |
+| R and target identity | Declared target service/replicas and native host identity | Map selected target instances to a or b; store explicit gate bindings | Two logical domains may share one runner; this is not a physical multi-host placement claim |
+| X | Request start and timestamped proxy checks | Use the latest completed check at or before start, at most two seconds old; decode the declared L4 or L7 contract | Stale/absent/unknown checks are masked. Eligibility is a proxy, not physical capability |
+| D | All mandatory target entries of one external attempt, with native replica identity | Record the joint demanded-replica footprint, including repeated calls and both-replica paths | Incomplete identity/entry evidence is masked; no independent routing probabilities or imputed selections |
+| C0 | Explicit native entry protocol/error certificates and declared external-root count | A certified failure makes the conjunction false; success additionally requires the expected root census | An absent error flag is not a success certificate; protocol completion is not full payload correctness |
+| Cg | Native mandatory-call records, explicit failures and declared source error propagation | Use certified failure/success; source-propagation completion requires its declared observation/count conditions | Otherwise masked; cached/conditional and optional branches retain their explicit declarations |
+| T | External request start/completion timestamps and fixed two-second deadline | Compare whole-operation elapsed time with the deadline | No response-time distribution or residual failure factor is fitted |
+| P / empirical observation law Q | One masked X/D/C/T row for every calibration attempt | Count complete masked categories jointly, with exact integer denominators | No coordinate independence, MCAR assumption or identification of physical failure causes |
+| Non-target eligibility | Explicit model scope declaration | Fix non-target node eligibility to true | This is a declared simplification, not an estimated availability parameter |
+| B0's probability | External calibration semantic verdict on every attempt | Raw S/N, without smoothing | This input is intentionally richer in business outcome labels than Gstar's parameter observations |
+
+The field whitelist and physical role files are specified in [ordinary identity v2](V3_ORDINARY_IDENTITY_V2.md). The source-bound adapter and its corrections are specified in [application execution v2](V3_APPLICATION_EXECUTION_V2.md). The prospective wrapper preserves the qualified numeric identification/solve path, while changing campaign identity, expected calibration census and stage timing. It does not tune an unexplained q from semantic labels.
+
+## 3. Execution semantics and the exact simplification condition
+
+Let B(s) be synchronous reachability of every declared required node in state s. Let
+
+Rsel(s) = B(s) AND [for each controlled service, at least one replica is demanded and every demanded replica has all its eligibility gates true].
+
+Let C(s) be C0 AND every required Cg AND the presence of each bound required synchronous edge. Define E(s) = Rsel(s) AND C(s) AND T(s). A missing required edge makes completion false even if an alternative path reaches the same service. Optional synchronous work and asynchronous work are not automatically prerequisites of immediate business completion. This is a declared immediate-completion class, not a model of eventual completion.
+
+The implemented graph functionals are B (GID), Rsel (Gselected), E (Gstar), Rsel*C (without deadline), B*C*T (without selection), and Rsel*T (without completion). All use the same discovered model and joint observation law. Thus a difference between two of these functionals isolates a mathematical guard in this model; it does not by itself identify a real-world causal mechanism.
+
+**Semantic statement.** For every complete state, E <= Rsel <= B, and E is no greater than any of its three single-guard ablations. For every law P,
+
+E_P[B] - E_P[E] = P(B = 1, E = 0).
+
+Consequently reachability and execution give the same mean exactly when P(B = 1, E = 0) = 0. They agree for every law supported on a set S exactly when B = E at every state in S.
+
+**Proof.** E is obtained by conjoining additional Boolean requirements with B. Hence B-E is the indicator of B=1 and E=0; integration gives the identity and its almost-sure equality condition. Pointwise equality on S is sufficient for every supported law. If equality fails at any state in S, a point mass at that state disproves necessity in the opposite direction. These are elementary indicator facts, not a new general probability theorem.
+
+The condition connecting this model to measured availability is additionally Y=E almost surely within the workload/environment class. It requires correct source propagation and call-group completeness assumptions, correct content/fixture assumptions, an adequate external timing boundary, and eligibility that is necessary for the actual execution despite probe lag. The model does not establish these assumptions by observing a successful span. A stale DOWN check can coexist with successful execution; a protocol-successful response can contain corrupt required content. Both are counterexamples to automatic business equivalence. In particular, the sign of B-Y is not constrained by the preceding identity.
+
+The [H-EXEC experiment](milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md) supplies an independent, scoped routing/execution mechanism check. It does not establish every business-equivalence assumption or explain the historical AINA biases. Only this one deep mechanism is selected; the three ablations are not presented as three additional causal hypotheses.
+
+## 4. Identification under informative missingness
+
+Each calibration attempt contributes a category o consisting of its observed Boolean values and mask. Let Q(o) be the observed category frequency and F(o) the compatible complete states. A compatible full law chooses any conditional distribution supported on F(o) for each category. The completion of a mask may depend on the state and the mask; there is no missing-at-random restriction.
+
+For a Boolean functional f, the sharp identified range conditional on the empirical Q is
+
+L(f) = sum_o Q(o) min_{s in F(o)} f(s),
+
+U(f) = sum_o Q(o) max_{s in F(o)} f(s).
+
+**Proof.** Within each category, every compatible conditional expectation lies between its minimum and maximum. Weighted summation yields the stated bounds. Selecting a minimizing or maximizing state separately in each positive-frequency category attains the respective endpoint. Therefore the bounds are sharp. The range is a singleton exactly when f is constant on every positive-frequency fiber. This finite-fiber argument is standard partial identification; the contribution here is its explicit observation contract, graph-execution binding and checked implementation.
+
+A target can be point identified while some latent coordinates remain unidentified. Conversely, a graph with many observed edges need not identify its target. Ambiguity is reported as a null point with bounds, not a midpoint or fabricated zero. A paired gap is evaluated as one functional on a common state; subtracting independently attained marginal endpoints would generally answer a different question.
+
+The exact solver enumerates the masked X/D/T control coordinates, with at most ten declared control bits. Conditional on those values, every reported functional and paired gap is affine in the single Boolean conjunction C. Replacing all masked completion bits by false or by true attains its feasible endpoints, so at most two completion candidates per control assignment suffice. These candidates are actual members of the fiber. This proves equivalence to exhaustive enumeration within the implemented class. Counts and probabilities use exact rational arithmetic. No Monte Carlo or ML is used for identification or graph prediction.
+
+The implementation checks at most 64 coordinates and rejects unsupported control dimensions. Artificial controls compare the reduced solver with exhaustive enumeration of every masked category in a small model, exercise known outcomes and informative masking, and verify structural changes and equivalent representations. Saved-model replay occurs in a fresh process. These checks establish arithmetic and dependence on the model structure, not population confidence coverage or adequacy for Y.
+
+Q estimated from a finite calibration sample is not the population observation law. Forecasting a later period also assumes invariance of the relevant law. Identification bounds, calibration sampling error, between-campaign uncertainty and semantic misspecification are distinct. The earlier independent-primitive/monomial identification results belong to their own restricted model class and are not silently transferred to this joint execution estimator.
+
+## 5. Comparators and information access
+
+The [frozen method table](V3_FINAL_COMPARISON_BINDINGS_V1.md) defines all ten outputs before main acquisition. G0 is an explicit adaptation of the original AINA fixed-k graph algorithm. It uses the observed graph and the all-attempt mean failed-eligibility fraction, including mask bounds, but not D, C, T or semantic outcomes. Its source quantization is preserved. This adaptation must not be described as an unchanged reproduction of AINA's original experiment. B0 is the unregularized calibration semantic-success frequency.
+
+PMX is a separate native-telemetry-to-PCM-to-Palladio chain. The primary variant is `conditional_local`; inclusive failure composition is reported separately. An unsupported primary PMX point is retained as such and is never replaced by the inclusive prediction. PMX receives a physically separate copy of the same whitelisted native spans and external calibration requests, including calibration failure labels, but receives no proxy health, our discovered graph, our fitted parameters or target-test inputs.
+
+The PMX input mapping is fixed per application: service boundaries for DeathStarBench, explicit SERVER spans for OpenTelemetry Demo, and SERVER plus observed MySQL CLIENT peers for Petclinic. In OpenTelemetry Demo, database execution remains aggregated within the enclosing SERVER; it is not an extra PCM peer. Petclinic database CLIENT peers are observed call abstractions, not measured database SERVER state processes. Caller-context separation, failure containment and integer-PMF bridges are declared adaptations. Four known-probability context/database cases, two variants and two solver passes provide 16 oracle records in each application solver batch. Application forecasts require valid probability mass and agreement between repeated solves. A failed oracle invalidates the corresponding application batch.
+
+These differences form an information-access comparison, not a claim that every method estimates the same state parameters from identical fields. The external target Y, campaign identities, calibration/test separation and error analysis are shared.
+
+## 6. Prospective procedure, census and analysis
+
+The frozen design has 3 applications x 2 placements x 4 laws x 10 repetitions = 240 main campaigns. There are 800 operation cells per method and 8,000 planned current-prediction slots across ten methods. Each campaign schedules 60 seconds of baseline, 900 seconds of calibration and 900 seconds of test at four attempts per second, with declared recovery intervals. The preflight has six campaigns, one per application/placement at NCD and repetition zero, in a separate namespace and seed. It uses the same durations but does not enter the main sample.
+
+Acquisition writes separate ordinary-calibration, PMX-calibration and closed-evaluator roles. Estimators receive only their input roles. Graph outputs must replay exactly from the saved model in a separate process. Candidate freezing associates all method slots with the calibration seals and expected evaluator seal. The evaluator job verifies the frozen role before downloading its closed test role, then opens that role and computes outcomes without fitting. File hashes establish byte integrity and association; fresh jobs and audited permitted reads supply operational isolation. Hashes alone are not a claim of adversarial confidentiality.
+
+Qualification uses the declared acquisition census, readiness/baseline criteria, identity/provenance checks, independent solver controls and valid result statuses. Forecast error and superiority are never admission criteria. Missing jobs, unsupported models, malformed observations, missing evaluators and ambiguous functionals remain in the planned census. The full preflight must establish the complete procedure before the separately recorded main admission.
+
+Primary accuracy uses every qualified test attempt. Per-cell signed error, absolute error in percentage points and Bernoulli Brier score are calculated from the frozen probability and test counts. Results report each method's own support and paired common support. The six primary contrasts are Gstar minus G0 and Gstar minus primary PMX MAE, separately for three applications. The [analysis component](V3_CAMPAIGN_ANALYSIS_COMPONENT_V1.md) fixes equal-operation/equal-retained-condition aggregation and paired whole-campaign bootstrap within conditions, with 10,000 draws and nominal Bonferroni-adjusted 99.1667% intervals. These intervals are conditional on retained common support and are not a finite-sample familywise-coverage guarantee. One cluster permits a descriptive point only; an empty contrast remains null.
+
+A secondary stable view uses the unchanged forecast on test attempts bracketed by unchanged, known proxy states over the declared guard interval, with a maximum observation gap. It reports retained fractions and empty subsets. It neither replaces the all-sequence primary result nor excludes failures merely because replicas are DOWN.
+
+For every planned source-to-other-placement direction, the current implementation reports transfer as unsupported: null target point/error, unrestricted target-event bounds [0,1], and change bounds relative to a source point where available. Observed target outcomes and changes are opened only for evaluation. These no-information bounds are neither useful transfer forecasts nor confidence intervals. The zero point-coverage result is an explicit limitation, not an omitted experiment or a refit advertised as transport.
+
+## 7. Cost, reproducibility and limits of automation
+
+The remote jobs measure available extraction, identification, solve and replay durations, together with process wall/CPU time, peak RSS and artifact bytes. Shared acquisition and graph extraction are counted once; application-batch PMX solver resources are deduplicated. Overlapping stage and process totals are not summed. Historical integration labor, update costs without a measured update run, monitoring off/on overhead and scalability curves remain unknown rather than zero. No speed, overhead or scalability claim follows from a timed technical qualification alone.
+
+Automation starts from a pinned application deployment, external workload/contract, instrumentation and source-bound declarations. Native graph extraction, joint-category identification, supported functional calculation, replay and evaluation are automated under these inputs. Selecting operation semantics, checking source error propagation, declaring peer completion and specifying workload assertions require manual work. The artifact must expose these actions and fields; it must not call the entire integration process fully automatic.
+
+Every correction after an experimental dispatch receives a new version and retains the previous outcome. Frozen source/configuration hashes, native-byte seals, role read audits, compact reports and complete attempted censuses link claims to executions. Full native/model payloads remain in remote evidence storage; only explicitly allowlisted compact artifacts are retained locally. Technical success, mechanism evidence, calibration adequacy and independent predictive validation are reported separately. The [claim-to-evidence table](ARTICLE_CLAIMS_V3.md) records which publication claims are already supportable and which await the prospective results.
