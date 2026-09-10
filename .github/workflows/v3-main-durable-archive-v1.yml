@@ -1,0 +1,43 @@
+name: V3 main durable unpublished evidence archive
+
+on:
+  workflow_run:
+    workflows: [V3 clock-qualified main evidence retention]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: v3-main-34465226083-durable-archive-v1
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Preserve terminal original ZIP bytes in unpublished bounded archive parts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/archive_v3_main_evidence_v1.py
+      - name: Retain compact archival provenance
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: v3-main-durable-archive-compact-${{ github.run_id }}
+          path: |
+            .smoke/v3-main-durable-archive-v1/compact.json
+            .smoke/v3-main-durable-archive-v1/manifest.json
+            .smoke/v3-main-durable-archive-v1/progress.json
+          if-no-files-found: warn
+          retention-days: 90

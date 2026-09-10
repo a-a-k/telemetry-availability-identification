@@ -145,7 +145,8 @@ def wait_ci(run_id, head):
 
 
 def checklist(number, title, summary, updates):
-    base=Path('docs/iterations/057d-author-stated-model-identification-contribution.md')
+    base=Path('docs/iterations/057e-research-only-main-evidence-preservation.md')
+    if not base.exists(): base=Path('docs/iterations/057d-author-stated-model-identification-contribution.md')
     if not base.exists(): base=Path('docs/iterations/057-admitted-main240-and-preflight-results.md')
     if not base.exists(): base=Path('docs/iterations/055-active-preflight-and-v3-continuation.md')
     source=base.read_text(encoding='utf-8')
@@ -191,7 +192,7 @@ def preflight():
         {'C09':('ПРОВЕРЕНО','Complete v3 PMX projection, controls, probability and read chain qualifies.','Scope is development preflight; independent main remains required.'),
          'C11':('ПРОВЕРЕНО','Evidence-backed admission binds exact preflight and protocol hashes.','Main source CI and single tagged dispatch.'),
          'C19':('ЧАСТИЧНО','All28 compact artifacts retained and verified; complete admission audit saved.','Main evidence retention and full main audit.'),
-         'C22':('ЧАСТИЧНО','All30 criteria retained at verified preflight admission.','Independent main and final article obligations.'),
+         'C22':('ЧАСТИЧНО','All30 criteria retained at verified preflight admission.','Independent main and final research evidence obligations.'),
          'F08':('ЧАСТИЧНО','The complete preflight qualifies the fixed final method set.','Independent main240 remains required.')})
     head = commit_paths([root, ADMISSION, report, check], 'Retain qualified v3 preflight and admit independent main240')
     admitted_head = command('git', 'log', '-1', '--format=%H', '--', str(ADMISSION))
@@ -295,15 +296,15 @@ def collect_main(run_id):
             f'[Collection status](../evidence/v3-comparison-main-{run_id}/collection-summary.json) and '
             f'[artifact manifest](../evidence/v3-comparison-main-{run_id}/verified-archives.json) retain all missing cases explicitly.\n')
     if source.exists():
-        text+=f'\n[Generated publication tables](../tables/v3-main-{run_id}/README.md) copy all existing remote metrics, statuses and contrasts without refitting or resampling.\n'
+        text+=f'\n[Generated research result tables](../tables/v3-main-{run_id}/README.md) copy all existing remote metrics, statuses and contrasts without refitting or resampling.\n'
     retention.persist(result,text.encode())
     paths.append(result)
     check=checklist('058','independent-main-evidence-retention',
         f'Main run{run_id} is terminal with conclusion{run["conclusion"]}; all available compact evidence retained. Full scientific review remains separate.',
         {'C13':('ЧАСТИЧНО','Main planned240campaign identities retained with explicit artifacts/absences; available remote8000slot analysis exported.','Inspect any missing analysis or failed strict main read-order checks.'),
          'C14':('ЧАСТИЧНО','Remote metric/contrast/coverage tables copied without refit or resampling.','Scientific interpretation of complete common support and uncertainty.'),
-         'C19':('ЧАСТИЧНО','Main ZIP/member hashes, dispatch/tag identity and available comparison seal verified.','Strict main audit result and final publication package.'),
-         'C22':('ЧАСТИЧНО','All30 criteria carried with explicit main retention scope.','Resolve remaining article and evidence obligations.'),
+         'C19':('ЧАСТИЧНО','Main ZIP/member hashes, dispatch/tag identity and available comparison seal verified.','Strict main audit result and complete research evidence package.'),
+         'C22':('ЧАСТИЧНО','All30 criteria carried with explicit main retention scope.','Complete scientific interpretation and remaining research evidence obligations; no manuscript work.'),
          'F08':('ЧАСТИЧНО','Independent main has reached its terminal remote state.','Assess valid main support and final claims; failed cases remain visible.')})
     paths.append(check)
     progress=Path('docs/V3_CURRENT_REMOTE_STATUS.md')
