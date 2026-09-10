@@ -42,7 +42,9 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--out',type=Path,default=DOCS/'manuscript-v3')
     p.add_argument('--pandoc',type=Path)
+    p.add_argument('--markdown-only',action='store_true',help='Synchronize only Markdown and its source provenance; leave earlier review exports unchanged')
     args=p.parse_args();out=args.out.resolve();out.mkdir(parents=True,exist_ok=True)
+    if args.markdown_only and args.pandoc:p.error('--markdown-only cannot be combined with --pandoc')
     chapters=[];inputs={}
     for name,heading in SOURCES:
         path=DOCS/name;raw=path.read_bytes()
@@ -62,6 +64,20 @@ def main():
           +status+'\n\nHistorical audits, technical checks, mechanism evidence and independent comparison have separate scopes. '
           'The original source chapters and complete claim table remain part of this draft.\n\n'+'\n\n'.join(chapters))
     manuscript=out/'manuscript.md';manuscript.write_bytes(text.encode())
+    if args.markdown_only:
+        provenance=dict(version='v3-markdown-source-sync-v1',title=TITLE,source_sha256=inputs,
+            outputs={'manuscript.md':dict(bytes=manuscript.stat().st_size,sha256=sha256(manuscript.read_bytes()).hexdigest())},
+            publication_ready=False,model_execution_or_resampling=False,build_status=status,
+            historical_review_exports='Earlier assembly-provenance.json describes unchanged historical exports; they are not current source renderings')
+        (out/'source-provenance.json').write_bytes((json.dumps(provenance,indent=2)+'\n').encode())
+        historical=out/'assembly-provenance.json'
+        if historical.exists():
+            old=json.loads(historical.read_bytes())
+            old['scope']='Historical review-export snapshot; its Markdown was superseded by source-provenance.json'
+            old['current_markdown_provenance']='source-provenance.json'
+            historical.write_bytes((json.dumps(old,indent=2)+'\n').encode())
+        print(json.dumps(dict(markdown_only=True,outputs=provenance['outputs'],publication_ready=False)))
+        return
     css=out/'review.css';css.write_bytes(b'body{max-width:72rem;margin:3rem auto;padding:0 2rem;font:17px/1.6 Georgia,serif;color:#18232c}h1,h2,h3,h4{font-family:Arial,sans-serif;line-height:1.3}h2{margin-top:2.8rem}a{color:#146a8a}table{border-collapse:collapse;width:100%;font:13px/1.45 Arial,sans-serif}th,td{border-bottom:1px solid #d0d7de;padding:7px;text-align:left;vertical-align:top}th{background:#eef3f6}img{max-width:100%;height:auto}code{overflow-wrap:anywhere} @page{size:A4;margin:18mm} @media print{body{font-size:11pt;margin:0;max-width:none}table{font-size:8pt}h2{break-after:avoid}tr{break-inside:avoid}}\n')
     version=None
     if args.pandoc:

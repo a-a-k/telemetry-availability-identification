@@ -2,6 +2,8 @@
 
 Research results updated on 10 September 2026. This chapter reports completed evidence for the [v3 methods](ARTICLE_METHODS_V3.md). It does not supply the still-pending independent main comparison. The [claim/evidence table](ARTICLE_CLAIMS_V3.md) limits attribution and generalization. Full v3 preflight `34460574221` passed its complete audit after the separately qualified PMX clock-progress repair. Independent main run `34465226083` is collecting its planned 240 campaigns from admitted source `d857ea65ca9da7fa9ae4ee1198317487475246a7`; no main accuracy result is reported yet. Earlier failed development runs remain distinct evidence below.
 
+The results assess the proposed automatic model-construction and identification method as a connected chain. Historical audits and H-EXEC motivate the execution semantics and their limits; structural controls and replay test the extracted model's actual role in calculation; point and interval support test what the observations determine; the independent main evaluates business adequacy, accuracy and measured costs. Comparison with G0 or PMX addresses practical performance within this broader contribution.
+
 ## 1. Historical discrepancies survive arithmetic and provenance checks
 
 The historical ICSE and AINA studies motivate the adequacy question, but they use their own endpoint/measurement contracts and failure designs. Their observations are not relabelled as the present ten whole-business-operation outcomes. Reproducing their aggregate arithmetic is also distinct from reconstructing every original runtime condition.

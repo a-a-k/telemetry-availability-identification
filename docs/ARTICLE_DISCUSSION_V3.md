@@ -2,6 +2,10 @@
 
 Prepared on 10 September 2026. This discussion uses completed evidence. Independent main error, coverage and cost findings must be integrated after the declared audit; no result is anticipated here.
 
+## Assessing the claimed method
+
+The central claim concerns automatic construction and identification of the declared formal stochastic model from telemetry, with justified target probabilities or attainable bounds. Its assessment therefore follows the complete chain: the extracted graph must affect the saved model's calculation; the observation contract must distinguish identified targets from ambiguity; the implementation must reproduce the stated exact calculation; and independent outcomes must establish the supported empirical adequacy, accuracy and computational costs. Conditions for using a simpler topology model are a consequence of that specification. Comparator error differences alone do not establish the entire contribution, and a low point-forecast coverage or uninformative interval remains a practical limitation of the method.
+
 ## What it means for the simpler model to be enough
 
 The adequacy question has a semantic answer and an empirical answer. In the declared model, the execution event E implies synchronous reachability B. The exact simplification condition is that no positive-probability state has B=1 and E=0. This condition is stronger than observing close averages in a finite dataset, and it identifies which selection, completion or deadline restrictions the simpler event omits. Nevertheless, using the mathematical event as business success still requires the application-specific equivalence Y=E. A proof about B and E does not prove that equivalence, or fix the sign of B minus observed Y.

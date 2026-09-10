@@ -1,6 +1,10 @@
 # Article references
 
-Bibliographic records for the works cited in the current manuscript. The linked source and its declared version determine the scope of each citation.
+Bibliographic records for the works cited in the current manuscript. The linked source and its declared version determine the scope of each citation. The previous version of this same work is recorded separately below.
+
+## Version history of this work
+
+Krasnovsky, A. A., and Maslovskaya, A. (2026). *Stochastic Connectivity as the Foundation of a Runtime Model for Microservice Availability Analysis*. arXiv:2607.00740v1, 1 July 2026. [Earlier preprint version of this work](https://arxiv.org/abs/2607.00740v1). The present article develops this preprint into the completed study.
 
 ## References
 
@@ -23,8 +27,6 @@ Krasnovsky, A. A. (2026). *Model Discovery and Graph Simulation: A Lightweight G
 Krasnovsky, A. A. (2025). *Evaluating Asynchronous Semantics in Trace-Discovered Resilience Models: A Case Study on the OpenTelemetry Demo*. arXiv:2512.12314v1, 13 December 2025. [Preprint version](https://arxiv.org/abs/2512.12314v1).
 
 Krasnovsky, A. A. (2026). *Refining Resilience Model Discovery: A Case Study on the Limited Role of Asynchronous Edges in the OpenTelemetry Demo*. AINA proceedings chapter. [DOI: 10.1007/978-3-032-23304-2_24](https://link.springer.com/chapter/10.1007/978-3-032-23304-2_24). The published chapter and preceding preprint retain their distinct titles and cited versions.
-
-Krasnovsky, A. A., and Maslovskaya, A. (2026). *Stochastic Connectivity as the Foundation of a Runtime Model for Microservice Availability Analysis*. arXiv:2607.00740v1, 1 July 2026. [Preprint version](https://arxiv.org/abs/2607.00740v1).
 
 Mazkatli, M., Monschein, D., Armbruster, M., Heinrich, R., and Koziolek, A. (2025). *Continuous integration of architectural performance models with parametric dependencies – the CIPM approach*. Automated Software Engineering 32, article 54. [DOI: 10.1007/s10515-025-00521-9](https://doi.org/10.1007/s10515-025-00521-9).
 
