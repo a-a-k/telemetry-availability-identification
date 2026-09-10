@@ -10,10 +10,13 @@ tests, configuration validation, and bounded smoke cases.
 
 ## Current v3 evidence
 
+[Verified remote continuation](V3_REMOTE_CONTINUATION_V1.md) automates evidence-gated admission,
+one tagged main dispatch and terminal compact retention; it does not certify publication readiness.
+
 The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` failed the PMX request-profile bridge; the [result and complete absence census](milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md) are retained. The [v2 correction](V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md) is frozen at `e89e7ca`; CI `34447089240` passed and full preflight `34447262633` is running. Main admission remains closed. The [results chapter and vector figure](ARTICLE_RESULTS_V3.md) report completed evidence separately.
 
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 047 checklist](iterations/047-article-results-and-audited-figure.md)
+[complete iteration 048 checklist](iterations/048-verified-remote-continuation.md)
 are the current authority and status. New main campaigns: **0/240**. Historical
 milestone completion below is scoped to each original protocol.
 

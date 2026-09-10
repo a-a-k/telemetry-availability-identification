@@ -11,8 +11,11 @@ input model from heterogeneous telemetry.
 
 ## Current evidence and article material
 
+[Verified remote continuation](docs/V3_REMOTE_CONTINUATION_V1.md) automates evidence-gated admission,
+one tagged main dispatch and terminal compact retention; it does not certify publication readiness.
+
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 047](docs/iterations/047-article-results-and-audited-figure.md)
+current study. [Iteration 048](docs/iterations/048-verified-remote-continuation.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. The new 240-campaign comparison has **not started**.

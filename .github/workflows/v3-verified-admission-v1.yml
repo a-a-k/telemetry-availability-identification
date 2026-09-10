@@ -1,0 +1,46 @@
+name: V3 verified admission and main dispatch
+
+on:
+  workflow_run:
+    workflows: [V3 prospective comparison v2]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: v3-preflight-34447262633-main-admission
+  cancel-in-progress: false
+
+jobs:
+  admit:
+    if: ${{ github.event_name == 'workflow_dispatch' || format('{0}', github.event.workflow_run.id) == '34447262633' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Retain and audit exact preflight then admit and dispatch main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/continue_v3_comparison_remote_v1.py admit
+      - name: Preserve compact continuation evidence even on gate failure
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: v3-admission-continuation-${{ github.run_id }}
+          path: |
+            docs/evidence/v3-comparison-preflight-34447262633/
+            configs/v3_main_admission_v1.json
+            docs/evidence/v3-main-dispatch-v2.json
+            docs/milestones/V3_COMPARISON_PREFLIGHT_V2_RESULT.md
+          if-no-files-found: warn
+          retention-days: 90
