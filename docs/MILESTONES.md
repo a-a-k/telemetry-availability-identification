@@ -10,31 +10,35 @@ tests, configuration validation, and bounded smoke cases.
 
 ## Current v3 evidence
 
-[Verified remote continuation](V3_REMOTE_CONTINUATION_V2.md) automates evidence-gated admission,
-one tagged main dispatch and terminal compact retention; it does not certify publication readiness.
+The [main scientific report](milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
+[final 30-criterion research checklist](iterations/060-main-scientific-result-and-final-research-checklist.md)
+record the completed 240 campaigns, 864,000 test attempts, independent PMX computation,
+full result/cost tables and original/recovery archives. The original artifact-listing
+failure and later numerical PMX computation remain an explicit C12 deviation.
+The model inputs were fixed before original evaluation; the original strict
+numeric-freeze gate is not retrospectively promoted. No manuscript work is part
+of this completed research package.
 
-The [v3 methods chapter](ARTICLE_METHODS_V3.md) and [claim/evidence table](ARTICLE_CLAIMS_V3.md) are prepared. Full-duration preflight `34442870952` failed the PMX request-profile bridge; the [result and complete absence census](milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md) are retained. The [v2 correction](V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md) is frozen at `e89e7ca`; CI `34447089240` passed and full preflight `34447262633` completed but [a PMX watchdog failure](milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md) blocks admission. The [minimal clock-progress repair](milestones/PMX_CLOCK_PROGRESS_QUALIFICATION_V1_RESULT.md) is now qualified. Fresh full preflight `34460574221` passed its complete audit and independent main `34465226083` is now executing. The [results chapter and vector figure](ARTICLE_RESULTS_V3.md) report completed evidence separately.
-
-The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 057 checklist](iterations/057-admitted-main240-and-preflight-results.md)
-are the current authority and status. See [current remote campaign status](V3_CURRENT_REMOTE_STATUS.md). Historical
-milestone completion below is scoped to each original protocol.
+The [author correction v3](SIMPAT_CORRECTION_V3.md) defines the criteria; later
+author instructions govern research-only scope and the same-work preprint attribution.
+[Current status](V3_CURRENT_REMOTE_STATUS.md) points to actual final evidence.
+Historical milestone completion below remains scoped to its original protocol.
 
 | Current result | Status and scope |
 | --- | --- |
 | [Historical health correction](milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md) | Full 160 M7 / 8 Petclinic correction and M9X rescore; original failures retained. |
-| [Independent PMX](milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md) | Technical/historical development comparison complete; prospective G* main pending. |
+| [Independent PMX and main](milestones/V3_MAIN_SCIENTIFIC_RESULT.md) | Saved-data main computation complete:660 primary PMX points/800; all240 campaigns, original/recovery provenance and C12 deviation retained. |
 | [AINA full audit](milestones/ORIGINAL_AINA_FULL_AUDIT.md) | 250 archives, 2.5 million probes and exact allowed-state async invariance audited. |
 | [AINA timing audit](milestones/ORIGINAL_AINA_TIMING_FEASIBILITY.md) | Full conditional timing-bound census; exact fault overlap remains unknown. |
 | [ICSE aggregate audit](milestones/ORIGINAL_ICSE_AGGREGATE_AUDIT.md) | 250 rows / 750 scalar files / 40 printed cells reproduced; raw execution provenance incomplete. |
 | [B0-v3 ten operations](milestones/B0_V3_TEN_OPERATION_QUALIFICATION.md) | Raw S/N bindings qualified on three applications; technical data only. |
 | [H-EXEC final study](milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md) | 32/32 final-input qualification, eight blocks, both registered primaries pass; original 31/32 failure preserved. |
-| [Primary analysis component](V3_CAMPAIGN_ANALYSIS_COMPONENT_V1.md) | Six-contrast campaign bootstrap and coverage rules tested; full method/evaluator/stable/transfer/cost bindings pending. |
+| [Primary analysis component](V3_CAMPAIGN_ANALYSIS_COMPONENT_V1.md) | Six declared contrasts calculated with their actual complete-common support; stable, transfer and cost bindings included in the final main report. |
 
 | [Execution binding v2](milestones/V3_APPLICATION_EXECUTION_V2_RESULT.md) | All10 point models,44 structural controls, exact6-operation invariance; opened calibration only. |
-| [G0 adaptation](milestones/V3_G0_QUALIFICATION_V1_RESULT.md) | All10 point models, exact replay and41 structural controls; independent accuracy pending. |
+| [G0 adaptation](milestones/V3_G0_QUALIFICATION_V1_RESULT.md) | All10 development point models and41 controls; main comparison now recorded separately with761/800 point support. |
 
-| [Final method bindings and prospective chain](V3_FINAL_COMPARISON_BINDINGS_V1.md) | Algorithms, role seals, candidate/evaluator/stable/transfer/cost census implemented; full-duration preflight pending. |
+| [Final method bindings and prospective chain](V3_FINAL_COMPARISON_BINDINGS_V1.md) | Qualified preflight and main completed; the final report preserves the original failed transport chain and the later saved-model recovery. |
 
 ## Historical milestones
 

@@ -1,63 +1,45 @@
 # Telemetry-driven availability identification
 
-This repository is the experimental implementation for the planned SIMPAT study
-Telemetry-Driven Identification of Stochastic Availability Models for
-Microservice Systems.
+This repository implements automatic construction and identification of formal
+stochastic availability models for microservice operations from telemetry.
+It preserves joint observations, uses direct frequency identification and exact
+probability calculations without ML, and returns a point, identified bounds or
+an explicit unsupported status under declared operation and observation contracts.
 
-It is a new research line built on the earlier stochastic-connectivity model. It
-is not a one-to-one implementation of MODELS reviewer requests. The venue-level
-claim here is about constructing, identifying, validating, and using a simulation
-input model from heterogeneous telemetry.
+## Current research result
 
-## Current evidence and article material
+The [main scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
+[complete 30-criterion checklist](docs/iterations/060-main-scientific-result-and-final-research-checklist.md)
+record all 240 campaigns, 864,000 test attempts and 8000 method slots.
+Gstar has 641 point forecasts, 120 identified intervals and 39 structural refusals;
+the independently extracted primary PMX has 660 points and 140 declared refusals.
+The primary point differences favour Gstar over G0; superiority over PMX/B0 is
+not established. Coverage, interval limitations, unfavorable ablations, stable
+results, nonidentified transfer and actual cost scopes are reported together.
 
-[Verified remote continuation](docs/V3_REMOTE_CONTINUATION_V2.md) automates evidence-gated admission,
-one tagged main dispatch and terminal compact retention; it does not certify publication readiness.
+Original main34465226083 lost downstream inputs through a 1000-artifact listing
+limit. [Recovery34517752889](docs/V3_MAIN_TRANSPORT_RECOVERY_V1.md) computed the
+saved PMX models and unchanged analysis, preserving original graph forecasts and
+all evaluator counts. Its numerical PMX computation occurred after original
+outcome opening; the model artifacts and solver specification were fixed before
+that opening. The original failed strict gate is retained as an explicit
+deviation. Both full source archives are preserved and remain unpublished.
 
+[Current status](docs/V3_CURRENT_REMOTE_STATUS.md), [complete result tables](docs/tables/v3-main-recovered-34517752889/README.md),
+[recorded cost scopes](docs/tables/v3-main-recovered-34517752889/cost-scopes/README.md)
+and the [milestone index](docs/MILESTONES.md) provide exact provenance and scope.
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 057](docs/iterations/057-admitted-main240-and-preflight-results.md)
-records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
-[milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
-publication obligations. [Current remote run status](docs/V3_CURRENT_REMOTE_STATUS.md)
-tracks preflight, admission and the independent 240-campaign comparison.
+research; the later instruction excludes manuscript drafting and exports.
 
-The [original AINA audit](docs/milestones/ORIGINAL_AINA_FULL_AUDIT.md) reconciles
-250 archives and 2.5 million probes and verifies exact async-predicate invariance
-throughout the original allowed state class. Its published literal 0.001-point
-forecast-difference bound is not reproduced. The separate
-[timing audit](docs/milestones/ORIGINAL_AINA_TIMING_FEASIBILITY.md) documents
-measurement-alignment limits without assigning unobserved fault overlap.
-The [ICSE aggregate audit](docs/milestones/ORIGINAL_ICSE_AGGREGATE_AUDIT.md)
-reproduces 250 rows and all 40 printed table cells; original raw denominators
-and the 250-job execution identity remain unverified.
+The [AINA full audit](docs/milestones/ORIGINAL_AINA_FULL_AUDIT.md),
+[AINA timing audit](docs/milestones/ORIGINAL_AINA_TIMING_FEASIBILITY.md),
+[ICSE aggregate audit](docs/milestones/ORIGINAL_ICSE_AGGREGATE_AUDIT.md) and
+[historical M7 correction](docs/milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md)
+retain their original objects and limitations. [H-EXEC-01](docs/milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md)
+confirms the declared routing intervention in eight blocks and 32 cells; it does
+not identify the causes of historical AINA errors or establish universal model adequacy.
 
-[H-EXEC](docs/milestones/H_EXEC_01_SEALED_STUDY_CONFIRMATION.md) confirms the
-registered routing/execution mechanism in eight blocks and all 32 study cells.
-A separately frozen replay on final immutable archives resolves the one failed
-native-parser gate while preserving every request outcome and statistic.
-The original failure remains in the record. This is scoped mechanism evidence,
-not an explanation of the historical AINA errors or qualification of final G*.
-
-The [independent PMX development comparison](docs/milestones/M9X_INDEPENDENT_PMX_DEVELOPMENT_COMPARISON.md)
-is completed on four retained historical campaigns. Use the
-[full health-prefix correction](docs/milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md)
-for current historical arithmetic and retain explicit own/common coverage.
-[B0-v3](docs/milestones/B0_V3_TEN_OPERATION_QUALIFICATION.md) now has qualified raw
-S/N bindings for all ten operations. The new prospective G* comparison with G0
-and PMX, transfer and comparable full costs remain required. The [final comparison bindings](docs/V3_FINAL_COMPARISON_BINDINGS_V1.md) now select
-Gstar, GID, execution ablations and the comparator versions. The complete new
-v1 full-duration preflight `34442870952` is preserved as a
-[PMX interface failure](docs/milestones/V3_COMPARISON_PREFLIGHT_V1_RESULT.md).
-The [versioned v2 correction](docs/V3_COMPARISON_V2_REQUEST_PROFILE_CORRECTION.md)
-is frozen at `e89e7ca`; CI `34447089240` passed and complete preflight
-`34447262633` completed but [one PMX process timeout](docs/milestones/V3_COMPARISON_PREFLIGHT_V2_FAILURE.md)
-blocks main admission. A focused exact-input diagnostic follows. The new
-[v3 methods chapter](docs/ARTICLE_METHODS_V3.md) and
-[contribution/evidence/limitation table](docs/ARTICLE_CLAIMS_V3.md) document the
-selected model, its proofs, parameter provenance and actual manual inputs. The
-[assembled working manuscript](docs/manuscript-v3/manuscript.md),
-[results chapter and vector AINA figure](docs/ARTICLE_RESULTS_V3.md) report completed
-evidence while keeping independent main results explicitly pending.
+## Earlier development evidence
 
 The [ordinary execution census](docs/milestones/V3_EXECUTION_OBSERVATION_CENSUS.md)
 accounts for all 4080 calibration attempts. [Identity recovery](docs/milestones/V3_ORDINARY_IDENTITY_AND_DEMAND.md)
@@ -456,4 +438,4 @@ benchmark revisions and declared logical domains. Its incomplete primary result
 does not establish effectiveness superiority, physical domain independence, or
 unconditional trace-topology sufficiency.
 
-The PMX zero-step timeout has a separately qualified minimal repair; all32 prior point forecasts are unchanged. The next independent-comparison step is a fresh full preflight, seed771605. [Current status](docs/V3_CURRENT_REMOTE_STATUS.md).
+The PMX zero-step timeout has a separately qualified minimal repair; all32 prior point forecasts are unchanged. That development preflight and the main comparison are complete; use the [current scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and its explicit recovery scope.
