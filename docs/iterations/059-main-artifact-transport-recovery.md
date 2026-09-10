@@ -1,0 +1,38 @@
+# Iteration059: complete saved main computation after artifact-list truncation
+
+All original observations are retained. The original strict chain failed; its successful provider job statuses do not qualify the scientific result. The fixed recovery source, its passed CI and run34517752889 are recorded in the current status and recovery protocol. This iteration introduces no new observations, method adjustment or manuscript work. Point/error conclusions await the actual recovered aggregate and independent continuity audit.
+
+The recovery checkout contains retained compact original evaluator summaries, although they are not supplied to the fixed PMX computation. Physical blinding is not claimed. Original graph forecasts and evaluator counts must remain unchanged; PMX solving has explicit later execution provenance.
+
+| ID | Статус | Доказательство / область | Остаток |
+| --- | --- | --- | --- |
+| C01 | ПРОВЕРЕНО | The frozen Gstar implementation, direct joint-law identification and exact functional calculation pass the complete v3 development chain. | Independent business accuracy and coverage remain the running main question. |
+| C02 | ЧАСТИЧНО | The author-stated formal-model construction and identification contribution remains the scientific target. | Complete independent research evidence and conclusions; manuscript work is explicitly excluded. |
+| C03 | ЧАСТИЧНО | AINA full raw audit retained; ICSE250 CSV jobs/750 scalar files reconcile exactly,40 published table cells reproduced at printed precision. | Original ICSE250-job run/ZIP identity and raw denominators unavailable; retained20-job rerun explicitly excluded as source. |
+| C04 | ПРОВЕРЕНО | All240 original main evaluators qualify;864000 test attempts are retained. | Recover the omitted PMX/aggregate computation on the same data. |
+| C05 | ПРОВЕРЕНО | Complete240campaign prospective data matrix retained. | No additional acquisition; computational recovery remains separate. |
+| C06 | ПРОВЕРЕНО | All three applications and both logical placements complete the full v3 pipeline with the declared ten operation contracts. | Complete the main matrix; logical domains remain on a single runner per campaign. |
+| C07 | ЧАСТИЧНО | Original eight graph-family forecasts preserved across800operation cells;240exact replays. | Final unchanged-code main ablation summaries and common support. |
+| C08 | ПРОВЕРЕНО | Matched PMX repair: 20 application projections, four controls, 48 solver-oracle records; 32 prior point forecasts unchanged. | Independent accuracy belongs to the pending main series. |
+| C09 | ПРОВЕРЕНО | Complete v3 PMX projection, controls, probability and read chain qualifies. | Scope is development preflight; independent main remains required. |
+| C10 | ЧАСТИЧНО | Experimental findings are mapped to the full construction/identification/estimate chain. G0, same-law GID/guard ablations and independent PMX retain their distinct comparison roles. | Main practical accuracy, coverage and cost. |
+| C11 | ПРОВЕРЕНО | Original admission/source tag preserved; recovery source3412fa5 andCI34517412703recorded. | No readmission or new main campaign. |
+| C12 | НЕ ПРОЙДЕНО | Original strict main chain fails after1000artifact listing truncation. Original failure retained. | Separate recovery continuity audit; original chronology is not retrospectively promoted. |
+| C13 | ПРОВЕРЕНО | Original240campaigns/800operation cells/8000method slots retained;PMXmissing800/800in original frozen roles. | RecoveredPMXslots receive their own provenance and status. |
+| C14 | ЧАСТИЧНО | Remote metric/contrast/coverage tables copied without refit or resampling. | Scientific interpretation of complete common support and uncertainty. |
+| C15 | ЧАСТИЧНО | Gstar641points/120empirical intervals/39structural refusals;G0/GID761points;B0800points. | RecoveredPMXcoverage and primary complete-common support. |
+| C16 | ЧАСТИЧНО | Source-only transfer explicitly nonidentified; every direction gets nullpoint/error and[0,1]targetbound; no targetinputs. | Publishactual zero pointcoverage, observedtarget/change and limitation; no usefultransferclaim. |
+| C17 | ЧАСТИЧНО | Existing development cost observations copied and individually reconciled:160 stages,50 process records,68 PMX model timers and six explicit absences; operation/campaign/batch scopes and unknown costs disclosed. | Independent main cost tables and interpretation on their actual measured support; no unlike-scope speed ratio. |
+| C18 | ПРОВЕРЕНО | All356 scientific source locks unchanged. Recovery changes transport and execution association only. | Retain separate original and recovery artifacts. |
+| C19 | ЧАСТИЧНО | All964original compactZIPs retained; source census2652/8.86GB. Full original archive34516536673running. | Verify complete archive and recover/retain new solver evidence. |
+| C20 | ПРОВЕРЕНО | Admission and subsequent runs/retention operate in GitHub Actions. Local work uses artificial control cases and already-retained compact metrics only. | Keep native/models and experiment execution remote. |
+| C21 | ЧАСТИЧНО | The article distinguishes the central method contribution from its empirical usefulness; negative errors, refusals, finite-sample limits and predecessors remain explicit. | Independent main conclusions; no prior readiness verdict. |
+| C22 | ЧАСТИЧНО | All30criteria reviewed;6recovery and3compact-retention boundary controls pass. | Actual recovered results, scientific interpretation and final evidence/checklist. |
+| F01 | ПРОВЕРЕНО | Historical ICSE/AINA discrepancy, exact graph semantics and the observed execution gap are linked to the implemented question; V3_MECHANISM_STATUS records each candidate and its evidence boundary. | Historical causes remain explicitly unestablished where data are missing; no automatic second mechanism. |
+| F02 | ЧАСТИЧНО | Central contribution fixed as automatic construction and identification of the specific formal stochastic execution/observation model, with identified targets or attainable bounds. The same-work preprint is recorded in version history, while actual prior studies and standard probability tools remain attributed. | Defend the specific implemented contribution and scope using final independent results; no unrestricted priority claim. |
+| F03 | ПРОВЕРЕНО | All six fresh preflight graph chains pass saved-model replay and the complete retained audit. | Main replay and independent prediction outcomes. |
+| F04 | ПРОВЕРЕНО | Selected H-EXEC-01 has a frozen intervention, fixed conditions, alternatives, eight independent blocks and a reproducible32-cell confirmation. Full original and audit data are durably preserved. | Scope is the declared routing intervention; no AINA causal attribution, mediation fraction or second mechanism claim. |
+| F05 | ЧАСТИЧНО | V3 preserves graph semantics and legitimate ambiguities; the independently qualified PMX progress repair is explicitly disclosed. | Main adequacy and coverage; no method tuning after dispatch. |
+| F06 | ПРОВЕРЕНО | Fresh full-duration preflight passes immutable acquisition and complete source/candidate/evaluator integrity. | Repeat the declared integrity audit on the actual main evidence. |
+| F07 | ЧАСТИЧНО | OriginalICSE/AINA versusG0adaptation versusGstar versusPMX versionsdistinct; openedcalibrationnotmain. | Finalnewcomparison andhistoricalprovenancelimits. |
+| F08 | ЧАСТИЧНО | Recovery34517752889solves savedPMXmodels and preserves original graph/counts;zero new campaigns. | Finish actual recovery, report chronology/checkout limitations, archive evidence, and conclude the research scope. |

@@ -1,3 +1,9 @@
-# V3 independent main is terminal
+# V3 main: saved-data computational recovery is running
 
-Run `34465226083` at `d857ea65ca9da7fa9ae4ee1198317487475246a7` finished with `success`. [Retained outcome and tables](milestones/V3_MAIN_COLLECTION_V2_RESULT.md) describe the evidence and missing cases. The strict main audit result and remaining scientific interpretation are explicit; publication readiness is not asserted.
+All 240 original campaigns, 864,000 test attempts and 240 exact graph-model replays are retained. Every original evaluator passes its quality gate. Original main run 34465226083 reports provider success but fails the strict complete-chain audit: wildcard downloads saw only 1000 of 2652 artifacts, omitted all PMX application models in the solver stage, and omitted all final evaluation/frozen summaries in the aggregate stage. The resulting empty comparison is preserved as a failure, not a scientific result.
+
+Recovery run **34517752889**, source **3412fa5e4b58e950b976835b9f354e9da28f27dd**, follows [the fixed saved-data recovery protocol](V3_MAIN_TRANSPORT_RECOVERY_V1.md). Its source CI **34517412703** passed. It solves the original extracted PMX models, preserves the original non-PMX forecasts and all/stable evaluator counts, and uses the unchanged aggregate analysis. It acquires no new observations and does not refit the graph family or repeat PMX extraction. The PMX computation is later than original outcome opening; the recovery and original strict-chain status remain distinct.
+
+Original Gstar point coverage is 641/800: DeathStarBench 186/240, OTel 135/240, Petclinic 320/320. Of the remaining 159 cells, 120 have empirical identified intervals and 39 have an unsupported native structural boundary. The [compact diagnostic](evidence/v3-main-transport-diagnostic-v1/diagnostic.json) records the exact status census. No main prediction-error or superiority conclusion has yet been asserted.
+
+Original full-evidence archival run **34516536673** is running separately and leaves its release unpublished. Research-result interpretation and the final checklist follow the actual recovery outputs. Manuscript work and document exports are excluded.

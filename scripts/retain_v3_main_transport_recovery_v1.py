@@ -176,6 +176,8 @@ def continuity(root,run,cases):
         byte_and_count_continuity_verified=True,all_technical_forecast_and_evaluator_gates_pass=not problems,
         problems=problems,original_strict_prospective_chain_restored=False,
         original_outcomes_opened_before_recovered_pmx=True,isolated_recovery_freeze_before_count_access=True,
+        original_compact_evaluator_summaries_present_in_recovery_checkout=True,
+        recovery_checkout_physically_blinded=False,
         original_graph_forecasts_frozen_before_original_evaluation=True,
         source_campaigns=240,new_campaigns=0,test_attempts=attempts,oracle_records=oracles,
         fit_or_solver_or_bootstrap_executed_locally=False,campaigns=rows)
@@ -189,6 +191,7 @@ def main():
         same=(json.loads(committed)==recovery.read(name)) if name==str(recovery.CONFIG) else committed==Path(name).read_bytes()
         audit.require(same,'recovery checkout content differs: '+name)
     root=Path(f'docs/evidence/v3-main-transport-recovery-{args.run}')
+    transport.persist(root/'.gitattributes',b'* -text whitespace=-trailing-space,-space-before-tab,cr-at-eol\n')
     selected,cases=choices(args.run)
     artifacts=transport.collect_pages(f'actions/runs/{args.run}/artifacts','artifacts');by_name={a['name']:a for a in artifacts}
     audit.require(len(by_name)==len(artifacts) and set(selected)<=set(by_name),'recovery compact census missing/duplicated')
