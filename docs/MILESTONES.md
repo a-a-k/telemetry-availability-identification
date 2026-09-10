@@ -11,7 +11,7 @@ tests, configuration validation, and bounded smoke cases.
 ## Current v3 evidence
 
 The [author correction v3](SIMPAT_CORRECTION_V3.md) and
-[complete iteration 042 checklist](iterations/042-g0-ten-operation-result.md)
+[complete iteration 043 checklist](iterations/043-final-bindings-and-prospective-pipeline.md)
 are the current authority and status. New main campaigns: **0/240**. Historical
 milestone completion below is scoped to each original protocol.
 
@@ -28,6 +28,8 @@ milestone completion below is scoped to each original protocol.
 
 | [Execution binding v2](milestones/V3_APPLICATION_EXECUTION_V2_RESULT.md) | All10 point models,44 structural controls, exact6-operation invariance; opened calibration only. |
 | [G0 adaptation](milestones/V3_G0_QUALIFICATION_V1_RESULT.md) | All10 point models, exact replay and41 structural controls; independent accuracy pending. |
+
+| [Final method bindings and prospective chain](V3_FINAL_COMPARISON_BINDINGS_V1.md) | Algorithms, role seals, candidate/evaluator/stable/transfer/cost census implemented; full-duration preflight pending. |
 
 ## Historical milestones
 

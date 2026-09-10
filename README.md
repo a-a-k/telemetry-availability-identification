@@ -12,7 +12,7 @@ input model from heterogeneous telemetry.
 ## Current evidence and article material
 
 The author's [research correction v3](docs/SIMPAT_CORRECTION_V3.md) governs the
-current study. [Iteration 042](docs/iterations/042-g0-ten-operation-result.md)
+current study. [Iteration 043](docs/iterations/043-final-bindings-and-prospective-pipeline.md)
 records all 30 criteria; the [claim ledger](docs/ARTICLE_CLAIM_LEDGER.md) and
 [milestone index](docs/MILESTONES.md) distinguish completed evidence from remaining
 publication obligations. The new 240-campaign comparison has **not started**.
@@ -40,8 +40,10 @@ is completed on four retained historical campaigns. Use the
 for current historical arithmetic and retain explicit own/common coverage.
 [B0-v3](docs/milestones/B0_V3_TEN_OPERATION_QUALIFICATION.md) now has qualified raw
 S/N bindings for all ten operations. The new prospective G* comparison with G0
-and PMX, transfer and comparable full costs remain required. Final G*, its
-formal/identification scope and justified refinements are not yet frozen.
+and PMX, transfer and comparable full costs remain required. The [final comparison bindings](docs/V3_FINAL_COMPARISON_BINDINGS_V1.md) now select
+Gstar, GID, execution ablations and the comparator versions. The complete new
+prospective workflow is prepared for full-duration preflight; main admission
+remains pending.
 
 The [ordinary execution census](docs/milestones/V3_EXECUTION_OBSERVATION_CENSUS.md)
 accounts for all 4080 calibration attempts. [Identity recovery](docs/milestones/V3_ORDINARY_IDENTITY_AND_DEMAND.md)

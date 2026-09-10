@@ -240,3 +240,10 @@ The completed H study is not added to the independent main sample.
 [Execution binding v2](milestones/V3_APPLICATION_EXECUTION_V2_RESULT.md) qualifies all10 operation graphs,44 structural controls and exact replay. All4080 calibration attempts enter the observation laws. Six unaffected results match the original calculation hashes; the original probe/peer defects remain documented. Two Petclinic execution forecasts lie13/900 below their calibration semantic fractions; this is an aggregate calibration discrepancy, not independent accuracy or a paired causal count.
 
 [G0 adaptation](milestones/V3_G0_QUALIFICATION_V1_RESULT.md) qualifies all10 source-adapted fixed-count forecasts with41 structural controls and exact replay. Shared native graph preprocessing is explicit; PMX receives no graph/model. These completed technical results update the earlier candidate-only status without changing main0/240 or closing the prospective comparison.
+
+
+## Final method selection and pipeline preparation, iteration043
+
+[Final comparison bindings](V3_FINAL_COMPARISON_BINDINGS_V1.md) now select Gstar as the observed joint execution model, GID as its reachability functional, selection/completion/deadline ablations, the explicit source-adapted G0, raw B0 and independently constructed primary conditional-local PMX with inclusive additional. This supersedes the earlier not-selected status. Twenty-six bounded pipeline and independent PMX controls pass. The full prospective workflow and six full-duration development preflight cases are implemented but not yet remotely qualified; main0/240.
+
+The selected current empirical-law methods do not identify changed-placement transfer. Complete transfer census with no-information bounds, null point/error and observed target/change is required; no useful-transfer, monitoring-overhead, scalability, unconditional business-equivalence or superiority claim follows. The primary six-contrast uncertainty and actual own/common coverage remain prospective obligations.
