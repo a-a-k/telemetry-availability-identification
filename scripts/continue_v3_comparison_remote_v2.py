@@ -145,7 +145,8 @@ def wait_ci(run_id, head):
 
 
 def checklist(number, title, summary, updates):
-    base=Path('docs/iterations/057-admitted-main240-and-preflight-results.md')
+    base=Path('docs/iterations/057d-author-stated-model-identification-contribution.md')
+    if not base.exists(): base=Path('docs/iterations/057-admitted-main240-and-preflight-results.md')
     if not base.exists(): base=Path('docs/iterations/055-active-preflight-and-v3-continuation.md')
     source=base.read_text(encoding='utf-8')
     lines=[line for line in source.splitlines() if line.startswith('| ')]
