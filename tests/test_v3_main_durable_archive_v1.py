@@ -31,6 +31,25 @@ def metadata(identity, name, raw):
 
 
 class MainArchiveControls(unittest.TestCase):
+    def test_only_exact_resource_member_is_exposed_with_byte_provenance(self):
+        text = b'User time (seconds): 1.25\nMaximum resident set size (kbytes): 2048\n'
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'source.zip'
+            with zipfile.ZipFile(path, 'w') as target:
+                target.writestr('process-resource-usage.txt', text)
+                target.writestr('artificial-native.json', b'not parsed or exposed')
+            before = path.read_bytes()
+            item = metadata(1, f'v3-comparison-pmx-extraction-artificial-{archive.RUN}', before)
+            record = archive.compact_extraction_resource(path, item)
+            self.assertTrue(record['present'])
+            self.assertEqual(record['text'].encode(), text)
+            self.assertEqual(record['sha256'], sha256(text).hexdigest())
+            self.assertEqual(path.read_bytes(), before)
+            self.assertIsNone(archive.compact_extraction_resource(path, dict(item, name='unrelated')))
+            with zipfile.ZipFile(path, 'w') as target:
+                target.writestr('nested/process-resource-usage.txt', text)
+            self.assertFalse(archive.compact_extraction_resource(path, item)['present'])
+
     def test_frozen_census_has_all_roles_and_only_main(self):
         names = archive.expected_artifacts()
         self.assertEqual(len(names), 2652)

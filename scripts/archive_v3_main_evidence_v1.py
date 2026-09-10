@@ -69,6 +69,25 @@ def add_source(archive, path, member):
         shutil.copyfileobj(source, target, 1024 * 1024)
 
 
+def compact_extraction_resource(path, item):
+    """Retain only the existing GNU-time text, never interpret native/model data."""
+    if not item['name'].startswith('v3-comparison-pmx-extraction-'):
+        return None
+    member = 'process-resource-usage.txt'
+    record = dict(artifact_id=item['id'], artifact_name=item['name'], member=member)
+    with zipfile.ZipFile(path) as archive:
+        if member not in archive.namelist():
+            return dict(record, present=False, reason='resource_record_not_in_source_artifact')
+        info = archive.getinfo(member)
+        require(info.file_size <= 65536 and not info.is_dir()
+                and (info.external_attr >> 16) & 0o170000 != 0o120000,
+                'invalid compact resource member')
+        raw = archive.read(member)
+    return dict(record, present=True, bytes=len(raw), sha256=sha256(raw).hexdigest(),
+                text=raw.decode('utf-8'),
+                scope='complete timed PMX extraction command and accounted children')
+
+
 def verify_part(path, entries):
     with zipfile.ZipFile(path) as archive:
         require(archive.namelist() == [row['member'] for row in entries], 'part member census differs')
@@ -145,7 +164,8 @@ def main():
                     source_artifacts=len(current), source_bytes=sum(item['size_in_bytes'] for item in current),
                     source_metadata_sha256=digest(SOURCE / 'all-artifact-metadata.json'),
                     missing_artifacts=missing, release_id=release['id'], draft=True,
-                    new_independent_campaigns=0, scientific_reanalysis=False, parts=[])
+                    new_independent_campaigns=0, scientific_reanalysis=False,
+                    compact_resource_records=[], parts=[])
     part = None
     archive = None
     entries = []
@@ -176,6 +196,9 @@ def main():
         with raw.open('xb') as target:
             target.write(transport.api(f'actions/artifacts/{item["id"]}/zip'))
         check = verify_zip(raw, item)
+        resource = compact_extraction_resource(raw, item)
+        if resource is not None:
+            manifest['compact_resource_records'].append(resource)
         member = f'source/{item["id"]}-{item["name"]}.zip'
         add_source(archive, raw, member)
         entries.append(dict(artifact_id=item['id'], name=item['name'], member=member,
@@ -195,6 +218,8 @@ def main():
                    source_bytes=manifest['source_bytes'], release_id=release['id'], release_tag=TAG,
                    draft=True, published_at=None, manifest_asset=manifest_asset,
                    parts=[part['asset'] for part in manifest['parts']],
+                   compact_resource_records=len(manifest['compact_resource_records']),
+                   available_resource_records=sum(row['present'] for row in manifest['compact_resource_records']),
                    source_zip_bytes_preserved=True, new_independent_campaigns=0,
                    model_execution=False, outcome_reanalysis=False)
     (OUT / 'compact.json').write_bytes(encoded(receipt))
