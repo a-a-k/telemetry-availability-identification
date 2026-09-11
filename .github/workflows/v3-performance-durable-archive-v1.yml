@@ -1,0 +1,40 @@
+name: V3 performance durable unpublished evidence archive
+
+on:
+  workflow_run:
+    workflows: [V3 complete pipeline and telemetry scaling benchmark v2]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: v3-performance-34558252086-durable-archive-v1
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 34558252086 && github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Preserve exact original ZIPs of all three performance cohorts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/archive_v3_performance_evidence_v1.py
+      - name: Retain compact archival provenance
+        uses: actions/upload-artifact@v7
+        with:
+          name: v3-performance-archive-compact-${{ github.run_id }}
+          path: |
+            workflow-results/performance-archive/compact.json
+            workflow-results/performance-archive/manifest.json
+            workflow-results/performance-archive/source-artifacts.json
+          if-no-files-found: error
+          retention-days: 90
