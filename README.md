@@ -461,8 +461,10 @@ The PMX zero-step timeout has a separately qualified minimal repair; all32 prior
 
 The [symmetric reuse, Bayesian and direct Storm report](docs/milestones/V3_EXACT_BACKENDS_RESULT.md)
 adds all 11025 fixed-panel records, including 11004 exactly matching answers and
-21 explicit aGrUM allocation failures on one artificial graph. On the application
-panel, prepared specialization is faster for both initial and repeat calculations;
-synthetic construction often favours CUDD. Reuse checks, updates, CPU, RSS and
+21 explicit aGrUM allocation failures on one artificial graph. A subsequent
+[baseline audit](docs/milestones/V3_EXACT_BACKENDS_BASELINE_AUDIT.md) found extra
+aGrUM verification inside its timer and untested manager reuse and representation
+choices. The timings describe the executed adapters; superiority over strong
+competitor implementations remains unestablished. Reuse checks, updates, CPU, RSS and
 representation sizes are included. GitHub Actions runs the native experiment,
 automatically builds all tables, and preserves the full remote evidence.
