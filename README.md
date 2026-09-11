@@ -9,7 +9,7 @@ an explicit unsupported status under declared operation and observation contract
 ## Current research result
 
 The [main scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
-[complete 30-criterion checklist](docs/iterations/062-cudd-competitor-and-v1-tag.md)
+[complete 30-criterion checklist](docs/iterations/063-symmetric-bayesian-markov-backends.md)
 record all 240 campaigns, 864,000 test attempts and 8000 method slots.
 Gstar has 641 point forecasts, 120 identified intervals and 39 structural refusals;
 the independently extracted primary PMX has 660 points and 140 declared refusals.
@@ -459,9 +459,10 @@ unconditional trace-topology sufficiency.
 
 The PMX zero-step timeout has a separately qualified minimal repair; all32 prior point forecasts are unchanged. That development preflight and the main comparison are complete; use the [current scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and its explicit recovery scope.
 
-The [symmetric reuse, Bayesian and direct Storm extension](docs/V3_EXACT_BACKENDS_V1.md)
-is implemented in `.github/workflows/v3-exact-backends-v1.yml`. It compares prepared
-representations under identical endpoint output and measures reuse checks,
-construction, updates, inference and process memory. A separate workflow
-automatically verifies compact evidence and generates complete CSV/Markdown tables.
-The fixed 11025-record panel is currently running; its results are not yet claimed.
+The [symmetric reuse, Bayesian and direct Storm report](docs/milestones/V3_EXACT_BACKENDS_RESULT.md)
+adds all 11025 fixed-panel records, including 11004 exactly matching answers and
+21 explicit aGrUM allocation failures on one artificial graph. On the application
+panel, prepared specialization is faster for both initial and repeat calculations;
+synthetic construction often favours CUDD. Reuse checks, updates, CPU, RSS and
+representation sizes are included. GitHub Actions runs the native experiment,
+automatically builds all tables, and preserves the full remote evidence.
