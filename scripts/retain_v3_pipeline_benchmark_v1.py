@@ -14,7 +14,7 @@ def main():
     parser.add_argument('--run',type=int,required=True)
     args=parser.parse_args()
     run=transport.read_api(f'actions/runs/{args.run}')
-    require(run['path']=='.github/workflows/v3-pipeline-benchmark-v1.yml'
+    require(run['path'] in ('.github/workflows/v3-pipeline-benchmark-v1.yml','.github/workflows/v3-pipeline-benchmark-v2.yml')
             and run['run_attempt']==1 and run['status']=='completed', 'wrong or unfinished benchmark')
     protocol_raw=subprocess.check_output(['git','show',run['head_sha']+':configs/v3_pipeline_benchmark_v1.json'])
     protocol=json.loads(protocol_raw)

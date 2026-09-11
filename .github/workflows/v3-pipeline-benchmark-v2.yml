@@ -1,0 +1,148 @@
+name: V3 complete pipeline and telemetry scaling benchmark v2
+'on':
+  workflow_dispatch: null
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: v3-computational-pipeline-benchmark-v2
+  cancel-in-progress: false
+jobs:
+  benchmark:
+    name: Complete pipeline and input scaling
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      matrix:
+        profile:
+        - deathstarbench_social_network
+        - opentelemetry_demo
+        - spring_petclinic_microservices
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+    - name: Check out study repository
+      uses: actions/checkout@v7
+    - name: Check out pinned Palladio reliability source
+      uses: actions/checkout@v7
+      with:
+        repository: PalladioSimulator/Palladio-Analyzer-Reliability
+        ref: a694e570afb705dc9e0470dc321e77b7219dcea4
+        path: palladio-source
+    - name: Set up Python
+      uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+        cache-dependency-path: requirements.txt
+    - name: Set up exact PMX compiler and runtime
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: 11.0.32+9
+    - name: Install fixed Python packages and verify scientific locks
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .
+
+        python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json'
+    - name: Obtain and compile the qualified PMX binary once
+      env:
+        AUTHOR_BASE: https://se-gitlab-extern.fzi.de/SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci/-/raw/9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+      run: 'mkdir -p workflow-input
+
+        curl --fail --location --retry 5 --retry-all-errors "$AUTHOR_BASE/main.jar" --output workflow-input/main.jar
+
+        curl --fail --location --retry 5 --retry-all-errors "$AUTHOR_BASE/Options.txt" --output workflow-input/Options.txt
+
+        /usr/bin/time -v -o workflow-input/pmx-clock-build-resource-usage.txt python scripts/build_pmx_clock_progress_v1.py
+        --original workflow-input/main.jar --out workflow-input/pmx-clock-build
+
+        mv workflow-input/pmx-clock-build-resource-usage.txt workflow-input/pmx-clock-build/build-resource-usage.txt'
+    - name: Preserve PMX runtime before selecting Palladio Java
+      run: echo "PMX_JAVA_HOME=$JAVA_HOME" >> "$GITHUB_ENV"
+    - name: Set up Palladio Java
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: '17'
+    - name: Reconstruct and audit the accepted release-date target platform
+      run: "petclinic_pmx_maven_repo=\"${RUNNER_TEMP}/petclinic-pmx-maven-repository\"\nevidence_dir=\"workflow-results/petclinic-pmx-solver/target-lock/repository\"\
+        \nmkdir -p \"$petclinic_pmx_maven_repo\" \"$evidence_dir\"\ncoordinate=\"$(jq -r '.target_platform_lock.coordinate'\
+        \ configs/m9a_palladio_bootstrap.json)\"\nmvn -B -ntp \"-Dmaven.repo.local=${petclinic_pmx_maven_repo}\" \\\n\
+        \  dependency:get \"-Dartifact=${coordinate}\"\ntarget_file=\"${petclinic_pmx_maven_repo}/org/palladiosimulator/palladio-target-platforms/0.1.0/palladio-target-platforms-0.1.0-palladio-2023-03.target\"\
+        \nrepository_url=\"$(jq -r '.target_platform_lock.pinned_repository_url' configs/m9a_palladio_bootstrap.json)\"\
+        \nwhile IFS= read -r relative_path; do\n  mkdir -p \"${evidence_dir}/$(dirname \"$relative_path\")\"\n  curl\
+        \ --fail --location --retry 5 --retry-all-errors \\\n    --output \"${evidence_dir}/${relative_path}\" \\\n \
+        \   \"${repository_url}${relative_path}\"\ndone < <(jq -r '.target_platform_lock.repository_evidence[].relative_path'\
+        \ configs/m9a_palladio_bootstrap.json)\npython -m telemetry_availability lock-palladio-target-platform \\\n \
+        \ --config configs/m9a_palladio_bootstrap.json \\\n  --target-file \"$target_file\" \\\n  --repository-evidence-dir\
+        \ \"$evidence_dir\" \\\n  --out workflow-results/petclinic-pmx-solver/target-lock/manifest.json\necho \"PETCLINIC_PMX_MAVEN_REPO=${petclinic_pmx_maven_repo}\"\
+        \ >> \"$GITHUB_ENV\"\ngit -C palladio-source diff --exit-code\n"
+    - name: Reconfirm the accepted analyzer capability boundary
+      run: python -m telemetry_availability audit-palladio-capability-source --config configs/m9b_palladio_semantic_controls.json
+        --analyzer-checkout palladio-source --out workflow-results/petclinic-pmx-solver/capability-manifest.json
+    - name: Overlay versioned generic harness with per-case StackOverflowError records
+      run: "test_bundle=\"palladio-source/tests/org.palladiosimulator.reliability.tests\"\ncp palladio/harness/META-INF/MANIFEST.MF\
+        \ \"$test_bundle/META-INF/MANIFEST.MF\"\ncp palladio/harness/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java\
+        \ \\\n  \"$test_bundle/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java\"\ngit -C palladio-source\
+        \ status --short > workflow-results/petclinic-pmx-solver/harness-overlay.txt\ntest \"$(git -C palladio-source\
+        \ diff --name-only)\" = \\\n  \"tests/org.palladiosimulator.reliability.tests/META-INF/MANIFEST.MF\"\ntest \"\
+        $(git -C palladio-source ls-files --others --exclude-standard)\" = \\\n  \"tests/org.palladiosimulator.reliability.tests/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java\"\
+        \n"
+    - name: Build the pinned analyzer without running the aligned experiment
+      run: "mkdir -p workflow-results/petclinic-pmx-solver/runtime\njava -version > workflow-results/petclinic-pmx-solver/runtime/java-version.txt\
+        \ 2>&1\nmvn -version > workflow-results/petclinic-pmx-solver/runtime/maven-version.txt 2>&1\nlscpu > workflow-results/petclinic-pmx-solver/runtime/runner-cpu.txt\n\
+        free -b > workflow-results/petclinic-pmx-solver/runtime/runner-memory.txt\nset -o pipefail\n/usr/bin/time -v\
+        \ -o workflow-results/petclinic-pmx-solver/runtime/build-resource-usage.txt \\\n  xvfb-run -a mvn -B -ntp \"\
+        -Dmaven.repo.local=${PETCLINIC_PMX_MAVEN_REPO}\" \\\n    -DskipTests=true -f palladio-source/pom.xml clean verify\
+        \ \\\n  2>&1 | tee workflow-results/petclinic-pmx-solver/runtime/build.log\ntest \"${PIPESTATUS[0]}\" -eq 0\n"
+    - name: Verify original roles and prepare deterministic volume workloads
+      run: python scripts/benchmark_v3_pipeline_v1.py prepare --profile "${{ matrix.profile }}"
+    - name: Measure all complete paired pipelines and volume levels
+      run: python scripts/benchmark_v3_pipeline_v1.py run --profile "${{ matrix.profile }}"
+    - name: Retain compact measurements even on failure
+      uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v3-pipeline-benchmark-compact-${{ matrix.profile }}-${{ github.run_id }}
+        path: workflow-benchmark/compact
+        if-no-files-found: warn
+        retention-days: 90
+    - name: Retain full computational evidence remotely
+      uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v3-pipeline-benchmark-full-${{ matrix.profile }}-${{ github.run_id }}
+        path: 'workflow-benchmark/inputs/**/workload.json
+
+          workflow-benchmark/source/**/receipt.json
+
+          workflow-benchmark/trials/**/graph/candidates
+
+          workflow-benchmark/trials/**/graph/replay
+
+          workflow-benchmark/trials/**/extractions/application/extraction-*.json
+
+          workflow-benchmark/trials/**/extractions/application/models
+
+          workflow-benchmark/trials/**/pmx-contract/solver-contract.json
+
+          workflow-benchmark/trials/**/pmx-candidates
+
+          workflow-benchmark/trials/**/pmx-solver
+
+          workflow-benchmark/trials/**/*resource-usage.txt
+
+          workflow-benchmark/trials/**/*.log
+
+          workflow-input/pmx-clock-build/build-provenance.json
+
+          workflow-input/pmx-clock-build/build-resource-usage.txt
+
+          workflow-results/petclinic-pmx-solver/runtime
+
+          workflow-results/petclinic-pmx-solver/target-lock'
+        if-no-files-found: warn
+        retention-days: 90

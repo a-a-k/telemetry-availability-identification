@@ -43,26 +43,30 @@ def file_sha(path):
     return h.hexdigest()
 
 
-def replicate(requests, native, multiplier):
+def replicate(requests, native, multiplier, profile):
     """Preserve each observation, mask, time and edge; only rename copy IDs."""
     require(type(multiplier) is int and multiplier in (1, 2, 4), 'unsupported workload multiplier')
+    from telemetry_availability.v3_execution_observation_audit_v1 import boundary_context
     require(len({r['trace_id'] for r in requests}) == len(requests), 'duplicate source traces')
     output = []
     traces = dict(calibration_only=True, selected_trace_ids=[], spans={})
     for copy in range(multiplier):
         for original in requests:
             old_trace = original['trace_id']
-            new_trace = old_trace if copy == 0 else sha256(f'{copy}/{old_trace}'.encode()).hexdigest()[:len(old_trace)]
             row = deepcopy(original)
-            row['trace_id'] = new_trace
             if copy:
                 row['request_id'] = str(original['request_id']) + f'-benchmark-copy-{copy}'
+            source_trace, source_parent = boundary_context(profile, original['request_id'])
+            require(source_trace == old_trace, 'source request context contract differs')
+            new_trace, new_parent = boundary_context(profile, row['request_id'])
+            row['trace_id'] = new_trace
             output.append(row)
             traces['selected_trace_ids'].append(new_trace)
             if old_trace in native['spans']:
                 spans = deepcopy(native['spans'][old_trace])
                 id_map = {s[key]: sha256(f'{copy}/{old_trace}/{s[key]}'.encode()).hexdigest()[:len(s[key])]
                           for s in spans for key in ('span_id', 'parent_id') if s[key]}
+                id_map[source_parent] = new_parent
                 for span in spans:
                     span['trace_id'] = new_trace
                     if copy:
@@ -102,14 +106,14 @@ def prepare(profile):
     require(ordinary['manifest.json']['identity'] == sources['identity'], 'source identity differs')
     for multiplier in config['multipliers']:
         target = ROOT/'inputs'/f'x{multiplier}'
-        identity = dict(sources['identity'], namespace=f'v3-computational-benchmark-x{multiplier}', data_role='artificial_control')
+        identity = dict(sources['identity'], namespace=f'v3-computational-benchmark-v2-x{multiplier}', data_role='artificial_control')
         data = deepcopy(ordinary)
-        data['requests.json'], data['native.json'] = replicate(ordinary['requests.json'], ordinary['native.json'], multiplier)
+        data['requests.json'], data['native.json'] = replicate(ordinary['requests.json'], ordinary['native.json'], multiplier, profile)
         data['manifest.json'].update(identity=identity, data_role='artificial_control', external_attempts=len(data['requests.json']))
         write_ordinary(target/'ordinary', data)
         del data
         data = deepcopy(pmx)
-        data['requests.json'], data['native.json'] = replicate(pmx['requests.json'], pmx['native.json'], multiplier)
+        data['requests.json'], data['native.json'] = replicate(pmx['requests.json'], pmx['native.json'], multiplier, profile)
         data['manifest.json'].update(identity=identity, computational_replication=multiplier)
         seal_role(target/'pmx', 'pmx_calibration', identity, data)
         request_count = len(data['requests.json'])
@@ -233,7 +237,7 @@ def check_forecasts(actual, expected):
     for op, methods in expected.items():
         for name, forecast in methods.items():
             current = actual[op][name]
-            require(current['status'] == forecast['status'], 'forecast support changed')
+            require(current['status'] == forecast['status'], f'forecast support changed: {op}/{name}: {current}')
             for key in ('probability','identified_lower','identified_upper'):
                 a,b = current.get(key),forecast.get(key)
                 require((a is None and b is None) or (a is not None and b is not None and abs(a-b)<=1e-12),
@@ -243,7 +247,7 @@ def check_forecasts(actual, expected):
 def run(profile):
     config = read(CONFIG)
     env = dict(os.environ,GITHUB_SHA=SCIENTIFIC_HEAD)
-    results = dict(version='v3-pipeline-benchmark-v1',profile=profile,workflow_head=os.environ['GITHUB_SHA'],
+    results = dict(version=config['version'],profile=profile,workflow_head=os.environ['GITHUB_SHA'],
                    run_id=int(os.environ['GITHUB_RUN_ID']),config_sha256=file_sha(CONFIG),
                    scientific_head=SCIENTIFIC_HEAD,new_independent_campaigns=0,records=[])
     for repetition, order in enumerate(config['scale_orders']):
