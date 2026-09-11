@@ -9,13 +9,23 @@ an explicit unsupported status under declared operation and observation contract
 ## Current research result
 
 The [main scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
-[complete 30-criterion checklist](docs/iterations/060-main-scientific-result-and-final-research-checklist.md)
+[complete 30-criterion checklist](docs/iterations/061-complete-pipeline-performance-and-scaling.md)
 record all 240 campaigns, 864,000 test attempts and 8000 method slots.
 Gstar has 641 point forecasts, 120 identified intervals and 39 structural refusals;
 the independently extracted primary PMX has 660 points and 140 declared refusals.
 The primary point differences favour Gstar over G0; superiority over PMX/B0 is
 not established. Coverage, interval limitations, unfavorable ablations, stable
 results, nonidentified transfer and actual cost scopes are reported together.
+
+The [complete computational pipeline report](docs/milestones/V3_PIPELINE_PERFORMANCE_RESULT.md)
+adds all 27 matched timing pairs at 3600/7200/14400 calibration attempts:
+baseline median PMX/graph wall ratios are **50.68/48.03/63.71x** for
+DeathStarBench/OTel/Petclinic. The boundary is prepared telemetry to saved,
+verified forecasts with installed tools; acquisition and installation are separate.
+The [model-size and missingness experiment](docs/milestones/V3_MODEL_SCALING_RESULT.md)
+adds 112 exact solves across 16 prespecified grid positions. These finite scaling
+results do not increase the independent campaign count or establish accuracy superiority.
+The failed first copy-generator run remains retained separately.
 
 Original main34465226083 lost downstream inputs through a 1000-artifact listing
 limit. [Recovery34517752889](docs/V3_MAIN_TRANSPORT_RECOVERY_V1.md) computed the

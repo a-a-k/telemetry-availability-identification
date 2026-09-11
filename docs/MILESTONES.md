@@ -11,7 +11,7 @@ tests, configuration validation, and bounded smoke cases.
 ## Current v3 evidence
 
 The [main scientific report](milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
-[final 30-criterion research checklist](iterations/060-main-scientific-result-and-final-research-checklist.md)
+[final 30-criterion research checklist](iterations/061-complete-pipeline-performance-and-scaling.md)
 record the completed 240 campaigns, 864,000 test attempts, independent PMX computation,
 full result/cost tables and original/recovery archives. The original artifact-listing
 failure and later numerical PMX computation remain an explicit C12 deviation.
@@ -26,6 +26,8 @@ Historical milestone completion below remains scoped to its original protocol.
 
 | Current result | Status and scope |
 | --- | --- |
+| [Complete computational pipeline](milestones/V3_PIPELINE_PERFORMANCE_RESULT.md) | Run 34558252086: 27/27 matched pairs, all 3 input volumes and original forecasts verified; time/CPU/memory/stages/input/model-size tables. Original failed copy run retained separately. |
+| [Model size and missingness](milestones/V3_MODEL_SCALING_RESULT.md) | Run 34556966879: 16 grid positions, 112/112 exact measured solves; completion reduction and remaining exponential control cost reported. |
 | [Historical health correction](milestones/HEALTH_PREFIX_COMPLETE_CORRECTION.md) | Full 160 M7 / 8 Petclinic correction and M9X rescore; original failures retained. |
 | [Independent PMX and main](milestones/V3_MAIN_SCIENTIFIC_RESULT.md) | Saved-data main computation complete:660 primary PMX points/800; all240 campaigns, original/recovery provenance and C12 deviation retained. |
 | [AINA full audit](milestones/ORIGINAL_AINA_FULL_AUDIT.md) | 250 archives, 2.5 million probes and exact allowed-state async invariance audited. |
