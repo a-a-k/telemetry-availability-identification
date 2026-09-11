@@ -20,7 +20,7 @@ class AgrumExact:
         for i in self.circuit.used:
             op,args,value=self.circuit.nodes[i];name='n'+str(i);self.node_names[i]=name
             self.bn.add(gum.LabelizedVariable(name,name,2))
-            parents=[self.obs] if op=='input' else [self.node_names[j] for j in args]
+            parents=['observation'] if op=='input' else [self.node_names[j] for j in args]
             for parent in parents:self.bn.addArc(parent,name)
             if op=='constant':self.bn.cpt(name).fillWith([int(not value),int(value)])
             elif op!='input':

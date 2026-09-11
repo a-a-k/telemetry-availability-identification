@@ -40,16 +40,22 @@ def backend(name,model):
 
 
 def native_controls():
+    import traceback
     from test_graph_execution_bdd_v1 import tiny_model
     config=json.loads(CONFIG.read_text());original=tiny_model()
+    failures=[]
     for method in config['methods']:
-        obj=None;key=None
-        for phase,model in updates(original):
-            new_key=semantic_key(model)
-            if new_key!=key:obj=backend(method,model);key=new_key
-            actual=obj.query(model)
-            require(actual==solve(model)['estimates'],f'native semantic control failed: {method}/{phase}')
-        print('native control passed: '+method,flush=True)
+        try:
+            obj=None;key=None
+            for phase,model in updates(original):
+                new_key=semantic_key(model)
+                if new_key!=key:obj=backend(method,model);key=new_key
+                actual=obj.query(model)
+                require(actual==solve(model)['estimates'],f'native semantic control failed: {method}/{phase}')
+            print('native control passed: '+method,flush=True)
+        except Exception as exc:
+            traceback.print_exc();failures.append(method+': '+str(exc))
+    require(not failures,'native controls failed: '+str(failures))
 
 
 def worker(args,config):
