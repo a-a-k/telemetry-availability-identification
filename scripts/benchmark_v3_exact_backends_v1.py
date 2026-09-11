@@ -61,6 +61,14 @@ def native_controls():
 def worker(args,config):
     import resource
     resource.setrlimit(resource.RLIMIT_AS,(config['address_space_limit_bytes'],config['address_space_limit_bytes']))
+    # Load the selected installed library before the model-to-answer timer.
+    # Fresh-process wall/CPU/RSS still include these imports for every method.
+    if args.method.startswith('cudd_'):
+        import dd.cudd
+    elif args.method=='agrum_lazy':
+        import pyagrum
+    elif args.method=='storm_exact':
+        import stormpy
     case=json.loads(args.input.read_text());obj=None;key=None
     args.out.mkdir(parents=True,exist_ok=True)
     with (args.out/'records.jsonl').open('w') as stream:
@@ -118,7 +126,7 @@ def run(args,config):
     environment=dict(run_id=int(os.environ['GITHUB_RUN_ID']),head=os.environ['GITHUB_SHA'],profile=args.profile,
         config_sha256=sha256(CONFIG.read_bytes()).hexdigest(),python=sys.version,platform=platform.platform(),
         cpu_info=Path('/proc/cpuinfo').read_text(),memory_info=Path('/proc/meminfo').read_text(),cpu_count=os.cpu_count(),
-        versions=dict(dd=dd.__version__,cudd=dd.cudd.__version__,pyagrum=pyagrum.__version__,stormpy=stormpy.__version__),
+        versions=dict(dd=dd.__version__,cudd=getattr(dd.cudd,'__version__',None),pyagrum=pyagrum.__version__,stormpy=stormpy.__version__),
         packages=subprocess.check_output([sys.executable,'-m','pip','freeze'],text=True))
     write(compact/'environment.json',environment)
     rows,absent,source=prepare(args.profile,config)
