@@ -174,6 +174,12 @@ def main():
         'У BDD тоже отсутствует экспоненциальный рост по числу обязательных завершений для данного конъюнктивного предиката. Вывод о преимуществе специализированного сокращения относительно полного перебора сохраняется, но не означает исключительности относительно символических решателей. Основной научный вклад — телеметрия → формальная модель → идентификация и достижимые границы; практическая вычислительная добавка ограничена измеренными режимами.\n',
         'Это сравнение начинается с сохранённой модели. [Полный результат v1 по PMX-конвейеру](V3_PIPELINE_PERFORMANCE_RESULT.md) сохраняет свою отдельную границу «подготовленная телеметрия → проверенные прогнозы». Общий коэффициент ускорения всего конвейера от замены ядра на BDD здесь не измерялся; переносить K из таблицы на весь конвейер нельзя. MAE основной серии не меняется при точном совпадении прогнозов. Исходное отклонение C12 остаётся в силе: этот вычислительный опыт выполнен после открытия исходов и не является новой слепой валидацией.\n']
     path = Path('docs/milestones/V3_BDD_COMPARISON_RESULT.md')
+    archive_path = Path('docs/evidence/v3-bdd-durable-archive-34584854005/retention.json')
+    if archive_path.exists():
+        archive = json.loads(archive_path.read_text(encoding='utf-8'))
+        if archive['source_artifacts'] != 8 or archive['source_bytes'] != 8073393 or archive['sources'][0]['run_id'] != args.run:
+            raise ValueError('durable archive identity differs')
+        report.append('## Долговременное сохранение\n\nВсе **8 оригинальных ZIP**, **8 073 393 байта**, сохранены в отдельном неопубликованном draft release **386922985**, archive run **34584854005**. Проверены исходные provider SHA-256/CRC, полный census ZIP, состав и SHA-256 загруженных release assets. [Подтверждение архива](../evidence/v3-bdd-durable-archive-34584854005/retention.json). Полные модели и сертификаты обрабатывались только remote; локально сохранён компактный receipt. CI отчёта и архиватора **34584811745** — success.\n')
     path.write_text('\n'.join(report), encoding='utf-8')
     print(json.dumps(dict(run_id=args.run, tables={name:len(rows) for name,rows in files.items()}, report=str(path))))
 
