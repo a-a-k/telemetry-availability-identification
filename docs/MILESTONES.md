@@ -10,8 +10,10 @@ tests, configuration validation, and bounded smoke cases.
 
 ## Current v3 evidence
 
+The [corrected exact comparison v2](milestones/V3_EXACT_COMPARISON_V2_RESULT.md) completes all four requested corrections: 35,280 planned records, both specialized algorithms, six native variants, two common input representations and seven reuse/update modes. Full phase/scaling tables and durable evidence are generated in Actions; all 26,208 application answers agree exactly.
+
 The [main scientific report](milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
-[final 30-criterion research checklist](iterations/061-complete-pipeline-performance-and-scaling.md)
+[final 30-criterion research checklist](iterations/064-corrected-exact-comparison.md)
 record the completed 240 campaigns, 864,000 test attempts, independent PMX computation,
 full result/cost tables and original/recovery archives. The original artifact-listing
 failure and later numerical PMX computation remain an explicit C12 deviation.

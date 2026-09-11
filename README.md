@@ -9,7 +9,7 @@ an explicit unsupported status under declared operation and observation contract
 ## Current research result
 
 The [main scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
-[complete 30-criterion checklist](docs/iterations/063-symmetric-bayesian-markov-backends.md)
+[complete 30-criterion checklist](docs/iterations/064-corrected-exact-comparison.md)
 record all 240 campaigns, 864,000 test attempts and 8000 method slots.
 Gstar has 641 point forecasts, 120 identified intervals and 39 structural refusals;
 the independently extracted primary PMX has 660 points and 140 declared refusals.
@@ -459,12 +459,14 @@ unconditional trace-topology sufficiency.
 
 The PMX zero-step timeout has a separately qualified minimal repair; all32 prior point forecasts are unchanged. That development preflight and the main comparison are complete; use the [current scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and its explicit recovery scope.
 
-The [symmetric reuse, Bayesian and direct Storm report](docs/milestones/V3_EXACT_BACKENDS_RESULT.md)
-adds all 11025 fixed-panel records, including 11004 exactly matching answers and
-21 explicit aGrUM allocation failures on one artificial graph. A subsequent
-[baseline audit](docs/milestones/V3_EXACT_BACKENDS_BASELINE_AUDIT.md) found extra
-aGrUM verification inside its timer and untested manager reuse and representation
-choices. The timings describe the executed adapters; superiority over strong
-competitor implementations remains unestablished. Reuse checks, updates, CPU, RSS and
-representation sizes are included. GitHub Actions runs the native experiment,
-automatically builds all tables, and preserves the full remote evidence.
+The [corrected exact comparison v2](docs/milestones/V3_EXACT_COMPARISON_V2_RESULT.md)
+closes the four requested timing/representation/reuse corrections: 35,280 planned
+records, 35,172 exact matches, 24 aGrUM allocation failures and 84 consequent skips
+on two artificial graphs. All 26,208 application calculations succeeded. Both our
+algorithms and six fixed native variants receive the same original or projected
+input; conversion, reuse checks, rebuilds, queries, CPU and RSS are recorded.
+Our first-build advantage remains on the application panel; retained CUDD and
+compacted Storm can win structural updates or repeated queries. Full tables,
+including unfavorable regimes, are generated automatically, verified byte-for-byte,
+and archived remotely (8 original ZIPs, 22,098,340 bytes). The earlier v1 adapters
+and [audit](docs/milestones/V3_EXACT_BACKENDS_BASELINE_AUDIT.md) remain historical evidence.
