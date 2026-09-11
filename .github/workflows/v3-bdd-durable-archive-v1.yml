@@ -1,0 +1,31 @@
+name: V3 CUDD durable unpublished evidence archive
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: v3-bdd-34583421491-durable-archive-v1
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Preserve all eight original CUDD evidence ZIPs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/archive_v3_bdd_evidence_v1.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: v3-bdd-archive-compact-${{ github.run_id }}
+          path: |
+            workflow-results/bdd-archive/compact.json
+            workflow-results/bdd-archive/manifest.json
+            workflow-results/bdd-archive/source-artifacts.json
+          if-no-files-found: error
+          retention-days: 90
