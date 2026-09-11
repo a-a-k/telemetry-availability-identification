@@ -53,7 +53,7 @@ class AgrumExact:
             self.bn.cpt(self.obs).fillWith(probabilities)
             # Recreate inference state after any CPT change; its cost is charged.
             self.engine=self.gum.LazyPropagation(self.bn);self.engine.setNumberOfThreads(1)
-            self.engine.setMaxMemory(1.0)
+            self.engine.setMaxMemory(1)
             self.engine.setTargets(set(self.node_names[i] for i in self.circuit.roots.values()))
             self.category_values=[list(v) for v in values];self.counts=list(counts)
 
