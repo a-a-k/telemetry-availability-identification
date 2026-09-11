@@ -1,0 +1,49 @@
+name: V3 exact CUDD comparison v1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo, spring_petclinic_microservices, synthetic]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.11.16
+      - name: Verify frozen scientific sources
+        run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+      - name: Install pinned native CUDD and runtime
+        run: |
+          python -m pip install -r requirements.txt -r requirements-bdd-v1.txt
+          python -m pip install --no-deps -e .
+      - name: Verify symbolic semantics and native CUDD on bounded controls
+        run: |
+          python -m unittest discover -s tests -p test_graph_execution_bdd_v1.py -v
+          python scripts/verify_cudd_controls_v1.py
+      - name: Compare all saved models and declared artificial grid
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/benchmark_v3_bdd_v1.py run --profile ${{ matrix.profile }} --out workflow-results/bdd
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v3-bdd-compact-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/bdd/compact
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v3-bdd-full-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/bdd
+          retention-days: 90
+          if-no-files-found: error
