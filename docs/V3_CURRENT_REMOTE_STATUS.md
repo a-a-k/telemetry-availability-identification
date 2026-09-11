@@ -31,4 +31,8 @@ All **13 original performance ZIPs**, **70074855 bytes**, are preserved in unpub
 
 CUDD comparison **34583421491**, source **2ff44cd313588dbabcda149ecb3990f50694e213**, completed successfully in all four jobs; source CI **34583407492** also passed. All 761 application models and 27 artificial positions returned identical exact bounds/statuses/contrasts, with checked witnesses. All 39 absent models remain explicit. The [complete report](milestones/V3_BDD_COMPARISON_RESULT.md) and [CSV tables](tables/v3-bdd-comparison-34583421491/README.md) retain 9456 first calculations and 28368 repeat queries. The baseline is immutable tag v1; no scientific core changed. The comparison establishes different favourable operating regimes, not universal superiority over CUDD.
 
-All **8 original CUDD ZIPs**, **8073393 bytes**, are retained in unpublished draft release **386922985**, archive run **34584854005**. [Verified compact archive receipt](evidence/v3-bdd-durable-archive-34584854005/retention.json). Archive and source CI **34584811745** succeeded. No experiment or archival job remains running.
+All **8 original CUDD ZIPs**, **8073393 bytes**, are retained in unpublished draft release **386922985**, archive run **34584854005**. [Verified compact archive receipt](evidence/v3-bdd-durable-archive-34584854005/retention.json). Archive and source CI **34584811745** succeeded. That CUDD cohort is complete.
+
+## Symmetric reuse, Bayesian inference and direct Storm
+
+The requested extension is running as **34596410909**, source `0c1366179ee3426c084b776f784a039d45349853`. All five native backends passed exact bounded controls. The [protocol](V3_EXACT_BACKENDS_V1.md) fixes 11025 records on 78 saved application models and all 27 artificial positions. The report workflow automatically verifies compact evidence and generates every table after a complete run. [Current iteration](iterations/063-symmetric-bayesian-markov-backends.md).

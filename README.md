@@ -458,3 +458,10 @@ does not establish effectiveness superiority, physical domain independence, or
 unconditional trace-topology sufficiency.
 
 The PMX zero-step timeout has a separately qualified minimal repair; all32 prior point forecasts are unchanged. That development preflight and the main comparison are complete; use the [current scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and its explicit recovery scope.
+
+The [symmetric reuse, Bayesian and direct Storm extension](docs/V3_EXACT_BACKENDS_V1.md)
+is implemented in `.github/workflows/v3-exact-backends-v1.yml`. It compares prepared
+representations under identical endpoint output and measures reuse checks,
+construction, updates, inference and process memory. A separate workflow
+automatically verifies compact evidence and generates complete CSV/Markdown tables.
+The fixed 11025-record panel is currently running; its results are not yet claimed.

@@ -26,7 +26,8 @@ def validate_compact(result,config):
         else:require(row['status']=='failed' and row.get('error'),'undocumented failed case')
     require(result['qualified']==all(r['status']=='qualified' for r in result['records']),'qualification flag differs')
     resource_keys=[(r['case_id'],r['method'],r['round']) for r in result['resources']]
-    require(len(resource_keys)==len(ids)*len(config['methods'])*config['technical_rounds'] and len(set(resource_keys))==len(resource_keys),'resource census differs')
+    expected_resources={(i,m,r) for i in ids for m in config['methods'] for r in range(config['technical_rounds'])}
+    require(len(resource_keys)==len(expected_resources) and set(resource_keys)==expected_resources,'resource census differs')
     forbidden={'model','models','observation_categories','replicas','signal_ids','category_certificates','lower_witness','upper_witness','native_spans'}
     def walk(obj):
         if isinstance(obj,dict):
