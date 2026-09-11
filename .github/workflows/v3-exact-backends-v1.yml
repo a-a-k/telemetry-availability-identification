@@ -1,0 +1,51 @@
+name: V3 symmetric reuse Bayesian and direct Storm comparison
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo, spring_petclinic_microservices, synthetic]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.11.16
+      - name: Verify frozen scientific sources
+        run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+      - name: Install native CUDD aGrUM and Storm
+        run: |
+          python -m pip install -r requirements-exact-backends-v1.txt
+          python -m pip install --no-deps -e .
+      - name: Verify all native backends on bounded exact controls
+        run: python scripts/benchmark_v3_exact_backends_v1.py controls
+      - name: Run complete fixed panel and update streams
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/benchmark_v3_exact_backends_v1.py run --profile ${{ matrix.profile }} --out workflow-results/exact-backends
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v3-exact-backends-compact-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/exact-backends/compact
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v3-exact-backends-full-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/exact-backends
+          retention-days: 90
+          if-no-files-found: error
