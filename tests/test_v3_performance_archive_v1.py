@@ -3,7 +3,7 @@ from copy import deepcopy
 from pathlib import Path
 import sys
 
-import pytest
+import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
 import archive_v3_performance_evidence_v1 as source
@@ -20,22 +20,26 @@ def cohort(run_id):
     return run, artifacts
 
 
-def test_declared_original_failure_is_preserved_and_success_not_assumed():
-    for run_id in source.SOURCES:
-        run, artifacts = cohort(run_id)
-        source.checked_source(run, artifacts)
-        changed = deepcopy(run)
-        changed['conclusion'] = 'success' if run['conclusion'] == 'failure' else 'failure'
-        with pytest.raises(ValueError, match='cohort'):
-            source.checked_source(changed, artifacts)
+class PerformanceArchiveControls(unittest.TestCase):
+    def test_declared_original_failure_is_preserved_and_success_not_assumed(self):
+        for run_id in source.SOURCES:
+            run, artifacts = cohort(run_id)
+            source.checked_source(run, artifacts)
+            changed = deepcopy(run)
+            changed['conclusion'] = 'success' if run['conclusion'] == 'failure' else 'failure'
+            with self.assertRaisesRegex(ValueError, 'cohort'):
+                source.checked_source(changed, artifacts)
+
+    def test_missing_artifact_and_changed_source_are_rejected(self):
+        for run_id in source.SOURCES:
+            run, artifacts = cohort(run_id)
+            with self.assertRaisesRegex(ValueError, 'census'):
+                source.checked_source(run, artifacts[:-1])
+            changed = deepcopy(artifacts)
+            changed[0]['workflow_run']['head_sha'] = '0' * 40
+            with self.assertRaisesRegex(ValueError, 'source/size'):
+                source.checked_source(run, changed)
 
 
-def test_missing_artifact_and_changed_source_are_rejected():
-    for run_id in source.SOURCES:
-        run, artifacts = cohort(run_id)
-        with pytest.raises(ValueError, match='census'):
-            source.checked_source(run, artifacts[:-1])
-        changed = deepcopy(artifacts)
-        changed[0]['workflow_run']['head_sha'] = '0' * 40
-        with pytest.raises(ValueError, match='source/size'):
-            source.checked_source(run, changed)
+if __name__ == '__main__':
+    unittest.main()
