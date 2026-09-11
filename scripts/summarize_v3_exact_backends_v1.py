@@ -26,7 +26,7 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--input',type=Path,required=True);parser.add_argument('--out',type=Path,required=True)
     args=parser.parse_args();receipt=json.loads((args.input/'retention.json').read_text());args.out.mkdir(parents=True,exist_ok=True)
     (args.out/'.gitattributes').write_bytes(b'* -text whitespace=-trailing-space,-space-before-tab,cr-at-eol\n')
-    raw,resources,summary,ratios,bounds,failures,census,grid=[],[],[],[],[],[],[],[]
+    raw,resources,summary,ratios,bounds,failures,census,grid,sizes=[],[],[],[],[],[],[],[],[]
     datasets={};environments={}
     for artifact in receipt['artifacts']:
         profile=artifact['profile'];data=json.loads((args.input/profile/'results.json').read_text());datasets[profile]=data
@@ -36,6 +36,14 @@ def main():
             planned=len(data['records']),qualified=sum(r['status']=='qualified' for r in data['records']),failed=sum(r['status']=='failed' for r in data['records'])))
         for row in data['records']:
             ok=row['status']=='qualified'
+            if ok:
+                stats=row['stats'];manager=stats.get('native',{}).get('manager',{})
+                sizes.append(dict(profile=profile,case_id=row['case_id'],method=row['method'],round=row['round'],phase=row['phase'],
+                    circuit_nodes=stats.get('circuit_nodes'),prepared_states=stats.get('prepared_states'),table_bytes=stats.get('table_bytes'),
+                    bn_nodes=stats.get('bn_nodes'),bn_arcs=stats.get('bn_arcs'),cpt_entries=stats.get('cpt_entries'),
+                    storm_model_type=stats.get('model_type'),storm_states=stats.get('states'),storm_transitions=stats.get('transitions'),storm_choices=stats.get('choices'),
+                    cudd_nodes=manager.get('n_nodes'),cudd_peak_nodes=manager.get('peak_nodes'),cudd_memory_bytes=manager.get('mem'),
+                    cudd_variables=manager.get('n_vars'),cudd_reorderings=manager.get('n_reorderings')))
             raw.append(dict(profile=profile,case_id=row['case_id'],method=row['method'],round=row['round'],phase=row['phase'],status=row['status'],
                 total_ms=row['total_ns']/1e6 if ok else None,cpu_ms=row['cpu_ns']/1e6 if ok else None,
                 key_check_ms=row['key_check_ns']/1e6 if ok else None,construction_ms=row['construction_ns']/1e6 if ok else None,
@@ -83,11 +91,11 @@ def main():
                         row[method+'_median_ms']=median(ys) if ys else None;row[method+'_qualified_rounds']=len(ys)
                     grid.append(row)
     files=dict(measurements=raw,process_resources=resources,stage_summary=summary,paired_ratios=ratios,exact_bounds=bounds,
-               failures=failures,census=census,synthetic_grid=grid)
+               failures=failures,census=census,synthetic_grid=grid,representations=sizes)
     for name,rows in files.items():save_csv(args.out/(name+'.csv'),rows)
-    provenance=dict(run_id=receipt['run_id'],head=receipt['head'],tables={p.name:dict(rows=len(files[p.stem]),sha256=sha256(p.read_bytes()).hexdigest()) for p in args.out.glob('*.csv')},
-        sources={str(p.relative_to(args.input)):sha256(p.read_bytes()).hexdigest() for p in args.input.glob('*/*.json')},local_model_execution=False)
-    (args.out/'provenance.json').write_text(json.dumps(provenance,indent=2)+'\n',encoding='utf-8')
+    provenance=dict(run_id=receipt['run_id'],head=receipt['head'],tables={p.name:dict(rows=len(files[p.stem]),sha256=sha256(p.read_bytes()).hexdigest()) for p in sorted(args.out.glob('*.csv'))},
+        sources={p.relative_to(args.input).as_posix():sha256(p.read_bytes()).hexdigest() for p in sorted(args.input.glob('*/*.json'))},local_model_execution=False)
+    (args.out/'provenance.json').write_text(json.dumps(provenance,indent=2)+'\n',encoding='utf-8',newline='\n')
     fmt=lambda x:'—' if x is None else f'{x:.4f}'
     report=['# Подготовленные ядра, байесовский вывод и прямой Storm\n',
         f'Вычислительный run **{receipt["run_id"]}**, источник `{receipt["head"]}`. Отчёт сформирован из проверенных compact artifacts, без локального исполнения моделей.\n',
@@ -121,8 +129,10 @@ def main():
         'Время начинается с сохранённой модели; извлечение телеметрии и самостоятельная идентификация вероятностных параметров конкурентами здесь не сравниваются. Общий коэффициент всего телеметрического конвейера из этих чисел не следует. Симметричное переиспользование включает консервативную проверку всех полей предиката, без доказательства эквивалентности разных формул. Частота реальных изменений структуры не измерена: распределение фаз задано экспериментатором.\n',
         'aGrUM LazyPropagation рассчитывает точечные posterior и, для интервалов, возможные исходы вспомогательного закона полного носителя. Равномерность неизвестных битов относится только к вспомогательной проверке возможности, не к целевому семейству законов и не к прогнозу. Это доказанная специальная редукция булевых границ, не общий нативный credal-network solver. Нативная арифметика BN — double; рациональные границы агрегируются отдельно, а все успешные результаты проверены.\n',
         'Storm использует точные рациональные DTMC/MDP и рассчитывает минимальную/максимальную вероятность достижения меток. Пространство состояний отражает один совместный наблюдаемый эксперимент и допустимые заполнения масок; интенсивности CTMC и динамическая марковская идентификация не вводились. Проекция по конъюнкции завершений сохраняет все 11 функционалов. Первое сравнение CUDD на 761 модели со свидетельствами и PMX-конвейер остаются отдельными когортами.\n',
-        '## Все машинные таблицы\n','\n'.join(f'- [{name}.csv]({name}.csv): {len(rows)} строк.' for name,rows in files.items() if rows)+'\n']
-    (args.out/'REPORT.md').write_text('\n'.join(report),encoding='utf-8')
+        '## Все машинные таблицы\n',
+        'representations.csv сохраняет размеры подготовленных таблиц, BN/CPT, CUDD и пространства состояний Storm по каждому успешному расчёту. Нативная память manager CUDD отличается от пика RSS всего процесса. Пустое поле означает неприменимость показателя, а не ноль.\n',
+        '\n'.join(f'- [{name}.csv]({name}.csv): {len(rows)} строк.' for name,rows in files.items() if rows)+'\n']
+    (args.out/'REPORT.md').write_text('\n'.join(report),encoding='utf-8',newline='\n')
     print(json.dumps(dict(run_id=receipt['run_id'],tables={n:len(r) for n,r in files.items()},failed=len(failures))))
 
 
