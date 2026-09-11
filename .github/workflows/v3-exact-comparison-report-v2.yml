@@ -1,0 +1,45 @@
+name: V3 corrected exact comparison v2 tables
+on:
+  workflow_run:
+    workflows: [V3 corrected exact comparison v2]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      source_run:
+        description: Completed exact-backends comparison run ID
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  tables:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Verify and retain every compact profile
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN: ${{ github.event.workflow_run.id || inputs.source_run }}
+        run: python scripts/retain_v3_exact_comparison_v2.py --run "$SOURCE_RUN" --out workflow-results/evidence
+      - name: Generate every measurement table and the complete report
+        run: python scripts/summarize_v3_exact_comparison_v2.py --input workflow-results/evidence --out workflow-results/tables
+      - uses: actions/upload-artifact@v7
+        with:
+          name: v3-exact-comparison-v2-tables-${{ github.run_id }}
+          path: workflow-results/tables
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        with:
+          name: v3-exact-comparison-v2-retention-${{ github.run_id }}
+          path: workflow-results/evidence/retention.json
+          retention-days: 90
+          if-no-files-found: error
