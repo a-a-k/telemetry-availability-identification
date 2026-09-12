@@ -117,7 +117,7 @@ Run {receipt['run_id']}, measurement source {receipt['head']}. All 27 planned pa
 
 The primary boundary starts at sealed prepared calibration roles with installed tools and ends at the first saved forecasts. Graph: revised v4 binding, six variants plus G0/B0, one build process. PMX: independent native projection/extraction, conditional_local and inclusive, collection, one application-only Palladio pass, saved first candidates. Interpreter/JVM starts and serialization are included. Acquisition, common role projection, transfer, replication and tool installation precede the boundary.
 
-All additional graph replay, separate PMX second passes, known-probability controls and comparisons to frozen source forecasts follow ALL nine measurement pairs for the application. Their 57 process observations appear separately in verification-processes.csv and are not added to primary times. Qualification is required before a measured pair can become a successful speed ratio. Raw first/second solver files remain separate; the unchanged validator receives them as passes 0/1 after timing.
+All additional graph replay, separate PMX second passes, known-probability controls and comparisons to frozen source forecasts follow ALL nine measurement pairs for the application. Their {len(verification_rows)} retained process observations appear separately in verification-processes.csv and are not added to primary times. Qualification is required before a measured pair can become a successful speed ratio. Raw first/second solver files remain separate; the unchanged validator receives them as passes 0/1 after timing.
 
 pipeline-summary.csv has median/min/max over three pairs per application/volume; speed ratios are formed within each pair first. paired-pipelines.csv keeps every original pair; stage-processes.csv keeps every primary command and resource. CPU is the sum of disjoint timed commands; memory is the greatest recorded process/children peak, not total runner RSS. Failure rows remain failures, never zero-time solves.
 
@@ -127,6 +127,20 @@ Scaling preserves empirical observations and topology, with renamed request/trac
 
 Protocol: docs/V4_PIPELINE_BENCHMARK_V1.md; all clocks, resource scopes, recorded omissions and source hashes remain explicit.
 '''
+    labels={'deathstarbench_social_network':'DeathStarBench','opentelemetry_demo':'OpenTelemetry','spring_petclinic_microservices':'Petclinic'}
+    def number(value):return '—' if value is None else f'{value:.3f}'
+    def interval(row,key):return number(row[key+'_median'])+' ['+number(row[key+'_min'])+'; '+number(row[key+'_max'])+']'
+    note+='\n## Полная таблица девяти сочетаний приложения и объёма\n\nВремя и парное ускорение: медиана [минимум; максимум] трёх повторов. CPU и память: медианы. Дополнительные проверки исключены из этих времён у обоих методов.\n\n'
+    note+='| Приложение | Попытки | Проверено пар | Наш конвейер, с | PMX/Palladio, с | PMX / наш, × | CPU наш / PMX, с | Память наш / PMX, MiB |\n| --- | ---: | ---: | --- | --- | --- | --- | --- |\n'
+    for row in summaries:
+        note+='| '+labels[row['application']]+' | '+str(row['attempts'])+' | '+str(row['qualified_pairs'])+'/'+str(row['planned_pairs'])+' | '+interval(row,'graph_wall_seconds')+' | '+interval(row,'pmx_wall_seconds')+' | '+interval(row,'speedup_pmx_over_graph')+' | '+number(row['graph_summed_timed_command_cpu_seconds_median'])+' / '+number(row['pmx_summed_timed_command_cpu_seconds_median'])+' | '+number(row['graph_largest_process_peak_rss_mib_median'])+' / '+number(row['pmx_largest_process_peak_rss_mib_median'])+' |\n'
+    note+='\n## Все 27 исходных пар\n\nПовтор — технический, начинается с 0. Порядок методов сохранён. Отказ не превращается в успешный коэффициент ускорения.\n\n| Приложение | Повтор | Попытки | Порядок | Статус | Наш, с | PMX, с | PMX / наш, × |\n| --- | ---: | ---: | --- | --- | ---: | ---: | ---: |\n'
+    for row in paired:
+        note+='| '+labels[row['application']]+' | '+str(row['repetition'])+' | '+str(row['attempts'])+' | '+row['method_order']+' | '+row['status']+' | '+number(row.get('graph_wall_seconds'))+' | '+number(row.get('pmx_wall_seconds'))+' | '+number(row.get('speedup_pmx_over_graph'))+' |\n'
+    note+='\n## Масштабирование по объёму наблюдений\n\nФиксированы структура и эмпирический закон; копирование не увеличивает независимую выборку.\n\n| Приложение | Метод | Попытки | T(N) / T(3600) | Память / память(3600) | Попыток/с |\n| --- | --- | ---: | ---: | ---: | ---: |\n'
+    for row in scaling:
+        note+='| '+labels[row['application']]+' | '+row['method']+' | '+str(row['attempts'])+' | '+number(row['time_growth_relative_to_1x'])+' | '+number(row['memory_growth_relative_to_1x'])+' | '+number(row['attempts_per_second'])+' |\n'
+    note+='\nВсе неперекрывающиеся команды основного таймера и CPU/RSS сохранены в [stage-processes.csv](stage-processes.csv); дополнительные проверки — в [verification-processes.csv](verification-processes.csv). [Полная сводка](pipeline-summary.csv) включает объёмы входов, spans, графы, категории, точечную поддержку, прикладные PCM-модели и арифметическое разложение фиксированного запуска PMX.\n'
     files['README.md']=note.encode()
     files['.gitattributes']=b'* -text whitespace=-trailing-space,-space-before-tab,cr-at-eol\n'
     provenance=dict(version='v4-pipeline-benchmark-table-export-v1',run_id=receipt['run_id'],head=receipt['head'],sources=sources,
