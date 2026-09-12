@@ -1,7 +1,7 @@
 name: V4 complete refinement tables v1
 on:
   workflow_run:
-    workflows: [V4 independent confirmation technical continuation v2, V4 independent observation missingness v2, V4 exact costs on independently checked models v2]
+    workflows: [V4 confirmation aggregate repair v3, V4 independent observation missingness v3, V4 exact costs on independently checked models v3]
     types: [completed]
   workflow_dispatch:
     inputs:
@@ -22,6 +22,7 @@ jobs:
     timeout-minutes: 5
     outputs:
       ready: ${{ steps.select.outputs.ready }}
+      summary_run: ${{ steps.select.outputs.summary_run }}
       missingness_run: ${{ steps.select.outputs.missingness_run }}
       performance_run: ${{ steps.select.outputs.performance_run }}
     steps:
@@ -43,6 +44,7 @@ jobs:
     timeout-minutes: 30
     env:
       GH_TOKEN: ${{ github.token }}
+      SUMMARY_RUN: ${{ needs.resolve.outputs.summary_run }}
       MISSINGNESS_RUN: ${{ needs.resolve.outputs.missingness_run }}
       PERFORMANCE_RUN: ${{ needs.resolve.outputs.performance_run }}
     steps:
@@ -60,11 +62,12 @@ jobs:
       - name: Verify original scientific implementation and exact numeric input IDs
         run: |
           python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
-          python -c "import os; assert all(os.environ[k].isdigit() and int(os.environ[k]) > 0 for k in ('MISSINGNESS_RUN','PERFORMANCE_RUN'))"
+          python -c "import os; assert all(os.environ[k].isdigit() and int(os.environ[k]) > 0 for k in ('SUMMARY_RUN','MISSINGNESS_RUN','PERFORMANCE_RUN'))"
       - name: Retain the complete independent cohort and verify all temporal barriers
         run: |
           python scripts/retain_v4_confirmation_v2.py
-          python scripts/summarize_v4_confirmation_v2.py
+          python scripts/retain_v4_confirmation_summary_v3.py --run "$SUMMARY_RUN"
+          python scripts/summarize_v4_confirmation_v2.py --summary-run "$SUMMARY_RUN"
       - name: Retain every fixed missingness and information-restoration setting
         run: python scripts/retain_v4_missingness_v2.py --run "$MISSINGNESS_RUN"
       - name: Retain every native configuration and render every timing and memory table
@@ -77,6 +80,7 @@ jobs:
           name: v4-complete-refinement-tables-${{ github.run_id }}
           path: |
             docs/evidence/v4-confirmation-v2-34703686592
+            docs/evidence/v4-confirmation-summary-v3-${{ needs.resolve.outputs.summary_run }}
             docs/tables/v4-confirmation-v2-34703686592
             docs/evidence/v4-missingness-v2-${{ needs.resolve.outputs.missingness_run }}
             docs/tables/v4-missingness-v2-${{ needs.resolve.outputs.missingness_run }}

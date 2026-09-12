@@ -34,8 +34,10 @@ def validate(result,config):
 def main():
     p=argparse.ArgumentParser();p.add_argument('--run',type=int,required=True);args=p.parse_args()
     run=transport.read_api(f'actions/runs/{args.run}')
-    require(run['status']=='completed' and run['run_attempt']==1 and run['path']=='.github/workflows/v4-confirmed-performance-v2.yml','wrong performance run')
-    meta=transport.read_api('contents/configs/v4_confirmed_performance_v2.json?ref='+run['head_sha'])
+    versions={'.github/workflows/v4-confirmed-performance-v2.yml':2,'.github/workflows/v4-confirmed-performance-v3.yml':3}
+    require(run['status']=='completed' and run['run_attempt']==1 and run['path'] in versions,'wrong performance run')
+    version=versions[run['path']]
+    meta=transport.read_api(f'contents/configs/v4_confirmed_performance_v{version}.json?ref='+run['head_sha'])
     protocol=base64.b64decode(meta['content']);config=json.loads(protocol)
     artifacts=transport.collect_pages(f'actions/runs/{args.run}/artifacts','artifacts');out=Path(f'docs/evidence/v4-confirmed-performance-v2-{args.run}')
     transport.persist(out/'.gitattributes',b'* -text whitespace=-trailing-space,-space-before-tab,cr-at-eol\n');rows=[]

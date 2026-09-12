@@ -3,30 +3,36 @@ import json
 import os
 
 import retain_v3_comparison_compact_v4 as transport
+from v4_confirmed_source_v3 import require_source
 
-SOURCE_RUN=34703686592
-SOURCE_HEAD='12ddb09369ee6e0b60ca4c7db6fe1e749530b7df'
+SUMMARY_RUN=34707482231
+FIRST_FOLLOWUPS={'missingness':34707544832,'performance':34707544825}
 
 
 def main():
-    source=transport.read_api(f'actions/runs/{SOURCE_RUN}')
-    if source['head_sha']!=SOURCE_HEAD or source['path']!='.github/workflows/v4-confirmation-v2.yml':raise ValueError('wrong confirmation source')
-    output=dict(ready='false',missingness_run='',performance_run='')
+    require_source()
+    source=transport.read_api(f'actions/runs/{SUMMARY_RUN}')
+    if (source['path']!='.github/workflows/v4-confirmation-summary-v3.yml' or source['run_attempt']!=1
+        or source['head_sha']!='a19fef0b998eb1f995ebd06acdde10acd819ff19'):
+        raise ValueError('wrong separate aggregate producer')
+    output=dict(ready='false',summary_run=str(SUMMARY_RUN),missingness_run='',performance_run='')
     if source['status']=='completed' and source['conclusion']=='success':
         chosen={}
-        for kind,workflow in [('missingness','v4-missingness-v2.yml'),('performance','v4-confirmed-performance-v2.yml')]:
+        for kind,workflow in [('missingness','v4-missingness-v3.yml'),('performance','v4-confirmed-performance-v3.yml')]:
             if os.environ.get('MANUAL_PAIR')=='true':
                 value=os.environ[kind.upper()+'_RUN']
                 if not value.isdigit() or int(value)<=0:raise ValueError('exact positive run ID required')
+                if int(value)!=FIRST_FOLLOWUPS[kind]:raise ValueError('a replacement execution cannot substitute for the first measurement')
                 run=transport.read_api('actions/runs/'+value)
             else:
                 runs=transport.collect_pages('actions/workflows/'+workflow+'/runs','workflow_runs')
                 candidates=[r for r in runs if r['event']=='workflow_run' and r['run_attempt']==1
                     and r['head_branch']=='main' and r['created_at']>=source['created_at']]
-                if not candidates:continue
+                if not candidates:raise ValueError('declared first measurement is missing')
                 # Failed original streams stay selected. A later successful
                 # execution cannot silently replace their measurements.
                 run=min(candidates,key=lambda r:(r['created_at'],r['id']))
+            if run['id']!=FIRST_FOLLOWUPS[kind]:raise ValueError('first measurement identity differs')
             if run['path']!='.github/workflows/'+workflow or run['run_attempt']!=1:raise ValueError('followup workflow identity differs')
             if run['status']=='completed':chosen[kind]=run['id']
         if set(chosen)=={'missingness','performance'}:

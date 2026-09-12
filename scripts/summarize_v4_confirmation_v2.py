@@ -1,5 +1,6 @@
 """Export every stored forecast, primary-compatibility and stage-cost scalar."""
 from hashlib import sha256
+import argparse
 import json
 from pathlib import Path
 
@@ -13,16 +14,20 @@ HEAD='12ddb09369ee6e0b60ca4c7db6fe1e749530b7df'
 
 
 def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--summary-run',type=int,required=True);args=parser.parse_args()
     evidence=Path(f'docs/evidence/v4-confirmation-v2-{RUN}')
     out=Path(f'docs/tables/v4-confirmation-v2-{RUN}')
     retained=json.loads((evidence/'retention.json').read_bytes())
     if retained['run']!=RUN or retained['head']!=HEAD:raise ValueError('confirmation retention differs')
-    source=evidence/'analysis/comparison.json'
+    aggregate=Path(f'docs/evidence/v4-confirmation-summary-v3-{args.summary_run}')
+    provenance=json.loads((aggregate/'retention.json').read_bytes())
+    if provenance['source_run']!=RUN or provenance['source_head']!=HEAD or provenance['run']!=args.summary_run:raise ValueError('aggregate source differs')
+    source=aggregate/'comparison.json'
     render(source,out/'forecasts')
     export(source,out/'recorded-pipeline-costs')
-    confirmation_path=evidence/'analysis/confirmation.json'
+    confirmation_path=aggregate/'confirmation.json'
     confirmation=json.loads(confirmation_path.read_bytes())
-    seal=json.loads((evidence/'analysis/confirmation-seal.json').read_bytes())
+    seal=json.loads((aggregate/'confirmation-seal.json').read_bytes())
     if (confirmation['run']!=str(RUN) or confirmation['head']!=HEAD or
         seal['files']['confirmation.json']!=sha256(confirmation_path.read_bytes()).hexdigest()):raise ValueError('primary aggregate provenance differs')
     def flatten(row):

@@ -17,9 +17,11 @@ INFORMATION=('none','selection_and_admission','entry_result','required_completio
 def main():
     p=argparse.ArgumentParser();p.add_argument('--run',type=int,required=True);args=p.parse_args()
     run=transport.read_api(f'actions/runs/{args.run}')
-    if run['path']!='.github/workflows/v4-missingness-v2.yml' or run['status']!='completed' or run['run_attempt']!=1:
+    versions={'.github/workflows/v4-missingness-v2.yml':2,'.github/workflows/v4-missingness-v3.yml':3}
+    if run['path'] not in versions or run['status']!='completed' or run['run_attempt']!=1:
         raise ValueError('fixed missingness execution differs')
-    config=json.loads(Path('configs/v4_missingness_execution_v2.json').read_bytes())
+    config_path=Path(f'configs/v4_missingness_execution_v{versions[run["path"]]}.json')
+    config=json.loads(config_path.read_bytes())
     settings,design,cases=planned_cases(Path('configs/v4_confirmation_design_v1.json'),'main')
     artifacts=transport.collect_pages(f'actions/runs/{args.run}/artifacts','artifacts')
     out=Path(f'docs/evidence/v4-missingness-v2-{args.run}');tables=Path(f'docs/tables/v4-missingness-v2-{args.run}')
@@ -39,7 +41,7 @@ def main():
             data=json.loads(files[case['key']+'.json'])
             if (data['run']!=str(args.run) or data['head']!=run['head_sha'] or data['source_run']!=SOURCE_RUN
                 or data['source_head']!=SOURCE_HEAD or data['identity']!=case['identity'] or data['selected_by_E_equals_Y'] is not False
-                or data['config_sha256']!=sha256(Path('configs/v4_missingness_execution_v2.json').read_bytes()).hexdigest()):
+                or data['config_sha256']!=sha256(config_path.read_bytes()).hexdigest()):
                 raise ValueError('missingness source/population/config differs')
             expected_n=settings['test_seconds']*settings['request_rate_per_second']//len(design['applications'][profile])
             if {r['operation']for r in data['operations']}!=set(design['applications'][profile]):raise ValueError('operation census differs')
