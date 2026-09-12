@@ -8,6 +8,14 @@ an explicit unsupported status under declared operation and observation contract
 
 ## Current research result
 
+The [review-driven attempt audit](docs/milestones/V3_ATTEMPT_AUDIT_V1_RESULT.md)
+reopens validation of the observation binding. Its first 12 historical campaigns
+contain 216 externally successful attempts excluded by the saved model through
+earlier negative proxy verdicts. The fixed 240-campaign census is running; the
+[refinement protocol](docs/milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md) separates
+primary evidence, binding errors and conceptual assumptions. Earlier numerical
+and computational results below retain their original scope.
+
 The [main scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
 [complete 30-criterion checklist](docs/iterations/064-corrected-exact-comparison.md)
 record all 240 campaigns, 864,000 test attempts and 8000 method slots.

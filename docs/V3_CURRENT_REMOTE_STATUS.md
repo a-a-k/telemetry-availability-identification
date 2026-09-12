@@ -1,4 +1,16 @@
-# V3 main result and full computational performance measurements are complete
+# V3 research refinement after review
+
+The [attempt-level audit](milestones/V3_ATTEMPT_AUDIT_V1_RESULT.md) is now the
+active refinement. Run **34694957306**, source **02f31dc45efb05006117793fcd0fe770f49e9d1e**,
+has completed its first 12 historical campaigns: 43,200 calibration attempts,
+42,000 with a supported model, **216 excluded external successes**, zero errors
+in the opposite direction. All 216 involve earlier negative proxy verdicts;
+213 states are fully known and three are partial. Raw-to-projection/model
+reproduction passed; independent business-label validation is a separate task.
+The remaining fixed census continues automatically. The prior completion claims
+below refer to the original experiments and computational comparison, not to
+closure of this newly identified model-adequacy issue. See the
+[refinement protocol](milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md).
 
 All **240 campaigns, 864,000 test attempts and 8000 method slots** are retained. The [scientific report](milestones/V3_MAIN_SCIENTIFIC_RESULT.md), [full tables](tables/v3-main-recovered-34517752889/README.md), [cost scopes](tables/v3-main-recovered-34517752889/cost-scopes/README.md) and [30-criterion final checklist](iterations/064-corrected-exact-comparison.md) record the result and limits. The main and CUDD measurements are complete; durable retention of the new CUDD artifacts is recorded below.
 

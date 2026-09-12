@@ -1,0 +1,439 @@
+[
+  {
+    "signature": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-split-N-7-run34465226083-a1-calibration-000496-owner_details_with_visits",
+      "trace_id": "6601b525fa2982da203e73a7e28c6010",
+      "operation": "owner_details_with_visits",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"api-gateway\",\"customers-service\"]": true,
+        "completed:[\"api-gateway\",\"visits-service\"]": true,
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": true,
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": true,
+        "probe_a": false,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"api-gateway\",\"customers-service\"]": "explicit_native_protocol_success",
+        "completed:[\"api-gateway\",\"visits-service\"]": "explicit_native_protocol_success",
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false",
+        "both_replica_probes_false"
+      ],
+      "probe_age_ns": 999908000,
+      "probe_observed_at": "2026-09-10T16:27:46.573915Z",
+      "external_duration_ns": 24991000,
+      "ablation_without_selection_lower": 0,
+      "ablation_without_selection_upper": 0
+    },
+    "request_field_names": [
+      "branch_class",
+      "client_parent_id",
+      "completed_at",
+      "completed_epoch",
+      "error",
+      "failure_law",
+      "latency_ms",
+      "marker",
+      "method",
+      "operation",
+      "path",
+      "payload",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_success",
+      "started_at",
+      "started_epoch",
+      "status_code",
+      "timed_out",
+      "trace_id",
+      "write_audit_required",
+      "write_found_without_timely_success"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": "complete_timely_semantic_result"
+    },
+    "response_field_names": [],
+    "span_statuses": [
+      {
+        "span_id": "cd9a235c396e0a1f",
+        "service": "visits-service",
+        "operation": "VisitRepository.findByPetIdIn",
+        "start_ns": 1789057667592618251,
+        "duration_ns": 3656043,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "c54164b7626a8e84",
+        "service": "visits-service",
+        "operation": "SELECT petclinic.visits",
+        "start_ns": 1789057667594526089,
+        "duration_ns": 555552,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "f0ce65cd059bc29f",
+        "service": "visits-service",
+        "operation": "GET /pets/visits",
+        "start_ns": 1789057667591538871,
+        "duration_ns": 5544725,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "366a0655fa4a905c",
+        "service": "visits-service",
+        "operation": "SELECT org.springframework.samples.petclinic.visits.model.Visit",
+        "start_ns": 1789057667593222838,
+        "duration_ns": 2804552,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "5261a6db41f1dd2f",
+        "service": "api-gateway",
+        "operation": "GET /api/gateway/owners/{ownerId}",
+        "start_ns": 1789057667575032806,
+        "duration_ns": 23267433,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "c71d3844b91e",
+          "service.instance.id": "api-gateway"
+        }
+      },
+      {
+        "span_id": "4f7406c78e927ebb",
+        "service": "api-gateway",
+        "operation": "GET",
+        "start_ns": 1789057667577014683,
+        "duration_ns": 8823537,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "c71d3844b91e",
+          "service.instance.id": "api-gateway"
+        }
+      },
+      {
+        "span_id": "9d9aed9e5d676922",
+        "service": "api-gateway",
+        "operation": "GET",
+        "start_ns": 1789057667588999906,
+        "duration_ns": 8239687,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "c71d3844b91e",
+          "service.instance.id": "api-gateway"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T16:27:46.573915Z",
+        "replica": "a",
+        "backend_status": "DOWN",
+        "backend_check_status": "L7TOUT",
+        "running": true,
+        "paused": true
+      },
+      {
+        "observed_at": "2026-09-10T16:27:46.573915Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "* L7TOUT",
+        "running": true,
+        "paused": true
+      },
+      {
+        "observed_at": "2026-09-10T16:27:46.573915Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/spring_petclinic_microservices--split--N--r7/owner_details_with_visits-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True"
+  },
+  {
+    "signature": "success_excluded|selected_replica_probe_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-split-N-7-run34465226083-a1-calibration-000759-owner_details_with_visits",
+      "trace_id": "ada0c05168ee2d24b17259723cce6b11",
+      "operation": "owner_details_with_visits",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"api-gateway\",\"customers-service\"]": true,
+        "completed:[\"api-gateway\",\"visits-service\"]": true,
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": true,
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": true,
+        "probe_a": true,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"api-gateway\",\"customers-service\"]": "explicit_native_protocol_success",
+        "completed:[\"api-gateway\",\"visits-service\"]": "explicit_native_protocol_success",
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false"
+      ],
+      "probe_age_ns": 750133000,
+      "probe_observed_at": "2026-09-10T16:28:52.573652Z",
+      "external_duration_ns": 19315000,
+      "ablation_without_selection_lower": 1,
+      "ablation_without_selection_upper": 1
+    },
+    "request_field_names": [
+      "branch_class",
+      "client_parent_id",
+      "completed_at",
+      "completed_epoch",
+      "error",
+      "failure_law",
+      "latency_ms",
+      "marker",
+      "method",
+      "operation",
+      "path",
+      "payload",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_success",
+      "started_at",
+      "started_epoch",
+      "status_code",
+      "timed_out",
+      "trace_id",
+      "write_audit_required",
+      "write_found_without_timely_success"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": "complete_timely_semantic_result"
+    },
+    "response_field_names": [],
+    "span_statuses": [
+      {
+        "span_id": "e8d67bb6bb47fa15",
+        "service": "api-gateway",
+        "operation": "GET /api/gateway/owners/{ownerId}",
+        "start_ns": 1789057733324632892,
+        "duration_ns": 17976033,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "c71d3844b91e",
+          "service.instance.id": "api-gateway"
+        }
+      },
+      {
+        "span_id": "46f7558f8abb8784",
+        "service": "api-gateway",
+        "operation": "GET",
+        "start_ns": 1789057733326205310,
+        "duration_ns": 8408878,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "c71d3844b91e",
+          "service.instance.id": "api-gateway"
+        }
+      },
+      {
+        "span_id": "c7731f3b7d5efe22",
+        "service": "api-gateway",
+        "operation": "GET",
+        "start_ns": 1789057733335989836,
+        "duration_ns": 5760475,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "c71d3844b91e",
+          "service.instance.id": "api-gateway"
+        }
+      },
+      {
+        "span_id": "21a31aad40f93cbc",
+        "service": "visits-service",
+        "operation": "VisitRepository.findByPetIdIn",
+        "start_ns": 1789057733338095020,
+        "duration_ns": 2999222,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "b19da59c81124607",
+        "service": "visits-service",
+        "operation": "SELECT petclinic.visits",
+        "start_ns": 1789057733339914503,
+        "duration_ns": 354587,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "e5c710e42a1e35ed",
+        "service": "visits-service",
+        "operation": "GET /pets/visits",
+        "start_ns": 1789057733337342895,
+        "duration_ns": 4317361,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.response.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "769b15f7004e344a",
+        "service": "visits-service",
+        "operation": "SELECT org.springframework.samples.petclinic.visits.model.Visit",
+        "start_ns": 1789057733338641768,
+        "duration_ns": 2290519,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "5f426d2d7ee2",
+          "service.instance.id": "visits-service-replica-b",
+          "study.replica": "b"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T16:28:52.573652Z",
+        "replica": "a",
+        "backend_status": "UP",
+        "backend_check_status": "L7OK",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T16:28:52.573652Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "L7TOUT",
+        "running": true,
+        "paused": true
+      },
+      {
+        "observed_at": "2026-09-10T16:28:52.573652Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/spring_petclinic_microservices--split--N--r7/owner_details_with_visits-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false|True"
+  }
+]
