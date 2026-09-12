@@ -50,11 +50,18 @@ wins the specified structural update. The report includes all timings, resources
 and 5130 missingness settings, including wide, weakly informative bounds.
 
 The complete source archive contains 310 original ZIPs (718,849,377 bytes) in
-unpublished release 387645995. The [additional revised full-pipeline protocol](docs/V4_PIPELINE_BENCHMARK_V1.md)
-now measures Palladio/PMX versus the revised telemetry-to-first-answer pipeline
-in run **34708991534**: 27 fixed pairs, all extra verification after timing.
-Its new coefficient is pending; the older end-to-end ratios below retain their
-original binding and measurement boundary.
+unpublished release 387645995. The [revised full-pipeline comparison](docs/tables/v4-pipeline-benchmark-34708991534/README.md),
+run **34708991534**, qualified all 27 fixed pairs, with all extra verification
+after timing. PMX/graph median paired ratios at 3600 attempts are
+**69.37/55.43/100.24** for DeathStarBench/OpenTelemetry/Petclinic; at 14,400 they
+are **31.73/48.77/47.82**. All nine workload summaries, 27 pairs, CPU/memory,
+stages and scaling rows are retained and match remote table producer 34712531566.
+The boundary is prepared telemetry and installed tools to first saved forecasts,
+including process starts and the original 20-second PMX launcher per operation.
+It excludes acquisition and extra verification; computational copies do not add
+independent observations. The older ratios retain their original binding and boundary.
+All seven original pipeline/report ZIPs (46,803,348 bytes) are preserved in
+unpublished release 387672616, with [verified hashes and complete census](docs/evidence/v4-pipeline-complete-archive-34712710619/retention.json).
 
 The [saved PCM/B0 explanation](docs/milestones/V4_PMX_B0_EXPLANATION_V1_RESULT.md)
 reproduces 40 Palladio answers to at most 1.11e-16 and explains concrete

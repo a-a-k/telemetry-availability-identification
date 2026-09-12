@@ -16,12 +16,20 @@ population. Complete tables **34708006475** match all 38 local table files byte
 for byte. Archive **34708008168** retains all 310 original ZIPs in unpublished
 release **387645995**; provider asset hashes verified. Historical C12 remains.
 
-The author's subsequent Palladio question adds a new matched full-pipeline
-measurement, **34708991534**, source `4d5270008e6845bc55220869da721698be347e68`:
-27 fixed pairs on the revised binding, 3600/7200/14400 attempts, extra verification
-after all measurement streams. This coefficient remains pending. The completed
-millisecond exact-solver result and the older full-pipeline ratios have different
-boundaries. [Fixed new protocol](V4_PIPELINE_BENCHMARK_V1.md).
+The additional matched full-pipeline measurement **34708991534**, source
+`4d5270008e6845bc55220869da721698be347e68`, is complete: 27/27 qualified pairs,
+3600/7200/14400 attempts, extra verification after all measurement streams.
+PMX/graph median paired ratios at 3600 attempts are **69.37/55.43/100.24** for
+DeathStarBench/OpenTelemetry/Petclinic; at 14,400 they are **31.73/48.77/47.82**.
+[Complete tables](tables/v4-pipeline-benchmark-34708991534/README.md) include all
+nine summaries, 27 pairs, stages, CPU/memory and scaling; all seven table files
+match remote producer **34712531566** byte for byte. The first-answer boundary
+includes starts and the fixed PMX launcher, excludes acquisition and additional
+verification, and differs from the older verified-pipeline boundary and the
+millisecond exact-solver comparison. [Fixed protocol](V4_PIPELINE_BENCHMARK_V1.md).
+Archive **34712710619** preserves all seven original measurement/report ZIPs
+(46,803,348 bytes) in unpublished release **387672616**; source and asset hashes
+are verified in the [retention receipt](evidence/v4-pipeline-complete-archive-34712710619/retention.json).
 
 The [complete attempt-level audit](milestones/V3_ATTEMPT_AUDIT_V1_RESULT.md), run
 **34694957306**, source **02f31dc45efb05006117793fcd0fe770f49e9d1e**, covers all

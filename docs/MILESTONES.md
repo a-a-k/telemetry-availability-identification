@@ -17,8 +17,14 @@ and numerical forecast gates preceding outcomes. It also contains all 5130
 missingness settings and 19,824 exact computations on 59 new models, with complete
 time, memory and update tables. All 310 source ZIPs are durably retained.
 The [refinement checklist](iterations/065-review-driven-primary-refinement.md)
-separates these completed results from the subsequent 27-pair revised full
-Palladio pipeline measurement, run 34708991534, whose result is still pending.
+also records the completed revised Palladio pipeline measurement, run
+34708991534: all 27 pairs qualified. [Full tables](tables/v4-pipeline-benchmark-34708991534/README.md)
+retain all nine volume/application summaries, 27 pairs, CPU/memory, stages and
+scaling. Median PMX/graph ratios range from 31.73 to 100.24 for the declared
+prepared-telemetry-to-first-answer boundary. All seven table files match the
+remote producer 34712531566; the original PMX launcher is included.
+All seven original pipeline/report artifacts are archived in unpublished
+release 387672616, with verified source/asset hashes (archive run 34712710619).
 
 ## Earlier v3 evidence
 
