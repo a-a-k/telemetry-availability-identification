@@ -1,0 +1,313 @@
+[
+  {
+    "signature": "success_excluded|selected_replica_probe_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-opentelemetry_demo-colocated-NCD-0-run34465226083-a1-opentelemetry_demo-colocated-NCD-r0-calibration-000719",
+      "trace_id": "a1c8c6d4cffc0a2a7389702b1ca7b45f",
+      "operation": "checkout",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": true,
+        "completed:[\"checkout\",\"cart\"]": true,
+        "completed:[\"checkout\",\"currency\"]": true,
+        "completed:[\"checkout\",\"payment\"]": true,
+        "completed:[\"checkout\",\"product-catalog\"]": true,
+        "completed:[\"checkout\",\"shipping\"]": true,
+        "completed:[\"frontend\",\"cart\"]": true,
+        "completed:[\"frontend\",\"checkout\"]": true,
+        "completed:[\"frontend\",\"product-catalog\"]": true,
+        "completed:[\"frontend-proxy\",\"frontend\"]": true,
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": true,
+        "completed:[\"shipping\",\"quote\"]": true,
+        "probe_a": false,
+        "probe_b": true,
+        "demand_a": true,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"checkout\",\"cart\"]": "explicit_native_protocol_success",
+        "completed:[\"checkout\",\"currency\"]": "explicit_native_protocol_success",
+        "completed:[\"checkout\",\"payment\"]": "explicit_native_protocol_success",
+        "completed:[\"checkout\",\"product-catalog\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"checkout\",\"shipping\"]": "explicit_native_protocol_success",
+        "completed:[\"frontend\",\"cart\"]": "explicit_native_protocol_success",
+        "completed:[\"frontend\",\"checkout\"]": "explicit_native_protocol_success",
+        "completed:[\"frontend\",\"product-catalog\"]": "explicit_native_protocol_success",
+        "completed:[\"frontend-proxy\",\"frontend\"]": "explicit_native_protocol_success",
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"shipping\",\"quote\"]": "explicit_native_protocol_success"
+      },
+      "flags": [
+        "selected_replica_probe_false"
+      ],
+      "probe_age_ns": 750046000,
+      "probe_observed_at": "2026-09-10T13:24:45.457642Z",
+      "external_duration_ns": 1767866000,
+      "ablation_without_selection_lower": 1,
+      "ablation_without_selection_upper": 1
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "9a6cc1a38c6e13a8",
+        "service": "frontend-proxy",
+        "operation": "router frontend egress",
+        "start_ns": 1789046686208833000,
+        "duration_ns": 1694635000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "94053682fba3b293",
+        "service": "frontend-proxy",
+        "operation": "GET",
+        "start_ns": 1789046686208646000,
+        "duration_ns": 1694867000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "41c08dc48b43c512",
+        "service": "frontend-proxy",
+        "operation": "router frontend egress",
+        "start_ns": 1789046687907801000,
+        "duration_ns": 9225000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "46b18a8e535e3b9e",
+        "service": "frontend-proxy",
+        "operation": "POST",
+        "start_ns": 1789046687907661000,
+        "duration_ns": 9385000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "a31c6464c8e9cb04",
+        "service": "frontend-proxy",
+        "operation": "router frontend egress",
+        "start_ns": 1789046687918454000,
+        "duration_ns": 56349000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "38a01b0ec17b7a1a",
+        "service": "frontend-proxy",
+        "operation": "POST",
+        "start_ns": 1789046687918359000,
+        "duration_ns": 56470000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "1b91de2bf8b6f39e",
+        "service": "product-catalog",
+        "operation": "oteldemo.ProductCatalogService/GetProduct",
+        "start_ns": 1789046687899189611,
+        "duration_ns": 2342510,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "rpc.method": "oteldemo.ProductCatalogService/GetProduct"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "a"
+        }
+      },
+      {
+        "span_id": "213af1b4d9b258d8",
+        "service": "product-catalog",
+        "operation": "astronomy-db",
+        "start_ns": 1789046687900715951,
+        "duration_ns": 764823,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "a"
+        }
+      },
+      {
+        "span_id": "bebe735e102f83b9",
+        "service": "product-catalog",
+        "operation": "astronomy-db",
+        "start_ns": 1789046687922703809,
+        "duration_ns": 489818,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "ebd1f1d050acb198",
+        "service": "product-catalog",
+        "operation": "astronomy-db",
+        "start_ns": 1789046687973244800,
+        "duration_ns": 541286,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "0d814ebd19fb5e99",
+        "service": "product-catalog",
+        "operation": "oteldemo.ProductCatalogService/GetProduct",
+        "start_ns": 1789046687921267995,
+        "duration_ns": 2013525,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "rpc.method": "oteldemo.ProductCatalogService/GetProduct"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "d207b01e62206454",
+        "service": "product-catalog",
+        "operation": "oteldemo.ProductCatalogService/GetProduct",
+        "start_ns": 1789046687972362441,
+        "duration_ns": 1578388,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "rpc.method": "oteldemo.ProductCatalogService/GetProduct"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "b"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T13:24:45.457642Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T13:24:45.457642Z",
+        "replica": "a",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T13:24:45.457642Z",
+        "replica": "b",
+        "backend_status": "UP",
+        "backend_check_status": "L4OK",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/opentelemetry_demo--colocated--NCD--r0/checkout-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false|True"
+  }
+]

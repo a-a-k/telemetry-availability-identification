@@ -1,0 +1,210 @@
+[
+  {
+    "signature": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-opentelemetry_demo-colocated-NCD-3-run34465226083-a1-opentelemetry_demo-colocated-NCD-r3-calibration-001670",
+      "trace_id": "38cbf09cbd08393babcc7bbc1d69c5d7",
+      "operation": "add_to_cart",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": true,
+        "completed:[\"frontend\",\"cart\"]": true,
+        "completed:[\"frontend\",\"product-catalog\"]": true,
+        "completed:[\"frontend-proxy\",\"frontend\"]": true,
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": true,
+        "probe_a": false,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"cart\",\"declared-db-client-3ea18c90ac5882af\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"frontend\",\"cart\"]": "explicit_native_protocol_success",
+        "completed:[\"frontend\",\"product-catalog\"]": "explicit_native_protocol_success",
+        "completed:[\"frontend-proxy\",\"frontend\"]": "explicit_native_protocol_success",
+        "completed:[\"product-catalog\",\"declared-db-client-3b7432b94a4ea337\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false",
+        "both_replica_probes_false"
+      ],
+      "probe_age_ns": 499916000,
+      "probe_observed_at": "2026-09-10T13:28:33.517889Z",
+      "external_duration_ns": 18724000,
+      "ablation_without_selection_lower": 0,
+      "ablation_without_selection_upper": 0
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "6dc72ed40970275d",
+        "service": "frontend-proxy",
+        "operation": "router frontend egress",
+        "start_ns": 1789046914019205000,
+        "duration_ns": 5333000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "9d8d47ce4f2be8e8",
+        "service": "frontend-proxy",
+        "operation": "GET",
+        "start_ns": 1789046914018671000,
+        "duration_ns": 5907000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "fbf9ca902f93f00f",
+        "service": "frontend-proxy",
+        "operation": "router frontend egress",
+        "start_ns": 1789046914027907000,
+        "duration_ns": 6568000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "ba117c07205e250f",
+        "service": "frontend-proxy",
+        "operation": "POST",
+        "start_ns": 1789046914027762000,
+        "duration_ns": 6754000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": "200"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p"
+        }
+      },
+      {
+        "span_id": "2a4664172c08de40",
+        "service": "product-catalog",
+        "operation": "oteldemo.ProductCatalogService/GetProduct",
+        "start_ns": 1789046914021798521,
+        "duration_ns": 1809233,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "rpc.method": "oteldemo.ProductCatalogService/GetProduct"
+        },
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "b"
+        }
+      },
+      {
+        "span_id": "d42e3556dc475b37",
+        "service": "product-catalog",
+        "operation": "astronomy-db",
+        "start_ns": 1789046914022906765,
+        "duration_ns": 603556,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "host.name": "runnervmlun5p",
+          "study.replica": "b"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T13:28:33.517889Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T13:28:33.517889Z",
+        "replica": "a",
+        "backend_status": "DOWN",
+        "backend_check_status": "* L4TOUT",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T13:28:33.517889Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/opentelemetry_demo--colocated--NCD--r3/add_to_cart-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True"
+  }
+]

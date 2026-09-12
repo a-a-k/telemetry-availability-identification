@@ -1,0 +1,574 @@
+{
+  "version": "v4-binding-diagnostic-v1",
+  "identity": {
+    "application": "spring_petclinic_microservices",
+    "placement": "split",
+    "law": "NC",
+    "repetition": 5,
+    "namespace": "v3-main-771601",
+    "data_role": "prospective_main",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548"
+  },
+  "run": "34696809884",
+  "head": "1e1a443d73dcfa2a529aa952359153f93101f34d",
+  "config_sha256": "c6715cc26efd5c3509f6837423fc15c1b0aa3152f38b88ddf6b467e00ef6efbb",
+  "data_role": "retrospective diagnostic on already-open calibration attempts; not independent confirmation",
+  "sources": {
+    "raw": {
+      "artifact_id": 10163567036,
+      "name": "v3-comparison-raw-spring_petclinic_microservices--split--NC--r5-34465226083",
+      "sha256": "3a36582a7e9490e3d859b6b1bc34e622ce7102674048e5bd721b108f91364ca3",
+      "bytes": 14957417,
+      "members": 41,
+      "uncompressed_bytes": 426005736,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    "graph": {
+      "artifact_id": 10165322672,
+      "name": "v3-comparison-graph-spring_petclinic_microservices--split--NC--r5-34465226083",
+      "sha256": "f84057a7f6dba35dae236a002b394d9b6e4e3690acf6b94dcee4dc1c131f9906",
+      "bytes": 14582,
+      "members": 10,
+      "uncompressed_bytes": 114871,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  },
+  "operations": [
+    {
+      "attempts": 900,
+      "successes": 799,
+      "lower_count": 799,
+      "upper_count": 799,
+      "lower_exact": "799/900",
+      "upper_exact": "799/900",
+      "b0_exact": "799/900",
+      "success_excluded": 0,
+      "failure_excluded": 0,
+      "incompatible_attempts": 0,
+      "incompatible_fraction": 0.0,
+      "fully_observed_attempts": 0,
+      "fully_observed_mismatches": 0,
+      "ambiguous_attempts": 0,
+      "aggregate_excess_above_upper_count": 0,
+      "aggregate_deficit_below_lower_count": 0,
+      "aggregate_contains_b0": true,
+      "incompatible_despite_aggregate_containment": false,
+      "signed_b0_minus_lower_pp": 0.0,
+      "signed_b0_minus_upper_pp": 0.0,
+      "operation": "create_visit",
+      "status": "diagnosed",
+      "legacy_forecast": {
+        "exact_fraction": "781/900",
+        "probability": 0.8677777777777778,
+        "reason": null,
+        "status": "ok"
+      },
+      "revised_estimate": {
+        "lower": 0.8877777777777778,
+        "upper": 0.8877777777777778,
+        "lower_exact": "799/900",
+        "upper_exact": "799/900",
+        "prediction": 0.8877777777777778,
+        "status": "singleton_given_empirical_observation_law"
+      },
+      "label_flip_invariant": true,
+      "checked_witness_endpoints": 76,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"visits-service\"]": {
+          "explicit_native_protocol_success": 821,
+          "explicit_required_client_failure": 14,
+          "declared_retry_outcome_not_fully_observed": 64,
+          "declared_single_retry_503_then_201_with_one_observed_receiver": 1
+        },
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "observed_required_group_and_source_propagation_certificate": 799,
+          "no_explicit_completion_certificate": 29,
+          "required_group_not_fully_observed": 72
+        }
+      },
+      "exact_qualification": [
+        {
+          "method": "ours_direct",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_direct",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        }
+      ]
+    },
+    {
+      "attempts": 900,
+      "successes": 900,
+      "lower_count": 900,
+      "upper_count": 900,
+      "lower_exact": "1",
+      "upper_exact": "1",
+      "b0_exact": "1",
+      "success_excluded": 0,
+      "failure_excluded": 0,
+      "incompatible_attempts": 0,
+      "incompatible_fraction": 0.0,
+      "fully_observed_attempts": 900,
+      "fully_observed_mismatches": 0,
+      "ambiguous_attempts": 0,
+      "aggregate_excess_above_upper_count": 0,
+      "aggregate_deficit_below_lower_count": 0,
+      "aggregate_contains_b0": true,
+      "incompatible_despite_aggregate_containment": false,
+      "signed_b0_minus_lower_pp": 0.0,
+      "signed_b0_minus_upper_pp": 0.0,
+      "operation": "list_owners",
+      "status": "diagnosed",
+      "legacy_forecast": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "revised_estimate": {
+        "lower": 1.0,
+        "upper": 1.0,
+        "lower_exact": "1",
+        "upper_exact": "1",
+        "prediction": 1.0,
+        "status": "singleton_given_empirical_observation_law"
+      },
+      "label_flip_invariant": true,
+      "checked_witness_endpoints": 0,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"customers-service\"]": {
+          "explicit_native_protocol_success": 900
+        },
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "observed_required_group_and_source_propagation_certificate": 900
+        }
+      },
+      "exact_qualification": [
+        {
+          "method": "ours_direct",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_direct",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        }
+      ]
+    },
+    {
+      "attempts": 900,
+      "successes": 900,
+      "lower_count": 900,
+      "upper_count": 900,
+      "lower_exact": "1",
+      "upper_exact": "1",
+      "b0_exact": "1",
+      "success_excluded": 0,
+      "failure_excluded": 0,
+      "incompatible_attempts": 0,
+      "incompatible_fraction": 0.0,
+      "fully_observed_attempts": 900,
+      "fully_observed_mismatches": 0,
+      "ambiguous_attempts": 0,
+      "aggregate_excess_above_upper_count": 0,
+      "aggregate_deficit_below_lower_count": 0,
+      "aggregate_contains_b0": true,
+      "incompatible_despite_aggregate_containment": false,
+      "signed_b0_minus_lower_pp": 0.0,
+      "signed_b0_minus_upper_pp": 0.0,
+      "operation": "list_vets",
+      "status": "diagnosed",
+      "legacy_forecast": {
+        "exact_fraction": "1",
+        "probability": 1.0,
+        "reason": null,
+        "status": "ok"
+      },
+      "revised_estimate": {
+        "lower": 1.0,
+        "upper": 1.0,
+        "lower_exact": "1",
+        "upper_exact": "1",
+        "prediction": 1.0,
+        "status": "singleton_given_empirical_observation_law"
+      },
+      "label_flip_invariant": true,
+      "checked_witness_endpoints": 0,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"vets-service\"]": {
+          "explicit_native_protocol_success": 900
+        }
+      },
+      "exact_qualification": [
+        {
+          "method": "ours_direct",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_direct",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        }
+      ]
+    },
+    {
+      "attempts": 900,
+      "successes": 807,
+      "lower_count": 807,
+      "upper_count": 807,
+      "lower_exact": "269/300",
+      "upper_exact": "269/300",
+      "b0_exact": "269/300",
+      "success_excluded": 0,
+      "failure_excluded": 0,
+      "incompatible_attempts": 0,
+      "incompatible_fraction": 0.0,
+      "fully_observed_attempts": 0,
+      "fully_observed_mismatches": 0,
+      "ambiguous_attempts": 0,
+      "aggregate_excess_above_upper_count": 0,
+      "aggregate_deficit_below_lower_count": 0,
+      "aggregate_contains_b0": true,
+      "incompatible_despite_aggregate_containment": false,
+      "signed_b0_minus_lower_pp": 0.0,
+      "signed_b0_minus_upper_pp": 0.0,
+      "operation": "owner_details_with_visits",
+      "status": "diagnosed",
+      "legacy_forecast": {
+        "exact_fraction": "133/150",
+        "probability": 0.8866666666666667,
+        "reason": null,
+        "status": "ok"
+      },
+      "revised_estimate": {
+        "lower": 0.8966666666666666,
+        "upper": 0.8966666666666666,
+        "lower_exact": "269/300",
+        "upper_exact": "269/300",
+        "prediction": 0.8966666666666666,
+        "status": "singleton_given_empirical_observation_law"
+      },
+      "label_flip_invariant": true,
+      "checked_witness_endpoints": 40,
+      "completion_evidence_counts": {
+        "completed:[\"api-gateway\",\"customers-service\"]": {
+          "explicit_native_protocol_success": 900
+        },
+        "completed:[\"api-gateway\",\"visits-service\"]": {
+          "explicit_native_protocol_success": 819,
+          "explicit_required_client_failure": 81
+        },
+        "completed:[\"customers-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "observed_required_group_and_source_propagation_certificate": 888,
+          "no_explicit_completion_certificate": 12
+        },
+        "completed:[\"visits-service\",\"declared-db-client-30f7b3f9b2fb3df3\"]": {
+          "observed_required_group_and_source_propagation_certificate": 807,
+          "no_explicit_completion_certificate": 12,
+          "required_group_not_fully_observed": 81
+        }
+      },
+      "exact_qualification": [
+        {
+          "method": "ours_direct",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "original",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_direct",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "ours_prepared",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_fixed",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "cudd_sift",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_conditioned",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "agrum_joint",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_sparse",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        },
+        {
+          "method": "storm_compact",
+          "representation": "completion_projected",
+          "all_eleven_bounds_exact": true
+        }
+      ]
+    }
+  ],
+  "performance_claims": false,
+  "independent_confirmation": false
+}

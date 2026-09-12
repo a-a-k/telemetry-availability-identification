@@ -1,15 +1,26 @@
 # V3 research refinement after review
 
-The [attempt-level audit](milestones/V3_ATTEMPT_AUDIT_V1_RESULT.md) is now the
-active refinement. Run **34694957306**, source **02f31dc45efb05006117793fcd0fe770f49e9d1e**,
-has completed its first 12 historical campaigns: 43,200 calibration attempts,
-42,000 with a supported model, **216 excluded external successes**, zero errors
-in the opposite direction. All 216 involve earlier negative proxy verdicts;
-213 states are fully known and three are partial. Raw-to-projection/model
-reproduction passed; independent business-label validation is a separate task.
-The remaining fixed census continues automatically. The prior completion claims
-below refer to the original experiments and computational comparison, not to
-closure of this newly identified model-adequacy issue. See the
+The [complete attempt-level audit](milestones/V3_ATTEMPT_AUDIT_V1_RESULT.md), run
+**34694957306**, source **02f31dc45efb05006117793fcd0fe770f49e9d1e**, covers all
+240 campaigns and 864,000 calibration attempts, including 46,800 attempts with
+the original structural refusal. Among 817,200 supported attempts, the old
+binding excludes **2541 registered successes** and zero failures: 2533 involve
+past negative proxy verdicts and 11 a rescued transport failure, with 3 shared.
+Primary projection, saved models and counts reproduce in all campaigns.
+
+Independent primary-verdict audit **34695678140** reproduces 39,831/43,200
+external outcomes in the fixed first 12 campaigns, with zero mismatches; 3369
+Petclinic write acknowledgments lack retained primary SELECT rows for complete
+independent persistence validation. All records remain in the census.
+
+The [candidate revision diagnostic](milestones/V4_BINDING_DIAGNOSTIC_V1_RESULT.md),
+run **34696809884**, source **1e1a443d73dcfa2a529aa952359153f93101f34d**, covers
+29 fixed historical campaigns: **535 → 0** incompatible intervals on 103,200
+supported attempts. All 1712 queries from eight exact-backend configurations
+and two representations agree on 107 revised models. This is retrospective;
+independent new confirmation, the missingness study and remaining reproducibility
+work are still required. Earlier completion statements below describe the
+original experiments, not closure of the review refinement. See the
 [refinement protocol](milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md).
 
 All **240 campaigns, 864,000 test attempts and 8000 method slots** are retained. The [scientific report](milestones/V3_MAIN_SCIENTIFIC_RESULT.md), [full tables](tables/v3-main-recovered-34517752889/README.md), [cost scopes](tables/v3-main-recovered-34517752889/cost-scopes/README.md) and [30-criterion final checklist](iterations/064-corrected-exact-comparison.md) record the result and limits. The main and CUDD measurements are complete; durable retention of the new CUDD artifacts is recorded below.
