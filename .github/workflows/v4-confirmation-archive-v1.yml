@@ -1,0 +1,36 @@
+name: V4 confirmation original evidence archive v1
+on:
+  workflow_dispatch:
+    inputs:
+      config:
+        type: choice
+        required: true
+        default: configs/v4_confirmation_failed_source_archive_v1.json
+        options: [configs/v4_confirmation_failed_source_archive_v1.json]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Verify original scientific sources
+        run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+      - name: Preserve every declared original artifact without interpreting outcomes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/archive_v4_confirmation_evidence_v1.py --config '${{ inputs.config }}'
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: v4-confirmation-archive-compact-${{ github.run_id }}
+          path: workflow-results/confirmation-archive/*.json
+          if-no-files-found: error
+          retention-days: 90

@@ -26,6 +26,19 @@ and `.github/workflows/v4-confirmation-v1.yml` specify 18 fresh campaigns,
 Numerical PMX/B0 and graph forecasts must all freeze before any outcome opening;
 primary HTTP bytes and SQL rows support independent attempt-level verification.
 
+The first run stopped before outcome opening because the Petclinic retry-control
+code matched both `default_backend` and `backend`. The [technical continuation](docs/milestones/V4_CONFIRMATION_V2_TECHNICAL_AMENDMENT.md),
+run **34703686592**, retains all twelve completed cohorts byte for byte and
+recollects only the six technically lost Petclinic cohorts. All criteria and
+scientific algorithms remain fixed. Missingness and fair backend measurements
+are wired to the completed continuation in their versioned workflows.
+
+The [saved PCM/B0 explanation](docs/milestones/V4_PMX_B0_EXPLANATION_V1_RESULT.md)
+reproduces 40 Palladio answers to at most 1.11e-16 and explains concrete
+coincidences and differences. The [single primary-record reproducer](docs/milestones/V4_SINGLE_PRIMARY_ATTEMPT_V1_RESULT.md)
+provides an independently replayed raw-to-state example directly from a bounded
+capsule in this repository; neither whole campaigns nor document exports are needed.
+
 The [main scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
 [complete 30-criterion checklist](docs/iterations/064-corrected-exact-comparison.md)
 record all 240 campaigns, 864,000 test attempts and 8000 method slots.

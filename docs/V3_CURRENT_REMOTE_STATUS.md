@@ -29,6 +29,24 @@ timestamps, primary Petclinic HTTP/SQL capture, 48 directed retry/normal control
 and a numerical PMX/B0 gate before any new test outcome opens. Preparation of
 this workflow is not itself an independent confirmation result.
 
+Run **34701084950** stopped before the numerical/global outcome gates: all six
+Petclinic post-period controls rejected the ordinary proxy template through a
+substring-matching bug. The [explicit technical amendment](milestones/V4_CONFIRMATION_V2_TECHNICAL_AMENDMENT.md)
+preserves twelve unopened source cohorts and recollects only the six technically
+lost Petclinic cohorts in run **34703686592**, head
+`12ddb09369ee6e0b60ca4c7db6fe1e749530b7df`. The corrected native proxy regression
+passed. Source CI **34703676996** passed. Independent scientific qualification
+remains pending until all strict numerical, realized-state and primary checks finish.
+
+[PMX/B0 decomposition](milestones/V4_PMX_B0_EXPLANATION_V1_RESULT.md) is complete:
+run **34702691485** independently reproduces all 40 selected saved PCM answers
+(maximum absolute difference 1.11e-16). The [bounded primary capsule](milestones/V4_SINGLE_PRIMARY_ATTEMPT_V1_RESULT.md)
+reproduced the same old-event 0 / revised-event 1 / primary success in runs
+**34702693646** (original archive extraction) and **34704078633** (committed capsule).
+The intermediate retained-capsule dispatch had an invalid YAML trigger and failed
+before execution; `573d739b` repairs that workflow serialization only. CI
+**34704078590** passed. No primary scientific evidence is replaced by that technical fix.
+
 All **240 campaigns, 864,000 test attempts and 8000 method slots** are retained. The [scientific report](milestones/V3_MAIN_SCIENTIFIC_RESULT.md), [full tables](tables/v3-main-recovered-34517752889/README.md), [cost scopes](tables/v3-main-recovered-34517752889/cost-scopes/README.md) and [30-criterion final checklist](iterations/064-corrected-exact-comparison.md) record the result and limits. The main and CUDD measurements are complete; durable retention of the new CUDD artifacts is recorded below.
 
 Original main **34465226083** is preserved with its failed strict chain: a1000-artifact listing limit omitted application models from PMX solving and all inputs from aggregate analysis. Recovery **34517752889** succeeded and passed the retained byte/count/forecast continuity audit. All356 scientific source files, all original graph forecasts and evaluator counts remain unchanged; no new observations were acquired. PMX model artifacts were committed before original evaluation, but numerical PMX forecasts were computed later. The original literal gate remains an explicit C12 deviation; physical blinding of the recovery checkout is not claimed.
