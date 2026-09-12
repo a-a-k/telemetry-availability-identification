@@ -9,7 +9,7 @@ import retain_v3_comparison_compact_v4 as t
 
 
 def main():
-    p=argparse.ArgumentParser();p.add_argument('--run',type=int,required=True);p.add_argument('--config',type=Path,required=True)
+    p=argparse.ArgumentParser();p.add_argument('--run',type=int,required=True);p.add_argument('--config',type=Path,required=True);p.add_argument('--out',type=Path)
     args=p.parse_args();config=json.loads(args.config.read_bytes());run=t.read_api(f'actions/runs/{args.run}')
     if (run['path']!='.github/workflows/v4-confirmation-archive-v1.yml' or run['status']!='completed'
         or run['conclusion']!='success' or run['run_attempt']!=1):raise ValueError('archive producer differs')
@@ -37,7 +37,7 @@ def main():
     if not release['draft'] or release['published_at'] is not None or release['tag_name']!=config['tag']:raise ValueError('unpublished archive identity differs')
     assets=[{k:a[k]for k in ('id','name','size','digest','state')}for a in release['assets']]
     if assets!=compact['assets']:raise ValueError('durable provider asset metadata differs')
-    out=Path(f'docs/evidence/v4-confirmation-complete-archive-{args.run}')
+    out=args.out or Path(f'docs/evidence/v4-confirmation-complete-archive-{args.run}')
     for name,raw in files.items():t.persist(out/name,raw)
     receipt=dict(run=args.run,head=run['head_sha'],artifact={k:a[k]for k in fields},release_id=release['id'],
         full_primary_payloads_downloaded=False,provider_assets_verified=True)

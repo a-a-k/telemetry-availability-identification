@@ -8,7 +8,19 @@ commit, workflow run, outputs, limitations, and interpretation.
 Heavy experiments are never run locally. Local execution is restricted to unit
 tests, configuration validation, and bounded smoke cases.
 
-## Current v3 evidence
+## Independent refinement after review
+
+The [new refinement report](milestones/V4_REFINEMENT_RESULT.md) records the
+completed independent scientific criteria: 64,800 verified primary outcomes,
+zero incompatibilities on 61,200 supported attempts, all 48 directed controls,
+and numerical forecast gates preceding outcomes. It also contains all 5130
+missingness settings and 19,824 exact computations on 59 new models, with complete
+time, memory and update tables. All 310 source ZIPs are durably retained.
+The [refinement checklist](iterations/065-review-driven-primary-refinement.md)
+separates these completed results from the subsequent 27-pair revised full
+Palladio pipeline measurement, run 34708991534, whose result is still pending.
+
+## Earlier v3 evidence
 
 The [corrected exact comparison v2](milestones/V3_EXACT_COMPARISON_V2_RESULT.md) completes all four requested corrections: 35,280 planned records, both specialized algorithms, six native variants, two common input representations and seven reuse/update modes. Full phase/scaling tables and durable evidence are generated in Actions; all 26,208 application answers agree exactly.
 
