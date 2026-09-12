@@ -1,0 +1,363 @@
+[
+  {
+    "signature": "success_excluded|selected_replica_probe_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-2-run34465226083-a1-deathstarbench_social_network-split-NC-r2-calibration-000509",
+      "trace_id": "fe3fb5a678d92690",
+      "operation": "read_user_timeline",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"nginx-web-server\",\"user-timeline-service\"]": true,
+        "completed:[\"user-timeline-service\",\"post-storage-service\"]": true,
+        "probe_a": true,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"nginx-web-server\",\"user-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"user-timeline-service\",\"post-storage-service\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false"
+      ],
+      "probe_age_ns": 249357000,
+      "probe_observed_at": "2026-09-10T11:34:47.267775Z",
+      "external_duration_ns": 1673902000,
+      "ablation_without_selection_lower": 1,
+      "ablation_without_selection_upper": 1
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "62aa643a740cb631",
+        "service": "user-timeline-service",
+        "operation": "read_user_timeline_redis_find_client",
+        "start_ns": 1789040089188889000,
+        "duration_ns": 256000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "e78d9ec36d2ccc16",
+        "service": "user-timeline-service",
+        "operation": "read_user_timeline_server",
+        "start_ns": 1789040089188876000,
+        "duration_ns": 1116000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "215764a9551ebed1",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/user-timeline/read",
+        "start_ns": 1789040087517642000,
+        "duration_ns": 1672891000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "dbb272446c661233",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/user-timeline/read",
+        "start_ns": 1789040087517000000,
+        "duration_ns": 1673534000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "c89fc98b3db3dfab",
+        "service": "nginx-web-server",
+        "operation": "ReadUserTimeline",
+        "start_ns": 1789040087517744000,
+        "duration_ns": 1672741000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T11:34:47.267775Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:34:47.267775Z",
+        "replica": "a",
+        "backend_status": "UP",
+        "backend_check_status": "L4OK",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:34:47.267775Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "* L4TOUT",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/deathstarbench_social_network--split--NC--r2/read_user_timeline-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false|True"
+  },
+  {
+    "signature": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-2-run34465226083-a1-deathstarbench_social_network-split-NC-r2-calibration-000770",
+      "trace_id": "95b81f1513cf2c75",
+      "operation": "read_user_timeline",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"nginx-web-server\",\"user-timeline-service\"]": true,
+        "completed:[\"user-timeline-service\",\"post-storage-service\"]": true,
+        "probe_a": false,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"nginx-web-server\",\"user-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"user-timeline-service\",\"post-storage-service\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false",
+        "both_replica_probes_false"
+      ],
+      "probe_age_ns": 499868000,
+      "probe_observed_at": "2026-09-10T11:35:52.267321Z",
+      "external_duration_ns": 4649000,
+      "ablation_without_selection_lower": 0,
+      "ablation_without_selection_upper": 0
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "7e5bdac245a7b509",
+        "service": "nginx-web-server",
+        "operation": "ReadUserTimeline",
+        "start_ns": 1789040152767909000,
+        "duration_ns": 3450000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "3553bdb78d3d0d75",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/user-timeline/read",
+        "start_ns": 1789040152767836000,
+        "duration_ns": 3574000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "f50a150854acf001",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/user-timeline/read",
+        "start_ns": 1789040152767000000,
+        "duration_ns": 4410000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "f6005277527c1d53",
+        "service": "user-timeline-service",
+        "operation": "read_user_timeline_server",
+        "start_ns": 1789040152768670000,
+        "duration_ns": 2174000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "a365041a7b2ac1f6",
+        "service": "user-timeline-service",
+        "operation": "read_user_timeline_redis_find_client",
+        "start_ns": 1789040152768684000,
+        "duration_ns": 564000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T11:35:52.267321Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:35:52.267321Z",
+        "replica": "a",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": true
+      },
+      {
+        "observed_at": "2026-09-10T11:35:52.267321Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/deathstarbench_social_network--split--NC--r2/read_user_timeline-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True"
+  }
+]

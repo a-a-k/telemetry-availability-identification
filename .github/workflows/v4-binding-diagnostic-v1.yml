@@ -1,0 +1,51 @@
+name: V4 operation binding diagnostic v1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo, spring_petclinic_microservices]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11.16'
+      - name: Install fixed native backends
+        run: |
+          python -m pip install -r requirements-exact-backends-v1.txt
+          python -m pip install --no-deps -e .
+      - name: Verify frozen sources and binding semantic controls
+        run: |
+          python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+          python -m unittest discover -s tests -p test_v4_execution_binding_v1.py -v
+      - name: Diagnose all attempts and independently compare exact representations
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/diagnose_v4_binding_v1.py run --profile ${{ matrix.profile }} --out workflow-results/diagnostic
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v4-binding-diagnostic-v1-compact-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/diagnostic/compact
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v4-binding-diagnostic-v1-full-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/diagnostic
+          retention-days: 90
+          if-no-files-found: error

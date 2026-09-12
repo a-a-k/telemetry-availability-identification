@@ -1,0 +1,624 @@
+[
+  {
+    "signature": "success_excluded|selected_replica_probe_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-9-run34465226083-a1-deathstarbench_social_network-split-NC-r9-calibration-001246",
+      "trace_id": "1c8603bb42e6dcf9",
+      "operation": "compose_post",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": true,
+        "completed:[\"compose-post-service\",\"media-service\"]": true,
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": true,
+        "completed:[\"compose-post-service\",\"text-service\"]": true,
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": true,
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": true,
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": true,
+        "completed:[\"text-service\",\"url-shorten-service\"]": true,
+        "completed:[\"text-service\",\"user-mention-service\"]": true,
+        "probe_a": true,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"media-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"text-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"url-shorten-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"user-mention-service\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false"
+      ],
+      "probe_age_ns": 499972000,
+      "probe_observed_at": "2026-09-10T11:38:10.642526Z",
+      "external_duration_ns": 1681053000,
+      "ablation_without_selection_lower": 1,
+      "ablation_without_selection_upper": 1
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "a549c66b1b6759d8",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_mongo_insert_client",
+        "start_ns": 1789040292821255000,
+        "duration_ns": 715000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "22d112a2fd93c8c7",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_server",
+        "start_ns": 1789040292821228000,
+        "duration_ns": 1018000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "b0eb85d8aa3af052",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_redis_update_client",
+        "start_ns": 1789040292821992000,
+        "duration_ns": 250000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "7ce3e4abe626cfe6",
+        "service": "nginx-web-server",
+        "operation": "compose_post_client",
+        "start_ns": 1789040291143222000,
+        "duration_ns": 1679906000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "4704172da10152cd",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789040291143102000,
+        "duration_ns": 1680439000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "a11be468ab4540b5",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789040291143000000,
+        "duration_ns": 1680541000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T11:38:10.642526Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:38:10.642526Z",
+        "replica": "a",
+        "backend_status": "UP",
+        "backend_check_status": "L4OK",
+        "running": true,
+        "paused": true
+      },
+      {
+        "observed_at": "2026-09-10T11:38:10.642526Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "* L4TOUT",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/deathstarbench_social_network--split--NC--r9/compose_post-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false|True"
+  },
+  {
+    "signature": "success_excluded|selected_replica_probe_false,both_replica_probes_false|False",
+    "attempt": {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-9-run34465226083-a1-deathstarbench_social_network-split-NC-r9-calibration-002317",
+      "trace_id": "ae759ae9f9502ad3",
+      "operation": "compose_post",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": false,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": null,
+        "completed:[\"compose-post-service\",\"media-service\"]": true,
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": true,
+        "completed:[\"compose-post-service\",\"text-service\"]": true,
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": true,
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": null,
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": true,
+        "completed:[\"text-service\",\"url-shorten-service\"]": true,
+        "completed:[\"text-service\",\"user-mention-service\"]": true,
+        "probe_a": false,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": "required_group_not_fully_observed",
+        "completed:[\"compose-post-service\",\"media-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"text-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": "required_group_not_fully_observed",
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"url-shorten-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"user-mention-service\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false",
+        "both_replica_probes_false"
+      ],
+      "probe_age_ns": 249969000,
+      "probe_observed_at": "2026-09-10T11:42:38.642533Z",
+      "external_duration_ns": 603697000,
+      "ablation_without_selection_lower": 0,
+      "ablation_without_selection_upper": 0
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "2efea64cdc1f0b76",
+        "service": "nginx-web-server",
+        "operation": "compose_post_client",
+        "start_ns": 1789040558893225000,
+        "duration_ns": 602513000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "2da850796ccf8938",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789040558892000000,
+        "duration_ns": 604169000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "d0975f5f26b215a2",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789040558893039000,
+        "duration_ns": 603130000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "843518aebdccfdf6",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_mongo_insert_client",
+        "start_ns": 1789040558895529000,
+        "duration_ns": 299579000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "18d22014b69e5293",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_server",
+        "start_ns": 1789040558895504000,
+        "duration_ns": 599707000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T11:42:38.642533Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:42:38.642533Z",
+        "replica": "a",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:42:38.642533Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/deathstarbench_social_network--split--NC--r9/compose_post-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false,both_replica_probes_false|False"
+  },
+  {
+    "signature": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-9-run34465226083-a1-deathstarbench_social_network-split-NC-r9-calibration-003017",
+      "trace_id": "e7e41d1ce119b3e8",
+      "operation": "compose_post",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": true,
+        "completed:[\"compose-post-service\",\"media-service\"]": true,
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": true,
+        "completed:[\"compose-post-service\",\"text-service\"]": true,
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": true,
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": true,
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": true,
+        "completed:[\"text-service\",\"url-shorten-service\"]": true,
+        "completed:[\"text-service\",\"user-mention-service\"]": true,
+        "probe_a": false,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"media-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"text-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"url-shorten-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"user-mention-service\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false",
+        "both_replica_probes_false"
+      ],
+      "probe_age_ns": 250035000,
+      "probe_observed_at": "2026-09-10T11:45:33.642494Z",
+      "external_duration_ns": 5535000,
+      "ablation_without_selection_lower": 0,
+      "ablation_without_selection_upper": 0
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "ca7f4773f8b6ac80",
+        "service": "nginx-web-server",
+        "operation": "compose_post_client",
+        "start_ns": 1789040733893378000,
+        "duration_ns": 4320000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "b1bc6f3316c21426",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789040733893000000,
+        "duration_ns": 5054000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "ac6450094ec5979f",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789040733893110000,
+        "duration_ns": 4944000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "5e2e1b1e3d6d4e77",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_mongo_insert_client",
+        "start_ns": 1789040733895549000,
+        "duration_ns": 750000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "bf2670ae0ab5001b",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_redis_update_client",
+        "start_ns": 1789040733896331000,
+        "duration_ns": 585000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "ee704804ab74566f",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_server",
+        "start_ns": 1789040733895520000,
+        "duration_ns": 1402000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T11:45:33.642494Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:45:33.642494Z",
+        "replica": "a",
+        "backend_status": "DOWN",
+        "backend_check_status": "* L4TOUT",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:45:33.642494Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/deathstarbench_social_network--split--NC--r9/compose_post-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false,both_replica_probes_false|True"
+  }
+]

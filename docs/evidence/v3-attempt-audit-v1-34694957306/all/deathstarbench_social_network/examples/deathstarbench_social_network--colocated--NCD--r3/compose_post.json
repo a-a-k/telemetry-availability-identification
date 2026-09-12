@@ -1,0 +1,213 @@
+[
+  {
+    "signature": "success_excluded|selected_replica_probe_false|True",
+    "attempt": {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NCD-3-run34465226083-a1-deathstarbench_social_network-colocated-NCD-r3-calibration-000784",
+      "trace_id": "bbea4bf909f171c4",
+      "operation": "compose_post",
+      "outcome": true,
+      "lower": 0,
+      "upper": 0,
+      "compatibility": "success_excluded",
+      "fully_observed": true,
+      "observation": {
+        "entry_completed": true,
+        "timely": true,
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": true,
+        "completed:[\"compose-post-service\",\"media-service\"]": true,
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": true,
+        "completed:[\"compose-post-service\",\"text-service\"]": true,
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-service\"]": true,
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": true,
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": true,
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": true,
+        "completed:[\"text-service\",\"url-shorten-service\"]": true,
+        "completed:[\"text-service\",\"user-mention-service\"]": true,
+        "probe_a": true,
+        "probe_b": false,
+        "demand_a": false,
+        "demand_b": true
+      },
+      "completion_reasons": {
+        "completed:[\"compose-post-service\",\"home-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"media-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"post-storage-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"text-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"unique-id-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"compose-post-service\",\"user-timeline-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"home-timeline-service\",\"social-graph-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"nginx-web-server\",\"compose-post-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"url-shorten-service\"]": "observed_required_group_and_source_propagation_certificate",
+        "completed:[\"text-service\",\"user-mention-service\"]": "observed_required_group_and_source_propagation_certificate"
+      },
+      "flags": [
+        "selected_replica_probe_false"
+      ],
+      "probe_age_ns": 1000078000,
+      "probe_observed_at": "2026-09-10T11:00:11.320748Z",
+      "external_duration_ns": 1693965000,
+      "ablation_without_selection_lower": 1,
+      "ablation_without_selection_upper": 1
+    },
+    "request_field_names": [
+      "branch_class",
+      "completed_at",
+      "deadline_seconds",
+      "error",
+      "failure_law",
+      "http_steps",
+      "immediate_success",
+      "latency_ms",
+      "operation",
+      "period",
+      "placement",
+      "profile",
+      "repetition",
+      "request_id",
+      "request_user_id",
+      "response_bytes",
+      "response_sha256",
+      "scheduled_offset_seconds",
+      "semantic_reason",
+      "semantic_rule",
+      "semantic_success",
+      "started_at",
+      "status_code",
+      "timed_out",
+      "trace_header",
+      "trace_id",
+      "trace_presence_used_for_verdict",
+      "write_side_effect_audit"
+    ],
+    "primary_request_scalars": {
+      "status_code": 200,
+      "error": "",
+      "semantic_success": true,
+      "timed_out": false,
+      "semantic_reason": ""
+    },
+    "response_field_names": [
+      [
+        "content_base64",
+        "http_steps",
+        "request_id",
+        "sha256",
+        "status_code"
+      ]
+    ],
+    "span_statuses": [
+      {
+        "span_id": "e68cfa353b5498f9",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789038012321000000,
+        "duration_ns": 1693757000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "f06eedda5ae9c700",
+        "service": "nginx-web-server",
+        "operation": "compose_post_client",
+        "start_ns": 1789038012322040000,
+        "duration_ns": 1692290000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "bf92de0130af7913",
+        "service": "nginx-web-server",
+        "operation": "/wrk2-api/post/compose",
+        "start_ns": 1789038012321900000,
+        "duration_ns": 1692856000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {
+          "http.status_code": 200
+        },
+        "replica_resources": {
+          "hostname": "nginx-thrift"
+        }
+      },
+      {
+        "span_id": "86c4a8ceebc018e6",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_mongo_insert_client",
+        "start_ns": 1789038014012560000,
+        "duration_ns": 532000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "0b5d46b7438d21e0",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_redis_update_client",
+        "start_ns": 1789038014013111000,
+        "duration_ns": 160000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      },
+      {
+        "span_id": "28e0bb2279c538ea",
+        "service": "user-timeline-service",
+        "operation": "write_user_timeline_server",
+        "start_ns": 1789038014012533000,
+        "duration_ns": 744000,
+        "error_tag": false,
+        "error_status": false,
+        "protocol": {},
+        "replica_resources": {
+          "hostname": "user-timeline-service-replica-b"
+        }
+      }
+    ],
+    "primary_health_scalars": [
+      {
+        "observed_at": "2026-09-10T11:00:11.320748Z",
+        "replica": "",
+        "backend_status": "",
+        "backend_check_status": "",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:00:11.320748Z",
+        "replica": "a",
+        "backend_status": "UP",
+        "backend_check_status": "L4OK",
+        "running": true,
+        "paused": false
+      },
+      {
+        "observed_at": "2026-09-10T11:00:11.320748Z",
+        "replica": "b",
+        "backend_status": "DOWN",
+        "backend_check_status": "L4TOUT",
+        "running": true,
+        "paused": false
+      }
+    ],
+    "full_remote_witness_member": "full/deathstarbench_social_network--colocated--NCD--r3/compose_post-witnesses.json",
+    "full_remote_witness_key": "success_excluded|selected_replica_probe_false|True"
+  }
+]
