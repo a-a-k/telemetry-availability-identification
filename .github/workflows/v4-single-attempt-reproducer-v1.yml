@@ -1,15 +1,4 @@
 name: V4 single primary attempt reproducer v1
-true:
-  workflow_dispatch:
-    inputs:
-      source:
-        description: Fixed historical capsule source
-        type: choice
-        required: true
-        default: retained
-        options:
-        - retained
-        - original_archive
 permissions:
   contents: read
   actions: read
@@ -53,3 +42,14 @@ jobs:
         path: workflow-results/single-attempt
         if-no-files-found: error
         retention-days: 90
+'on':
+  workflow_dispatch:
+    inputs:
+      source:
+        description: Fixed historical capsule source
+        type: choice
+        required: true
+        default: retained
+        options:
+        - retained
+        - original_archive
