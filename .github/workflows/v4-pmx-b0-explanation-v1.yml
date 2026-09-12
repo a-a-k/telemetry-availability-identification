@@ -1,0 +1,27 @@
+name: V4 saved PCM and B0 explanation v1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Inspect actual preserved PCM models and their external wrapper counts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/inspect_v4_pmx_b0_v1.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: v4-pmx-b0-inspection-${{ github.run_id }}
+          path: workflow-results/pmx-explanation/inspection.json
+          if-no-files-found: error
+          retention-days: 90
