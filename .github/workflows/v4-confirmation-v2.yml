@@ -1,0 +1,723 @@
+name: V4 independent confirmation technical continuation v2
+'on':
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  actions: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      cases: ${{ steps.matrix.outputs.cases }}
+      profiles: ${{ steps.matrix.outputs.profiles }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - name: Emit the fixed 18-campaign independent confirmation census
+      run: python -m telemetry_availability.v4_confirmation_orchestration_v2 --config configs/v4_confirmation_design_v1.json
+        matrix --mode main
+      id: matrix
+  acquire:
+    needs:
+    - plan
+    - proxy_regression
+    if: ${{ always() && needs.plan.result == 'success' && needs.proxy_regression.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.cases) }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - name: Restore the twelve fixed unopened source cohorts byte for byte
+      if: ${{ matrix.profile != 'spring_petclinic_microservices' }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: python scripts/restore_v4_confirmation_roles_v2.py --key "${{ matrix.key }}" --out workflow-results/acquisition
+    - name: Restore the exact qualified Petclinic image
+      run: python scripts/restore_petclinic_image.py
+      if: ${{ matrix.profile == 'spring_petclinic_microservices' }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+    - name: Acquire all attempts and seal physically separate observation roles
+      run: 'mkdir -p workflow-results/acquisition
+
+        /usr/bin/time -v -o workflow-results/acquisition/acquisition-resource-usage.txt python -m telemetry_availability.v4_primary_capture_v2
+        --config configs/v4_confirmation_design_v1.json --profile "${{ matrix.profile }}" --placement "${{ matrix.placement
+        }}" --law "${{ matrix.law }}" --repetition "${{ matrix.repetition }}" --mode main --out workflow-results/acquisition'
+      if: ${{ matrix.profile == 'spring_petclinic_microservices' }}
+    - name: Extract compact acquisition CPU wall and memory records
+      run: python scripts/report_v3_comparison_costs_v1.py --root workflow-results/acquisition --out workflow-results/acquisition/resource-summary.json
+      if: ${{ matrix.profile == 'spring_petclinic_microservices' && always() }}
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-raw-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/acquisition
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-ordinary-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/acquisition/roles/ordinary
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-input-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/acquisition/roles/pmx
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-closed-evaluator-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/acquisition/roles/evaluator
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-receipt-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/acquisition/public
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-test-binding-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/acquisition/roles/test-binding
+        retention-days: 90
+        if-no-files-found: error
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-primary-closed-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/acquisition/roles/primary-closed
+        retention-days: 90
+        if-no-files-found: error
+  graph:
+    needs:
+    - plan
+    - acquire
+    if: ${{ always() && needs.plan.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.cases) }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-ordinary-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/ordinary
+    - name: Build all graph variants and B0 without evaluator inputs
+      run: 'mkdir -p workflow-results/graph/compact
+
+        /usr/bin/time -v -o workflow-results/graph/compact/build-resource-usage.txt python -m telemetry_availability.v4_confirmation_candidates_v1
+        build --input workflow-input/ordinary --output workflow-results/graph --config configs/v4_confirmation_execution_v1.json'
+    - name: Reproduce all saved-model probabilities in a fresh restricted process
+      run: /usr/bin/time -v -o workflow-results/graph/compact/replay-resource-usage.txt python -m telemetry_availability.v4_confirmation_candidates_v1
+        replay --input workflow-results/graph/candidates --output workflow-results/graph/compact --config configs/v4_confirmation_execution_v1.json
+    - name: Extract compact graph process resource measurements
+      run: python scripts/report_v3_comparison_costs_v1.py --root workflow-results/graph/compact --out workflow-results/graph/compact/resource-summary.json
+      if: ${{ always() }}
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-graph-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/graph
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-graph-compact-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/graph/compact
+        retention-days: 90
+        if-no-files-found: warn
+  pmx:
+    needs:
+    - plan
+    - acquire
+    if: ${{ always() && needs.plan.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.cases) }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: 11.0.32+9
+    - name: Obtain exact author PMX binary and source options
+      run: 'mkdir -p workflow-input
+
+        curl --fail --location --retry 8 --retry-all-errors "$AUTHOR_BASE/main.jar" --output workflow-input/main.jar
+
+        curl --fail --location --retry 8 --retry-all-errors "$AUTHOR_BASE/Options.txt" --output workflow-input/Options.txt'
+      env:
+        AUTHOR_BASE: https://se-gitlab-extern.fzi.de/SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci/-/raw/9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+    - name: Rebuild the exact qualified clock-progress PMX binary and measure preparation
+      run: '/usr/bin/time -v -o workflow-input/pmx-clock-build-resource-usage.txt python scripts/build_pmx_clock_progress_v1.py
+        --original workflow-input/main.jar --out workflow-input/pmx-clock-build
+
+        mv workflow-input/pmx-clock-build-resource-usage.txt workflow-input/pmx-clock-build/build-resource-usage.txt'
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-pmx-input-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/pmx-native
+    - name: Independently project, extract and audit complete native operation models
+      run: 'mkdir -p workflow-results/extraction
+
+        /usr/bin/time -v -o workflow-results/extraction/process-resource-usage.txt python -m telemetry_availability.v3_comparison_pmx_v3
+        extract --source workflow-input/pmx-native --out workflow-results/extraction --config configs/v4_confirmation_execution_v1.json
+        --options workflow-input/Options.txt --jar workflow-input/pmx-clock-build/main-clock-progress-v1.jar'
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-extraction-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/extraction
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-build-${{ matrix.key }}-${{ github.run_id }}
+        path: 'workflow-input/pmx-clock-build/build-provenance.json
+
+          workflow-input/pmx-clock-build/build-resource-usage.txt'
+        retention-days: 90
+        if-no-files-found: warn
+  pmx_controls:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: 11.0.32+9
+    - name: Obtain exact author PMX binary and source options
+      run: 'mkdir -p workflow-input
+
+        curl --fail --location --retry 8 --retry-all-errors "$AUTHOR_BASE/main.jar" --output workflow-input/main.jar
+
+        curl --fail --location --retry 8 --retry-all-errors "$AUTHOR_BASE/Options.txt" --output workflow-input/Options.txt'
+      env:
+        AUTHOR_BASE: https://se-gitlab-extern.fzi.de/SebastianWeberFZI/ableitung-von-leistungsmodellen-in-ci/-/raw/9b8d4c5707751eeabe31f7e7d6b7de0acf0c45a2
+    - name: Rebuild the exact qualified clock-progress PMX binary and measure preparation
+      run: '/usr/bin/time -v -o workflow-input/pmx-clock-build-resource-usage.txt python scripts/build_pmx_clock_progress_v1.py
+        --original workflow-input/main.jar --out workflow-input/pmx-clock-build
+
+        mv workflow-input/pmx-clock-build-resource-usage.txt workflow-input/pmx-clock-build/build-resource-usage.txt'
+    - name: Reconstruct four known-probability context and database cases
+      run: python -m telemetry_availability.v3_comparison_pmx_v3 controls --source workflow-input/pmx-native --out
+        workflow-results/extraction --config configs/v4_confirmation_execution_v1.json --options workflow-input/Options.txt
+        --jar workflow-input/pmx-clock-build/main-clock-progress-v1.jar
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-extraction-controls-${{ github.run_id }}
+        path: workflow-results/extraction
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-build-controls-${{ github.run_id }}
+        path: 'workflow-input/pmx-clock-build/build-provenance.json
+
+          workflow-input/pmx-clock-build/build-resource-usage.txt'
+        retention-days: 90
+        if-no-files-found: warn
+  palladio_solver:
+    name: Solve independent PMX models and known controls twice
+    needs:
+    - plan
+    - pmx
+    - pmx_controls
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+    - name: Check out study repository
+      uses: actions/checkout@v7
+    - name: Check out pinned Palladio reliability source
+      uses: actions/checkout@v7
+      with:
+        repository: PalladioSimulator/Palladio-Analyzer-Reliability
+        ref: a694e570afb705dc9e0470dc321e77b7219dcea4
+        path: palladio-source
+    - name: Set up Python
+      uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+        cache-dependency-path: requirements.txt
+    - name: Set up pinned Java
+      uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: '17'
+    - name: Install dependencies and validate the frozen contract
+      run: "python -m pip install --upgrade pip\npython -m pip install -r requirements.txt\npython -m pip install\
+        \ --no-deps -e .\npython -m telemetry_availability.pmx_context_comparison validate\ntest \"$(git -C palladio-source\
+        \ rev-parse HEAD)\" = \\\n  \"a694e570afb705dc9e0470dc321e77b7219dcea4\"\n"
+    - uses: actions/download-artifact@v8
+      with:
+        pattern: v4-confirmation-pmx-extraction-${{ matrix.profile }}--*-${{ github.run_id }}
+        path: workflow-input/extractions
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-pmx-extraction-controls-${{ github.run_id }}
+        path: workflow-input/extractions/controls
+    - name: Census independently extracted models for this application
+      run: python -m telemetry_availability.v3_comparison_pmx_v3 collect --source workflow-input/extractions --profile
+        "${{ matrix.profile }}" --out workflow-input/petclinic-pmx-contract
+    - name: Record actual model count including extraction abstentions
+      run: echo "PETCLINIC_PMX_MODEL_COUNT=$(jq -r .model_count workflow-input/petclinic-pmx-contract/solver-contract.json)"
+        >> "$GITHUB_ENV"
+    - name: Reconstruct and audit the accepted release-date target platform
+      run: "petclinic_pmx_maven_repo=\"${RUNNER_TEMP}/petclinic-pmx-maven-repository\"\nevidence_dir=\"workflow-results/petclinic-pmx-solver/target-lock/repository\"\
+        \nmkdir -p \"$petclinic_pmx_maven_repo\" \"$evidence_dir\"\ncoordinate=\"$(jq -r '.target_platform_lock.coordinate'\
+        \ configs/m9a_palladio_bootstrap.json)\"\nmvn -B -ntp \"-Dmaven.repo.local=${petclinic_pmx_maven_repo}\"\
+        \ \\\n  dependency:get \"-Dartifact=${coordinate}\"\ntarget_file=\"${petclinic_pmx_maven_repo}/org/palladiosimulator/palladio-target-platforms/0.1.0/palladio-target-platforms-0.1.0-palladio-2023-03.target\"\
+        \nrepository_url=\"$(jq -r '.target_platform_lock.pinned_repository_url' configs/m9a_palladio_bootstrap.json)\"\
+        \nwhile IFS= read -r relative_path; do\n  mkdir -p \"${evidence_dir}/$(dirname \"$relative_path\")\"\n \
+        \ curl --fail --location --retry 5 --retry-all-errors \\\n    --output \"${evidence_dir}/${relative_path}\"\
+        \ \\\n    \"${repository_url}${relative_path}\"\ndone < <(jq -r '.target_platform_lock.repository_evidence[].relative_path'\
+        \ configs/m9a_palladio_bootstrap.json)\npython -m telemetry_availability lock-palladio-target-platform \\\
+        \n  --config configs/m9a_palladio_bootstrap.json \\\n  --target-file \"$target_file\" \\\n  --repository-evidence-dir\
+        \ \"$evidence_dir\" \\\n  --out workflow-results/petclinic-pmx-solver/target-lock/manifest.json\necho \"\
+        PETCLINIC_PMX_MAVEN_REPO=${petclinic_pmx_maven_repo}\" >> \"$GITHUB_ENV\"\ngit -C palladio-source diff --exit-code\n"
+    - name: Reconfirm the accepted analyzer capability boundary
+      run: python -m telemetry_availability audit-palladio-capability-source --config configs/m9b_palladio_semantic_controls.json
+        --analyzer-checkout palladio-source --out workflow-results/petclinic-pmx-solver/capability-manifest.json
+    - name: Overlay versioned generic harness with per-case StackOverflowError records
+      run: "test_bundle=\"palladio-source/tests/org.palladiosimulator.reliability.tests\"\ncp palladio/harness/META-INF/MANIFEST.MF\
+        \ \"$test_bundle/META-INF/MANIFEST.MF\"\ncp palladio/harness/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java\
+        \ \\\n  \"$test_bundle/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java\"\ngit -C palladio-source\
+        \ status --short > workflow-results/petclinic-pmx-solver/harness-overlay.txt\ntest \"$(git -C palladio-source\
+        \ diff --name-only)\" = \\\n  \"tests/org.palladiosimulator.reliability.tests/META-INF/MANIFEST.MF\"\ntest\
+        \ \"$(git -C palladio-source ls-files --others --exclude-standard)\" = \\\n  \"tests/org.palladiosimulator.reliability.tests/src/org/palladiosimulator/reliability/tests/PmxContextBridgeTest.java\"\
+        \n"
+    - name: Build the pinned analyzer without running the aligned experiment
+      run: "mkdir -p workflow-results/petclinic-pmx-solver/runtime\njava -version > workflow-results/petclinic-pmx-solver/runtime/java-version.txt\
+        \ 2>&1\nmvn -version > workflow-results/petclinic-pmx-solver/runtime/maven-version.txt 2>&1\nlscpu > workflow-results/petclinic-pmx-solver/runtime/runner-cpu.txt\n\
+        free -b > workflow-results/petclinic-pmx-solver/runtime/runner-memory.txt\nset -o pipefail\n/usr/bin/time\
+        \ -v -o workflow-results/petclinic-pmx-solver/runtime/build-resource-usage.txt \\\n  xvfb-run -a mvn -B\
+        \ -ntp \"-Dmaven.repo.local=${PETCLINIC_PMX_MAVEN_REPO}\" \\\n    -DskipTests=true -f palladio-source/pom.xml\
+        \ clean verify \\\n  2>&1 | tee workflow-results/petclinic-pmx-solver/runtime/build.log\ntest \"${PIPESTATUS[0]}\"\
+        \ -eq 0\n"
+    - name: Solve every supported model twice
+      env:
+        TAID_PALLADIO_ALIGNED_ROOT: ${{ github.workspace }}/workflow-input/petclinic-pmx-contract/models
+        TAID_PALLADIO_RESULT: ${{ github.workspace }}/workflow-results/petclinic-pmx-solver/raw-result.json
+        TAID_REPEAT_RUNS: '2'
+        TAID_EXPECTED_MODEL_COUNT: ${{ env.PETCLINIC_PMX_MODEL_COUNT }}
+        TAID_EXPECTED_CASE_COUNT: ${{ env.PETCLINIC_PMX_MODEL_COUNT }}
+        TAID_PROBABILITY_TOLERANCE: 1e-12
+      run: "set -o pipefail\n/usr/bin/time -v -o workflow-results/petclinic-pmx-solver/runtime/solve-resource-usage.txt\
+        \ \\\n  xvfb-run -a mvn -B -ntp \"-Dmaven.repo.local=${PETCLINIC_PMX_MAVEN_REPO}\" \\\n    -f palladio-source/pom.xml\
+        \ verify \\\n  2>&1 | tee workflow-results/petclinic-pmx-solver/runtime/solve.log\ntest \"${PIPESTATUS[0]}\"\
+        \ -eq 0\n"
+      if: ${{ env.PETCLINIC_PMX_MODEL_COUNT != '0' }}
+    - name: Collect test reports
+      if: ${{ always() }}
+      run: "report_root=\"palladio-source/tests/org.palladiosimulator.reliability.tests/target/surefire-reports\"\
+        \nif [[ -d \"$report_root\" ]]; then\n  cp -R \"$report_root\" workflow-results/petclinic-pmx-solver/surefire-reports\n\
+        fi\n"
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-solver-${{ matrix.profile }}-${{ github.run_id }}
+        path: workflow-results/petclinic-pmx-solver
+        retention-days: 90
+        if-no-files-found: warn
+    - name: Freeze every independent PMX forecast or absence after known-probability controls
+      run: python -m telemetry_availability.v3_comparison_pmx_v3 freeze --source workflow-input/petclinic-pmx-contract
+        --solver workflow-results/petclinic-pmx-solver --out workflow-results/pmx-candidates
+      if: ${{ always() }}
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-candidates-${{ matrix.profile }}-${{ github.run_id }}
+        path: workflow-results/pmx-candidates
+        retention-days: 90
+        if-no-files-found: warn
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-pmx-solver-contract-${{ matrix.profile }}-${{ github.run_id }}
+        path: workflow-input/petclinic-pmx-contract
+        retention-days: 90
+        if-no-files-found: warn
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: ${{ fromJSON(needs.plan.outputs.profiles) }}
+    if: ${{ always() && needs.plan.result == 'success' }}
+  freeze:
+    needs:
+    - plan
+    - graph
+    - palladio_solver
+    if: ${{ needs.plan.result == 'success' && needs.graph.result == 'success' && needs.palladio_solver.result ==
+      'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.cases) }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-receipt-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/receipt
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-graph-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/graph
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-pmx-candidates-${{ matrix.profile }}-${{ github.run_id }}
+        path: workflow-input/pmx
+    - name: Seal all ten-method slots before any evaluator download
+      run: python -m telemetry_availability.v4_confirmation_orchestration_v2 --config configs/v4_confirmation_design_v1.json
+        freeze --mode main --key "${{ matrix.key }}" --source workflow-input --out workflow-results/frozen
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-frozen-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/frozen
+        retention-days: 90
+        if-no-files-found: warn
+  bounds:
+    needs:
+    - plan
+    - freeze
+    if: ${{ needs.freeze.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.cases) }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-frozen-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/frozen
+    - name: Require complete PMX, B0 and graph forecast freeze before opening the next role
+      run: python -m telemetry_availability.v4_confirmation_orchestration_v2 gate --key "${{ matrix.key }}" --source
+        workflow-input/frozen
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-test-binding-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/test-binding
+    - name: Seal every realized-state bound without external business labels
+      run: python -m telemetry_availability.v4_confirmation_verification_v2 bounds --source workflow-input/test-binding
+        --frozen workflow-input/frozen --out workflow-results/bounds
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-bounds-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/bounds
+        retention-days: 90
+        if-no-files-found: error
+  evaluate:
+    needs:
+    - plan
+    - freeze
+    - bounds
+    if: ${{ needs.freeze.result == 'success' && needs.bounds.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.cases) }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-frozen-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/frozen
+    - name: Require complete PMX, B0 and graph forecast freeze before opening the next role
+      run: python -m telemetry_availability.v4_confirmation_orchestration_v2 gate --key "${{ matrix.key }}" --source
+        workflow-input/frozen
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-closed-evaluator-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/evaluator
+    - name: Open exact sealed evaluator and score immutable forecasts
+      run: python -m telemetry_availability.v4_confirmation_orchestration_v2 --config configs/v4_confirmation_design_v1.json
+        evaluate --mode main --key "${{ matrix.key }}" --source workflow-input/frozen --evaluator workflow-input/evaluator
+        --out workflow-results/evaluation
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-evaluation-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/evaluation
+        retention-days: 90
+        if-no-files-found: warn
+  primary:
+    needs:
+    - plan
+    - freeze
+    - bounds
+    if: ${{ needs.freeze.result == 'success' && needs.bounds.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.cases) }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-frozen-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/frozen
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-bounds-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/bounds
+    - name: Require complete PMX, B0 and graph forecast freeze before opening the next role
+      run: python -m telemetry_availability.v4_confirmation_orchestration_v2 gate --key "${{ matrix.key }}" --source
+        workflow-input/frozen
+    - uses: actions/download-artifact@v8
+      with:
+        name: v4-confirmation-primary-closed-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-input/primary
+    - name: Independently check primary HTTP and SQL outcomes against sealed attempt bounds
+      run: python -m telemetry_availability.v4_confirmation_verification_v2 primary --source workflow-input/primary
+        --frozen workflow-input/frozen --bounds workflow-input/bounds/sealed --out workflow-results/primary
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-primary-full-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/primary/full
+        retention-days: 90
+        if-no-files-found: error
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-primary-compact-${{ matrix.key }}-${{ github.run_id }}
+        path: workflow-results/primary/compact.json
+        retention-days: 90
+        if-no-files-found: error
+  analysis:
+    needs:
+    - plan
+    - evaluate
+    - primary
+    if: ${{ always() && needs.plan.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install pinned Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify complete frozen comparison implementation
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - uses: actions/download-artifact@v8
+      with:
+        pattern: v4-confirmation-evaluation-*-${{ github.run_id }}
+        path: workflow-input/evaluations
+    - uses: actions/download-artifact@v8
+      with:
+        pattern: v4-confirmation-frozen-*-${{ github.run_id }}
+        path: workflow-input/frozen
+    - uses: actions/download-artifact@v8
+      with:
+        pattern: v4-confirmation-primary-compact-*-${{ github.run_id }}
+        path: workflow-input/primary
+    - name: Reconcile every planned identity, primary/stable/transfer coverage and costs
+      run: python -m telemetry_availability.v4_confirmation_orchestration_v2 --config configs/v4_confirmation_design_v1.json
+        summarize --mode main --source workflow-input --out workflow-results/comparison
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-compact-${{ github.run_id }}
+        path: workflow-results/comparison
+        retention-days: 90
+        if-no-files-found: warn
+  proxy_regression:
+    needs:
+    - plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: 3.13.15
+        cache: pip
+    - name: Install declared environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .'
+    - name: Verify both fixed versions
+      run: 'python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+
+        python -c "from telemetry_availability.v4_confirmation_orchestration_v2 import verify_new_locks; verify_new_locks()"'
+    - name: Verify the exact first-attempt rule with the qualified proxy
+      run: python scripts/check_v4_retry_proxy_v2.py
+    - uses: actions/upload-artifact@v7
+      if: ${{ always() }}
+      with:
+        name: v4-confirmation-proxy-regression-${{ github.run_id }}
+        path: workflow-results/proxy-regression
+        retention-days: 90
+        if-no-files-found: error
