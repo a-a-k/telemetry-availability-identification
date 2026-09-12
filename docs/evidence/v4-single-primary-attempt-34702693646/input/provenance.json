@@ -1,0 +1,145 @@
+{
+  "source": {
+    "artifact_id": 10150948048,
+    "name": "v3-comparison-raw-deathstarbench_social_network--split--NC--r1-34465226083",
+    "sha256": "8b393598b6fc3ae3d4ef21bda4828e4cdd8f085b6d8fdf5ba826d8defb032653",
+    "bytes": 10976086,
+    "members": 42,
+    "uncompressed_bytes": 207137076,
+    "provider_digest_verified": true,
+    "zip_crc_verified": true
+  },
+  "source_identity": {
+    "application": "deathstarbench_social_network",
+    "data_role": "prospective_main",
+    "law": "NC",
+    "namespace": "v3-main-771601",
+    "placement": "split",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548",
+    "repetition": 1
+  },
+  "request_source_file_sha256": "47dc64008527780ecbbb17cfabe5d156ca01737fdfba1b3d9b9bd84263fb6c0e",
+  "request_JSON_pointer": "/583",
+  "request_canonical_sha256": "a4e66b5282f3e7239abd2d6470091744304ad2befa138f0e241d27fd3fac07a9",
+  "native_source_file_sha256": "e5a851216ba0c856f47d42bee949b59639cf7735157ff4625a42b8620b3be7ef",
+  "native_JSON_pointer": "/data/5999",
+  "native_trace_canonical_sha256": "24bca28315bf88d27b566877930909d6108cc2fa65362f107d4382d0464d4737",
+  "health_source_file_sha256": "ff7dc9ae432c54b16a975b206e2f156018a0cce7f82b2ba95a64dcbc1d0d6d8a",
+  "health_source_row_indices": [
+    432,
+    433,
+    434,
+    435,
+    436,
+    437,
+    438,
+    439,
+    440,
+    441,
+    442,
+    443,
+    444,
+    445,
+    446
+  ],
+  "health_records_canonical_sha256": "d9e82eb5a6c1097b954c20b4a698692916410897aee05e6fee33d67cfd1ecaa5",
+  "original_ordinary_seal_sha256": "f0e4e193844e8e367c3e4bb26f313c84c9d037d4557562d97b722e0c91f48bd7",
+  "original_spec": {
+    "allowed_native_services": [
+      "compose-post-service",
+      "home-timeline-service",
+      "media-service",
+      "nginx-web-server",
+      "post-storage-service",
+      "social-graph-service",
+      "text-service",
+      "unique-id-service",
+      "url-shorten-service",
+      "user-mention-service",
+      "user-service",
+      "user-timeline-service"
+    ],
+    "assumptions": {
+      "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+      "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+      "scope": "Registered fixed compose payload; source futures/deferred work awaited; success is acknowledgement, not an independent durable-write certificate.",
+      "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+      "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+    },
+    "client_route_names": [],
+    "database_peers": [],
+    "deadline_ns": 2000000000,
+    "entry": "nginx-web-server",
+    "expected_attempts": 1200,
+    "external_roots": 1,
+    "ignored_rpc_methods_by_pair": {},
+    "maximum_probe_age_ns": 2000000000,
+    "minimum_calls_by_pair": {},
+    "required_native_pairs": [
+      [
+        "nginx-web-server",
+        "compose-post-service"
+      ],
+      [
+        "compose-post-service",
+        "home-timeline-service"
+      ],
+      [
+        "compose-post-service",
+        "media-service"
+      ],
+      [
+        "compose-post-service",
+        "post-storage-service"
+      ],
+      [
+        "compose-post-service",
+        "text-service"
+      ],
+      [
+        "compose-post-service",
+        "unique-id-service"
+      ],
+      [
+        "compose-post-service",
+        "user-service"
+      ],
+      [
+        "compose-post-service",
+        "user-timeline-service"
+      ],
+      [
+        "home-timeline-service",
+        "social-graph-service"
+      ],
+      [
+        "text-service",
+        "url-shorten-service"
+      ],
+      [
+        "text-service",
+        "user-mention-service"
+      ]
+    ],
+    "required_native_services": [
+      "compose-post-service",
+      "home-timeline-service",
+      "media-service",
+      "post-storage-service",
+      "text-service",
+      "unique-id-service",
+      "user-service",
+      "user-timeline-service",
+      "social-graph-service",
+      "url-shorten-service",
+      "user-mention-service"
+    ],
+    "source_error_propagation_assumed": true,
+    "target_calls": 1
+  },
+  "only_spec_change": "expected_attempts: 1200 -> 1 for this explicit single-record demonstration",
+  "selected_as_previously_audited_counterexample": true,
+  "population_estimation_or_independent_validation": false,
+  "extraction_head": "7e5ae67bccd048af0cf802531b1a7c887b3931ac",
+  "extraction_run": "34702693646"
+}

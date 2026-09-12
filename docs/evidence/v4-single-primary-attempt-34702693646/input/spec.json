@@ -1,0 +1,93 @@
+{
+  "allowed_native_services": [
+    "compose-post-service",
+    "home-timeline-service",
+    "media-service",
+    "nginx-web-server",
+    "post-storage-service",
+    "social-graph-service",
+    "text-service",
+    "unique-id-service",
+    "url-shorten-service",
+    "user-mention-service",
+    "user-service",
+    "user-timeline-service"
+  ],
+  "assumptions": {
+    "payload_contract": "correct fixed fixtures/payload and declared synchronous propagation assumed; native protocol alone is insufficient",
+    "retries": "all declared mandatory calls must complete; rescued failed mandatory calls outside this binding",
+    "scope": "Registered fixed compose payload; source futures/deferred work awaited; success is acknowledgement, not an independent durable-write certificate.",
+    "stationarity": "joint law invariance required for future forecast, not established by technical calibration",
+    "unobserved_dependencies": "untraced storage/cache/infrastructure behavior must satisfy the explicit workload scope"
+  },
+  "client_route_names": [],
+  "database_peers": [],
+  "deadline_ns": 2000000000,
+  "entry": "nginx-web-server",
+  "expected_attempts": 1,
+  "external_roots": 1,
+  "ignored_rpc_methods_by_pair": {},
+  "maximum_probe_age_ns": 2000000000,
+  "minimum_calls_by_pair": {},
+  "required_native_pairs": [
+    [
+      "nginx-web-server",
+      "compose-post-service"
+    ],
+    [
+      "compose-post-service",
+      "home-timeline-service"
+    ],
+    [
+      "compose-post-service",
+      "media-service"
+    ],
+    [
+      "compose-post-service",
+      "post-storage-service"
+    ],
+    [
+      "compose-post-service",
+      "text-service"
+    ],
+    [
+      "compose-post-service",
+      "unique-id-service"
+    ],
+    [
+      "compose-post-service",
+      "user-service"
+    ],
+    [
+      "compose-post-service",
+      "user-timeline-service"
+    ],
+    [
+      "home-timeline-service",
+      "social-graph-service"
+    ],
+    [
+      "text-service",
+      "url-shorten-service"
+    ],
+    [
+      "text-service",
+      "user-mention-service"
+    ]
+  ],
+  "required_native_services": [
+    "compose-post-service",
+    "home-timeline-service",
+    "media-service",
+    "post-storage-service",
+    "text-service",
+    "unique-id-service",
+    "user-service",
+    "user-timeline-service",
+    "social-graph-service",
+    "url-shorten-service",
+    "user-mention-service"
+  ],
+  "source_error_propagation_assumed": true,
+  "target_calls": 1
+}

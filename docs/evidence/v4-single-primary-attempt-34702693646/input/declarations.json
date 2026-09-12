@@ -1,0 +1,27 @@
+{
+  "backend_success_check_statuses": [
+    "L4OK"
+  ],
+  "database_shared": null,
+  "dependency_provenance": "Required call semantics are separately pinned operation source declarations; empty metadata lists mean unspecified, not no dependencies",
+  "failure_law": "NC",
+  "known_non_target_dependencies": [],
+  "placement": "split",
+  "placements": {
+    "a": "domain_a",
+    "b": "domain_b"
+  },
+  "profile": "deathstarbench_social_network",
+  "repetition": 1,
+  "replica_health_check": "HAProxy L4 transport connect only",
+  "replicas": {
+    "a": "user-timeline-service-replica-a",
+    "b": "user-timeline-service-replica-b"
+  },
+  "source_declared_dependencies": {
+    "compose_post": [],
+    "read_home_timeline": [],
+    "read_user_timeline": []
+  },
+  "target_service": "user-timeline-service"
+}

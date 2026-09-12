@@ -1,6 +1,15 @@
 name: V4 single primary attempt reproducer v1
-on:
+true:
   workflow_dispatch:
+    inputs:
+      source:
+        description: Fixed historical capsule source
+        type: choice
+        required: true
+        default: retained
+        options:
+        - retained
+        - original_archive
 permissions:
   contents: read
   actions: read
@@ -9,29 +18,38 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v7
-        with:
-          persist-credentials: false
-      - uses: actions/setup-python@v7
-        with:
-          python-version: '3.13'
-          cache: pip
-      - name: Install declared Python environment
-        run: |
-          python -m pip install -r requirements.txt
-          python -m pip install --no-deps -e .
-      - name: Verify original scientific implementation
-        run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
-      - name: Extract the fixed primary witness with original source pointers
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python scripts/prepare_v4_single_attempt_v1.py
-      - name: Independently replay primary parsing and both model bindings in a fresh process
-        run: python scripts/reproduce_v4_single_attempt_v1.py --input workflow-results/single-attempt/input --out workflow-results/single-attempt/result.json
-      - uses: actions/upload-artifact@v7
-        if: always()
-        with:
-          name: v4-single-primary-attempt-${{ github.run_id }}
-          path: workflow-results/single-attempt
-          if-no-files-found: error
-          retention-days: 90
+    - uses: actions/checkout@v7
+      with:
+        persist-credentials: false
+    - uses: actions/setup-python@v7
+      with:
+        python-version: '3.13'
+        cache: pip
+    - name: Install declared Python environment
+      run: 'python -m pip install -r requirements.txt
+
+        python -m pip install --no-deps -e .
+
+        '
+    - name: Verify original scientific implementation
+      run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+    - name: Use the exact bounded primary capsule committed to the repository
+      if: ${{ inputs.source == 'retained' }}
+      run: 'mkdir -p workflow-results/single-attempt
+
+        cp -R docs/evidence/v4-single-primary-attempt-34702693646/input workflow-results/single-attempt/input'
+    - name: Extract the fixed primary witness with original source pointers
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: python scripts/prepare_v4_single_attempt_v1.py
+      if: ${{ inputs.source == 'original_archive' }}
+    - name: Independently replay primary parsing and both model bindings in a fresh process
+      run: python scripts/reproduce_v4_single_attempt_v1.py --input workflow-results/single-attempt/input --out
+        workflow-results/single-attempt/result.json
+    - uses: actions/upload-artifact@v7
+      if: always()
+      with:
+        name: v4-single-primary-attempt-${{ github.run_id }}
+        path: workflow-results/single-attempt
+        if-no-files-found: error
+        retention-days: 90

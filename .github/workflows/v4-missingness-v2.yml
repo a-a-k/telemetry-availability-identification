@@ -1,0 +1,43 @@
+name: V4 independent observation missingness v2
+on:
+  workflow_run:
+    workflows: [V4 independent confirmation technical continuation v2]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  experiment:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 34703686592 && github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo, spring_petclinic_microservices]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+          cache: pip
+      - name: Install declared Python environment
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Preserve the original frozen scientific implementation
+        run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+      - name: Evaluate fixed missingness and information restoration on every primary-verified supported attempt
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/run_v4_missingness_v2.py --profile '${{ matrix.profile }}' --out workflow-results/missingness
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: v4-missingness-compact-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/missingness/*.json
+          if-no-files-found: error
+          retention-days: 90
