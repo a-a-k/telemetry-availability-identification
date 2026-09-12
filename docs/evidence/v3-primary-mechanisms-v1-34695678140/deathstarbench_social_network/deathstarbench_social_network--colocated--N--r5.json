@@ -1,0 +1,113 @@
+{
+  "version": "v3-primary-mechanisms-v1",
+  "identity": {
+    "application": "deathstarbench_social_network",
+    "placement": "colocated",
+    "law": "N",
+    "repetition": 5,
+    "namespace": "v3-main-771601",
+    "data_role": "prospective_main",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548"
+  },
+  "source_audit_run": 34694957306,
+  "run": "34695678140",
+  "head": "29f7fbd14cca526d4cc93da60180a644014769b5",
+  "sources": {
+    "raw": {
+      "artifact_id": 10148470390,
+      "name": "v3-comparison-raw-deathstarbench_social_network--colocated--N--r5-34465226083",
+      "sha256": "b321c14c825d27aa245ea695c7187c78805cdd78b706afc71b755067d462d8ae",
+      "bytes": 11136469,
+      "members": 42,
+      "uncompressed_bytes": 211403356,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    "graph": {
+      "artifact_id": 10165074336,
+      "name": "v3-comparison-graph-deathstarbench_social_network--colocated--N--r5-34465226083",
+      "sha256": "588319c1da2cba002be54a7f57ae34ddc795c3211e83aca8e9b53e2f8e4316f5",
+      "bytes": 13772,
+      "members": 10,
+      "uncompressed_bytes": 105442,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  },
+  "fixture_source": null,
+  "event_source_sha256": "186cd42d3ca274b8a29efe32a179183624e12bc3820f9168b33e332a44e4c57e",
+  "operations": [
+    {
+      "operation": "compose_post",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0
+      }
+    },
+    {
+      "operation": "read_home_timeline",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0
+      }
+    },
+    {
+      "operation": "read_user_timeline",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0
+      }
+    }
+  ],
+  "examples": [
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-N-5-run34465226083-a1-deathstarbench_social_network-colocated-N-r5-calibration-000000",
+      "trace_id": "b3edeb066cb313f5",
+      "operation": "compose_post",
+      "stored_outcome": false,
+      "independent_verdict": {
+        "outcome": false,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-N-5-run34465226083-a1-deathstarbench_social_network-colocated-N-r5-calibration-000015",
+      "trace_id": "ccfbee12b53854e2",
+      "operation": "read_home_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-N-5-run34465226083-a1-deathstarbench_social_network-colocated-N-r5-calibration-000002",
+      "trace_id": "5c811a6c6569a9dd",
+      "operation": "read_user_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    }
+  ],
+  "selection": "all calibration attempts in fixed first four campaigns; no selection by E=Y"
+}

@@ -1,0 +1,399 @@
+{
+  "version": "v3-primary-mechanisms-v1",
+  "identity": {
+    "application": "spring_petclinic_microservices",
+    "placement": "colocated",
+    "law": "N",
+    "repetition": 0,
+    "namespace": "v3-main-771601",
+    "data_role": "prospective_main",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548"
+  },
+  "source_audit_run": 34694957306,
+  "run": "34695678140",
+  "head": "29f7fbd14cca526d4cc93da60180a644014769b5",
+  "sources": {
+    "raw": {
+      "artifact_id": 10160399527,
+      "name": "v3-comparison-raw-spring_petclinic_microservices--colocated--N--r0-34465226083",
+      "sha256": "13161a11e2662a04895273ddbf55dcfe74ebd0c87348e761c2c0c3ff5b8e4565",
+      "bytes": 15276067,
+      "members": 41,
+      "uncompressed_bytes": 428279871,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    "graph": {
+      "artifact_id": 10165241969,
+      "name": "v3-comparison-graph-spring_petclinic_microservices--colocated--N--r0-34465226083",
+      "sha256": "e92f6ae5ac43e2dbbfa9f5faddac832b192fff7c662d54dc51ac18afeb4b5cae",
+      "bytes": 14479,
+      "members": 10,
+      "uncompressed_bytes": 113605,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  },
+  "fixture_source": {
+    "source_commit": "3858f9c630cf989bb6809a86edf47c2be78dc9f1",
+    "SQL_sha256": {
+      "spring-petclinic-customers-service/src/main/resources/db/mysql/data.sql": "6ca8d1327d662a65db58ea0da74f5201dac37238e8d31c9777c119373c776f06",
+      "spring-petclinic-visits-service/src/main/resources/db/mysql/data.sql": "88863383b18d40fe7c06184d3a7a16592afe504120a4b6e5ea095ab6343ca57b",
+      "spring-petclinic-vets-service/src/main/resources/db/mysql/data.sql": "4e3beb276725d5b25c7c182e43eff5b60402d0c8e8490d2376e77feed5cbf4cd"
+    }
+  },
+  "event_source_sha256": "631d8887016768104b3b03c1acdf0d779c6b84754a30808297caeb2bd7a62a8e",
+  "operations": [
+    {
+      "operation": "create_visit",
+      "counts": {
+        "attempts": 900,
+        "verification:ack_verified_persistence_primary_rows_not_retained": 857,
+        "outcome_not_independently_determined": 857,
+        "verification:write_failure_verified": 43,
+        "outcome_independently_determined": 43,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 5,
+        "incompatible_with_independently_determined_outcome": 0,
+        "mechanism:confirmed_release_between_sample_and_target_execution": 4,
+        "mechanism:recent_release_precedes_negative_sample": 1
+      }
+    },
+    {
+      "operation": "list_owners",
+      "counts": {
+        "attempts": 900,
+        "verification:parsed_primary_payload_against_pinned_SQL_fixture": 900,
+        "outcome_independently_determined": 900,
+        "outcome_mismatches": 0
+      }
+    },
+    {
+      "operation": "list_vets",
+      "counts": {
+        "attempts": 900,
+        "verification:parsed_primary_payload_against_pinned_SQL_fixture": 900,
+        "outcome_independently_determined": 900,
+        "outcome_mismatches": 0
+      }
+    },
+    {
+      "operation": "owner_details_with_visits",
+      "counts": {
+        "attempts": 900,
+        "verification:parsed_primary_payload_against_pinned_SQL_fixture": 900,
+        "outcome_independently_determined": 900,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 8,
+        "incompatible_with_independently_determined_outcome": 8,
+        "mechanism:confirmed_release_between_sample_and_target_execution": 6,
+        "mechanism:recent_release_precedes_negative_sample": 2
+      }
+    }
+  ],
+  "examples": [
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-000008-create_visit",
+      "trace_id": "147dd96205cd98f0a2a6893f3b406aec",
+      "operation": "create_visit",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": null,
+        "verification": "ack_verified_persistence_primary_rows_not_retained",
+        "acknowledged_response_valid": true,
+        "original_response_bytes_retained": false,
+        "persistence_independently_verified": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-000064-create_visit",
+      "trace_id": "5c42d009d6a642a2f4468f91213f96ff",
+      "operation": "create_visit",
+      "stored_outcome": false,
+      "independent_verdict": {
+        "outcome": false,
+        "verification": "write_failure_verified",
+        "acknowledged_response_valid": false,
+        "original_response_bytes_retained": false,
+        "persistence_independently_verified": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-000746-create_visit",
+      "trace_id": "0aab0cbec83ebc579034a8be6349b0e9",
+      "operation": "create_visit",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": null,
+        "verification": "ack_verified_persistence_primary_rows_not_retained",
+        "acknowledged_response_valid": true,
+        "original_response_bytes_retained": false,
+        "persistence_independently_verified": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "confirmed_release_between_sample_and_target_execution",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "confirmed_release_between_sample_and_target_execution",
+            "target_entries": [
+              {
+                "span_id": "421d1d746f9a9ca2",
+                "start_ns": 1789053279872427741,
+                "end_ns": 1789053279878012964
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T15:14:39.368318Z",
+                "service": "visits-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": true,
+                "network_count": 3,
+                "backend_status": "DOWN",
+                "backend_check_status": "L7TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-individual_b-006",
+                "effect": "pause",
+                "applied_at": "2026-09-10T15:14:33.269697Z",
+                "released_at": "2026-09-10T15:14:39.483978Z",
+                "released_ns": 1789053279483978000,
+                "release_after_sample": true,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-002731-create_visit",
+      "trace_id": "2ad0c4c38d06286974527b9bc8f2a541",
+      "operation": "create_visit",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": null,
+        "verification": "ack_verified_persistence_primary_rows_not_retained",
+        "acknowledged_response_valid": true,
+        "original_response_bytes_retained": false,
+        "persistence_independently_verified": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "recent_release_precedes_negative_sample",
+        "replica_evidence": [
+          {
+            "replica": "a",
+            "classification": "recent_release_precedes_negative_sample",
+            "target_entries": [
+              {
+                "span_id": "911da11ea4d887fc",
+                "start_ns": 1789053776120991554,
+                "end_ns": 1789053776125311567
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T15:22:55.368349Z",
+                "service": "visits-service-replica-a",
+                "replica": "a",
+                "running": true,
+                "paused": false,
+                "network_count": 3,
+                "backend_status": "DOWN",
+                "backend_check_status": "L7TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-individual_a-019",
+                "effect": "pause",
+                "applied_at": "2026-09-10T15:22:48.358080Z",
+                "released_at": "2026-09-10T15:22:55.117158Z",
+                "released_ns": 1789053775117158000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-000005-list_owners",
+      "trace_id": "4e54f73a8c4d02fab7405441ffd592e8",
+      "operation": "list_owners",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "parsed_primary_payload_against_pinned_SQL_fixture",
+        "original_response_bytes_retained": false,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-000001-list_vets",
+      "trace_id": "495312f7745362c495025c53a7a258d8",
+      "operation": "list_vets",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "parsed_primary_payload_against_pinned_SQL_fixture",
+        "original_response_bytes_retained": false,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-000000-owner_details_with_visits",
+      "trace_id": "af6939e7ecd80cdfae8640e6614c1097",
+      "operation": "owner_details_with_visits",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "parsed_primary_payload_against_pinned_SQL_fixture",
+        "original_response_bytes_retained": false,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-000078-owner_details_with_visits",
+      "trace_id": "4e3b7793ca0310d64dbd2ec25dff1e0d",
+      "operation": "owner_details_with_visits",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "parsed_primary_payload_against_pinned_SQL_fixture",
+        "original_response_bytes_retained": false,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "confirmed_release_between_sample_and_target_execution",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "confirmed_release_between_sample_and_target_execution",
+            "target_entries": [
+              {
+                "span_id": "e79789a3b00d6922",
+                "start_ns": 1789053112883251529,
+                "end_ns": 1789053112890362573
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T15:11:52.368403Z",
+                "service": "visits-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": true,
+                "network_count": 3,
+                "backend_status": "DOWN",
+                "backend_check_status": "* L7TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-individual_b-000",
+                "effect": "pause",
+                "applied_at": "2026-09-10T15:11:46.180574Z",
+                "released_at": "2026-09-10T15:11:52.770523Z",
+                "released_ns": 1789053112770523000,
+                "release_after_sample": true,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-spring_petclinic_microservices-colocated-N-0-run34465226083-a1-calibration-002074-owner_details_with_visits",
+      "trace_id": "c3d551b9b3ea69433b3d152411409bfb",
+      "operation": "owner_details_with_visits",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "parsed_primary_payload_against_pinned_SQL_fixture",
+        "original_response_bytes_retained": false,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "recent_release_precedes_negative_sample",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "recent_release_precedes_negative_sample",
+            "target_entries": [
+              {
+                "span_id": "a050d4ff5afabc09",
+                "start_ns": 1789053611877177741,
+                "end_ns": 1789053611881111508
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T15:20:11.368620Z",
+                "service": "visits-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 3,
+                "backend_status": "DOWN",
+                "backend_check_status": "L7TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-individual_b-017",
+                "effect": "pause",
+                "applied_at": "2026-09-10T15:20:02.462038Z",
+                "released_at": "2026-09-10T15:20:11.301774Z",
+                "released_ns": 1789053611301774000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    }
+  ],
+  "selection": "all calibration attempts in fixed first four campaigns; no selection by E=Y"
+}

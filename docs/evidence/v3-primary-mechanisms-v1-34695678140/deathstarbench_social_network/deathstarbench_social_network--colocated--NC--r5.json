@@ -1,0 +1,439 @@
+{
+  "version": "v3-primary-mechanisms-v1",
+  "identity": {
+    "application": "deathstarbench_social_network",
+    "placement": "colocated",
+    "law": "NC",
+    "repetition": 5,
+    "namespace": "v3-main-771601",
+    "data_role": "prospective_main",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548"
+  },
+  "source_audit_run": 34694957306,
+  "run": "34695678140",
+  "head": "29f7fbd14cca526d4cc93da60180a644014769b5",
+  "sources": {
+    "raw": {
+      "artifact_id": 10148475048,
+      "name": "v3-comparison-raw-deathstarbench_social_network--colocated--NC--r5-34465226083",
+      "sha256": "e0e05cbb5e04ac0894b0a8abc79a3b081db7cde95b2040d5e6a5d0115d388cd3",
+      "bytes": 11128310,
+      "members": 42,
+      "uncompressed_bytes": 210148078,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    "graph": {
+      "artifact_id": 10165075648,
+      "name": "v3-comparison-graph-deathstarbench_social_network--colocated--NC--r5-34465226083",
+      "sha256": "9ef6287e1c6dc54622f30b1951c653001552ab4e445c3c323f93acb1161c8d23",
+      "bytes": 14836,
+      "members": 10,
+      "uncompressed_bytes": 118495,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  },
+  "fixture_source": null,
+  "event_source_sha256": "f0ec8959eb46d0198096199f4f5e11bc923c89e8db0e3d4eca68cc8ca022b3b6",
+  "operations": [
+    {
+      "operation": "compose_post",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 24,
+        "incompatible_with_independently_determined_outcome": 24,
+        "mechanism:recent_release_precedes_negative_sample": 3,
+        "mechanism:transition_not_localized_in_window": 18,
+        "mechanism:confirmed_release_between_sample_and_target_execution": 3
+      }
+    },
+    {
+      "operation": "read_home_timeline",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0
+      }
+    },
+    {
+      "operation": "read_user_timeline",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 22,
+        "incompatible_with_independently_determined_outcome": 22,
+        "mechanism:confirmed_release_between_sample_and_target_execution": 7,
+        "mechanism:recent_release_precedes_negative_sample": 2,
+        "mechanism:transition_not_localized_in_window": 13
+      }
+    }
+  ],
+  "examples": [
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-000000",
+      "trace_id": "23fae7a3f7349d32",
+      "operation": "compose_post",
+      "stored_outcome": false,
+      "independent_verdict": {
+        "outcome": false,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-000672",
+      "trace_id": "cd79089f6203597d",
+      "operation": "compose_post",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "recent_release_precedes_negative_sample",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "recent_release_precedes_negative_sample",
+            "target_entries": [
+              {
+                "span_id": "65738473dc95735a",
+                "start_ns": 1789035852974041000,
+                "end_ns": 1789035852975456000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T10:24:11.969663Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_b-002",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T10:24:06.098713Z",
+                "released_at": "2026-09-10T10:24:11.755995Z",
+                "released_ns": 1789035851755995000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-001982",
+      "trace_id": "ff008bee9b298ee9",
+      "operation": "compose_post",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "transition_not_localized_in_window",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "transition_not_localized_in_window",
+            "target_entries": [
+              {
+                "span_id": "38426682c63aaea5",
+                "start_ns": 1789036180473351000,
+                "end_ns": 1789036180474881000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T10:29:39.969930Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": []
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-002491",
+      "trace_id": "74387bf1f2e9864a",
+      "operation": "compose_post",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "confirmed_release_between_sample_and_target_execution",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "confirmed_release_between_sample_and_target_execution",
+            "target_entries": [
+              {
+                "span_id": "1b56df35552dd1d6",
+                "start_ns": 1789036308136108000,
+                "end_ns": 1789036308137904000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T10:31:46.969626Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 0,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_b-010",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T10:31:43.451268Z",
+                "released_at": "2026-09-10T10:31:48.078888Z",
+                "released_ns": 1789036308078888000,
+                "release_after_sample": true,
+                "release_before_request_start": false,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-000001",
+      "trace_id": "ff0680282c1fc460",
+      "operation": "read_home_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-000005",
+      "trace_id": "3ae4f317aedebdb6",
+      "operation": "read_user_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-000494",
+      "trace_id": "b2a29e9f5dadf020",
+      "operation": "read_user_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "confirmed_release_between_sample_and_target_execution",
+        "replica_evidence": [
+          {
+            "replica": "a",
+            "classification": "confirmed_release_between_sample_and_target_execution",
+            "target_entries": [
+              {
+                "span_id": "a65d88d5f722e0f7",
+                "start_ns": 1789035809303673000,
+                "end_ns": 1789035809304754000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T10:23:27.969939Z",
+                "service": "user-timeline-service-replica-a",
+                "replica": "a",
+                "running": true,
+                "paused": false,
+                "network_count": 0,
+                "backend_status": "DOWN",
+                "backend_check_status": "* L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_a-000",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T10:23:23.498679Z",
+                "released_at": "2026-09-10T10:23:29.131697Z",
+                "released_ns": 1789035809131697000,
+                "release_after_sample": true,
+                "release_before_request_start": false,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-001282",
+      "trace_id": "0e82d3126ba4d930",
+      "operation": "read_user_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "recent_release_precedes_negative_sample",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "recent_release_precedes_negative_sample",
+            "target_entries": [
+              {
+                "span_id": "5629a2b8e3911645",
+                "start_ns": 1789036005470831000,
+                "end_ns": 1789036005471781000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T10:26:44.969742Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "* L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_b-004",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T10:26:37.529423Z",
+                "released_at": "2026-09-10T10:26:44.949329Z",
+                "released_ns": 1789036004949329000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-colocated-NC-5-run34465226083-a1-deathstarbench_social_network-colocated-NC-r5-calibration-001984",
+      "trace_id": "c79ebd961e1e20d8",
+      "operation": "read_user_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "transition_not_localized_in_window",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "transition_not_localized_in_window",
+            "target_entries": [
+              {
+                "span_id": "ebf249c5764b6cd3",
+                "start_ns": 1789036180971241000,
+                "end_ns": 1789036180973583000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T10:29:40.969724Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": []
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    }
+  ],
+  "selection": "all calibration attempts in fixed first four campaigns; no selection by E=Y"
+}

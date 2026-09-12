@@ -1,0 +1,276 @@
+{
+  "version": "v3-primary-mechanisms-v1",
+  "identity": {
+    "application": "deathstarbench_social_network",
+    "placement": "split",
+    "law": "NC",
+    "repetition": 1,
+    "namespace": "v3-main-771601",
+    "data_role": "prospective_main",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548"
+  },
+  "source_audit_run": 34694957306,
+  "run": "34695678140",
+  "head": "29f7fbd14cca526d4cc93da60180a644014769b5",
+  "sources": {
+    "raw": {
+      "artifact_id": 10150948048,
+      "name": "v3-comparison-raw-deathstarbench_social_network--split--NC--r1-34465226083",
+      "sha256": "8b393598b6fc3ae3d4ef21bda4828e4cdd8f085b6d8fdf5ba826d8defb032653",
+      "bytes": 10976086,
+      "members": 42,
+      "uncompressed_bytes": 207137076,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    "graph": {
+      "artifact_id": 10165116691,
+      "name": "v3-comparison-graph-deathstarbench_social_network--split--NC--r1-34465226083",
+      "sha256": "30160cd1c342d81b9565143c19f0c77f05d000e6432b72c5ca74250f5b5fb40d",
+      "bytes": 13489,
+      "members": 10,
+      "uncompressed_bytes": 95205,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  },
+  "fixture_source": null,
+  "event_source_sha256": "405dc641e1fa5e7344f700a83e95af8647957c9cb87c9f908a322d3c1e10b45f",
+  "operations": [
+    {
+      "operation": "compose_post",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 56,
+        "incompatible_with_independently_determined_outcome": 56,
+        "mechanism:confirmed_release_between_sample_and_target_execution": 3,
+        "mechanism:recent_release_precedes_negative_sample": 3,
+        "mechanism:transition_not_localized_in_window": 50
+      }
+    },
+    {
+      "operation": "read_home_timeline",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0
+      }
+    },
+    {
+      "operation": "read_user_timeline",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0
+      }
+    }
+  ],
+  "examples": [
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-1-run34465226083-a1-deathstarbench_social_network-split-NC-r1-calibration-000000",
+      "trace_id": "78c0975f2bf8d9ef",
+      "operation": "compose_post",
+      "stored_outcome": false,
+      "independent_verdict": {
+        "outcome": false,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-1-run34465226083-a1-deathstarbench_social_network-split-NC-r1-calibration-000343",
+      "trace_id": "ab001a37f5166863",
+      "operation": "compose_post",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "confirmed_release_between_sample_and_target_execution",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "confirmed_release_between_sample_and_target_execution",
+            "target_entries": [
+              {
+                "span_id": "d54271d809acbd3d",
+                "start_ns": 1789040042240734000,
+                "end_ns": 1789040042241580000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T11:33:59.805144Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 0,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_b-001",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T11:33:53.775663Z",
+                "released_at": "2026-09-10T11:34:01.716500Z",
+                "released_ns": 1789040041716500000,
+                "release_after_sample": true,
+                "release_before_request_start": false,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-1-run34465226083-a1-deathstarbench_social_network-split-NC-r1-calibration-001437",
+      "trace_id": "83295a839a764692",
+      "operation": "compose_post",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "recent_release_precedes_negative_sample",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "recent_release_precedes_negative_sample",
+            "target_entries": [
+              {
+                "span_id": "4c419a9d1acee5c1",
+                "start_ns": 1789040314058645000,
+                "end_ns": 1789040314060864000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T11:38:33.804889Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "* L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_b-007",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T11:38:24.488694Z",
+                "released_at": "2026-09-10T11:38:32.339834Z",
+                "released_ns": 1789040312339834000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-1-run34465226083-a1-deathstarbench_social_network-split-NC-r1-calibration-001441",
+      "trace_id": "a8b99d7c1f23da9a",
+      "operation": "compose_post",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "transition_not_localized_in_window",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "transition_not_localized_in_window",
+            "target_entries": [
+              {
+                "span_id": "3e22731db20efdcb",
+                "start_ns": 1789040315057535000,
+                "end_ns": 1789040315058844000
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T11:38:34.805148Z",
+                "service": "user-timeline-service-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "* L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": []
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-1-run34465226083-a1-deathstarbench_social_network-split-NC-r1-calibration-000001",
+      "trace_id": "f8068bc2b219dab5",
+      "operation": "read_home_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-deathstarbench_social_network-split-NC-1-run34465226083-a1-deathstarbench_social_network-split-NC-r1-calibration-000002",
+      "trace_id": "a0734478dd5e04fd",
+      "operation": "read_user_timeline",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    }
+  ],
+  "selection": "all calibration attempts in fixed first four campaigns; no selection by E=Y"
+}

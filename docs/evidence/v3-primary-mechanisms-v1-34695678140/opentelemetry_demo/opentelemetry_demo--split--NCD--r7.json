@@ -1,0 +1,363 @@
+{
+  "version": "v3-primary-mechanisms-v1",
+  "identity": {
+    "application": "opentelemetry_demo",
+    "placement": "split",
+    "law": "NCD",
+    "repetition": 7,
+    "namespace": "v3-main-771601",
+    "data_role": "prospective_main",
+    "protocol_sha256": "6b60a07faad6778284f36bebc86a3f8a201c4b19319f006206b1e63b5ab8b548"
+  },
+  "source_audit_run": 34694957306,
+  "run": "34695678140",
+  "head": "29f7fbd14cca526d4cc93da60180a644014769b5",
+  "sources": {
+    "raw": {
+      "artifact_id": 10158800140,
+      "name": "v3-comparison-raw-opentelemetry_demo--split--NCD--r7-34465226083",
+      "sha256": "db064b606f91b38584fd27beeb8f31db645944fc264fd65ab6bbd00144669f9f",
+      "bytes": 37113090,
+      "members": 44,
+      "uncompressed_bytes": 525926978,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    },
+    "graph": {
+      "artifact_id": 10165243383,
+      "name": "v3-comparison-graph-opentelemetry_demo--split--NCD--r7-34465226083",
+      "sha256": "e35c92a5eaa1fc048988cb508908ad701727bd6d604c7080eaa7dac218119c27",
+      "bytes": 15997,
+      "members": 10,
+      "uncompressed_bytes": 136958,
+      "provider_digest_verified": true,
+      "zip_crc_verified": true
+    }
+  },
+  "fixture_source": null,
+  "event_source_sha256": "218171a390b70b825813a65c4a5f466cf97b778e873331dd286b0973e5c8a7ad",
+  "operations": [
+    {
+      "operation": "add_to_cart",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 1,
+        "incompatible_with_independently_determined_outcome": 1,
+        "mechanism:confirmed_release_between_sample_and_target_execution": 1
+      }
+    },
+    {
+      "operation": "browse_product",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 1,
+        "incompatible_with_independently_determined_outcome": 1,
+        "mechanism:recent_release_precedes_negative_sample": 1
+      }
+    },
+    {
+      "operation": "checkout",
+      "counts": {
+        "attempts": 1200,
+        "verification:whole_http_contract_from_primary_response_bytes": 1200,
+        "outcome_independently_determined": 1200,
+        "outcome_mismatches": 0,
+        "incompatible_attempts": 11,
+        "incompatible_with_independently_determined_outcome": 11,
+        "mechanism:recent_release_precedes_negative_sample": 5,
+        "mechanism:confirmed_release_between_sample_and_target_execution": 6
+      }
+    }
+  ],
+  "examples": [
+    {
+      "request_id": "v3-main-771601-opentelemetry_demo-split-NCD-7-run34465226083-a1-opentelemetry_demo-split-NCD-r7-calibration-000002",
+      "trace_id": "df3a25323e5ed67eb67870419e97416f",
+      "operation": "add_to_cart",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 2,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-opentelemetry_demo-split-NCD-7-run34465226083-a1-opentelemetry_demo-split-NCD-r7-calibration-000198",
+      "trace_id": "a8f9cf76a80537ae8a6330f90b6a93c7",
+      "operation": "add_to_cart",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 2,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "confirmed_release_between_sample_and_target_execution",
+        "replica_evidence": [
+          {
+            "replica": "b",
+            "classification": "confirmed_release_between_sample_and_target_execution",
+            "target_entries": [
+              {
+                "span_id": "fac7126366082e2f",
+                "start_ns": 1789050989394922722,
+                "end_ns": 1789050989396334371
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T14:36:28.891917Z",
+                "service": "product-catalog-replica-b",
+                "replica": "b",
+                "running": true,
+                "paused": false,
+                "network_count": 0,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-individual_b-000",
+                "effect": "pause",
+                "applied_at": "2026-09-10T14:36:21.512712Z",
+                "released_at": "2026-09-10T14:36:28.702449Z",
+                "released_ns": 1789050988702449000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              },
+              {
+                "event_id": "calibration-communication_b-000",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T14:36:23.875311Z",
+                "released_at": "2026-09-10T14:36:29.182420Z",
+                "released_ns": 1789050989182420000,
+                "release_after_sample": true,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-opentelemetry_demo-split-NCD-7-run34465226083-a1-opentelemetry_demo-split-NCD-r7-calibration-000005",
+      "trace_id": "89b0f603ec3b9affdca8485ee7186dcd",
+      "operation": "browse_product",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-opentelemetry_demo-split-NCD-7-run34465226083-a1-opentelemetry_demo-split-NCD-r7-calibration-001263",
+      "trace_id": "bf44705ca3c4cb76e301b1f9e4663aa8",
+      "operation": "browse_product",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 1,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "recent_release_precedes_negative_sample",
+        "replica_evidence": [
+          {
+            "replica": "a",
+            "classification": "recent_release_precedes_negative_sample",
+            "target_entries": [
+              {
+                "span_id": "ab7f001aa8e6dc7c",
+                "start_ns": 1789051257123704685,
+                "end_ns": 1789051257127073821
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T14:40:54.891809Z",
+                "service": "product-catalog-replica-a",
+                "replica": "a",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_a-007",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T14:40:49.886538Z",
+                "released_at": "2026-09-10T14:40:54.856115Z",
+                "released_ns": 1789051254856115000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-opentelemetry_demo-split-NCD-7-run34465226083-a1-opentelemetry_demo-split-NCD-r7-calibration-000000",
+      "trace_id": "7b065729cbfb3ec613f3d27a2f577752",
+      "operation": "checkout",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 3,
+        "persistence_claimed": false
+      },
+      "incompatible": false,
+      "mechanism": null
+    },
+    {
+      "request_id": "v3-main-771601-opentelemetry_demo-split-NCD-7-run34465226083-a1-opentelemetry_demo-split-NCD-r7-calibration-000827",
+      "trace_id": "cec1d9608c02b5a83ae14ceef8af9374",
+      "operation": "checkout",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 3,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "recent_release_precedes_negative_sample",
+        "replica_evidence": [
+          {
+            "replica": "a",
+            "classification": "recent_release_precedes_negative_sample",
+            "target_entries": [
+              {
+                "span_id": "c00f9f12e11585a6",
+                "start_ns": 1789051146657485856,
+                "end_ns": 1789051146658893830
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T14:39:05.891959Z",
+                "service": "product-catalog-replica-a",
+                "replica": "a",
+                "running": true,
+                "paused": false,
+                "network_count": 1,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_a-004",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T14:38:59.159941Z",
+                "released_at": "2026-09-10T14:39:05.746118Z",
+                "released_ns": 1789051145746118000,
+                "release_after_sample": false,
+                "release_before_request_start": true,
+                "release_before_any_target_entry": true,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    },
+    {
+      "request_id": "v3-main-771601-opentelemetry_demo-split-NCD-7-run34465226083-a1-opentelemetry_demo-split-NCD-r7-calibration-001370",
+      "trace_id": "fafb4bde2194d78d5a03c74d05b08834",
+      "operation": "checkout",
+      "stored_outcome": true,
+      "independent_verdict": {
+        "outcome": true,
+        "verification": "whole_http_contract_from_primary_response_bytes",
+        "checked_response_hashes": 3,
+        "persistence_claimed": false
+      },
+      "incompatible": true,
+      "mechanism": {
+        "classification": "confirmed_release_between_sample_and_target_execution",
+        "replica_evidence": [
+          {
+            "replica": "a",
+            "classification": "confirmed_release_between_sample_and_target_execution",
+            "target_entries": [
+              {
+                "span_id": "4004bafbd0b3ef34",
+                "start_ns": 1789051282447749059,
+                "end_ns": 1789051282451177464
+              }
+            ],
+            "health_snapshots": [
+              {
+                "observed_at": "2026-09-10T14:41:21.891810Z",
+                "service": "product-catalog-replica-a",
+                "replica": "a",
+                "running": true,
+                "paused": false,
+                "network_count": 0,
+                "backend_status": "DOWN",
+                "backend_check_status": "L4TOUT"
+              }
+            ],
+            "nearby_confirmed_releases": [
+              {
+                "event_id": "calibration-communication_a-008",
+                "effect": "network_disconnect",
+                "applied_at": "2026-09-10T14:41:16.262470Z",
+                "released_at": "2026-09-10T14:41:22.448625Z",
+                "released_ns": 1789051282448625000,
+                "release_after_sample": true,
+                "release_before_request_start": false,
+                "release_before_any_target_entry": false,
+                "release_before_any_target_end": true,
+                "expected_affected_after_release": ""
+              }
+            ]
+          }
+        ],
+        "independent_overlapping_faults_not_excluded": true,
+        "existing_connections_not_individually_observed": true
+      }
+    }
+  ],
+  "selection": "all calibration attempts in fixed first four campaigns; no selection by E=Y"
+}
