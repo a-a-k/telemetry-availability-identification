@@ -1,5 +1,6 @@
 """Export every stored forecast, primary-compatibility and stage-cost scalar."""
 from hashlib import sha256
+from fractions import Fraction
 import argparse
 import json
 from pathlib import Path
@@ -35,14 +36,23 @@ def main():
     primary=[flatten(r)for r in confirmation['operations']]
     controls=[flatten(r)for r in confirmation['controls']]
     _,_,cases=planned_cases(Path('configs/v4_confirmation_design_v1.json'),'main')
-    sources=[]
+    sources=[];b0_pairs=[]
     for index,case in enumerate(cases,1):
         receipt=json.loads((evidence/f'case-{index:03d}/receipt/receipt.json').read_bytes())
+        frozen_path=evidence/f'case-{index:03d}/frozen/frozen/candidates.json'
+        frozen=json.loads(frozen_path.read_bytes())
+        for operation,values in frozen['forecasts'].items():
+            g,b=values['Gstar'],values['B0']
+            if g['probability'] is not None and b['probability'] is not None:
+                gf=g.get('exact_fraction') or g.get('lower_exact');bf=b['exact_fraction']
+                b0_pairs.append(dict(case['identity'],operation=operation,gstar_exact=gf,b0_exact=bf,
+                    exactly_equal=Fraction(gf)==Fraction(bf),probability_difference=g['probability']-b['probability'],
+                    frozen_candidates_sha256=sha256(frozen_path.read_bytes()).hexdigest()))
         sources.append(dict(case['identity'],acquisition_run=receipt['acquisition_run'],acquisition_head=receipt['acquisition_head'],
             analysis_run=RUN,analysis_head=HEAD,recollected=case['profile']=='spring_petclinic_microservices',
             graph_input_seal_sha256=receipt['graph_input_seal_sha256'],pmx_input_seal_sha256=receipt['pmx_input_seal_sha256'],
             test_binding_seal_sha256=receipt['test_binding_seal_sha256'],primary_closed_seal_sha256=receipt['primary_closed_seal_sha256']))
-    for name,rows in [('primary-compatibility',primary),('directed-controls',controls),('acquisition-source-map',sources)]:
+    for name,rows in [('primary-compatibility',primary),('directed-controls',controls),('acquisition-source-map',sources),('gstar-b0-common-points',b0_pairs)]:
         transport.persist(out/(name+'.csv'),csv_bytes(rows))
     transport.persist(out/'scientific-checks.json',transport.encoded(dict(checks=confirmation['checks'],
         qualified_within_declared_conditions=confirmation['qualified_within_declared_conditions'],
