@@ -1,0 +1,33 @@
+name: V4 primary refinement durable archive v1
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: v4-primary-refinement-archive-v1
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Preserve all 21 original ZIPs in an unpublished draft
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/archive_v4_primary_refinement_v1.py
+      - uses: actions/upload-artifact@v7
+        with:
+          name: v4-primary-refinement-archive-compact-${{ github.run_id }}
+          path: |
+            workflow-results/exact-backends-archive/compact.json
+            workflow-results/exact-backends-archive/manifest.json
+            workflow-results/exact-backends-archive/source-artifacts.json
+          if-no-files-found: error
+          retention-days: 90
