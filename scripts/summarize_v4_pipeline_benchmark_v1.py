@@ -57,9 +57,9 @@ def export(evidence,out):
             for method in ('graph','pmx'):
                 if method not in row:continue
                 base.update({method+'_'+k:v for k,v in measurement(row[method]).items()})
-                forecasts=row[method].get('forecasts',{})
+                forecasts=row[method].get('forecasts')
                 target='Gstar' if method=='graph' else 'PMX'
-                base[method+'_point_operations']=sum(f[target]['status']=='ok' for f in forecasts.values())
+                base[method+'_point_operations']=sum(f[target]['status']=='ok' for f in forecasts.values()) if forecasts is not None else None
                 for stage,value in row[method]['stages'].items():
                     stage_rows.append(dict(application=profile,repetition=row['repetition'],multiplier=row['multiplier'],
                         method=method,stage=stage,outer_command_wall_seconds=value['wall_seconds'],
