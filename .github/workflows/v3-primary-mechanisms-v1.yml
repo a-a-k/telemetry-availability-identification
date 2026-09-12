@@ -1,0 +1,47 @@
+name: V3 primary verdict and transition audit v1
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  mechanisms:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo, spring_petclinic_microservices]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11.16'
+      - name: Install pinned dependencies
+        run: |
+          python -m pip install -r requirements.txt
+          python -m pip install --no-deps -e .
+      - name: Verify unchanged scientific sources and independent acceptance controls
+        run: |
+          python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+          python -m unittest discover -s tests -p test_primary_verdict_audit_v1.py -v
+      - name: Independently check every external record and locate observed transitions
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/audit_v3_primary_mechanisms_v1.py --profile ${{ matrix.profile }} --out workflow-results/mechanisms
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v3-primary-mechanisms-v1-compact-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/mechanisms/compact
+          retention-days: 90
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v7
+        if: ${{ always() }}
+        with:
+          name: v3-primary-mechanisms-v1-full-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/mechanisms
+          retention-days: 90
+          if-no-files-found: error
