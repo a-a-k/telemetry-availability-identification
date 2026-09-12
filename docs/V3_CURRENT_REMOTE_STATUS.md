@@ -1,5 +1,28 @@
 # V3 research refinement after review
 
+The [independent refinement result](milestones/V4_REFINEMENT_RESULT.md) is now
+retained and pushed: 64,800 independently checked external outcomes; zero
+incompatibilities on 61,200 supported attempts, 4411 ambiguous and 3600
+structurally unsupported attempts. All 48 directed controls and the complete
+prespecified criteria passed. All forecasts and realized-state bounds preceded
+their respective outcome checks. Aggregate producer **34707482231** repairs
+only the unplanned placement-transfer table; scientific source **34703686592**
+keeps its original overall failure status for that final reporting error.
+
+New exact performance **34707544825**: 59 calibration models, 19,824/19,824 exact
+answers, all eight configurations/two representations/seven modes retained.
+Missingness **34707544832**: all 5130 settings on the same supported primary
+population. Complete tables **34708006475** match all 38 local table files byte
+for byte. Archive **34708008168** retains all 310 original ZIPs in unpublished
+release **387645995**; provider asset hashes verified. Historical C12 remains.
+
+The author's subsequent Palladio question adds a new matched full-pipeline
+measurement, **34708991534**, source `4d5270008e6845bc55220869da721698be347e68`:
+27 fixed pairs on the revised binding, 3600/7200/14400 attempts, extra verification
+after all measurement streams. This coefficient remains pending. The completed
+millisecond exact-solver result and the older full-pipeline ratios have different
+boundaries. [Fixed new protocol](V4_PIPELINE_BENCHMARK_V1.md).
+
 The [complete attempt-level audit](milestones/V3_ATTEMPT_AUDIT_V1_RESULT.md), run
 **34694957306**, source **02f31dc45efb05006117793fcd0fe770f49e9d1e**, covers all
 240 campaigns and 864,000 calibration attempts, including 46,800 attempts with
@@ -18,16 +41,16 @@ run **34696809884**, source **1e1a443d73dcfa2a529aa952359153f93101f34d**, covers
 29 fixed historical campaigns: **535 → 0** incompatible intervals on 103,200
 supported attempts. All 1712 queries from eight exact-backend configurations
 and two representations agree on 107 revised models. This is retrospective;
-independent new confirmation, the missingness study and remaining reproducibility
-work are still required. Earlier completion statements below describe the
-original experiments, not closure of the review refinement. See the
+independent new confirmation and missingness results are now recorded above.
+Earlier completion statements below describe the original experiments and
+retain their original numerical scope. See the
 [refinement protocol](milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md).
 
 The [new independent series](milestones/V4_CONFIRMATION_V1_PROTOCOL.md) now has
 a fixed 18-campaign protocol and executable workflow, completed health-reading
 timestamps, primary Petclinic HTTP/SQL capture, 48 directed retry/normal controls,
-and a numerical PMX/B0 gate before any new test outcome opens. Preparation of
-this workflow is not itself an independent confirmation result.
+and a numerical PMX/B0 gate before any new test outcome opens. All of these
+scientific stages have completed; the current result is linked above.
 
 Run **34701084950** stopped before the numerical/global outcome gates: all six
 Petclinic post-period controls rejected the ordinary proxy template through a
@@ -35,8 +58,8 @@ substring-matching bug. The [explicit technical amendment](milestones/V4_CONFIRM
 preserves twelve unopened source cohorts and recollects only the six technically
 lost Petclinic cohorts in run **34703686592**, head
 `12ddb09369ee6e0b60ca4c7db6fe1e749530b7df`. The corrected native proxy regression
-passed. Source CI **34703676996** passed. Independent scientific qualification
-remains pending until all strict numerical, realized-state and primary checks finish.
+passed. Source CI **34703676996** passed. All strict numerical, realized-state
+and primary checks subsequently completed and qualified as recorded above.
 
 [PMX/B0 decomposition](milestones/V4_PMX_B0_EXPLANATION_V1_RESULT.md) is complete:
 run **34702691485** independently reproduces all 40 selected saved PCM answers

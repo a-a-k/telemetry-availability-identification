@@ -15,8 +15,8 @@ the old binding through earlier proxy verdicts and rescued transport failures.
 The [candidate semantic revision](docs/milestones/V4_BINDING_DIAGNOSTIC_V1_RESULT.md)
 reduces 535 contradictions to zero in a fixed 29-campaign diagnostic, with
 1712 matching exact-backend queries on 107 reconstructed models. This is
-retrospective evidence; independent confirmation and the missingness study
-remain required. The [refinement protocol](docs/milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md)
+retrospective evidence, followed by the completed independent confirmation below.
+The [refinement protocol](docs/milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md)
 separates primary evidence, binding errors and conceptual assumptions. Earlier
 numerical and computational results below retain their original scope.
 
@@ -31,7 +31,30 @@ code matched both `default_backend` and `backend`. The [technical continuation](
 run **34703686592**, retains all twelve completed cohorts byte for byte and
 recollects only the six technically lost Petclinic cohorts. All criteria and
 scientific algorithms remain fixed. Missingness and fair backend measurements
-are wired to the completed continuation in their versioned workflows.
+are complete in their versioned workflows.
+
+The [new refinement report](docs/milestones/V4_REFINEMENT_RESULT.md) records
+64,800 independently verified external outcomes, zero incompatibilities on
+61,200 supported attempts, 4411 ambiguous attempts and 3600 structural refusals.
+All 48 directed controls and every prespecified scientific criterion passed;
+all PMX/B0/graph forecasts preceded outcome opening. A separate, disclosed
+aggregate repair handles an unplanned placement-transfer table without changing
+the observations, forecasts or the original workflow failure status.
+
+New Gstar point MAE is 0.944/2.000/0.926 percentage points on its stated support.
+All 54 common point forecasts equal B0 exactly; superiority over PMX is not
+established. All 19,824 exact computations on 59 new calibration models agree.
+First-build prepared computation wins against each tested CUDD/aGrUM/Storm
+configuration on every model in both representations; retained-manager CUDD
+wins the specified structural update. The report includes all timings, resources
+and 5130 missingness settings, including wide, weakly informative bounds.
+
+The complete source archive contains 310 original ZIPs (718,849,377 bytes) in
+unpublished release 387645995. The [additional revised full-pipeline protocol](docs/V4_PIPELINE_BENCHMARK_V1.md)
+now measures Palladio/PMX versus the revised telemetry-to-first-answer pipeline
+in run **34708991534**: 27 fixed pairs, all extra verification after timing.
+Its new coefficient is pending; the older end-to-end ratios below retain their
+original binding and measurement boundary.
 
 The [saved PCM/B0 explanation](docs/milestones/V4_PMX_B0_EXPLANATION_V1_RESULT.md)
 reproduces 40 Palladio answers to at most 1.11e-16 and explains concrete

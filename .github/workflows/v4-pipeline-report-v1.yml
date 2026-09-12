@@ -1,0 +1,39 @@
+name: V4 revised pipeline complete tables v1
+on:
+  workflow_run:
+    workflows: [V4 revised pipeline and Palladio scaling v1]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  tables:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.id == 34708991534
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Verify original scientific locks
+        run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+      - name: Retain the first measurement including unsuccessful pairs
+        run: python scripts/retain_v4_pipeline_benchmark_v1.py --run 34708991534
+      - name: Export every pair, stage, verification process and input scale
+        run: python scripts/summarize_v4_pipeline_benchmark_v1.py --evidence docs/evidence/v4-pipeline-benchmark-34708991534 --out docs/tables/v4-pipeline-benchmark-34708991534
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: v4-pipeline-complete-tables-${{ github.run_id }}
+          path: |
+            docs/evidence/v4-pipeline-benchmark-34708991534
+            docs/tables/v4-pipeline-benchmark-34708991534
+          if-no-files-found: error
+          retention-days: 90
