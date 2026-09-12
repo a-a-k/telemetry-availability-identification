@@ -1,0 +1,90 @@
+{
+  "version": "v4-confirmed-application-costs-v1",
+  "source_run": 34701084950,
+  "source_head": "1d43c3d5ec7852b4dbedf30b3c9e3e8cfd7e557b",
+  "profiles": [
+    "deathstarbench_social_network",
+    "opentelemetry_demo",
+    "spring_petclinic_microservices"
+  ],
+  "expected_models": [
+    null,
+    null,
+    null
+  ],
+  "expected_original_absences": [
+    null,
+    null,
+    null
+  ],
+  "selection": "all saved calibration models of all 18 new campaigns; explicit structural absences; no performance/outcome selection",
+  "methods": [
+    "ours_direct",
+    "ours_prepared",
+    "cudd_fixed",
+    "cudd_sift",
+    "agrum_conditioned",
+    "agrum_joint",
+    "storm_sparse",
+    "storm_compact"
+  ],
+  "primary_cudd": "cudd_sift",
+  "phases": [
+    "initial",
+    "repeat",
+    "counts",
+    "masks",
+    "metadata",
+    "structure",
+    "restore"
+  ],
+  "technical_rounds": 3,
+  "method_order": "rotate Cartesian method-major (method,representation) list left by (case_index+round) modulo 16; cases lexicographic",
+  "stream_timeout_seconds": 60,
+  "address_space_limit_bytes": 3221225472,
+  "agrum_inference_memory_gib": 1,
+  "threads": 1,
+  "output_contract": "six variants and five contrasts, exact endpoint fractions and statuses; no witness output for any timed backend",
+  "reuse": "one current backend per stream; persistent CUDD manager, aGrUM BayesNet container, Storm Environment and property cache; rebuild predicate-dependent data when exact key changes; no final-answer or category-extrema memoization",
+  "reuse_key": "all fields determining predicates and coordinate correspondence, excluding frequencies, masks and nonsemantic metadata",
+  "updates": "declared artificial transformations of saved models; no new observations or independent campaigns",
+  "construction_boundary": "loaded original model through common input projection, exact semantic-key check, optional construction and endpoint query; imports excluded; conversion separately reported and included in total",
+  "stage_costs": "common projection, key check, construction, backend data update, query excluding update, wall and CPU; diagnostic reads after timers",
+  "memory_scope": "GNU time peak RSS across fresh seven-snapshot process including imports, load and diagnostics; verification oracle is a different parent process",
+  "bayesian_intervals": "proved full-support Boolean oracle with LazyPropagation; uniform missing bits only in the auxiliary support law, never imputed target probabilities; not a generic native credal-network algorithm",
+  "bayesian_arithmetic": "native double exact-inference algorithm; inspect each posterior cell for exact zero/positive; no unconditional verification inference; rational frequency aggregation; posterior cell validation after timed streams",
+  "markov_intervals": "exact-rational finite DTMC when no nondeterministic choices; otherwise MDP Pmin/Pmax reachability; no invented continuous-time rates",
+  "markov_compression": "sparse: existing completion-prefix decision graph; compact: exact terminal-label/transition equivalence and deterministic unlabelled stutter elimination, initial state retained for frequency updates; not native double bisimulation",
+  "scope": "computation on fixed joint empirical models; independent identification accuracy and full telemetry reconstruction are separate experiments",
+  "representations": [
+    "original",
+    "completion_projected"
+  ],
+  "primary_agrum": "agrum_conditioned",
+  "primary_storm": "storm_compact",
+  "verification": "source integrity in parent; native toy controls in exited process; final exact qualification after all profile streams; no oracle references in timed workers",
+  "structure_update": "add an actual synchronous edge from entry to first distinct required service (self if none), no factors or new signals; preserve reusable library infrastructure; restore original at final snapshot",
+  "failure_policy": "preserve failed row and skip later snapshots of the same broken stream as upstream_failure; timeout kills entire process; never silently recreate infrastructure after failure",
+  "cudd_config": "fixed initial cache 16384, memory_estimate 1GiB; control coordinates before completion coordinates; fixed or one explicit sift per semantic build; retain manager on rebuild",
+  "agrum_config": "uniform positive observation-category support prior; conditioned LazyPropagation versus all (category,unique output) joint targets; no extra mixture query; retain BN container; rebuild engine after CPT/mask changes; counts only update exact outer weights",
+  "selection_policy": "all fixed variants retained; no per-case winner selection; no timing-driven tuning after measurement",
+  "planned_operation_cases": {
+    "deathstarbench_social_network": 18,
+    "opentelemetry_demo": 18,
+    "spring_petclinic_microservices": 24
+  },
+  "new_source_locks": {
+    "scripts/benchmark_v4_confirmed_models_v1.py": "3d1ea58a793b460efa70b11a78a8269bdcd7049290ec6b083518fdc2865b834f",
+    "scripts/benchmark_v3_exact_comparison_v2.py": "778764d8e3ecb54b5787413c618bd0d797fa9460c68a171432d8b30fd4247b22",
+    "scripts/run_v4_missingness_v1.py": "c79268b05b6ada63c10eb3bba5c127f6890fffaf5f209475e1479e8546f3b02b",
+    ".github/workflows/v4-confirmed-performance-v1.yml": "6f86973c75a4ae5ff84f8c94b73fc9882814a178af053ddc39f4c138d844042c",
+    "docs/milestones/V4_CONFIRMED_PERFORMANCE_V1_PROTOCOL.md": "18f3679ac0bc0b2f62ec343f5d6b1289176d96b59a64a92a7709485c589acb85",
+    "requirements-exact-backends-v1.txt": "bbaa0895509c1215ce6525340d7703fdcdc1947911646c588053f563f50beb89",
+    "src/telemetry_availability/exact_comparison_v2.py": "e17ee434fab68bb844380be9a13b63cda9d89e6729ae1e0704f05364dd29c062",
+    "src/telemetry_availability/exact_backend_common_v1.py": "424d2c9325a7c065a6f2f0ef04495da9ada199ddaf595d4fa43aa19907221d84",
+    "src/telemetry_availability/prepared_exact_v1.py": "eb6daf3b4db09784f6768c1e6f0658d2c4d847dca2863b1758be9d845cb8083c",
+    "src/telemetry_availability/cudd_comparison_v2.py": "255ceb59cc5eb74149edac8f7444a4ccfa8e9e61e7a27aa4c755d645b880e8f0",
+    "src/telemetry_availability/agrum_comparison_v2.py": "996b3e9b4a4f3c33fa1521cb1d2262c548e15f77431c534064b2064de303e550",
+    "src/telemetry_availability/storm_comparison_v2.py": "358f4067f0c5991275c2c9d15463eeae7a55543dcbb4aa17271e99d6e344f8ff"
+  }
+}

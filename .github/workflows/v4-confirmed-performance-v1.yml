@@ -1,0 +1,55 @@
+name: V4 exact costs on independently checked models v1
+on:
+  workflow_run:
+    workflows: [V4 independent confirmation v1]
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+env:
+  OMP_NUM_THREADS: '1'
+  OPENBLAS_NUM_THREADS: '1'
+  MKL_NUM_THREADS: '1'
+jobs:
+  compare:
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.id == 34701084950 && github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        profile: [deathstarbench_social_network, opentelemetry_demo, spring_petclinic_microservices]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: 3.11.16
+      - name: Verify frozen scientific sources
+        run: python scripts/verify_staged_research_lock.py configs/v3_comparison_execution_v3.json
+      - name: Install unchanged native backends
+        run: |
+          python -m pip install -r requirements-exact-backends-v1.txt
+          python -m pip install --no-deps -e .
+      - name: Native semantic controls in a separate exited process
+        run: python scripts/benchmark_v4_confirmed_models_v1.py controls
+      - name: Measure all newly saved application models with unchanged fair workers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/benchmark_v4_confirmed_models_v1.py run --profile ${{ matrix.profile }} --out workflow-results/comparison
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: v4-confirmed-performance-compact-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/comparison/compact
+          if-no-files-found: error
+          retention-days: 90
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: v4-confirmed-performance-full-${{ matrix.profile }}-${{ github.run_id }}
+          path: workflow-results/comparison
+          if-no-files-found: error
+          retention-days: 90
