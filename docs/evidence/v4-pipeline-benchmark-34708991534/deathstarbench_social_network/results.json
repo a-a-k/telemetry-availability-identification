@@ -1,0 +1,4903 @@
+{
+  "version": "v4-pipeline-benchmark-v1",
+  "profile": "deathstarbench_social_network",
+  "workflow_head": "4d5270008e6845bc55220869da721698be347e68",
+  "run_id": 34708991534,
+  "config_sha256": "f1af496e9d8af1e21def19f8496a3a6213157101a43d79154c0c5f84eca2117a",
+  "scientific_head": "12ddb09369ee6e0b60ca4c7db6fe1e749530b7df",
+  "new_independent_campaigns": 0,
+  "records": [
+    {
+      "repetition": 0,
+      "multiplier": 1,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 1,
+        "attempts": 3600,
+        "native_spans": 53155,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x1",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "d7f332b0a4c4b35bffee2119086b84793291fea520ef7c94d88e398caad1bfb4"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "c0096c2d8a25891d8c59917bf6a0c15c3dc9465fad3e8aae1e8596f224c1c4c0"
+          },
+          "ordinary/native.json": {
+            "bytes": 34980026,
+            "sha256": "e55f0e755f681268ed94bb4214ff4cd38d761c3674d4b7c90dad5886a9a6e9b7"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1776,
+            "sha256": "3aea638322547929f3916c2fd88b5166e09d4303a97dc901443bf04951fd1e29"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 1569604,
+            "sha256": "442aa2af3cf21e3e5285221d47c74260fa808964c7d9c46e8c456b913d6eb914"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "e165b05605dfad6574ca72de07ed30dd41ce4ef2a8676c96f8851acab4d9411a"
+          },
+          "pmx/native.json": {
+            "bytes": 34980026,
+            "sha256": "e55f0e755f681268ed94bb4214ff4cd38d761c3674d4b7c90dad5886a9a6e9b7"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "649719966d16541e7ff3478964511cdad408078b7aa9e48a2c295e025c509f7b"
+          },
+          "pmx/requests.json": {
+            "bytes": 1569604,
+            "sha256": "442aa2af3cf21e3e5285221d47c74260fa808964c7d9c46e8c456b913d6eb914"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 2.547940609999955,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x1/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r0-x1/graph",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json"
+            ],
+            "wall_seconds": 2.4716544799999838,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 2.42,
+              "user_seconds": 2.73,
+              "system_seconds": 0.15,
+              "maximum_rss_bytes": 216035328.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 1200
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 1200
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 1200
+          }
+        },
+        "saved_candidate_sha256": "dca2db16d0b0896164334824b4aa9f79602273ebf0dbcc8691bf773706aec519"
+      },
+      "pmx": {
+        "wall_seconds": 171.85582511500002,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x1/pmx",
+              "--out",
+              "workflow-benchmark/trials/r0-x1/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 83.96039219800002,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 83.93,
+              "user_seconds": 61.87,
+              "system_seconds": 2.96,
+              "maximum_rss_bytes": 2380328960.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r0-x1/extractions",
+              "--out",
+              "workflow-benchmark/trials/r0-x1/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9167009509999389,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.9,
+              "user_seconds": 1.44,
+              "system_seconds": 0.08,
+              "maximum_rss_bytes": 110583808.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 86.75427448799996,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 86.74,
+              "user_seconds": 177.78,
+              "system_seconds": 3.77,
+              "maximum_rss_bytes": 1744969728.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r0-x1"
+            ],
+            "wall_seconds": 0.21515639599999759,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.17,
+              "user_seconds": 0.44,
+              "system_seconds": 0.03,
+              "maximum_rss_bytes": 41992192.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 9218927525
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 402762795
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 101755403
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 93171844
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 131258069
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 132391338
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r0-x1/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r0-x1/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x1/execution.json"
+          ],
+          "wall_seconds": 0.9188217480000276,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.91,
+            "user_seconds": 1.43,
+            "system_seconds": 0.09,
+            "maximum_rss_bytes": 109867008.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 79.9201378759999,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 79.88,
+            "user_seconds": 171.19,
+            "system_seconds": 3.6,
+            "maximum_rss_bytes": 1446572032.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 67.44891322839862
+    },
+    {
+      "repetition": 0,
+      "multiplier": 2,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 2,
+        "attempts": 7200,
+        "native_spans": 106310,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x2",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "71cffe5555fd88418c8fb3a3ce22ae0a21427f3d0ea2ff24ca25b6f819707684"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "f7fa2cbd33d279d873836466130e0a5122d69a84193bbff1e682a1edd77a570b"
+          },
+          "ordinary/native.json": {
+            "bytes": 69959974,
+            "sha256": "ff7e8d31636ac81a283c925cad8b9f424b3a21298f8d3cf27269473a39239e0c"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1776,
+            "sha256": "606550e187a95b50060ba1ac24e62585e56a26093e1e501a2ed33a37ade1e487"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 3200405,
+            "sha256": "c4f3260bfc8909b3bd108d0cfd732ebb38a99e697c2c703c1a6c9097adf6f36c"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "2f183cd6bfedf13361848f9cf2e39151e341226a82e1f94a45b133d5d9092b85"
+          },
+          "pmx/native.json": {
+            "bytes": 69959974,
+            "sha256": "ff7e8d31636ac81a283c925cad8b9f424b3a21298f8d3cf27269473a39239e0c"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "7c178a7d2c440e63feba32981f9e3592a0268e208956365f4773ca4fbc72d460"
+          },
+          "pmx/requests.json": {
+            "bytes": 3200405,
+            "sha256": "c4f3260bfc8909b3bd108d0cfd732ebb38a99e697c2c703c1a6c9097adf6f36c"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 191.86161266099998,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x2/pmx",
+              "--out",
+              "workflow-benchmark/trials/r0-x2/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 106.78965265199997,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 106.72999999999999,
+              "user_seconds": 94.98,
+              "system_seconds": 4.4,
+              "maximum_rss_bytes": 3752681472.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r0-x2/extractions",
+              "--out",
+              "workflow-benchmark/trials/r0-x2/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9162712380000357,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.9,
+              "user_seconds": 1.45,
+              "system_seconds": 0.07,
+              "maximum_rss_bytes": 110661632.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 83.93221073900008,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 83.89,
+              "user_seconds": 175.02,
+              "system_seconds": 3.72,
+              "maximum_rss_bytes": 2349010944.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r0-x2"
+            ],
+            "wall_seconds": 0.21481690999996772,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.16,
+              "user_seconds": 0.45,
+              "system_seconds": 0.01,
+              "maximum_rss_bytes": 42037248.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 5920423499
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 541260374
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 115246998
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 108107182
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 155938526
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 142357518
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 4.176230145999966,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x2/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r0-x2/graph",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json"
+            ],
+            "wall_seconds": 4.173992882999983,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 4.16,
+              "user_seconds": 4.55,
+              "system_seconds": 0.22,
+              "maximum_rss_bytes": 321712128.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 2400
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 2400
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 2400
+          }
+        },
+        "saved_candidate_sha256": "2c414b7f18abdee6c320b616a6687c29f29ad0d22bd8ba01d40f6681179c58ef"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r0-x2/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r0-x2/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x2/execution.json"
+          ],
+          "wall_seconds": 0.915939286000139,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.89,
+            "user_seconds": 1.41,
+            "system_seconds": 0.08,
+            "maximum_rss_bytes": 109658112.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 81.23339092199967,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 81.19,
+            "user_seconds": 173.6,
+            "system_seconds": 3.8,
+            "maximum_rss_bytes": 2231324672.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 45.94134086330632
+    },
+    {
+      "repetition": 0,
+      "multiplier": 4,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 4,
+        "attempts": 14400,
+        "native_spans": 212620,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x4",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "5dd413e139ecad0db286d3beb0d9848dc8b02d6f372e30a0aa01a2dfc7c256b1"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "b78c9f1c6009777177a7a6b114cf1f7d0b675d240c0d2f965434781051940744"
+          },
+          "ordinary/native.json": {
+            "bytes": 139919870,
+            "sha256": "7d62b60d47d240be8c821141ce944cb3814a59cccc4ac47376f908adf0f93c3f"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1777,
+            "sha256": "5e660af4824bd23430bd1f880da6a9b4285ef9435ea96c383c07616df805a2ad"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 6462007,
+            "sha256": "b08b23830e9c80312c886c32ec9404245245126e9f5831b3ed29948cdaa62048"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "0394817c5bea21f5f80ce0b5523a0ea9e8268073f596c5b5bb39ca7a7820aa9c"
+          },
+          "pmx/native.json": {
+            "bytes": 139919870,
+            "sha256": "7d62b60d47d240be8c821141ce944cb3814a59cccc4ac47376f908adf0f93c3f"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "9e6ded27f525cff81d2aabedded1754902dde6a3b335ceddb0e1d14111a4f295"
+          },
+          "pmx/requests.json": {
+            "bytes": 6462007,
+            "sha256": "b08b23830e9c80312c886c32ec9404245245126e9f5831b3ed29948cdaa62048"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 8.033964115999993,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x4/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r0-x4/graph",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json"
+            ],
+            "wall_seconds": 8.033431051999969,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 7.98,
+              "user_seconds": 8.27,
+              "system_seconds": 0.32,
+              "maximum_rss_bytes": 534151168.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 4800
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 4800
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 4800
+          }
+        },
+        "saved_candidate_sha256": "49702295f67658aaf93b9373bcf06ec3b929506f30c2833c18dc007fe0d93c93"
+      },
+      "pmx": {
+        "wall_seconds": 249.69022629999984,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x4/pmx",
+              "--out",
+              "workflow-benchmark/trials/r0-x4/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 166.32526872699998,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 166.32,
+              "user_seconds": 186.23,
+              "system_seconds": 6.51,
+              "maximum_rss_bytes": 4591755264.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r0-x4/extractions",
+              "--out",
+              "workflow-benchmark/trials/r0-x4/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9171703450001587,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.91,
+              "user_seconds": 1.44,
+              "system_seconds": 0.08,
+              "maximum_rss_bytes": 110596096.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 82.22387837399992,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 82.19,
+              "user_seconds": 175.78,
+              "system_seconds": 3.74,
+              "maximum_rss_bytes": 1955962880.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r0-x4"
+            ],
+            "wall_seconds": 0.21471224000015354,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.16,
+              "user_seconds": 0.45,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 42000384.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 6172356159
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 411095431
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 112288315
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 93158537
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 132042705
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 116838595
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r0-x4/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r0-x4/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x4/execution.json"
+          ],
+          "wall_seconds": 0.9163145460001942,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.9,
+            "user_seconds": 1.41,
+            "system_seconds": 0.08,
+            "maximum_rss_bytes": 109715456.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 81.98283931000014,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 81.95,
+            "user_seconds": 174.5,
+            "system_seconds": 3.67,
+            "maximum_rss_bytes": 1390252032.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 31.079330539046193
+    },
+    {
+      "repetition": 1,
+      "multiplier": 2,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 2,
+        "attempts": 7200,
+        "native_spans": 106310,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x2",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "71cffe5555fd88418c8fb3a3ce22ae0a21427f3d0ea2ff24ca25b6f819707684"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "f7fa2cbd33d279d873836466130e0a5122d69a84193bbff1e682a1edd77a570b"
+          },
+          "ordinary/native.json": {
+            "bytes": 69959974,
+            "sha256": "ff7e8d31636ac81a283c925cad8b9f424b3a21298f8d3cf27269473a39239e0c"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1776,
+            "sha256": "606550e187a95b50060ba1ac24e62585e56a26093e1e501a2ed33a37ade1e487"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 3200405,
+            "sha256": "c4f3260bfc8909b3bd108d0cfd732ebb38a99e697c2c703c1a6c9097adf6f36c"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "2f183cd6bfedf13361848f9cf2e39151e341226a82e1f94a45b133d5d9092b85"
+          },
+          "pmx/native.json": {
+            "bytes": 69959974,
+            "sha256": "ff7e8d31636ac81a283c925cad8b9f424b3a21298f8d3cf27269473a39239e0c"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "7c178a7d2c440e63feba32981f9e3592a0268e208956365f4773ca4fbc72d460"
+          },
+          "pmx/requests.json": {
+            "bytes": 3200405,
+            "sha256": "c4f3260bfc8909b3bd108d0cfd732ebb38a99e697c2c703c1a6c9097adf6f36c"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 4.1252239349998945,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x2/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r1-x2/graph",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json"
+            ],
+            "wall_seconds": 4.124681817999999,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 4.11,
+              "user_seconds": 4.48,
+              "system_seconds": 0.21,
+              "maximum_rss_bytes": 321531904.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 2400
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 2400
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 2400
+          }
+        },
+        "saved_candidate_sha256": "2c414b7f18abdee6c320b616a6687c29f29ad0d22bd8ba01d40f6681179c58ef"
+      },
+      "pmx": {
+        "wall_seconds": 192.30815786799985,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x2/pmx",
+              "--out",
+              "workflow-benchmark/trials/r1-x2/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 106.43279767000013,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 106.41,
+              "user_seconds": 93.04,
+              "system_seconds": 4.25,
+              "maximum_rss_bytes": 3783426048.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r1-x2/extractions",
+              "--out",
+              "workflow-benchmark/trials/r1-x2/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9164182429999528,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.9,
+              "user_seconds": 1.44,
+              "system_seconds": 0.08,
+              "maximum_rss_bytes": 110653440.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 84.73480801999995,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 84.68,
+              "user_seconds": 176.5,
+              "system_seconds": 3.7,
+              "maximum_rss_bytes": 1646227456.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r1-x2"
+            ],
+            "wall_seconds": 0.21489599099982115,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.16,
+              "user_seconds": 0.45,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 42110976.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 5966667057
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 414083487
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 112794004
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 106038446
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 150992091
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 145513939
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r1-x2/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r1-x2/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x2/execution.json"
+          ],
+          "wall_seconds": 0.9167665499999202,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.9,
+            "user_seconds": 1.41,
+            "system_seconds": 0.09,
+            "maximum_rss_bytes": 109514752.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 81.98088006200032,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 81.95,
+            "user_seconds": 175.66,
+            "system_seconds": 3.71,
+            "maximum_rss_bytes": 1468776448.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 46.617628739227406
+    },
+    {
+      "repetition": 1,
+      "multiplier": 4,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 4,
+        "attempts": 14400,
+        "native_spans": 212620,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x4",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "5dd413e139ecad0db286d3beb0d9848dc8b02d6f372e30a0aa01a2dfc7c256b1"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "b78c9f1c6009777177a7a6b114cf1f7d0b675d240c0d2f965434781051940744"
+          },
+          "ordinary/native.json": {
+            "bytes": 139919870,
+            "sha256": "7d62b60d47d240be8c821141ce944cb3814a59cccc4ac47376f908adf0f93c3f"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1777,
+            "sha256": "5e660af4824bd23430bd1f880da6a9b4285ef9435ea96c383c07616df805a2ad"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 6462007,
+            "sha256": "b08b23830e9c80312c886c32ec9404245245126e9f5831b3ed29948cdaa62048"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "0394817c5bea21f5f80ce0b5523a0ea9e8268073f596c5b5bb39ca7a7820aa9c"
+          },
+          "pmx/native.json": {
+            "bytes": 139919870,
+            "sha256": "7d62b60d47d240be8c821141ce944cb3814a59cccc4ac47376f908adf0f93c3f"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "9e6ded27f525cff81d2aabedded1754902dde6a3b335ceddb0e1d14111a4f295"
+          },
+          "pmx/requests.json": {
+            "bytes": 6462007,
+            "sha256": "b08b23830e9c80312c886c32ec9404245245126e9f5831b3ed29948cdaa62048"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 250.62225326099997,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x4/pmx",
+              "--out",
+              "workflow-benchmark/trials/r1-x4/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 168.12350363300015,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 168.11,
+              "user_seconds": 186.94,
+              "system_seconds": 6.83,
+              "maximum_rss_bytes": 4592553984.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r1-x4/extractions",
+              "--out",
+              "workflow-benchmark/trials/r1-x4/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9190450869998585,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.91,
+              "user_seconds": 1.44,
+              "system_seconds": 0.08,
+              "maximum_rss_bytes": 110309376.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 81.35616282599995,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 81.3,
+              "user_seconds": 173.93,
+              "system_seconds": 3.77,
+              "maximum_rss_bytes": 1310027776.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r1-x4"
+            ],
+            "wall_seconds": 0.21480103999988387,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.16,
+              "user_seconds": 0.45,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 42102784.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 5850985334
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 478035758
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 117672937
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 118885945
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 171177143
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 143128105
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 7.88543525099999,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x4/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r1-x4/graph",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json"
+            ],
+            "wall_seconds": 7.883223598000086,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 7.84,
+              "user_seconds": 8.1,
+              "system_seconds": 0.34,
+              "maximum_rss_bytes": 546344960.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 4800
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 4800
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 4800
+          }
+        },
+        "saved_candidate_sha256": "49702295f67658aaf93b9373bcf06ec3b929506f30c2833c18dc007fe0d93c93"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r1-x4/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r1-x4/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x4/execution.json"
+          ],
+          "wall_seconds": 0.9164429370002836,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.89,
+            "user_seconds": 1.42,
+            "system_seconds": 0.08,
+            "maximum_rss_bytes": 109723648.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 82.48168598199982,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 82.45,
+            "user_seconds": 176.53,
+            "system_seconds": 3.74,
+            "maximum_rss_bytes": 1329311744.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 31.78293211262084
+    },
+    {
+      "repetition": 1,
+      "multiplier": 1,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 1,
+        "attempts": 3600,
+        "native_spans": 53155,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x1",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "d7f332b0a4c4b35bffee2119086b84793291fea520ef7c94d88e398caad1bfb4"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "c0096c2d8a25891d8c59917bf6a0c15c3dc9465fad3e8aae1e8596f224c1c4c0"
+          },
+          "ordinary/native.json": {
+            "bytes": 34980026,
+            "sha256": "e55f0e755f681268ed94bb4214ff4cd38d761c3674d4b7c90dad5886a9a6e9b7"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1776,
+            "sha256": "3aea638322547929f3916c2fd88b5166e09d4303a97dc901443bf04951fd1e29"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 1569604,
+            "sha256": "442aa2af3cf21e3e5285221d47c74260fa808964c7d9c46e8c456b913d6eb914"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "e165b05605dfad6574ca72de07ed30dd41ce4ef2a8676c96f8851acab4d9411a"
+          },
+          "pmx/native.json": {
+            "bytes": 34980026,
+            "sha256": "e55f0e755f681268ed94bb4214ff4cd38d761c3674d4b7c90dad5886a9a6e9b7"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "649719966d16541e7ff3478964511cdad408078b7aa9e48a2c295e025c509f7b"
+          },
+          "pmx/requests.json": {
+            "bytes": 1569604,
+            "sha256": "442aa2af3cf21e3e5285221d47c74260fa808964c7d9c46e8c456b913d6eb914"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 166.92774183799997,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x1/pmx",
+              "--out",
+              "workflow-benchmark/trials/r1-x1/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 84.12008841099987,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 84.11,
+              "user_seconds": 62.19,
+              "system_seconds": 3.13,
+              "maximum_rss_bytes": 2551844864.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r1-x1/extractions",
+              "--out",
+              "workflow-benchmark/trials/r1-x1/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9170363460000317,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.9,
+              "user_seconds": 1.44,
+              "system_seconds": 0.08,
+              "maximum_rss_bytes": 110428160.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 81.66683282300005,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 81.65,
+              "user_seconds": 174.8,
+              "system_seconds": 3.72,
+              "maximum_rss_bytes": 1276624896.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r1-x1"
+            ],
+            "wall_seconds": 0.21509495600002992,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.16,
+              "user_seconds": 0.44,
+              "system_seconds": 0.03,
+              "maximum_rss_bytes": 42115072.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 6289739638
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 369760041
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 106559165
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 101088855
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 147945505
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 118668750
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 2.3721204840001064,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x1/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r1-x1/graph",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json"
+            ],
+            "wall_seconds": 2.3698957589999736,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 2.35,
+              "user_seconds": 2.79,
+              "system_seconds": 0.16,
+              "maximum_rss_bytes": 218337280.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 1200
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 1200
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 1200
+          }
+        },
+        "saved_candidate_sha256": "dca2db16d0b0896164334824b4aa9f79602273ebf0dbcc8691bf773706aec519"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r1-x1/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r1-x1/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x1/execution.json"
+          ],
+          "wall_seconds": 0.9177492619996883,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.9,
+            "user_seconds": 1.42,
+            "system_seconds": 0.08,
+            "maximum_rss_bytes": 109981696.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 82.68101949899983,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 82.63,
+            "user_seconds": 174.26,
+            "system_seconds": 3.74,
+            "maximum_rss_bytes": 1326833664.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 70.37068435769744
+    },
+    {
+      "repetition": 2,
+      "multiplier": 4,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 4,
+        "attempts": 14400,
+        "native_spans": 212620,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x4",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "5dd413e139ecad0db286d3beb0d9848dc8b02d6f372e30a0aa01a2dfc7c256b1"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "b78c9f1c6009777177a7a6b114cf1f7d0b675d240c0d2f965434781051940744"
+          },
+          "ordinary/native.json": {
+            "bytes": 139919870,
+            "sha256": "7d62b60d47d240be8c821141ce944cb3814a59cccc4ac47376f908adf0f93c3f"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1777,
+            "sha256": "5e660af4824bd23430bd1f880da6a9b4285ef9435ea96c383c07616df805a2ad"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 6462007,
+            "sha256": "b08b23830e9c80312c886c32ec9404245245126e9f5831b3ed29948cdaa62048"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "0394817c5bea21f5f80ce0b5523a0ea9e8268073f596c5b5bb39ca7a7820aa9c"
+          },
+          "pmx/native.json": {
+            "bytes": 139919870,
+            "sha256": "7d62b60d47d240be8c821141ce944cb3814a59cccc4ac47376f908adf0f93c3f"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "9e6ded27f525cff81d2aabedded1754902dde6a3b335ceddb0e1d14111a4f295"
+          },
+          "pmx/requests.json": {
+            "bytes": 6462007,
+            "sha256": "b08b23830e9c80312c886c32ec9404245245126e9f5831b3ed29948cdaa62048"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 7.833680678000064,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x4/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r2-x4/graph",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json"
+            ],
+            "wall_seconds": 7.833218090999935,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 7.79,
+              "user_seconds": 8.08,
+              "system_seconds": 0.32,
+              "maximum_rss_bytes": 546775040.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 4800
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 4800
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 4800
+          }
+        },
+        "saved_candidate_sha256": "49702295f67658aaf93b9373bcf06ec3b929506f30c2833c18dc007fe0d93c93"
+      },
+      "pmx": {
+        "wall_seconds": 248.56936328999996,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x4/pmx",
+              "--out",
+              "workflow-benchmark/trials/r2-x4/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 166.09616633300016,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 166.07,
+              "user_seconds": 187.51,
+              "system_seconds": 6.48,
+              "maximum_rss_bytes": 4599750656.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r2-x4/extractions",
+              "--out",
+              "workflow-benchmark/trials/r2-x4/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9184101979999468,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.9,
+              "user_seconds": 1.41,
+              "system_seconds": 0.09,
+              "maximum_rss_bytes": 110735360.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 81.32856924800012,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 81.31,
+              "user_seconds": 173.79,
+              "system_seconds": 3.66,
+              "maximum_rss_bytes": 2095484928.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r2-x4"
+            ],
+            "wall_seconds": 0.21700516199985032,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.16,
+              "user_seconds": 0.46,
+              "system_seconds": 0.01,
+              "maximum_rss_bytes": 41967616.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 5819549271
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 475717045
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 123564676
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 112700500
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 149047349
+          },
+          {
+            "model_id": "campaign-558d4449c1651fd8ba8a--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 141872612
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r2-x4/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r2-x4/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x4/execution.json"
+          ],
+          "wall_seconds": 0.9158758899998247,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.91,
+            "user_seconds": 1.41,
+            "system_seconds": 0.07,
+            "maximum_rss_bytes": 109920256.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 85.49153611800011,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 85.47,
+            "user_seconds": 175.11,
+            "system_seconds": 3.59,
+            "maximum_rss_bytes": 1471594496.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 31.730852138009233
+    },
+    {
+      "repetition": 2,
+      "multiplier": 1,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 1,
+        "attempts": 3600,
+        "native_spans": 53155,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x1",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "d7f332b0a4c4b35bffee2119086b84793291fea520ef7c94d88e398caad1bfb4"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "c0096c2d8a25891d8c59917bf6a0c15c3dc9465fad3e8aae1e8596f224c1c4c0"
+          },
+          "ordinary/native.json": {
+            "bytes": 34980026,
+            "sha256": "e55f0e755f681268ed94bb4214ff4cd38d761c3674d4b7c90dad5886a9a6e9b7"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1776,
+            "sha256": "3aea638322547929f3916c2fd88b5166e09d4303a97dc901443bf04951fd1e29"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 1569604,
+            "sha256": "442aa2af3cf21e3e5285221d47c74260fa808964c7d9c46e8c456b913d6eb914"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "e165b05605dfad6574ca72de07ed30dd41ce4ef2a8676c96f8851acab4d9411a"
+          },
+          "pmx/native.json": {
+            "bytes": 34980026,
+            "sha256": "e55f0e755f681268ed94bb4214ff4cd38d761c3674d4b7c90dad5886a9a6e9b7"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "649719966d16541e7ff3478964511cdad408078b7aa9e48a2c295e025c509f7b"
+          },
+          "pmx/requests.json": {
+            "bytes": 1569604,
+            "sha256": "442aa2af3cf21e3e5285221d47c74260fa808964c7d9c46e8c456b913d6eb914"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 2.420561022999891,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x1/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r2-x1/graph",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json"
+            ],
+            "wall_seconds": 2.420088009999972,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 2.39,
+              "user_seconds": 2.86,
+              "system_seconds": 0.13,
+              "maximum_rss_bytes": 218873856.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 1200
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 1200
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 1200
+          }
+        },
+        "saved_candidate_sha256": "dca2db16d0b0896164334824b4aa9f79602273ebf0dbcc8691bf773706aec519"
+      },
+      "pmx": {
+        "wall_seconds": 167.9066789149997,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x1/pmx",
+              "--out",
+              "workflow-benchmark/trials/r2-x1/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 84.28516528699993,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 84.27,
+              "user_seconds": 62.71,
+              "system_seconds": 3.16,
+              "maximum_rss_bytes": 2505895936.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r2-x1/extractions",
+              "--out",
+              "workflow-benchmark/trials/r2-x1/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9678170890001638,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.91,
+              "user_seconds": 1.43,
+              "system_seconds": 0.09,
+              "maximum_rss_bytes": 110596096.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 82.42968333999988,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 82.4,
+              "user_seconds": 173.35,
+              "system_seconds": 3.67,
+              "maximum_rss_bytes": 2106937344.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r2-x1"
+            ],
+            "wall_seconds": 0.21469835999960196,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.17,
+              "user_seconds": 0.45,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 42119168.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 5902935516
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 468090250
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 119222937
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 99524899
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 147577079
+          },
+          {
+            "model_id": "campaign-1c7fc776dedb5eebe0c1--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 136286298
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r2-x1/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r2-x1/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x1/execution.json"
+          ],
+          "wall_seconds": 0.9178527210001448,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.9,
+            "user_seconds": 1.41,
+            "system_seconds": 0.09,
+            "maximum_rss_bytes": 109768704.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 82.75257115900013,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 82.71000000000001,
+            "user_seconds": 177.3,
+            "system_seconds": 3.72,
+            "maximum_rss_bytes": 1268600832.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 69.36684401656056
+    },
+    {
+      "repetition": 2,
+      "multiplier": 2,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 2,
+        "attempts": 7200,
+        "native_spans": 106310,
+        "probe_observations": 900,
+        "source_identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "deathstarbench_social_network",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x2",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "71cffe5555fd88418c8fb3a3ce22ae0a21427f3d0ea2ff24ca25b6f819707684"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "f7fa2cbd33d279d873836466130e0a5122d69a84193bbff1e682a1edd77a570b"
+          },
+          "ordinary/native.json": {
+            "bytes": 69959974,
+            "sha256": "ff7e8d31636ac81a283c925cad8b9f424b3a21298f8d3cf27269473a39239e0c"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1776,
+            "sha256": "606550e187a95b50060ba1ac24e62585e56a26093e1e501a2ed33a37ade1e487"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 804,
+            "sha256": "fe2058a097a879216c9839a687d036bfb6cd367f800ec7991f6dbcddb8b80d04"
+          },
+          "ordinary/probes.json": {
+            "bytes": 239603,
+            "sha256": "a8c3ae670685b5040e864749ea31cb768c829ffddd31b757d111e9e7d393e2f9"
+          },
+          "ordinary/requests.json": {
+            "bytes": 3200405,
+            "sha256": "c4f3260bfc8909b3bd108d0cfd732ebb38a99e697c2c703c1a6c9097adf6f36c"
+          },
+          "pmx/seal.json": {
+            "bytes": 671,
+            "sha256": "2f183cd6bfedf13361848f9cf2e39151e341226a82e1f94a45b133d5d9092b85"
+          },
+          "pmx/native.json": {
+            "bytes": 69959974,
+            "sha256": "ff7e8d31636ac81a283c925cad8b9f424b3a21298f8d3cf27269473a39239e0c"
+          },
+          "pmx/manifest.json": {
+            "bytes": 725,
+            "sha256": "7c178a7d2c440e63feba32981f9e3592a0268e208956365f4773ca4fbc72d460"
+          },
+          "pmx/requests.json": {
+            "bytes": 3200405,
+            "sha256": "c4f3260bfc8909b3bd108d0cfd732ebb38a99e697c2c703c1a6c9097adf6f36c"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 190.03632320799989,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x2/pmx",
+              "--out",
+              "workflow-benchmark/trials/r2-x2/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 106.72408782100001,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 106.69,
+              "user_seconds": 95.14,
+              "system_seconds": 4.22,
+              "maximum_rss_bytes": 3823247360.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r2-x2/extractions",
+              "--out",
+              "workflow-benchmark/trials/r2-x2/pmx-contract",
+              "--profile",
+              "deathstarbench_social_network"
+            ],
+            "wall_seconds": 0.9194077160000234,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.9,
+              "user_seconds": 1.43,
+              "system_seconds": 0.08,
+              "maximum_rss_bytes": 110501888.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 82.16992992399992,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 82.15,
+              "user_seconds": 172.13,
+              "system_seconds": 3.65,
+              "maximum_rss_bytes": 2040045568.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r2-x2"
+            ],
+            "wall_seconds": 0.21419110100032412,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.17,
+              "user_seconds": 0.45,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 42315776.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9533333333333334,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9525388888888889,
+              "reason": null
+            }
+          },
+          "read_home_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "read_user_timeline": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9299999999999999,
+              "reason": null
+            }
+          }
+        },
+        "models": 6,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c4d7befb570589b7a57b15991218ea5846c70f786de8286aa8377740f6c57f24",
+        "solver_records": [
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--compose_post--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9533333333333334,
+            "failure_probability_sum": 0.04666666666666667,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 5641168157
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--compose_post--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9525388888888889,
+            "failure_probability_sum": 0.047461111111111114,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 485313092
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_home_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 112895631
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_home_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 107187300
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_user_timeline--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 140349337
+          },
+          {
+            "model_id": "campaign-17a634ce968dd83180d3--read_user_timeline--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9299999999999999,
+            "failure_probability_sum": 0.07,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 112751940
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 4.127041528000063,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x2/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r2-x2/graph",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json"
+            ],
+            "wall_seconds": 4.124804486000357,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 4.09,
+              "user_seconds": 4.49,
+              "system_seconds": 0.21,
+              "maximum_rss_bytes": 321277952.0
+            }
+          }
+        },
+        "forecasts": {
+          "compose_post": {
+            "B0": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9541666666666667,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 0.9991666666666666,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9533333333333334,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9533333333333334,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_home_timeline": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "read_user_timeline": {
+            "B0": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.93,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.93,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "compose_post": {
+            "nodes": 12,
+            "edges": 11,
+            "coordinates": 17,
+            "categories": 5,
+            "samples": 2400
+          },
+          "read_home_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 2400
+          },
+          "read_user_timeline": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 4,
+            "samples": 2400
+          }
+        },
+        "saved_candidate_sha256": "2c414b7f18abdee6c320b616a6687c29f29ad0d22bd8ba01d40f6681179c58ef"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r2-x2/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r2-x2/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x2/execution.json"
+          ],
+          "wall_seconds": 0.9159053729999869,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.9,
+            "user_seconds": 1.43,
+            "system_seconds": 0.07,
+            "maximum_rss_bytes": 109453312.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 81.2175873199999,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 81.2,
+            "user_seconds": 174.31,
+            "system_seconds": 3.69,
+            "maximum_rss_bytes": 1619591168.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 46.046622482156174
+    }
+  ],
+  "control_verification": {
+    "command": [
+      "xvfb-run",
+      "-a",
+      "mvn",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+      "-f",
+      "palladio-source/pom.xml",
+      "verify"
+    ],
+    "wall_seconds": 85.17961550400014,
+    "exit_code": 0,
+    "timed_out": false,
+    "resource": {
+      "path": "verify-resource-usage.txt",
+      "wall_seconds": 85.15,
+      "user_seconds": 177.76,
+      "system_seconds": 3.76,
+      "maximum_rss_bytes": 1257943040.0
+    }
+  }
+}

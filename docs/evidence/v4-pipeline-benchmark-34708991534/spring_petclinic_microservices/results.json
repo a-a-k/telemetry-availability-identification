@@ -1,0 +1,5686 @@
+{
+  "version": "v4-pipeline-benchmark-v1",
+  "profile": "spring_petclinic_microservices",
+  "workflow_head": "4d5270008e6845bc55220869da721698be347e68",
+  "run_id": 34708991534,
+  "config_sha256": "f1af496e9d8af1e21def19f8496a3a6213157101a43d79154c0c5f84eca2117a",
+  "scientific_head": "12ddb09369ee6e0b60ca4c7db6fe1e749530b7df",
+  "new_independent_campaigns": 0,
+  "records": [
+    {
+      "repetition": 0,
+      "multiplier": 1,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 1,
+        "attempts": 3600,
+        "native_spans": 34964,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x1",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "d7f332b0a4c4b35bffee2119086b84793291fea520ef7c94d88e398caad1bfb4"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "866ee715c6c4fd578ad6ea92a765ce4ef642fe74838a000ca833420ef9d7a447"
+          },
+          "ordinary/native.json": {
+            "bytes": 47248178,
+            "sha256": "c8d6a38494b46337bda007f68cfa1a9b9f50ac5ea5b5bdf7060dc0c0ccc5958d"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1797,
+            "sha256": "5da5bc14925567d1650d1cf0a19b488e75c81a9f9e58200211ba90484b25261f"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 1531837,
+            "sha256": "c076736561cb0f748c00b503ca1e11f351823b214c986b5b37258d1c5a627c17"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "2d74eef222f0a5c9b6a8a9a36b2a2fe237f4eaf2bfa49833cff7b8f6dec67ac2"
+          },
+          "pmx/native.json": {
+            "bytes": 47248178,
+            "sha256": "c8d6a38494b46337bda007f68cfa1a9b9f50ac5ea5b5bdf7060dc0c0ccc5958d"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "707c541ffc3cfea39675f10667fe646bb44defbf24d952379be1c656d72ba80f"
+          },
+          "pmx/requests.json": {
+            "bytes": 1531837,
+            "sha256": "c076736561cb0f748c00b503ca1e11f351823b214c986b5b37258d1c5a627c17"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 1.8788138259999982,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x1/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r0-x1/graph",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json"
+            ],
+            "wall_seconds": 1.8186607630000253,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 1.76,
+              "user_seconds": 2.25,
+              "system_seconds": 0.12,
+              "maximum_rss_bytes": 246886400.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 900
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 900
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 900
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 900
+          }
+        },
+        "saved_candidate_sha256": "8b2cddb39487804d7397a0f94398a2c8b5d74b7435c300576ee5815eb839d398"
+      },
+      "pmx": {
+        "wall_seconds": 180.03906307700004,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x1/pmx",
+              "--out",
+              "workflow-benchmark/trials/r0-x1/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 102.06742727,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 102.03,
+              "user_seconds": 59.96,
+              "system_seconds": 2.91,
+              "maximum_rss_bytes": 1574625280.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r0-x1/extractions",
+              "--out",
+              "workflow-benchmark/trials/r0-x1/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.765954109000063,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.26,
+              "system_seconds": 0.07,
+              "maximum_rss_bytes": 108892160.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 77.03197316,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 77.02,
+              "user_seconds": 138.43,
+              "system_seconds": 3.0,
+              "maximum_rss_bytes": 1682014208.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r0-x1"
+            ],
+            "wall_seconds": 0.1650170130000106,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.36,
+              "system_seconds": 0.01,
+              "maximum_rss_bytes": 40316928.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 6925551800
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 172315232
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 128205886
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 102475940
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 69697859
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 66300051
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 124942471
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 123604399
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r0-x1/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r0-x1/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x1/execution.json"
+          ],
+          "wall_seconds": 0.7667534499996691,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.72,
+            "user_seconds": 1.2,
+            "system_seconds": 0.06,
+            "maximum_rss_bytes": 108134400.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 72.68270644199993,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 72.63,
+            "user_seconds": 136.06,
+            "system_seconds": 3.0,
+            "maximum_rss_bytes": 1850126336.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 95.82591983597645
+    },
+    {
+      "repetition": 0,
+      "multiplier": 2,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 2,
+        "attempts": 7200,
+        "native_spans": 69928,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x2",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79850,
+            "sha256": "d3373faf18d45da76b7795309fff78e6851b7658efa426d336657a8d045e35f0"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "37533efdb12e4521c5a589c32a9780735be7025cdc3a8ff0875dadcb49630eb7"
+          },
+          "ordinary/native.json": {
+            "bytes": 94496278,
+            "sha256": "83b27b0b41c7c7d2aa3d2dd51a65deda8397eb105907cc222dd71802576f652f"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1797,
+            "sha256": "0b1a09212e4af7855066c1d5026040532562ccf3b5d124834032d876c504d88f"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 3124871,
+            "sha256": "ecc4ec2947c09cc44cb7dca2342e8d966f594b0b8d0a28305a144104eaf482c5"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "ee3b8aaab89da4eaee69e7fbf4b15d817d3eb962fdb430d03647984bbc00359b"
+          },
+          "pmx/native.json": {
+            "bytes": 94496278,
+            "sha256": "83b27b0b41c7c7d2aa3d2dd51a65deda8397eb105907cc222dd71802576f652f"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "5b6db87fbd61ba0956c9134f183ab6eea5824319cdb84a9a9a5aee7359c3352e"
+          },
+          "pmx/requests.json": {
+            "bytes": 3124871,
+            "sha256": "ecc4ec2947c09cc44cb7dca2342e8d966f594b0b8d0a28305a144104eaf482c5"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 195.30844248899996,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x2/pmx",
+              "--out",
+              "workflow-benchmark/trials/r0-x2/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 121.96314698200001,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 121.95,
+              "user_seconds": 91.29,
+              "system_seconds": 4.08,
+              "maximum_rss_bytes": 2679508992.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r0-x2/extractions",
+              "--out",
+              "workflow-benchmark/trials/r0-x2/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.7660695349999287,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.26,
+              "system_seconds": 0.07,
+              "maximum_rss_bytes": 108486656.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 72.406511981,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 72.4,
+              "user_seconds": 137.27,
+              "system_seconds": 2.99,
+              "maximum_rss_bytes": 1395699712.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r0-x2"
+            ],
+            "wall_seconds": 0.1646542439999621,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.36,
+              "system_seconds": 0.01,
+              "maximum_rss_bytes": 40333312.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 4063411650
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 188338380
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 125760466
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 120870640
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 78172221
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 83829064
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 157626407
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 149509000
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 2.9763902749999716,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x2/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r0-x2/graph",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json"
+            ],
+            "wall_seconds": 2.974276499000098,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 2.92,
+              "user_seconds": 3.27,
+              "system_seconds": 0.19,
+              "maximum_rss_bytes": 384434176.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 1800
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 1800
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 1800
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 1800
+          }
+        },
+        "saved_candidate_sha256": "061606ce0548db3ef6703e32e416a14028cda2d8237333fcb168071dce80d624"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r0-x2/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r0-x2/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x2/execution.json"
+          ],
+          "wall_seconds": 0.7661117289999311,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.72,
+            "user_seconds": 1.21,
+            "system_seconds": 0.06,
+            "maximum_rss_bytes": 108277760.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 73.42774065599997,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 73.4,
+            "user_seconds": 137.33,
+            "system_seconds": 3.05,
+            "maximum_rss_bytes": 1910910976.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 65.61923149980788
+    },
+    {
+      "repetition": 0,
+      "multiplier": 4,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 4,
+        "attempts": 14400,
+        "native_spans": 139856,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x4",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79850,
+            "sha256": "b5cae3fdb950e963ef005d721af90501941d110764d6cef94258d81d47853abc"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "a8a3512eee642f2acc722b97abea58203d3d8bf3eafc5cf2d0584b97b2af2633"
+          },
+          "ordinary/native.json": {
+            "bytes": 188992478,
+            "sha256": "b3e03034f8a452e02edf0b2c11f6ca0fbe12a70351353f3b2fb35a5257739531"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1798,
+            "sha256": "ecdc48df217ded03f9364ed4ce3667ff7b49a8a095993e6472c94cee3a0495db"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 6310939,
+            "sha256": "571f726a5356ed601c3cde93adc7a8512d721bbaee763530553b25d5946ec285"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "1bd54e8d0213bf4b8f0f741e4ef4c40f98905a7022912ec67fd56dca65a88cbe"
+          },
+          "pmx/native.json": {
+            "bytes": 188992478,
+            "sha256": "b3e03034f8a452e02edf0b2c11f6ca0fbe12a70351353f3b2fb35a5257739531"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "324ebf358cdbbdfe20a20fa278b4f79cabc597f6b71ecb127ea926e641c4eeb7"
+          },
+          "pmx/requests.json": {
+            "bytes": 6310939,
+            "sha256": "571f726a5356ed601c3cde93adc7a8512d721bbaee763530553b25d5946ec285"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 5.276390585999934,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x4/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r0-x4/graph",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json"
+            ],
+            "wall_seconds": 5.275947268999971,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 5.26,
+              "user_seconds": 5.49,
+              "system_seconds": 0.32,
+              "maximum_rss_bytes": 660406272.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 3600
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 3600
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 3600
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 3600
+          }
+        },
+        "saved_candidate_sha256": "0c673083cd606f01b00d75e445cb43e85c9e900d1dd79cbec15117feb5e00d28"
+      },
+      "pmx": {
+        "wall_seconds": 251.44590284700007,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x4/pmx",
+              "--out",
+              "workflow-benchmark/trials/r0-x4/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 177.15962323100007,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 177.15,
+              "user_seconds": 179.26,
+              "system_seconds": 6.48,
+              "maximum_rss_bytes": 4076720128.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r0-x4/extractions",
+              "--out",
+              "workflow-benchmark/trials/r0-x4/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.7656517309999344,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.27,
+              "system_seconds": 0.07,
+              "maximum_rss_bytes": 108838912.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 73.34775524300005,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 73.3,
+              "user_seconds": 136.81,
+              "system_seconds": 2.9,
+              "maximum_rss_bytes": 1865900032.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r0-x4"
+            ],
+            "wall_seconds": 0.16430597199996555,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.36,
+              "system_seconds": 0.01,
+              "maximum_rss_bytes": 40361984.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 4236901322
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 186585769
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 127526087
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 127424274
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 90702725
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 83775636
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 161565723
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 150163070
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r0-x4/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r0-x4/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x4/execution.json"
+          ],
+          "wall_seconds": 0.7163216810004087,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.7,
+            "user_seconds": 1.16,
+            "system_seconds": 0.07,
+            "maximum_rss_bytes": 108519424.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 74.23267564199978,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 74.2,
+            "user_seconds": 141.67,
+            "system_seconds": 3.06,
+            "maximum_rss_bytes": 1822433280.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 47.65490703326094
+    },
+    {
+      "repetition": 1,
+      "multiplier": 2,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 2,
+        "attempts": 7200,
+        "native_spans": 69928,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x2",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79850,
+            "sha256": "d3373faf18d45da76b7795309fff78e6851b7658efa426d336657a8d045e35f0"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "37533efdb12e4521c5a589c32a9780735be7025cdc3a8ff0875dadcb49630eb7"
+          },
+          "ordinary/native.json": {
+            "bytes": 94496278,
+            "sha256": "83b27b0b41c7c7d2aa3d2dd51a65deda8397eb105907cc222dd71802576f652f"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1797,
+            "sha256": "0b1a09212e4af7855066c1d5026040532562ccf3b5d124834032d876c504d88f"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 3124871,
+            "sha256": "ecc4ec2947c09cc44cb7dca2342e8d966f594b0b8d0a28305a144104eaf482c5"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "ee3b8aaab89da4eaee69e7fbf4b15d817d3eb962fdb430d03647984bbc00359b"
+          },
+          "pmx/native.json": {
+            "bytes": 94496278,
+            "sha256": "83b27b0b41c7c7d2aa3d2dd51a65deda8397eb105907cc222dd71802576f652f"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "5b6db87fbd61ba0956c9134f183ab6eea5824319cdb84a9a9a5aee7359c3352e"
+          },
+          "pmx/requests.json": {
+            "bytes": 3124871,
+            "sha256": "ecc4ec2947c09cc44cb7dca2342e8d966f594b0b8d0a28305a144104eaf482c5"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 2.9216025220000574,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x2/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r1-x2/graph",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json"
+            ],
+            "wall_seconds": 2.9211908240001776,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 2.9,
+              "user_seconds": 3.25,
+              "system_seconds": 0.18,
+              "maximum_rss_bytes": 383991808.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 1800
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 1800
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 1800
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 1800
+          }
+        },
+        "saved_candidate_sha256": "061606ce0548db3ef6703e32e416a14028cda2d8237333fcb168071dce80d624"
+      },
+      "pmx": {
+        "wall_seconds": 195.37488528500012,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x2/pmx",
+              "--out",
+              "workflow-benchmark/trials/r1-x2/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 121.41072513500012,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 121.37,
+              "user_seconds": 89.97,
+              "system_seconds": 3.97,
+              "maximum_rss_bytes": 2405142528.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r1-x2/extractions",
+              "--out",
+              "workflow-benchmark/trials/r1-x2/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.766476116999911,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.25,
+              "system_seconds": 0.08,
+              "maximum_rss_bytes": 108937216.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 73.02434459200003,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 73.0,
+              "user_seconds": 133.84,
+              "system_seconds": 2.94,
+              "maximum_rss_bytes": 1341431808.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r1-x2"
+            ],
+            "wall_seconds": 0.16480149600010918,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.35,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 40341504.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 4413398448
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 205023530
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 125913251
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 126597099
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 80802167
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 75649181
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 142457091
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 122278487
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r1-x2/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r1-x2/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x2/execution.json"
+          ],
+          "wall_seconds": 0.7657721949999541,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.74,
+            "user_seconds": 1.15,
+            "system_seconds": 0.07,
+            "maximum_rss_bytes": 108130304.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 73.82817103600019,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 73.78999999999999,
+            "user_seconds": 141.02,
+            "system_seconds": 3.0,
+            "maximum_rss_bytes": 1426006016.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 66.87250706206649
+    },
+    {
+      "repetition": 1,
+      "multiplier": 4,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 4,
+        "attempts": 14400,
+        "native_spans": 139856,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x4",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79850,
+            "sha256": "b5cae3fdb950e963ef005d721af90501941d110764d6cef94258d81d47853abc"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "a8a3512eee642f2acc722b97abea58203d3d8bf3eafc5cf2d0584b97b2af2633"
+          },
+          "ordinary/native.json": {
+            "bytes": 188992478,
+            "sha256": "b3e03034f8a452e02edf0b2c11f6ca0fbe12a70351353f3b2fb35a5257739531"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1798,
+            "sha256": "ecdc48df217ded03f9364ed4ce3667ff7b49a8a095993e6472c94cee3a0495db"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 6310939,
+            "sha256": "571f726a5356ed601c3cde93adc7a8512d721bbaee763530553b25d5946ec285"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "1bd54e8d0213bf4b8f0f741e4ef4c40f98905a7022912ec67fd56dca65a88cbe"
+          },
+          "pmx/native.json": {
+            "bytes": 188992478,
+            "sha256": "b3e03034f8a452e02edf0b2c11f6ca0fbe12a70351353f3b2fb35a5257739531"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "324ebf358cdbbdfe20a20fa278b4f79cabc597f6b71ecb127ea926e641c4eeb7"
+          },
+          "pmx/requests.json": {
+            "bytes": 6310939,
+            "sha256": "571f726a5356ed601c3cde93adc7a8512d721bbaee763530553b25d5946ec285"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 251.36737136300007,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x4/pmx",
+              "--out",
+              "workflow-benchmark/trials/r1-x4/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 177.21797131900007,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 177.21,
+              "user_seconds": 179.28,
+              "system_seconds": 6.42,
+              "maximum_rss_bytes": 3983343616.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r1-x4/extractions",
+              "--out",
+              "workflow-benchmark/trials/r1-x4/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.7669701459999487,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.28,
+              "system_seconds": 0.06,
+              "maximum_rss_bytes": 108818432.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 73.20927022299998,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 73.19,
+              "user_seconds": 136.41,
+              "system_seconds": 2.94,
+              "maximum_rss_bytes": 1974968320.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r1-x4"
+            ],
+            "wall_seconds": 0.1649548739999318,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.37,
+              "system_seconds": 0.01,
+              "maximum_rss_bytes": 40419328.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 4117711606
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 188878339
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 127372374
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 115957865
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 80550676
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 88631227
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 166358794
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 150584010
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 5.178745815000184,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x4/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r1-x4/graph",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json"
+            ],
+            "wall_seconds": 5.176651828000104,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 5.16,
+              "user_seconds": 5.39,
+              "system_seconds": 0.28,
+              "maximum_rss_bytes": 661311488.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 3600
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 3600
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 3600
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 3600
+          }
+        },
+        "saved_candidate_sha256": "0c673083cd606f01b00d75e445cb43e85c9e900d1dd79cbec15117feb5e00d28"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r1-x4/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r1-x4/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x4/execution.json"
+          ],
+          "wall_seconds": 0.7696478170000773,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.72,
+            "user_seconds": 1.2,
+            "system_seconds": 0.06,
+            "maximum_rss_bytes": 108015616.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 74.81510517200013,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 74.81,
+            "user_seconds": 138.89,
+            "system_seconds": 2.94,
+            "maximum_rss_bytes": 1760862208.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 48.53827168634481
+    },
+    {
+      "repetition": 1,
+      "multiplier": 1,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 1,
+        "attempts": 3600,
+        "native_spans": 34964,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x1",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "d7f332b0a4c4b35bffee2119086b84793291fea520ef7c94d88e398caad1bfb4"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "866ee715c6c4fd578ad6ea92a765ce4ef642fe74838a000ca833420ef9d7a447"
+          },
+          "ordinary/native.json": {
+            "bytes": 47248178,
+            "sha256": "c8d6a38494b46337bda007f68cfa1a9b9f50ac5ea5b5bdf7060dc0c0ccc5958d"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1797,
+            "sha256": "5da5bc14925567d1650d1cf0a19b488e75c81a9f9e58200211ba90484b25261f"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 1531837,
+            "sha256": "c076736561cb0f748c00b503ca1e11f351823b214c986b5b37258d1c5a627c17"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "2d74eef222f0a5c9b6a8a9a36b2a2fe237f4eaf2bfa49833cff7b8f6dec67ac2"
+          },
+          "pmx/native.json": {
+            "bytes": 47248178,
+            "sha256": "c8d6a38494b46337bda007f68cfa1a9b9f50ac5ea5b5bdf7060dc0c0ccc5958d"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "707c541ffc3cfea39675f10667fe646bb44defbf24d952379be1c656d72ba80f"
+          },
+          "pmx/requests.json": {
+            "bytes": 1531837,
+            "sha256": "c076736561cb0f748c00b503ca1e11f351823b214c986b5b37258d1c5a627c17"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 177.71805666699993,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x1/pmx",
+              "--out",
+              "workflow-benchmark/trials/r1-x1/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 101.70932017300015,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 101.67,
+              "user_seconds": 59.69,
+              "system_seconds": 3.08,
+              "maximum_rss_bytes": 1520087040.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r1-x1/extractions",
+              "--out",
+              "workflow-benchmark/trials/r1-x1/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.7668727440000112,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.71,
+              "user_seconds": 1.27,
+              "system_seconds": 0.05,
+              "maximum_rss_bytes": 108998656.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 75.06975742200007,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 75.05,
+              "user_seconds": 138.01,
+              "system_seconds": 3.05,
+              "maximum_rss_bytes": 1378164736.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r1-x1"
+            ],
+            "wall_seconds": 0.16401434299996254,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.35,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 40292352.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 4155213071
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 207023929
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 142424160
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 114944053
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 78345445
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 77549058
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 165400146
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 159701838
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 1.7711774550000428,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x1/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r1-x1/graph",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json"
+            ],
+            "wall_seconds": 1.769109096000193,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 1.75,
+              "user_seconds": 2.15,
+              "system_seconds": 0.13,
+              "maximum_rss_bytes": 245579776.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 900
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 900
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 900
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 900
+          }
+        },
+        "saved_candidate_sha256": "8b2cddb39487804d7397a0f94398a2c8b5d74b7435c300576ee5815eb839d398"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r1-x1/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r1-x1/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x1/execution.json"
+          ],
+          "wall_seconds": 0.766899929000374,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.72,
+            "user_seconds": 1.2,
+            "system_seconds": 0.06,
+            "maximum_rss_bytes": 108281856.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 73.88314213000012,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 73.84,
+            "user_seconds": 138.51,
+            "system_seconds": 2.99,
+            "maximum_rss_bytes": 1277431808.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 100.33893338315761
+    },
+    {
+      "repetition": 2,
+      "multiplier": 4,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 4,
+        "attempts": 14400,
+        "native_spans": 139856,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x4",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79850,
+            "sha256": "b5cae3fdb950e963ef005d721af90501941d110764d6cef94258d81d47853abc"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "a8a3512eee642f2acc722b97abea58203d3d8bf3eafc5cf2d0584b97b2af2633"
+          },
+          "ordinary/native.json": {
+            "bytes": 188992478,
+            "sha256": "b3e03034f8a452e02edf0b2c11f6ca0fbe12a70351353f3b2fb35a5257739531"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1798,
+            "sha256": "ecdc48df217ded03f9364ed4ce3667ff7b49a8a095993e6472c94cee3a0495db"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 6310939,
+            "sha256": "571f726a5356ed601c3cde93adc7a8512d721bbaee763530553b25d5946ec285"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "1bd54e8d0213bf4b8f0f741e4ef4c40f98905a7022912ec67fd56dca65a88cbe"
+          },
+          "pmx/native.json": {
+            "bytes": 188992478,
+            "sha256": "b3e03034f8a452e02edf0b2c11f6ca0fbe12a70351353f3b2fb35a5257739531"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "324ebf358cdbbdfe20a20fa278b4f79cabc597f6b71ecb127ea926e641c4eeb7"
+          },
+          "pmx/requests.json": {
+            "bytes": 6310939,
+            "sha256": "571f726a5356ed601c3cde93adc7a8512d721bbaee763530553b25d5946ec285"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 5.277867553000078,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x4/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r2-x4/graph",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json"
+            ],
+            "wall_seconds": 5.277436155000032,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 5.23,
+              "user_seconds": 5.48,
+              "system_seconds": 0.29,
+              "maximum_rss_bytes": 672935936.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 3600
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 3600
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 3600
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 3600
+          }
+        },
+        "saved_candidate_sha256": "0c673083cd606f01b00d75e445cb43e85c9e900d1dd79cbec15117feb5e00d28"
+      },
+      "pmx": {
+        "wall_seconds": 252.374850939,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x4/pmx",
+              "--out",
+              "workflow-benchmark/trials/r2-x4/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x4/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 177.221633419,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 177.19,
+              "user_seconds": 179.83,
+              "system_seconds": 6.4,
+              "maximum_rss_bytes": 3904741376.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r2-x4/extractions",
+              "--out",
+              "workflow-benchmark/trials/r2-x4/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.7654966259999583,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.27,
+              "system_seconds": 0.07,
+              "maximum_rss_bytes": 108969984.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 74.21317464499998,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 74.18,
+              "user_seconds": 137.93,
+              "system_seconds": 2.97,
+              "maximum_rss_bytes": 1665064960.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r2-x4"
+            ],
+            "wall_seconds": 0.16595276399993963,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.35,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 40423424.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 3991454770
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 189009290
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 129711579
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 118987010
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 76994891
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 81504119
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 173220138
+          },
+          {
+            "model_id": "campaign-91db469af959d3c0e9e0--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 159959405
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r2-x4/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r2-x4/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x4/execution.json"
+          ],
+          "wall_seconds": 0.7656728609999846,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.71,
+            "user_seconds": 1.18,
+            "system_seconds": 0.07,
+            "maximum_rss_bytes": 108523520.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 73.71219870899995,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 73.68,
+            "user_seconds": 136.22,
+            "system_seconds": 2.86,
+            "maximum_rss_bytes": 1254256640.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 47.81757943045454
+    },
+    {
+      "repetition": 2,
+      "multiplier": 1,
+      "method_order": [
+        "graph",
+        "pmx"
+      ],
+      "workload": {
+        "multiplier": 1,
+        "attempts": 3600,
+        "native_spans": 34964,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x1",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79846,
+            "sha256": "d7f332b0a4c4b35bffee2119086b84793291fea520ef7c94d88e398caad1bfb4"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "866ee715c6c4fd578ad6ea92a765ce4ef642fe74838a000ca833420ef9d7a447"
+          },
+          "ordinary/native.json": {
+            "bytes": 47248178,
+            "sha256": "c8d6a38494b46337bda007f68cfa1a9b9f50ac5ea5b5bdf7060dc0c0ccc5958d"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1797,
+            "sha256": "5da5bc14925567d1650d1cf0a19b488e75c81a9f9e58200211ba90484b25261f"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 1531837,
+            "sha256": "c076736561cb0f748c00b503ca1e11f351823b214c986b5b37258d1c5a627c17"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "2d74eef222f0a5c9b6a8a9a36b2a2fe237f4eaf2bfa49833cff7b8f6dec67ac2"
+          },
+          "pmx/native.json": {
+            "bytes": 47248178,
+            "sha256": "c8d6a38494b46337bda007f68cfa1a9b9f50ac5ea5b5bdf7060dc0c0ccc5958d"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "707c541ffc3cfea39675f10667fe646bb44defbf24d952379be1c656d72ba80f"
+          },
+          "pmx/requests.json": {
+            "bytes": 1531837,
+            "sha256": "c076736561cb0f748c00b503ca1e11f351823b214c986b5b37258d1c5a627c17"
+          }
+        }
+      },
+      "status": "qualified",
+      "graph": {
+        "wall_seconds": 1.7720411640000293,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x1/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r2-x1/graph",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json"
+            ],
+            "wall_seconds": 1.7716211530000692,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 1.73,
+              "user_seconds": 2.14,
+              "system_seconds": 0.11,
+              "maximum_rss_bytes": 245444608.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 900
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 900
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 900
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 900
+          }
+        },
+        "saved_candidate_sha256": "8b2cddb39487804d7397a0f94398a2c8b5d74b7435c300576ee5815eb839d398"
+      },
+      "pmx": {
+        "wall_seconds": 177.62827970699982,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x1/pmx",
+              "--out",
+              "workflow-benchmark/trials/r2-x1/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x1/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 101.79136010799994,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 101.78,
+              "user_seconds": 59.13,
+              "system_seconds": 3.06,
+              "maximum_rss_bytes": 1790537728.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r2-x1/extractions",
+              "--out",
+              "workflow-benchmark/trials/r2-x1/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.766250805999789,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.26,
+              "system_seconds": 0.07,
+              "maximum_rss_bytes": 108675072.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 74.8967219709998,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 74.86,
+              "user_seconds": 140.38,
+              "system_seconds": 2.98,
+              "maximum_rss_bytes": 2032701440.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r2-x1"
+            ],
+            "wall_seconds": 0.16534285199986698,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.35,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 40378368.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 4413990220
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 193429696
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 125295965
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 111995045
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 73777000
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 73446984
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 180824188
+          },
+          {
+            "model_id": "campaign-ea52fffa06fe2fe81ea9--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 119990925
+          }
+        ]
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r2-x1/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r2-x1/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x1/execution.json"
+          ],
+          "wall_seconds": 0.7655527729998539,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.73,
+            "user_seconds": 1.18,
+            "system_seconds": 0.06,
+            "maximum_rss_bytes": 108351488.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 74.63747046300023,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 74.6,
+            "user_seconds": 139.72,
+            "system_seconds": 2.89,
+            "maximum_rss_bytes": 1695600640.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 100.23936425158399
+    },
+    {
+      "repetition": 2,
+      "multiplier": 2,
+      "method_order": [
+        "pmx",
+        "graph"
+      ],
+      "workload": {
+        "multiplier": 2,
+        "attempts": 7200,
+        "native_spans": 69928,
+        "probe_observations": 901,
+        "source_identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "prospective_main",
+          "law": "N",
+          "namespace": "v4-confirmation-771621",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "independent_new_observations": 0,
+        "identity": {
+          "application": "spring_petclinic_microservices",
+          "data_role": "artificial_control",
+          "law": "N",
+          "namespace": "v4-computational-benchmark-v1-x2",
+          "placement": "split",
+          "protocol_sha256": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+          "repetition": 0
+        },
+        "files": {
+          "execution.json": {
+            "bytes": 79850,
+            "sha256": "d3373faf18d45da76b7795309fff78e6851b7658efa426d336657a8d045e35f0"
+          },
+          "ordinary/seal.json": {
+            "bytes": 516,
+            "sha256": "37533efdb12e4521c5a589c32a9780735be7025cdc3a8ff0875dadcb49630eb7"
+          },
+          "ordinary/native.json": {
+            "bytes": 94496278,
+            "sha256": "83b27b0b41c7c7d2aa3d2dd51a65deda8397eb105907cc222dd71802576f652f"
+          },
+          "ordinary/manifest.json": {
+            "bytes": 1797,
+            "sha256": "0b1a09212e4af7855066c1d5026040532562ccf3b5d124834032d876c504d88f"
+          },
+          "ordinary/declarations.json": {
+            "bytes": 792,
+            "sha256": "8804d784e3379c553ebfcbd31d57c7c17ffae5cae68fceb536e953a72df788d8"
+          },
+          "ordinary/probes.json": {
+            "bytes": 241203,
+            "sha256": "2c8935666a27f8ddb2ff94b6e1932047cad5f32c6260305de0ba20266657a12b"
+          },
+          "ordinary/requests.json": {
+            "bytes": 3124871,
+            "sha256": "ecc4ec2947c09cc44cb7dca2342e8d966f594b0b8d0a28305a144104eaf482c5"
+          },
+          "pmx/seal.json": {
+            "bytes": 672,
+            "sha256": "ee3b8aaab89da4eaee69e7fbf4b15d817d3eb962fdb430d03647984bbc00359b"
+          },
+          "pmx/native.json": {
+            "bytes": 94496278,
+            "sha256": "83b27b0b41c7c7d2aa3d2dd51a65deda8397eb105907cc222dd71802576f652f"
+          },
+          "pmx/manifest.json": {
+            "bytes": 726,
+            "sha256": "5b6db87fbd61ba0956c9134f183ab6eea5824319cdb84a9a9a5aee7359c3352e"
+          },
+          "pmx/requests.json": {
+            "bytes": 3124871,
+            "sha256": "ecc4ec2947c09cc44cb7dca2342e8d966f594b0b8d0a28305a144104eaf482c5"
+          }
+        }
+      },
+      "status": "qualified",
+      "pmx": {
+        "wall_seconds": 195.72222601899966,
+        "stages": {
+          "extract": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "extract",
+              "--source",
+              "workflow-benchmark/inputs/x2/pmx",
+              "--out",
+              "workflow-benchmark/trials/r2-x2/extractions/application",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json",
+              "--options",
+              "workflow-input/Options.txt",
+              "--jar",
+              "workflow-input/pmx-clock-build/main-clock-progress-v1.jar"
+            ],
+            "wall_seconds": 121.25905546800004,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-extract-resource-usage.txt",
+              "wall_seconds": 121.25,
+              "user_seconds": 90.22,
+              "system_seconds": 3.95,
+              "maximum_rss_bytes": 2261344256.0
+            }
+          },
+          "collect": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v3_comparison_pmx_v3",
+              "collect",
+              "--source",
+              "workflow-benchmark/trials/r2-x2/extractions",
+              "--out",
+              "workflow-benchmark/trials/r2-x2/pmx-contract",
+              "--profile",
+              "spring_petclinic_microservices"
+            ],
+            "wall_seconds": 0.7657491859999936,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-collect-resource-usage.txt",
+              "wall_seconds": 0.72,
+              "user_seconds": 1.28,
+              "system_seconds": 0.06,
+              "maximum_rss_bytes": 108904448.0
+            }
+          },
+          "solve": {
+            "command": [
+              "xvfb-run",
+              "-a",
+              "mvn",
+              "-B",
+              "-ntp",
+              "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+              "-f",
+              "palladio-source/pom.xml",
+              "verify"
+            ],
+            "wall_seconds": 73.52512107700022,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-solve-resource-usage.txt",
+              "wall_seconds": 73.52,
+              "user_seconds": 137.05,
+              "system_seconds": 2.88,
+              "maximum_rss_bytes": 1754820608.0
+            }
+          },
+          "save": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "/home/runner/work/telemetry-availability-identification/telemetry-availability-identification/scripts/benchmark_v4_pipeline_v1.py",
+              "save-first",
+              "--target",
+              "workflow-benchmark/trials/r2-x2"
+            ],
+            "wall_seconds": 0.16401239900005748,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "pmx-save-resource-usage.txt",
+              "wall_seconds": 0.13,
+              "user_seconds": 0.34,
+              "system_seconds": 0.02,
+              "maximum_rss_bytes": 40366080.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9611111111111111,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9418888888888889,
+              "reason": null
+            }
+          },
+          "list_owners": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "list_vets": {
+            "PMX": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 1.0,
+              "reason": null
+            }
+          },
+          "owner_details_with_visits": {
+            "PMX": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            },
+            "PMX_inclusive": {
+              "status": "ok",
+              "probability": 0.9622222222222222,
+              "reason": null
+            }
+          }
+        },
+        "models": 8,
+        "controls_qualified": true,
+        "saved_candidate_sha256": "c65bc9513db11da9ed589b808a9e7654ad9302b02fc10e77695420cc5da250db",
+        "solver_records": [
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--create_visit--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9611111111111111,
+            "failure_probability_sum": 0.03888888888888889,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 4327188941
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--create_visit--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9418888888888889,
+            "failure_probability_sum": 0.05811111111111111,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 187677588
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_owners--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 126836492
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_owners--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 113848013
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_vets--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 77257709
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--list_vets--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 1.0,
+            "failure_probability_sum": 0.0,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 87623609
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--owner_details_with_visits--conditional_local",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 164174040
+          },
+          {
+            "model_id": "campaign-18fcfe23823bd2f8abb3--owner_details_with_visits--inclusive",
+            "repetition": 0,
+            "status": "solved",
+            "scenario_id": "usageScenario",
+            "success_probability": 0.9622222222222222,
+            "failure_probability_sum": 0.03777777777777778,
+            "physical_state_probability": 1.0,
+            "evaluated_physical_states": 1,
+            "total_physical_states": 1,
+            "load_solve_elapsed_nanoseconds": 144898008
+          }
+        ]
+      },
+      "graph": {
+        "wall_seconds": 2.9736219229998824,
+        "stages": {
+          "build": {
+            "command": [
+              "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+              "-m",
+              "telemetry_availability.v4_confirmation_candidates_v1",
+              "build",
+              "--input",
+              "workflow-benchmark/inputs/x2/ordinary",
+              "--output",
+              "workflow-benchmark/trials/r2-x2/graph",
+              "--config",
+              "workflow-benchmark/inputs/x2/execution.json"
+            ],
+            "wall_seconds": 2.9715102270001807,
+            "exit_code": 0,
+            "timed_out": false,
+            "resource": {
+              "path": "graph-build-resource-usage.txt",
+              "wall_seconds": 2.94,
+              "user_seconds": 3.29,
+              "system_seconds": 0.18,
+              "maximum_rss_bytes": 383815680.0
+            }
+          }
+        },
+        "forecasts": {
+          "create_visit": {
+            "B0": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.9811111111111112,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9611111111111111,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9611111111111111,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_owners": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "list_vets": {
+            "B0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_completion": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_deadline": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "G_without_selection": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gstar": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            }
+          },
+          "owner_details_with_visits": {
+            "B0": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "G0": {
+              "probability": 1.0,
+              "reason": null,
+              "status": "ok"
+            },
+            "GID": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_completion": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.98,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_deadline": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 0.9822222222222222,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "G_without_selection": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            },
+            "Gselected": {
+              "identified_lower": 0.9622222222222222,
+              "identified_upper": 1.0,
+              "probability": null,
+              "reason": "not_point_identified_under_declared_observation_law",
+              "status": "unsupported"
+            },
+            "Gstar": {
+              "probability": 0.9622222222222222,
+              "reason": null,
+              "status": "ok"
+            }
+          }
+        },
+        "model_structure": {
+          "create_visit": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 8,
+            "categories": 6,
+            "samples": 1800
+          },
+          "list_owners": {
+            "nodes": 3,
+            "edges": 2,
+            "coordinates": 4,
+            "categories": 1,
+            "samples": 1800
+          },
+          "list_vets": {
+            "nodes": 2,
+            "edges": 1,
+            "coordinates": 3,
+            "categories": 1,
+            "samples": 1800
+          },
+          "owner_details_with_visits": {
+            "nodes": 4,
+            "edges": 4,
+            "coordinates": 10,
+            "categories": 5,
+            "samples": 1800
+          }
+        },
+        "saved_candidate_sha256": "061606ce0548db3ef6703e32e416a14028cda2d8237333fcb168071dce80d624"
+      },
+      "original_forecasts_preserved": true,
+      "extra_verification_stages": {
+        "graph_replay": {
+          "command": [
+            "/opt/hostedtoolcache/Python/3.13.15/x64/bin/python",
+            "-m",
+            "telemetry_availability.v4_confirmation_candidates_v1",
+            "replay",
+            "--input",
+            "workflow-benchmark/trials/r2-x2/graph/candidates",
+            "--output",
+            "workflow-benchmark/trials/r2-x2/graph/replay",
+            "--config",
+            "workflow-benchmark/inputs/x2/execution.json"
+          ],
+          "wall_seconds": 0.7692017030003626,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "graph-replay-resource-usage.txt",
+            "wall_seconds": 0.72,
+            "user_seconds": 1.17,
+            "system_seconds": 0.07,
+            "maximum_rss_bytes": 107843584.0
+          }
+        },
+        "pmx_repeat": {
+          "command": [
+            "xvfb-run",
+            "-a",
+            "mvn",
+            "-B",
+            "-ntp",
+            "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+            "-f",
+            "palladio-source/pom.xml",
+            "verify"
+          ],
+          "wall_seconds": 72.98256535600012,
+          "exit_code": 0,
+          "timed_out": false,
+          "resource": {
+            "path": "pmx-repeat-resource-usage.txt",
+            "wall_seconds": 72.96000000000001,
+            "user_seconds": 137.15,
+            "system_seconds": 2.91,
+            "maximum_rss_bytes": 1910738944.0
+          }
+        }
+      },
+      "extra_verification_after_all_measurements": true,
+      "speedup_pmx_over_graph": 65.81947237648457
+    }
+  ],
+  "control_verification": {
+    "command": [
+      "xvfb-run",
+      "-a",
+      "mvn",
+      "-B",
+      "-ntp",
+      "-Dmaven.repo.local=/home/runner/work/_temp/petclinic-pmx-maven-repository",
+      "-f",
+      "palladio-source/pom.xml",
+      "verify"
+    ],
+    "wall_seconds": 74.57234217099995,
+    "exit_code": 0,
+    "timed_out": false,
+    "resource": {
+      "path": "verify-resource-usage.txt",
+      "wall_seconds": 74.52,
+      "user_seconds": 140.56,
+      "system_seconds": 2.92,
+      "maximum_rss_bytes": 1381531648.0
+    }
+  }
+}
