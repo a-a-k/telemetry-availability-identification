@@ -23,6 +23,12 @@ work are still required. Earlier completion statements below describe the
 original experiments, not closure of the review refinement. See the
 [refinement protocol](milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md).
 
+The [new independent series](milestones/V4_CONFIRMATION_V1_PROTOCOL.md) now has
+a fixed 18-campaign protocol and executable workflow, completed health-reading
+timestamps, primary Petclinic HTTP/SQL capture, 48 directed retry/normal controls,
+and a numerical PMX/B0 gate before any new test outcome opens. Preparation of
+this workflow is not itself an independent confirmation result.
+
 All **240 campaigns, 864,000 test attempts and 8000 method slots** are retained. The [scientific report](milestones/V3_MAIN_SCIENTIFIC_RESULT.md), [full tables](tables/v3-main-recovered-34517752889/README.md), [cost scopes](tables/v3-main-recovered-34517752889/cost-scopes/README.md) and [30-criterion final checklist](iterations/064-corrected-exact-comparison.md) record the result and limits. The main and CUDD measurements are complete; durable retention of the new CUDD artifacts is recorded below.
 
 Original main **34465226083** is preserved with its failed strict chain: a1000-artifact listing limit omitted application models from PMX solving and all inputs from aggregate analysis. Recovery **34517752889** succeeded and passed the retained byte/count/forecast continuity audit. All356 scientific source files, all original graph forecasts and evaluator counts remain unchanged; no new observations were acquired. PMX model artifacts were committed before original evaluation, but numerical PMX forecasts were computed later. The original literal gate remains an explicit C12 deviation; physical blinding of the recovery checkout is not claimed.

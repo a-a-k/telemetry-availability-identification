@@ -1,7 +1,8 @@
 # Telemetry-driven availability identification
 
-This repository implements automatic construction and identification of formal
-stochastic availability models for microservice operations from telemetry.
+The contribution combines formalization of a stochastic model of operation
+success, analytical study of its properties and applicability, and automatic
+construction and identification from microservice telemetry.
 It preserves joint observations, uses direct frequency identification and exact
 probability calculations without ML, and returns a point, identified bounds or
 an explicit unsupported status under declared operation and observation contracts.
@@ -18,6 +19,12 @@ retrospective evidence; independent confirmation and the missingness study
 remain required. The [refinement protocol](docs/milestones/V3_ATTEMPT_AUDIT_V1_PROTOCOL.md)
 separates primary evidence, binding errors and conceptual assumptions. Earlier
 numerical and computational results below retain their original scope.
+
+The [fixed independent confirmation protocol](docs/milestones/V4_CONFIRMATION_V1_PROTOCOL.md)
+and `.github/workflows/v4-confirmation-v1.yml` specify 18 fresh campaigns,
+64,800 calibration and 64,800 test attempts, plus 48 separate retry controls.
+Numerical PMX/B0 and graph forecasts must all freeze before any outcome opening;
+primary HTTP bytes and SQL rows support independent attempt-level verification.
 
 The [main scientific result](docs/milestones/V3_MAIN_SCIENTIFIC_RESULT.md) and
 [complete 30-criterion checklist](docs/iterations/064-corrected-exact-comparison.md)

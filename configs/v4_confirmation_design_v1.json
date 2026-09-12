@@ -1,0 +1,118 @@
+{
+  "version": "v4-confirmation-design-v1",
+  "status": "fixed_before_fresh_acquisition_and_outcome_opening",
+  "design": {
+    "applications": {
+      "deathstarbench_social_network": [
+        "compose_post",
+        "read_home_timeline",
+        "read_user_timeline"
+      ],
+      "opentelemetry_demo": [
+        "browse_product",
+        "add_to_cart",
+        "checkout"
+      ],
+      "spring_petclinic_microservices": [
+        "list_owners",
+        "owner_details_with_visits",
+        "create_visit",
+        "list_vets"
+      ]
+    },
+    "placements": [
+      "split"
+    ],
+    "laws": [
+      "N",
+      "NC"
+    ],
+    "repetitions": [
+      0,
+      1,
+      2
+    ]
+  },
+  "baseline_seconds": 60,
+  "calibration_seconds": 900,
+  "test_seconds": 900,
+  "request_rate_per_second": 4,
+  "request_workers": 16,
+  "deadline_seconds": 2,
+  "main_seed": 771621,
+  "bootstrap_seed": 771602,
+  "main_namespace": "v4-confirmation-771621",
+  "inter_period_recovery_seconds": 70,
+  "trace_flush_seconds": 20,
+  "minimum_baseline_success_fraction": 0.95,
+  "main_campaigns": 18,
+  "main_operation_cells_per_method": 60,
+  "methods": [
+    "Gstar",
+    "GID",
+    "Gselected",
+    "G_without_deadline",
+    "G_without_selection",
+    "G_without_completion",
+    "G0",
+    "B0",
+    "PMX",
+    "PMX_inclusive"
+  ],
+  "primary_comparators": [
+    "G0",
+    "PMX"
+  ],
+  "primary_pmx_variant": "conditional_local",
+  "stable_guard_seconds": 1,
+  "stable_maximum_probe_gap_seconds": 2,
+  "retention_days": 90,
+  "max_parallel_acquisition": 20,
+  "telemetry_sealing": "stop collector before final read; exact immutable native byte hash",
+  "test_quality_uses_forecast_error": false,
+  "transfer": "unsupported changed empirical joint law; unrestricted target event bounds and explicit complete coverage census",
+  "method_binding_document": "docs/milestones/V4_CONFIRMATION_V1_PROTOCOL.md",
+  "pmx_clock_progress_qualification": {
+    "run_id": 34458641994,
+    "head": "f3d4061dd6468de68d61060c1d22a8066cb6d586",
+    "derived_jar_sha256": "2322880b6447754528e201553bc4e2fac00334b7d6f3ac202cfe1e3742bbbcc6",
+    "audit_sha256": "69ec0d4daf95b7ab6f57880807eb8cf141d458e495523bd94b439fb7b0cab32d"
+  },
+  "confirmation": {
+    "contribution": "Формализация стохастической модели успешности операций, аналитическое исследование её свойств и границ применимости, автоматическое построение и идентификация по телеметрии.",
+    "historical_diagnostic_run": 34696809884,
+    "calibration_attempts": 64800,
+    "test_attempts": 64800,
+    "petclinic_directed_controls": 48,
+    "controls_per_petclinic_campaign": {
+      "normal": 4,
+      "first_transport_503": 4
+    },
+    "control_phase": "after test period and test SQL snapshot; 70 second recovery; separate from forecast errors",
+    "criterion": "complete primary verification, both-sided per-attempt compatibility, full unsupported census, observed mechanism and ordinary control coverage; no superiority requirement",
+    "zero_incompatibility_is_scope_limited": true,
+    "all_forecasts_including_PMX_and_B0_sealed_before_opening": true,
+    "all_realized_bounds_sealed_before_primary_opening": true,
+    "automatic_rerun_or_expansion": false
+  },
+  "missingness": {
+    "levels": [
+      0,
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1
+    ],
+    "mechanisms": [
+      "uniform_coordinates",
+      "failure_associated_coordinates",
+      "whole_native_attempt"
+    ],
+    "population": "all independently primary-verified supported test attempts, without E=Y selection",
+    "masked_fields": "known native coordinates; keep external timing and attempt ledger; original unknowns stay unknown",
+    "additional_observations": "restore original known native coordinates in fixed semantic groups; report counts and ambiguity resolved; no new adaptive-policy claim",
+    "identification_intervals_are_not_confidence_intervals": true,
+    "seed": 771622
+  }
+}
