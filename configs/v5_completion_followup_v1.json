@@ -1,0 +1,134 @@
+{
+  "version": "v5-completion-four-route-stages-accuracy-v1",
+  "routes": [
+    "full_e",
+    "full_r",
+    "projected_r",
+    "direct_r"
+  ],
+  "scale_orders": [
+    [
+      1,
+      2,
+      4
+    ],
+    [
+      2,
+      4,
+      1
+    ],
+    [
+      4,
+      1,
+      2
+    ]
+  ],
+  "warm_queries": 31,
+  "applications": {
+    "deathstarbench_social_network": [
+      "compose_post",
+      "read_home_timeline",
+      "read_user_timeline"
+    ],
+    "opentelemetry_demo": [
+      "browse_product",
+      "add_to_cart",
+      "checkout"
+    ],
+    "spring_petclinic_microservices": [
+      "list_owners",
+      "owner_details_with_visits",
+      "create_visit",
+      "list_vets"
+    ]
+  },
+  "bootstrap_seeds": [
+    771602,
+    771604,
+    771606
+  ],
+  "forecast_census": "docs/tables/v4-confirmation-v2-34703686592/forecasts/attempted-census.csv",
+  "R_source": {
+    "run": 34750418515,
+    "head": "934f177504aee378dd77ae0b593ec879f019d3e4",
+    "workflow": ".github/workflows/v5-completion-target-v2.yml",
+    "artifacts": [
+      {
+        "id": 10315810510,
+        "name": "v5-completion-compact-deathstarbench_social_network-34750418515",
+        "size_in_bytes": 129907,
+        "digest": "sha256:7d96cbc3338dfd425ee33fc0a9b550682d173c351326e280614f6a068d2cf0de"
+      },
+      {
+        "id": 10315656116,
+        "name": "v5-completion-full-deathstarbench_social_network-34750418515",
+        "size_in_bytes": 4368764,
+        "digest": "sha256:4b12257891ef05c85469f61c152cdf0a3ff8c630a427d9f3c7fc0c078447c2e9"
+      },
+      {
+        "id": 10315588239,
+        "name": "v5-completion-full-spring_petclinic_microservices-34750418515",
+        "size_in_bytes": 4619099,
+        "digest": "sha256:86118fe32091519ace1a5393ea2ba2def9167763536ac14ffa826a1409fc84b4"
+      },
+      {
+        "id": 10315558731,
+        "name": "v5-completion-full-opentelemetry_demo-34750418515",
+        "size_in_bytes": 6571417,
+        "digest": "sha256:31045e723b3e7ab615c4906d12dbcabeb4217093dac30a395b1bc628f275a1c2"
+      },
+      {
+        "id": 10315239285,
+        "name": "v5-completion-compact-spring_petclinic_microservices-34750418515",
+        "size_in_bytes": 184618,
+        "digest": "sha256:a5255ae96f846e7f6fff21dacf9f32e2aaad5dedf7c905b7591e56fd8cad2b2a"
+      },
+      {
+        "id": 10315154779,
+        "name": "v5-completion-compact-opentelemetry_demo-34750418515",
+        "size_in_bytes": 157486,
+        "digest": "sha256:b3efe8920b43cd4befc4eaaeffd1fc16a70882668ff2ad747eb25baf5e5c94c3"
+      },
+      {
+        "id": 10314869793,
+        "name": "v5-completion-tables-34750418515",
+        "size_in_bytes": 181465,
+        "digest": "sha256:48190e8b55b2598fd7405e1b0e76fb9dfa840abd7b88bc99ea102e27f75697ad"
+      }
+    ]
+  },
+  "source_locks": {
+    "src/telemetry_availability/completion_target_v1.py": "4ca03f3ecbb67804cade553dc39abeaa208898f3a0df1c36af4f0dcb36ec4999",
+    "src/telemetry_availability/completion_target_analysis_v1.py": "abe5101d1dcf8356e31ac95f4cc5257c18900d044d0a2ef166d1655193ff2e1d",
+    "scripts/measure_completion_target_v1.py": "15979ca0e283f18d2c9fbe710426b9e14101faf140ece7400a050eb1ce38f060",
+    "scripts/run_completion_target_v1.py": "8eb8ba2a2a50b472ce9d5db1c512cfaccff5f4de9a1de8fd57732628e5106336",
+    "scripts/summarize_completion_target_v1.py": "92a22801b36d6f6a29a95c9106327b6435b87098cc2aafbe5893d007275197c5",
+    "tests/test_completion_target_v1.py": "f7139d69abb862a2ce99e52a36a5b847bf6e133493e7ea836a24b28371fcf99e",
+    "docs/milestones/V5_COMPLETION_TARGET_V1_PROTOCOL.md": "1f0a935f15d18e5312ed880023997793372e1bc4b3b852593a7c5bed10188045",
+    ".github/workflows/v5-completion-target-v1.yml": "f56cf0c6fd679f808b525fd5250eae1229eaff40613c297708d3cc019965d900",
+    "src/telemetry_availability/v4_execution_binding_v1.py": "ab8a3b6d2a10b1b51deba6c6d471da8cb1bdb5fc8a5f096c9fc2d30930babfd1",
+    "src/telemetry_availability/v3_application_execution_v2.py": "8122c4b48ba307baa93957888fff39bed793f5c9be718f9f9b2e02c5de8a7ab5",
+    "src/telemetry_availability/graph_execution_model_v1.py": "db60c0049c29c86f59137acfded9d7f9ab47f6bb63a7a230ee382458f452b361",
+    "src/telemetry_availability/v4_missingness_v1.py": "553b375aac135967f56878e2c0e6669e810b0e0f7c1935caa42def14642ec899",
+    "scripts/benchmark_v3_pipeline_v1.py": "e401919643c1c2fbf49df80bc8bb340d40de7e4cdc13828f4cd149e878124eff",
+    "scripts/run_v4_missingness_v3.py": "07c42a5cfd601d0b2f1e137f500d25d2f47af1db65b02a8f355a08d241ccddb1",
+    "scripts/v4_confirmed_source_v3.py": "da690a4d2f72fcf373fd4b4146f92ee32e1f989df896de2519f5a7ad19c35b5b",
+    "configs/v4_confirmation_execution_v1.json": "d7f332b0a4c4b35bffee2119086b84793291fea520ef7c94d88e398caad1bfb4",
+    "configs/v4_confirmation_design_v1.json": "4de2d4e3858020f56af48f1469d414e3adc6962bd6acee9da4c62442a70a44fb",
+    "scripts/run_completion_target_v2.py": "c8a9838c3344411379e77f98cf43bd3d204aa04138a6a71903de0e7b82f7b270",
+    ".github/workflows/v5-completion-target-v2.yml": "5d7ca5b61a141ab1dc4d8860e430c72f6b210c372d3e9daa99c68e4092640b76",
+    "docs/milestones/V5_COMPLETION_TARGET_V2_TECHNICAL_AMENDMENT.md": "4e8c4edc817872da55e5366bd8e3a27195266120e88cdacffc44c11a5be9a9ce",
+    "configs/v5_completion_target_v2.json": "b81741e0cbdea9fb5ec0101440b0fce3ff9b766fad86d64aab7db7b260bbf209",
+    "src/telemetry_availability/completion_target_profile_v1.py": "9bf51025a44d93b4d77bf032c37fe3a8cafaa9bbaa01cc7aa34ba580b0a15ac5",
+    "scripts/measure_completion_target_v3.py": "a0ad718e08d8c2f48035fdbfdf4042b1956621f5cd86366798ac9829dc58fdac",
+    "scripts/run_completion_followup_v1.py": "ca3babc39e9040b9f2032ae7696bb47559ea42dfa9a81eaca7eff4df99ad841a",
+    "scripts/evaluate_completion_forecasts_v1.py": "d2f268e20cb098a931cfd551f9d88f6a9687de800e1e92363768e9f4dd1e870e",
+    "scripts/summarize_completion_followup_v1.py": "5a7bebc87baae971906249bc73e2019b6a155679132750007a5fdc5531a35f7c",
+    "scripts/retain_completion_followup_v1.py": "c82c596bccaacc3f4289800afba61c8152aa79f13728b37ba9e64e638f08e56a",
+    "tests/test_completion_target_followup_v1.py": "3335fbb04ccbd05f4c07b54f52aaefaf4c24fe9bba8e4c4880deacf1451ff15e",
+    ".github/workflows/v5-completion-followup-v1.yml": "d9f9e426e601c527bc7cb0c03dc70aca609969be01ec746fcfa3e01f91ea2946",
+    "docs/milestones/V5_COMPLETION_TARGET_FOLLOWUP_V1.md": "5d959a3c8183479a3d1c04f45cfe0b935e0dd97c22ce7dcf43f08b8a1be1d6fa",
+    "src/telemetry_availability/v3_campaign_analysis_v1.py": "b2becdce9ea314f5e67346c1148504d5643b6da2d85cea3faabc89b41f2ed3cd",
+    "docs/tables/v4-confirmation-v2-34703686592/forecasts/attempted-census.csv": "0f4db4433d94aab5197627e5283b146dd380b9cabf25c8879a0649783811ea14"
+  }
+}
