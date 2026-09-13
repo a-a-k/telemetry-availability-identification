@@ -1,5 +1,19 @@
 # V3 research refinement after review
 
+The [necessary-detail report](milestones/V5_COMPLETION_TARGET_RESULT.md)
+adds the saved-data E/R analysis: source 34750418515 qualifies all 120 planned
+positions, 5130 settings and the original 81 three-route measurements. The
+followup 34751473713 adds the matched E control and retrospective accuracy.
+All 54 point and five interval forecasts are preserved exactly, with unchanged
+support; 4409 supported test attempts still admit an E/R event difference.
+The new cost comparison has its own target and boundary and is not multiplied
+by the old Palladio ratios.
+All 108 followup cost processes and 11,160 ready queries qualified, and all
+11 followup table files match remotely (in addition to the first nine).
+Direct R saves 5.1–11.2% versus full E on the nine median paired comparisons.
+Archive 34751987341 retains all 18 source ZIPs in unpublished release 387864460,
+with verified hashes and a complete census.
+
 The [independent refinement result](milestones/V4_REFINEMENT_RESULT.md) is now
 retained and pushed: 64,800 independently checked external outcomes; zero
 incompatibilities on 61,200 supported attempts, 4411 ambiguous and 3600

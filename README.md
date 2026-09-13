@@ -1,13 +1,32 @@
 # Telemetry-driven availability identification
 
-The contribution combines formalization of a stochastic model of operation
-success, analytical study of its properties and applicability, and automatic
-construction and identification from microservice telemetry.
+The contribution is a method for identification of a stochastic availability
+model of microservice operations from runtime observability data, with formal
+justification of identifiability and computational reduction. Operation
+declarations, success requirements and observation interpretation are explicit
+additional inputs.
 It preserves joint observations, uses direct frequency identification and exact
 probability calculations without ML, and returns a point, identified bounds or
 an explicit unsupported status under declared operation and observation contracts.
 
 ## Current research result
+
+The [necessary-detail experiment](docs/milestones/V5_COMPLETION_TARGET_RESULT.md)
+separates E=K AND R from R=deadline AND mandatory logical completions, and
+compares three identification routes for the same R plus the current full E
+control. All 54 common point forecasts and all five interval forecasts are
+preserved exactly on the saved calibration/test split. Joint R−E remains
+undetermined on 4409 supported test attempts despite equal marginal bounds.
+The report retains all 5130 matched primitive-mask settings and the separate
+four-route, stage-instrumented cost grid. Its ratios are not combined with the
+earlier Palladio ratios, whose pipeline computed multiple model variants.
+All 108 new cost processes qualified: direct R reduces first-answer time versus
+full E by 5.1–11.2% in the nine median paired comparisons, with essentially
+unchanged peak memory. All 9 + 11 table files match their remote producers.
+The [complete original archive](docs/evidence/v5-completion-complete-archive-34751987341/retention.json)
+retains 18 ZIPs, including the initial technical failure, in unpublished release
+387864460. The [five-step checklist](docs/iterations/066-completion-target-identification.md)
+is complete.
 
 The [completed review-driven attempt audit](docs/milestones/V3_ATTEMPT_AUDIT_V1_RESULT.md)
 covers all 240 historical campaigns: 2541 registered successes are excluded by

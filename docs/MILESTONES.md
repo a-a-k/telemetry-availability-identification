@@ -10,6 +10,18 @@ tests, configuration validation, and bounded smoke cases.
 
 ## Independent refinement after review
 
+The [necessary-detail extension](milestones/V5_COMPLETION_TARGET_RESULT.md)
+and [five-step checklist](iterations/066-completion-target-identification.md)
+retain the existing campaigns and distinguish event sufficiency from equivalent
+identification of R. All 54 point forecasts and five interval forecasts equal
+the full E forecasts; support is unchanged. Joint differences, all 5130 matched
+mask settings, the direct route, full E cost control and stage-level accounting
+are reported separately from the existing external comparisons.
+The 108-process followup is complete: direct R saves 5.1–11.2% versus full E;
+peak RSS is essentially unchanged. Every one of the 20 complete table files
+matches its remote producer. Archive 34751987341 preserves all 18 original ZIPs
+(17,256,100 bytes) in unpublished release 387864460.
+
 The [new refinement report](milestones/V4_REFINEMENT_RESULT.md) records the
 completed independent scientific criteria: 64,800 verified primary outcomes,
 zero incompatibilities on 61,200 supported attempts, all 48 directed controls,
